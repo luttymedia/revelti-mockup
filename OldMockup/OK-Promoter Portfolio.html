@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revelo - Promoter Portfolio</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom styles to extend Tailwind */
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #f0f2f5; /* Light gray background */
+            /* Added padding to prevent content from touching screen edges on mobile */
+            padding-top: 1rem;
+            padding-bottom: 3rem;
+        }
+        /* Custom color palette inspired by the logo */
+        .revelo-blue { color: #213c63; }
+        .revelo-orange { color: #f58220; }
+        .bg-revelo-blue { background-color: #213c63; }
+        .bg-revelo-orange { background-color: #f58220; }
+        .border-revelo-orange { border-color: #f58220; }
+
+        /* Style for the active tab */
+        .tab-active {
+            border-bottom: 3px solid #f58220;
+            color: #213c63;
+            font-weight: 700;
+        }
+
+        /* Custom scrollbar styles for horizontal lists */
+        .horizontal-scroll {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .horizontal-scroll::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, and Opera */
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+
+    <!-- Main container with a max-width for larger screens -->
+    <div class="max-w-2xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+
+        <!-- Header Section -->
+        <header class="p-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <img src="https://placehold.co/80x80/cccccc/000000?text=JD" alt="Promoter Avatar" class="w-20 h-20 rounded-full object-cover shadow-md">
+                    <div class="ml-4">
+                        <h1 class="text-3xl font-extrabold revelo-blue">John Doe</h1>
+                        <p class="text-gray-500">Event Promoter</p>
+                    </div>
+                </div>
+                <button aria-label="Share promoter profile" class="p-2 rounded-full hover:bg-gray-200 transition duration-300">
+                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path></svg>
+                </button>
+            </div>
+             <!-- Action Buttons -->
+            <div class="mt-6 flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
+                <button class="flex-1 flex items-center justify-center bg-revelo-orange text-white font-bold py-2 px-4 rounded-lg shadow-md hover:bg-orange-600 transition duration-300">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                    Follow promoter
+                </button>
+                <button class="flex-1 flex items-center justify-center bg-gray-200 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300 transition duration-300">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    Contact
+                </button>
+                <button class="flex-1 flex items-center justify-center bg-gray-200 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300 transition duration-300">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m4.05 16.95l-1.414-1.414M18.364 5.636l-1.414 1.414M21 12h-2M16 12a4 4 0 11-8 0 4 4 0 018 0zM12 19v2M5.636 18.364l1.414-1.414M4 12H2m14-7l1.414-1.414"></path></svg>
+                    Translate
+                </button>
+            </div>
+        </header>
+        
+        <!-- Tab Navigation -->
+        <nav class="border-t border-b border-gray-200">
+            <div class="flex justify-around">
+                <button onclick="switchTab('events')" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelo-blue transition duration-300 tab-active">Events</button>
+                <button onclick="switchTab('collaborators')" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelo-blue transition duration-300">Collaborators</button>
+            </div>
+        </nav>
+
+        <!-- Main Content Sections (Tabs) -->
+        <main class="p-6">
+            <!-- Events Section -->
+            <div id="events" class="tab-content space-y-8">
+                <!-- Highlighted Events -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-3">Highlighted</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Event Card 1 -->
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                            <img src="https://goandance-media-cache-prod.s3.eu-central-1.amazonaws.com/poster_full/event/poster/2025/05/23/6830eaeb459d1543987602.jpg" alt="Event Poster" class="w-full h-40 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Event';">
+                            <div class="p-4">
+                                <h4 class="font-bold text-md revelo-blue truncate">Sensuality & Essentiality</h4>
+                                <p class="text-sm text-gray-500">Nov 1-2, 2025 | Barcelona</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Past Events -->
+                <div class="mt-6">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-3">Past Events</h3>
+                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Past Event Card -->
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 opacity-75">
+                            <img src="https://placehold.co/600x400/cccccc/ffffff?text=Past+Event" alt="Past Event Poster" class="w-full h-40 object-cover">
+                            <div class="p-4">
+                                <h4 class="font-bold text-md revelo-blue truncate">Barcelona Summer Fest</h4>
+                                <p class="text-sm text-gray-500">Jul 15-17, 2024 | Barcelona</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Collaborators Section -->
+            <div id="collaborators" class="tab-content hidden space-y-8">
+                <!-- Organizers -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-3">Collaborator Organizers</h3>
+                    <div class="flex space-x-4 overflow-x-auto pb-4 horizontal-scroll">
+                         <a href="#" class="flex-shrink-0 text-center w-20">
+                             <img src="https://goandance-media-cache-prod.s3.eu-central-1.amazonaws.com/square_preview_700/organizer/profile/2019/12/20/68067775d3164196627518.png" alt="Avatar for Bachata Sensual Events" class="w-20 h-20 rounded-full object-cover shadow-md mx-auto">
+                             <p class="mt-2 text-sm font-semibold revelo-blue break-words">Bachata Sensual Events</p>
+                         </a>
+                         <a href="#" class="flex-shrink-0 text-center w-20">
+                             <img src="https://placehold.co/80x80/213c63/ffffff?text=E" alt="Avatar for Esencia" class="w-20 h-20 rounded-full object-cover shadow-md mx-auto">
+                             <p class="mt-2 text-sm font-semibold revelo-blue break-words">Esencia</p>
+                         </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Store references to tab buttons and content panels
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        /**
+         * Switches the visible tab in the content area.
+         * @param {string} targetId The ID of the tab content to display.
+         */
+        function switchTab(targetId) {
+            // Hide all content panels
+            tabContents.forEach(content => {
+                content.classList.add('hidden');
+            });
+
+            // Deactivate all tab buttons
+            tabButtons.forEach(button => {
+                button.classList.remove('tab-active');
+            });
+
+            // Show the target content panel
+            const targetContent = document.getElementById(targetId);
+            if (targetContent) {
+                targetContent.classList.remove('hidden');
+            }
+
+            // Activate the clicked tab button
+            // We find the button that controls the targetId
+            const targetButton = document.querySelector(`[onclick="switchTab('${targetId}')"]`);
+            if (targetButton) {
+                targetButton.classList.add('tab-active');
+            }
+        }
+
+        // Initialize the page with the 'events' tab visible by default.
+        document.addEventListener('DOMContentLoaded', () => {
+            switchTab('events');
+        });
+    </script>
+</body>
+</html>
+
+

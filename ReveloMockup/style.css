@@ -1,0 +1,63 @@
+/* ----------------------------------
+   Revelo Webapp - Global Stylesheet
+   ---------------------------------- */
+
+/* --- Base & Font Styles --- */
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #f0f2f5; /* Light gray background */
+    /* Added padding to prevent content from touching screen edges on mobile */
+    /* padding-top: 1rem; */
+    padding-bottom: 3rem;
+}
+
+/* --- Custom Color Palette --- */
+/* Use these classes to apply brand colors */
+.revelo-blue { color: #213c63; }
+.revelo-orange { color: #f58220; }
+.bg-revelo-blue { background-color: #213c63; }
+.bg-revelo-orange { background-color: #f58220; }
+.border-revelo-orange { border-color: #f58220; }
+
+/* --- Component Styles --- */
+
+/* Active Tab Indicator */
+.tab-active {
+    border-bottom: 3px solid #f58220;
+    color: #213c63;
+    font-weight: 700;
+}
+
+/* Accordion (Details/Summary) Arrow Rotation */
+details > summary {
+    list-style: none;
+}
+details > summary::-webkit-details-marker {
+    display: none;
+}
+details[open] > summary svg {
+    transform: rotate(180deg);
+}
+
+/* Custom styles for transitions */
+#search-bar {
+    transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+#search-container {
+    transition: all 0.3s ease-in-out;
+}
+
+/* --- Utility Styles --- */
+
+/* Hides scrollbar for horizontal scrolling containers */
+.horizontal-scroll {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+.horizontal-scroll::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
+}
+
+.break-inside-avoid {
+    break-inside: avoid;
+}

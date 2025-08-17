@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revelo - Home</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="antialiased text-gray-800">
+
+    <!-- Full-width Main Banner -->
+    <div class="max-w-2xl mx-auto mb-6 rounded-lg overflow-hidden">
+         <img src="https://i.imgur.com/p5ppiPj.jpeg" alt="Revelo Banner: Find your dance. Find your people." class="w-full h-auto">
+    </div>
+
+    <!-- Main container with a max-width for larger screens -->
+    <div class="max-w-2xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+
+        <!-- Header Section -->
+        <header class="p-6">
+            <!-- Search Bar -->
+            <div class="relative">
+                <input type="text" placeholder="Search for events, organizers, creators..." class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-revelo-orange">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Tab Navigation -->
+        <nav class="border-t border-b border-gray-200">
+            <div class="flex justify-around">
+                <button onclick="switchTab('events')" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelo-blue transition duration-300 tab-active">Events</button>
+                <button onclick="switchTab('organizers')" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelo-blue transition duration-300">Organizers</button>
+                <button onclick="switchTab('creators')" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelo-blue transition duration-300">Creators</button>
+            </div>
+        </nav>
+
+        <!-- Main Content Sections (Tabs) -->
+        <main class="p-6 bg-gray-50">
+            <!-- Events Tab -->
+            <div id="events" class="tab-content space-y-6">
+                <!-- Featured Events Section -->
+                <details open>
+                    <summary class="flex justify-between items-center cursor-pointer">
+                        <h2 class="text-xl font-bold revelo-blue">Featured Events</h2>
+                        <a href="eventListings.html" class="p-1 rounded-full hover:bg-gray-200">
+                            <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                        </a>
+                    </summary>
+                    <div class="flex space-x-4 overflow-x-auto pb-4 mt-3 horizontal-scroll">
+                        <!-- Card 1 -->
+                        <div class="flex-shrink-0 w-2/3 sm:w-1/2">
+                            <a href="eventDetail.html">
+                                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                                    <div class="relative">
+                                        <img src="https://goandance-media-cache-prod.s3.eu-central-1.amazonaws.com/poster_full/event/poster/2025/05/23/6830eaeb459d1543987602.jpg" alt="Event Poster" class="w-full h-40 object-cover">
+                                        <div class="absolute top-2 right-2 flex space-x-1">
+                                            <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></button>
+                                            <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path></svg></button>
+                                        </div>
+                                    </div>
+                                    <div class="p-3">
+                                        <h4 class="font-bold text-sm revelo-blue truncate">Sensuality & Essentiality</h4>
+                                        <p class="text-xs text-gray-500">Nov 1-2, 2025 | Barcelona</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Card 2 -->
+                        <div class="flex-shrink-0 w-2/3 sm:w-1/2">
+                            <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                                <div class="relative">
+                                    <img src="https://placehold.co/600x400/f58220/ffffff?text=Featured" alt="Event Poster" class="w-full h-40 object-cover">
+                                    <div class="absolute top-2 right-2 flex space-x-1">
+                                        <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></button>
+                                        <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path></svg></button>
+                                    </div>
+                                </div>
+                                <div class="p-3">
+                                    <h4 class="font-bold text-sm revelo-blue truncate">Madrid Bachata Masters | Madrid</h4>
+                                    <p class="text-xs text-gray-500">Oct 17-19, 2025</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card 3 -->
+                        <div class="flex-shrink-0 w-2/3 sm:w-1/2">
+                            <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                                <div class="relative">
+                                    <img src="https://placehold.co/600x400/f58220/ffffff?text=Featured" alt="Event Poster" class="w-full h-40 object-cover">
+                                    <div class="absolute top-2 right-2 flex space-x-1">
+                                        <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></button>
+                                        <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path></svg></button>
+                                    </div>
+                                </div>
+                                <div class="p-3">
+                                    <h4 class="font-bold text-sm revelo-blue truncate">Valencia Salsa Summit</h4>
+                                    <p class="text-xs text-gray-500">Jan 20-22, 2026 | Valencia</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Trending Events Section -->
+                <details open>
+                    <summary class="flex justify-between items-center cursor-pointer">
+                        <h2 class="text-xl font-bold revelo-blue">Trending Events</h2>
+                        <a href="eventListings.html" class="p-1 rounded-full hover:bg-gray-200">
+                            <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                        </a>
+                    </summary>
+                    <div class="flex space-x-4 overflow-x-auto pb-4 mt-3 horizontal-scroll">
+                        <!-- Card 1 -->
+                        <div class="flex-shrink-0 w-2/3 sm:w-1/2">
+                            <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                                <div class="relative">
+                                    <img src="https://placehold.co/600x400/213c63/ffffff?text=Trending" alt="Event Poster" class="w-full h-40 object-cover">
+                                    <div class="absolute top-2 right-2 flex space-x-1">
+                                        <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></button>
+                                        <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path></svg></button>
+                                    </div>
+                                </div>
+                                <div class="p-3">
+                                    <h4 class="font-bold text-sm revelo-blue truncate">BCN Bachata Congress</h4>
+                                    <p class="text-xs text-gray-500">Oct 10-12, 2025 | Barcelona</p>
+                                </div>
+                            </div>
+                        </div>
+                         <!-- Card 2 -->
+                        <div class="flex-shrink-0 w-2/3 sm:w-1/2">
+                            <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                                <div class="relative">
+                                    <img src="https://placehold.co/600x400/213c63/ffffff?text=Trending" alt="Event Poster" class="w-full h-40 object-cover">
+                                    <div class="absolute top-2 right-2 flex space-x-1">
+                                        <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></button>
+                                        <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path></svg></button>
+                                    </div>
+                                </div>
+                                <div class="p-3">
+                                    <h4 class="font-bold text-sm revelo-blue truncate">Seville Kizomba Immersion</h4>
+                                    <p class="text-xs text-gray-500">Nov 20-22, 2025 | Seville</p>
+                                </div>
+                            </div>
+                        </div>
+                         <!-- Card 3 -->
+                        <div class="flex-shrink-0 w-2/3 sm:w-1/2">
+                            <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                                <div class="relative">
+                                    <img src="https://placehold.co/600x400/213c63/ffffff?text=Trending" alt="Event Poster" class="w-full h-40 object-cover">
+                                    <div class="absolute top-2 right-2 flex space-x-1">
+                                        <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></button>
+                                        <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path></svg></button>
+                                    </div>
+                                </div>
+                                <div class="p-3">
+                                    <h4 class="font-bold text-sm revelo-blue truncate">Zaragoza Dance Fest</h4>
+                                    <p class="text-xs text-gray-500">Sep 28-30, 2025 | Zaragoza</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+                
+                <!-- New Events Section -->
+                <details open>
+                    <summary class="flex justify-between items-center cursor-pointer">
+                        <h2 class="text-xl font-bold revelo-blue">New Events</h2>
+                        <a href="eventListings.html" class="p-1 rounded-full hover:bg-gray-200">
+                            <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                        </a>
+                    </summary>
+                    <div class="flex space-x-4 overflow-x-auto pb-4 mt-3 horizontal-scroll">
+                        <!-- Card 1 -->
+                        <div class="flex-shrink-0 w-2/3 sm:w-1/2">
+                            <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                                <div class="relative">
+                                    <img src="https://placehold.co/600x400/cccccc/ffffff?text=New" alt="Event Poster" class="w-full h-40 object-cover">
+                                    <div class="absolute top-2 right-2 flex space-x-1">
+                                        <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></button>
+                                        <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path></svg></button>
+                                    </div>
+                                </div>
+                                <div class="p-3">
+                                    <h4 class="font-bold text-sm revelo-blue truncate">Bilbao Dance Weekend</h4>
+                                    <p class="text-xs text-gray-500">Dec 5-7, 2025 | Bilbao</p>
+                                </div>
+                            </div>
+                        </div>
+                         <!-- Card 2 -->
+                        <div class="flex-shrink-0 w-2/3 sm:w-1/2">
+                            <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                                <div class="relative">
+                                    <img src="https://placehold.co/600x400/cccccc/ffffff?text=New" alt="Event Poster" class="w-full h-40 object-cover">
+                                    <div class="absolute top-2 right-2 flex space-x-1">
+                                        <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></button>
+                                        <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path></svg></button>
+                                    </div>
+                                </div>
+                                <div class="p-3">
+                                    <h4 class="font-bold text-sm revelo-blue truncate">Mallorca Beach Festival</h4>
+                                    <p class="text-xs text-gray-500">Jun 12-14, 2026 | Mallorca</p>
+                                </div>
+                            </div>
+                        </div>
+                         <!-- Card 3 -->
+                        <div class="flex-shrink-0 w-2/3 sm:w-1/2">
+                            <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                                <div class="relative">
+                                    <img src="https://placehold.co/600x400/cccccc/ffffff?text=New" alt="Event Poster" class="w-full h-40 object-cover">
+                                    <div class="absolute top-2 right-2 flex space-x-1">
+                                        <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></button>
+                                        <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path></svg></button>
+                                    </div>
+                                </div>
+                                <div class="p-3">
+                                    <h4 class="font-bold text-sm revelo-blue truncate">Urban Kiz Experience</h4>
+                                    <p class="text-xs text-gray-500">Feb 6-8, 2026 | Barcelona</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Revelo Promo Banner -->
+                <div class="bg-revelo-orange rounded-lg p-6 text-center mt-6">
+                    <h3 class="text-white text-2xl font-bold">Are you an Organizer or Creator?</h3>
+                    <p class="text-white mt-1">Join Revelo and connect with a passionate community.</p>
+                    <button class="mt-4 bg-white text-revelo-orange font-bold py-2 px-6 rounded-full shadow-md">Learn More</button>
+                </div>
+            </div>
+
+            <!-- Organizers Tab -->
+            <div id="organizers" class="tab-content hidden">
+                 <h2 class="text-xl font-bold revelo-blue mb-4">Featured Organizers</h2>
+                 <div class="flex space-x-4 overflow-x-auto pb-4">
+                     <a href="organizerPortfolio.html" class="flex-shrink-0 text-center w-24">
+                         <img src="https://goandance-media-cache-prod.s3.eu-central-1.amazonaws.com/square_preview_700/organizer/profile/2019/12/20/68067775d3164196627518.png" alt="Avatar for Bachata Sensual Events" class="w-24 h-24 rounded-full object-cover shadow-md mx-auto">
+                         <p class="mt-2 text-sm font-semibold revelo-blue break-words">Bachata Sensual Events</p>
+                     </a>
+                     <a href="#" class="flex-shrink-0 text-center w-24">
+                         <img src="https://placehold.co/80x80/213c63/ffffff?text=E" alt="Avatar for Esencia" class="w-24 h-24 rounded-full object-cover shadow-md mx-auto">
+                         <p class="mt-2 text-sm font-semibold revelo-blue break-words">Esencia</p>
+                     </a>
+                     <a href="#" class="flex-shrink-0 text-center w-24">
+                         <img src="https://placehold.co/80x80/213c63/ffffff?text=M" alt="Avatar for Manisero" class="w-24 h-24 rounded-full object-cover shadow-md mx-auto">
+                         <p class="mt-2 text-sm font-semibold revelo-blue break-words">Manisero</p>
+                     </a>
+                </div>
+            </div>
+
+            <!-- Creators Tab -->
+            <div id="creators" class="tab-content hidden">
+                <h2 class="text-xl font-bold revelo-blue mb-4">Featured Creators</h2>
+                <div class="grid grid-cols-3 gap-4">
+                     <a href="creatorPortfolio.html" class="text-center">
+                         <img src="https://placehold.co/80x80/f58220/ffffff?text=A" alt="Avatar for AMedia" class="w-24 h-24 rounded-full object-cover shadow-md mx-auto">
+                         <p class="mt-2 text-sm font-semibold revelo-blue break-words">AMedia</p>
+                     </a>
+                     <a href="#" class="text-center">
+                         <img src="https://placehold.co/80x80/f58220/ffffff?text=SI" alt="Avatar for Sha Iborra" class="w-24 h-24 rounded-full object-cover shadow-md mx-auto">
+                         <p class="mt-2 text-sm font-semibold revelo-blue break-words">Sha Iborra</p>
+                     </a>
+                     <a href="#" class="text-center">
+                         <img src="https://placehold.co/80x80/f58220/ffffff?text=LM" alt="Avatar for Lutty Moreira" class="w-24 h-24 rounded-full object-cover shadow-md mx-auto">
+                         <p class="mt-2 text-sm font-semibold revelo-blue break-words">Lutty Moreira</p>
+                     </a>
+                     <a href="#" class="text-center">
+                         <img src="https://placehold.co/80x80/f58220/ffffff?text=PR" alt="Avatar for Pablo Ríos" class="w-24 h-24 rounded-full object-cover shadow-md mx-auto">
+                         <p class="mt-2 text-sm font-semibold revelo-blue break-words">Pablo Ríos</p>
+                     </a>
+                     <a href="#" class="text-center">
+                         <img src="https://placehold.co/80x80/f58220/ffffff?text=V" alt="Avatar for Visuals Pro" class="w-24 h-24 rounded-full object-cover shadow-md mx-auto">
+                         <p class="mt-2 text-sm font-semibold revelo-blue break-words">Visuals Pro</p>
+                     </a>
+                     <a href="#" class="text-center">
+                         <img src="https://placehold.co/80x80/f58220/ffffff?text=D" alt="Avatar for Dance Vids" class="w-24 h-24 rounded-full object-cover shadow-md mx-auto">
+                         <p class="mt-2 text-sm font-semibold revelo-blue break-words">Dance Vids</p>
+                     </a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Store references to tab buttons and content panels
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        /**
+         * Switches the visible tab in the content area.
+         * @param {string} targetId The ID of the tab content to display.
+         */
+        function switchTab(targetId) {
+            // Hide all content panels
+            tabContents.forEach(content => {
+                content.classList.add('hidden');
+            });
+
+            // Deactivate all tab buttons
+            tabButtons.forEach(button => {
+                button.classList.remove('tab-active');
+            });
+
+            // Show the target content panel
+            const targetContent = document.getElementById(targetId);
+            if (targetContent) {
+                targetContent.classList.remove('hidden');
+            }
+
+            // Activate the clicked tab button
+            // We find the button that controls the targetId
+            const targetButton = document.querySelector(`[onclick="switchTab('${targetId}')"]`);
+            if (targetButton) {
+                targetButton.classList.add('tab-active');
+            }
+        }
+
+        // Initialize the page with the 'events' tab visible by default.
+        document.addEventListener('DOMContentLoaded', () => {
+            switchTab('events');
+        });
+    </script>
+</body>
+</html>

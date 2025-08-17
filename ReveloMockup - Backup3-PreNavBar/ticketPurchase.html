@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revelo - Purchase Tickets</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Link to external stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body class="antialiased text-gray-800">
+
+    <!-- Main container with a max-width for larger screens -->
+    <div class="max-w-2xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+
+        <!-- Header Section -->
+        <header class="p-6 border-b text-center">
+            <p class="text-sm revelo-orange font-semibold">You are buying tickets for</p>
+            <h1 class="text-2xl font-extrabold revelo-blue">Sensuality & Essentiality</h1>
+            <p class="text-sm text-gray-500">November 1-2, 2025</p>
+            <p class="text-sm text-gray-500">by Bachata Sensual Events</p>
+        </header>
+        
+        <!-- Main Content -->
+        <main class="p-6 bg-gray-50 pb-24"> <!-- Added padding-bottom for footer spacing -->
+            <div class="space-y-6">
+                <!-- Main Passes -->
+                <details class="bg-white border rounded-lg" open>
+                    <summary class="p-4 font-semibold revelo-blue cursor-pointer flex justify-between items-center text-xl">Main Passes <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
+                    <div class="p-4 border-t border-gray-200 space-y-4">
+                        <!-- Sensuality Pass Card -->
+                        <div class="bg-gray-50 p-4 rounded-lg border">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-bold text-lg revelo-blue">Sensuality Pass</h3>
+                                    <p class="text-sm text-gray-600 mt-1">Access to all workshops and parties for the Sensuality track.</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-gray-500 line-through">€220.00</p>
+                                    <p class="font-bold text-2xl revelo-orange">€190.00</p>
+                                    <p class="text-xs text-green-600">You save €30.00</p>
+                                    <button class="price-info-trigger text-left w-full">
+                                        <div class="flex items-start justify-end text-xs text-gray-500 mt-1">
+                                            <svg class="w-4 h-4 mr-1 revelo-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                            <span>Until Aug 31, 2025</span>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="flex justify-end items-center mt-2">
+                                <div class="flex items-center space-x-3">
+                                    <button class="quantity-btn p-1 rounded-full bg-gray-200 text-gray-700" data-item-id="1" data-action="decrease">-</button>
+                                    <span class="quantity-display font-bold text-lg" id="quantity-1">0</span>
+                                    <button class="quantity-btn p-1 rounded-full bg-gray-200 text-gray-700" data-item-id="1" data-action="increase">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Essentiality Pass Card -->
+                        <div class="bg-gray-50 p-4 rounded-lg border">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-bold text-lg revelo-blue">Essentiality Pass</h3>
+                                    <p class="text-sm text-gray-600 mt-1">Access to all workshops and parties for the Essentiality track.</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-gray-500 line-through">€220.00</p>
+                                    <p class="font-bold text-2xl revelo-orange">€190.00</p>
+                                    <p class="text-xs text-green-600">You save €30.00</p>
+                                     <button class="price-info-trigger text-left w-full">
+                                        <div class="flex items-start justify-end text-xs text-gray-500 mt-1">
+                                            <svg class="w-4 h-4 mr-1 revelo-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                            <span>Until Aug 31, 2025</span>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="flex justify-end items-center mt-2">
+                                <div class="flex items-center space-x-3">
+                                    <button class="quantity-btn p-1 rounded-full bg-gray-200 text-gray-700" data-item-id="2" data-action="decrease">-</button>
+                                    <span class="quantity-display font-bold text-lg" id="quantity-2">0</span>
+                                    <button class="quantity-btn p-1 rounded-full bg-gray-200 text-gray-700" data-item-id="2" data-action="increase">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Training Tracks -->
+                <details class="bg-white border rounded-lg">
+                    <summary class="p-4 font-semibold revelo-blue cursor-pointer flex justify-between items-center text-xl">Training Tracks <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
+                    <div class="p-4 border-t border-gray-200 space-y-4">
+                        <!-- Sensuality Training Track -->
+                        <div class="bg-gray-50 p-4 rounded-lg border">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-bold text-lg revelo-blue">Sensuality Training Track</h3>
+                                    <p class="text-sm text-gray-600 mt-1">Intensive training focused on sensuality techniques.</p>
+                                </div>
+                                <p class="font-bold text-xl revelo-orange">€100.00</p>
+                            </div>
+                            <div class="flex justify-end items-center mt-2">
+                                <div class="flex items-center space-x-3">
+                                    <button class="quantity-btn p-1 rounded-full bg-gray-200 text-gray-700" data-item-id="3" data-action="decrease">-</button>
+                                    <span class="quantity-display font-bold text-lg" id="quantity-3">0</span>
+                                    <button class="quantity-btn p-1 rounded-full bg-gray-200 text-gray-700" data-item-id="3" data-action="increase">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Essentiality Training Track -->
+                        <div class="bg-gray-50 p-4 rounded-lg border">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-bold text-lg revelo-blue">Essentiality Training Track</h3>
+                                    <p class="text-sm text-gray-600 mt-1">Intensive training focused on essential dance foundations.</p>
+                                </div>
+                                <p class="font-bold text-xl revelo-orange">€100.00</p>
+                            </div>
+                            <div class="flex justify-end items-center mt-2">
+                                <div class="flex items-center space-x-3">
+                                    <button class="quantity-btn p-1 rounded-full bg-gray-200 text-gray-700" data-item-id="4" data-action="decrease">-</button>
+                                    <span class="quantity-display font-bold text-lg" id="quantity-4">0</span>
+                                    <button class="quantity-btn p-1 rounded-full bg-gray-200 text-gray-700" data-item-id="4" data-action="increase">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Jack & Jill -->
+                <details class="bg-white border rounded-lg">
+                    <summary class="p-4 font-semibold revelo-blue cursor-pointer flex justify-between items-center text-xl">Jack & Jill <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
+                    <div class="p-4 border-t border-gray-200 space-y-4">
+                         <div class="bg-gray-50 p-4 rounded-lg border">
+                            <div class="flex justify-between items-start">
+                                <div><h3 class="font-bold text-lg revelo-blue">J&J Amateur</h3><p class="text-sm text-gray-600 mt-1">For non-professional dancers.</p><p class="text-xs text-gray-500 mt-1">3 more entries available before price increases.</p></div>
+                                <p class="font-bold text-xl revelo-orange">€10.00</p>
+                            </div>
+                            <div class="flex justify-end items-center mt-2">
+                                <div class="flex items-center space-x-3">
+                                    <button class="quantity-btn p-1 rounded-full bg-gray-200 text-gray-700" data-item-id="5" data-action="decrease">-</button>
+                                    <span class="quantity-display font-bold text-lg" id="quantity-5">0</span>
+                                    <button class="quantity-btn p-1 rounded-full bg-gray-200 text-gray-700" data-item-id="5" data-action="increase">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg border">
+                            <div class="flex justify-between items-start">
+                                <div><h3 class="font-bold text-lg revelo-blue">J&J Pro</h3><p class="text-sm text-gray-600 mt-1">For professional dancers and instructors.</p><p class="text-xs text-gray-500 mt-1">5 more entries available before price increases.</p></div>
+                                <p class="font-bold text-xl revelo-orange">€15.00</p>
+                            </div>
+                            <div class="flex justify-end items-center mt-2">
+                                <div class="flex items-center space-x-3">
+                                    <button class="quantity-btn p-1 rounded-full bg-gray-200 text-gray-700" data-item-id="7" data-action="decrease">-</button>
+                                    <span class="quantity-display font-bold text-lg" id="quantity-7">0</span>
+                                    <button class="quantity-btn p-1 rounded-full bg-gray-200 text-gray-700" data-item-id="7" data-action="increase">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                 <!-- Add-ons -->
+                <details class="bg-white border rounded-lg">
+                    <summary class="p-4 font-semibold revelo-blue cursor-pointer flex justify-between items-center text-xl">Add-ons <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
+                    <div class="p-4 border-t border-gray-200 space-y-4">
+                        <div class="bg-gray-50 p-4 rounded-lg border">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-bold text-lg revelo-blue">Official T-shirt</h3>
+                                    <p class="text-sm text-gray-600 mt-1">Get the official event T-shirt.</p>
+                                </div>
+                                <p class="font-bold text-xl revelo-orange">€25.00</p>
+                            </div>
+                            <div id="tshirt-rows-container" class="space-y-2 mt-2">
+                                <!-- T-shirt selector rows will be dynamically added here -->
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            </div>
+        </main>
+
+        <!-- Fixed Footer: Order Summary -->
+        <footer class="fixed bottom-0 left-0 right-0 max-w-2xl mx-auto bg-white border-t border-gray-200">
+             <details>
+                <summary id="footer-summary" class="p-4 flex justify-between items-center cursor-pointer">
+                    <div class="flex items-center">
+                        <span class="font-bold text-2xl revelo-blue" id="total-price">€0.00</span>
+                        <svg class="w-5 h-5 text-gray-500 ml-2 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                    <button class="bg-revelo-orange text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-orange-600 transition duration-300">
+                        Proceed to Checkout
+                    </button>
+                </summary>
+                <div id="cart-details" class="p-4 border-t border-gray-200 max-h-48 overflow-y-auto">
+                    <!-- Cart items will be populated here -->
+                </div>
+            </details>
+        </footer>
+    </div>
+    
+    <!-- Price Info Modal -->
+    <div id="price-info-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-sm p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h4 class="font-bold text-lg revelo-blue">Price Evolution</h4>
+                <button id="close-price-modal" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+            </div>
+            <div class="space-y-2 text-gray-700">
+                <p class="line-through">Early bird <b>€120.00</b></p>
+                <p class="line-through">Until 30 Jul <b>€170.00</b></p>
+                <p class="line-through">Until 31 Jul <b>€180.00</b></p>
+                <p class="revelo-orange font-bold">Until 31 Aug €190.00</p>
+                <p>Final price <b>€220.00</b></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const tickets = [
+            { id: 1, name: 'Sensuality Pass', price: 190.00 },
+            { id: 2, name: 'Essentiality Pass', price: 190.00 },
+            { id: 3, name: 'Sensuality Training Track', price: 100.00 },
+            { id: 4, name: 'Essentiality Training Track', price: 100.00 },
+            { id: 5, name: 'J&J Amateur', price: 10.00 },
+            { id: 7, name: 'J&J Pro', price: 15.00 },
+            { id: '6-S', name: 'Official T-shirt (Size S)', price: 25.00 },
+            { id: '6-M', name: 'Official T-shirt (Size M)', price: 25.00 },
+            { id: '6-L', name: 'Official T-shirt (Size L)', price: 25.00 },
+            { id: '6-XL', name: 'Official T-shirt (Size XL)', price: 25.00 },
+        ];
+
+        let cart = {};
+        const distributionFee = 3.00;
+        let tshirtRowCounter = 0;
+
+        function updateSummary() {
+            let totalItems = 0;
+            let subtotal = 0;
+            const cartDetailsContainer = document.getElementById('cart-details');
+            cartDetailsContainer.innerHTML = '';
+
+            for (const itemId in cart) {
+                if (cart[itemId] > 0) {
+                    const quantity = cart[itemId];
+                    totalItems += quantity;
+                    const ticket = tickets.find(t => t.id == itemId);
+                    subtotal += quantity * ticket.price;
+
+                    const itemEl = document.createElement('div');
+                    itemEl.className = 'flex justify-between items-center text-sm text-gray-700';
+                    itemEl.innerHTML = `
+                        <span>${quantity} x ${ticket.name}</span>
+                        <div class="flex items-center">
+                            <span>€${(quantity * ticket.price).toFixed(2)}</span>
+                            <button class="cart-remove-btn p-1 text-red-500 hover:text-red-700 ml-2" data-item-id="${itemId}">&times;</button>
+                        </div>
+                    `;
+                    cartDetailsContainer.appendChild(itemEl);
+                }
+            }
+            
+            let finalTotal = subtotal;
+            if (totalItems > 0) {
+                const fee = totalItems * distributionFee;
+                finalTotal += fee;
+                const feeEl = document.createElement('div');
+                feeEl.className = 'flex justify-between text-sm text-gray-500 mt-2 pt-2 border-t';
+                feeEl.innerHTML = `
+                    <span>Distribution Fee</span>
+                    <span>€${fee.toFixed(2)}</span>
+                `;
+                cartDetailsContainer.appendChild(feeEl);
+            }
+
+            document.getElementById('total-price').textContent = `€${finalTotal.toFixed(2)}`;
+            const totalItemsSpan = document.querySelector('#footer-summary p span');
+             if (totalItemsSpan) {
+                totalItemsSpan.textContent = totalItems;
+            }
+        }
+        
+        function updateCartItem(itemId, action) {
+             if (!cart[itemId]) cart[itemId] = 0;
+             if (action === 'increase') cart[itemId]++;
+             else if (action === 'decrease' && cart[itemId] > 0) cart[itemId]--;
+             
+             const quantityDisplay = document.getElementById(`quantity-${itemId}`);
+             if (quantityDisplay) {
+                quantityDisplay.textContent = cart[itemId];
+             }
+             updateSummary();
+        }
+
+        function createTshirtRow() {
+            const container = document.getElementById('tshirt-rows-container');
+            const rowId = `tshirt-row-${tshirtRowCounter++}`;
+            const row = document.createElement('div');
+            row.id = rowId;
+            row.className = 'tshirt-row flex justify-between items-center';
+            row.innerHTML = `
+                <select class="tshirt-size-select border border-gray-300 rounded-md p-1 text-sm">
+                    <option value="S">Size S</option>
+                    <option value="M">Size M</option>
+                    <option value="L">Size L</option>
+                    <option value="XL">Size XL</option>
+                </select>
+                <div class="flex items-center space-x-3">
+                    <button class="tshirt-quantity-btn p-1 rounded-full bg-gray-200 text-gray-700" data-action="decrease">-</button>
+                    <span class="quantity-display font-bold text-lg">0</span>
+                    <button class="tshirt-quantity-btn p-1 rounded-full bg-gray-200 text-gray-700" data-action="increase">+</button>
+                </div>
+            `;
+            container.appendChild(row);
+        }
+
+        document.getElementById('tshirt-rows-container').addEventListener('click', (event) => {
+            const button = event.target.closest('.tshirt-quantity-btn');
+            if (!button) return;
+
+            const row = button.closest('.tshirt-row');
+            const size = row.querySelector('.tshirt-size-select').value;
+            const itemId = `6-${size}`;
+            const action = button.dataset.action;
+
+            if (!cart[itemId]) cart[itemId] = 0;
+
+            if (action === 'increase') {
+                cart[itemId]++;
+            } else if (action === 'decrease' && cart[itemId] > 0) {
+                cart[itemId]--;
+            }
+            
+            row.querySelector('.quantity-display').textContent = cart[itemId];
+
+            const allRows = document.querySelectorAll('.tshirt-row');
+            const lastRow = allRows[allRows.length - 1];
+            if (parseInt(lastRow.querySelector('.quantity-display').textContent) > 0) {
+                createTshirtRow();
+            }
+            updateSummary();
+        });
+        
+        document.querySelectorAll('.quantity-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                updateCartItem(button.dataset.itemId, button.dataset.action);
+            });
+        });
+        
+        document.getElementById('cart-details').addEventListener('click', (event) => {
+            const button = event.target.closest('.cart-remove-btn');
+            if (button) {
+                const itemId = button.dataset.itemId;
+                if (cart[itemId] > 0) {
+                    cart[itemId]--;
+                    
+                    const quantityDisplay = document.getElementById(`quantity-${itemId}`);
+                     if (quantityDisplay) {
+                        quantityDisplay.textContent = cart[itemId];
+                    } else {
+                        // Handle T-shirt display update
+                        document.querySelectorAll('.tshirt-row').forEach(row => {
+                            const size = row.querySelector('.tshirt-size-select').value;
+                            if (`6-${size}` === itemId) {
+                                row.querySelector('.quantity-display').textContent = cart[itemId];
+                            }
+                        });
+                    }
+                    updateSummary();
+                }
+            }
+        });
+        
+        // --- Price Info Modal Interaction ---
+        const priceInfoModal = document.getElementById('price-info-modal');
+        const closePriceModalBtn = document.getElementById('close-price-modal');
+        const priceInfoTriggers = document.querySelectorAll('.price-info-trigger');
+
+        priceInfoTriggers.forEach(trigger => {
+            trigger.addEventListener('click', () => priceInfoModal.classList.remove('hidden'));
+        });
+        const closePriceModal = () => priceInfoModal.classList.add('hidden');
+        closePriceModalBtn.addEventListener('click', closePriceModal);
+        priceInfoModal.addEventListener('click', (event) => {
+            if (event.target === priceInfoModal) closePriceModal();
+        });
+        
+        // Initial setup
+        document.addEventListener('DOMContentLoaded', () => {
+            createTshirtRow();
+        });
+    </script>
+</body>
+</html>

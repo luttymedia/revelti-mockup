@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revelo - Gallery Navigation</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="antialiased text-gray-800 bg-gray-100">
+    <div id="navbar-placeholder"></div>
+
+    <!-- Main container with a max-width for larger screens -->
+    <div class="max-w-2xl mx-auto bg-white shadow-lg overflow-hidden mb-6">
+
+        <!-- Header Section -->
+        <header class="relative h-48 bg-gray-900">
+            <img src="images/eventPoster.jpg" alt="Sensuality 2025 banner" class="absolute inset-0 w-full h-full object-cover">
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent flex items-end p-6">
+                <div>
+                    <h1 class="text-white text-3xl font-extrabold leading-tight">Sensuality 2025</h1>
+                    <p class="text-white text-lg opacity-90">Galleries</p>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Main Content -->
+        <main class="p-6 bg-gray-50">
+            
+            <!-- Breadcrumb Navigation -->
+            <nav id="breadcrumb-nav" class="mb-2 text-sm text-gray-500"></nav>
+            
+            <!-- Collaborators Display -->
+            <div id="collaborators-display" class="mb-4 flex items-center space-x-4">
+                <!-- Collaborator avatars will be dynamically inserted here -->
+            </div>
+
+            <!-- Gallery Levels Container -->
+            <div id="gallery-container">
+                <!-- Level 1: Day 1 / Day 2 -->
+                <div id="level-1" class="gallery-level">
+                    <button class="w-full mb-6 bg-revelo-orange text-white font-bold py-2 px-4 rounded-lg shadow-md hover:bg-orange-600 transition duration-300 flex items-center justify-center"><svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>Follow this gallery</button>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-white p-4 rounded-lg shadow border flex items-center justify-between cursor-pointer hover:border-revelo-blue transition-colors" onclick="navigateTo(2, 'Saturday 01-Nov')"><div><img src="https://placehold.co/80x80/213c63/ffffff?text=Folder" class="w-16 h-16 rounded-lg mr-4 inline-block"><h3 class="font-bold text-lg revelo-blue inline-block">Saturday 01-Nov</h3></div><button class="p-1.5 rounded-full text-gray-600 hover:bg-gray-200"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path></svg></button></div>
+                        <div class="bg-white p-4 rounded-lg shadow border flex items-center justify-between"><div><img src="https://placehold.co/80x80/cccccc/ffffff?text=Folder" class="w-16 h-16 rounded-lg mr-4 inline-block"><h3 class="font-bold text-lg text-gray-500 inline-block">Sunday 02-Nov</h3></div><button class="p-1.5 rounded-full text-gray-600 hover:bg-gray-200"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path></svg></button></div>
+                    </div>
+                </div>
+                <!-- Level 2: Photos / Videos -->
+                <div id="level-2" class="gallery-level hidden">
+                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-white p-4 rounded-lg shadow border flex items-center justify-between cursor-pointer hover:border-revelo-blue transition-colors" onclick="navigateTo(3, 'Photos')"><div><img src="https://placehold.co/80x80/213c63/ffffff?text=Folder" class="w-16 h-16 rounded-lg mr-4 inline-block"><h3 class="font-bold text-lg revelo-blue inline-block">Photos</h3></div><button class="p-1.5 rounded-full text-gray-600 hover:bg-gray-200"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path></svg></button></div>
+                        <div class="bg-white p-4 rounded-lg shadow border flex items-center justify-between"><div><img src="https://placehold.co/80x80/cccccc/ffffff?text=Folder" class="w-16 h-16 rounded-lg mr-4 inline-block"><h3 class="font-bold text-lg text-gray-500 inline-block">Videos</h3></div><button class="p-1.5 rounded-full text-gray-600 hover:bg-gray-200"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path></svg></button></div>
+                    </div>
+                </div>
+                <!-- Level 3: Photo Categories -->
+                <div id="level-3" class="gallery-level hidden">
+                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-white p-4 rounded-lg shadow border flex items-center justify-between cursor-pointer hover:border-revelo-blue transition-colors" onclick="navigateTo(4, 'Workshops')"><div><img src="https://placehold.co/80x80/213c63/ffffff?text=Folder" class="w-16 h-16 rounded-lg mr-4 inline-block"><h3 class="font-bold text-lg revelo-blue inline-block">Workshops</h3></div><button class="p-1.5 rounded-full text-gray-600 hover:bg-gray-200"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path></svg></button></div>
+                        <div class="bg-white p-4 rounded-lg shadow border flex items-center justify-between"><div><img src="https://placehold.co/80x80/cccccc/ffffff?text=Folder" class="w-16 h-16 rounded-lg mr-4 inline-block"><h3 class="font-bold text-lg text-gray-500 inline-block">Jack & Jill</h3></div><button class="p-1.5 rounded-full text-gray-600 hover:bg-gray-200"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path></svg></button></div>
+                        <div class="bg-white p-4 rounded-lg shadow border flex items-center justify-between"><div><img src="https://placehold.co/80x80/cccccc/ffffff?text=Folder" class="w-16 h-16 rounded-lg mr-4 inline-block"><h3 class="font-bold text-lg text-gray-500 inline-block">Shows</h3></div><button class="p-1.5 rounded-full text-gray-600 hover:bg-gray-200"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path></svg></button></div>
+                        <div class="bg-white p-4 rounded-lg shadow border flex items-center justify-between"><div><img src="https://placehold.co/80x80/cccccc/ffffff?text=Folder" class="w-16 h-16 rounded-lg mr-4 inline-block"><h3 class="font-bold text-lg text-gray-500 inline-block">Social</h3></div><button class="p-1.5 rounded-full text-gray-600 hover:bg-gray-200"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path></svg></button></div>
+                    </div>
+                </div>
+                <!-- Level 4: Actual Gallery -->
+                <div id="level-4" class="gallery-level hidden">
+                    <div style="column-count: 2; column-gap: 1rem;">
+                        <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Sensuality 2025" data-creator="AMedia">
+                            <img src="https://placehold.co/600x800/f58220/ffffff?text=Photo+1" class="rounded-lg shadow-md w-full">
+                        </div>
+                        <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Sensuality 2025" data-creator="AMedia">
+                            <img src="https://placehold.co/600x600/213c63/ffffff?text=Photo+2" class="rounded-lg shadow-md w-full">
+                        </div>
+                        <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Sensuality 2025" data-creator="AMedia">
+                            <img src="https://placehold.co/600x900/f58220/ffffff?text=Photo+3" class="rounded-lg shadow-md w-full">
+                        </div>
+                        <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Sensuality 2025" data-creator="AMedia">
+                            <img src="https://placehold.co/600x700/213c63/ffffff?text=Photo+4" class="rounded-lg shadow-md w-full">
+                        </div>
+                        <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Sensuality 2025" data-creator="AMedia">
+                            <img src="https://placehold.co/600x850/f58220/ffffff?text=Photo+5" class="rounded-lg shadow-md w-full">
+                        </div>
+                        <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Sensuality 2025" data-creator="AMedia">
+                            <img src="https://placehold.co/600x650/213c63/ffffff?text=Photo+6" class="rounded-lg shadow-md w-full">
+                        </div>
+                        <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Sensuality 2025" data-creator="AMedia">
+                            <img src="https://placehold.co/600x750/f58220/ffffff?text=Photo+7" class="rounded-lg shadow-md w-full">
+                        </div>
+                        <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Sensuality 2025" data-creator="AMedia">
+                            <img src="https://placehold.co/600x950/213c63/ffffff?text=Photo+8" class="rounded-lg shadow-md w-full">
+                        </div>
+                        <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Sensuality 2025" data-creator="AMedia">
+                            <img src="https://placehold.co/600x550/f58220/ffffff?text=Photo+9" class="rounded-lg shadow-md w-full">
+                        </div>
+                        <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Sensuality 2025" data-creator="AMedia">
+                            <img src="https://placehold.co/600x800/213c63/ffffff?text=Photo+10" class="rounded-lg shadow-md w-full">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Media Modal -->
+    <div id="media-modal" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center p-4 hidden z-50">
+        <!-- Image Display Area -->
+        <div class="relative w-full h-full flex items-center justify-center">
+            <img id="modal-image" src="" class="max-h-full max-w-full object-contain cursor-pointer">
+            
+            <!-- Overlay Container -->
+            <div id="modal-overlay" class="absolute inset-0 flex flex-col justify-between p-2">
+                <!-- Modal Header -->
+                <div class="w-full flex justify-between items-start text-white">
+                    <div>
+                        <h3 id="modal-event-name" class="font-bold text-lg"></h3>
+                        <p id="modal-creator-name" class="text-sm"></p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button class="p-2 rounded-full hover:bg-white/20"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg></button>
+                        <button class="p-2 rounded-full hover:bg-white/20"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path></svg></button>
+                        <button class="p-2 rounded-full hover:bg-white/20"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg></button>
+                        <button id="close-media-modal" class="p-2 rounded-full hover:bg-white/20 text-4xl leading-none">×</button>
+                    </div>
+                </div>
+                <!-- Navigation -->
+                <div class="w-full flex justify-between items-center absolute top-1/2 left-0 transform -translate-y-1/2">
+                     <button id="prev-media" class="text-white bg-black bg-opacity-30 p-3 rounded-full m-2 hover:bg-opacity-50 transition-opacity"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg></button>
+                     <button id="next-media" class="text-white bg-black bg-opacity-30 p-3 rounded-full m-2 hover:bg-opacity-50 transition-opacity"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const galleryContainer = document.getElementById('gallery-container');
+        const breadcrumbNav = document.getElementById('breadcrumb-nav');
+        const collaboratorsDisplay = document.getElementById('collaborators-display');
+        
+        // Initialize breadcrumb trail for this page
+        let breadcrumbTrail = [
+            { name: 'Galleries', level: -1, link: 'organizerGalleries.html' }, // Link back to the main page
+            { name: 'Sensuality 2025', level: 1 }
+        ];
+
+        const collaboratorsByLevel = {
+            1: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }],
+            2: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }],
+            3: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }],
+            4: [
+                { name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' },
+                { name: 'Lutty Moreira', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=LM' }
+            ]
+        };
+
+        function updateCollaborators(level) {
+            collaboratorsDisplay.innerHTML = '';
+            const collaborators = collaboratorsByLevel[level] || [];
+            if (collaborators.length > 0) {
+                const title = document.createElement('span');
+                title.className = 'text-sm font-semibold text-gray-600';
+                title.textContent = collaborators.length > 1 ? 'Creators:' : 'Creator:';
+                collaboratorsDisplay.appendChild(title);
+
+                collaborators.forEach(c => {
+                    const avatarLink = document.createElement('a');
+                    if (c.name === 'AMedia') {
+                        avatarLink.href = "creatorPortfolio.html";
+                    } else {
+                        avatarLink.href = "#";
+                    }
+                    avatarLink.className = "flex items-center space-x-2 bg-white px-2 py-1 rounded-full border shadow-sm hover:shadow-md transition-shadow";
+                    avatarLink.innerHTML = `<img src="${c.avatar}" class="w-6 h-6 rounded-full"><span class="text-sm font-semibold revelo-blue">${c.name}</span>`;
+                    collaboratorsDisplay.appendChild(avatarLink);
+                });
+            }
+        }
+
+        function updateBreadcrumbs() {
+            breadcrumbNav.innerHTML = '';
+            breadcrumbTrail.forEach((crumb, index) => {
+                const isLast = index === breadcrumbTrail.length - 1;
+                const crumbEl = document.createElement(isLast ? 'span' : 'a');
+                crumbEl.textContent = crumb.name;
+                
+                if (isLast) {
+                    crumbEl.className = 'font-semibold text-gray-800';
+                } else {
+                    crumbEl.className = 'hover:underline cursor-pointer';
+                    if (crumb.link) {
+                        crumbEl.href = crumb.link;
+                    } else {
+                        crumbEl.onclick = () => navigateTo(crumb.level, crumb.name, true, index);
+                    }
+                }
+
+                breadcrumbNav.appendChild(crumbEl);
+                if (!isLast) {
+                    breadcrumbNav.append(' > ');
+                }
+            });
+        }
+
+        function navigateTo(level, name, isBreadcrumbClick = false, breadcrumbIndex = -1) {
+            // Hide all levels
+            galleryContainer.querySelectorAll('.gallery-level').forEach(el => el.classList.add('hidden'));
+            
+            // Show target level
+            const targetLevel = document.getElementById(`level-${level}`);
+            if (targetLevel) {
+                targetLevel.classList.remove('hidden');
+            }
+
+            // Update breadcrumb
+            if (isBreadcrumbClick) {
+                breadcrumbTrail = breadcrumbTrail.slice(0, breadcrumbIndex + 1);
+            } else {
+                // Prevent adding duplicates
+                if (!breadcrumbTrail.find(c => c.level === level)) {
+                    breadcrumbTrail.push({ name, level });
+                }
+            }
+            updateBreadcrumbs();
+            updateCollaborators(level);
+        }
+        
+        // --- Media Modal Interaction ---
+        const mediaModal = document.getElementById('media-modal');
+        const modalImage = document.getElementById('modal-image');
+        const modalOverlay = document.getElementById('modal-overlay');
+        const modalEventName = document.getElementById('modal-event-name');
+        const modalCreatorName = document.getElementById('modal-creator-name');
+        const closeMediaModalBtn = document.getElementById('close-media-modal');
+        const nextBtn = document.getElementById('next-media');
+        const prevBtn = document.getElementById('prev-media');
+
+        let galleryItems = [];
+        let currentIndex = 0;
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        function toggleOverlay() {
+            modalOverlay.classList.toggle('hidden');
+        }
+
+        function openMediaModal(element) {
+            const gallery = element.closest('.gallery-level');
+            galleryItems = Array.from(gallery.querySelectorAll('.cursor-pointer'));
+            currentIndex = galleryItems.indexOf(element);
+            
+            if (currentIndex === -1) return;
+
+            showMedia(currentIndex);
+            mediaModal.classList.remove('hidden');
+            modalOverlay.classList.remove('hidden'); // Ensure overlay is visible on open
+        }
+
+        function showMedia(index) {
+            if (index < 0 || index >= galleryItems.length) {
+                return;
+            }
+            const item = galleryItems[index];
+            const img = item.querySelector('img');
+            const eventName = item.getAttribute('data-event') || breadcrumbTrail[breadcrumbTrail.length - 1].name;
+            const creatorName = item.getAttribute('data-creator') || 'Revelo';
+
+            modalImage.src = img.src;
+            modalEventName.textContent = eventName;
+            modalCreatorName.textContent = `by ${creatorName}`;
+            currentIndex = index;
+        }
+
+        function nextMedia() {
+            const nextIndex = (currentIndex + 1) % galleryItems.length;
+            showMedia(nextIndex);
+        }
+
+        function prevMedia() {
+            const prevIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+            showMedia(prevIndex);
+        }
+
+        function closeMediaModal() {
+            mediaModal.classList.add('hidden');
+            modalImage.src = "";
+        }
+
+        // Swipe functionality
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) { // Swiped left
+                nextMedia();
+            }
+            if (touchEndX > touchStartX + 50) { // Swiped right
+                prevMedia();
+            }
+        }
+
+        mediaModal.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, {passive: true});
+
+        mediaModal.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        // Click listeners
+        modalImage.addEventListener('click', toggleOverlay);
+        closeMediaModalBtn.addEventListener('click', closeMediaModal);
+        nextBtn.addEventListener('click', nextMedia);
+        prevBtn.addEventListener('click', prevMedia);
+
+        mediaModal.addEventListener('click', (event) => {
+            // Close only if clicking the background, not the image or overlay buttons
+            if (event.target === mediaModal) {
+                closeMediaModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (!mediaModal.classList.contains('hidden')) {
+                if (e.key === 'ArrowRight') {
+                    nextMedia();
+                } else if (e.key === 'ArrowLeft') {
+                    prevMedia();
+                } else if (e.key === 'Escape') {
+                    closeMediaModal();
+                }
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            updateBreadcrumbs();
+            updateCollaborators(1); // Start by showing collaborators for level 1
+        });
+    </script>
+    <script src="main.js" defer></script>
+</body>
+</html>

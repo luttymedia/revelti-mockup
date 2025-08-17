@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revelo - My Dashboard</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="antialiased text-gray-800">
+
+    <!-- Main container with a max-width for larger screens -->
+    <div class="max-w-2xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+
+        <!-- Header Section -->
+        <header class="p-6 flex items-center">
+            <img src="https://placehold.co/80x80/213c63/ffffff?text=A" alt="User Avatar" class="w-20 h-20 rounded-full object-cover shadow-md">
+            <div class="ml-4">
+                <h1 class="text-3xl font-extrabold revelo-blue">Alex Johnson</h1>
+                <p class="text-gray-500">Attendee Dashboard</p>
+            </div>
+        </header>
+        
+        <!-- Tab Navigation -->
+        <nav class="border-t border-b border-gray-200">
+            <div class="flex justify-around">
+                <button onclick="switchTab('following')" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelo-blue transition duration-300 tab-active">Following</button>
+                <button onclick="switchTab('media')" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelo-blue transition duration-300">Media</button>
+                <button onclick="switchTab('tickets')" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelo-blue transition duration-300">My Tickets</button>
+                <button onclick="switchTab('profile')" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelo-blue transition duration-300">Profile</button>
+            </div>
+        </nav>
+
+        <!-- Main Content Sections (Tabs) -->
+        <main class="p-6 bg-gray-50">
+            <!-- Following Tab -->
+            <div id="following" class="tab-content space-y-6">
+                <!-- Events Subsection -->
+                <details open>
+                    <summary class="flex justify-between items-center cursor-pointer font-bold text-xl revelo-blue">Events <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
+                    <div class="flex space-x-4 overflow-x-auto pb-4 mt-3 horizontal-scroll">
+                        <!-- Event Card 1 -->
+                        <a href="eventDetail.html" class="flex-shrink-0 w-2/3 sm:w-1/2">
+                            <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                                <div class="relative">
+                                    <img src="https://goandance-media-cache-prod.s3.eu-central-1.amazonaws.com/poster_full/event/poster/2025/05/23/6830eaeb459d1543987602.jpg" alt="Event Poster" class="w-full h-40 object-cover" onerror="this.onerror=null;this.src='https.placehold.co/600x400/cccccc/ffffff?text=Event';">
+                                    <div class="absolute top-2 right-2 flex space-x-1">
+                                        <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></button>
+                                        <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path></svg></button>
+                                    </div>
+                                </div>
+                                <div class="p-3">
+                                    <h4 class="font-bold text-sm revelo-blue truncate">Sensuality & Essentiality</h4>
+                                    <p class="text-xs text-gray-500">Nov 1-2, 2025 | Barcelona</p>
+                                </div>
+                            </div>
+                        </a>
+                        <!-- Event Card 2 -->
+                        <a href="#" class="flex-shrink-0 w-2/3 sm:w-1/2">
+                            <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                                <div class="relative">
+                                    <img src="https://placehold.co/600x400/213c63/ffffff?text=Trending" alt="Event Poster" class="w-full h-40 object-cover" onerror="this.onerror=null;this.src='https.placehold.co/600x400/cccccc/ffffff?text=Event';">
+                                    <div class="absolute top-2 right-2 flex space-x-1">
+                                        <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></button>
+                                        <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path></svg></button>
+                                    </div>
+                                </div>
+                                <div class="p-3">
+                                    <h4 class="font-bold text-sm revelo-blue truncate">BCN Bachata Congress</h4>
+                                    <p class="text-xs text-gray-500">Dec 5-8, 2025 | Barcelona</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </details>
+                <!-- Organizers Subsection -->
+                <details>
+                    <summary class="flex justify-between items-center cursor-pointer font-bold text-xl revelo-blue">Organizers <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
+                    <div class="flex space-x-4 overflow-x-auto pb-4 mt-3 horizontal-scroll">
+                        <a href="organizerPortfolio.html" class="flex-shrink-0 text-center w-24"><img src="https://goandance-media-cache-prod.s3.eu-central-1.amazonaws.com/square_preview_700/organizer/profile/2019/12/20/68067775d3164196627518.png" alt="Avatar" class="w-24 h-24 rounded-full object-cover shadow-md mx-auto"><p class="mt-2 text-sm font-semibold revelo-blue break-words">Bachata Sensual Events</p></a>
+                        <a href="#" class="flex-shrink-0 text-center w-24"><img src="https://placehold.co/80x80/213c63/ffffff?text=E" alt="Avatar" class="w-24 h-24 rounded-full object-cover shadow-md mx-auto"><p class="mt-2 text-sm font-semibold revelo-blue break-words">Esencia</p></a>
+                    </div>
+                </details>
+                <!-- Creators Subsection -->
+                 <details>
+                    <summary class="flex justify-between items-center cursor-pointer font-bold text-xl revelo-blue">Creators <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
+                    <div class="flex space-x-4 overflow-x-auto pb-4 mt-3 horizontal-scroll">
+                        <a href="creatorPortfolio.html" class="flex-shrink-0 text-center w-24"><img src="https://placehold.co/80x80/f58220/ffffff?text=A" alt="AMedia Avatar" class="w-24 h-24 rounded-full object-cover shadow-md mx-auto"><p class="mt-2 text-sm font-semibold revelo-blue break-words">AMedia</p></a>
+                    </div>
+                </details>
+                <!-- Promoters Subsection -->
+                <details>
+                    <summary class="flex justify-between items-center cursor-pointer font-bold text-xl revelo-blue">Promoters <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
+                    <div class="flex space-x-4 overflow-x-auto pb-4 mt-3 horizontal-scroll">
+                        <a href="promoterPortfolio.html" class="flex-shrink-0 text-center w-24"><img src="https://placehold.co/80x80/cccccc/000000?text=JD" alt="JD Avatar" class="w-24 h-24 rounded-full object-cover shadow-md mx-auto"><p class="mt-2 text-sm font-semibold revelo-blue break-words">John Doe</p></a>
+                    </div>
+                </details>
+            </div>
+
+            <!-- Media Tab -->
+            <div id="media" class="tab-content hidden space-y-6">
+                <!-- Galleries Subsection -->
+                <details>
+                    <summary class="flex justify-between items-center cursor-pointer font-bold text-xl revelo-blue">Galleries <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
+                    <div class="flex space-x-4 overflow-x-auto pb-4 mt-3 horizontal-scroll">
+                        <a href="galleryNavigation.html" class="flex-shrink-0 w-2/3 sm:w-1/2">
+                            <div class="relative rounded-lg overflow-hidden shadow-lg">
+                                <img src="https://placehold.co/600x400/213c63/ffffff?text=Official+Media" alt="Album cover" class="w-full h-40 object-cover">
+                                <div class="absolute top-2 right-2 flex space-x-1">
+                                    <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></button>
+                                    <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path></svg></button>
+                                </div>
+                                <div class="absolute inset-0 bg-black bg-opacity-40 flex items-end p-4">
+                                    <h3 class="text-white text-xl font-bold">Sensuality 2025</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="flex-shrink-0 w-2/3 sm:w-1/2">
+                            <div class="relative rounded-lg overflow-hidden shadow-lg">
+                                <img src="https://placehold.co/600x400/cccccc/ffffff?text=Media" alt="Album cover" class="w-full h-40 object-cover">
+                                <div class="absolute top-2 right-2 flex space-x-1">
+                                    <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></button>
+                                    <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path></svg></button>
+                                </div>
+                                <div class="absolute inset-0 bg-black bg-opacity-40 flex items-end p-4">
+                                    <h3 class="text-white text-xl font-bold">Summer Fest 2024</h3>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </details>
+                <!-- My Favorites Subsection -->
+                <details>
+                            <summary class="flex justify-between items-center cursor-pointer font-bold text-xl revelo-blue">My Favorites <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
+                            <div id="favorites-grid" class="mt-3" style="column-count: 2; column-gap: 1rem;">
+                                <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Sensuality &amp; Essentiality" data-creator="AMedia">
+                                    <img src="https://placehold.co/600x800/f58220/ffffff?text=Favorite+1" class="rounded-lg shadow-md w-full relative z-0">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg z-10"></div>
+                                    <div class="absolute bottom-0 left-0 p-2 text-white z-20">
+                                        <p class="font-bold text-sm">Sensuality &amp; Essentiality</p>
+                                        <p class="text-xs">by AMedia</p>
+                                    </div>
+                                </div>
+                                <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="BCN Congress" data-creator="AMedia">
+                                    <img src="https://placehold.co/600x600/213c63/ffffff?text=Favorite+2" class="rounded-lg shadow-md w-full relative z-0">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg z-10"></div>
+                                    <div class="absolute bottom-0 left-0 p-2 text-white z-20">
+                                        <p class="font-bold text-sm">BCN Congress</p>
+                                        <p class="text-xs">by AMedia</p>
+                                    </div>
+                                </div>
+                                <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Summer Fest" data-creator="Visuals Pro">
+                                    <img src="https://placehold.co/600x900/f58220/ffffff?text=Favorite+3" class="rounded-lg shadow-md w-full relative z-0">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg z-10"></div>
+                                    <div class="absolute bottom-0 left-0 p-2 text-white z-20">
+                                        <p class="font-bold text-sm">Summer Fest</p>
+                                        <p class="text-xs">by Visuals Pro</p>
+                                    </div>
+                                </div>
+                                <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Sensuality &amp; Essentiality" data-creator="AMedia">
+                                    <img src="https://placehold.co/600x700/213c63/ffffff?text=Favorite+4" class="rounded-lg shadow-md w-full relative z-0">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg z-10"></div>
+                                    <div class="absolute bottom-0 left-0 p-2 text-white z-20">
+                                        <p class="font-bold text-sm">Sensuality &amp; Essentiality</p>
+                                        <p class="text-xs">by AMedia</p>
+                                    </div>
+                                </div>
+                                <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="BCN Congress" data-creator="AMedia">
+                                    <img src="https://placehold.co/600x850/f58220/ffffff?text=Favorite+5" class="rounded-lg shadow-md w-full relative z-0">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg z-10"></div>
+                                    <div class="absolute bottom-0 left-0 p-2 text-white z-20">
+                                        <p class="font-bold text-sm">BCN Congress</p>
+                                        <p class="text-xs">by AMedia</p>
+                                    </div>
+                                </div>
+                                <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Summer Fest" data-creator="Visuals Pro">
+                                    <img src="https://placehold.co/600x650/213c63/ffffff?text=Favorite+6" class="rounded-lg shadow-md w-full relative z-0">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg z-10"></div>
+                                    <div class="absolute bottom-0 left-0 p-2 text-white z-20">
+                                        <p class="font-bold text-sm">Summer Fest</p>
+                                        <p class="text-xs">by Visuals Pro</p>
+                                    </div>
+                                </div>
+                                <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Sensuality &amp; Essentiality" data-creator="AMedia">
+                                    <img src="https://placehold.co/600x750/f58220/ffffff?text=Favorite+7" class="rounded-lg shadow-md w-full relative z-0">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg z-10"></div>
+                                    <div class="absolute bottom-0 left-0 p-2 text-white z-20">
+                                        <p class="font-bold text-sm">Sensuality &amp; Essentiality</p>
+                                        <p class="text-xs">by AMedia</p>
+                                    </div>
+                                </div>
+                                <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="BCN Congress" data-creator="AMedia">
+                                    <img src="https://placehold.co/600x950/213c63/ffffff?text=Favorite+8" class="rounded-lg shadow-md w-full relative z-0">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg z-10"></div>
+                                    <div class="absolute bottom-0 left-0 p-2 text-white z-20">
+                                        <p class="font-bold text-sm">BCN Congress</p>
+                                        <p class="text-xs">by AMedia</p>
+                                    </div>
+                                </div>
+                                <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Summer Fest" data-creator="Visuals Pro">
+                                    <img src="https://placehold.co/600x550/f58220/ffffff?text=Favorite+9" class="rounded-lg shadow-md w-full relative z-0">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg z-10"></div>
+                                    <div class="absolute bottom-0 left-0 p-2 text-white z-20">
+                                        <p class="font-bold text-sm">Summer Fest</p>
+                                        <p class="text-xs">by Visuals Pro</p>
+                                    </div>
+                                </div>
+                                <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Sensuality &amp; Essentiality" data-creator="AMedia">
+                                    <img src="https://placehold.co/600x800/213c63/ffffff?text=Favorite+10" class="rounded-lg shadow-md w-full relative z-0">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg z-10"></div>
+                                    <div class="absolute bottom-0 left-0 p-2 text-white z-20">
+                                        <p class="font-bold text-sm">Sensuality &amp; Essentiality</p>
+                                        <p class="text-xs">by AMedia</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+
+            <!-- My Tickets Tab -->
+            <div id="tickets" class="tab-content hidden space-y-6">
+                <!-- Upcoming Events Subsection -->
+                <details open class="space-y-4">
+                    <summary class="flex justify-between items-center cursor-pointer font-bold text-xl revelo-blue">Upcoming Events <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
+                    <div class="space-y-4 pt-3">
+                        <!-- Ticket Card 1 -->
+                        <a href="purchaseDetails.html">
+                            <div class="bg-white p-4 rounded-lg shadow border border-gray-200 cursor-pointer hover:shadow-lg transition-shadow">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <p class="text-sm text-gray-500">Order #1A2B3C4D</p>
+                                        <h3 class="font-bold text-lg revelo-blue">Sensuality & Essentiality</h3>
+                                    </div>
+                                    <p class="font-bold text-lg revelo-orange">€190.00</p>
+                                </div>
+                                <div class="mt-2 text-sm text-gray-600">
+                                    <p><strong>Event date:</strong> Nov 1, 2025</p>
+                                    <p><strong>Ticket:</strong> Sensuality Pass</p>
+                                    <p><strong>Purchased:</strong> Aug 10, 2025</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </details>
+
+                <!-- Past Events Subsection -->
+                <details class="space-y-4">
+                    <summary class="flex justify-between items-center cursor-pointer font-bold text-xl revelo-blue">Past Events <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
+                    <div class="space-y-4 pt-3">
+                        <!-- Ticket Card 2 -->
+                        <div class="bg-white p-4 rounded-lg shadow border border-gray-200 cursor-pointer hover:shadow-lg transition-shadow">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="text-sm text-gray-500">Order #E5F6G7H8</p>
+                                    <h3 class="font-bold text-lg revelo-blue">Salsa Spring Fest</h3>
+                                </div>
+                                <p class="font-bold text-lg revelo-orange">€120.00</p>
+                            </div>
+                            <div class="mt-2 text-sm text-gray-600">
+                                <p><strong>Event date:</strong> Sep 5, 2025</p>
+                                <p><strong>Ticket:</strong> Full Pass</p>
+                                <p><strong>Purchased:</strong> Jul 28, 2025</p>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            </div>
+
+            <!-- Profile Tab -->
+            <div id="profile" class="tab-content hidden space-y-4">
+                <details><summary class="flex justify-between items-center cursor-pointer font-semibold text-lg revelo-blue p-3 bg-white border rounded-lg">Personal Data <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
+                    <div class="p-4 space-y-4 bg-white border-x border-b rounded-b-lg">
+                        <div><label class="font-semibold text-gray-700">Name:</label><input type="text" value="Alex Johnson" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                        <div><label class="font-semibold text-gray-700">Email:</label><input type="email" value="alex.j@email.com" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                        <div><label class="font-semibold text-gray-700">Location:</label><input type="text" value="Barcelona, Spain" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                        <button class="w-full bg-revelo-blue text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-800 transition duration-300">Save Changes</button>
+                    </div>
+                </details>
+                <details><summary class="flex justify-between items-center cursor-pointer font-semibold text-lg revelo-blue p-3 bg-white border rounded-lg">Notifications <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
+                    <div class="p-4 space-y-4 bg-white border-x border-b rounded-b-lg">
+                        <div class="flex justify-between items-center"><span class="text-gray-700">New events from followed organizers</span><label class="relative inline-flex items-center cursor-pointer"><input type="checkbox" value="" class="sr-only peer" checked><div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#f58220]"></div></label></div>
+                        <div class="flex justify-between items-center"><span class="text-gray-700">New media from followed creators</span><label class="relative inline-flex items-center cursor-pointer"><input type="checkbox" value="" class="sr-only peer" checked><div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#f58220]"></div></label></div>
+                        <div class="flex justify-between items-center"><span class="text-gray-700">Weekly event recommendations</span><label class="relative inline-flex items-center cursor-pointer"><input type="checkbox" value="" class="sr-only peer"><div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#f58220]"></div></label></div>
+                    </div>
+                </details>
+                <details><summary class="flex justify-between items-center cursor-pointer font-semibold text-lg revelo-blue p-3 bg-white border rounded-lg">Dancing/Music Styles <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
+                    <div class="p-4 bg-white border-x border-b rounded-b-lg">
+                        <p class="text-gray-600 mb-3">Your favorite styles help us give you better recommendations.</p>
+                        <div id="styles-display" class="flex flex-wrap gap-2">
+                            <span class="bg-revelo-orange text-white text-sm font-semibold px-3 py-1 rounded-full">Bachata Sensual</span>
+                            <span class="bg-revelo-orange text-white text-sm font-semibold px-3 py-1 rounded-full">Kizomba</span>
+                        </div>
+                        <button id="edit-styles-btn" class="mt-4 text-revelo-orange font-bold">Edit Styles</button>
+                    </div>
+                </details>
+                <details><summary class="flex justify-between items-center cursor-pointer font-semibold text-lg revelo-blue p-3 bg-white border rounded-lg">My Reviews <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
+                    <div class="p-4 space-y-4 bg-white border-x border-b rounded-b-lg">
+                        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                            <div class="flex items-center mb-2">
+                                <div class="flex text-yellow-400">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 mt-1">"Absolutely incredible experience! The organization was flawless and the artists were top-notch. Can't wait for next year!"</p>
+                        <p class="text-sm italic text-gray-500 mt-2">For: Sensuality & Essentiality</p>
+                    </div>
+                </details>
+                <details><summary class="flex justify-between items-center cursor-pointer font-semibold text-lg revelo-blue p-3 bg-white border rounded-lg">My Account <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
+                    <div class="p-4 space-y-4 bg-white border-x border-b rounded-b-lg">
+                        <div><label class="font-semibold text-gray-700">Change Password:</label>
+                            <input type="password" placeholder="Current Password" class="w-full p-2 border border-gray-300 rounded-md mt-1">
+                            <input type="password" placeholder="New Password" class="w-full p-2 border border-gray-300 rounded-md mt-2">
+                            <input type="password" placeholder="Confirm New Password" class="w-full p-2 border border-gray-300 rounded-md mt-2">
+                        </div>
+                        <button class="w-full bg-revelo-blue text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-800 transition duration-300">Update Password</button>
+                        <div class="border-t pt-4 mt-4">
+                             <button class="w-full bg-red-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-700 transition duration-300">Delete Account</button>
+                        </div>
+                    </div>
+                </details>
+            </div>
+        </main>
+    </div>
+    
+        <!-- Media Modal -->
+    <div id="media-modal" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center p-4 hidden z-50">
+        <!-- Image Display Area -->
+        <div class="relative w-full h-full flex items-center justify-center">
+            <img id="modal-image" src="" class="max-h-full max-w-full object-contain cursor-pointer">
+            
+            <!-- Overlay Container -->
+            <div id="modal-overlay" class="absolute inset-0 flex flex-col justify-between p-2">
+                <!-- Modal Header -->
+                <div class="w-full flex justify-between items-start text-white">
+                    <div>
+                        <h3 id="modal-event-name" class="font-bold text-lg"></h3>
+                        <p id="modal-creator-name" class="text-sm"></p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button class="p-2 rounded-full hover:bg-white/20"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg></button>
+                        <button class="p-2 rounded-full hover:bg-white/20"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path></svg></button>
+                        <button class="p-2 rounded-full hover:bg-white/20"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg></button>
+                        <button id="close-media-modal" class="p-2 rounded-full hover:bg-white/20 text-4xl leading-none">×</button>
+                    </div>
+                </div>
+                <!-- Navigation -->
+                <div class="w-full flex justify-between items-center absolute top-1/2 left-0 transform -translate-y-1/2">
+                     <button id="prev-media" class="text-white bg-black bg-opacity-30 p-3 rounded-full m-2 hover:bg-opacity-50 transition-opacity"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg></button>
+                     <button id="next-media" class="text-white bg-black bg-opacity-30 p-3 rounded-full m-2 hover:bg-opacity-50 transition-opacity"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Styles Modal -->
+    <div id="styles-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-sm" id="styles-modal-content">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold revelo-blue">Edit Your Styles</h3>
+                <button id="close-styles-modal" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">×</button>
+            </div>
+            <div class="space-y-2">
+                <!-- Styles will be populated here by JS -->
+            </div>
+            <button id="confirm-styles-btn" class="mt-6 w-full bg-revelo-orange text-white font-bold py-2 px-4 rounded-lg">Save Styles</button>
+        </div>
+    </div>
+
+    <script>
+        // Store references to tab buttons and content panels
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        /**
+         * Switches the visible tab in the content area.
+         * @param {string} targetId The ID of the tab content to display.
+         */
+        function switchTab(targetId) {
+            // Hide all content panels
+            tabContents.forEach(content => {
+                content.classList.add('hidden');
+            });
+
+            // Deactivate all tab buttons
+            tabButtons.forEach(button => {
+                button.classList.remove('tab-active');
+            });
+
+            // Show the target content panel
+            const targetContent = document.getElementById(targetId);
+            if (targetContent) {
+                targetContent.classList.remove('hidden');
+            }
+
+            // Activate the clicked tab button
+            // We find the button that controls the targetId
+            const targetButton = document.querySelector(`[onclick="switchTab('${targetId}')"]`);
+            if (targetButton) {
+                targetButton.classList.add('tab-active');
+            }
+        }
+
+        // --- Media Modal Interaction ---
+        const mediaModal = document.getElementById('media-modal');
+        const modalImage = document.getElementById('modal-image');
+        const modalOverlay = document.getElementById('modal-overlay'); // New
+        const modalEventName = document.getElementById('modal-event-name');
+        const modalCreatorName = document.getElementById('modal-creator-name');
+        const closeMediaModalBtn = document.getElementById('close-media-modal');
+        const nextBtn = document.getElementById('next-media');
+        const prevBtn = document.getElementById('prev-media');
+
+        let galleryItems = [];
+        let currentIndex = 0;
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        function toggleOverlay(e) {
+        e.stopPropagation();
+        modalOverlay.classList.toggle('hidden');
+}
+
+        function openMediaModal(element) {
+            const favoritesGrid = document.getElementById('favorites-grid');
+            galleryItems = Array.from(favoritesGrid.querySelectorAll('.cursor-pointer'));
+            currentIndex = galleryItems.indexOf(element);
+            
+            if (currentIndex === -1) return;
+
+            showMedia(currentIndex);
+            mediaModal.classList.remove('hidden');
+            modalOverlay.classList.remove('hidden'); // Ensure overlay is visible on open
+        }
+
+        function showMedia(index) {
+            if (index < 0 || index >= galleryItems.length) {
+                return;
+            }
+            const item = galleryItems[index];
+            const img = item.querySelector('img');
+            const eventName = item.getAttribute('data-event');
+            const creatorName = item.getAttribute('data-creator');
+
+            modalImage.src = img.src;
+            modalEventName.textContent = eventName;
+            modalCreatorName.textContent = `by ${creatorName}`;
+            currentIndex = index;
+        }
+
+        function nextMedia() {
+            const nextIndex = (currentIndex + 1) % galleryItems.length;
+            showMedia(nextIndex);
+        }
+
+        function prevMedia() {
+            const prevIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+            showMedia(prevIndex);
+        }
+
+        function closeMediaModal() {
+            mediaModal.classList.add('hidden');
+            modalImage.src = "";
+        }
+
+        // Swipe functionality
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) { // Swiped left
+                nextMedia();
+            }
+            if (touchEndX > touchStartX + 50) { // Swiped right
+                prevMedia();
+            }
+        }
+
+        mediaModal.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, {passive: true});
+
+        mediaModal.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        // Click listeners
+        modalImage.addEventListener('click', (e) => toggleOverlay(e));
+        closeMediaModalBtn.addEventListener('click', closeMediaModal);
+        nextBtn.addEventListener('click', nextMedia);
+        prevBtn.addEventListener('click', prevMedia);
+
+        mediaModal.addEventListener('click', (event) => {
+            // Close only if clicking the background (not children)
+            if (event.target === mediaModal) {
+                closeMediaModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (!mediaModal.classList.contains('hidden')) {
+                if (e.key === 'ArrowRight') {
+                    nextMedia();
+                } else if (e.key === 'ArrowLeft') {
+                    prevMedia();
+                } else if (e.key === 'Escape') {
+                    closeMediaModal();
+                }
+            }
+        });
+        
+        // --- Styles Modal Interaction ---
+        const stylesModal = document.getElementById('styles-modal');
+        const editStylesBtn = document.getElementById('edit-styles-btn');
+        const closeStylesModalBtn = document.getElementById('close-styles-modal');
+        const confirmStylesBtn = document.getElementById('confirm-styles-btn');
+        const stylesModalContent = document.getElementById('styles-modal-content');
+        const stylesDisplay = document.getElementById('styles-display');
+        
+        const allStyles = ['Bachata Sensual', 'Salsa On1', 'Kizomba', 'Zouk', 'Bachata Fusion', 'Salsa On2'];
+        let selectedStyles = ['Bachata Sensual', 'Kizomba']; // Default selected
+
+        function renderStylesInModal() {
+            const container = stylesModalContent.querySelector('.space-y-2');
+            container.innerHTML = '';
+            allStyles.forEach(style => {
+                const isChecked = selectedStyles.includes(style);
+                const label = document.createElement('label');
+                label.className = 'flex justify-between items-center p-2 rounded-md hover:bg-gray-100 cursor-pointer';
+                label.innerHTML = `
+                    <span class="text-gray-700">${style}</span>
+                    <input type="checkbox" value="${style}" class="h-5 w-5 rounded border-gray-300 text-revelo-orange focus:ring-revelo-orange" ${isChecked ? 'checked' : ''}>
+                `;
+                container.appendChild(label);
+            });
+        }
+        
+        function updateSelectedStylesDisplay() {
+            stylesDisplay.innerHTML = '';
+            selectedStyles.forEach(style => {
+                const span = document.createElement('span');
+                span.className = 'bg-revelo-orange text-white text-sm font-semibold px-3 py-1 rounded-full';
+                span.textContent = style;
+                stylesDisplay.appendChild(span);
+            });
+        }
+
+        editStylesBtn.addEventListener('click', () => {
+            renderStylesInModal();
+            stylesModal.classList.remove('hidden');
+        });
+
+        function closeStylesModal() {
+            stylesModal.classList.add('hidden');
+        }
+
+        closeStylesModalBtn.addEventListener('click', closeStylesModal);
+        confirmStylesBtn.addEventListener('click', () => {
+            const newSelected = [];
+            stylesModalContent.querySelectorAll('input[type="checkbox"]:checked').forEach(input => {
+                newSelected.push(input.value);
+            });
+            selectedStyles = newSelected;
+            updateSelectedStylesDisplay();
+            closeStylesModal();
+        });
+
+        stylesModal.addEventListener('click', (event) => {
+            if (!stylesModalContent.contains(event.target)) {
+                closeStylesModal();
+            }
+        });
+
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            switchTab('following');
+            updateSelectedStylesDisplay();
+        });
+    </script>
+</body>
+</html>
