@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revelo - Organizer Dashboard</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Your Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-100 antialiased text-gray-800 pt-16">
+    <!-- Organizer-specific Navbar -->
+    <div id="organizer-navbar-placeholder"></div>
+
+    <!-- Main container with a wider max-width for desktop-first view -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- Header Section -->
+        <header class="flex flex-col md:flex-row justify-between items-center mb-6">
+            <a href="organizerDashboard.html" class="flex items-center mb-4 md:mb-0">
+                <img src="images/organizerLogo.jpg" alt="Organizer Avatar" class="w-20 h-20 rounded-full object-cover shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/80x80/213c63/ffffff?text=BS';">
+                <div class="ml-4">
+                    <h1 class="text-3xl font-extrabold revelo-blue">Bachata Sensual Events</h1>
+                    <p class="text-gray-500">Organizer Dashboard</p>
+                </div>
+            </a>
+            <a href="createEvent.html" class="w-full md:w-auto bg-revelo-blue text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-blue-800 transition duration-300 flex items-center justify-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                Create New Event
+            </a>
+        </header>
+        
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <!-- Tab Navigation -->
+            <nav class="border-b border-gray-200">
+                <div class="flex">
+                    <button onclick="switchTab('stats')" class="tab-button flex-1 py-4 px-1 text-center text-gray-500 hover:revelo-blue font-semibold transition duration-300 organizer-tab-active">Stats</button>
+                    <button onclick="switchTab('events')" class="tab-button flex-1 py-4 px-1 text-center text-gray-500 hover:revelo-blue font-semibold transition duration-300">Events</button>
+                    <button onclick="switchTab('manage')" class="tab-button flex-1 py-4 px-1 text-center text-gray-500 hover:revelo-blue font-semibold transition duration-300">Manage</button>
+                    <button onclick="switchTab('profile')" class="tab-button flex-1 py-4 px-1 text-center text-gray-500 hover:revelo-blue font-semibold transition duration-300">Profile</button>
+                </div>
+            </nav>
+
+            <!-- Main Content Sections (Tabs) -->
+            <main class="p-6 md:p-8">
+                <!-- Stats Tab -->
+                <div id="stats" class="tab-content">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Stat Card 1: Total Revenue -->
+                        <a href="#" class="block bg-gray-50 p-6 rounded-lg border border-gray-200 hover:shadow-md hover:border-revelo-blue transition-all">
+                            <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Total Revenue</h3>
+                            <p class="text-4xl font-extrabold revelo-blue mt-2">€42,150.00</p>
+                            <p class="text-sm text-green-600 mt-1">+15.2% from last period</p>
+                        </a>
+                        <!-- Stat Card 2: Tickets Sold (30 days) -->
+                        <a href="#" class="block bg-gray-50 p-6 rounded-lg border border-gray-200 hover:shadow-md hover:border-revelo-blue transition-all">
+                            <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Tickets Sold (30 days)</h3>
+                            <p class="text-4xl font-extrabold revelo-blue mt-2">1,204</p>
+                            <p class="text-sm text-gray-500 mt-1">Across 3 active events</p>
+                        </a>
+                        <!-- Stat Card 3: Upcoming Events -->
+                        <a href="#" class="block bg-gray-50 p-6 rounded-lg border border-gray-200 hover:shadow-md hover:border-revelo-blue transition-all">
+                            <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Upcoming Events</h3>
+                            <p class="text-4xl font-extrabold revelo-blue mt-2">5</p>
+                            <p class="text-sm text-gray-500 mt-1">2 on sale, 3 in draft</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Events Tab -->
+                <div id="events" class="tab-content hidden">
+                    <!-- Filters and Search -->
+                    <div class="flex flex-col md:flex-row items-center justify-between mb-6">
+                        <div class="relative w-full md:w-1/3 mb-4 md:mb-0">
+                            <input type="text" placeholder="Search my events..." class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-revelo-blue">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                            </div>
+                        </div>
+                        <div id="event-filters" class="flex space-x-2">
+                            <button onclick="filterEvents('upcoming')" class="filter-btn px-4 py-2 text-sm font-semibold bg-revelo-blue text-white rounded-lg">Upcoming</button>
+                            <button onclick="filterEvents('draft')" class="filter-btn px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-lg">Drafts</button>
+                            <button onclick="filterEvents('past')" class="filter-btn px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-lg">Past Events</button>
+                        </div>
+                    </div>
+                    <!-- Event Cards Grid -->
+                    <div id="event-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Event Card 1 -->
+                        <div class="event-card bg-white rounded-lg shadow-md overflow-hidden border border-gray-200" data-status="upcoming">
+                            <img src="images/eventPoster.jpg" alt="Event Poster" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Event';">
+                            <div class="p-4">
+                                <div class="flex justify-between items-start">
+                                    <h4 class="font-bold text-lg revelo-blue">Sensuality & Essentiality</h4>
+                                    <span class="text-xs font-bold bg-green-100 text-green-800 px-2 py-1 rounded-full whitespace-nowrap">On Sale</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1">Nov 1-2, 2025 | Barcelona</p>
+                                <div class="flex justify-between items-end mt-4">
+                                    <div class="text-sm">
+                                        <p class="font-semibold text-gray-700">Revenue: €12,500</p>
+                                        <p class="text-gray-500">350 / 500 sold</p>
+                                    </div>
+                                    <a href="liveEventEdit.html" class="px-4 py-2 text-sm font-bold bg-revelo-blue text-white rounded-lg hover:bg-blue-800">Manage</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Event Card 2 -->
+                        <div class="event-card bg-white rounded-lg shadow-md overflow-hidden border border-gray-200" data-status="draft">
+                            <img src="https://placehold.co/600x400/213c63/ffffff?text=Event" alt="Event Poster" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <div class="flex justify-between items-start">
+                                    <h4 class="font-bold text-lg revelo-blue">BCN Zouk Congress</h4>
+                                    <span class="text-xs font-bold bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">Draft</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1">Dec 5-8, 2025 | Barcelona</p>
+                                <div class="flex justify-between items-end mt-4">
+                                    <div class="text-sm">
+                                        <p class="font-semibold text-gray-700">Revenue: €0</p>
+                                        <p class="text-gray-500">0 / 800 sold</p>
+                                    </div>
+                                    <a href="#" class="px-4 py-2 text-sm font-bold bg-revelo-blue text-white rounded-lg hover:bg-blue-800">Manage</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Event Card 3 -->
+                        <div class="event-card bg-white rounded-lg shadow-md overflow-hidden border border-gray-200" data-status="past">
+                            <img src="https://placehold.co/600x400/cccccc/ffffff?text=Past+Event" alt="Event Poster" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <div class="flex justify-between items-start">
+                                    <h4 class="font-bold text-lg revelo-blue">Summer Fest 2024</h4>
+                                    <span class="text-xs font-bold bg-gray-200 text-gray-800 px-2 py-1 rounded-full">Completed</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1">Jul 15-17, 2024 | Barcelona</p>
+                                <div class="flex justify-between items-end mt-4">
+                                    <div class="text-sm">
+                                        <p class="font-semibold text-gray-700">Revenue: €29,650</p>
+                                        <p class="text-gray-500">593 / 600 sold</p>
+                                    </div>
+                                    <a href="#" class="px-4 py-2 text-sm font-bold bg-gray-400 text-white rounded-lg cursor-not-allowed">Manage</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Manage Tab -->
+                <div id="manage" class="tab-content hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Manage Card 1: Galleries -->
+                        <a href="#" class="block bg-gray-50 p-6 rounded-lg border border-gray-200 hover:shadow-md hover:border-revelo-blue transition-all">
+                            <h3 class="text-lg font-bold revelo-blue">Manage Galleries</h3>
+                            <p class="text-gray-600 mt-1">1,240 Total Media / 3 Ungrouped Galleries</p>
+                        </a>
+                        <!-- Manage Card 2: Promoters -->
+                        <a href="#" class="block bg-gray-50 p-6 rounded-lg border border-gray-200 hover:shadow-md hover:border-revelo-blue transition-all">
+                            <h3 class="text-lg font-bold revelo-blue">Manage Promoters</h3>
+                            <p class="text-gray-600 mt-1">Top Promoter this month: DJ Sparkus (45 sales)</p>
+                        </a>
+                        <!-- Manage Card 3: Creators -->
+                        <a href="#" class="block bg-gray-50 p-6 rounded-lg border border-gray-200 hover:shadow-md hover:border-revelo-blue transition-all">
+                            <h3 class="text-lg font-bold revelo-blue">Manage Creators</h3>
+                            <p class="text-gray-600 mt-1">5 Active Collaborators</p>
+                        </a>
+                        <!-- Manage Card 4: Financials -->
+                        <a href="#" class="block bg-gray-50 p-6 rounded-lg border border-gray-200 hover:shadow-md hover:border-revelo-blue transition-all">
+                            <h3 class="text-lg font-bold revelo-blue">Reports & Financials</h3>
+                            <p class="text-gray-600 mt-1">Next Payout: €2,150.00 on Sep 1, 2025</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Profile Tab -->
+                <div id="profile" class="tab-content hidden space-y-6">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="lg:col-span-2 space-y-6">
+                            <!-- Public Profile Info -->
+                            <details open><summary class="flex justify-between items-center cursor-pointer font-semibold text-lg revelo-blue p-3 bg-white border rounded-lg">Public Profile Info <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
+                                <div class="p-4 space-y-4 bg-white border-x border-b rounded-b-lg">
+                                    <!-- Avatar and Banner Upload -->
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                        <div>
+                                            <label class="font-semibold text-gray-700">Avatar Image</label>
+                                            <div class="mt-1 flex items-center space-x-4">
+                                                <img src="images/organizerLogo.jpg" alt="Current Avatar" class="w-20 h-20 rounded-full object-cover shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/80x80/213c63/ffffff?text=BS';">
+                                                <button class="px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-lg">Upload New</button>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label class="font-semibold text-gray-700">Banner Image</label>
+                                            <div class="mt-1 flex items-center space-x-4">
+                                                <img src="images/organizerLogo.jpg" alt="Current Banner" class="w-32 h-16 object-cover rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/128x64/213c63/ffffff?text=Banner';">
+                                                <button class="px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-lg">Upload New</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="border-t pt-4">
+                                        <label class="font-semibold text-gray-700">Organizer Name:</label>
+                                        <input type="text" value="Bachata Sensual Events" class="w-full p-2 border border-gray-300 rounded-md mt-1">
+                                    </div>
+                                    <div><label class="font-semibold text-gray-700">Public Description:</label><textarea class="w-full p-2 border border-gray-300 rounded-md mt-1" rows="4">Leading organizers of premier bachata and salsa events in Barcelona. We bring world-class artists and a passionate community together for unforgettable dance experiences.</textarea></div>
+                                    <div><label class="font-semibold text-gray-700">Social Media Links:</label>
+                                        <div class="space-y-2 mt-1">
+                                            <input type="url" placeholder="Instagram URL" class="w-full p-2 border border-gray-300 rounded-md">
+                                            <input type="url" placeholder="YouTube URL" class="w-full p-2 border border-gray-300 rounded-md">
+                                            <input type="url" placeholder="Website URL" class="w-full p-2 border border-gray-300 rounded-md">
+                                        </div>
+                                    </div>
+                                    <button class="w-full bg-revelo-blue text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-800 transition duration-300">Save Changes</button>
+                                </div>
+                            </details>
+                            <!-- Account Settings -->
+                            <details><summary class="flex justify-between items-center cursor-pointer font-semibold text-lg revelo-blue p-3 bg-white border rounded-lg">Account Settings <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
+                                <div class="p-4 space-y-4 bg-white border-x border-b rounded-b-lg">
+                                    <div><label class="font-semibold text-gray-700">Change Password:</label>
+                                        <input type="password" placeholder="Current Password" class="w-full p-2 border border-gray-300 rounded-md mt-1">
+                                        <input type="password" placeholder="New Password" class="w-full p-2 border border-gray-300 rounded-md mt-2">
+                                        <input type="password" placeholder="Confirm New Password" class="w-full p-2 border border-gray-300 rounded-md mt-2">
+                                    </div>
+                                    <button class="w-full bg-revelo-blue text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-800 transition duration-300">Update Password</button>
+                                    <div class="border-t pt-4 mt-4">
+                                         <button class="w-full bg-red-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-700 transition duration-300">Delete Account</button>
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                        <div class="space-y-6">
+                             <!-- Reviews Received -->
+                             <div class="bg-white p-4 rounded-lg border">
+                                <h3 class="font-semibold text-lg revelo-blue mb-3">Recent Reviews</h3>
+                                <div class="space-y-4">
+                                    <div class="bg-gray-50 p-3 rounded-lg border border-gray-200">
+                                        <div class="flex items-center mb-1"><div class="flex text-yellow-400"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg></div></div>
+                                        <p class="text-gray-700 text-sm">"The best events in Barcelona, hands down..."</p>
+                                        <p class="text-xs italic text-gray-500 mt-1">From: Sensuality & Essentiality</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // --- Tab Switching Logic ---
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        function switchTab(targetId) {
+            tabContents.forEach(content => content.classList.add('hidden'));
+            tabButtons.forEach(button => button.classList.remove('organizer-tab-active'));
+            
+            document.getElementById(targetId)?.classList.remove('hidden');
+            document.querySelector(`[onclick="switchTab('${targetId}')"]`)?.classList.add('organizer-tab-active');
+        }
+
+        // --- Event Filtering Logic ---
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const eventCards = document.querySelectorAll('.event-card');
+
+        function filterEvents(status) {
+            // Update button styles
+            filterButtons.forEach(button => {
+                if (button.getAttribute('onclick') === `filterEvents('${status}')`) {
+                    button.classList.add('bg-revelo-blue', 'text-white');
+                    button.classList.remove('bg-gray-200', 'text-gray-700');
+                } else {
+                    button.classList.add('bg-gray-200', 'text-gray-700');
+                    button.classList.remove('bg-revelo-blue', 'text-white');
+                }
+            });
+
+            // Show/hide event cards
+            eventCards.forEach(card => {
+                if (card.dataset.status === status) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
+        // --- Page Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            switchTab('stats');
+            filterEvents('upcoming'); // Set initial filter for the events tab
+        });
+    </script>
+    <script src="organizer.js" defer></script>
+</body>
+</html>

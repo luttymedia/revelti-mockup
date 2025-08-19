@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revelo - Ticket Management</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-100 antialiased text-gray-800 pt-16">
+    
+    <!-- Organizer-specific Navbar -->
+    <div id="organizer-navbar-placeholder"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Header Section from Event Management Dashboard -->
+        <header class="flex flex-col md:flex-row justify-between items-center mb-6">
+            <div>
+                <div class="flex items-center">
+                    <h1 class="text-3xl font-extrabold revelo-blue">Sensuality & Essentiality</h1>
+                    <span class="ml-4 text-sm font-bold bg-green-100 text-green-800 px-3 py-1 rounded-full whitespace-nowrap">On Sale</span>
+                </div>
+                <p class="text-gray-600">Ticket Management Dashboard</p>
+            </div>
+            <div class="flex space-x-2 mt-4 md:mt-0">
+                <a href="eventDetailOrganizerView.html" class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition duration-300">View Public Page</a>
+                <a href="liveEventEdit.html" class="px-4 py-2 font-bold bg-revelo-blue text-white rounded-lg hover:bg-blue-800 transition duration-300">Live Edit Page</a>
+            </div>
+        </header>
+        
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <main class="p-6 md:p-8">
+                <div class="space-y-8">
+                    <details open>
+                        <summary class="flex justify-between items-center cursor-pointer font-bold text-xl revelo-blue">Ticket Types & Pricing <svg class="w-5 h-5 transform transition-transform accordion-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
+                        <div class="mt-4">
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full bg-white">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase w-1/3">Name</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Current Price</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Sold</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                                            <th class="px-4 py-2"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="ticket-types-table" class="divide-y divide-gray-200">
+                                        </tbody>
+                                </table>
+                            </div>
+                            <button onclick="openTicketModal()" class="w-full md:w-auto mt-4 px-4 py-2 font-bold bg-revelo-blue text-white rounded-lg hover:bg-blue-800">Create New Ticket Type</button>
+                        </div>
+                    </details>
+                    
+                    <details>
+                        <summary class="flex justify-between items-center cursor-pointer font-bold text-xl revelo-blue">Discount Codes <svg class="w-5 h-5 transform transition-transform accordion-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
+                        <div class="mt-4">
+                             <div class="overflow-x-auto">
+                                <table class="min-w-full bg-white border">
+                                    <thead class="bg-gray-50"><tr><th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Code</th><th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Discount</th><th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Uses</th><th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Status</th><th class="px-4 py-2"></th></tr></thead>
+                                    <tbody id="discount-codes-table" class="divide-y divide-gray-200">
+                                        </tbody>
+                                </table>
+                            </div>
+                            <button onclick="openCodeModal()" class="w-full md:w-auto mt-4 px-4 py-2 font-bold bg-revelo-blue text-white rounded-lg hover:bg-blue-800">Generate New Code</button>
+                        </div>
+                    </details>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div id="modal-backdrop" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40" onclick="closeAllModals()"></div>
+    
+    <div id="ticket-modal" class="modal fixed inset-0 flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col">
+            <header class="p-4 border-b flex justify-between items-center">
+                <h3 id="ticket-modal-title" class="font-bold text-xl revelo-blue">Create New Ticket Type</h3>
+                <div class="flex items-center space-x-2">
+                    <button onclick="openModal('help-modal')" class="text-gray-400 hover:text-revelo-orange">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                    </button>
+                    <button onclick="closeModal('ticket-modal')" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+                </div>
+            </header>
+            
+            <main class="p-6 space-y-4 overflow-y-auto">
+                <input type="hidden" id="editing-ticket-id">
+                <div><label class="font-semibold text-gray-700">Ticket Name</label><input id="ticket-name" type="text" placeholder="e.g., Weekend Pass" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div><label class="font-semibold text-gray-700">Quantity Available</label><input id="ticket-qty" type="number" placeholder="e.g., 200" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                    <div>
+                        <label class="font-semibold text-gray-700">Status</label>
+                        <select id="ticket-status" class="w-full p-2 border border-gray-300 rounded-md mt-1" onchange="toggleScheduledDate(this.value)">
+                            <option value="On Sale">On Sale</option>
+                            <option value="Draft">Draft</option>
+                            <option value="Scheduled">Scheduled</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="scheduled-date-container" class="hidden">
+                    <label class="font-semibold text-gray-700">Sale Start Date</label>
+                    <input id="scheduled-date" type="date" class="w-full p-2 border border-gray-300 rounded-md mt-1">
+                </div>
+
+                <div class="pt-4 border-t">
+                    <label class="font-semibold text-gray-700">Pricing Strategy</label>
+                    <div class="flex space-x-4 mt-2">
+                        <label class="flex items-center"><input type="radio" name="pricing-strategy" value="simple" class="mr-2" onchange="togglePricingStrategy(this.value)" checked> Simple Price</label>
+                        <label class="flex items-center"><input type="radio" name="pricing-strategy" value="dynamic" class="mr-2" onchange="togglePricingStrategy(this.value)"> Dynamic Pricing</label>
+                    </div>
+                </div>
+
+                <div id="simple-price-view">
+                    <div><label class="font-semibold text-gray-700">Price (€)</label><input id="simple-price" type="number" placeholder="e.g., 190.00" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                </div>
+
+                <div id="dynamic-price-view" class="hidden space-y-4">
+                    <div><label class="font-semibold text-gray-700">Base Price (€)</label><input id="base-price" type="number" placeholder="The first price tier" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                    <div id="pricing-rules-container" class="space-y-2">
+                        </div>
+                    <button type="button" onclick="addPricingRule()" class="text-sm font-semibold revelo-blue hover:underline">+ Add Pricing Rule</button>
+                    
+                    <div class="pt-4 border-t">
+                        <label class="flex items-center text-sm">
+                            <input type="checkbox" id="final-price-override-check" class="mr-2" onchange="toggleFinalPriceOverride()">
+                            Manually set a different "final price" for display (strikethrough price)
+                        </label>
+                        <div id="final-price-override-container" class="hidden mt-2">
+                            <label class="font-semibold text-gray-700">Display Final Price (€)</label>
+                            <input id="final-price-override-value" type="number" placeholder="e.g., 250.00" class="w-full p-2 border border-gray-300 rounded-md mt-1">
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <footer class="p-4 border-t flex justify-between bg-gray-50">
+                <button id="delete-ticket-btn" onclick="deleteTicket()" class="px-4 py-2 font-bold bg-red-600 text-white rounded-lg hidden">Delete</button>
+                <div class="flex space-x-2">
+                    <button onclick="closeModal('ticket-modal')" class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg">Cancel</button>
+                    <button onclick="saveTicket()" class="px-4 py-2 font-bold bg-revelo-blue text-white rounded-lg">Save Ticket</button>
+                </div>
+            </footer>
+        </div>
+    </div>
+    
+    <div id="code-modal" class="modal fixed inset-0 flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md p-6 space-y-4">
+            <header class="flex justify-between items-center">
+                 <h3 id="code-modal-title" class="font-bold text-xl revelo-blue">Generate New Discount Code</h3>
+                 <button onclick="closeModal('code-modal')" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+            </header>
+            <input type="hidden" id="editing-code-id">
+            <div id="edit-code-note" class="hidden text-sm bg-yellow-100 text-yellow-800 p-3 rounded-lg">For active codes, only the number of uses is editable.</div>
+            <div><label class="font-semibold text-gray-700">Discount Code</label><input id="code-text" type="text" placeholder="e.g., EARLYBIRD15" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+            <div class="grid grid-cols-2 gap-4">
+                <div><label class="font-semibold text-gray-700">Discount Type</label><select id="code-type" class="w-full p-2 border border-gray-300 rounded-md mt-1"><option value="percentage">Percentage (%)</option><option value="fixed">Fixed Amount (€)</option></select></div>
+                <div><label class="font-semibold text-gray-700">Value</label><input id="code-value" type="number" placeholder="15" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+            </div>
+            <div><label class="font-semibold text-gray-700">Total Uses Available</label><input id="code-uses" type="number" placeholder="100" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+            <div>
+                <label class="font-semibold text-gray-700">Status</label>
+                <select id="code-status" class="w-full p-2 border border-gray-300 rounded-md mt-1"></select>
+            </div>
+            <div class="flex justify-end space-x-2">
+                <button onclick="closeModal('code-modal')" class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg">Cancel</button>
+                <button onclick="saveCode()" class="px-4 py-2 font-bold bg-revelo-blue text-white rounded-lg">Save Code</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="help-modal" class="modal fixed inset-0 flex items-center justify-center p-4 hidden z-50" style="z-index: 60;">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col">
+             <header class="p-4 border-b flex justify-between items-center">
+                <h3 class="font-bold text-xl revelo-blue">Ticket Creation Guide</h3>
+                <button onclick="closeModal('help-modal')" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+            </header>
+            <main class="p-6 space-y-4 text-gray-700 overflow-y-auto">
+                <h4 class="font-bold text-lg revelo-blue">Ticket Status</h4>
+                <p>A ticket's status controls its visibility and availability on your public event page.</p>
+                <ul class="list-disc list-inside space-y-1 pl-2">
+                    <li><b>On Sale:</b> The ticket is live and can be purchased immediately.</li>
+                    <li><b>Draft:</b> The ticket is saved in the system but is hidden from the public. Use this to prepare tickets in advance.</li>
+                    <li><b>Scheduled:</b> The ticket will automatically become "On Sale" at a future date you specify.</li>
+                </ul>
+
+                <h4 class="font-bold text-lg revelo-blue pt-4 border-t mt-4">Pricing Strategy</h4>
+                <p>Choose how your ticket's price is determined.</p>
+                <ul class="list-disc list-inside space-y-1 pl-2">
+                    <li><b>Simple Price:</b> The ticket has one fixed price that does not change.</li>
+                    <li><b>Dynamic Pricing:</b> The ticket price changes automatically based on rules you set. This is perfect for early-bird discounts or creating urgency.</li>
+                </ul>
+
+                <h4 class="font-bold text-lg revelo-blue pt-4 border-t mt-4">Understanding Dynamic Pricing</h4>
+                <p>When you select Dynamic Pricing, you set a <b>Base Price</b> and then add <b>Pricing Rules</b>. Each rule defines a future price increase.</p>
+                <p><b>Example:</b></p>
+                <div class="bg-gray-50 p-3 rounded-md border text-sm">
+                    <p><b>Base Price:</b> €170.00</p>
+                    <p><b>Rule 1:</b> Increase price to <b>€190.00</b> when <b>Date is after > Sep 1, 2025</b></p>
+                    <p><b>Rule 2:</b> Increase price to <b>€220.00</b> when <b>Date is after > Oct 1, 2025</b></p>
+                </div>
+                <p class="mt-2">This setup means the ticket will cost €170 initially, then automatically jump to €190 on September 2nd, and finally to €220 on October 2nd.</p>
+            
+                <h4 class="font-bold text-lg revelo-blue pt-4 border-t mt-4">Display Final Price (Strikethrough)</h4>
+                <p>This feature shows a higher, "final" price with a strikethrough next to the current price, highlighting the discount for buyers (e.g., <span class="line-through">€220.00</span> €190.00).</p>
+                <ul class="list-disc list-inside space-y-1 pl-2">
+                    <li><b>By default</b>, the system automatically uses the highest price from your dynamic rules as the final price.</li>
+                    <li><b>For marketing</b>, you can check the box to manually enter a different, often higher, price to show an even bigger discount.</li>
+                </ul>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // --- DATA ---
+        let ticketsData = [
+            {
+                id: 1, name: 'Sensuality Pass', quantity: 200, sold: 150, status: 'On Sale',
+                pricing: { strategy: 'dynamic', basePrice: 170.00, rules: [ { type: 'date', value: '2025-08-01', newPrice: 180.00 }, { type: 'date', value: '2025-09-01', newPrice: 190.00 }, { type: 'date', value: '2025-10-01', newPrice: 220.00 } ], finalPriceOverride: null }
+            },
+            {
+                id: 2, name: 'Essentiality Pass', quantity: 200, sold: 120, status: 'On Sale',
+                pricing: { strategy: 'dynamic', basePrice: 170.00, rules: [ { type: 'date', value: '2025-08-01', newPrice: 180.00 }, { type: 'date', value: '2025-09-01', newPrice: 190.00 }, { type: 'date', value: '2025-10-01', newPrice: 220.00 } ], finalPriceOverride: 250.00 }
+            },
+            {
+                id: 3, name: 'J&J Amateur', quantity: 40, sold: 17, status: 'On Sale',
+                pricing: { strategy: 'dynamic', basePrice: 10.00, rules: [ { type: 'sales', value: 20, newPrice: 15.00 }, { type: 'sales', value: 30, newPrice: 20.00 } ], finalPriceOverride: null }
+            },
+            {
+                id: 4, name: 'Training Tracks', quantity: 50, sold: 0, status: 'Draft',
+                pricing: { strategy: 'simple', simplePrice: 100.00 }
+            },
+            {
+                id: 5, name: 'Party Pass', quantity: 100, sold: 0, status: 'Scheduled', scheduledDate: '2025-10-15',
+                pricing: { strategy: 'simple', simplePrice: 80.00 }
+            }
+        ];
+        
+        let discountCodesData = [
+            { id: 1, text: 'DJSPARKUS10', type: 'percentage', value: 10, uses: 100, claimed: 45, status: 'Active' },
+            { id: 2, text: 'VALENTINES', type: 'fixed', value: 5, uses: 150, claimed: 25, status: 'Active' },
+            { id: 3, text: 'EARLYBIRD', type: 'percentage', value: 15, uses: 50, claimed: 50, status: 'Inactive' },
+            { id: 4, text: 'NEWPROMO', type: 'fixed', value: 20, uses: 200, claimed: 0, status: 'Draft' },
+        ];
+
+
+        // --- UTILITY FUNCTIONS ---
+        const MOCK_CURRENT_DATE = new Date('2025-09-15T12:00:00'); 
+        const formatCurrency = (amount) => `€${parseFloat(amount).toFixed(2)}`;
+        const formatDate = (dateString) => {
+            if (!dateString) return '';
+            const date = new Date(dateString);
+            const correctedDate = new Date(date.valueOf() + date.getTimezoneOffset() * 60 * 1000);
+            return correctedDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        };
+
+        const getStatusBadge = (ticket) => {
+            if (ticket.status === 'Scheduled') {
+                return `<span class="text-xs font-semibold bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Scheduled for ${formatDate(ticket.scheduledDate)}</span>`;
+            }
+            switch (ticket.status) {
+                case 'On Sale': return `<span class="text-xs font-semibold bg-green-100 text-green-800 px-2 py-1 rounded-full">On Sale</span>`;
+                case 'Draft': return `<span class="text-xs font-semibold bg-gray-200 text-gray-800 px-2 py-1 rounded-full">Draft</span>`;
+                default: return '';
+            }
+        };
+        
+        const getCodeStatusBadge = (status) => {
+            switch (status) {
+                case 'Active': return `<span class="text-xs font-semibold bg-green-100 text-green-800 px-2 py-1 rounded-full">Active</span>`;
+                case 'Draft': return `<span class="text-xs font-semibold bg-gray-200 text-gray-800 px-2 py-1 rounded-full">Draft</span>`;
+                case 'Inactive': return `<span class="text-xs font-semibold bg-red-100 text-red-800 px-2 py-1 rounded-full">Inactive</span>`;
+                default: return '';
+            }
+        };
+
+        const getCurrentPrice = (ticket) => {
+            if (ticket.pricing.strategy === 'simple') return ticket.pricing.simplePrice;
+            
+            let currentPrice = ticket.pricing.basePrice;
+            const applicableRules = ticket.pricing.rules.filter(rule => {
+                if (rule.type === 'date') return MOCK_CURRENT_DATE > new Date(rule.value);
+                if (rule.type === 'sales') return ticket.sold >= rule.value;
+                return false;
+            });
+            if (applicableRules.length > 0) {
+                 currentPrice = Math.max(currentPrice, ...applicableRules.map(r => r.newPrice));
+            }
+            return currentPrice;
+        };
+
+        // --- RENDER FUNCTIONS ---
+        const renderTickets = () => {
+            const tableBody = document.getElementById('ticket-types-table');
+            tableBody.innerHTML = '';
+            ticketsData.forEach(ticket => {
+                const row = document.createElement('tr');
+                let priceDisplay = formatCurrency(getCurrentPrice(ticket));
+                if (ticket.pricing.strategy === 'dynamic') {
+                    priceDisplay += ' <span class="text-xs text-revelo-orange font-bold">⚡ Dynamic</span>';
+                }
+
+                row.innerHTML = `
+                    <td class="px-4 py-3 whitespace-nowrap align-top">
+                        <div class="font-semibold">${ticket.name}</div>
+                        ${ticket.pricing.strategy === 'dynamic' ? renderRulesSummary(ticket) : ''}
+                    </td>
+                    <td class="px-4 py-3 align-top">${priceDisplay}</td>
+                    <td class="px-4 py-3 align-top">${ticket.sold} / ${ticket.quantity}</td>
+                    <td class="px-4 py-3 align-top">${getStatusBadge(ticket)}</td>
+                    <td class="px-4 py-3 text-right align-top">
+                        <button onclick="openTicketModal(${ticket.id})" class="text-sm font-semibold revelo-blue">Edit</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        };
+
+        const renderRulesSummary = (ticket) => {
+            const dateRules = ticket.pricing.rules.filter(r => r.type === 'date').sort((a,b) => new Date(a.value) - new Date(b.value));
+            const tiers = [{ price: ticket.pricing.basePrice, startDate: null }, ...dateRules.map(r => ({ price: r.newPrice, startDate: r.value }))];
+            
+            let html = '<ul class="text-xs text-gray-600 mt-1 space-y-1">';
+            const currentPrice = getCurrentPrice(ticket);
+
+            for(let i = 0; i < tiers.length; i++) {
+                const tier = tiers[i];
+                if (!tier.startDate && tiers.length > 1) { // Handle base price for date-based dynamic tickets
+                     const nextTierDate = new Date(new Date(tiers[i+1].startDate) - 86400000);
+                     if (MOCK_CURRENT_DATE > nextTierDate) {
+                        html += `<li>✅ <span class="text-gray-500">Price was ${formatCurrency(tier.price)} until ${formatDate(nextTierDate)}</span></li>`;
+                     } else {
+                        html += `<li>➡️ <span class="font-bold">Current Price: ${formatCurrency(tier.price)} until ${formatDate(nextTierDate)}</span></li>`;
+                     }
+                } else if (tier.startDate) {
+                    const endDate = (i + 1 < tiers.length) ? new Date(new Date(tiers[i+1].startDate) - 86400000) : null;
+                    if (tier.price < currentPrice) {
+                        html += `<li>✅ <span class="text-gray-500">Price was ${formatCurrency(tier.price)} from ${formatDate(tier.startDate)} ${endDate ? 'to ' + formatDate(endDate) : ''}</span></li>`;
+                    } else if (tier.price === currentPrice) {
+                         html += `<li>➡️ <span class="font-bold">Current Price: ${formatCurrency(tier.price)} from ${formatDate(tier.startDate)}</span></li>`;
+                    } else {
+                        html += `<li>🕒 Increases to ${formatCurrency(tier.price)} on ${formatDate(tier.startDate)}</li>`;
+                    }
+                }
+            }
+            
+            ticket.pricing.rules.filter(r => r.type === 'sales').forEach(rule => {
+                 html += `<li>⚡ Increases to ${formatCurrency(rule.newPrice)} after ${rule.value} sales</li>`;
+            });
+            
+            html += '</ul>';
+            return html;
+        };
+        
+        const renderDiscountCodes = () => {
+            const tableBody = document.getElementById('discount-codes-table');
+            tableBody.innerHTML = '';
+            discountCodesData.forEach(code => {
+                const row = document.createElement('tr');
+                const discountText = code.type === 'percentage' ? `${code.value}%` : formatCurrency(code.value);
+                row.innerHTML = `
+                    <td class="px-4 py-3 whitespace-nowrap font-semibold">${code.text}</td>
+                    <td class="px-4 py-3">${discountText}</td>
+                    <td class="px-4 py-3">${code.claimed} / ${code.uses}</td>
+                    <td class="px-4 py-3">${getCodeStatusBadge(code.status)}</td>
+                    <td class="px-4 py-3 text-right">
+                        <button onclick="openCodeModal(${code.id})" class="text-sm font-semibold revelo-blue">Edit</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        };
+
+        // --- MODAL LOGIC ---
+        const modalBackdrop = document.getElementById('modal-backdrop');
+        const allModals = document.querySelectorAll('.modal');
+
+        const openModal = (modalId) => {
+            document.getElementById(modalId)?.classList.remove('hidden');
+            if (modalId !== 'help-modal') {
+                modalBackdrop.classList.remove('hidden');
+            }
+        };
+
+        const closeModal = (modalId) => {
+            document.getElementById(modalId)?.classList.add('hidden');
+            const isAnyModalOpen = Array.from(allModals).some(modal => !modal.classList.contains('hidden') && modal.id !== 'help-modal');
+            if (!isAnyModalOpen) {
+                modalBackdrop.classList.add('hidden');
+            }
+        };
+        
+        const closeAllModals = () => {
+            allModals.forEach(modal => modal.classList.add('hidden'));
+            modalBackdrop.classList.add('hidden');
+        }
+
+        const openTicketModal = (ticketId = null) => {
+            const deleteBtn = document.getElementById('delete-ticket-btn');
+            document.getElementById('editing-ticket-id').value = ticketId;
+
+            if (ticketId) {
+                const ticket = ticketsData.find(t => t.id === ticketId);
+                document.getElementById('ticket-modal-title').textContent = 'Edit Ticket Type';
+                deleteBtn.classList.toggle('hidden', ticket.status === 'On Sale');
+                
+                document.getElementById('ticket-name').value = ticket.name;
+                document.getElementById('ticket-qty').value = ticket.quantity;
+                document.getElementById('ticket-status').value = ticket.status;
+                toggleScheduledDate(ticket.status);
+                if (ticket.status === 'Scheduled') {
+                    document.getElementById('scheduled-date').value = ticket.scheduledDate;
+                }
+                
+                const strategy = ticket.pricing.strategy;
+                document.querySelector(`input[name="pricing-strategy"][value="${strategy}"]`).checked = true;
+                togglePricingStrategy(strategy);
+
+                if (strategy === 'simple') {
+                    document.getElementById('simple-price').value = ticket.pricing.simplePrice;
+                } else {
+                    document.getElementById('base-price').value = ticket.pricing.basePrice;
+                    document.getElementById('pricing-rules-container').innerHTML = '';
+                    ticket.pricing.rules.forEach(rule => addPricingRule(rule));
+                    const overrideCheck = document.getElementById('final-price-override-check');
+                    overrideCheck.checked = !!ticket.pricing.finalPriceOverride;
+                    toggleFinalPriceOverride();
+                    if (ticket.pricing.finalPriceOverride) {
+                        document.getElementById('final-price-override-value').value = ticket.pricing.finalPriceOverride;
+                    }
+                }
+
+            } else { // Creating a new ticket
+                document.getElementById('ticket-modal-title').textContent = 'Create New Ticket Type';
+                deleteBtn.classList.remove('hidden'); // Can always delete a new draft
+                document.getElementById('ticket-name').value = '';
+                document.getElementById('ticket-qty').value = '';
+                document.getElementById('ticket-status').value = 'On Sale';
+                toggleScheduledDate('On Sale');
+                document.querySelector('input[name="pricing-strategy"][value="simple"]').checked = true;
+                togglePricingStrategy('simple');
+                document.getElementById('simple-price').value = '';
+                document.getElementById('base-price').value = '';
+                document.getElementById('pricing-rules-container').innerHTML = '';
+                document.getElementById('final-price-override-check').checked = false;
+                toggleFinalPriceOverride();
+            }
+            openModal('ticket-modal');
+        };
+        
+        const openCodeModal = (codeId = null) => {
+            const note = document.getElementById('edit-code-note');
+            const statusSelect = document.getElementById('code-status');
+            statusSelect.innerHTML = ''; // Clear previous options
+            document.getElementById('editing-code-id').value = codeId;
+
+            const fieldsToDisable = ['code-text', 'code-type', 'code-value'];
+            
+            if (codeId) {
+                const code = discountCodesData.find(c => c.id === codeId);
+                document.getElementById('code-modal-title').textContent = 'Edit Discount Code';
+                note.classList.remove('hidden');
+                
+                document.getElementById('code-text').value = code.text;
+                document.getElementById('code-type').value = code.type;
+                document.getElementById('code-value').value = code.value;
+                document.getElementById('code-uses').value = code.uses;
+                
+                if (code.status === 'Draft') {
+                    ['Draft', 'Active', 'Inactive'].forEach(s => statusSelect.add(new Option(s, s)));
+                } else {
+                    ['Active', 'Inactive'].forEach(s => statusSelect.add(new Option(s, s)));
+                }
+                statusSelect.value = code.status;
+                
+                fieldsToDisable.forEach(id => document.getElementById(id).disabled = true);
+            } else {
+                 document.getElementById('code-modal-title').textContent = 'Generate New Discount Code';
+                note.classList.add('hidden');
+                ['code-text', 'code-value', 'code-uses'].forEach(id => document.getElementById(id).value = '');
+                document.getElementById('code-type').value = 'percentage';
+                ['Draft', 'Active', 'Inactive'].forEach(s => statusSelect.add(new Option(s, s)));
+                statusSelect.value = 'Draft';
+                fieldsToDisable.forEach(id => document.getElementById(id).disabled = false);
+            }
+            openModal('code-modal');
+        };
+
+        const togglePricingStrategy = (strategy) => {
+            document.getElementById('simple-price-view').classList.toggle('hidden', strategy !== 'simple');
+            document.getElementById('dynamic-price-view').classList.toggle('hidden', strategy !== 'dynamic');
+        };
+        
+        const toggleScheduledDate = (status) => {
+            document.getElementById('scheduled-date-container').classList.toggle('hidden', status !== 'Scheduled');
+        };
+        
+        const toggleFinalPriceOverride = () => {
+            const isChecked = document.getElementById('final-price-override-check').checked;
+            document.getElementById('final-price-override-container').classList.toggle('hidden', !isChecked);
+        };
+
+        const addPricingRule = (rule = null) => {
+            const container = document.getElementById('pricing-rules-container');
+            const ruleDiv = document.createElement('div');
+            ruleDiv.className = 'flex items-center space-x-2 rule-enter';
+            
+            ruleDiv.innerHTML = `
+                <span>Increase to</span>
+                <input type="number" placeholder="220.00" class="rule-price p-2 border border-gray-300 rounded-md w-24" value="${rule?.newPrice || ''}">
+                <span>when</span>
+                <select class="rule-type p-2 border border-gray-300 rounded-md" onchange="updateRuleInputType(this)">
+                    <option value="date" ${rule?.type === 'date' ? 'selected' : ''}>Date is after</option>
+                    <option value="sales" ${rule?.type === 'sales' ? 'selected' : ''}>Tickets Sold ></option>
+                </select>
+                <input type="${rule?.type === 'sales' ? 'number' : 'date'}" class="rule-value p-2 border border-gray-300 rounded-md flex-1" value="${rule?.value || ''}">
+                <button type="button" onclick="this.parentElement.remove()" class="text-red-500 hover:text-red-700 font-bold">&times;</button>
+            `;
+            container.appendChild(ruleDiv);
+            requestAnimationFrame(() => ruleDiv.classList.add('rule-enter-active'));
+        };
+        
+        const updateRuleInputType = (selectElement) => {
+            const valueInput = selectElement.nextElementSibling;
+            valueInput.type = selectElement.value === 'date' ? 'date' : 'number';
+            valueInput.value = '';
+        };
+
+        const saveTicket = () => {
+            const ticketId = parseInt(document.getElementById('editing-ticket-id').value);
+            const strategy = document.querySelector('input[name="pricing-strategy"]:checked').value;
+            const status = document.getElementById('ticket-status').value;
+            
+            let pricingData = {};
+            if (strategy === 'simple') {
+                pricingData = { strategy: 'simple', simplePrice: parseFloat(document.getElementById('simple-price').value) || 0 };
+            } else {
+                const rules = [];
+                document.querySelectorAll('#pricing-rules-container > div').forEach(ruleDiv => {
+                    rules.push({
+                        type: ruleDiv.querySelector('.rule-type').value,
+                        value: ruleDiv.querySelector('.rule-value').value,
+                        newPrice: parseFloat(ruleDiv.querySelector('.rule-price').value) || 0
+                    });
+                });
+                const finalPriceOverride = document.getElementById('final-price-override-check').checked
+                    ? parseFloat(document.getElementById('final-price-override-value').value) || null : null;
+                pricingData = {
+                    strategy: 'dynamic',
+                    basePrice: parseFloat(document.getElementById('base-price').value) || 0,
+                    rules: rules,
+                    finalPriceOverride: finalPriceOverride
+                };
+            }
+
+            const ticketPayload = {
+                name: document.getElementById('ticket-name').value || 'Unnamed Ticket',
+                quantity: parseInt(document.getElementById('ticket-qty').value) || 0,
+                status: status,
+                scheduledDate: status === 'Scheduled' ? document.getElementById('scheduled-date').value : null,
+                pricing: pricingData,
+                sold: ticketId ? ticketsData.find(t => t.id === ticketId).sold : 0
+            };
+
+            if (ticketId) {
+                const index = ticketsData.findIndex(t => t.id === ticketId);
+                ticketsData[index] = { ...ticketsData[index], ...ticketPayload };
+            } else {
+                ticketPayload.id = Math.max(...ticketsData.map(t => t.id), 0) + 1;
+                ticketsData.unshift(ticketPayload);
+            }
+            renderTickets();
+            closeModal('ticket-modal');
+        };
+
+        const deleteTicket = () => {
+            const ticketId = parseInt(document.getElementById('editing-ticket-id').value);
+            if (ticketId) { // Deleting an existing ticket
+                 const ticket = ticketsData.find(t => t.id === ticketId);
+                 if(ticket.status === 'On Sale') {
+                    alert("Cannot delete a ticket that is 'On Sale'.");
+                    return;
+                 }
+                 if (confirm('Are you sure you want to delete this ticket? This action cannot be undone.')) {
+                    ticketsData = ticketsData.filter(t => t.id !== ticketId);
+                    renderTickets();
+                    closeModal('ticket-modal');
+                 }
+            } else { // "Deleting" a new, unsaved ticket is just closing the modal
+                closeModal('ticket-modal');
+            }
+        };
+        
+        const saveCode = () => {
+            const codeId = parseInt(document.getElementById('editing-code-id').value);
+            
+            if (codeId) { // Editing
+                const index = discountCodesData.findIndex(c => c.id === codeId);
+                discountCodesData[index].uses = parseInt(document.getElementById('code-uses').value) || 0;
+                discountCodesData[index].status = document.getElementById('code-status').value;
+            } else { // Creating
+                 const newCode = {
+                    id: Math.max(...discountCodesData.map(c => c.id), 0) + 1,
+                    text: document.getElementById('code-text').value,
+                    type: document.getElementById('code-type').value,
+                    value: parseFloat(document.getElementById('code-value').value) || 0,
+                    uses: parseInt(document.getElementById('code-uses').value) || 0,
+                    claimed: 0,
+                    promoter: '', // Promoter field was removed from modal, so it's empty
+                    status: document.getElementById('code-status').value
+                };
+                discountCodesData.unshift(newCode);
+            }
+            renderDiscountCodes();
+            closeModal('code-modal');
+        };
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTickets();
+            renderDiscountCodes();
+        });
+    </script>
+    <script src="organizer.js" defer></script>
+</body>
+</html>

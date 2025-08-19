@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revelo - Create New Event</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Your Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-100 antialiased text-gray-800 pt-16">
+    <!-- Organizer-specific Navbar -->
+    <div id="organizer-navbar-placeholder"></div>
+
+    <!-- Main container -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <h1 class="text-3xl font-extrabold revelo-blue mb-2">Create a New Event</h1>
+        <p class="text-gray-600 mb-6">Follow the steps to get your event ready for the public.</p>
+
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <!-- Progress Bar -->
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex justify-between items-center">
+                    <div id="step-1-indicator" onclick="jumpToStep(1)" class="step-indicator active text-center cursor-pointer">
+                        <div class="w-8 h-8 mx-auto rounded-full bg-revelo-blue text-white flex items-center justify-center font-bold">1</div>
+                        <p class="text-xs mt-1 font-semibold revelo-blue">Core Details</p>
+                    </div>
+                    <div class="flex-1 h-px bg-gray-300 mx-4"></div>
+                    <div id="step-2-indicator" onclick="jumpToStep(2)" class="step-indicator text-center">
+                        <div class="w-8 h-8 mx-auto rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-bold">2</div>
+                        <p class="text-xs mt-1 font-semibold text-gray-500">Description</p>
+                    </div>
+                    <div class="flex-1 h-px bg-gray-300 mx-4"></div>
+                    <div id="step-3-indicator" onclick="jumpToStep(3)" class="step-indicator text-center">
+                        <div class="w-8 h-8 mx-auto rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-bold">3</div>
+                        <p class="text-xs mt-1 font-semibold text-gray-500">Ticketing</p>
+                    </div>
+                    <div class="flex-1 h-px bg-gray-300 mx-4"></div>
+                    <div id="step-4-indicator" onclick="jumpToStep(4)" class="step-indicator text-center">
+                        <div class="w-8 h-8 mx-auto rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-bold">4</div>
+                        <p class="text-xs mt-1 font-semibold text-gray-500">Collaborators</p>
+                    </div>
+                </div>
+            </div>
+            
+            <main class="p-6 md:p-8">
+                <!-- Step Content Wrapper for consistent width -->
+                <div class="max-w-3xl mx-auto">
+                    <!-- Step 1: Core Details -->
+                    <div id="step-1" class="step-content space-y-4">
+                        <div><label class="font-semibold text-gray-700">Event Title*</label><input type="text" placeholder="e.g., Barcelona Summer Festival" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div><label class="font-semibold text-gray-700">Event Type*</label><select class="w-full p-2 border border-gray-300 rounded-md mt-1"><option>Congress</option><option>Festival</option><option>Social</option><option>Workshop</option></select></div>
+                            <div><label class="font-semibold text-gray-700">Primary Language*</label><select class="w-full p-2 border border-gray-300 rounded-md mt-1"><option>English</option><option>Spanish</option></select></div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div><label class="font-semibold text-gray-700">Start Date*</label><input type="date" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                            <div><label class="font-semibold text-gray-700">End Date*</label><input type="date" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                        </div>
+                        <div><label class="font-semibold text-gray-700">Venue Name*</label><input type="text" placeholder="e.g., Hotel Evenia Olympic" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                        <div><label class="font-semibold text-gray-700">Location*</label><input type="text" placeholder="e.g., Barcelona, Spain" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                    </div>
+
+                    <!-- Step 2: Description & Media -->
+                    <div id="step-2" class="step-content hidden space-y-6">
+                        <div><label class="font-semibold text-gray-700">Promotional Media</label><p class="text-sm text-gray-500">Upload assets that will be shown on the public event page.</p><div class="mt-2 p-6 border-2 border-dashed border-gray-300 rounded-lg text-center"><p>Drag & drop files here or <button class="font-semibold revelo-blue">browse files</button></p></div></div>
+                        <div><label class="font-semibold text-gray-700">Event Description</label><textarea class="w-full p-2 border border-gray-300 rounded-md mt-1" rows="6" placeholder="Tell attendees all about your event..."></textarea></div>
+                        <div><label class="font-semibold text-gray-700">Artists & Instructors</label><input type="text" placeholder="e.g., Korke & Judith, Alonso & Noelia (comma separated)" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                        <div><label class="font-semibold text-gray-700">Tags</label><input type="text" placeholder="e.g., Bachata, Salsa, Zouk (comma separated)" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                    </div>
+
+                    <!-- Step 3: Ticketing -->
+                    <div id="step-3" class="step-content hidden space-y-4">
+                        <h3 class="font-bold text-lg revelo-blue">Initial Ticket Setup</h3>
+                        <p class="text-sm text-gray-600">You can add more ticket types, descriptions, promo codes, and advanced pricing rules from the <strong>event management dashboard</strong> later.</p>
+                        <div id="ticket-types-container" class="space-y-4">
+                            <!-- Ticket Type Row (template for cloning) -->
+                            <div class="ticket-type-row p-4 border rounded-lg bg-gray-50 space-y-4">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div><label class="font-semibold text-gray-700">Ticket Name</label><input type="text" value="Full Pass" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                                    <div><label class="font-semibold text-gray-700">Price (€)</label><input type="number" value="120" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                                    <div><label class="font-semibold text-gray-700">Quantity</label><input type="number" value="100" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="addTicketType()" class="w-full mt-2 px-6 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 flex items-center justify-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                            Add Another Ticket Type
+                        </button>
+                    </div>
+
+                    <!-- Step 4: Collaborators -->
+                    <div id="step-4" class="step-content hidden space-y-4">
+                        <h3 class="font-bold text-lg revelo-blue">Invite Collaborators</h3>
+                        <p class="text-sm text-gray-600">Invite Creators and Promoters to your event.</p>
+                        <div class="relative">
+                            <label class="font-semibold text-gray-700">Search by Username or Email</label>
+                            <input type="text" id="collaborator-search" onkeyup="handleSearch(event)" placeholder="e.g., AMedia or John Doe" class="w-full p-2 border border-gray-300 rounded-md mt-1">
+                            <!-- Search Suggestions -->
+                            <div id="search-suggestions" class="absolute w-full bg-white border border-gray-300 rounded-md mt-1 shadow-lg z-10 hidden">
+                                <!-- Suggestions will be injected here by JS -->
+                            </div>
+                        </div>
+                        <!-- Invited Collaborators List -->
+                        <div id="invited-list-container" class="hidden">
+                            <h4 class="font-semibold text-gray-700 mt-4">Invited Collaborators</h4>
+                            <div id="invited-list" class="mt-2 flex flex-wrap gap-2">
+                                <!-- Invited collaborators will be added here by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Navigation Buttons -->
+            <footer class="p-6 border-t border-gray-200 flex justify-between items-center">
+                <button id="prev-btn" onclick="navigateStep(-1)" class="px-6 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg hidden">Previous</button>
+                <button id="draft-btn" class="px-6 py-2 font-semibold text-revelo-blue rounded-lg hover:bg-gray-100">Save as Draft</button>
+                <button id="next-btn" onclick="navigateStep(1)" class="px-6 py-2 font-bold bg-revelo-blue text-white rounded-lg">Next Step</button>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 4;
+
+        function showStep(step) {
+            document.querySelectorAll('.step-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`step-${step}`).classList.remove('hidden');
+
+            for (let i = 1; i <= totalSteps; i++) {
+                const indicator = document.getElementById(`step-${i}-indicator`);
+                const circle = indicator.querySelector('div');
+                const text = indicator.querySelector('p');
+                if (i < step) {
+                    circle.classList.add('bg-revelo-blue', 'text-white');
+                    circle.classList.remove('bg-gray-300', 'text-gray-600');
+                    text.classList.add('revelo-blue');
+                    text.classList.remove('text-gray-500');
+                    indicator.classList.add('cursor-pointer');
+                } else if (i === step) {
+                    circle.classList.add('bg-revelo-blue', 'text-white');
+                    circle.classList.remove('bg-gray-300', 'text-gray-600');
+                    text.classList.add('revelo-blue');
+                    text.classList.remove('text-gray-500');
+                    indicator.classList.remove('cursor-pointer');
+                } else {
+                    circle.classList.add('bg-gray-300', 'text-gray-600');
+                    circle.classList.remove('bg-revelo-blue', 'text-white');
+                    text.classList.add('text-gray-500');
+                    text.classList.remove('revelo-blue');
+                    indicator.classList.remove('cursor-pointer');
+                }
+            }
+
+            document.getElementById('prev-btn').classList.toggle('hidden', step === 1);
+            document.getElementById('next-btn').textContent = step === totalSteps ? 'Finish & Create Event' : 'Next Step';
+        }
+
+        function navigateStep(direction) {
+            const newStep = currentStep + direction;
+            if (newStep > 0 && newStep <= totalSteps) {
+                currentStep = newStep;
+                showStep(currentStep);
+            } else if (newStep > totalSteps) {
+                alert('Event Created! (Mockup)');
+            }
+        }
+
+        function jumpToStep(stepNumber) {
+            if (stepNumber < currentStep) {
+                currentStep = stepNumber;
+                showStep(currentStep);
+            }
+        }
+
+        function addTicketType() {
+            const container = document.getElementById('ticket-types-container');
+            const firstTicketRow = container.querySelector('.ticket-type-row');
+            const newRow = firstTicketRow.cloneNode(true);
+            newRow.querySelectorAll('input').forEach(input => input.value = '');
+            container.appendChild(newRow);
+        }
+
+        // --- Collaborator Search Simulation ---
+        const mockCollaborators = [
+            { name: 'AMedia', type: 'Creator' },
+            { name: 'John Doe', type: 'Promoter' },
+            { name: 'Visuals Pro', type: 'Creator' }
+        ];
+        
+        const searchInput = document.getElementById('collaborator-search');
+        const suggestionsContainer = document.getElementById('search-suggestions');
+        const invitedListContainer = document.getElementById('invited-list-container');
+        const invitedList = document.getElementById('invited-list');
+
+        function handleSearch(event) {
+            const query = event.target.value.toLowerCase();
+            suggestionsContainer.innerHTML = '';
+
+            if (query.length < 2) {
+                suggestionsContainer.classList.add('hidden');
+                return;
+            }
+
+            const filtered = mockCollaborators.filter(c => c.name.toLowerCase().includes(query));
+            
+            if (filtered.length > 0) {
+                filtered.forEach(collab => {
+                    const item = document.createElement('div');
+                    item.className = 'p-2 hover:bg-gray-100 cursor-pointer flex items-center';
+                    item.innerHTML = `
+                        <span>${collab.name}</span>
+                        <span class="text-xs font-bold ml-2 ${collab.type === 'Creator' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800'} px-2 py-1 rounded-full">${collab.type}</span>
+                    `;
+                    item.onclick = () => addCollaborator(collab);
+                    suggestionsContainer.appendChild(item);
+                });
+                suggestionsContainer.classList.remove('hidden');
+            } else {
+                suggestionsContainer.classList.add('hidden');
+            }
+        }
+        
+        function addCollaborator(collaborator) {
+            invitedListContainer.classList.remove('hidden');
+            
+            const tag = document.createElement('div');
+            tag.className = 'inline-flex items-center bg-gray-100 rounded-full px-3 py-1 text-sm font-semibold text-gray-800 border';
+            tag.innerHTML = `
+                <span>${collaborator.name}</span>
+                <span class="text-xs font-bold ml-2 ${collaborator.type === 'Creator' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800'} px-2 py-1 rounded-full">${collaborator.type}</span>
+                <button onclick="removeCollaborator(this)" class="ml-2 text-red-500 hover:text-red-700 font-bold">&times;</button>
+            `;
+            
+            invitedList.appendChild(tag);
+            
+            searchInput.value = '';
+            suggestionsContainer.classList.add('hidden');
+        }
+
+        function removeCollaborator(buttonElement) {
+            buttonElement.parentElement.remove();
+            // If the list is empty, hide the container again
+            if (invitedList.children.length === 0) {
+                invitedListContainer.classList.add('hidden');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            showStep(currentStep);
+        });
+    </script>
+    <script src="organizer.js" defer></script>
+</body>
+</html>

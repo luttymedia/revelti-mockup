@@ -21,6 +21,7 @@ body {
 
 /* --- Component Styles --- */
 
+
 /* Active Tab Indicator */
 .tab-active {
     border-bottom: 3px solid #f58220;
@@ -35,29 +36,78 @@ details > summary {
 details > summary::-webkit-details-marker {
     display: none;
 }
-details[open] > summary svg {
+/* This rule is too general and is rotating all SVGs. Let's make it more specific. */
+/* details[open] > summary svg {
     transform: rotate(180deg);
-}
-
-/* Custom styles for transitions */
-#search-bar {
-    transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
-}
-#search-container {
-    transition: all 0.3s ease-in-out;
-}
+} 
+*/
 
 /* --- Utility Styles --- */
 
 /* Hides scrollbar for horizontal scrolling containers */
-.horizontal-scroll {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-}
-.horizontal-scroll::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, and Opera */
+/* .horizontal-scroll {
+/*     -ms-overflow-style: none;  /* IE and Edge */
+/*     scrollbar-width: none;  /* Firefox */
+/* }
+/* .horizontal-scroll::-webkit-scrollbar {
+/*     display: none; /* Chrome, Safari, and Opera */
+/* }
+/* 
+/* .break-inside-avoid {
+/*     break-inside: avoid;
+/* }
+
+/* --- Custom Styles for Organizer Pages --- */
+.organizer-tab-active {
+    border-bottom: 3px solid #213c63; /* Revelo Blue */
+    color: #213c63; /* Revelo Blue */
+    font-weight: 700;
 }
 
-.break-inside-avoid {
-    break-inside: avoid;
+/* Simple transition for tree view expansion */
+.tree-content {
+    transition: max-height 0.3s ease-in-out;
+    max-height: 0;
+    overflow: hidden;
+}
+.tree-item.open > .tree-content {
+    max-height: 500px; /* Adjust as needed */
+}
+.tree-item > div > svg {
+    transition: transform 0.3s ease-in-out;
+}
+.tree-item.open > div > svg {
+    transform: rotate(90deg);
+}
+
+/* --- Styles for ticketManagement & liveEventEdit --- */
+/* This more specific rule will only rotate SVGs that have the 'accordion-arrow' class */
+details[open] > summary svg.accordion-arrow { 
+    transform: rotate(180deg); 
+}
+.rule-enter {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+.rule-enter-active {
+    max-height: 100px; /* Adjust as needed */
+    opacity: 1;
+    transform: translateY(0);
+}
+/* Styles for mediaManagement */
+.tree-content {
+    transition: max-height 0.3s ease-in-out;
+    max-height: 0;
+    overflow: hidden;
+}
+.tree-item.open > .tree-content {
+    max-height: 500px; /* Adjust as needed */
+}
+.tree-item > div > svg {
+    transition: transform 0.3s ease-in-out;
+}
+.tree-item.open > div > svg {
+    transform: rotate(90deg);
 }

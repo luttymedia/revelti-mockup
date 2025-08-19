@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revelo - Live Event Edit</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- CHANGE: Added styles for the change indicator dot -->
+    <style>
+        .change-dot {
+            display: none;
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 9px;
+            height: 9px;
+            background-color: #f58220; /* revelo-orange */
+            border-radius: 50%;
+            border: 1px solid white;
+        }
+        .change-dot.visible {
+            display: block;
+        }
+    </style>
+
+</head>
+<body class="bg-gray-100 antialiased text-gray-800 pt-16">
+    <!-- Organizer-specific Navbar -->
+    <div id="organizer-navbar-placeholder"></div>
+
+    <!-- Main container -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Header Section -->
+        <header class="flex flex-col md:flex-row justify-between items-center mb-6">
+            <div>
+                <div class="flex items-center">
+                    <h1 class="text-3xl font-extrabold revelo-blue">Sensuality & Essentiality</h1>
+                    <span class="ml-4 text-sm font-bold bg-green-100 text-green-800 px-3 py-1 rounded-full whitespace-nowrap">On Sale</span>
+                </div>
+                <p class="text-gray-600">Live Edit Dashboard</p>
+            </div>
+            <div id="header-buttons" class="flex space-x-2 mt-4 md:mt-0">
+                <a href="eventDetailOrganizerView.html" class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition duration-300">View Public Page</a>
+                <button id="cancel-changes-btn" onclick="cancelChanges()" class="px-4 py-2 font-semibold bg-red-500 text-white rounded-lg hover:bg-red-600 transition duration-300 disabled:bg-gray-300 disabled:cursor-not-allowed" disabled>Cancel Changes</button>
+                <button id="publish-changes-btn" class="px-4 py-2 font-bold bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-300 disabled:bg-gray-300 disabled:cursor-not-allowed" disabled>Publish Changes</button>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column -->
+            <div class="lg:col-span-1 space-y-6">
+                <!-- Action Buttons -->
+                <div class="grid grid-cols-2 gap-4">
+                    <a href="ticketManagement.html" class="bg-white p-4 rounded-lg shadow-md flex flex-col items-center justify-center text-center hover:shadow-xl transition-shadow">
+                        <svg class="w-8 h-8 revelo-blue mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"></path></svg>
+                        <span class="font-semibold revelo-blue">Ticket Management</span>
+                    </a>
+                    <a href="mediaManagement.html" class="bg-white p-4 rounded-lg shadow-md flex flex-col items-center justify-center text-center hover:shadow-xl transition-shadow">
+                        <svg class="w-8 h-8 revelo-blue mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        <span class="font-semibold revelo-blue">Media Management</span>
+                    </a>
+                    <a href="analytics.html" class="bg-white p-4 rounded-lg shadow-md flex flex-col items-center justify-center text-center hover:shadow-xl transition-shadow">
+                        <svg class="w-8 h-8 revelo-blue mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
+                        <span class="font-semibold revelo-blue">Stats & Reports</span>
+                    </a>
+                    <a href="collaboratorManagement.html" class="bg-white p-4 rounded-lg shadow-md flex flex-col items-center justify-center text-center hover:shadow-xl transition-shadow">
+                        <svg class="w-8 h-8 revelo-blue mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283-.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        <span class="font-semibold revelo-blue">Collaborators</span>
+                    </a>
+                </div>
+                <!-- Event Poster -->
+                <div class="relative">
+                    <img id="event-poster-img" src="images/eventPoster.jpg" alt="Promotional poster" class="w-full h-auto rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/800x450/f58220/ffffff?text=Event+Poster';">
+                    <div class="absolute top-4 right-4">
+                        <button id="edit-poster-icon" onclick="openModal('edit-poster-modal')" class="bg-white/80 hover:bg-white text-gray-800 font-bold p-2 rounded-full shadow-lg flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Event Details Block -->
+                <div id="main-details-block" class="bg-white p-6 rounded-lg shadow-md relative">
+                     <div class="absolute top-4 right-4">
+                        <button id="edit-info-icon" onclick="openModal('edit-info-block-modal')" class="p-2 rounded-full text-gray-700 hover:bg-gray-100">
+                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                           </svg>
+                        </button>
+                    </div>
+                    <p class="text-sm font-semibold revelo-orange uppercase tracking-wider">Weekend Intensive</p>
+                    <h2 class="relative text-2xl font-extrabold revelo-blue mt-1">
+                        Sensuality & Essentiality
+                        <span id="info-change-dot" class="change-dot !top-1 !right-[-15px]"></span>
+                    </h2>
+                    <div class="mt-3 text-gray-600 space-y-2">
+                        <p class="flex items-center"><svg class="w-5 h-5 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg><span>November 1-2, 2025</span></p>
+                        <p class="flex items-center"><svg class="w-5 h-5 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><span>BS Dance Center, Barcelona</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="lg:col-span-2 bg-white rounded-lg shadow-md">
+                <!-- Tab Navigation -->
+                <nav class="border-b border-gray-200">
+                    <div class="flex">
+                        <button onclick="switchTab('details')" class="tab-button relative flex-1 py-4 px-1 text-center text-gray-500 hover:revelo-blue font-semibold transition duration-300 organizer-tab-active">Details <span id="details-tab-dot" class="change-dot"></span></button>
+                        <button onclick="switchTab('reviews')" class="tab-button relative flex-1 py-4 px-1 text-center text-gray-500 hover:revelo-blue font-semibold transition duration-300">Reviews</button>
+                        <button onclick="switchTab('updates')" class="tab-button relative flex-1 py-4 px-1 text-center text-gray-500 hover:revelo-blue font-semibold transition duration-300">Updates <span id="updates-tab-dot" class="change-dot"></span></button>
+                        <button onclick="switchTab('faq')" class="tab-button relative flex-1 py-4 px-1 text-center text-gray-500 hover:revelo-blue font-semibold transition duration-300">FAQ <span id="faq-tab-dot" class="change-dot"></span></button>
+                    </div>
+                </nav>
+
+                <!-- Content Sections (Tabs) -->
+                <main class="p-6">
+                    <div id="details" class="tab-content space-y-4">
+                        <details open><summary class="flex justify-between items-center cursor-pointer font-bold text-xl revelo-blue">About the Event <button id="edit-about-icon" onclick="openModal('edit-about-modal')" class="p-1 rounded-full hover:bg-gray-200"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-500"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" /></svg></button></summary><div id="about-content" class="pt-2 text-gray-700 leading-relaxed">Sensuality & Essentiality is much more than a boy/girl stylo event - it's a transformative experience designed to take your dance to another level. Here you will not only perfect your technique, but you will face the most important challenge: stepping out of your comfort zone. <br><br> Through intensive workshops, personal exploration dynamics and conscious training, you will immerse yourself in a journey where projection and essence become key tools to unlock your authentic style. You will learn to master your energy, express yourself with confidence and find your own voice in movement, whether you are a boy, a girl or exploring both languages. <br><br> This is the space where you break boundaries, awaken your body and free your mind. Because when you connect with your essence, your stylo becomes your superpower. <br><br> Welcome to Sensuality & Essentiality.</div></details>
+                        <details open><summary class="flex justify-between items-center cursor-pointer font-bold text-xl revelo-blue">Artists & Instructors <button id="edit-artists-icon" onclick="handleOpenListModal('artists')" class="p-1 rounded-full hover:bg-gray-200"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-500"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" /></svg></button></summary><ul id="artists-content" class="pt-2 list-disc list-inside text-gray-700 space-y-1"><li>Korke & Judith</li><li>Alonso & Noelia</li><li>Adrian & Anita</li><li>Anita Santos Rubin</li><li>Carolina Rosa</li><li>Gloria Ramos</li><li>Stefanny Moreno</li></ul></details>
+                        <details open><summary class="flex justify-between items-center cursor-pointer font-bold text-xl revelo-blue">Tags <button id="edit-tags-icon" onclick="handleOpenListModal('tags')" class="p-1 rounded-full hover:bg-gray-200"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-500"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" /></svg></button></summary><div id="tags-content" class="pt-2 flex flex-wrap gap-2"><span class="bg-gray-200 text-gray-700 text-sm font-semibold px-3 py-1 rounded-full">Everything in the same place</span><span class="bg-gray-200 text-gray-700 text-sm font-semibold px-3 py-1 rounded-full">Possibility of cancellation until a certain date</span><span class="bg-gray-200 text-gray-700 text-sm font-semibold px-3 py-1 rounded-full">Workshops</span><span class="bg-gray-200 text-gray-700 text-sm font-semibold px-3 py-1 rounded-full">Masterclass</span><span class="bg-gray-200 text-gray-700 text-sm font-semibold px-3 py-1 rounded-full">Several rooms</span><span class="bg-gray-200 text-gray-700 text-sm font-semibold px-3 py-1 rounded-full">Weekend</span><span class="bg-gray-200 text-gray-700 text-sm font-semibold px-3 py-1 rounded-full">Intensive</span></div></details>
+                    </div>
+                    <div id="reviews" class="tab-content hidden space-y-4">
+                        <details open><summary class="flex justify-between items-center cursor-pointer font-bold text-xl revelo-blue">Challenged (1)<svg class="w-5 h-5 accordion-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary><div id="challenged-reviews-content" class="pt-2 space-y-4"><div class="bg-yellow-50 border border-yellow-200 p-4 rounded-lg"><div class="flex items-center mb-2"><div class="flex text-yellow-400"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg></div><p class="ml-auto text-sm text-yellow-600 font-semibold">Under Review</p></div><p class="text-gray-700 mt-1">"The music was way too loud and the floor was sticky."</p><p class="text-sm font-semibold text-gray-800 mt-3">- Anonymous</p><div class="mt-4 pt-4 border-t border-yellow-200"><p class="text-sm font-bold revelo-blue">Organizer's Challenge Explanation:</p><p class="text-sm text-gray-600">This review appears to be from a different event. Our venue uses professional sound systems with regulated volume, and we have a dedicated cleaning crew that maintains the dance floors throughout the night.</p></div></div></div></details>
+                        <details open><summary class="flex justify-between items-center cursor-pointer font-bold text-xl revelo-blue">Public (1)<svg class="w-5 h-5 accordion-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary><div id="public-reviews-content" class="pt-2 space-y-4"><div class="bg-gray-50 p-4 rounded-lg border" data-review-id="1"><div class="flex items-start justify-between mb-2"><div class="flex items-center"><div class="flex text-yellow-400"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg></div><p class="text-sm text-gray-500 ml-2">Verified Attendee</p></div><button onclick="openFlagModal(1)" class="text-gray-500 hover:text-red-600 p-1"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3v1.5M3 21v-6m0 0 2.77-.693a9 9 0 0 1 6.208.682l.108.054a9 9 0 0 0 6.086.71l3.114-.732a48.524 48.524 0 0 1-.005-10.499l-3.11.732a9 9 0 0 1-6.085-.711l-.108-.054a9 9 0 0 0-6.208-.682L3 4.5M3 15V4.5" /></svg></button></div><p class="text-gray-700 mt-1">"Absolutely incredible experience! The organization was flawless and the artists were top-notch. Can't wait for next year!"</p><p class="text-sm font-semibold text-gray-800 mt-3">- Alex Johnson</p><div class="mt-4 pt-4 border-t"><textarea class="w-full p-2 border rounded-md text-sm" rows="2" placeholder="Write a public response..."></textarea><div class="text-right mt-2"><button onclick="publishResponse(1)" class="px-3 py-1 text-sm font-bold bg-revelo-blue text-white rounded-md">Publish Response</button></div></div></div></div></details>
+                    </div>
+                    <div id="updates" class="tab-content hidden space-y-4">
+                        <div class="bg-gray-50 p-4 rounded-lg border">
+                            <h3 class="font-bold text-lg revelo-blue">Post a New Update</h3>
+                            <input id="new-update-title" type="text" placeholder="Update Title" class="w-full p-2 border rounded-md mt-2">
+                            <textarea id="new-update-desc" placeholder="Update description..." rows="4" class="w-full p-2 border rounded-md mt-2"></textarea>
+                            <div class="flex justify-between items-center mt-2">
+                                <div>
+                                    <button onclick="document.getElementById('update-image-upload').click()" class="text-sm font-semibold text-gray-600 hover:revelo-blue flex items-center"><svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>Add Image</button>
+                                    <input type="file" id="update-image-upload" class="hidden" onchange="handleImageUpload(event)">
+                                    <div id="image-preview" class="mt-2"></div>
+                                </div>
+                                <div id="update-button-container">
+                                    <button onclick="postUpdate()" class="px-4 py-2 font-bold bg-revelo-blue text-white rounded-lg">Post Update</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="updates-content" class="space-y-4">
+                            <div class="border-l-4 border-revelo-orange pl-4 relative" data-update-id="1">
+                                <div class="absolute top-0 right-0 flex space-x-1">
+                                    <button id="edit-update-1-icon" onclick="editUpdate(1)" class="p-1 bg-white rounded-full hover:bg-gray-100"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-600"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" /></svg></button>
+                                    <button onclick="deleteUpdate(1)" class="p-1 bg-white rounded-full hover:bg-gray-100"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-red-600"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg></button>
+                                </div>
+                                <h3 class="font-bold text-lg revelo-blue">Schedule Update: New Workshop Added!</h3>
+                                <p class="text-sm text-gray-500 mb-1">Posted on: Oct 15, 2025</p>
+                                <p class="text-gray-700">We're excited to announce a new 'Musicality Masterclass' with Sebas Garreta on Sunday at 11:00 AM. Check the updated schedule!</p>
+                            </div>
+                             <div class="border-l-4 border-revelo-orange pl-4 relative" data-update-id="2">
+                                <div class="absolute top-0 right-0 flex space-x-1">
+                                    <button id="edit-update-2-icon" onclick="editUpdate(2)" class="p-1 bg-white rounded-full hover:bg-gray-100"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-600"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" /></svg></button>
+                                    <button onclick="deleteUpdate(2)" class="p-1 bg-white rounded-full hover:bg-gray-100"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-red-600"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg></button>
+                                </div>
+                                <h3 class="font-bold text-lg revelo-blue">COVID-19 Safety Protocols</h3>
+                                <p class="text-sm text-gray-500 mb-1">Posted on: Oct 12, 2025</p>
+                                <p class="text-gray-700">The safety of our attendees is our top priority. Please review our updated health and safety guidelines on the FAQ page.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="faq" class="tab-content hidden space-y-4">
+                         <div class="bg-gray-50 p-4 rounded-lg border">
+                            <h3 class="font-bold text-lg revelo-blue">Add New FAQ</h3>
+                            <input id="new-faq-question" type="text" placeholder="Question" class="w-full p-2 border rounded-md mt-2">
+                            <textarea id="new-faq-answer" placeholder="Answer..." rows="3" class="w-full p-2 border rounded-md mt-2"></textarea>
+                            <div class="text-right mt-2"><button onclick="addFaq()" class="px-4 py-2 font-bold bg-revelo-blue text-white rounded-lg">Add FAQ</button></div>
+                        </div>
+                        <div id="faq-content" class="space-y-2">
+                            <details data-faq-id="1"><summary class="flex justify-between items-center cursor-pointer font-semibold text-lg revelo-blue py-2">What is the refund policy? <div class="flex space-x-1"><button id="edit-faq-1-icon" onclick="openEditFaqModal(1, event)" class="p-1 rounded-full hover:bg-gray-200"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-600"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" /></svg></button><button onclick="removeFaq(1, event)" class="p-1 rounded-full hover:bg-gray-200"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-red-600"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg></button></div></summary><div class="pb-2 pt-1 pl-2"><p class="text-gray-700">Tickets are non-refundable but can be transferred to another person up to 7 days before the event. Please contact support for assistance.</p></div></details>
+                            <details data-faq-id="2"><summary class="flex justify-between items-center cursor-pointer font-semibold text-lg revelo-blue py-2">Are there parking facilities at the venue? <div class="flex space-x-1"><button id="edit-faq-2-icon" onclick="openEditFaqModal(2, event)" class="p-1 rounded-full hover:bg-gray-200"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-600"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" /></svg></button><button onclick="removeFaq(2, event)" class="p-1 rounded-full hover:bg-gray-200"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-red-600"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg></button></div></summary><div class="pb-2 pt-1 pl-2"><p class="text-gray-700">Yes, Fira Gran Via has ample underground parking available. The daily rate is €20. We recommend using public transport as it is very convenient.</p></div></details>
+                            <details data-faq-id="3"><summary class="flex justify-between items-center cursor-pointer font-semibold text-lg revelo-blue py-2">Can I bring my own food and drinks? <div class="flex space-x-1"><button id="edit-faq-3-icon" onclick="openEditFaqModal(3, event)" class="p-1 rounded-full hover:bg-gray-200"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-600"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" /></svg></button><button onclick="removeFaq(3, event)" class="p-1 rounded-full hover:bg-gray-200"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-red-600"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg></button></div></summary><div class="pb-2 pt-1 pl-2"><p class="text-gray-700">Outside food and drinks are not permitted inside the venue. There will be a variety of food trucks and stalls available on-site.</p></div></details>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals Container -->
+    <div id="modal-backdrop" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40"></div>
+    
+    <div id="edit-poster-modal" class="modal hidden fixed inset-0 flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-lg p-6 space-y-4">
+            <h3 class="font-bold text-xl revelo-blue">Edit Poster</h3>
+            <div class="border-2 border-dashed border-gray-300 rounded-lg p-10 text-center">
+                <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true"><path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                <p class="mt-2 text-sm text-gray-600">Drag & drop image or <button onclick="alert('Simulating file browser...')" class="font-medium revelo-blue hover:revelo-orange">browse files</button></p>
+            </div>
+             <div class="flex justify-end space-x-2"><button onclick="closeAllModals()" class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg">Cancel</button><button onclick="savePoster()" class="px-4 py-2 font-bold bg-revelo-blue text-white rounded-lg">Save Changes</button></div>
+        </div>
+    </div>
+
+    <div id="edit-info-block-modal" class="modal hidden fixed inset-0 flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-lg p-6 space-y-4">
+            <h3 class="font-bold text-xl revelo-blue">Edit Event Information</h3>
+            <div><label class="font-semibold text-gray-700">Event Type</label><input id="modal-event-type" type="text" class="w-full p-2 border rounded-md mt-1"></div>
+            <div><label class="font-semibold text-gray-700">Event Name</label><input id="modal-event-name" type="text" class="w-full p-2 border rounded-md mt-1"></div>
+            <div class="flex space-x-4">
+                <div class="flex-1"><label class="font-semibold text-gray-700">Start Date</label><input id="modal-event-start-date" type="date" class="w-full p-2 border rounded-md mt-1"></div>
+                <div class="flex-1"><label class="font-semibold text-gray-700">End Date</label><input id="modal-event-end-date" type="date" class="w-full p-2 border rounded-md mt-1"></div>
+            </div>
+            <div><label class="font-semibold text-gray-700">Event Location</label><input id="modal-event-location" type="text" class="w-full p-2 border rounded-md mt-1"></div>
+            <div class="flex justify-end space-x-2"><button onclick="closeAllModals()" class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg">Cancel</button><button onclick="saveMainInfo()" class="px-4 py-2 font-bold bg-revelo-blue text-white rounded-lg">Save Changes</button></div>
+        </div>
+    </div>
+    
+    <div id="edit-about-modal" class="modal hidden fixed inset-0 flex items-center justify-center p-4 z-50">
+         <div class="bg-white rounded-lg shadow-xl w-full max-w-lg p-6 space-y-4">
+            <h3 class="font-bold text-xl revelo-blue">Edit About Section</h3>
+            <textarea id="modal-about-text" rows="10" class="w-full p-2 border rounded-md"></textarea>
+            <div class="flex justify-end space-x-2"><button onclick="closeAllModals()" class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg">Cancel</button><button onclick="saveAbout()" class="px-4 py-2 font-bold bg-revelo-blue text-white rounded-lg">Save Changes</button></div>
+        </div>
+    </div>
+
+    <div id="edit-list-modal" class="modal hidden fixed inset-0 flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-lg p-6 space-y-4">
+            <h3 id="edit-list-title" class="font-bold text-xl revelo-blue">Edit List</h3>
+            <div id="edit-list-items" class="space-y-2 max-h-60 overflow-y-auto"></div>
+            <div class="flex items-center space-x-2"><input id="edit-list-new-item" type="text" class="w-full p-2 border rounded-md" placeholder="Add new item..."><button onclick="addNewListItem()" class="px-4 py-2 font-bold bg-revelo-blue text-white rounded-lg">Add</button></div>
+            <div class="flex justify-end space-x-2"><button onclick="closeAllModals()" class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg">Cancel</button><button onclick="saveList()" class="px-4 py-2 font-bold bg-revelo-blue text-white rounded-lg">Save Changes</button></div>
+        </div>
+    </div>
+
+    <div id="flag-review-modal" class="modal hidden fixed inset-0 flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-lg p-6 space-y-4">
+            <h3 class="font-bold text-xl revelo-blue">Challenge Review</h3>
+            <p class="text-gray-600">Please provide a reason for challenging this review. This will be recorded and sent to the platform administrators.</p>
+            <textarea id="flag-reason-text" rows="5" class="w-full p-2 border rounded-md" placeholder="e.g., This review contains misinformation..."></textarea>
+            <div class="flex justify-end space-x-2"><button onclick="closeAllModals()" class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg">Cancel</button><button onclick="submitFlag()" class="px-4 py-2 font-bold bg-revelo-orange text-white rounded-lg">Submit Challenge</button></div>
+        </div>
+    </div>
+
+    <div id="edit-faq-modal" class="modal hidden fixed inset-0 flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-lg p-6 space-y-4">
+            <h3 class="font-bold text-xl revelo-blue">Edit FAQ</h3>
+            <input type="hidden" id="edit-faq-id">
+            <div><label class="font-semibold text-gray-700">Question</label><input id="modal-faq-question" type="text" class="w-full p-2 border rounded-md mt-1"></div>
+            <div><label class="font-semibold text-gray-700">Answer</label><textarea id="modal-faq-answer" rows="4" class="w-full p-2 border rounded-md mt-1"></textarea></div>
+            <div class="flex justify-end space-x-2"><button onclick="closeAllModals()" class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg">Cancel</button><button onclick="saveFaq()" class="px-4 py-2 font-bold bg-revelo-blue text-white rounded-lg">Save Changes</button></div>
+        </div>
+    </div>
+
+    <script>
+        // --- STATE MANAGEMENT ---
+        let originalState = {};
+        let editedState = {};
+
+        // --- TAB SWITCHING ---
+        function switchTab(targetId) {
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.add('hidden'));
+            document.querySelectorAll('.tab-button').forEach(button => button.classList.remove('organizer-tab-active'));
+            
+            document.getElementById(targetId)?.classList.remove('hidden');
+            document.querySelector(`[onclick="switchTab('${targetId}')"]`)?.classList.add('organizer-tab-active');
+        }
+
+        // --- MODAL MANAGEMENT ---
+        const modalBackdrop = document.getElementById('modal-backdrop');
+        const allModals = document.querySelectorAll('.modal');
+        let currentModal = null;
+        let currentListType = ''; // 'artists' or 'tags'
+        let currentReviewId = null;
+        let editingUpdateId = null; 
+
+        function openModal(modalId) {
+            closeAllModals();
+            currentModal = document.getElementById(modalId);
+            if (!currentModal) return;
+
+            if (modalId === 'edit-info-block-modal') populateInfoBlockModal();
+            if (modalId === 'edit-about-modal') populateAboutModal();
+            
+            modalBackdrop.classList.remove('hidden');
+            currentModal.classList.remove('hidden');
+        }
+
+        function closeAllModals() {
+            allModals.forEach(modal => modal.classList.add('hidden'));
+            modalBackdrop.classList.add('hidden');
+            currentModal = null;
+        }
+
+        // --- CHANGE DETECTION & UI UPDATE ---
+        function checkForChanges() {
+            const hasChanges = Object.keys(editedState).length > 0;
+            const publishBtn = document.getElementById('publish-changes-btn');
+            const cancelBtn = document.getElementById('cancel-changes-btn');
+
+            publishBtn.disabled = !hasChanges;
+            cancelBtn.disabled = !hasChanges;
+        }
+        
+        function markAsEdited(section, id = null) {
+            const key = id ? `${section}-${id}` : section;
+            editedState[key] = true;
+            const iconId = id ? `edit-${section}-${id}-icon` : `edit-${section}-icon`;
+            const icon = document.getElementById(iconId);
+            
+            if(icon) {
+                icon.classList.add('revelo-orange');
+                icon.querySelector('svg')?.classList.add('revelo-orange');
+            }
+
+            // Add orange dot logic
+            let dotId;
+            switch(section) {
+                case 'info':
+                    document.getElementById('info-change-dot')?.classList.add('visible');
+                    break;
+                case 'poster':
+                    // No specific dot for poster, but it's a change.
+                    break;
+                case 'about':
+                case 'artists':
+                case 'tags':
+                    dotId = 'details-tab-dot';
+                    break;
+                case 'updates':
+                case 'update': // for individual update edits
+                     dotId = 'updates-tab-dot';
+                     break;
+                case 'faq':
+                     dotId = 'faq-tab-dot';
+                     break;
+            }
+            if (dotId) {
+                document.getElementById(dotId)?.classList.add('visible');
+            }
+
+            checkForChanges();
+        }
+        
+        function cancelChanges() {
+            if (originalState.mainInfo) {
+                const block = document.getElementById('main-details-block');
+                block.querySelector('p').textContent = originalState.mainInfo.type;
+                block.querySelector('h2').childNodes[0].nodeValue = originalState.mainInfo.name;
+                block.querySelectorAll('p span')[0].textContent = originalState.mainInfo.dates;
+                block.querySelectorAll('p span')[1].textContent = originalState.mainInfo.location;
+            }
+            if (originalState.about) document.getElementById('about-content').innerHTML = originalState.about;
+            if (originalState.artists) document.getElementById('artists-content').innerHTML = originalState.artists;
+            if (originalState.tags) document.getElementById('tags-content').innerHTML = originalState.tags;
+            if (originalState.updates) document.getElementById('updates-content').innerHTML = originalState.updates;
+            if (originalState.faq) document.getElementById('faq-content').innerHTML = originalState.faq;
+            
+            document.querySelectorAll('.revelo-orange').forEach(el => el.classList.remove('revelo-orange'));
+            document.querySelectorAll('.change-dot').forEach(dot => dot.classList.remove('visible'));
+
+            editedState = {};
+            checkForChanges();
+        }
+
+        // --- DATA POPULATION & SAVING ---
+        function savePoster() {
+            markAsEdited('poster');
+            closeAllModals();
+        }
+
+        function populateInfoBlockModal() {
+            document.getElementById('modal-event-type').value = originalState.mainInfo.type;
+            document.getElementById('modal-event-name').value = originalState.mainInfo.name;
+            const dates = originalState.mainInfo.dates.split('-')[0].trim();
+            const date = new Date(dates + ", 2025");
+            document.getElementById('modal-event-start-date').valueAsDate = date;
+            document.getElementById('modal-event-end-date').valueAsDate = new Date(date.getTime() + 86400000);
+            document.getElementById('modal-event-location').value = originalState.mainInfo.location;
+        }
+
+        function saveMainInfo() {
+            markAsEdited('info');
+            const block = document.getElementById('main-details-block');
+            block.querySelector('p').textContent = document.getElementById('modal-event-type').value;
+            block.querySelector('h2').childNodes[0].nodeValue = document.getElementById('modal-event-name').value;
+            
+            const startDateValue = new Date(document.getElementById('modal-event-start-date').value);
+            const endDateValue = new Date(document.getElementById('modal-event-end-date').value);
+
+            startDateValue.setMinutes(startDateValue.getMinutes() + startDateValue.getTimezoneOffset());
+            endDateValue.setMinutes(endDateValue.getMinutes() + endDateValue.getTimezoneOffset());
+
+            let formattedDate;
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+
+            if (startDateValue.getTime() === endDateValue.getTime()) {
+                formattedDate = startDateValue.toLocaleDateString('en-US', options);
+            } else {
+                const startMonth = startDateValue.toLocaleString('en-US', { month: 'long' });
+                const endMonth = endDateValue.toLocaleString('en-US', { month: 'long' });
+                if (startMonth === endMonth && startDateValue.getFullYear() === endDateValue.getFullYear()) {
+                    formattedDate = `${startMonth} ${startDateValue.getDate()}-${endDateValue.getDate()}, ${endDateValue.getFullYear()}`;
+                } else {
+                    formattedDate = `${startDateValue.toLocaleDateString('en-US', options)} - ${endDateValue.toLocaleDateString('en-US', options)}`;
+                }
+            }
+            
+            block.querySelectorAll('p span')[0].textContent = formattedDate;
+            block.querySelectorAll('p span')[1].textContent = document.getElementById('modal-event-location').value;
+            closeAllModals();
+        }
+
+        function populateAboutModal() {
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = originalState.about.replace(/<br\s*[\/]?>/gi, "\n");
+            document.getElementById('modal-about-text').value = tempDiv.textContent || "";
+        }
+        function saveAbout() {
+            markAsEdited('about');
+            document.getElementById('about-content').innerHTML = document.getElementById('modal-about-text').value.replace(/\n/g, "<br>");
+            closeAllModals();
+        }
+
+        function handleOpenListModal(type) {
+            currentListType = type;
+            populateListModal(type === 'artists' ? 'Artists & Instructors' : 'Tags');
+            openModal('edit-list-modal');
+        }
+
+        function populateListModal(title) {
+            document.getElementById('edit-list-title').textContent = `Edit ${title}`;
+            const container = document.getElementById('edit-list-items');
+            container.innerHTML = '';
+            const sourceId = currentListType === 'artists' ? 'artists-content' : 'tags-content';
+            const items = Array.from(document.getElementById(sourceId).children);
+            items.forEach((item) => {
+                const div = document.createElement('div');
+                div.className = 'flex items-center justify-between bg-gray-100 p-2 rounded';
+                div.innerHTML = `<span>${item.textContent}</span><button onclick="this.parentElement.remove()" class="text-red-500 font-bold text-xl">&times;</button>`;
+                container.appendChild(div);
+            });
+        }
+
+        function addNewListItem() {
+            const input = document.getElementById('edit-list-new-item');
+            if (input.value.trim() === '') return;
+            const container = document.getElementById('edit-list-items');
+            const div = document.createElement('div');
+            div.className = 'flex items-center justify-between bg-gray-100 p-2 rounded';
+            div.innerHTML = `<span>${input.value.trim()}</span><button onclick="this.parentElement.remove()" class="text-red-500 font-bold text-xl">&times;</button>`;
+            container.appendChild(div);
+            input.value = '';
+        }
+
+        function saveList() {
+            markAsEdited(currentListType);
+            const sourceId = currentListType === 'artists' ? 'artists-content' : 'tags-content';
+            const contentDiv = document.getElementById(sourceId);
+            contentDiv.innerHTML = '';
+            const items = document.getElementById('edit-list-items').querySelectorAll('span');
+            items.forEach(item => {
+                let newEl;
+                if (currentListType === 'artists') {
+                    newEl = document.createElement('li');
+                    newEl.textContent = item.textContent;
+                } else {
+                    newEl = document.createElement('span');
+                    newEl.className = 'bg-gray-200 text-gray-700 text-sm font-semibold px-3 py-1 rounded-full';
+                    newEl.textContent = item.textContent;
+                }
+                contentDiv.appendChild(newEl);
+            });
+            closeAllModals();
+        }
+
+        // Review Management
+        function openFlagModal(reviewId) {
+            currentReviewId = reviewId;
+            openModal('flag-review-modal');
+        }
+
+        function submitFlag() {
+            const reason = document.getElementById('flag-reason-text').value;
+            if (reason.trim() === '') return;
+            
+            const reviewElement = document.querySelector(`[data-review-id='${currentReviewId}']`);
+            if (!reviewElement) return;
+
+            const reviewText = reviewElement.querySelector('p.text-gray-700').textContent;
+            const reviewAuthor = reviewElement.querySelector('p.text-sm.font-semibold').textContent;
+            const challengedContainer = document.getElementById('challenged-reviews-content');
+            
+            const newChallengedReviewHTML = `...`; // Same as before
+            
+            challengedContainer.insertAdjacentHTML('beforeend', newChallengedReviewHTML);
+            reviewElement.remove();
+            closeAllModals();
+        }
+        
+        function publishResponse(reviewId) {
+            const reviewElement = document.querySelector(`[data-review-id='${reviewId}']`);
+            const textarea = reviewElement.querySelector('textarea');
+            if (textarea.value.trim() === '') return;
+            const responseContainer = textarea.parentElement;
+            responseContainer.innerHTML = `<p class="text-sm font-bold revelo-blue">Your Response:</p><p class="text-sm text-gray-600">${textarea.value}</p>`;
+        }
+
+        // --- UPDATES & FAQ MANAGEMENT ---
+        function deleteUpdate(updateId) {
+            if (confirm('Are you sure you want to delete this update?')) {
+                document.querySelector(`[data-update-id='${updateId}']`).remove();
+                markAsEdited('updates');
+            }
+        }
+
+        function editUpdate(updateId) {
+            const updateElement = document.querySelector(`[data-update-id='${updateId}']`);
+            if (!updateElement) return;
+            document.getElementById('updates').parentElement.scrollTop = 0;
+            editingUpdateId = updateId;
+            document.getElementById('new-update-title').value = updateElement.querySelector('h3').textContent;
+            document.getElementById('new-update-desc').value = updateElement.querySelector('p.text-gray-700').textContent;
+            document.getElementById('new-update-title').focus();
+
+            const buttonContainer = document.getElementById('update-button-container');
+            buttonContainer.innerHTML = `
+                <button onclick="cancelUpdateEdit()" class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg">Cancel</button>
+                <button onclick="saveUpdate()" class="px-4 py-2 font-bold bg-revelo-blue text-white rounded-lg">Save Changes</button>
+            `;
+        }
+
+        function saveUpdate() {
+            if (!editingUpdateId) return;
+            const updateElement = document.querySelector(`[data-update-id='${editingUpdateId}']`);
+            if (!updateElement) return;
+
+            updateElement.querySelector('h3').textContent = document.getElementById('new-update-title').value;
+            updateElement.querySelector('p.text-gray-700').textContent = document.getElementById('new-update-desc').value;
+            
+            markAsEdited('update', editingUpdateId);
+            cancelUpdateEdit();
+        }
+
+        function cancelUpdateEdit() {
+            editingUpdateId = null;
+            document.getElementById('new-update-title').value = '';
+            document.getElementById('new-update-desc').value = '';
+            document.getElementById('update-button-container').innerHTML = `<button onclick="postUpdate()" class="px-4 py-2 font-bold bg-revelo-blue text-white rounded-lg">Post Update</button>`;
+        }
+        
+        function postUpdate() {
+            markAsEdited('updates');
+            cancelUpdateEdit();
+        }
+
+        function openEditFaqModal(faqId, event) {
+            event.stopPropagation();
+            const faqElement = document.querySelector(`[data-faq-id='${faqId}']`);
+            document.getElementById('edit-faq-id').value = faqId;
+            document.getElementById('modal-faq-question').value = faqElement.querySelector('summary').firstChild.textContent.trim();
+            document.getElementById('modal-faq-answer').value = faqElement.querySelector('p').textContent;
+            openModal('edit-faq-modal');
+        }
+
+        function saveFaq() {
+            const faqId = document.getElementById('edit-faq-id').value;
+            const faqElement = document.querySelector(`[data-faq-id='${faqId}']`);
+            faqElement.querySelector('summary').firstChild.textContent = document.getElementById('modal-faq-question').value;
+            faqElement.querySelector('p').textContent = document.getElementById('modal-faq-answer').value;
+            markAsEdited('faq', faqId);
+            closeAllModals();
+        }
+
+        function removeFaq(faqId, event) {
+            event.stopPropagation();
+            if (confirm('Are you sure you want to delete this FAQ?')) {
+                document.querySelector(`[data-faq-id='${faqId}']`).remove();
+                markAsEdited('faq');
+            }
+        }
+
+        function addFaq() {
+            markAsEdited('faq');
+            document.getElementById('new-faq-question').value = '';
+            document.getElementById('new-faq-answer').value = '';
+        }
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const block = document.getElementById('main-details-block');
+            originalState.mainInfo = {
+                type: block.querySelector('p').textContent,
+                name: block.querySelector('h2').childNodes[0].nodeValue.trim(),
+                dates: block.querySelectorAll('p span')[0].textContent,
+                location: block.querySelectorAll('p span')[1].textContent
+            };
+            originalState.about = document.getElementById('about-content').innerHTML;
+            originalState.artists = document.getElementById('artists-content').innerHTML;
+            originalState.tags = document.getElementById('tags-content').innerHTML;
+            originalState.updates = document.getElementById('updates-content').innerHTML;
+            originalState.faq = document.getElementById('faq-content').innerHTML;
+
+            switchTab('details');
+        });
+    </script>
+    <script src="organizer.js" defer></script>
+</body>
+</html>
