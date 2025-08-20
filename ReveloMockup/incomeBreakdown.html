@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revelo - Income Breakdown</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Your Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-100 antialiased text-gray-800">
+    <!-- Organizer-specific Navbar -->
+    <div id="organizer-navbar-placeholder"></div>
+
+    <!-- Main container -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-24">
+
+        <header class="flex flex-col md:flex-row justify-between items-center mb-8">
+            <div>
+                <h1 class="text-3xl font-extrabold revelo-blue">Income Breakdown</h1>
+                <p class="text-gray-500">Analyze your event revenue streams.</p>
+            </div>
+            <a href="organizerDashboard.html" class="px-4 py-2 bg-revelo-blue text-white rounded-lg hover:bg-blue-800 transition duration-300 flex items-center justify-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                Organizer Dashboard
+            </a>
+        </header>
+
+        <!-- KPI Cards -->
+        <div id="kpi-cards" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <!-- KPI cards will be dynamically inserted here -->
+        </div>
+
+        <!-- Chart and Table Section -->
+        <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+            
+            <!-- Filters -->
+            <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+                <div class="w-full md:w-1/3">
+                    <label for="eventFilter" class="block text-sm font-semibold text-gray-700 mb-1">Filter by Event</label>
+                    <select id="eventFilter" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-revelo-blue">
+                        <option value="all">All Events</option>
+                        <!-- Options will be dynamically inserted here -->
+                    </select>
+                </div>
+                <div class="w-full md:w-1/3">
+                    <label for="eventSearch" class="block text-sm font-semibold text-gray-700 mb-1">Search Event</label>
+                    <input type="text" id="eventSearch" placeholder="Type to search..." class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-revelo-blue">
+                </div>
+            </div>
+
+            <!-- Bar Chart -->
+            <div class="mb-10 h-80">
+                <canvas id="incomeChart"></canvas>
+            </div>
+
+            <!-- Data Table -->
+            <div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="p-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider cursor-pointer" data-sort="event">
+                                    <div class="flex items-center">Event Name <span class="ml-2 text-revelo-blue"></span></div>
+                                </th>
+                                <th class="p-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider cursor-pointer" data-sort="totalIncome">
+                                    <div class="flex items-center">Total Income <span class="ml-2 text-revelo-blue"></span></div>
+                                </th>
+                                <th class="p-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider cursor-pointer" data-sort="netProfit">
+                                    <div class="flex items-center">Net Profit <span class="ml-2 text-revelo-blue"></span></div>
+                                </th>
+                                <th class="p-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider cursor-pointer" data-sort="taxes">
+                                    <div class="flex items-center">Taxes (IVA) <span class="ml-2 text-revelo-blue"></span></div>
+                                </th>
+                                <th class="p-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider cursor-pointer" data-sort="commissions">
+                                    <div class="flex items-center">Commissions <span class="ml-2 text-revelo-blue"></span></div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="incomeTableBody" class="divide-y divide-gray-200">
+                            <!-- Table rows will be dynamically inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- DATA SOURCE ---
+            const incomeData = [
+                { event: 'Sensuality & Essentiality', organizer: 'Bachata Sensual Events', totalIncome: 424995.50, netProfit: 322996.58, taxes: 89249.06, commissions: 12749.86 },
+                { event: 'Barcelona Summer Fest', organizer: 'Bachata Sensual Events', totalIncome: 33841.75, netProfit: 25719.73, taxes: 7106.77, commissions: 1015.25 },
+                { event: 'Winter Bachata Gala', organizer: 'Bachata Sensual Events', totalIncome: 311341.75, netProfit: 236619.73, taxes: 65381.77, commissions: 9340.25 }
+            ];
+
+            // --- DOM ELEMENTS ---
+            const kpiContainer = document.getElementById('kpi-cards');
+            const eventFilter = document.getElementById('eventFilter');
+            const eventSearch = document.getElementById('eventSearch');
+            const tableBody = document.getElementById('incomeTableBody');
+            const chartCanvas = document.getElementById('incomeChart');
+            const tableHeaders = document.querySelectorAll('th[data-sort]');
+
+            let chartInstance = null;
+            let currentSort = { column: 'totalIncome', direction: 'desc' };
+            let currentData = [...incomeData];
+
+            // --- UTILITY FUNCTIONS ---
+            const formatCurrency = (value) => `€${value.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+            // --- DATA RENDERING FUNCTIONS ---
+            const renderKpis = (data) => {
+                const totalIncome = data.reduce((sum, item) => sum + item.totalIncome, 0);
+                const totalNetProfit = data.reduce((sum, item) => sum + item.netProfit, 0);
+                const avgIncome = data.length > 0 ? totalIncome / data.length : 0;
+
+                kpiContainer.innerHTML = `
+                    <div class="bg-white p-6 rounded-lg border border-gray-200">
+                        <h3 class="text-sm font-semibold text-gray-500 uppercase">Total Income</h3>
+                        <p class="text-3xl font-extrabold revelo-blue mt-2">${formatCurrency(totalIncome)}</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg border border-gray-200">
+                        <h3 class="text-sm font-semibold text-gray-500 uppercase">Total Net Profit</h3>
+                        <p class="text-3xl font-extrabold text-green-600 mt-2">${formatCurrency(totalNetProfit)}</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg border border-gray-200">
+                        <h3 class="text-sm font-semibold text-gray-500 uppercase">Average Income / Event</h3>
+                        <p class="text-3xl font-extrabold revelo-blue mt-2">${formatCurrency(avgIncome)}</p>
+                    </div>
+                `;
+            };
+
+            const renderTable = (data) => {
+                tableBody.innerHTML = data.map(item => `
+                    <tr class="hover:bg-gray-50">
+                        <td class="p-4 whitespace-nowrap font-semibold revelo-blue">${item.event}</td>
+                        <td class="p-4 whitespace-nowrap text-gray-800 font-bold">${formatCurrency(item.totalIncome)}</td>
+                        <td class="p-4 whitespace-nowrap text-green-600">${formatCurrency(item.netProfit)}</td>
+                        <td class="p-4 whitespace-nowrap text-gray-600">${formatCurrency(item.taxes)}</td>
+                        <td class="p-4 whitespace-nowrap text-gray-600">${formatCurrency(item.commissions)}</td>
+                    </tr>
+                `).join('');
+            };
+
+            const renderChart = (data) => {
+                if (chartInstance) {
+                    chartInstance.destroy();
+                }
+                const ctx = chartCanvas.getContext('2d');
+                chartInstance = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: data.map(item => item.event),
+                        datasets: [{
+                            label: 'Total Income',
+                            data: data.map(item => item.totalIncome),
+                            backgroundColor: [
+                                'rgba(33, 60, 99, 0.8)',
+                                'rgba(245, 130, 32, 0.8)',
+                                'rgba(54, 162, 235, 0.8)'
+                            ],
+                            borderColor: [
+                                'rgba(33, 60, 99, 1)',
+                                'rgba(245, 130, 32, 1)',
+                                'rgba(54, 162, 235, 1)'
+                            ],
+                            borderWidth: 1,
+                            borderRadius: 5,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        const item = data[context.dataIndex];
+                                        return [
+                                            `Event: ${item.event}`,
+                                            `Total Income: ${formatCurrency(item.totalIncome)}`,
+                                            `Net Profit: ${formatCurrency(item.netProfit)}`,
+                                            `Taxes: ${formatCurrency(item.taxes)}`,
+                                            `Commissions: ${formatCurrency(item.commissions)}`
+                                        ];
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: (value) => formatCurrency(value)
+                                }
+                            }
+                        }
+                    }
+                });
+            };
+
+            const populateFilter = () => {
+                incomeData.forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item.event;
+                    option.textContent = item.event;
+                    eventFilter.appendChild(option);
+                });
+            };
+            
+            const updateSortIndicators = () => {
+                tableHeaders.forEach(header => {
+                    const indicator = header.querySelector('span');
+                    if (header.dataset.sort === currentSort.column) {
+                        indicator.textContent = currentSort.direction === 'asc' ? '▲' : '▼';
+                    } else {
+                        indicator.textContent = '';
+                    }
+                });
+            };
+
+            // --- DATA MANIPULATION & EVENT HANDLING ---
+            const sortData = (data, column, direction) => {
+                return [...data].sort((a, b) => {
+                    const valA = a[column];
+                    const valB = b[column];
+                    if (typeof valA === 'string') {
+                        return direction === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
+                    } else {
+                        return direction === 'asc' ? valA - valB : valB - valA;
+                    }
+                });
+            };
+
+            const applyFiltersAndRender = () => {
+                const filterValue = eventFilter.value;
+                const searchValue = eventSearch.value.toLowerCase();
+
+                let filteredData = incomeData;
+
+                if (filterValue !== 'all') {
+                    filteredData = filteredData.filter(item => item.event === filterValue);
+                }
+
+                if (searchValue) {
+                    filteredData = filteredData.filter(item => item.event.toLowerCase().includes(searchValue));
+                }
+                
+                currentData = filteredData;
+                const sortedData = sortData(currentData, currentSort.column, currentSort.direction);
+
+                renderKpis(currentData);
+                renderTable(sortedData);
+                renderChart(currentData);
+                updateSortIndicators();
+            };
+
+            tableHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const column = header.dataset.sort;
+                    const direction = currentSort.column === column && currentSort.direction === 'asc' ? 'desc' : 'asc';
+                    currentSort = { column, direction };
+                    const sortedData = sortData(currentData, column, direction);
+                    renderTable(sortedData);
+                    updateSortIndicators();
+                });
+            });
+
+            eventFilter.addEventListener('change', applyFiltersAndRender);
+            eventSearch.addEventListener('input', applyFiltersAndRender);
+            
+            // --- INITIALIZATION ---
+            populateFilter();
+            applyFiltersAndRender();
+        });
+    </script>
+    <script src="organizer.js" defer></script>
+</body>
+</html>

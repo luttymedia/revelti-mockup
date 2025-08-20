@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revelo - Event Breakdown</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
+
+    <!-- DataTables.js for advanced tables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+
+    <!-- Your Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+     <style>
+        /* Custom styles for DataTables */
+        .dt-button { background-color: #213c63 !important; color: white !important; border-radius: 0.5rem !important; padding: 0.5rem 1rem !important; margin: 0 0.25rem !important; border: none !important; }
+        .dt-button:hover { background-color: #1a3050 !important; }
+        .dataTables_wrapper .dataTables_filter input, .dataTables_wrapper .dataTables_length select { border: 1px solid #d1d5db; border-radius: 0.5rem; padding: 0.5rem; }
+        .tab-button.active { border-bottom: 3px solid #213c63; color: #213c63; font-weight: 700; }
+        .revelo-blue { color: #213c63; }
+        .bg-revelo-blue { background-color: #213c63; }
+        
+        /* Modal styles */
+        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 1000; }
+        .modal-content { background: white; padding: 2rem; border-radius: 0.5rem; width: 90%; max-width: 500px; max-height: 80vh; overflow-y: auto; position: relative; }
+    </style>
+</head>
+<body class="bg-gray-100 antialiased text-gray-800">
+    <!-- Organizer-specific Navbar -->
+    <div id="organizer-navbar-placeholder"></div>
+
+    <!-- Main container -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-24">
+
+        <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+            <div>
+                <div class="flex items-center">
+                    <h1 class="text-3xl font-extrabold revelo-blue">Sensuality & Essentiality</h1>
+                    <span class="ml-4 text-sm font-bold bg-green-100 text-green-800 px-3 py-1 rounded-full whitespace-nowrap">On Sale</span>
+                </div>
+                <p class="text-gray-600 mt-1">Insights from ticket sales, promoters, and discounts</p>
+            </div>
+            <div class="flex space-x-2 mt-4 md:mt-0">
+                <a href="eventDetailOrganizerView.html" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition duration-300">View Public Page</a>
+                <a href="liveEventEdit.html" class="px-4 py-2 bg-revelo-blue text-white rounded-lg hover:bg-blue-800 transition duration-300">Live Edit Page</a>
+            </div>
+        </header>
+
+        <div class="bg-white rounded-lg shadow-lg">
+            <!-- Tab Navigation -->
+            <nav class="border-b border-gray-200">
+                <div class="flex justify-around -mb-px">
+                    <button class="tab-button active flex-1 py-4 px-6 text-center" data-tab="sales-overview">Sales Overview</button>
+                    <button class="tab-button flex-1 py-4 px-6 text-center" data-tab="promoter-performance">Promoter Performance</button>
+                    <button class="tab-button flex-1 py-4 px-6 text-center" data-tab="pricing-discounts">Pricing & Discounts</button>
+                    <button class="tab-button flex-1 py-4 px-6 text-center" data-tab="comparative-kpis">Comparative KPIs</button>
+                    <button class="tab-button flex-1 py-4 px-6 text-center" data-tab="detailed-breakdown">Detailed Breakdown</button>
+                </div>
+            </nav>
+
+            <main class="p-6 md:p-8">
+                <!-- Sales Overview Tab -->
+                <div id="sales-overview" class="tab-content">
+                    <div id="sales-kpis" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8"></div>
+                    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+                        <div class="lg:col-span-3 bg-gray-50 p-4 rounded-lg">
+                            <h4 class="text-md font-bold text-gray-700 text-center mb-2">Ticket Sales Over Time</h4>
+                            <canvas id="salesTrendChart"></canvas>
+                        </div>
+                        <div class="lg:col-span-2 bg-gray-50 p-4 rounded-lg">
+                            <h4 class="text-md font-bold text-gray-700 text-center mb-2">Tickets by Type</h4>
+                            <canvas id="ticketsByTypeChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Promoter Performance Tab -->
+                <div id="promoter-performance" class="tab-content hidden">
+                    <div id="promoter-kpis" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8"></div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div class="bg-gray-50 p-4 rounded-lg h-96">
+                            <div class="flex items-center justify-center mb-2">
+                                <h4 class="text-md font-bold text-gray-700">Promoter Effectiveness</h4>
+                                <button class="info-btn ml-2" data-modal="promoterEffectivenessInfoModal">
+                                    <svg class="w-5 h-5 text-gray-400 hover:text-revelo-blue" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                                </button>
+                            </div>
+                            <canvas id="promoterEffectivenessChart"></canvas>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="text-md font-bold text-gray-700 text-center mb-2">Top Promoters by Tickets</h4>
+                            <canvas id="topPromotersChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pricing & Discounts Tab -->
+                <div id="pricing-discounts" class="tab-content hidden">
+                    <div id="pricing-kpis" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8"></div>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="text-md font-bold text-gray-700 text-center mb-2">Sales by Price Tier</h4>
+                            <canvas id="salesByPriceTierChart"></canvas>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="text-md font-bold text-gray-700 text-center mb-2">Discount Code Usage</h4>
+                            <canvas id="discountCodeUsageChart"></canvas>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="text-md font-bold text-gray-700 text-center mb-2">Revenue With vs. Without Discounts</h4>
+                            <canvas id="revenueWithVsWithoutDiscountsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comparative KPIs Tab -->
+                <div id="comparative-kpis" class="tab-content hidden">
+                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="text-md font-bold text-gray-700 text-center mb-2">Tickets Sold per Event</h4>
+                            <canvas id="ticketsSoldComparisonChart"></canvas>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="text-md font-bold text-gray-700 text-center mb-2">Revenue per Event</h4>
+                            <canvas id="revenueComparisonChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Detailed Breakdown Tab -->
+                <div id="detailed-breakdown" class="tab-content hidden">
+                    <div class="bg-white rounded-lg p-6 mb-8">
+                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <button data-modal="eventFilterModal" class="filter-btn w-full bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg">Filter Events</button>
+                            <button data-modal="ticketTypeFilterModal" class="filter-btn w-full bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg">Filter Ticket Types</button>
+                            <button data-modal="promoterFilterModal" class="filter-btn w-full bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg">Filter Promoters</button>
+                            <button id="resetFilters" class="w-full bg-orange-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-orange-600">Reset Filters</button>
+                        </div>
+                    </div>
+                    <table id="masterTable" class="display" style="width:100%">
+                        <thead>
+                           <tr><th>Event</th><th>Ticket Type</th><th>Ticket Price</th><th>Qty Sold</th><th>Disc. %</th><th>Disc. €</th><th>Disc. Code</th><th>Promoter</th><th>Total</th></tr>
+                        </thead>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <!-- Filter Modals -->
+    <div id="eventFilterModal" class="modal-overlay"><div class="modal-content"><button class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button><h2 class="text-xl font-bold mb-4">Filter by Event</h2><div id="eventFilterOptions"></div><button class="apply-filter mt-4 bg-revelo-blue text-white w-full py-2 rounded">Apply</button></div></div>
+    <div id="ticketTypeFilterModal" class="modal-overlay"><div class="modal-content"><button class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button><h2 class="text-xl font-bold mb-4">Filter by Ticket Type</h2><div id="ticketTypeFilterOptions"></div><button class="apply-filter mt-4 bg-revelo-blue text-white w-full py-2 rounded">Apply</button></div></div>
+    <div id="promoterFilterModal" class="modal-overlay"><div class="modal-content"><button class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button><h2 class="text-xl font-bold mb-4">Filter by Promoter</h2><div id="promoterFilterOptions"></div><button class="apply-filter mt-4 bg-revelo-blue text-white w-full py-2 rounded">Apply</button></div></div>
+    
+    <!-- Info Modals -->
+    <div id="promoterEffectivenessInfoModal" class="modal-overlay"><div class="modal-content"><button class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button><h2 class="text-xl font-bold mb-4">What is Promoter Effectiveness?</h2><p class="text-gray-600">This chart helps you evaluate your promoters. Each bubble is a promoter. <br><br><b>How far right a bubble is:</b> Shows how many tickets they sold. <br><b>How high up a bubble is:</b> Shows the average price of the tickets they sold. <br><b>The size of the bubble:</b> Shows the total revenue they generated. <br><br>Ideal promoters are high up, far to the right, and have a large bubble.</p></div></div>
+
+
+    <script>
+    $(document).ready(function() {
+        // --- DATA SOURCE (UPDATED) ---
+        const allTicketData = [
+            // Sensuality & Essentiality (21 entries)
+            { event: 'Sensuality & Essentiality', ticketType: 'Essentiality Pass', ticketPrice: 220, qtySold: 148, discPerc: 0, discEuro: 9, discountCode: 'PROD8', promoter: 'ProDancers', total: 31228, date: '2024-08-06' },
+            { event: 'Sensuality & Essentiality', ticketType: 'Sensuality Pass', ticketPrice: 190, qtySold: 294, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 55860, date: '2024-08-09' },
+            { event: 'Sensuality & Essentiality', ticketType: 'Sensuality Pass', ticketPrice: 220, qtySold: 283, discPerc: 15, discEuro: 0, discountCode: 'PART8', promoter: 'PartyPros', total: 52921, date: '2024-08-11' },
+            { event: 'Sensuality & Essentiality', ticketType: 'J&J Amateur', ticketPrice: 10, qtySold: 190, discPerc: 0, discEuro: 6, discountCode: 'PART12', promoter: 'PartyPros', total: 760, date: '2024-08-25' },
+            { event: 'Sensuality & Essentiality', ticketType: 'Essentiality Training Track', ticketPrice: 100, qtySold: 49, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 4900, date: '2024-09-08' },
+            { event: 'Sensuality & Essentiality', ticketType: 'Essentiality Training Track', ticketPrice: 100, qtySold: 130, discPerc: 0, discEuro: 7, discountCode: 'PART20', promoter: 'PartyPros', total: 12090, date: '2024-09-25' },
+            { event: 'Sensuality & Essentiality', ticketType: 'Sensuality Training Track', ticketPrice: 100, qtySold: 271, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 27100, date: '2024-10-30' },
+            { event: 'Sensuality & Essentiality', ticketType: 'J&J Pro', ticketPrice: 15, qtySold: 221, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 3315, date: '2024-11-09' },
+            { event: 'Sensuality & Essentiality', ticketType: 'J&J Amateur', ticketPrice: 10, qtySold: 146, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 1460, date: '2024-11-11' },
+            { event: 'Sensuality & Essentiality', ticketType: 'Sensuality Training Track', ticketPrice: 100, qtySold: 293, discPerc: 15, discEuro: 0, discountCode: 'DANC20', promoter: 'DanceWorld', total: 24905, date: '2024-11-18' },
+            { event: 'Sensuality & Essentiality', ticketType: 'J&J Pro', ticketPrice: 15, qtySold: 250, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 3750, date: '2024-11-21' },
+            { event: 'Sensuality & Essentiality', ticketType: 'Sensuality Training Track', ticketPrice: 100, qtySold: 31, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 3100, date: '2024-11-23' },
+            { event: 'Sensuality & Essentiality', ticketType: 'Sensuality Training Track', ticketPrice: 100, qtySold: 218, discPerc: 15, discEuro: 0, discountCode: 'DANC16', promoter: 'DanceWorld', total: 18530, date: '2024-11-28' },
+            { event: 'Sensuality & Essentiality', ticketType: 'Essentiality Training Track', ticketPrice: 100, qtySold: 260, discPerc: 5, discEuro: 0, discountCode: 'LATI16', promoter: 'LatinStars', total: 24700, date: '2024-12-10' },
+            { event: 'Sensuality & Essentiality', ticketType: 'Sensuality Pass', ticketPrice: 190, qtySold: 194, discPerc: 10, discEuro: 0, discountCode: 'PRO09', promoter: 'ProDancers', total: 33174, date: '2024-12-20' },
+            { event: 'Sensuality & Essentiality', ticketType: 'Essentiality Pass', ticketPrice: 220, qtySold: 184, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 40480, date: '2025-02-01' },
+            { event: 'Sensuality & Essentiality', ticketType: 'Essentiality Training Track', ticketPrice: 100, qtySold: 281, discPerc: 5, discEuro: 0, discountCode: 'PRO011', promoter: 'ProDancers', total: 26695, date: '2025-02-22' },
+            { event: 'Sensuality & Essentiality', ticketType: 'J&J Pro', ticketPrice: 15, qtySold: 80, discPerc: 5, discEuro: 0, discountCode: 'LATI17', promoter: 'LatinStars', total: 1140, date: '2025-03-17' },
+            { event: 'Sensuality & Essentiality', ticketType: 'J&J Amateur', ticketPrice: 10, qtySold: 107, discPerc: 5, discEuro: 0, discountCode: 'DANC18', promoter: 'DanceWorld', total: 1016.5, date: '2025-04-06' },
+            { event: 'Sensuality & Essentiality', ticketType: 'Essentiality Pass', ticketPrice: 220, qtySold: 159, discPerc: 10, discEuro: 0, discountCode: 'SENS5', promoter: 'SensualPromo', total: 31482, date: '2025-05-11' },
+            { event: 'Sensuality & Essentiality', ticketType: 'Sensuality Training Track', ticketPrice: 100, qtySold: 275, discPerc: 5, discEuro: 0, discountCode: 'PRO011', promoter: 'ProDancers', total: 26125, date: '2025-07-26' },
+
+            // Barcelona Summer Fest (9 entries)
+            { event: 'Barcelona Summer Fest', ticketType: 'J&J Amateur', ticketPrice: 10, qtySold: 294, discPerc: 0, discEuro: 6, discountCode: 'LATI9', promoter: 'LatinStars', total: 1176, date: '2024-11-15' },
+            { event: 'Barcelona Summer Fest', ticketType: 'J&J Amateur', ticketPrice: 10, qtySold: 272, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 2720, date: '2024-11-12' },
+            { event: 'Barcelona Summer Fest', ticketType: 'J&J Amateur', ticketPrice: 10, qtySold: 136, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 1360, date: '2024-12-24' },
+            { event: 'Barcelona Summer Fest', ticketType: 'J&J Amateur', ticketPrice: 10, qtySold: 79, discPerc: 0, discEuro: 10, discountCode: 'LATI9', promoter: 'LatinStars', total: 0, date: '2025-02-24' },
+            { event: 'Barcelona Summer Fest', ticketType: 'Full Pass', ticketPrice: 120, qtySold: 27, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 3240, date: '2025-06-23' },
+            { event: 'Barcelona Summer Fest', ticketType: 'Full Pass', ticketPrice: 180, qtySold: 111, discPerc: 15, discEuro: 0, discountCode: 'PROD19', promoter: 'ProDancers', total: 16983, date: '2024-08-07' },
+            { event: 'Barcelona Summer Fest', ticketType: 'J&J Pro', ticketPrice: 15, qtySold: 201, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 3015, date: '2025-01-06' },
+            { event: 'Barcelona Summer Fest', ticketType: 'J&J Pro', ticketPrice: 15, qtySold: 57, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 855, date: '2025-02-02' },
+            { event: 'Barcelona Summer Fest', ticketType: 'J&J Pro', ticketPrice: 15, qtySold: 165, discPerc: 5, discEuro: 0, discountCode: 'PART10', promoter: 'PartyPros', total: 2351.25, date: '2025-08-22' },
+
+            // Winter Bachata Gala (20 entries)
+            { event: 'Winter Bachata Gala', ticketType: 'Full Pass', ticketPrice: 180, qtySold: 225, discPerc: 15, discEuro: 0, discountCode: 'DANC9', promoter: 'DanceWorld', total: 34425, date: '2024-11-06' },
+            { event: 'Winter Bachata Gala', ticketType: 'Full Pass', ticketPrice: 180, qtySold: 233, discPerc: 5, discEuro: 0, discountCode: 'SENS11', promoter: 'SensualPromo', total: 39843, date: '2024-12-09' },
+            { event: 'Winter Bachata Gala', ticketType: 'Full Pass', ticketPrice: 180, qtySold: 209, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 37620, date: '2024-11-03' },
+            { event: 'Winter Bachata Gala', ticketType: 'Full Pass', ticketPrice: 200, qtySold: 248, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 49600, date: '2025-02-11' },
+            { event: 'Winter Bachata Gala', ticketType: 'Party Pass', ticketPrice: 25, qtySold: 39, discPerc: 5, discEuro: 0, discountCode: 'PROD7', promoter: 'ProDancers', total: 926.25, date: '2024-08-02' },
+            { event: 'Winter Bachata Gala', ticketType: 'Party Pass', ticketPrice: 35, qtySold: 270, discPerc: 10, discEuro: 0, discountCode: 'SENS16', promoter: 'SensualPromo', total: 8505, date: '2025-02-27' },
+            { event: 'Winter Bachata Gala', ticketType: 'Party Pass', ticketPrice: 25, qtySold: 210, discPerc: 15, discEuro: 0, discountCode: 'DANC15', promoter: 'DanceWorld', total: 4462.5, date: '2025-03-08' },
+            { event: 'Winter Bachata Gala', ticketType: 'Party Pass', ticketPrice: 20, qtySold: 170, discPerc: 5, discEuro: 0, discountCode: 'LATI15', promoter: 'LatinStars', total: 3230, date: '2025-05-26' },
+            { event: 'Winter Bachata Gala', ticketType: 'J&J Amateur', ticketPrice: 10, qtySold: 134, discPerc: 0, discEuro: 10, discountCode: 'PART8', promoter: 'PartyPros', total: 0, date: '2024-09-19' },
+            { event: 'Winter Bachata Gala', ticketType: 'J&J Amateur', ticketPrice: 10, qtySold: 108, discPerc: 15, discEuro: 0, discountCode: 'PART10', promoter: 'PartyPros', total: 918, date: '2024-10-18' },
+            { event: 'Winter Bachata Gala', ticketType: 'J&J Pro', ticketPrice: 15, qtySold: 127, discPerc: 15, discEuro: 0, discountCode: 'PART14', promoter: 'PartyPros', total: 1619.25, date: '2024-08-30' },
+            { event: 'Winter Bachata Gala', ticketType: 'J&J Pro', ticketPrice: 15, qtySold: 222, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 3330, date: '2024-11-24' },
+            { event: 'Winter Bachata Gala', ticketType: 'J&J Pro', ticketPrice: 15, qtySold: 218, discPerc: 0, discEuro: 5, discountCode: 'DANC10', promoter: 'DanceWorld', total: 2180, date: '2025-08-07' },
+            { event: 'Winter Bachata Gala', ticketType: 'J&J Pro', ticketPrice: 15, qtySold: 181, discPerc: 0, discEuro: 5, discountCode: 'LATI14', promoter: 'LatinStars', total: 1810, date: '2025-04-21' },
+            { event: 'Winter Bachata Gala', ticketType: 'J&J Pro', ticketPrice: 15, qtySold: 184, discPerc: 15, discEuro: 0, discountCode: 'LATI12', promoter: 'LatinStars', total: 2346, date: '2024-10-06' },
+            { event: 'Winter Bachata Gala', ticketType: 'Training Track', ticketPrice: 120, qtySold: 261, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 31320, date: '2024-08-28' },
+            { event: 'Winter Bachata Gala', ticketType: 'Training Track', ticketPrice: 120, qtySold: 119, discPerc: 0, discEuro: 6, discountCode: 'DANC6', promoter: 'DanceWorld', total: 13566, date: '2025-02-13' },
+            { event: 'Winter Bachata Gala', ticketType: 'Training Track', ticketPrice: 120, qtySold: 262, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 31440, date: '2025-06-04' },
+            { event: 'Winter Bachata Gala', ticketType: 'Training Track', ticketPrice: 120, qtySold: 224, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 26880, date: '2025-07-13' },
+            { event: 'Winter Bachata Gala', ticketType: 'Training Track', ticketPrice: 100, qtySold: 152, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 15200, date: '2024-12-06' }
+        ];
+        
+        const mainEventData = allTicketData.filter(d => d.event === 'Sensuality & Essentiality');
+        const bachataSensualEvents = allTicketData.filter(d => ['Sensuality & Essentiality', 'Barcelona Summer Fest', 'Winter Bachata Gala'].includes(d.event));
+
+        let charts = {};
+        const chartColors = ['#213c63', '#f58220', '#36a2eb', '#ffcd56', '#4bc0c0', '#9966ff', '#ff9f40'];
+
+        // --- TAB SWITCHING ---
+        $('.tab-button').on('click', function() {
+            $('.tab-button').removeClass('active');
+            $(this).addClass('active');
+            $('.tab-content').addClass('hidden');
+            const tabId = $(this).data('tab');
+            $('#' + tabId).removeClass('hidden');
+
+            switch(tabId) {
+                case 'sales-overview':
+                    renderSalesOverview();
+                    break;
+                case 'promoter-performance':
+                    renderPromoterPerformance();
+                    break;
+                case 'pricing-discounts':
+                    renderPricingAndDiscounts();
+                    break;
+                case 'comparative-kpis':
+                    renderComparativeKpis();
+                    break;
+            }
+        });
+
+        // --- CHARTING ---
+        function createChart(canvasElement, type, data, options) {
+            const id = $(canvasElement).attr('id');
+            if (charts[id]) {
+                charts[id].destroy();
+            }
+            const ctx = canvasElement.getContext('2d');
+            charts[id] = new Chart(ctx, { type, data, options });
+        }
+        
+        function generateColors(num) {
+            const colors = [];
+            for (let i = 0; i < num; i++) {
+                colors.push(chartColors[i % chartColors.length]);
+            }
+            return colors;
+        }
+
+        // --- SALES OVERVIEW ---
+        function renderSalesOverview() {
+            const totalTickets = mainEventData.reduce((sum, d) => sum + d.qtySold, 0);
+            const totalRevenue = mainEventData.reduce((sum, d) => sum + d.total, 0);
+            $('#sales-kpis').html(`
+                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">Total Tickets Sold</h3><p class="text-3xl font-bold revelo-blue">${totalTickets}</p></div>
+                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">Total Revenue</h3><p class="text-3xl font-bold revelo-blue">€${totalRevenue.toLocaleString('de-DE', {minimumFractionDigits: 2})}</p></div>
+                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">Avg. Ticket Price</h3><p class="text-3xl font-bold revelo-blue">€${(totalRevenue/totalTickets).toFixed(2)}</p></div>
+            `);
+            
+            const salesByMonth = mainEventData.reduce((acc, d) => {
+                 const month = new Date(d.date).toLocaleString('default', { month: 'short', year: 'numeric' });
+                 acc[month] = (acc[month] || 0) + d.qtySold;
+                 return acc;
+            }, {});
+
+            const monthLabels = [];
+            let currentDate = new Date('2024-08-01');
+            const endDate = new Date('2025-08-01');
+            while (currentDate <= endDate) {
+                monthLabels.push(currentDate.toLocaleString('default', { month: 'short', year: 'numeric' }));
+                currentDate.setMonth(currentDate.getMonth() + 1);
+            }
+            
+            const monthData = monthLabels.map(label => salesByMonth[label] || 0);
+
+            createChart($('#salesTrendChart')[0], 'bar', {
+                labels: monthLabels,
+                datasets: [{ 
+                    label: 'Tickets Sold', 
+                    data: monthData, 
+                    backgroundColor: generateColors(monthLabels.length)
+                }]
+            }, { responsive: true, plugins: { title: { display: false } } });
+
+            const salesByType = mainEventData.reduce((acc, d) => { acc[d.ticketType] = (acc[d.ticketType] || 0) + d.qtySold; return acc; }, {});
+            createChart($('#ticketsByTypeChart')[0], 'doughnut', {
+                labels: Object.keys(salesByType),
+                datasets: [{ data: Object.values(salesByType), backgroundColor: generateColors(Object.keys(salesByType).length) }]
+            }, { responsive: true, plugins: { title: { display: false } } });
+        }
+        
+        // --- PROMOTER PERFORMANCE ---
+        function renderPromoterPerformance() {
+            const promoterData = mainEventData.filter(d => d.promoter !== 'N/A');
+            const promoterSales = promoterData.reduce((acc, d) => { acc[d.promoter] = (acc[d.promoter] || 0) + d.qtySold; return acc; }, {});
+            const topPromoterName = Object.keys(promoterSales).length > 0 ? Object.entries(promoterSales).sort((a,b) => b[1]-a[1])[0][0] : 'None';
+            const promoterRevenue = promoterData.reduce((s,d) => s+d.total, 0);
+            
+            $('#promoter-kpis').html(`
+                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">Top Promoter</h3><p class="text-3xl font-bold revelo-blue">${topPromoterName}</p></div>
+                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">Promoter Revenue</h3><p class="text-3xl font-bold revelo-blue">€${promoterRevenue.toLocaleString('de-DE', {minimumFractionDigits: 2})}</p></div>
+            `);
+
+            const promoterStats = promoterData.reduce((acc, d) => {
+                if (!acc[d.promoter]) acc[d.promoter] = { tickets: 0, revenue: 0, totalDiscountValue: 0, totalOriginalValue: 0, count: 0 };
+                acc[d.promoter].tickets += d.qtySold;
+                acc[d.promoter].revenue += d.total;
+                const discountValue = d.discPerc > 0 ? (d.ticketPrice * d.discPerc / 100) * d.qtySold : d.discEuro * d.qtySold;
+                acc[d.promoter].totalDiscountValue += discountValue;
+                acc[d.promoter].totalOriginalValue += d.ticketPrice * d.qtySold;
+                acc[d.promoter].count++;
+                return acc;
+            }, {});
+
+            const bubbleData = Object.entries(promoterStats).map(([promoter, stats], index) => {
+                const avgRevenuePerTicket = stats.tickets > 0 ? stats.revenue / stats.tickets : 0;
+                return {
+                    label: promoter,
+                    data: [{ 
+                        x: stats.tickets, 
+                        y: avgRevenuePerTicket, 
+                        r: stats.revenue / 4000 // Bubble size is based on total revenue
+                    }],
+                    backgroundColor: chartColors[index % chartColors.length]
+                }
+            });
+            
+            createChart($('#promoterEffectivenessChart')[0], 'bubble', { datasets: bubbleData }, { 
+                responsive: true, 
+                maintainAspectRatio: false, 
+                scales: { 
+                    x: { title: { display: true, text: 'Tickets Sold' } }, 
+                    y: { title: { display: true, text: 'Average Revenue per Ticket (€)' } } 
+                },
+                plugins: { 
+                    legend: { display: false },
+                    title: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const promoterName = context.dataset.label;
+                                const stats = promoterStats[promoterName];
+                                if (!stats) return '';
+                                
+                                const avgRevenue = (stats.revenue / stats.tickets).toFixed(2);
+                                const avgDiscount = (stats.totalOriginalValue > 0 ? (stats.totalDiscountValue / stats.totalOriginalValue) * 100 : 0).toFixed(2);
+
+                                return [
+                                    `${promoterName}`,
+                                    `Tickets Sold: ${stats.tickets}`,
+                                    `Total Revenue: €${stats.revenue.toLocaleString('de-DE', {minimumFractionDigits: 2})}`,
+                                    `Avg Revenue/Ticket: €${avgRevenue}`,
+                                    `Avg Discount: ${avgDiscount}%`
+                                ];
+                            }
+                        }
+                    }
+                } 
+            });
+
+            const sortedPromoters = Object.entries(promoterSales).sort((a,b) => b[1]-a[1]);
+            createChart($('#topPromotersChart')[0], 'bar', {
+                labels: sortedPromoters.map(p => p[0]),
+                datasets: [{ label: 'Tickets Sold', data: sortedPromoters.map(p => p[1]), backgroundColor: generateColors(sortedPromoters.length) }]
+            }, { responsive: true, plugins: { title: { display: false } } });
+        }
+
+        // --- PRICING & DISCOUNTS ---
+        function renderPricingAndDiscounts() {
+            const discountedTickets = mainEventData.filter(d => (d.discPerc > 0) || (d.discEuro > 0));
+            const totalDiscountValue = mainEventData.reduce((sum, d) => {
+                const discount = d.discPerc > 0 ? (d.ticketPrice * d.discPerc / 100) * d.qtySold : d.discEuro * d.qtySold;
+                return sum + discount;
+            }, 0);
+
+            $('#pricing-kpis').html(`
+                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">% Sold with Discount</h3><p class="text-3xl font-bold revelo-blue">${((discountedTickets.reduce((sum, d) => sum + d.qtySold, 0) / mainEventData.reduce((sum, d) => sum + d.qtySold, 0)) * 100).toFixed(1)}%</p></div>
+                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">Total Discount Value</h3><p class="text-3xl font-bold revelo-blue">€${totalDiscountValue.toLocaleString('de-DE', {minimumFractionDigits: 2})}</p></div>
+            `);
+
+            const priceTiers = mainEventData.reduce((acc, d) => {
+                const tier = d.ticketPrice < 50 ? '€0-50' : d.ticketPrice <= 150 ? '€51-150' : '€151+';
+                acc[tier] = (acc[tier] || 0) + d.qtySold;
+                return acc;
+            }, {});
+            createChart($('#salesByPriceTierChart')[0], 'bar', {
+                labels: Object.keys(priceTiers),
+                datasets: [{ label: 'Tickets Sold', data: Object.values(priceTiers), backgroundColor: generateColors(Object.keys(priceTiers).length) }]
+            }, { responsive: true, plugins: { title: { display: false } } });
+            
+            const discountUsage = discountedTickets.reduce((acc, d) => { acc[d.discountCode] = (acc[d.discountCode] || 0) + d.qtySold; return acc; }, {});
+            createChart($('#discountCodeUsageChart')[0], 'pie', {
+                labels: Object.keys(discountUsage),
+                datasets: [{ data: Object.values(discountUsage), backgroundColor: generateColors(Object.keys(discountUsage).length) }]
+            }, { responsive: true, plugins: { title: { display: false } } });
+
+            const revenueWith = discountedTickets.reduce((s,d) => s+d.total, 0);
+            // CORRECTED: The filter for "Without Discount" is now the inverse of "With Discount"
+            const revenueWithout = mainEventData.filter(d => d.discPerc === 0 && d.discEuro === 0).reduce((s,d) => s+d.total, 0);
+            createChart($('#revenueWithVsWithoutDiscountsChart')[0], 'bar', {
+                labels: ['With Discount', 'Without Discount'],
+                datasets: [{ label: 'Revenue', data: [revenueWith, revenueWithout], backgroundColor: generateColors(2) }]
+            }, { responsive: true, plugins: { title: { display: false } } });
+        }
+        
+        // --- COMPARATIVE KPIS ---
+        function renderComparativeKpis() {
+            const ticketsByEvent = bachataSensualEvents.reduce((acc, d) => { acc[d.event] = (acc[d.event] || 0) + d.qtySold; return acc; }, {});
+            createChart($('#ticketsSoldComparisonChart')[0], 'bar', {
+                labels: Object.keys(ticketsByEvent),
+                datasets: [{ label: 'Total Tickets Sold', data: Object.values(ticketsByEvent), backgroundColor: Object.keys(ticketsByEvent).map(e => e === 'Sensuality & Essentiality' ? '#f58220' : '#213c63') }]
+            }, { responsive: true, plugins: { title: { display: false } } });
+
+            const revenueByEvent = bachataSensualEvents.reduce((acc, d) => { acc[d.event] = (acc[d.event] || 0) + d.total; return acc; }, {});
+            createChart($('#revenueComparisonChart')[0], 'bar', {
+                labels: Object.keys(revenueByEvent),
+                datasets: [{ label: 'Total Revenue', data: Object.values(revenueByEvent), backgroundColor: Object.keys(revenueByEvent).map(e => e === 'Sensuality & Essentiality' ? '#f58220' : '#213c63') }]
+            }, { responsive: true, indexAxis: 'y', plugins: { title: { display: false } } });
+        }
+
+        // --- DETAILED BREAKDOWN ---
+        let masterTable;
+        function renderDetailedBreakdown(data) {
+             if (masterTable) {
+                masterTable.clear().rows.add(data).draw();
+                return;
+            }
+            masterTable = $('#masterTable').DataTable({
+                data: data,
+                columns: [
+                    { data: 'event' }, 
+                    { data: 'ticketType' },
+                    { data: 'ticketPrice', render: $.fn.dataTable.render.number(',', '.', 2, '€') },
+                    { data: 'qtySold' },
+                    { data: 'discPerc', render: (d) => d ? `${d}%` : '0%' },
+                    { data: 'discEuro', render: $.fn.dataTable.render.number(',', '.', 2, '€') },
+                    { data: 'discountCode', defaultContent: 'N/A' },
+                    { data: 'promoter' },
+                    { data: 'total', render: $.fn.dataTable.render.number(',', '.', 2, '€') }
+                ],
+                dom: 'Bfrtip',
+                buttons: ['csv', 'excel', 'pdf']
+            });
+        }
+        
+        // --- MODAL & FILTER LOGIC ---
+        function populateModal(filterId, options) {
+            const container = $(`#${filterId}Options`);
+            container.empty();
+            options.forEach(opt => {
+                container.append(`<div><input type="checkbox" id="${filterId}-${opt.replace(/\s+/g, '-')}" value="${opt}" class="mr-2"><label for="${filterId}-${opt.replace(/\s+/g, '-')}">${opt}</label></div>`);
+            });
+        }
+
+        populateModal('eventFilter', [...new Set(allTicketData.map(item => item.event))]);
+        populateModal('ticketTypeFilter', [...new Set(allTicketData.map(item => item.ticketType))]);
+        populateModal('promoterFilter', [...new Set(allTicketData.map(item => item.promoter))].filter(p => p !== 'N/A'));
+
+        $('.filter-btn, .info-btn').on('click', function() { $(`#${$(this).data('modal')}`).css('display', 'flex'); });
+        $('.modal-overlay').on('click', function(e) { if (e.target === this) $(this).hide(); });
+        $('.close-modal').on('click', function() { $(this).closest('.modal-overlay').hide(); });
+        $('.apply-filter').on('click', function() { 
+            $(this).closest('.modal-overlay').hide(); 
+            applyAllFilters(); 
+        });
+
+        function applyAllFilters() {
+            const getSelected = (modalId) => $(`#${modalId}Options input:checked`).map((_, el) => $(el).val()).get();
+            const selectedEvents = getSelected('eventFilter');
+            const selectedTypes = getSelected('ticketTypeFilter');
+            const selectedPromoters = getSelected('promoterFilter');
+
+            const filteredData = allTicketData.filter(item => {
+                const eventMatch = selectedEvents.length === 0 || selectedEvents.includes(item.event);
+                const typeMatch = selectedTypes.length === 0 || selectedTypes.includes(item.ticketType);
+                const promoterMatch = selectedPromoters.length === 0 || selectedPromoters.includes(item.promoter);
+                return eventMatch && typeMatch && promoterMatch;
+            });
+            renderDetailedBreakdown(filteredData);
+        }
+
+        $('#resetFilters').on('click', function() {
+            $('.modal-content input').prop('checked', false);
+            applyAllFilters();
+        });
+
+
+        // --- INITIALIZE ---
+        renderSalesOverview(); // Only render the visible tab's charts
+        renderDetailedBreakdown(bachataSensualEvents);
+    });
+    </script>
+    <script src="organizer.js" defer></script>
+</body>
+</html>
