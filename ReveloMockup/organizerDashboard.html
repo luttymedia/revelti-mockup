@@ -42,9 +42,9 @@
             <!-- Tab Navigation -->
             <nav class="border-b border-gray-200">
                 <div class="flex">
-                    <button onclick="switchTab('stats')" class="tab-button flex-1 py-4 px-1 text-center text-gray-500 hover:revelo-blue font-semibold transition duration-300 organizer-tab-active">Quick Stats</button>
-                    <button onclick="switchTab('events')" class="tab-button flex-1 py-4 px-1 text-center text-gray-500 hover:revelo-blue font-semibold transition duration-300">Events</button>
-                    <button onclick="switchTab('manage')" class="tab-button flex-1 py-4 px-1 text-center text-gray-500 hover:revelo-blue font-semibold transition duration-300">Manage</button>
+                    <button onclick="switchTab('events')" class="tab-button flex-1 py-4 px-1 text-center text-gray-500 hover:revelo-blue font-semibold transition duration-300 organizer-tab-active">Events</button>
+                    <button onclick="switchTab('stats')" class="tab-button flex-1 py-4 px-1 text-center text-gray-500 hover:revelo-blue font-semibold transition duration-300">Quick Stats</button>
+                    <button onclick="switchTab('overview')" class="tab-button flex-1 py-4 px-1 text-center text-gray-500 hover:revelo-blue font-semibold transition duration-300">Overview</button>
                     <button onclick="switchTab('profile')" class="tab-button flex-1 py-4 px-1 text-center text-gray-500 hover:revelo-blue font-semibold transition duration-300">Profile</button>
                 </div>
             </nav>
@@ -52,7 +52,7 @@
             <!-- Main Content Sections (Tabs) -->
             <main class="p-6 md:p-8">
                 <!-- Stats Tab -->
-                <div id="stats" class="tab-content">
+                <div id="stats" class="tab-content hidden">
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                         <!-- Main Stat Card: Total Income -->
                         <a href="incomeBreakdown.html" class="lg:col-span-2 block bg-white p-6 rounded-lg border border-gray-200 hover:shadow-xl hover:border-revelo-blue transition-all duration-300">
@@ -89,7 +89,7 @@
                 </div>
 
                 <!-- Events Tab -->
-                <div id="events" class="tab-content hidden">
+                <div id="events" class="tab-content">
                     <!-- Filters and Search -->
                     <div class="flex flex-col md:flex-row items-center justify-between mb-6">
                         <div class="relative w-full md:w-1/3 mb-4 md:mb-0">
@@ -163,27 +163,27 @@
                     </div>
                 </div>
 
-                <!-- Manage Tab -->
-                <div id="manage" class="tab-content hidden">
+                <!-- Overview Tab -->
+                <div id="overview" class="tab-content hidden">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Manage Card 1: Galleries -->
-                        <a href="#" class="block bg-gray-50 p-6 rounded-lg border border-gray-200 hover:shadow-md hover:border-revelo-blue transition-all">
-                            <h3 class="text-lg font-bold revelo-blue">Manage Galleries</h3>
-                            <p class="text-gray-600 mt-1">1,240 Total Media / 3 Ungrouped Galleries</p>
+                        <!-- Manage Card 1: Creators -->
+                        <a href="creatorsOverview.html" class="block bg-gray-50 p-6 rounded-lg border border-gray-200 hover:shadow-md hover:border-revelo-blue transition-all">
+                            <h3 class="text-lg font-bold revelo-blue">Creators Overview</h3>
+                            <p class="text-gray-600 mt-1"><strong>2</strong> Active Collaborators / <strong>2</strong> Pending Invitations</p>
                         </a>
                         <!-- Manage Card 2: Promoters -->
-                        <a href="#" class="block bg-gray-50 p-6 rounded-lg border border-gray-200 hover:shadow-md hover:border-revelo-blue transition-all">
-                            <h3 class="text-lg font-bold revelo-blue">Manage Promoters</h3>
-                            <p class="text-gray-600 mt-1">Top Promoter this month: DJ Sparkus (45 sales)</p>
+                        <a href="promotersOverview.html" class="block bg-gray-50 p-6 rounded-lg border border-gray-200 hover:shadow-md hover:border-revelo-blue transition-all">
+                            <h3 class="text-lg font-bold revelo-blue">Promoters Overview</h3>
+                            <p class="text-gray-600 mt-1">Top Promoter: <strong>PartyPros</strong></p>
                         </a>
-                        <!-- Manage Card 3: Creators -->
-                        <a href="#" class="block bg-gray-50 p-6 rounded-lg border border-gray-200 hover:shadow-md hover:border-revelo-blue transition-all">
-                            <h3 class="text-lg font-bold revelo-blue">Manage Creators</h3>
-                            <p class="text-gray-600 mt-1">5 Active Collaborators</p>
+                        <!-- Manage Card 3: Galleries -->
+                        <a href="galleriesOverview.html" class="block bg-gray-50 p-6 rounded-lg border border-gray-200 hover:shadow-md hover:border-revelo-blue transition-all">
+                            <h3 class="text-lg font-bold revelo-blue">Galleries Overview</h3>
+                            <p class="text-gray-600 mt-1"><strong>1,327</strong> Total Media Files / <strong>1</strong> Pending Approval</p>
                         </a>
                         <!-- Manage Card 4: Financials -->
                         <a href="#" class="block bg-gray-50 p-6 rounded-lg border border-gray-200 hover:shadow-md hover:border-revelo-blue transition-all">
-                            <h3 class="text-lg font-bold revelo-blue">Reports & Financials</h3>
+                            <h3 class="text-lg font-bold revelo-blue">Financial Overview</h3>
                             <p class="text-gray-600 mt-1">Next Payout: €2,150.00 on Sep 1, 2025</p>
                         </a>
                     </div>
@@ -303,7 +303,8 @@
 
         // --- Page Initialization ---
         document.addEventListener('DOMContentLoaded', () => {
-            switchTab('stats');
+            // Set "Events" as the default tab
+            switchTab('events');
             filterEvents('upcoming'); // Set initial filter for the events tab
         });
     </script>
