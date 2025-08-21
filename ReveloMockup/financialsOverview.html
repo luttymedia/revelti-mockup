@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revelo - Financials Overview</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* This rule is needed to prevent content from being hidden behind the navbar */
+        body { padding-top: 4rem; }
+        
+        /* Custom styles for pagination and sorting indicators */
+        .pagination-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        .pagination-btn.active {
+            background-color: #213c63;
+            color: white;
+        }
+        .pagination-btn:not(.active) {
+            background-color: #e5e7eb;
+            color: #374151;
+        }
+        .pagination-btn:disabled {
+            background-color: #f3f4f6;
+            color: #9ca3af;
+            cursor: not-allowed;
+        }
+        .sort-indicator {
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+        th:hover .sort-indicator {
+            opacity: 1;
+        }
+        
+        /* The accordion arrow style is already in style.css */
+
+        /* Modal styles */
+        .modal-overlay { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            bottom: 0; 
+            background: rgba(0,0,0,0.5); 
+            display: none; 
+            justify-content: center; 
+            align-items: center; 
+            z-index: 1000; 
+        }
+        .modal-content { 
+            background: white; 
+            padding: 2rem; 
+            border-radius: 0.5rem; 
+            width: 90%; 
+            max-width: 600px; 
+            max-height: 80vh; 
+            overflow-y: auto; 
+            position: relative; 
+        }
+    </style>
+</head>
+<body class="bg-gray-100 antialiased text-gray-800">
+
+    <!-- Organizer-specific Navbar -->
+    <div id="organizer-navbar-placeholder"></div>
+
+    <!-- Main container -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <header class="mb-8">
+            <nav class="text-sm mb-2" aria-label="Breadcrumb">
+                <ol class="list-none p-0 inline-flex">
+                    <li class="flex items-center">
+                        <a href="organizerDashboard.html" class="text-gray-500 hover:text-revelo-blue">Organizer Dashboard</a>
+                        <!-- Arrow SVG -->
+                        <svg class="fill-current w-3 h-3 mx-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569 9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg>
+                    </li>
+                    <li>
+                        <span class="text-gray-700 font-semibold">Financials Overview</span>
+                    </li>
+                </ol>
+            </nav>
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                 <div>
+                    <h1 class="text-3xl font-extrabold revelo-blue">Financials Overview</h1>
+                    <p class="text-gray-500 mt-1">Your deep-dive financial analysis and accounting tool.</p>
+                </div>
+                 <a href="organizerDashboard.html" class="mt-4 md:mt-0 px-4 py-2 bg-revelo-blue text-white rounded-lg hover:bg-blue-800 transition duration-300 flex items-center justify-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                    Dashboard
+                </a>
+            </div>
+        </header>
+
+        <!-- 1. Payouts & Banking Section (Collapsible) -->
+        <details class="bg-white rounded-lg shadow-lg mb-8" open>
+            <summary class="flex justify-between items-center cursor-pointer font-bold text-2xl revelo-blue p-6">
+                Payouts & Banking
+                <svg class="w-6 h-6 transform transition-transform accordion-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </summary>
+            <div class="p-6 border-t border-gray-200">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Next Payout Card -->
+                    <div id="next-payout-card" class="bg-gray-50 p-6 rounded-lg border col-span-1 md:col-span-1 flex flex-col justify-center">
+                        <h3 class="text-sm font-semibold text-gray-500 uppercase">NEXT PAYOUT</h3>
+                        <p id="next-payout-amount" class="text-4xl font-extrabold revelo-blue mt-2">€0.00</p>
+                        <p id="next-payout-date" class="text-gray-500 mt-1">Calculating...</p>
+                    </div>
+                    <!-- Payout Settings -->
+                    <div class="bg-gray-50 p-6 rounded-lg border col-span-1 md:col-span-1 flex flex-col justify-center">
+                         <h3 class="text-sm font-semibold text-gray-500 uppercase mb-2">PAYOUT SETTINGS</h3>
+                         <p class="text-gray-700 font-semibold">Bank Account ending in ••••1234</p>
+                         <button id="manage-payout-btn" class="mt-3 text-left text-sm font-bold text-revelo-orange hover:underline">Manage Payout Settings</button>
+                    </div>
+                    <!-- Payout History -->
+                    <div class="bg-gray-50 p-6 rounded-lg border col-span-1 md:col-span-1 flex flex-col justify-center items-start">
+                         <h3 class="text-sm font-semibold text-gray-500 uppercase mb-2">PAYOUT HISTORY</h3>
+                         <p class="text-gray-600 mb-3">View all your past payouts and download statements.</p>
+                         <button id="view-history-btn" class="w-full bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg hover:bg-gray-300 transition">View History</button>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- 2. Transaction Explorer Section (Collapsible) -->
+        <details class="bg-white rounded-lg shadow-lg mb-8" open>
+            <summary class="flex justify-between items-center cursor-pointer font-bold text-2xl revelo-blue p-6">
+                Transaction Explorer
+                <svg class="w-6 h-6 transform transition-transform accordion-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </summary>
+            <div class="p-6 md:p-8 border-t border-gray-200">
+                <!-- Filters -->
+                <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-6 items-end">
+                    <!-- Date Range -->
+                    <div class="flex-1 w-full md:w-auto">
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Date Range</label>
+                        <div class="flex space-x-2">
+                            <input type="date" id="explorer-startDate" class="w-1/2 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-revelo-blue">
+                            <input type="date" id="explorer-endDate" class="w-1/2 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-revelo-blue">
+                        </div>
+                    </div>
+                    <!-- Transaction Type and Buttons -->
+                    <div class="flex flex-1 items-end w-full md:w-auto">
+                        <div class="flex-1">
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Transaction Type</label>
+                            <div class="flex rounded-lg border border-gray-300">
+                                <button class="transaction-type-btn flex-1 p-2 rounded-l-lg bg-revelo-blue text-white" data-type="All">All</button>
+                                <button class="transaction-type-btn flex-1 p-2 border-l border-r border-gray-300" data-type="Sale">Sales</button>
+                                <button class="transaction-type-btn flex-1 p-2 rounded-r-lg" data-type="Refund">Refunds</button>
+                            </div>
+                        </div>
+                        <div class="flex-1 md:flex-initial pl-2 flex space-x-2">
+                            <button id="reset-table-filters-btn" class="w-full bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg hover:bg-gray-300 transition">Reset</button>
+                            <button id="exportBtn" class="w-full bg-revelo-orange text-white font-bold py-2 px-4 rounded-lg hover:bg-orange-600 transition">Export</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Transactions Table -->
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white" id="transaction-explorer-table">
+                        <thead class="bg-gray-50 border-b-2 border-gray-200">
+                            <tr id="table-header-row">
+                                <!-- Table Headers will be dynamically inserted here -->
+                            </tr>
+                        </thead>
+                        <tbody id="transactionsTableBody" class="divide-y divide-gray-200">
+                            <!-- Rows will be dynamically inserted here -->
+                            <tr>
+                                <td colspan="17" class="text-center p-4">Loading transactions...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Pagination -->
+                <div id="pagination" class="flex justify-between items-center mt-4"></div>
+            </div>
+        </details>
+
+        <!-- 3. Historical Analysis Section (Collapsible) -->
+        <details class="bg-white rounded-lg shadow-lg mb-8" open>
+            <summary class="flex justify-between items-center cursor-pointer font-bold text-2xl revelo-blue p-6">
+                Historical Analysis
+                <svg class="w-6 h-6 transform transition-transform accordion-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </summary>
+            <div class="p-6 border-t border-gray-200">
+                <div class="flex space-x-2 mb-4 justify-center">
+                    <input type="date" id="analysis-startDate" class="w-1/3 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-revelo-blue">
+                    <input type="date" id="analysis-endDate" class="w-1/3 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-revelo-blue">
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Interactive Revenue Chart -->
+                    <div class="lg:col-span-2 bg-gray-50 rounded-lg border p-6">
+                        <h3 class="text-lg font-bold text-gray-700 mb-4">Net Revenue Over Time</h3>
+                        <div class="h-80">
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+                    </div>
+                    <!-- Key Metrics Summary -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
+                        <div class="bg-gray-50 p-6 rounded-lg border">
+                            <h4 class="text-sm font-semibold text-gray-500 uppercase">Gross Sales</h4>
+                            <p id="metric-gross-sales" class="text-3xl font-extrabold revelo-blue mt-2">€0.00</p>
+                        </div>
+                         <div class="bg-gray-50 p-6 rounded-lg border">
+                            <h4 class="text-sm font-semibold text-gray-500 uppercase">Refunds</h4>
+                            <p id="metric-refunds" class="text-3xl font-extrabold text-red-600 mt-2">€0.00</p>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-lg border">
+                            <h4 class="text-sm font-semibold text-gray-500 uppercase">Platform Fees</h4>
+                            <p id="metric-platform-fees" class="text-3xl font-extrabold text-gray-700 mt-2">€0.00</p>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-lg border">
+                            <h4 class="text-sm font-semibold text-gray-500 uppercase">Net Revenue</h4>
+                            <p id="metric-net-revenue" class="text-3xl font-extrabold text-green-600 mt-2">€0.00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+    </div>
+
+    <!-- Modals -->
+    <!-- Manage Payouts Modal -->
+    <div id="managePayoutsModal" class="modal-overlay">
+        <div class="modal-content">
+            <button onclick="closeModal('managePayoutsModal')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+            <h2 class="text-xl font-bold mb-4 revelo-blue">Manage Payout Settings</h2>
+            <p class="text-gray-600 mb-4">Update your banking information for future payouts. Your current account ends in ••••1234.</p>
+            <form class="space-y-4">
+                <div>
+                    <label for="accountHolder" class="block text-sm font-semibold text-gray-700">Account Holder Name</label>
+                    <input type="text" id="accountHolder" class="mt-1 w-full p-2 border border-gray-300 rounded-lg" value="John Doe">
+                </div>
+                <div>
+                    <label for="iban" class="block text-sm font-semibold text-gray-700">IBAN</label>
+                    <input type="text" id="iban" class="mt-1 w-full p-2 border border-gray-300 rounded-lg" value="ES9121000418450200051332">
+                </div>
+                <div>
+                    <label for="bankName" class="block text-sm font-semibold text-gray-700">Bank Name</label>
+                    <input type="text" id="bankName" class="mt-1 w-full p-2 border border-gray-300 rounded-lg" value="Santander">
+                </div>
+                <div class="flex justify-end">
+                    <button type="button" onclick="closeModal('managePayoutsModal')" class="bg-revelo-blue text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-800 transition">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Payout History Modal -->
+    <div id="payoutHistoryModal" class="modal-overlay">
+        <div class="modal-content max-w-2xl">
+            <button onclick="closeModal('payoutHistoryModal')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+            <h2 class="text-xl font-bold mb-4 revelo-blue">Payout History</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Payout ID</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
+                            <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Amount</th>
+                            <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="payoutsTableBody" class="bg-white divide-y divide-gray-200">
+                        <!-- Payout history rows will be injected here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Column Filter Modal -->
+    <div id="columnFilterModal" class="modal-overlay">
+        <div class="modal-content max-w-sm">
+            <button onclick="closeModal('columnFilterModal')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+            <h2 id="column-filter-title" class="text-xl font-bold mb-4 revelo-blue">Filter</h2>
+            <div class="relative mb-4">
+                <input type="text" id="column-filter-search" placeholder="Search..." class="w-full p-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-revelo-blue">
+                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+            </div>
+            <div id="column-filter-options" class="max-h-60 overflow-y-auto space-y-1 mb-4">
+                <!-- Checkbox options will be dynamically inserted here -->
+            </div>
+            <div class="flex justify-between space-x-2">
+                <button id="column-filter-reset" class="flex-1 bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg hover:bg-gray-300 transition">Reset</button>
+                <button id="column-filter-apply" class="flex-1 bg-revelo-blue text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-800 transition">Apply</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Export Modal -->
+    <div id="exportModal" class="modal-overlay">
+        <div class="modal-content max-w-sm">
+            <button onclick="closeModal('exportModal')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+            <h2 class="text-xl font-bold mb-4 revelo-blue">Export Transactions</h2>
+            <p class="text-gray-600 mb-6">Choose your preferred export format.</p>
+            <div class="flex flex-col space-y-4">
+                <button id="exportCsvBtn" class="bg-gray-200 text-gray-700 font-bold py-3 px-4 rounded-lg hover:bg-gray-300 transition">Export to CSV</button>
+                <button id="exportExcelBtn" class="bg-gray-200 text-gray-700 font-bold py-3 px-4 rounded-lg hover:bg-gray-300 transition">Export to Excel</button>
+                <button id="exportPdfBtn" class="bg-gray-200 text-gray-700 font-bold py-3 px-4 rounded-lg hover:bg-gray-300 transition">Export to PDF</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Global function to close modals
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        }
+        
+        // This function needs to be outside the onload listener to be accessible globally
+        function createExportFile(data, type) {
+            let content;
+            let filename;
+            const headers = Object.keys(data[0]);
+
+            switch (type) {
+                case 'csv':
+                    // Create CSV content
+                    const csvRows = data.map(t => 
+                        headers.map(header => {
+                            let val = t[header];
+                            if (header === 'Transaction_Date' && val instanceof Date) {
+                                val = formatDate(val);
+                            }
+                            if (typeof val === 'string' && val.includes(',')) {
+                                return `"${val}"`;
+                            }
+                            return val;
+                        }).join(',')
+                    );
+                    content = "data:text/csv;charset=utf-8," + headers.join(',') + '\n' + csvRows.join('\n');
+                    filename = 'transactions_export.csv';
+                    break;
+                case 'excel':
+                    // Create a simple table HTML that can be opened by Excel
+                    const tableHtml = `
+                        <table>
+                            <thead>
+                                <tr>${headers.map(h => `<th>${h}</th>`).join('')}</tr>
+                            </thead>
+                            <tbody>
+                                ${data.map(t => `
+                                    <tr>
+                                        ${headers.map(h => {
+                                            let val = t[h];
+                                            if (h === 'Transaction_Date' && val instanceof Date) {
+                                                val = formatDate(val);
+                                            }
+                                            return `<td>${val}</td>`;
+                                        }).join('')}
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    `;
+                    content = "data:application/vnd.ms-excel;charset=utf-8," + encodeURIComponent(tableHtml);
+                    filename = 'transactions_export.xls';
+                    break;
+                case 'pdf':
+                     // This is a placeholder. A real PDF export would require a library like jsPDF.
+                     // The user is not expecting a full library implementation but a functional button
+                     // and a message box.
+                    alert('PDF export functionality is not yet implemented. Please try CSV or Excel.');
+                    return;
+            }
+            
+            if (type !== 'pdf') {
+                const link = document.createElement("a");
+                link.setAttribute("href", content);
+                link.setAttribute("download", filename);
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+
+
+        window.addEventListener('load', () => {
+            // The JSON file is expected to be in a 'data' sub-folder
+            const JSON_URL = './data/transactions.json';
+
+            // --- STATE MANAGEMENT ---
+            let allTransactions = [];
+            let filteredTransactions = [];
+            let revenueChart = null;
+            let currentPage = 1;
+            const rowsPerPage = 10;
+            let sortConfig = { key: 'Transaction_Date', direction: 'descending' };
+            const payoutHistoryData = [
+                { id: 'POUT-202406-01', date: '2024-06-07', amount: 2005.15, status: 'Completed' },
+                { id: 'POUT-202407-15', date: '2024-07-16', amount: 4500.80, status: 'Completed' },
+                { id: 'POUT-202408-20', date: '2024-08-21', amount: 1532.00, status: 'Completed' },
+            ];
+            
+            // Filters for the main table (Transaction Explorer)
+            const columnFilters = {};
+            
+            // The list of headers that should have a filter icon
+            const filterableHeaders = [
+                'Transaction_ID', 'Transaction_Type', 'Event_Name', 'Ticket_Type', 'Attendee_Name',
+                'Promoter_Name', 'Discount_Code_Used', 'Payment_Method', 'Status', 'Payout_ID'
+            ];
+            
+            // --- DOM ELEMENTS ---
+            const tableBody = document.getElementById('transactionsTableBody');
+            const paginationContainer = document.getElementById('pagination');
+            const explorerStartDateInput = document.getElementById('explorer-startDate');
+            const explorerEndDateInput = document.getElementById('explorer-endDate');
+            const analysisStartDateInput = document.getElementById('analysis-startDate');
+            const analysisEndDateInput = document.getElementById('analysis-endDate');
+            const transactionTypeBtns = document.querySelectorAll('.transaction-type-btn');
+            const exportBtn = document.getElementById('exportBtn');
+            const tableHeaderRow = document.querySelector('#table-header-row');
+            const managePayoutsBtn = document.getElementById('manage-payout-btn');
+            const viewHistoryBtn = document.getElementById('view-history-btn');
+            const payoutsTableBody = document.getElementById('payoutsTableBody');
+            const columnFilterModal = document.getElementById('columnFilterModal');
+            const columnFilterTitle = document.getElementById('column-filter-title');
+            const columnFilterOptions = document.getElementById('column-filter-options');
+            const columnFilterSearch = document.getElementById('column-filter-search');
+            const resetTableFiltersBtn = document.getElementById('reset-table-filters-btn');
+            const exportModal = document.getElementById('exportModal');
+            const exportCsvBtn = document.getElementById('exportCsvBtn');
+            const exportExcelBtn = document.getElementById('exportExcelBtn');
+            const exportPdfBtn = document.getElementById('exportPdfBtn');
+
+
+            // --- UTILITY FUNCTIONS ---
+            const formatCurrency = (value) => {
+                const num = parseFloat(value || 0);
+                if (isNaN(num)) return '€0.00';
+                return `€${num.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            };
+
+            const formatDate = (date) => {
+                if (!(date instanceof Date) || isNaN(date.getTime())) {
+                    return '';
+                }
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                return `${year}-${month}-${day}`;
+            };
+            
+            function openModal(modalId) {
+                document.getElementById(modalId).style.display = 'flex';
+            }
+
+
+            // --- DATA FETCHING & INITIALIZATION ---
+            async function loadAndProcessData() {
+                try {
+                    const response = await fetch(JSON_URL);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const rawData = await response.json();
+                    
+                    if (rawData && rawData.length > 0) {
+                        const headers = Object.keys(rawData[0]);
+                        renderTableHeaders(headers);
+
+                        allTransactions = rawData.map(row => {
+                            const newRow = {};
+                            headers.forEach(header => {
+                                let value = row[header];
+                                if (['Promoter_Commission', 'Base', 'IVA', 'Gross_Amount', 'Fees', 'Net_Amount'].includes(header)) {
+                                    const parsedValue = parseFloat(value);
+                                    value = isNaN(parsedValue) ? 0 : parsedValue;
+                                } else if (header === 'Transaction_Date') {
+                                    const datePart = value.split(' ')[0];
+                                    value = new Date(datePart);
+                                }
+                                newRow[header] = value;
+                            });
+                            return newRow;
+                        });
+                        
+                        filteredTransactions = [...allTransactions];
+                        initializeApp();
+                    } else {
+                        console.error("JSON file is empty or invalid.");
+                        tableBody.innerHTML = `<tr><td colspan="17" class="text-center p-4 text-red-500">JSON file is empty or invalid.</td></tr>`;
+                    }
+                } catch (error) {
+                    console.error("Error fetching JSON:", error);
+                    tableBody.innerHTML = `<tr><td colspan="17" class="text-center p-4 text-red-500">Error loading data. Please check the file path and make sure the file is available at <strong>${JSON_URL}</strong>.</td></tr>`;
+                }
+            }
+            
+            function renderTableHeaders(headers) {
+                tableHeaderRow.innerHTML = '';
+                const displayHeaders = [
+                    'ID', 'Date', 'Type', 'Event', 'Ticket', 'Attendee', 'Promoter', 'Code',
+                    'Commission', 'Base', 'IVA', 'Gross', 'Fees', 'Net', 'Method', 'Status', 'PayId'
+                ];
+                const columnKeys = [
+                    'Transaction_ID', 'Transaction_Date', 'Transaction_Type', 'Event_Name', 
+                    'Ticket_Type', 'Attendee_Name', 'Promoter_Name', 'Discount_Code_Used',
+                    'Promoter_Commission', 'Base', 'IVA', 'Gross_Amount', 'Fees', 
+                    'Net_Amount', 'Payment_Method', 'Status', 'Payout_ID'
+                ];
+                 
+                columnKeys.forEach((key, index) => {
+                    const th = document.createElement('th');
+                    th.className = 'p-4 text-left text-sm font-bold text-gray-700 cursor-pointer';
+                    th.setAttribute('data-sort', key);
+                    
+                    let headerContent = `<div class="flex items-center">${displayHeaders[index]} <span class="ml-2 text-gray-400 sort-indicator">↕</span>`;
+                    
+                    if (filterableHeaders.includes(key)) {
+                         headerContent += `
+                            <button class="filter-icon ml-2" data-column-key="${key}" data-column-name="${displayHeaders[index]}">
+                                <svg class="w-4 h-4 text-gray-400 hover:text-revelo-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-4.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
+                            </button>
+                        `;
+                    }
+
+                    headerContent += '</div>';
+                    th.innerHTML = headerContent;
+                    tableHeaderRow.appendChild(th);
+                });
+            }
+            
+            function initializeApp() {
+                if (allTransactions.length === 0) {
+                     tableBody.innerHTML = `<tr><td colspan="17" class="text-center p-4">No transactions to display.</td></tr>`;
+                    return;
+                }
+                
+                const dates = allTransactions.map(t => t.Transaction_Date).filter(d => d instanceof Date && !isNaN(d));
+                if (dates.length > 0) {
+                    const minDate = formatDate(new Date(Math.min(...dates)));
+                    const maxDate = formatDate(new Date(Math.max(...dates)));
+                    explorerStartDateInput.value = minDate;
+                    explorerEndDateInput.value = maxDate;
+                    analysisStartDateInput.value = minDate;
+                    analysisEndDateInput.value = maxDate;
+                }
+                
+                setupEventListeners();
+                calculateNextPayout();
+                applyFiltersAndRender();
+            }
+            
+            function calculateNextPayout() {
+                const latestPayoutId = allTransactions.reduce((latest, t) => {
+                    if (!t.Payout_ID) return latest;
+                    if (!latest) return t.Payout_ID;
+                    return t.Payout_ID > latest ? t.Payout_ID : latest;
+                }, '');
+
+                if (!latestPayoutId) {
+                     document.getElementById('next-payout-amount').textContent = '€0.00';
+                     document.getElementById('next-payout-date').textContent = 'No payouts found';
+                     return;
+                }
+
+                const nextPayoutTransactions = allTransactions.filter(t => t.Payout_ID === latestPayoutId);
+                const totalNet = nextPayoutTransactions.reduce((sum, t) => sum + (t.Net_Amount || 0), 0);
+                
+                document.getElementById('next-payout-amount').textContent = formatCurrency(totalNet);
+                
+                const parts = latestPayoutId.split('-');
+                if (parts.length === 3) {
+                    const year = parts[1].substring(0, 4);
+                    const month = parts[1].substring(4, 6) - 1;
+                    const day = parts[2];
+                    const date = new Date(year, month, day);
+                    document.getElementById('next-payout-date').textContent = `On ${date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}`;
+                } else {
+                     document.getElementById('next-payout-date').textContent = `On ${latestPayoutId}`;
+                }
+            }
+
+            // --- EVENT LISTENERS ---
+            function setupEventListeners() {
+                explorerStartDateInput.addEventListener('change', applyFiltersAndRender);
+                explorerEndDateInput.addEventListener('change', applyFiltersAndRender);
+                analysisStartDateInput.addEventListener('change', applyFiltersAndRender);
+                analysisEndDateInput.addEventListener('change', applyFiltersAndRender);
+                
+                transactionTypeBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        transactionTypeBtns.forEach(b => {
+                            b.classList.remove('bg-revelo-blue', 'text-white');
+                            b.classList.add('bg-gray-50', 'text-gray-800');
+                        });
+                        btn.classList.add('bg-revelo-blue', 'text-white');
+                        btn.classList.remove('bg-gray-50', 'text-gray-800');
+                        columnFilters['Transaction_Type'] = btn.dataset.type;
+                        applyFiltersAndRender();
+                    });
+                });
+
+                document.querySelectorAll('th[data-sort]').forEach(header => {
+                    header.addEventListener('click', (event) => {
+                        // Ignore clicks on the filter icon
+                        if (event.target.closest('.filter-icon')) {
+                            return;
+                        }
+                        const sortKey = header.dataset.sort;
+                        const direction = sortConfig.key === sortKey && sortConfig.direction === 'ascending' ? 'descending' : 'ascending';
+                        sortConfig = { key: sortKey, direction };
+                        
+                        document.querySelectorAll('th[data-sort] .sort-indicator').forEach(span => {
+                            span.textContent = '↕';
+                            span.classList.remove('text-revelo-blue');
+                            span.classList.add('text-gray-400');
+                        });
+                        const indicator = header.querySelector('.sort-indicator');
+                        indicator.textContent = direction === 'ascending' ? '▲' : '▼';
+                        indicator.classList.add('text-revelo-blue');
+
+                        applyFiltersAndRender();
+                    });
+                });
+                
+                document.querySelectorAll('.filter-icon').forEach(icon => {
+                    icon.addEventListener('click', (e) => {
+                        const key = e.currentTarget.dataset.columnKey;
+                        const name = e.currentTarget.dataset.columnName;
+                        openColumnFilterModal(key, name);
+                    });
+                });
+                
+                document.getElementById('column-filter-apply').addEventListener('click', () => {
+                    const key = columnFilterModal.dataset.columnKey;
+                    const selectedValues = Array.from(document.querySelectorAll('#column-filter-options input:checked')).map(cb => cb.value);
+                    columnFilters[key] = selectedValues;
+                    applyFiltersAndRender();
+                    closeModal('columnFilterModal');
+                });
+                
+                document.getElementById('column-filter-reset').addEventListener('click', () => {
+                     const key = columnFilterModal.dataset.columnKey;
+                     columnFilters[key] = [];
+                     document.querySelectorAll('#column-filter-options input').forEach(cb => cb.checked = false);
+                });
+                
+                columnFilterSearch.addEventListener('input', (e) => {
+                    const query = e.target.value.toLowerCase();
+                    Array.from(columnFilterOptions.children).forEach(item => {
+                        const checkbox = item.querySelector('input');
+                        if (checkbox.value.toLowerCase().includes(query)) {
+                            item.style.display = 'flex';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+                
+                exportBtn.addEventListener('click', () => openModal('exportModal'));
+                exportCsvBtn.addEventListener('click', () => { createExportFile(filteredTransactions, 'csv'); closeModal('exportModal'); });
+                exportExcelBtn.addEventListener('click', () => { createExportFile(filteredTransactions, 'excel'); closeModal('exportModal'); });
+                exportPdfBtn.addEventListener('click', () => { createExportFile(filteredTransactions, 'pdf'); closeModal('exportModal'); });
+
+                managePayoutsBtn.addEventListener('click', () => openModal('managePayoutsModal'));
+                viewHistoryBtn.addEventListener('click', openPayoutsHistoryModal);
+                
+                // Add listener for the new reset filters button
+                resetTableFiltersBtn.addEventListener('click', resetTableFilters);
+            }
+            
+            function openColumnFilterModal(key, name) {
+                columnFilterTitle.textContent = `Filter by ${name}`;
+                columnFilterModal.dataset.columnKey = key;
+                
+                const uniqueValues = [...new Set(allTransactions.map(t => t[key]))]
+                    .filter(v => v !== null && v !== undefined && v !== '').sort();
+                
+                const currentFilters = Array.isArray(columnFilters[key]) ? columnFilters[key] : [];
+                
+                columnFilterOptions.innerHTML = uniqueValues.map(value => `
+                    <label class="flex items-center space-x-2">
+                        <input type="checkbox" value="${value}" class="rounded text-revelo-blue" ${currentFilters.includes(value) ? 'checked' : ''}>
+                        <span>${value}</span>
+                    </label>
+                `).join('');
+                
+                openModal('columnFilterModal');
+            }
+
+
+            // --- FILTERING, SORTING, AND RENDERINg ---
+            function applyFiltersAndRender() {
+                // Filter the table data based on multiple criteria
+                const tableFilteredTransactions = allTransactions.filter(t => {
+                    const explorerStartDate = new Date(explorerStartDateInput.value);
+                    const explorerEndDate = new Date(explorerEndDateInput.value);
+                    explorerEndDate.setHours(23, 59, 59, 999);
+                    const dateMatch = t.Transaction_Date instanceof Date && !isNaN(t.Transaction_Date.getTime()) && t.Transaction_Date >= explorerStartDate && t.Transaction_Date <= explorerEndDate;
+
+                    const typeMatch = (columnFilters['Transaction_Type'] === 'All' || !columnFilters['Transaction_Type']) || t.Transaction_Type === columnFilters['Transaction_Type'];
+                    
+                    const columnFilterMatch = Object.keys(columnFilters).every(key => {
+                        const filterValue = columnFilters[key];
+                        if (!filterValue || filterValue.length === 0 || filterValue === 'All') return true;
+                        
+                        if (Array.isArray(filterValue)) {
+                            return filterValue.includes(String(t[key]));
+                        } else {
+                           return String(t[key]).toLowerCase().includes(String(filterValue).toLowerCase());
+                        }
+                    });
+                    
+                    return dateMatch && typeMatch && columnFilterMatch;
+                });
+
+                const analysisStartDate = new Date(analysisStartDateInput.value);
+                const analysisEndDate = new Date(analysisEndDateInput.value);
+                analysisEndDate.setHours(23, 59, 59, 999);
+                const analysisFilteredTransactions = allTransactions.filter(t => {
+                    return t.Transaction_Date instanceof Date && !isNaN(t.Transaction_Date.getTime()) && t.Transaction_Date >= analysisStartDate && t.Transaction_Date <= analysisEndDate;
+                });
+
+                tableFilteredTransactions.sort((a, b) => {
+                    const valA = a[sortConfig.key];
+                    const valB = b[sortConfig.key];
+                    
+                    let comparison = 0;
+                    if (valA > valB) {
+                        comparison = 1;
+                    } else if (valA < valB) {
+                        comparison = -1;
+                    }
+                    
+                    return sortConfig.direction === 'descending' ? comparison * -1 : comparison;
+                });
+                
+                filteredTransactions = tableFilteredTransactions;
+
+                currentPage = 1;
+                renderTable();
+                renderPagination();
+                updateMetrics(analysisFilteredTransactions);
+                renderChart(analysisFilteredTransactions);
+            }
+
+            function resetTableFilters() {
+                // Reset date filters
+                const dates = allTransactions.map(t => t.Transaction_Date).filter(d => d instanceof Date && !isNaN(d));
+                if (dates.length > 0) {
+                    const minDate = formatDate(new Date(Math.min(...dates)));
+                    const maxDate = formatDate(new Date(Math.max(...dates)));
+                    explorerStartDateInput.value = minDate;
+                    explorerEndDateInput.value = maxDate;
+                }
+
+                // Reset transaction type buttons
+                transactionTypeBtns.forEach(b => {
+                    b.classList.remove('bg-revelo-blue', 'text-white');
+                    b.classList.add('bg-gray-50', 'text-gray-800');
+                });
+                const allBtn = document.querySelector('.transaction-type-btn[data-type="All"]');
+                if (allBtn) {
+                     allBtn.classList.add('bg-revelo-blue', 'text-white');
+                     allBtn.classList.remove('bg-gray-50', 'text-gray-800');
+                     
+                }
+                
+                // Clear all column filters by deleting the keys from the object
+                for (const key in columnFilters) {
+                    delete columnFilters[key];
+                }
+                
+                // Re-apply filters to update the table
+                applyFiltersAndRender();
+            }
+
+            function renderAllComponents() {
+                renderTable();
+                renderPagination();
+                updateMetrics(filteredTransactions);
+                renderChart(filteredTransactions);
+            }
+
+            // --- TABLE & PAGINATION ---
+            function renderTable() {
+                const start = (currentPage - 1) * rowsPerPage;
+                const end = start + rowsPerPage;
+                const paginatedItems = filteredTransactions.slice(start, end);
+
+                tableBody.innerHTML = paginatedItems.map(t => {
+                    const cells = [
+                        t.Transaction_ID, t.Transaction_Date.toLocaleDateString(), t.Transaction_Type, t.Event_Name, t.Ticket_Type, 
+                        t.Attendee_Name, t.Promoter_Name, t.Discount_Code_Used || '', formatCurrency(t.Promoter_Commission),
+                        formatCurrency(t.Base), formatCurrency(t.IVA), formatCurrency(t.Gross_Amount), 
+                        formatCurrency(t.Fees), formatCurrency(t.Net_Amount), t.Payment_Method, t.Status, t.Payout_ID
+                    ];
+                    
+                    const cellHtml = cells.map((cellValue, index) => {
+                        let cellClass = 'p-4 whitespace-nowrap text-sm text-gray-700';
+                        let content = cellValue;
+                        
+                        if ([8, 9, 10, 11, 12, 13].includes(index)) {
+                            cellClass = 'p-4 whitespace-nowrap text-sm text-right text-gray-900 font-medium';
+                            if (index === 13) {
+                                cellClass = 'p-4 whitespace-nowrap text-sm text-right font-bold text-green-600';
+                            }
+                        }
+                        
+                        if (index === 15) {
+                            const statusClass = t.Status === 'Completed' ? 'bg-green-100 text-green-800' : (t.Status === 'Refund' ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800');
+                            content = `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusClass}">${t.Status || 'N/A'}</span>`;
+                            cellClass = 'p-4 whitespace-nowrap text-sm text-center';
+                        }
+                        
+                        return `<td class="${cellClass}">${content}</td>`;
+                    }).join('');
+                    
+                    return `<tr class="hover:bg-gray-50">${cellHtml}</tr>`;
+                }).join('');
+                
+                if (paginatedItems.length === 0) {
+                    tableBody.innerHTML = `<tr><td colspan="17" class="text-center p-4">No transactions found for the selected filters.</td></tr>`;
+                }
+            }
+
+            function renderPagination() {
+                const pageCount = Math.ceil(filteredTransactions.length / rowsPerPage);
+                paginationContainer.innerHTML = '';
+                if (pageCount <= 1) return;
+
+                const startRecord = Math.min((currentPage - 1) * rowsPerPage + 1, filteredTransactions.length);
+                const endRecord = Math.min(currentPage * rowsPerPage, filteredTransactions.length);
+                
+                const info = document.createElement('div');
+                info.className = 'text-sm text-gray-700';
+                info.textContent = `Showing ${startRecord} to ${endRecord} of ${filteredTransactions.length} results`;
+
+                const buttons = document.createElement('div');
+                buttons.className = 'flex space-x-2';
+                
+                const prevButton = document.createElement('button');
+                prevButton.textContent = 'Previous';
+                prevButton.className = 'pagination-btn';
+                prevButton.disabled = currentPage === 1;
+                prevButton.addEventListener('click', () => {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        renderTable();
+                        renderPagination();
+                    }
+                });
+
+                const nextButton = document.createElement('button');
+                nextButton.textContent = 'Next';
+                nextButton.className = 'pagination-btn';
+                nextButton.disabled = currentPage === pageCount;
+                nextButton.addEventListener('click', () => {
+                    if (currentPage < pageCount) {
+                        currentPage++;
+                        renderTable();
+                        renderPagination();
+                    }
+                });
+                
+                buttons.appendChild(prevButton);
+                buttons.appendChild(nextButton);
+                paginationContainer.appendChild(info);
+                paginationContainer.appendChild(buttons);
+            }
+
+            // --- METRICS & CHART ---
+            function updateMetrics(data) {
+                let grossSales = 0;
+                let refunds = 0;
+                let platformFees = 0;
+                let netRevenue = 0;
+
+                data.forEach(t => {
+                    if (t.Transaction_Type === 'Sale') {
+                        grossSales += (t.Gross_Amount || 0);
+                    } else if (t.Transaction_Type === 'Refund') {
+                        refunds += (t.Gross_Amount || 0);
+                    }
+                    platformFees += (t.Fees || 0);
+                    netRevenue += (t.Net_Amount || 0);
+                });
+
+                document.getElementById('metric-gross-sales').textContent = formatCurrency(grossSales);
+                document.getElementById('metric-refunds').textContent = formatCurrency(refunds);
+                document.getElementById('metric-platform-fees').textContent = formatCurrency(platformFees);
+                document.getElementById('metric-net-revenue').textContent = formatCurrency(netRevenue);
+            }
+
+            function renderChart(data) {
+                const ctx = document.getElementById('revenueChart').getContext('2d');
+                
+                const salesByDate = data.reduce((acc, t) => {
+                    if(t.Transaction_Date && !isNaN(t.Transaction_Date.getTime())) {
+                        const date = t.Transaction_Date.toISOString().split('T')[0];
+                        if (!acc[date]) {
+                            acc[date] = 0;
+                        }
+                        acc[date] += (t.Net_Amount || 0);
+                    }
+                    return acc;
+                }, {});
+
+                const sortedDates = Object.keys(salesByDate).sort();
+                const chartData = sortedDates.map(date => ({ x: date, y: salesByDate[date] }));
+
+                if (revenueChart) {
+                    revenueChart.data.labels = sortedDates;
+                    revenueChart.data.datasets[0].data = chartData;
+                    revenueChart.update();
+                } else {
+                    revenueChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: sortedDates,
+                            datasets: [{
+                                label: 'Net Revenue',
+                                data: chartData,
+                                borderColor: '#213c63',
+                                backgroundColor: 'rgba(33, 60, 99, 0.1)',
+                                fill: true,
+                                tension: 0.1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                x: {
+                                    type: 'time',
+                                    time: {
+                                        unit: 'day',
+                                        tooltipFormat: 'MMM dd, yyyy'
+                                    },
+                                    title: { display: false }
+                                },
+                                y: {
+                                    beginAtZero: true,
+                                    title: { display: false },
+                                    ticks: {
+                                        callback: (value) => formatCurrency(value)
+                                    }
+                                }
+                            },
+                            plugins: {
+                                legend: { display: false },
+                                tooltip: {
+                                    callbacks: {
+                                        label: (context) => `Net Revenue: ${formatCurrency(context.raw.y)}`
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+            
+            // --- PAYOUT HISTORY MODAL ---
+            function renderPayoutsTable() {
+                payoutsTableBody.innerHTML = payoutHistoryData.map(payout => {
+                    const statusClass = payout.status === 'Completed' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800';
+                    return `
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${payout.id}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${payout.date}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-right text-gray-500">${formatCurrency(payout.amount)}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-right text-gray-500">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusClass}">${payout.status}</span>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+
+            function openPayoutsHistoryModal() {
+                renderPayoutsTable();
+                openModal('payoutHistoryModal');
+            }
+
+
+            // --- START THE APP ---
+            loadAndProcessData();
+        });
+    </script>
+    <!-- Assuming you have a separate organizer.js file that handles navbar logic -->
+    <script src="organizer.js" defer></script>
+</body>
+</html>

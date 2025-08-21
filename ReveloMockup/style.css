@@ -126,3 +126,31 @@ details > summary { list-style: none; }
 details > summary::-webkit-details-marker { display: none; }
 details > summary svg { transition: transform 0.2s; }
 details[open] > summary svg { transform: rotate(180deg); }
+
+/* Custom styles for pagination and sorting */
+.pagination-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+.pagination-btn.active {
+    background-color: #213c63;
+    color: white;
+}
+.pagination-btn:not(.active) {
+    background-color: #e5e7eb;
+    color: #374151;
+}
+.pagination-btn:disabled {
+    background-color: #f3f4f6;
+    color: #9ca3af;
+    cursor: not-allowed;
+}
+.sort-indicator {
+    opacity: 0.5;
+    transition: opacity 0.3s;
+}
+th:hover .sort-indicator {
+    opacity: 1;
+}
