@@ -120,8 +120,14 @@
     </div>
 
     <!-- Ticket Modal -->
-    <div id="ticket-modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 hidden z-50">
-        <div class="bg-white rounded-lg shadow-xl w-full max-w-md flex flex-col max-h-[90vh]" id="ticket-modal-content">
+    <!-- CHANGE: Increased z-index to z-[60] to ensure it's above the footer. Removed padding for mobile view. -->
+    <div id="ticket-modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center hidden z-[60] lg:p-4">
+        <!-- 
+            CHANGE: Modal content is now full-screen on mobile and reverts to a centered card on large screens.
+            - Mobile (default): w-full, h-full
+            - Large screens (lg:): lg:rounded-lg, lg:shadow-xl, lg:max-w-md, lg:h-auto, lg:max-h-[90vh]
+        -->
+        <div class="bg-white w-full h-full flex flex-col lg:rounded-lg lg:shadow-xl lg:max-w-md lg:h-auto lg:max-h-[90vh]" id="ticket-modal-content">
             <div class="p-6 overflow-y-auto">
                 <div class="flex justify-between items-start">
                     <img src="images/reveloLogo.png" alt="Revelo Logo" class="h-8">
@@ -220,5 +226,6 @@
         }
     </script>
     <script src="main.js" defer></script>
+    <div id="footer-placeholder"></div>
 </body>
 </html>

@@ -6,10 +6,20 @@
 body {
     font-family: 'Nunito', sans-serif;
     background-color: #f0f2f5; /* Light gray background */
-    /* Added padding to prevent content from touching screen edges on mobile */
-    /* padding-top: 1rem; */
-    padding-bottom: 3rem;
+    padding-top: 3rem; /* Added padding to prevent content from being hidden behind the fixed navbar */
 }
+
+/* Add padding to the bottom of the body on smaller screens 
+  to prevent the fixed footer from overlapping the content.
+  The footer is 4rem (h-16) high, so 5rem gives a little extra space.
+  This padding is removed on large screens where the footer is hidden.
+*/
+@media (max-width: 1023px) {
+    body {
+        padding-bottom: 3.5rem; /* Space for the new mobile footer */
+    }
+}
+
 
 /* --- Custom Color Palette --- */
 /* Use these classes to apply brand colors */
@@ -132,6 +142,10 @@ details[open] > summary svg.accordion-arrow {
     opacity: 0; /* Start fully transparent */
     transition: opacity 0.3s ease-in-out; /* Fade-in transition */
 }
+/* Fix for toggle switch colors */
+.peer:checked ~ .peer-checked\:bg-revelo-orange {
+  background-color: #f58220 !important;
+}
 
 /* This style will be added by JS to show the modal */
 .modal-overlay.visible {
@@ -212,9 +226,6 @@ th:hover .sort-indicator {
 details[open] .accordion-arrow {
     transform: rotate(180deg);
 }
-
-/* Styles from financialOverview.html */
-body { padding-top: 4rem; }
 
 /* Styles from liveEventEdit.html */
 .change-dot {

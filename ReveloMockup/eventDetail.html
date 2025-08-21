@@ -282,25 +282,31 @@
             followModal.classList.remove('hidden');
         });
 
-        const closeModal = () => {
+        // CHANGE: Renamed this function to avoid conflict with the global closeModal in main.js
+        const closeFollowModal = () => {
             followModal.classList.add('hidden');
         };
         
-        closeModalBtn.addEventListener('click', closeModal);
-        confirmFollowBtn.addEventListener('click', closeModal);
+        // CHANGE: Updated event listeners to call the new function name
+        closeModalBtn.addEventListener('click', closeFollowModal);
+        confirmFollowBtn.addEventListener('click', closeFollowModal);
         
         // Close modal if user clicks outside the content area
         followModal.addEventListener('click', (event) => {
             if (!modalContent.contains(event.target)) {
-                closeModal();
+                // CHANGE: Updated the function call here as well
+                closeFollowModal();
             }
         });
 
 
         // Initialize the page with the 'details' tab visible.
-        // This function is called implicitly by the default class setup.
+        document.addEventListener('DOMContentLoaded', () => {
+            switchTab('details');
+        });
     </script>
     <script src="main.js" defer></script>
+    <div id="footer-placeholder"></div>
 
 </body>
 </html>

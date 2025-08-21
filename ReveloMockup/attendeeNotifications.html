@@ -22,7 +22,7 @@
     <div class="max-w-2xl mx-auto bg-white shadow-lg flex flex-col h-full">
 
         <!-- Header Section -->
-        <header class="sticky top-0 bg-white z-40 px-4 h-16 border-b border-gray-200 flex items-center justify-between relative flex-shrink-0">
+        <header class="sticky top-0 bg-white z-50 px-4 h-16 border-b border-gray-200 flex items-center justify-between relative flex-shrink-0">
             <h1 class="text-xl font-bold revelo-blue">Notifications</h1>
             <div class="flex items-center space-x-0 mr-8 flex-shrink-0">
                 <!-- Filter Button -->
@@ -36,7 +36,7 @@
             </div>
 
             <!-- Filter Panel (Initially Hidden) -->
-            <div id="filterPanel" class="absolute top-full right-4 mt-2 w-64 bg-white border border-gray-200 rounded-lg shadow-lg p-4 z-20 hidden">
+            <div id="filterPanel" class="absolute top-full right-4 mt-2 w-64 bg-white border border-gray-200 rounded-lg shadow-lg p-4 z-50 hidden">
                 <h3 class="font-bold text-lg mb-2">Filter Notifications</h3>
                 <div class="mb-3">
                     <p class="font-semibold text-sm mb-1">Filter by type:</p>
@@ -232,5 +232,6 @@
     });
     </script>
     <script src="main.js" defer></script>
+    <div id="footer-placeholder"></div>
 </body>
 </html>

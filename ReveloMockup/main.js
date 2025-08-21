@@ -151,8 +151,9 @@ function openNotificationsModal() {
 }
 
 
-// --- NAVBAR INITIALIZATION ---
+// --- NAVBAR & FOOTER INITIALIZATION ---
 document.addEventListener("DOMContentLoaded", function() {
+    // Load Navbar
     fetch('navBar.html')
         .then(response => response.text())
         .then(html => {
@@ -250,4 +251,15 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         })
         .catch(error => console.error('Error fetching navbar:', error));
+
+    // Load Footer
+    fetch('footer.html')
+        .then(response => response.text())
+        .then(html => {
+            const placeholder = document.getElementById('footer-placeholder');
+            if (placeholder) {
+                placeholder.innerHTML = html;
+            }
+        })
+        .catch(error => console.error('Error fetching footer:', error));
 });
