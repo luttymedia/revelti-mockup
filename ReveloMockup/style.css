@@ -154,3 +154,37 @@ details[open] > summary svg { transform: rotate(180deg); }
 th:hover .sort-indicator {
     opacity: 1;
 }
+
+/* Styles from eventBreakdown.html */
+.tab-button.active { border-bottom: 3px solid #213c63; color: #213c63; font-weight: 700; }
+
+/* Styles from eventCollaboratorManagement.html */
+.accordion-arrow {
+    transition: transform 0.2s;
+}
+details[open] .accordion-arrow {
+    transform: rotate(180deg);
+}
+
+/* Styles from financialOverview.html */
+body { padding-top: 4rem; }
+
+.modal-content { 
+    max-width: 600px; 
+}
+
+/* Styles from liveEventEdit.html */
+.change-dot {
+    display: none;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 9px;
+    height: 9px;
+    background-color: #f58220; /* revelo-orange */
+    border-radius: 50%;
+    border: 1px solid white;
+}
+.change-dot.visible {
+    display: block;
+}
