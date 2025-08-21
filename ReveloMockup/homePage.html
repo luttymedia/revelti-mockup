@@ -18,16 +18,22 @@
 <body class="antialiased text-gray-800">
 <div id="navbar-placeholder"></div>
 
-    <!-- Full-width Main Banner -->
-    <div class="max-w-2xl mx-auto mb-6 overflow-hidden">
-         <img src="images/homeBanner.jpeg" alt="Revelo Banner: Find your dance. Find your people." class="w-full h-auto">
+    <!-- 
+        Full-width Main Banner 
+        This banner is now a layered component, using a background image,
+        a logo, and text. It is hidden by default on small screens
+        and becomes visible on large screens using the Tailwind 'lg:block' class.
+    -->
+    <div class="relative hidden lg:block max-w-2xl lg:max-w-7xl mx-auto overflow-hidden">
+        <!-- Banner Image (hidden on small screens) -->
+        <img src="images/banner1200x400.png" alt="Revelo Banner: Find your dance. Find your people." class="w-full h-auto object-cover">
     </div>
 
     <!-- Main container with a max-width for larger screens -->
-    <div class="max-w-2xl lg:max-w-7xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+    <div class="max-w-2xl lg:max-w-7xl mx-auto bg-white shadow-lg overflow-hidden">
 
         <!-- Header Section -->
-        <header class="p-6">
+        <header class="p-4">
             <!-- Search Bar -->
             <div class="relative">
                 <input type="text" placeholder="Search for events, organizers, creators..." class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-revelo-orange">
