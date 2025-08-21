@@ -172,6 +172,7 @@ details > summary { list-style: none; }
 details > summary::-webkit-details-marker { display: none; }
 details > summary svg { transition: transform 0.2s; }
 details[open] > summary svg { transform: rotate(180deg); }
+details[open] > summary svg.no-rotate { transform: none; } /* This overrides the rotation */
 
 /* Custom styles for pagination and sorting */
 .pagination-btn {
