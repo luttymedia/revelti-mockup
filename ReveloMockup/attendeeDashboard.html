@@ -19,7 +19,7 @@
     <div id="navbar-placeholder"></div>
 
     <!-- Main container with a max-width for larger screens -->
-    <div class="max-w-2xl mx-auto bg-white shadow-lg overflow-hidden">
+    <div class="max-w-2xl lg:max-w-7xl mx-auto bg-white shadow-lg overflow-hidden">
 
         <!-- Header Section -->
         <header class="p-6 flex items-center">
@@ -47,36 +47,36 @@
                 <!-- Events Subsection -->
                 <details open>
                     <summary class="flex justify-between items-center cursor-pointer font-bold text-xl revelo-blue">Events <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
-                    <div class="flex space-x-4 overflow-x-auto pb-4 mt-3 horizontal-scroll">
+                    <div class="flex space-x-4 overflow-x-auto pb-4 mt-3 horizontal-scroll lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible">
                         <!-- Event Card 1 -->
-                        <a href="eventDetail.html" class="flex-shrink-0 w-2/3 sm:w-1/2">
+                        <a href="eventDetail.html" class="flex-shrink-0 w-2/3 sm:w-1/2 lg:w-full">
                             <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
                                 <div class="relative">
-                                    <img src="images/eventPoster.jpg" alt="Event Poster" class="w-full h-40 object-cover" onerror="this.onerror=null;this.src='https.placehold.co/600x400/cccccc/ffffff?text=Event';">
+                                    <img src="images/eventPoster.jpg" alt="Event Poster" class="w-full h-40 lg:h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Event';">
                                     <div class="absolute top-2 right-2 flex space-x-1">
                                         <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></button>
                                         <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path></svg></button>
                                     </div>
                                 </div>
-                                <div class="p-3">
-                                    <h4 class="font-bold text-sm revelo-blue truncate">Sensuality & Essentiality</h4>
-                                    <p class="text-xs text-gray-500">Nov 1-2, 2025 | Barcelona</p>
+                                <div class="p-3 lg:p-4">
+                                    <h4 class="font-bold text-sm lg:text-lg revelo-blue truncate">Sensuality & Essentiality</h4>
+                                    <p class="text-xs lg:text-sm text-gray-500">Nov 1-2, 2025 | Barcelona</p>
                                 </div>
                             </div>
                         </a>
                         <!-- Event Card 2 -->
-                        <a href="#" class="flex-shrink-0 w-2/3 sm:w-1/2">
+                        <a href="#" class="flex-shrink-0 w-2/3 sm:w-1/2 lg:w-full">
                             <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
                                 <div class="relative">
-                                    <img src="https://placehold.co/600x400/213c63/ffffff?text=Trending" alt="Event Poster" class="w-full h-40 object-cover" onerror="this.onerror=null;this.src='https.placehold.co/600x400/cccccc/ffffff?text=Event';">
+                                    <img src="https://placehold.co/600x400/213c63/ffffff?text=Trending" alt="Event Poster" class="w-full h-40 lg:h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Event';">
                                     <div class="absolute top-2 right-2 flex space-x-1">
                                         <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></button>
                                         <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path></svg></button>
                                     </div>
                                 </div>
-                                <div class="p-3">
-                                    <h4 class="font-bold text-sm revelo-blue truncate">BCN Bachata Congress</h4>
-                                    <p class="text-xs text-gray-500">Dec 5-8, 2025 | Barcelona</p>
+                                <div class="p-3 lg:p-4">
+                                    <h4 class="font-bold text-sm lg:text-lg revelo-blue truncate">BCN Bachata Congress</h4>
+                                    <p class="text-xs lg:text-sm text-gray-500">Dec 5-8, 2025 | Barcelona</p>
                                 </div>
                             </div>
                         </a>
@@ -85,22 +85,24 @@
                 <!-- Organizers Subsection -->
                 <details>
                     <summary class="flex justify-between items-center cursor-pointer font-bold text-xl revelo-blue">Organizers <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
-                    <div class="flex space-x-4 overflow-x-auto pb-4 mt-3 horizontal-scroll">
+                    <div class="flex space-x-4 overflow-x-auto pb-4 mt-3 horizontal-scroll lg:flex lg:space-x-4 lg:overflow-x-auto lg:pb-4">
                         <a href="organizerPortfolio.html" class="flex-shrink-0 text-center w-24"><img src="images/organizerLogo.jpg" alt="Avatar" class="w-24 h-24 rounded-full object-cover shadow-md mx-auto"><p class="mt-2 text-sm font-semibold revelo-blue break-words">Bachata Sensual Events</p></a>
                         <a href="#" class="flex-shrink-0 text-center w-24"><img src="https://placehold.co/80x80/213c63/ffffff?text=E" alt="Avatar" class="w-24 h-24 rounded-full object-cover shadow-md mx-auto"><p class="mt-2 text-sm font-semibold revelo-blue break-words">Esencia</p></a>
                     </div>
                 </details>
+
                 <!-- Creators Subsection -->
-                 <details>
+                <details>
                     <summary class="flex justify-between items-center cursor-pointer font-bold text-xl revelo-blue">Creators <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
-                    <div class="flex space-x-4 overflow-x-auto pb-4 mt-3 horizontal-scroll">
+                    <div class="flex space-x-4 overflow-x-auto pb-4 mt-3 horizontal-scroll lg:flex lg:space-x-4 lg:overflow-x-auto lg:pb-4">
                         <a href="creatorPortfolio.html" class="flex-shrink-0 text-center w-24"><img src="https://placehold.co/80x80/f58220/ffffff?text=A" alt="AMedia Avatar" class="w-24 h-24 rounded-full object-cover shadow-md mx-auto"><p class="mt-2 text-sm font-semibold revelo-blue break-words">AMedia</p></a>
                     </div>
                 </details>
+
                 <!-- Promoters Subsection -->
                 <details>
                     <summary class="flex justify-between items-center cursor-pointer font-bold text-xl revelo-blue">Promoters <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
-                    <div class="flex space-x-4 overflow-x-auto pb-4 mt-3 horizontal-scroll">
+                    <div class="flex space-x-4 overflow-x-auto pb-4 mt-3 horizontal-scroll lg:flex lg:space-x-4 lg:overflow-x-auto lg:pb-4">
                         <a href="promoterPortfolio.html" class="flex-shrink-0 text-center w-24"><img src="https://placehold.co/80x80/cccccc/000000?text=JD" alt="JD Avatar" class="w-24 h-24 rounded-full object-cover shadow-md mx-auto"><p class="mt-2 text-sm font-semibold revelo-blue break-words">John Doe</p></a>
                     </div>
                 </details>
@@ -109,12 +111,12 @@
             <!-- Media Tab -->
             <div id="media" class="tab-content hidden space-y-6">
                 <!-- Galleries Subsection -->
-                <details>
-                    <summary class="flex justify-between items-center cursor-pointer font-bold text-xl revelo-blue">Galleries <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
-                    <div class="flex space-x-4 overflow-x-auto pb-4 mt-3 horizontal-scroll">
-                        <a href="galleryNavigation.html" class="flex-shrink-0 w-2/3 sm:w-1/2">
+                <details open>
+                    <summary class="flex justify-between items-center cursor-pointer font-bold text-xl revelo-blue">Galleries Followed <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
+                    <div class="flex space-x-4 overflow-x-auto pb-4 mt-3 horizontal-scroll lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible">
+                        <a href="galleryNavigation.html" class="flex-shrink-0 w-2/3 sm:w-1/2 lg:w-full">
                             <div class="relative rounded-lg overflow-hidden shadow-lg">
-                                <img src="https://placehold.co/600x400/213c63/ffffff?text=Official+Media" alt="Album cover" class="w-full h-40 object-cover">
+                                <img src="https://placehold.co/600x400/213c63/ffffff?text=Official+Media" alt="Album cover" class="w-full h-40 lg:h-48 object-cover">
                                 <div class="absolute top-2 right-2 flex space-x-1">
                                     <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></button>
                                     <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path></svg></button>
@@ -124,9 +126,9 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="#" class="flex-shrink-0 w-2/3 sm:w-1/2">
+                        <a href="#" class="flex-shrink-0 w-2/3 sm:w-1/2 lg:w-full">
                             <div class="relative rounded-lg overflow-hidden shadow-lg">
-                                <img src="https://placehold.co/600x400/cccccc/ffffff?text=Media" alt="Album cover" class="w-full h-40 object-cover">
+                                <img src="https://placehold.co/600x400/cccccc/ffffff?text=Media" alt="Album cover" class="w-full h-40 lg:h-48 object-cover">
                                 <div class="absolute top-2 right-2 flex space-x-1">
                                     <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></button>
                                     <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path></svg></button>
@@ -138,92 +140,92 @@
                         </a>
                     </div>
                 </details>
-                <!-- My Favorites Subsection -->
-                <details>
-                            <summary class="flex justify-between items-center cursor-pointer font-bold text-xl revelo-blue">My Favorites <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
-                            <div id="favorites-grid" class="mt-3" style="column-count: 2; column-gap: 1rem;">
-                                <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Sensuality &amp; Essentiality" data-creator="AMedia">
-                                    <img src="https://placehold.co/600x800/f58220/ffffff?text=Favorite+1" class="rounded-lg shadow-md w-full relative z-0">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg z-10"></div>
-                                    <div class="absolute bottom-0 left-0 p-2 text-white z-20">
-                                        <p class="font-bold text-sm">Sensuality &amp; Essentiality</p>
-                                        <p class="text-xs">by AMedia</p>
-                                    </div>
-                                </div>
-                                <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="BCN Congress" data-creator="AMedia">
-                                    <img src="https://placehold.co/600x600/213c63/ffffff?text=Favorite+2" class="rounded-lg shadow-md w-full relative z-0">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg z-10"></div>
-                                    <div class="absolute bottom-0 left-0 p-2 text-white z-20">
-                                        <p class="font-bold text-sm">BCN Congress</p>
-                                        <p class="text-xs">by AMedia</p>
-                                    </div>
-                                </div>
-                                <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Summer Fest" data-creator="Visuals Pro">
-                                    <img src="https://placehold.co/600x900/f58220/ffffff?text=Favorite+3" class="rounded-lg shadow-md w-full relative z-0">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg z-10"></div>
-                                    <div class="absolute bottom-0 left-0 p-2 text-white z-20">
-                                        <p class="font-bold text-sm">Summer Fest</p>
-                                        <p class="text-xs">by Visuals Pro</p>
-                                    </div>
-                                </div>
-                                <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Sensuality &amp; Essentiality" data-creator="AMedia">
-                                    <img src="https://placehold.co/600x700/213c63/ffffff?text=Favorite+4" class="rounded-lg shadow-md w-full relative z-0">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg z-10"></div>
-                                    <div class="absolute bottom-0 left-0 p-2 text-white z-20">
-                                        <p class="font-bold text-sm">Sensuality &amp; Essentiality</p>
-                                        <p class="text-xs">by AMedia</p>
-                                    </div>
-                                </div>
-                                <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="BCN Congress" data-creator="AMedia">
-                                    <img src="https://placehold.co/600x850/f58220/ffffff?text=Favorite+5" class="rounded-lg shadow-md w-full relative z-0">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg z-10"></div>
-                                    <div class="absolute bottom-0 left-0 p-2 text-white z-20">
-                                        <p class="font-bold text-sm">BCN Congress</p>
-                                        <p class="text-xs">by AMedia</p>
-                                    </div>
-                                </div>
-                                <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Summer Fest" data-creator="Visuals Pro">
-                                    <img src="https://placehold.co/600x650/213c63/ffffff?text=Favorite+6" class="rounded-lg shadow-md w-full relative z-0">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg z-10"></div>
-                                    <div class="absolute bottom-0 left-0 p-2 text-white z-20">
-                                        <p class="font-bold text-sm">Summer Fest</p>
-                                        <p class="text-xs">by Visuals Pro</p>
-                                    </div>
-                                </div>
-                                <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Sensuality &amp; Essentiality" data-creator="AMedia">
-                                    <img src="https://placehold.co/600x750/f58220/ffffff?text=Favorite+7" class="rounded-lg shadow-md w-full relative z-0">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg z-10"></div>
-                                    <div class="absolute bottom-0 left-0 p-2 text-white z-20">
-                                        <p class="font-bold text-sm">Sensuality &amp; Essentiality</p>
-                                        <p class="text-xs">by AMedia</p>
-                                    </div>
-                                </div>
-                                <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="BCN Congress" data-creator="AMedia">
-                                    <img src="https://placehold.co/600x950/213c63/ffffff?text=Favorite+8" class="rounded-lg shadow-md w-full relative z-0">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg z-10"></div>
-                                    <div class="absolute bottom-0 left-0 p-2 text-white z-20">
-                                        <p class="font-bold text-sm">BCN Congress</p>
-                                        <p class="text-xs">by AMedia</p>
-                                    </div>
-                                </div>
-                                <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Summer Fest" data-creator="Visuals Pro">
-                                    <img src="https://placehold.co/600x550/f58220/ffffff?text=Favorite+9" class="rounded-lg shadow-md w-full relative z-0">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg z-10"></div>
-                                    <div class="absolute bottom-0 left-0 p-2 text-white z-20">
-                                        <p class="font-bold text-sm">Summer Fest</p>
-                                        <p class="text-xs">by Visuals Pro</p>
-                                    </div>
-                                </div>
-                                <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Sensuality &amp; Essentiality" data-creator="AMedia">
-                                    <img src="https://placehold.co/600x800/213c63/ffffff?text=Favorite+10" class="rounded-lg shadow-md w-full relative z-0">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg z-10"></div>
-                                    <div class="absolute bottom-0 left-0 p-2 text-white z-20">
-                                        <p class="font-bold text-sm">Sensuality &amp; Essentiality</p>
-                                        <p class="text-xs">by AMedia</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </details>
+            <!-- My Favorites Subsection -->
+            <details>
+                <summary class="flex justify-between items-center cursor-pointer font-bold text-xl revelo-blue">My Favorites <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
+                <div id="favorites-grid" class="mt-3 columns-2 gap-4 lg:columns-4">
+                    <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Sensuality &amp; Essentiality" data-creator="AMedia">
+                        <img src="https://placehold.co/600x800/f58220/ffffff?text=Favorite+1" class="rounded-lg shadow-md w-full relative z-0">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg z-10"></div>
+                        <div class="absolute bottom-0 left-0 p-2 text-white z-20">
+                            <p class="font-bold text-sm">Sensuality &amp; Essentiality</p>
+                            <p class="text-xs">by AMedia</p>
+                        </div>
+                    </div>
+                    <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="BCN Congress" data-creator="AMedia">
+                        <img src="https://placehold.co/600x600/213c63/ffffff?text=Favorite+2" class="rounded-lg shadow-md w-full relative z-0">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg z-10"></div>
+                        <div class="absolute bottom-0 left-0 p-2 text-white z-20">
+                            <p class="font-bold text-sm">BCN Congress</p>
+                            <p class="text-xs">by AMedia</p>
+                        </div>
+                    </div>
+                    <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Summer Fest" data-creator="Visuals Pro">
+                        <img src="https://placehold.co/600x900/f58220/ffffff?text=Favorite+3" class="rounded-lg shadow-md w-full relative z-0">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg z-10"></div>
+                        <div class="absolute bottom-0 left-0 p-2 text-white z-20">
+                            <p class="font-bold text-sm">Summer Fest</p>
+                            <p class="text-xs">by Visuals Pro</p>
+                        </div>
+                    </div>
+                    <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Sensuality &amp; Essentiality" data-creator="AMedia">
+                        <img src="https://placehold.co/600x700/213c63/ffffff?text=Favorite+4" class="rounded-lg shadow-md w-full relative z-0">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg z-10"></div>
+                        <div class="absolute bottom-0 left-0 p-2 text-white z-20">
+                            <p class="font-bold text-sm">Sensuality &amp; Essentiality</p>
+                            <p class="text-xs">by AMedia</p>
+                        </div>
+                    </div>
+                    <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="BCN Congress" data-creator="AMedia">
+                        <img src="https://placehold.co/600x850/f58220/ffffff?text=Favorite+5" class="rounded-lg shadow-md w-full relative z-0">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg z-10"></div>
+                        <div class="absolute bottom-0 left-0 p-2 text-white z-20">
+                            <p class="font-bold text-sm">BCN Congress</p>
+                            <p class="text-xs">by AMedia</p>
+                        </div>
+                    </div>
+                    <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Summer Fest" data-creator="Visuals Pro">
+                        <img src="https://placehold.co/600x650/213c63/ffffff?text=Favorite+6" class="rounded-lg shadow-md w-full relative z-0">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg z-10"></div>
+                        <div class="absolute bottom-0 left-0 p-2 text-white z-20">
+                            <p class="font-bold text-sm">Summer Fest</p>
+                            <p class="text-xs">by Visuals Pro</p>
+                        </div>
+                    </div>
+                    <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Sensuality &amp; Essentiality" data-creator="AMedia">
+                        <img src="https://placehold.co/600x750/f58220/ffffff?text=Favorite+7" class="rounded-lg shadow-md w-full relative z-0">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg z-10"></div>
+                        <div class="absolute bottom-0 left-0 p-2 text-white z-20">
+                            <p class="font-bold text-sm">Sensuality &amp; Essentiality</p>
+                            <p class="text-xs">by AMedia</p>
+                        </div>
+                    </div>
+                    <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="BCN Congress" data-creator="AMedia">
+                        <img src="https://placehold.co/600x950/213c63/ffffff?text=Favorite+8" class="rounded-lg shadow-md w-full relative z-0">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg z-10"></div>
+                        <div class="absolute bottom-0 left-0 p-2 text-white z-20">
+                            <p class="font-bold text-sm">BCN Congress</p>
+                            <p class="text-xs">by AMedia</p>
+                        </div>
+                    </div>
+                    <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Summer Fest" data-creator="Visuals Pro">
+                        <img src="https://placehold.co/600x550/f58220/ffffff?text=Favorite+9" class="rounded-lg shadow-md w-full relative z-0">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg z-10"></div>
+                        <div class="absolute bottom-0 left-0 p-2 text-white z-20">
+                            <p class="font-bold text-sm">Summer Fest</p>
+                            <p class="text-xs">by Visuals Pro</p>
+                        </div>
+                    </div>
+                    <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Sensuality &amp; Essentiality" data-creator="AMedia">
+                        <img src="https://placehold.co/600x800/213c63/ffffff?text=Favorite+10" class="rounded-lg shadow-md w-full relative z-0">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg z-10"></div>
+                        <div class="absolute bottom-0 left-0 p-2 text-white z-20">
+                            <p class="font-bold text-sm">Sensuality &amp; Essentiality</p>
+                            <p class="text-xs">by AMedia</p>
+                        </div>
+                    </div>
+                </div>
+            </details>
                     </div>
 
             <!-- My Tickets Tab -->

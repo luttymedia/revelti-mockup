@@ -19,7 +19,7 @@
     <div id="navbar-placeholder"></div>
 
     <!-- Main container with a max-width for larger screens -->
-    <div class="max-w-2xl mx-auto bg-white shadow-lg overflow-hidden">
+    <div class="max-w-2xl lg:max-w-7xl mx-auto bg-white shadow-lg overflow-hidden">
 
         <!-- Header Section -->
         <header class="p-6 border-b">
@@ -28,11 +28,12 @@
             <p class="text-sm text-gray-500">Purchased on: August 10, 2025</p>
         </header>
         
-        <!-- Main Content -->
-        <main class="p-6 space-y-6">
+    <!-- Main Content -->
+    <main class="p-6 space-y-6 lg:grid lg:grid-cols-2 lg:gap-8 lg:space-y-0">
+        <div class="space-y-6">
             <button id="see-ticket-btn" class="w-full flex items-center justify-center bg-revelo-orange text-white font-bold py-3 px-4 rounded-lg shadow-md hover:bg-orange-600 transition duration-300 text-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 0 1 0 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 0 1 0-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375Z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 0 1 0 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 0 1 0-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375Z" />
                 </svg>
                 View Ticket
             </button>
@@ -41,7 +42,7 @@
             <a href="eventDetail.html" class="block hover:shadow-xl transition-shadow duration-300">
                 <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
                     <div class="relative">
-                        <img src="images/eventPoster.jpg" alt="Event Poster" class="w-full h-40 object-cover">
+                        <img src="images/eventPoster.jpg" alt="Event Poster" class="w-full h-40 lg:h-48 object-cover">
                         <div class="absolute top-2 right-2 flex space-x-1">
                             <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></button>
                             <button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path></svg></button>
@@ -79,10 +80,11 @@
                     </div>
                 </div>
             </a>
+        </div>
 
-
+        <div class="space-y-6">
             <!-- Order Summary -->
-            <details class="bg-white border rounded-lg">
+            <details class="bg-white border rounded-lg" open>
                 <summary class="p-4 font-semibold revelo-blue cursor-pointer flex justify-between items-center text-xl">Order Summary <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
                 <div class="p-4 border-t border-gray-200 space-y-2 text-gray-700">
                     <p><strong>Ticket type:</strong> Sensuality Pass</p>
@@ -113,7 +115,8 @@
                     <button class="mt-2 w-full sm:w-auto bg-revelo-orange text-white font-bold py-2 px-6 rounded-lg shadow-md hover:bg-orange-600 transition duration-300">Submit Review</button>
                 </div>
             </details>
-        </main>
+        </div>
+    </main>
     </div>
 
     <!-- Ticket Modal -->
