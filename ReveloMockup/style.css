@@ -46,15 +46,14 @@ details > summary::-webkit-details-marker {
 
 /* Hides scrollbar for horizontal scrolling containers */
 /* .horizontal-scroll {
-/*     -ms-overflow-style: none;  /* IE and Edge */
-/*     scrollbar-width: none;  /* Firefox */
+/* -ms-overflow-style: none;  /* IE and Edge */
+/* scrollbar-width: none;  /* Firefox */
 /* }
 /* .horizontal-scroll::-webkit-scrollbar {
-/*     display: none; /* Chrome, Safari, and Opera */
+/* display: none; /* Chrome, Safari, and Opera */
 /* }
-/* 
-/* .break-inside-avoid {
-/*     break-inside: avoid;
+/* /* .break-inside-avoid {
+/* break-inside: avoid;
 /* }
 
 /* --- Custom Styles for Organizer Pages --- */
@@ -117,9 +116,56 @@ details[open] > summary svg.accordion-arrow {
 .dt-button:hover { background-color: #1a3050 !important; }
 .dataTables_wrapper .dataTables_filter input { border: 1px solid #d1d5db; border-radius: 0.5rem; padding: 0.5rem; }
 
-/* Modal styles */
-.modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 1000; }
-.modal-content { background: white; padding: 2rem; border-radius: 0.5rem; width: 90%; max-width: 500px; max-height: 80vh; overflow-y: auto; position: relative; }
+/* --- MODAL STYLES (UPDATED) --- */
+.modal-overlay { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0; 
+    background: rgba(0,0,0,0.6); /* Darkened overlay slightly */
+    display: none; /* Hidden by default */
+    justify-content: center; 
+    align-items: center; 
+    z-index: 1000; 
+    padding: 1rem; /* Add padding for smaller screens */
+    opacity: 0; /* Start fully transparent */
+    transition: opacity 0.3s ease-in-out; /* Fade-in transition */
+}
+
+/* This style will be added by JS to show the modal */
+.modal-overlay.visible {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content { 
+    background: white; 
+    padding: 0; /* Remove padding, as the fetched content has its own */
+    border-radius: 0.5rem; 
+    width: 100%; /* Full width on small screens */
+    max-width: 672px; /* max-w-2xl from Tailwind, to match notification content */
+    max-height: 90vh; /* Limit height to 90% of viewport */
+    display: flex; /* Use flexbox to manage inner content */
+    flex-direction: column; /* Stack content vertically */
+    overflow: hidden; /* Hide overflow on the modal itself */
+    position: relative; 
+    transform: scale(0.95); /* Start slightly smaller */
+    transition: transform 0.3s ease-in-out; /* Pop-in transition */
+}
+
+.modal-overlay.visible .modal-content {
+    transform: scale(1); /* Scale to full size when visible */
+}
+
+/* When the notification container is inside the modal, remove its shadow and margin */
+.modal-content .max-w-2xl {
+    box-shadow: none !important;
+    margin: 0 !important;
+    /* Allow the inner content of the notification panel to scroll */
+    overflow-y: auto;
+}
+
 
 /* Accordion arrow */
 details > summary { list-style: none; }
@@ -168,10 +214,6 @@ details[open] .accordion-arrow {
 
 /* Styles from financialOverview.html */
 body { padding-top: 4rem; }
-
-.modal-content { 
-    max-width: 600px; 
-}
 
 /* Styles from liveEventEdit.html */
 .change-dot {

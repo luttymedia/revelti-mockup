@@ -291,8 +291,7 @@
                     <div class="p-4 bg-white border-x border-b rounded-b-lg">
                         <p class="text-gray-600 mb-3">Your favorite styles help us give you better recommendations.</p>
                         <div id="styles-display" class="flex flex-wrap gap-2">
-                            <span class="bg-revelo-orange text-white text-sm font-semibold px-3 py-1 rounded-full">Bachata Sensual</span>
-                            <span class="bg-revelo-orange text-white text-sm font-semibold px-3 py-1 rounded-full">Kizomba</span>
+                            <!-- Styles are populated by JS -->
                         </div>
                         <button id="edit-styles-btn" class="mt-4 text-revelo-orange font-bold">Edit Styles</button>
                     </div>
@@ -304,16 +303,17 @@
                                 <div class="flex text-yellow-400">
                                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
                                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                </div>
                             </div>
+                            <p class="text-gray-700 mt-1">"Absolutely incredible experience! The organization was flawless and the artists were top-notch. Can't wait for next year!"</p>
+                            <p class="text-sm italic text-gray-500 mt-2">For: Sensuality & Essentiality</p>
                         </div>
-                        <p class="text-gray-700 mt-1">"Absolutely incredible experience! The organization was flawless and the artists were top-notch. Can't wait for next year!"</p>
-                        <p class="text-sm italic text-gray-500 mt-2">For: Sensuality & Essentiality</p>
                     </div>
                 </details>
-                <a href="notificationSettings.html" class="flex justify-between items-center cursor-pointer font-semibold text-lg revelo-blue p-3 bg-white border rounded-lg hover:bg-gray-50 transition-colors">
+                <button id="notification-settings-link" class="w-full flex justify-between items-center cursor-pointer font-semibold text-lg revelo-blue p-3 bg-white border rounded-lg hover:bg-gray-50 transition-colors">
                     <span>Notification Settings</span>
                     <svg class="w-6 h-6 revelo-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                </a>
+                </button>
                 <details><summary class="flex justify-between items-center cursor-pointer font-semibold text-lg revelo-blue p-3 bg-white border rounded-lg">My Account <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
                     <div class="p-4 space-y-4 bg-white border-x border-b rounded-b-lg">
                         <div><label class="font-semibold text-gray-700">Change Password:</label>
@@ -376,210 +376,148 @@
     </div>
 
     <script>
-        // Store references to tab buttons and content panels
-        const tabButtons = document.querySelectorAll('.tab-button');
-        const tabContents = document.querySelectorAll('.tab-content');
-
-        /**
-         * Switches the visible tab in the content area.
-         * @param {string} targetId The ID of the tab content to display.
-         */
-        function switchTab(targetId) {
-            // Hide all content panels
-            tabContents.forEach(content => {
-                content.classList.add('hidden');
-            });
-
-            // Deactivate all tab buttons
-            tabButtons.forEach(button => {
-                button.classList.remove('tab-active');
-            });
-
-            // Show the target content panel
-            const targetContent = document.getElementById(targetId);
-            if (targetContent) {
-                targetContent.classList.remove('hidden');
-            }
-
-            // Activate the clicked tab button
-            // We find the button that controls the targetId
-            const targetButton = document.querySelector(`[onclick="switchTab('${targetId}')"]`);
-            if (targetButton) {
-                targetButton.classList.add('tab-active');
-            }
-        }
-
-        // --- Media Modal Interaction ---
-        const mediaModal = document.getElementById('media-modal');
-        const modalImage = document.getElementById('modal-image');
-        const modalOverlay = document.getElementById('modal-overlay'); // New
-        const modalEventName = document.getElementById('modal-event-name');
-        const modalCreatorName = document.getElementById('modal-creator-name');
-        const closeMediaModalBtn = document.getElementById('close-media-modal');
-        const nextBtn = document.getElementById('next-media');
-        const prevBtn = document.getElementById('prev-media');
-
-        let galleryItems = [];
-        let currentIndex = 0;
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        function toggleOverlay(e) {
-        e.stopPropagation();
-        modalOverlay.classList.toggle('hidden');
-}
-
-        function openMediaModal(element) {
-            const favoritesGrid = document.getElementById('favorites-grid');
-            galleryItems = Array.from(favoritesGrid.querySelectorAll('.cursor-pointer'));
-            currentIndex = galleryItems.indexOf(element);
-            
-            if (currentIndex === -1) return;
-
-            showMedia(currentIndex);
-            mediaModal.classList.remove('hidden');
-            modalOverlay.classList.remove('hidden'); // Ensure overlay is visible on open
-        }
-
-        function showMedia(index) {
-            if (index < 0 || index >= galleryItems.length) {
-                return;
-            }
-            const item = galleryItems[index];
-            const img = item.querySelector('img');
-            const eventName = item.getAttribute('data-event');
-            const creatorName = item.getAttribute('data-creator');
-
-            modalImage.src = img.src;
-            modalEventName.textContent = eventName;
-            modalCreatorName.textContent = `by ${creatorName}`;
-            currentIndex = index;
-        }
-
-        function nextMedia() {
-            const nextIndex = (currentIndex + 1) % galleryItems.length;
-            showMedia(nextIndex);
-        }
-
-        function prevMedia() {
-            const prevIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
-            showMedia(prevIndex);
-        }
-
-        function closeMediaModal() {
-            mediaModal.classList.add('hidden');
-            modalImage.src = "";
-        }
-
-        // Swipe functionality
-        function handleSwipe() {
-            if (touchEndX < touchStartX - 50) { // Swiped left
-                nextMedia();
-            }
-            if (touchEndX > touchStartX + 50) { // Swiped right
-                prevMedia();
-            }
-        }
-
-        mediaModal.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, {passive: true});
-
-        mediaModal.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
-
-        // Click listeners
-        modalImage.addEventListener('click', (e) => toggleOverlay(e));
-        closeMediaModalBtn.addEventListener('click', closeMediaModal);
-        nextBtn.addEventListener('click', nextMedia);
-        prevBtn.addEventListener('click', prevMedia);
-
-        mediaModal.addEventListener('click', (event) => {
-            // Close only if clicking the background (not children)
-            if (event.target === mediaModal) {
-                closeMediaModal();
-            }
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (!mediaModal.classList.contains('hidden')) {
-                if (e.key === 'ArrowRight') {
-                    nextMedia();
-                } else if (e.key === 'ArrowLeft') {
-                    prevMedia();
-                } else if (e.key === 'Escape') {
-                    closeMediaModal();
-                }
-            }
-        });
-        
-        // --- Styles Modal Interaction ---
-        const stylesModal = document.getElementById('styles-modal');
-        const editStylesBtn = document.getElementById('edit-styles-btn');
-        const closeStylesModalBtn = document.getElementById('close-styles-modal');
-        const confirmStylesBtn = document.getElementById('confirm-styles-btn');
-        const stylesModalContent = document.getElementById('styles-modal-content');
-        const stylesDisplay = document.getElementById('styles-display');
-        
-        const allStyles = ['Bachata Sensual', 'Salsa On1', 'Kizomba', 'Zouk', 'Bachata Fusion', 'Salsa On2'];
-        let selectedStyles = ['Bachata Sensual', 'Kizomba']; // Default selected
-
-        function renderStylesInModal() {
-            const container = stylesModalContent.querySelector('.space-y-2');
-            container.innerHTML = '';
-            allStyles.forEach(style => {
-                const isChecked = selectedStyles.includes(style);
-                const label = document.createElement('label');
-                label.className = 'flex justify-between items-center p-2 rounded-md hover:bg-gray-100 cursor-pointer';
-                label.innerHTML = `
-                    <span class="text-gray-700">${style}</span>
-                    <input type="checkbox" value="${style}" class="h-5 w-5 rounded border-gray-300 text-revelo-orange focus:ring-revelo-orange" ${isChecked ? 'checked' : ''}>
-                `;
-                container.appendChild(label);
-            });
-        }
-        
-        function updateSelectedStylesDisplay() {
-            stylesDisplay.innerHTML = '';
-            selectedStyles.forEach(style => {
-                const span = document.createElement('span');
-                span.className = 'bg-revelo-orange text-white text-sm font-semibold px-3 py-1 rounded-full';
-                span.textContent = style;
-                stylesDisplay.appendChild(span);
-            });
-        }
-
-        editStylesBtn.addEventListener('click', () => {
-            renderStylesInModal();
-            stylesModal.classList.remove('hidden');
-        });
-
-        function closeStylesModal() {
-            stylesModal.classList.add('hidden');
-        }
-
-        closeStylesModalBtn.addEventListener('click', closeStylesModal);
-        confirmStylesBtn.addEventListener('click', () => {
-            const newSelected = [];
-            stylesModalContent.querySelectorAll('input[type="checkbox"]:checked').forEach(input => {
-                newSelected.push(input.value);
-            });
-            selectedStyles = newSelected;
-            updateSelectedStylesDisplay();
-            closeStylesModal();
-        });
-
-        stylesModal.addEventListener('click', (event) => {
-            if (!stylesModalContent.contains(event.target)) {
-                closeStylesModal();
-            }
-        });
-
-
-        // Initialize the page
         document.addEventListener('DOMContentLoaded', () => {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            window.switchTab = function(targetId) {
+                tabContents.forEach(content => content.classList.add('hidden'));
+                tabButtons.forEach(button => button.classList.remove('tab-active'));
+                const targetContent = document.getElementById(targetId);
+                if (targetContent) targetContent.classList.remove('hidden');
+                const targetButton = document.querySelector(`[onclick="switchTab('${targetId}')"]`);
+                if (targetButton) targetButton.classList.add('tab-active');
+            }
+
+            const mediaModal = document.getElementById('media-modal');
+            const modalImage = document.getElementById('modal-image');
+            const modalOverlay = document.getElementById('modal-overlay');
+            const modalEventName = document.getElementById('modal-event-name');
+            const modalCreatorName = document.getElementById('modal-creator-name');
+            const closeMediaModalBtn = document.getElementById('close-media-modal');
+            const nextBtn = document.getElementById('next-media');
+            const prevBtn = document.getElementById('prev-media');
+            let galleryItems = [];
+            let currentIndex = 0;
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            function toggleOverlay(e) {
+                e.stopPropagation();
+                modalOverlay.classList.toggle('hidden');
+            }
+
+            window.openMediaModal = function(element) {
+                const favoritesGrid = document.getElementById('favorites-grid');
+                galleryItems = Array.from(favoritesGrid.querySelectorAll('.cursor-pointer'));
+                currentIndex = galleryItems.indexOf(element);
+                if (currentIndex === -1) return;
+                showMedia(currentIndex);
+                mediaModal.classList.remove('hidden');
+                modalOverlay.classList.remove('hidden');
+            }
+
+            function showMedia(index) {
+                if (index < 0 || index >= galleryItems.length) return;
+                const item = galleryItems[index];
+                const img = item.querySelector('img');
+                modalImage.src = img.src;
+                modalEventName.textContent = item.getAttribute('data-event');
+                modalCreatorName.textContent = `by ${item.getAttribute('data-creator')}`;
+                currentIndex = index;
+            }
+
+            function nextMedia() { showMedia((currentIndex + 1) % galleryItems.length); }
+            function prevMedia() { showMedia((currentIndex - 1 + galleryItems.length) % galleryItems.length); }
+            function closeMediaModal() { mediaModal.classList.add('hidden'); modalImage.src = ""; }
+            function handleSwipe() {
+                if (touchEndX < touchStartX - 50) nextMedia();
+                if (touchEndX > touchStartX + 50) prevMedia();
+            }
+
+            mediaModal.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, {passive: true});
+            mediaModal.addEventListener('touchend', e => { touchEndX = e.changedTouches[0].screenX; handleSwipe(); });
+            modalImage.addEventListener('click', (e) => toggleOverlay(e));
+            closeMediaModalBtn.addEventListener('click', closeMediaModal);
+            nextBtn.addEventListener('click', nextMedia);
+            prevBtn.addEventListener('click', prevMedia);
+            mediaModal.addEventListener('click', (event) => { if (event.target === mediaModal) closeMediaModal(); });
+            document.addEventListener('keydown', (e) => {
+                if (!mediaModal.classList.contains('hidden')) {
+                    if (e.key === 'ArrowRight') nextMedia();
+                    else if (e.key === 'ArrowLeft') prevMedia();
+                    else if (e.key === 'Escape') closeMediaModal();
+                }
+            });
+            
+            const stylesModal = document.getElementById('styles-modal');
+            const editStylesBtn = document.getElementById('edit-styles-btn');
+            const closeStylesModalBtn = document.getElementById('close-styles-modal');
+            const confirmStylesBtn = document.getElementById('confirm-styles-btn');
+            const stylesModalContent = document.getElementById('styles-modal-content');
+            const stylesDisplay = document.getElementById('styles-display');
+            const allStyles = ['Bachata Sensual', 'Salsa On1', 'Kizomba', 'Zouk', 'Bachata Fusion', 'Salsa On2'];
+            let selectedStyles = ['Bachata Sensual', 'Kizomba'];
+
+            function renderStylesInModal() {
+                const container = stylesModalContent.querySelector('.space-y-2');
+                container.innerHTML = '';
+                allStyles.forEach(style => {
+                    const isChecked = selectedStyles.includes(style);
+                    const label = document.createElement('label');
+                    label.className = 'flex justify-between items-center p-2 rounded-md hover:bg-gray-100 cursor-pointer';
+                    label.innerHTML = `<span class="text-gray-700">${style}</span><input type="checkbox" value="${style}" class="h-5 w-5 rounded border-gray-300 text-revelo-orange focus:ring-revelo-orange" ${isChecked ? 'checked' : ''}>`;
+                    container.appendChild(label);
+                });
+            }
+            
+            function updateSelectedStylesDisplay() {
+                stylesDisplay.innerHTML = '';
+                selectedStyles.forEach(style => {
+                    const span = document.createElement('span');
+                    span.className = 'bg-revelo-orange text-white text-sm font-semibold px-3 py-1 rounded-full';
+                    span.textContent = style;
+                    stylesDisplay.appendChild(span);
+                });
+            }
+
+            editStylesBtn.addEventListener('click', () => {
+                renderStylesInModal();
+                stylesModal.classList.remove('hidden');
+            });
+
+            function closeStylesModal() { stylesModal.classList.add('hidden'); }
+
+            closeStylesModalBtn.addEventListener('click', closeStylesModal);
+            confirmStylesBtn.addEventListener('click', () => {
+                const newSelected = [];
+                stylesModalContent.querySelectorAll('input[type="checkbox"]:checked').forEach(input => newSelected.push(input.value));
+                selectedStyles = newSelected;
+                updateSelectedStylesDisplay();
+                closeStylesModal();
+            });
+
+            stylesModal.addEventListener('click', (event) => {
+                if (!stylesModalContent.contains(event.target)) closeStylesModal();
+            });
+
+            // --- Notification Settings Link ---
+            const settingsLink = document.getElementById('notification-settings-link');
+            if (settingsLink) {
+                settingsLink.addEventListener('click', () => {
+                    if (typeof openSettingsModal === 'function') {
+                        if (window.innerWidth < 768) {
+                            window.location.href = 'notificationSettings.html';
+                        } else {
+                            openSettingsModal();
+                        }
+                    } else {
+                        console.error('openSettingsModal function not found. Navigating directly.');
+                        window.location.href = 'notificationSettings.html';
+                    }
+                });
+            }
+
             switchTab('following');
             updateSelectedStylesDisplay();
         });

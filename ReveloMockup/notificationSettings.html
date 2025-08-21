@@ -22,7 +22,7 @@
     <div class="max-w-2xl mx-auto bg-white shadow-lg overflow-hidden">
 
         <!-- Header Section -->
-        <header class="p-6 border-b">
+        <header class="sticky top-0 bg-white z-10 p-6 border-b">
             <h1 class="text-2xl font-bold revelo-blue">Notification Settings</h1>
             <p class="text-gray-500">Choose what you want to be notified about and how you receive updates.</p>
         </header>
@@ -224,46 +224,39 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const masterPushToggle = document.getElementById('master-push-toggle');
-            const masterEmailToggle = document.getElementById('master-email-toggle');
-            const pushCheckboxes = document.querySelectorAll('.push-checkbox');
-            const emailCheckboxes = document.querySelectorAll('.email-checkbox');
+        function initializeSettingsComponent(hostElement) {
+            if (!hostElement) return;
+
+            const masterPushToggle = hostElement.querySelector('#master-push-toggle');
+            const masterEmailToggle = hostElement.querySelector('#master-email-toggle');
+            const pushCheckboxes = hostElement.querySelectorAll('.push-checkbox');
+            const emailCheckboxes = hostElement.querySelectorAll('.email-checkbox');
 
             let pushStates = [];
             let emailStates = [];
 
-            // Function to save checkbox states
             function saveStates(checkboxes, stateArray) {
-                stateArray.length = 0; // Clear the array
-                checkboxes.forEach(checkbox => {
-                    stateArray.push(checkbox.checked);
-                });
+                stateArray.length = 0;
+                checkboxes.forEach(checkbox => stateArray.push(checkbox.checked));
             }
 
-            // Function to restore checkbox states
             function restoreStates(checkboxes, stateArray) {
                 checkboxes.forEach((checkbox, index) => {
                     checkbox.checked = stateArray[index] || false;
                 });
             }
             
-            // Initial save of states
             saveStates(pushCheckboxes, pushStates);
             saveStates(emailCheckboxes, emailStates);
 
-
             masterPushToggle.addEventListener('change', function () {
                 if (this.checked) {
-                    // Enable and restore states
                     pushCheckboxes.forEach((checkbox, index) => {
                         checkbox.disabled = false;
                         checkbox.checked = pushStates[index];
                     });
                 } else {
-                    // Save current states before disabling
                     saveStates(pushCheckboxes, pushStates);
-                    // Disable and uncheck
                     pushCheckboxes.forEach(checkbox => {
                         checkbox.checked = false;
                         checkbox.disabled = true;
@@ -273,21 +266,25 @@
 
             masterEmailToggle.addEventListener('change', function () {
                 if (this.checked) {
-                    // Enable and restore states
                     emailCheckboxes.forEach((checkbox, index) => {
                         checkbox.disabled = false;
                         checkbox.checked = emailStates[index];
                     });
                 } else {
-                    // Save current states before disabling
                     saveStates(emailCheckboxes, emailStates);
-                    // Disable and uncheck
                     emailCheckboxes.forEach(checkbox => {
                         checkbox.checked = false;
                         checkbox.disabled = true;
                     });
                 }
             });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const pageHost = document.querySelector('.max-w-2xl.mx-auto.bg-white');
+            if (pageHost) {
+                initializeSettingsComponent(pageHost);
+            }
         });
     </script>
     <script src="main.js" defer></script>
