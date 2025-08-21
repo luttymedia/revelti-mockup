@@ -87,25 +87,67 @@
                         <div><label class="font-semibold text-gray-700">Tags</label><input type="text" placeholder="e.g., Bachata, Salsa, Zouk (comma separated)" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
                     </div>
 
-                    <!-- Step 3: Ticketing -->
-                    <div id="step-3" class="step-content hidden space-y-4">
-                        <h3 class="font-bold text-lg revelo-blue">Initial Ticket Setup</h3>
-                        <p class="text-sm text-gray-600">You can add more ticket types, descriptions, promo codes, and advanced pricing rules from the <strong>event management dashboard</strong> later.</p>
-                        <div id="ticket-types-container" class="space-y-4">
-                            <!-- Ticket Type Row (template for cloning) -->
-                            <div class="ticket-type-row p-4 border rounded-lg bg-gray-50 space-y-4">
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                    <div><label class="font-semibold text-gray-700">Ticket Name</label><input type="text" value="Full Pass" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
-                                    <div><label class="font-semibold text-gray-700">Price (€)</label><input type="number" value="120" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
-                                    <div><label class="font-semibold text-gray-700">Quantity</label><input type="number" value="100" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                    <!-- Step 3: Ticketing (NEW) -->
+                    <div id="step-3" class="step-content hidden space-y-6">
+                        <!-- Container for created ticket summaries -->
+                        <div id="ticket-summary-container" class="space-y-2"></div>
+                        
+                        <!-- Ticket Creation Form -->
+                        <div id="ticket-creation-form" class="p-4 border rounded-lg bg-gray-50 space-y-4">
+                            <h3 id="ticket-form-title" class="font-bold text-lg revelo-blue">Add New Ticket Type</h3>
+                            <input type="hidden" id="editing-ticket-id">
+                            <div><label class="font-semibold text-gray-700">Ticket Name</label><input id="ticket-name" type="text" placeholder="e.g., Weekend Pass" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div><label class="font-semibold text-gray-700">Quantity Available</label><input id="ticket-qty" type="number" placeholder="e.g., 200" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                                <div>
+                                    <label class="font-semibold text-gray-700">Status</label>
+                                    <select id="ticket-status" class="w-full p-2 border border-gray-300 rounded-md mt-1" onchange="toggleScheduledDate(this.value)">
+                                        <option value="On Sale">On Sale</option>
+                                        <option value="Draft">Draft</option>
+                                        <option value="Scheduled">Scheduled</option>
+                                    </select>
                                 </div>
                             </div>
+                            <div id="scheduled-date-container" class="hidden">
+                                <label class="font-semibold text-gray-700">Sale Start Date</label>
+                                <input id="scheduled-date" type="date" class="w-full p-2 border border-gray-300 rounded-md mt-1">
+                            </div>
+
+                            <div class="pt-4 border-t">
+                                <label class="font-semibold text-gray-700">Pricing Strategy</label>
+                                <div class="flex space-x-4 mt-2">
+                                    <label class="flex items-center"><input type="radio" name="pricing-strategy" value="simple" class="mr-2" onchange="togglePricingStrategy(this.value)" checked> Simple Price</label>
+                                    <label class="flex items-center"><input type="radio" name="pricing-strategy" value="dynamic" class="mr-2" onchange="togglePricingStrategy(this.value)"> Dynamic Pricing</label>
+                                </div>
+                            </div>
+
+                            <div id="simple-price-view">
+                                <div><label class="font-semibold text-gray-700">Price (€)</label><input id="simple-price" type="number" placeholder="e.g., 190.00" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                            </div>
+
+                            <div id="dynamic-price-view" class="hidden space-y-4">
+                                <div><label class="font-semibold text-gray-700">Base Price (€)</label><input id="base-price" type="number" placeholder="The first price tier" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                                <div id="pricing-rules-container" class="space-y-2"></div>
+                                <button type="button" onclick="addPricingRule()" class="text-sm font-semibold revelo-blue hover:underline">+ Add Pricing Rule</button>
+                                
+                                <div class="pt-4 border-t">
+                                    <label class="flex items-center text-sm">
+                                        <input type="checkbox" id="final-price-override-check" class="mr-2" onchange="toggleFinalPriceOverride()">
+                                        Manually set a different "final price" for display (strikethrough price)
+                                    </label>
+                                    <div id="final-price-override-container" class="hidden mt-2">
+                                        <label class="font-semibold text-gray-700">Display Final Price (€)</label>
+                                        <input id="final-price-override-value" type="number" placeholder="e.g., 250.00" class="w-full p-2 border border-gray-300 rounded-md mt-1">
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="flex justify-end space-x-2 pt-4">
+                                <button id="cancel-edit-btn" onclick="resetTicketForm()" class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg hidden">Cancel Edit</button>
+                                <button onclick="saveTicket()" class="px-4 py-2 font-bold bg-revelo-blue text-white rounded-lg">Save Ticket</button>
+                            </div>
                         </div>
-                        <button onclick="addTicketType()" class="w-full mt-2 px-6 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 flex items-center justify-center">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
-                            Add Another Ticket Type
-                        </button>
                     </div>
+
 
                     <!-- Step 4: Collaborators -->
                     <div id="step-4" class="step-content hidden space-y-4">
@@ -142,6 +184,7 @@
     <script>
         let currentStep = 1;
         const totalSteps = 4;
+        let eventTickets = []; // Array to store ticket data for this page
 
         function showStep(step) {
             document.querySelectorAll('.step-content').forEach(el => el.classList.add('hidden'));
@@ -187,21 +230,176 @@
         }
 
         function jumpToStep(stepNumber) {
-            if (stepNumber < currentStep) {
+            // Allow jumping only to previously completed steps
+            const indicator = document.getElementById(`step-${stepNumber}-indicator`);
+            if (indicator.classList.contains('cursor-pointer')) {
                 currentStep = stepNumber;
                 showStep(currentStep);
             }
         }
 
-        function addTicketType() {
-            const container = document.getElementById('ticket-types-container');
-            const firstTicketRow = container.querySelector('.ticket-type-row');
-            const newRow = firstTicketRow.cloneNode(true);
-            newRow.querySelectorAll('input').forEach(input => input.value = '');
-            container.appendChild(newRow);
+
+        // --- Step 3: Ticketing Logic ---
+        function togglePricingStrategy(strategy) {
+            document.getElementById('simple-price-view').classList.toggle('hidden', strategy !== 'simple');
+            document.getElementById('dynamic-price-view').classList.toggle('hidden', strategy !== 'dynamic');
+        }
+        
+        function toggleScheduledDate(status) {
+            document.getElementById('scheduled-date-container').classList.toggle('hidden', status !== 'Scheduled');
+        }
+        
+        function toggleFinalPriceOverride() {
+            const isChecked = document.getElementById('final-price-override-check').checked;
+            document.getElementById('final-price-override-container').classList.toggle('hidden', !isChecked);
         }
 
-        // --- Collaborator Search Simulation ---
+        function addPricingRule(rule = null) {
+            const container = document.getElementById('pricing-rules-container');
+            const ruleDiv = document.createElement('div');
+            ruleDiv.className = 'flex items-center space-x-2';
+            
+            ruleDiv.innerHTML = `
+                <span>Increase to</span>
+                <input type="number" placeholder="220.00" class="rule-price p-2 border border-gray-300 rounded-md w-24" value="${rule?.newPrice || ''}">
+                <span>when</span>
+                <select class="rule-type p-2 border border-gray-300 rounded-md" onchange="updateRuleInputType(this)">
+                    <option value="date" ${rule?.type === 'date' ? 'selected' : ''}>Date is after</option>
+                    <option value="sales" ${rule?.type === 'sales' ? 'selected' : ''}>Tickets Sold ></option>
+                </select>
+                <input type="${rule?.type === 'sales' ? 'number' : 'date'}" class="rule-value p-2 border border-gray-300 rounded-md flex-1" value="${rule?.value || ''}">
+                <button type="button" onclick="this.parentElement.remove()" class="text-red-500 hover:text-red-700 font-bold">&times;</button>
+            `;
+            container.appendChild(ruleDiv);
+        }
+        
+        function updateRuleInputType(selectElement) {
+            const valueInput = selectElement.nextElementSibling;
+            valueInput.type = selectElement.value === 'date' ? 'date' : 'number';
+            valueInput.value = '';
+        }
+        
+        function saveTicket() {
+            const ticketId = document.getElementById('editing-ticket-id').value;
+            const strategy = document.querySelector('input[name="pricing-strategy"]:checked').value;
+            const status = document.getElementById('ticket-status').value;
+            
+            let pricingData = {};
+            if (strategy === 'simple') {
+                pricingData = { strategy: 'simple', simplePrice: parseFloat(document.getElementById('simple-price').value) || 0 };
+            } else {
+                const rules = [];
+                document.querySelectorAll('#pricing-rules-container > div').forEach(ruleDiv => {
+                    rules.push({
+                        type: ruleDiv.querySelector('.rule-type').value,
+                        value: ruleDiv.querySelector('.rule-value').value,
+                        newPrice: parseFloat(ruleDiv.querySelector('.rule-price').value) || 0
+                    });
+                });
+                const finalPriceOverride = document.getElementById('final-price-override-check').checked
+                    ? parseFloat(document.getElementById('final-price-override-value').value) || null : null;
+                pricingData = {
+                    strategy: 'dynamic',
+                    basePrice: parseFloat(document.getElementById('base-price').value) || 0,
+                    rules: rules,
+                    finalPriceOverride: finalPriceOverride
+                };
+            }
+
+            const ticketPayload = {
+                name: document.getElementById('ticket-name').value || 'Unnamed Ticket',
+                quantity: parseInt(document.getElementById('ticket-qty').value) || 0,
+                status: status,
+                scheduledDate: status === 'Scheduled' ? document.getElementById('scheduled-date').value : null,
+                pricing: pricingData,
+            };
+
+            if (ticketId) {
+                const index = eventTickets.findIndex(t => t.id == ticketId);
+                eventTickets[index] = { ...eventTickets[index], ...ticketPayload };
+            } else {
+                ticketPayload.id = Date.now(); // Simple unique ID for mockup
+                eventTickets.push(ticketPayload);
+            }
+            renderTicketSummaries();
+            resetTicketForm();
+        }
+
+        function resetTicketForm() {
+            document.getElementById('ticket-form-title').textContent = 'Add New Ticket Type';
+            document.getElementById('editing-ticket-id').value = '';
+            document.getElementById('ticket-name').value = '';
+            document.getElementById('ticket-qty').value = '';
+            document.getElementById('ticket-status').value = 'On Sale';
+            toggleScheduledDate('On Sale');
+            document.querySelector('input[name="pricing-strategy"][value="simple"]').checked = true;
+            togglePricingStrategy('simple');
+            document.getElementById('simple-price').value = '';
+            document.getElementById('base-price').value = '';
+            document.getElementById('pricing-rules-container').innerHTML = '';
+            document.getElementById('final-price-override-check').checked = false;
+            toggleFinalPriceOverride();
+            document.getElementById('cancel-edit-btn').classList.add('hidden');
+        }
+
+        function renderTicketSummaries() {
+            const container = document.getElementById('ticket-summary-container');
+            container.innerHTML = '';
+            if (eventTickets.length > 0 && container.querySelector('h3') === null) {
+                 container.innerHTML = '<h3 class="font-bold text-lg revelo-blue">Created Tickets</h3>';
+            }
+            eventTickets.forEach(ticket => {
+                const summaryDiv = document.createElement('div');
+                summaryDiv.className = 'flex justify-between items-center p-3 border rounded-lg bg-white';
+                const strategyText = ticket.pricing.strategy.charAt(0).toUpperCase() + ticket.pricing.strategy.slice(1);
+                summaryDiv.innerHTML = `
+                    <div>
+                        <p class="font-semibold">${ticket.name}</p>
+                        <p class="text-sm text-gray-600">Pricing: ${strategyText}</p>
+                    </div>
+                    <button onclick="editTicket(${ticket.id})" class="text-sm font-semibold revelo-blue">Edit</button>
+                `;
+                container.appendChild(summaryDiv);
+            });
+        }
+        
+        function editTicket(ticketId) {
+            const ticket = eventTickets.find(t => t.id === ticketId);
+            if (!ticket) return;
+
+            document.getElementById('ticket-form-title').textContent = `Editing: ${ticket.name}`;
+            document.getElementById('editing-ticket-id').value = ticket.id;
+            
+            document.getElementById('ticket-name').value = ticket.name;
+            document.getElementById('ticket-qty').value = ticket.quantity;
+            document.getElementById('ticket-status').value = ticket.status;
+            toggleScheduledDate(ticket.status);
+            if (ticket.status === 'Scheduled') {
+                document.getElementById('scheduled-date').value = ticket.scheduledDate;
+            }
+            
+            const strategy = ticket.pricing.strategy;
+            document.querySelector(`input[name="pricing-strategy"][value="${strategy}"]`).checked = true;
+            togglePricingStrategy(strategy);
+
+            if (strategy === 'simple') {
+                document.getElementById('simple-price').value = ticket.pricing.simplePrice;
+            } else {
+                document.getElementById('base-price').value = ticket.pricing.basePrice;
+                document.getElementById('pricing-rules-container').innerHTML = '';
+                ticket.pricing.rules.forEach(rule => addPricingRule(rule));
+                const overrideCheck = document.getElementById('final-price-override-check');
+                overrideCheck.checked = !!ticket.pricing.finalPriceOverride;
+                toggleFinalPriceOverride();
+                if (ticket.pricing.finalPriceOverride) {
+                    document.getElementById('final-price-override-value').value = ticket.pricing.finalPriceOverride;
+                }
+            }
+            document.getElementById('cancel-edit-btn').classList.remove('hidden');
+        }
+
+
+        // --- Step 4: Collaborator Search Simulation ---
         const mockCollaborators = [
             { name: 'AMedia', type: 'Creator' },
             { name: 'John Doe', type: 'Promoter' },
@@ -260,7 +458,6 @@
 
         function removeCollaborator(buttonElement) {
             buttonElement.parentElement.remove();
-            // If the list is empty, hide the container again
             if (invitedList.children.length === 0) {
                 invitedListContainer.classList.add('hidden');
             }
