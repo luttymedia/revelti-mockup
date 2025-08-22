@@ -84,14 +84,35 @@
     <div id="modal-backdrop" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40"></div>
     <div id="edit-folder-modal" class="modal fixed inset-0 flex items-center justify-center p-4 hidden z-50">
         <div class="bg-white rounded-lg shadow-xl w-full max-w-lg p-6 space-y-4">
-            <h3 class="font-bold text-xl revelo-blue" id="modal-folder-name">Edit Folder: Sensuality 2025</h3>
+            <h3 class="font-bold text-xl revelo-blue" id="modal-folder-name">Edit Folder: Official Media</h3>
+            <!-- Owner Badge -->
+            <div id="modal-owner-badge" class="flex items-center text-sm font-semibold revelo-blue p-2 bg-blue-50 rounded-lg">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                <span id="modal-owner-name">Folder Owner: AMedia</span>
+            </div>
+            <!-- Copy link -->
+            <div class="flex items-center justify-between border-t py-4">
+                <div class="flex items-center space-x-2 text-revelo-blue font-semibold cursor-pointer">
+                    <!-- New SVG for the link icon -->
+                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor"><path d="M451.5 160C434.9 160 418.8 164.5 404.7 172.7C388.9 156.7 370.5 143.3 350.2 133.2C378.4 109.2 414.3 96 451.5 96C537.9 96 608 166 608 252.5C608 294 591.5 333.8 562.2 363.1L491.1 434.2C461.8 463.5 422 480 380.5 480C294.1 480 224 410 224 323.5C224 322 224 320.5 224.1 319C224.6 301.3 239.3 287.4 257 287.9C274.7 288.4 288.6 303.1 288.1 320.8C288.1 321.7 288.1 322.6 288.1 323.4C288.1 374.5 329.5 415.9 380.6 415.9C405.1 415.9 428.6 406.2 446 388.8L517.1 317.7C534.4 300.4 544.2 276.8 544.2 252.3C544.2 201.2 502.8 159.8 451.7 159.8zM307.2 237.3C305.3 236.5 303.4 235.4 301.7 234.2C289.1 227.7 274.7 224 259.6 224C235.1 224 211.6 233.7 194.2 251.1L123.1 322.2C105.8 339.5 96 363.1 96 387.6C96 438.7 137.4 480.1 188.5 480.1C205 480.1 221.1 475.7 235.2 467.5C251 483.5 269.4 496.9 289.8 507C261.6 530.9 225.8 544.2 188.5 544.2C102.1 544.2 32 474.2 32 387.7C32 346.2 48.5 306.4 77.8 277.1L148.9 206C178.2 176.7 218 160.2 259.5 160.2C346.1 160.2 416 230.8 416 317.1C416 318.4 416 319.7 416 321C415.6 338.7 400.9 352.6 383.2 352.2C365.5 351.8 351.6 337.1 352 319.4C352 318.6 352 317.9 352 317.1C352 283.4 334 253.8 307.2 237.5z"/></svg>
+                    <span>Copy folder link</span>
+                </div>
+            </div>
             <!-- Status -->
             <div>
                 <label class="font-semibold text-gray-700">Status</label>
-                <select id="modal-folder-status" onchange="toggleScheduledFields()" class="w-full p-2 border border-gray-300 rounded-md mt-1">
+                <select id="modal-folder-status" onchange="toggleScheduledFields(); toggleVisibilityControl()" class="w-full p-2 border border-gray-300 rounded-md mt-1">
                     <option>Private</option>
                     <option>Public</option>
                     <option>Scheduled</option>
+                </select>
+            </div>
+            <!-- Gallery visibility control -->
+            <div id="visibility-control-container" class="space-y-2 hidden">
+                <label class="font-semibold text-gray-700">Gallery visibility</label>
+                <select id="modal-visibility-control" class="w-full p-2 border border-gray-300 rounded-md mt-1">
+                    <option>Restricted (only owner and collaborators)</option>
+                    <option>Anyone with the link</option>
                 </select>
             </div>
             <!-- Scheduled Fields -->
@@ -137,7 +158,7 @@
                         <h3 id="modal-event-name" class="font-bold text-lg"></h3>
                         <p id="modal-creator-name" class="text-sm"></p>
                     </div>
-                    <div class="flex items-center space-x-2">
+                    <div id="modal-header-icons" class="flex items-center space-x-2">
                         <!-- Icons will be dynamically loaded by JS -->
                     </div>
                 </div>
@@ -149,61 +170,76 @@
             </div>
         </div>
     </div>
-
+    
     <!-- This is the main script for the page's core functionality -->
     <script>
+        // Updated galleryData with new folders and properties
         const galleryData = {
             id: 'root',
-            name: 'Sensuality 2025',
-            status: 'Public',
-            creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }],
+            name: 'Root',
             children: [
                 {
-                    id: 'sat',
-                    name: 'Saturday 01-Nov',
+                    id: 'sensuality',
+                    name: 'Official Media',
                     status: 'Public',
+                    owner: 'AMedia', // Added owner property
                     creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }],
                     children: [
                         {
-                            id: 'sat-photos',
-                            name: 'Photos',
+                            id: 'sat',
+                            name: 'Saturday 01-Nov',
                             status: 'Public',
+                            owner: 'AMedia',
                             creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }],
                             children: [
-                                { id: 'Social', name: 'Social', type: 'gallery', status: 'Public', creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }, { name: 'Lutty Moreira', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=LM' }], content: '125 Photos, 10 Videos' },
-                                { id: 'jandj', name: 'Jack & Jill', type: 'gallery', status: 'Public', creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }], content: '50 Photos' },
+                                { id: 'Social', name: 'Social', type: 'gallery', status: 'Public', owner: 'AMedia', creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }, { name: 'Lutty Moreira', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=LM' }], content: '125 Photos, 10 Videos' },
+                                { id: 'jandj', name: 'Jack & Jill', type: 'gallery', status: 'Public', owner: 'AMedia', creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }], content: '50 Photos' },
                             ]
                         },
-                        { id: 'sat-videos', name: 'Videos', status: 'Approval Needed', creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }], children: [] }
-                    ]
-                },
-                {
-                    id: 'sun',
-                    name: 'Sunday 02-Nov',
-                    status: 'Scheduled',
-                    schedule: 'Nov 10, 2025 10:00 AM',
-                    creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }],
-                    children: [
+                        // Moved 'sun' folder to be a child of 'sensuality'
                         {
-                            id: 'sun-photos',
-                            name: 'Photos',
+                            id: 'sun',
+                            name: 'Sunday 02-Nov',
                             status: 'Scheduled',
                             schedule: 'Nov 10, 2025 10:00 AM',
+                            owner: 'AMedia',
                             creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }],
                             children: [
-                                { id: 'sun-social', name: 'Sunday Social', type: 'gallery', status: 'Scheduled', creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }], content: '180 Photos, 5 Videos', schedule: 'Nov 10, 2025 10:00 AM' },
+                                { id: 'sun-photos', name: 'Photos', status: 'Scheduled', schedule: 'Nov 10, 2025 10:00 AM', owner: 'AMedia', creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }], children: [
+                                    { id: 'sun-social', name: 'Sunday Social', type: 'gallery', status: 'Scheduled', owner: 'AMedia', creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }], content: '180 Photos, 5 Videos', schedule: 'Nov 10, 2025 10:00 AM' },
+                                ] }
                             ]
                         }
                     ]
+                },
+                // New folders as requested
+                {
+                    id: 'promotional',
+                    name: 'Promotional Material',
+                    status: 'Public',
+                    owner: 'Bachata Sensual Events',
+                    creators: [{ name: 'Bachata Sensual Events', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=B' }],
+                    type: 'gallery',
+                    content: '4 Photos',
+                    children: [] // No child folders inside a gallery
+                },
+                {
+                    id: 'demos',
+                    name: 'Demos',
+                    status: 'Private',
+                    owner: 'AMedia',
+                    creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }],
+                    children: [],
+                    linkAccess: true // Added new property for "Anyone with the link"
                 }
             ]
         };
-
-        let currentPath = ['root'];
+        // Set the current path to point to the new top-level
+        let currentPath = ['sensuality'];
 
         function findNodeByPath(path) {
             let currentNode = galleryData;
-            for (let i = 1; i < path.length; i++) {
+            for (let i = 0; i < path.length; i++) {
                 if (!currentNode.children) return null;
                 currentNode = currentNode.children.find(c => c.id === path[i]);
             }
@@ -261,10 +297,29 @@
             });
         }
 
+        function getStatusHtml(status) {
+            switch(status) {
+                case 'Approval Needed': return `<span class="text-xs font-bold bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full whitespace-nowrap">${status}</span>`;
+                case 'Public': return `<span class="text-xs font-bold bg-green-100 text-green-800 px-2 py-1 rounded-full whitespace-nowrap">${status}</span>`;
+                case 'Scheduled': return `<span class="text-xs font-bold bg-blue-100 text-blue-800 px-2 py-1 rounded-full whitespace-nowrap">${status}</span>`;
+                default: return `<span class="text-xs font-bold bg-gray-200 text-gray-800 px-2 py-1 rounded-full whitespace-nowrap">${status}</span>`;
+            }
+        }
+        
+        // New function to generate the owner badge HTML
+        function getOwnerHtml(ownerName) {
+            // Updated styling to be an outline and regular font
+            return `<span class="text-xs font-normal border border-revelo-blue text-revelo-blue px-2 py-1 rounded-full whitespace-nowrap">Owner: ${ownerName}</span>`;
+        }
+
         function renderCurrentFolderActions() {
             const actionsContainer = document.getElementById('current-folder-actions');
             const currentNode = findNodeByPath(currentPath);
             const statusHtml = getStatusHtml(currentNode.status);
+            // Owner badge is shown here
+            const ownerHtml = currentNode.owner ? getOwnerHtml(currentNode.owner) : '';
+            const linkAccessHtml = currentNode.linkAccess ? `<span class="text-xs font-bold bg-purple-100 text-purple-800 px-2 py-1 rounded-full whitespace-nowrap">Anyone with the link</span>` : '';
+
 
             let creatorsHtml = '';
             if (currentNode.creators && currentNode.creators.length > 0) {
@@ -279,8 +334,10 @@
                 <div class="flex flex-col sm:flex-row justify-between sm:items-center">
                     <div class="flex-1 space-y-2">
                         <h3 class="font-bold text-lg revelo-blue">${currentNode.name}</h3>
-                        <div class="flex items-center space-x-2">
+                        <div class="flex flex-wrap items-center space-x-2">
                             ${statusHtml}
+                            ${ownerHtml}
+                            ${linkAccessHtml}
                             ${currentNode.schedule ? `<p class="text-xs text-gray-500">Publishes on ${currentNode.schedule}</p>` : ''}
                         </div>
                         ${creatorsHtml}
@@ -312,30 +369,68 @@
                 grid.innerHTML = '<p class="text-gray-500 col-span-full">This folder is empty.</p>';
                 return;
             }
-
-            currentNode.children.forEach(child => {
-                const fullPath = [...currentPath, child.id];
-                if (child.type === 'gallery') {
-                    grid.innerHTML += createGalleryCard(child, fullPath);
-                } else {
-                    grid.innerHTML += createFolderCard(child, fullPath);
-                }
-            });
+            // If we are at the root level, render all children
+            if (currentPath.length === 1 && currentPath[0] === 'root') {
+                 currentNode.children.forEach(child => {
+                     const fullPath = [child.id];
+                     if (child.type === 'gallery') {
+                         grid.innerHTML += createGalleryCard(child, fullPath);
+                     } else {
+                         grid.innerHTML += createFolderCard(child, fullPath);
+                     }
+                 });
+             } else {
+                 currentNode.children.forEach(child => {
+                     const fullPath = [...currentPath, child.id];
+                     if (child.type === 'gallery') {
+                         grid.innerHTML += createGalleryCard(child, fullPath);
+                     } else {
+                         grid.innerHTML += createFolderCard(child, fullPath);
+                     }
+                 });
+             }
         }
 
         function renderPhotoGalleryView(gridContainer, galleryNode) {
-            const photoPaths = [
-                "albums/event/gallery1.jpg",
-                "albums/event/gallery2.jpg",
-                "albums/event/gallery3.jpg",
-                "albums/event/gallery4.jpg",
-                "albums/event/gallery5.jpg",
-                "albums/event/gallery6.jpg",
-                "albums/event/gallery7.jpg",
-                "albums/event/gallery8.jpg",
-                "albums/event/gallery9.jpg",
-                "albums/event/gallery10.jpg"
-            ];
+            let photoPaths = [];
+            
+            // Conditional check for promotional material gallery
+            if (galleryNode.id === 'promotional') {
+                photoPaths = [
+                    "albums/promo/promo1.jpg",
+                    "albums/promo/promo2.jpg",
+                    "albums/promo/promo3.jpg",
+                    "albums/promo/promo4.jpg"
+                ];
+            } else if (galleryNode.id === 'Social') {
+                // Re-added the original 10 images for the "Social" gallery
+                photoPaths = [
+                    "albums/event/gallery1.jpg",
+                    "albums/event/gallery2.jpg",
+                    "albums/event/gallery3.jpg",
+                    "albums/event/gallery4.jpg",
+                    "albums/event/gallery5.jpg",
+                    "albums/event/gallery6.jpg",
+                    "albums/event/gallery7.jpg",
+                    "albums/event/gallery8.jpg",
+                    "albums/event/gallery9.jpg",
+                    "albums/event/gallery10.jpg"
+                ];
+            } else {
+                 // Fallback to placeholders for any other gallery
+                 photoPaths = [
+                    "https://placehold.co/600x400/cccccc/ffffff?text=Image+1",
+                    "https://placehold.co/600x400/cccccc/ffffff?text=Image+2",
+                    "https://placehold.co/600x400/cccccc/ffffff?text=Image+3",
+                    "https://placehold.co/600x400/cccccc/ffffff?text=Image+4",
+                    "https://placehold.co/600x400/cccccc/ffffff?text=Image+5",
+                    "https://placehold.co/600x400/cccccc/ffffff?text=Image+6",
+                    "https://placehold.co/600x400/cccccc/ffffff?text=Image+7",
+                    "https://placehold.co/600x400/cccccc/ffffff?text=Image+8",
+                    "https://placehold.co/600x400/cccccc/ffffff?text=Image+9",
+                    "https://placehold.co/600x400/cccccc/ffffff?text=Image+10"
+                ];
+            }
 
             photoPaths.forEach(path => {
                 gridContainer.innerHTML += `
@@ -345,18 +440,13 @@
                 `;
             });
         }
-        
-            function getStatusHtml(status) {
-            switch(status) {
-                case 'Approval Needed': return `<span class="text-xs font-bold bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full whitespace-nowrap">${status}</span>`;
-                case 'Public': return `<span class="text-xs font-bold bg-green-100 text-green-800 px-2 py-1 rounded-full whitespace-nowrap">${status}</span>`;
-                case 'Scheduled': return `<span class="text-xs font-bold bg-blue-100 text-blue-800 px-2 py-1 rounded-full whitespace-nowrap">${status}</span>`;
-                default: return `<span class="text-xs font-bold bg-gray-200 text-gray-800 px-2 py-1 rounded-full whitespace-nowrap">${status}</span>`;
-            }
-        }
 
         function createFolderCard(node, path) {
             const statusHtml = getStatusHtml(node.status);
+            // Owner badge is hidden in subfolder cards, but shown for top-level
+            const ownerHtml = path.length === 1 ? getOwnerHtml(node.owner) : '';
+            const linkAccessHtml = node.linkAccess ? `<span class="text-xs font-bold bg-purple-100 text-purple-800 px-2 py-1 rounded-full whitespace-nowrap">Anyone with the link</span>` : '';
+
             let creatorsHtml = '';
             if (node.creators && node.creators.length > 0) {
                 creatorsHtml += '<div class="flex -space-x-2 mt-2">';
@@ -369,11 +459,13 @@
             return `
                 <div class="bg-white rounded-lg shadow border flex flex-col justify-between">
                     <div onclick='selectFolder(${JSON.stringify(path)})' class="p-4 flex items-start cursor-pointer">
-                        <svg class="w-12 h-12 text-revelo-blue mr-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path></svg>
+                        <svg class="w-12 h-12 text-revelo-blue mr-4 flex-shrink-0" fill="currentColor" viewBox="0 0 0 20 20"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path></svg>
                         <div class="space-y-1 flex-1 min-w-0">
                             <h3 class="font-bold text-lg revelo-blue truncate">${node.name}</h3>
-                            <div class="flex items-center space-x-2">
+                            <div class="flex flex-wrap items-center space-x-2">
                                 ${statusHtml}
+                                ${ownerHtml}
+                                ${linkAccessHtml}
                             </div>
                         </div>
                     </div>
@@ -384,33 +476,44 @@
                 </div>`;
         }
 
-function createGalleryCard(gallery, path) {
-    const statusHtml = getStatusHtml(gallery.status);
-    let creatorsHtml = '';
-    if (gallery.creators && gallery.creators.length > 0) {
-        creatorsHtml += '<div class="flex -space-x-2">';
-        gallery.creators.forEach(creator => {
-            creatorsHtml += `<img class="w-6 h-6 rounded-full border-2 border-white" src="${creator.avatar}" alt="${creator.name}" title="${creator.name}">`;
-        });
-        creatorsHtml += '</div>';
-    }
+        function createGalleryCard(gallery, path) {
+            const statusHtml = getStatusHtml(gallery.status);
+            // Owner badge is hidden in subfolder cards, but shown for top-level
+            const ownerHtml = path.length === 1 ? getOwnerHtml(gallery.owner) : '';
+            const linkAccessHtml = gallery.linkAccess ? `<span class="text-xs font-bold bg-purple-100 text-purple-800 px-2 py-1 rounded-full whitespace-nowrap">Anyone with the link</span>` : '';
+            
+            let creatorsHtml = '';
+            if (gallery.creators && gallery.creators.length > 0) {
+                creatorsHtml += '<div class="flex -space-x-2">';
+                gallery.creators.forEach(creator => {
+                    creatorsHtml += `<img class="w-6 h-6 rounded-full border-2 border-white" src="${creator.avatar}" alt="${creator.name}" title="${creator.name}">`;
+                });
+                creatorsHtml += '</div>';
+            }
 
-    return `
-        <div class="bg-white rounded-lg shadow border flex flex-col justify-between">
-            <div onclick='selectFolder(${JSON.stringify(path)})' class="cursor-pointer">
-                <div class="block relative group"><img src="https://placehold.co/600x400/cccccc/ffffff?text=${gallery.name.replace(' ', '+')}" alt="Gallery cover" class="w-full h-40 object-cover rounded-t-lg"></div>
-                <div class="p-4">
-                    <div class="flex justify-between items-start"><h3 class="font-bold revelo-blue">${gallery.name}</h3>${statusHtml}</div>
-                    <p class="text-sm text-gray-500">by ${gallery.creators.map(c => c.name).join(', ')}</p>
-                    <p class="text-sm text-gray-500 mt-2">${gallery.content}</p>
-                </div>
-            </div>
-             <div class="p-4 border-t flex justify-between items-center min-h-[60px]">
-                ${creatorsHtml || '<div></div>'}
-                ${gallery.schedule ? `<p class="text-xs text-gray-500 text-right">Publishes on<br>${gallery.schedule}</p>` : ''}
-            </div>
-        </div>`;
-}
+            return `
+                <div class="bg-white rounded-lg shadow border flex flex-col justify-between">
+                    <div onclick='selectFolder(${JSON.stringify(path)})' class="cursor-pointer">
+                        <div class="block relative group"><img src="https://placehold.co/600x400/cccccc/ffffff?text=${gallery.name.replace(' ', '+')}" alt="Gallery cover" class="w-full h-40 object-cover rounded-t-lg"></div>
+                        <div class="p-4">
+                            <div class="flex flex-wrap justify-between items-start space-y-1">
+                                <h3 class="font-bold revelo-blue">${gallery.name}</h3>
+                                <div class="flex items-center space-x-1">
+                                    ${statusHtml}
+                                    ${ownerHtml}
+                                    ${linkAccessHtml}
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-500">by ${gallery.creators.map(c => c.name).join(', ')}</p>
+                            <p class="text-sm text-gray-500 mt-2">${gallery.content}</p>
+                        </div>
+                    </div>
+                     <div class="p-4 border-t flex justify-between items-center min-h-[60px]">
+                        ${creatorsHtml || '<div></div>'}
+                        ${gallery.schedule ? `<p class="text-xs text-gray-500 text-right">Publishes on<br>${gallery.schedule}</p>` : ''}
+                    </div>
+                </div>`;
+        }
 
         function selectFolder(path) {
             currentPath = path;
@@ -420,7 +523,10 @@ function createGalleryCard(gallery, path) {
         function updateUI() {
             const treeContainer = document.getElementById('gallery-tree');
             treeContainer.innerHTML = '';
-            treeContainer.appendChild(renderTreeView(galleryData));
+            // Render the top-level folders
+            galleryData.children.forEach(child => {
+                treeContainer.appendChild(renderTreeView(child));
+            });
             
             let path = [];
             currentPath.forEach(nodeId => {
@@ -447,8 +553,17 @@ function createGalleryCard(gallery, path) {
                 modalCurrentNode = findNodeByPath(currentPath);
                 document.getElementById('modal-folder-name').textContent = `Edit Folder: ${modalCurrentNode.name}`;
                 document.getElementById('modal-folder-status').value = modalCurrentNode.status;
+                document.getElementById('modal-owner-name').textContent = `Folder Owner: ${modalCurrentNode.owner}`;
                 renderModalCollaborators();
                 toggleScheduledFields();
+                toggleVisibilityControl();
+
+                // Set the correct value for the gallery visibility dropdown
+                if (modalCurrentNode.linkAccess) {
+                    document.getElementById('modal-visibility-control').value = 'Anyone with the link';
+                } else {
+                    document.getElementById('modal-visibility-control').value = 'Restricted (only owner and collaborators)';
+                }
             }
 
             modal.classList.remove('hidden');
@@ -464,6 +579,13 @@ function createGalleryCard(gallery, path) {
             const status = document.getElementById('modal-folder-status').value;
             const fields = document.getElementById('modal-scheduled-fields');
             fields.classList.toggle('hidden', status !== 'Scheduled');
+        }
+
+        // New function to show/hide visibility control
+        function toggleVisibilityControl() {
+            const status = document.getElementById('modal-folder-status').value;
+            const visibilityControl = document.getElementById('visibility-control-container');
+            visibilityControl.classList.toggle('hidden', status !== 'Private');
         }
 
         function renderModalCollaborators() {
