@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="style.css">
 
 </head>
-<body class="bg-gray-100 antialiased text-gray-800 pt-8">
+<body class="bg-gray-100 antialiased text-gray-800 pt-8" data-page-type="media-management">
     <!-- Organizer-specific Navbar -->
     <div id="organizer-navbar-placeholder"></div>
 
@@ -122,21 +122,35 @@
             </div>
         </div>
     </div>
-
-    <!-- Lightbox Modal -->
-    <div id="lightbox-modal" class="modal fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center p-4 hidden z-50">
-        <img id="lightbox-image" src="" class="max-h-full max-w-full object-contain">
-        <div class="absolute top-0 right-0 p-4 flex items-center space-x-2 text-white">
-            <button id="privacy-toggle" class="p-2 rounded-full hover:bg-white/20" title="Toggle Privacy">
-                <!-- Eye icon will be toggled here -->
-            </button>
-            <button class="p-2 rounded-full hover:bg-white/20" title="Delete Photo">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-            </button>
-            <button onclick="closeAllModals()" class="p-2 rounded-full hover:bg-white/20 text-3xl leading-none">&times;</button>
+    
+    <!-- Media Modal -->
+    <div id="media-modal" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center p-4 hidden z-[100]">
+        <!-- Image Display Area -->
+        <div class="relative w-full h-full flex items-center justify-center">
+            <img id="modal-image" src="" class="max-h-full max-w-full object-contain cursor-pointer">
+            
+            <!-- Overlay Container -->
+            <div id="modal-overlay" class="absolute inset-0 flex flex-col justify-between p-2">
+                <!-- Modal Header -->
+                <div class="w-full flex justify-between items-start text-white">
+                    <div>
+                        <h3 id="modal-event-name" class="font-bold text-lg"></h3>
+                        <p id="modal-creator-name" class="text-sm"></p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <!-- Icons will be dynamically loaded by JS -->
+                    </div>
+                </div>
+                <!-- Navigation -->
+                <div id="modal-nav" class="w-full flex justify-between items-center absolute top-1/2 left-0 transform -translate-y-1/2">
+                     <button id="prev-media" class="text-white bg-black bg-opacity-30 p-3 rounded-full m-2 hover:bg-opacity-50 transition-opacity"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg></button>
+                     <button id="next-media" class="text-white bg-black bg-opacity-30 p-3 rounded-full m-2 hover:bg-opacity-50 transition-opacity"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></button>
+                </div>
+            </div>
         </div>
     </div>
 
+    <!-- This is the main script for the page's core functionality -->
     <script>
         const galleryData = {
             id: 'root',
@@ -156,7 +170,7 @@
                             status: 'Public',
                             creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }],
                             children: [
-                                { id: 'workshops', name: 'Workshops', type: 'gallery', status: 'Public', creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }, { name: 'Lutty Moreira', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=LM' }], content: '125 Photos, 10 Videos' },
+                                { id: 'Social', name: 'Social', type: 'gallery', status: 'Public', creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }, { name: 'Lutty Moreira', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=LM' }], content: '125 Photos, 10 Videos' },
                                 { id: 'jandj', name: 'Jack & Jill', type: 'gallery', status: 'Public', creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }], content: '50 Photos' },
                             ]
                         },
@@ -310,13 +324,26 @@
         }
 
         function renderPhotoGalleryView(gridContainer, galleryNode) {
-            for (let i = 1; i <= 10; i++) {
+            const photoPaths = [
+                "albums/event/gallery1.jpg",
+                "albums/event/gallery2.jpg",
+                "albums/event/gallery3.jpg",
+                "albums/event/gallery4.jpg",
+                "albums/event/gallery5.jpg",
+                "albums/event/gallery6.jpg",
+                "albums/event/gallery7.jpg",
+                "albums/event/gallery8.jpg",
+                "albums/event/gallery9.jpg",
+                "albums/event/gallery10.jpg"
+            ];
+
+            photoPaths.forEach(path => {
                 gridContainer.innerHTML += `
-                    <div class="aspect-square bg-gray-200 rounded-lg overflow-hidden">
-                        <img src="https://placehold.co/400x400/cccccc/ffffff?text=Photo+${i}" onclick="openLightbox(this)" class="w-full h-full object-cover cursor-pointer">
+                    <div class="aspect-square bg-gray-200 rounded-lg overflow-hidden" data-open-media-modal data-event="${galleryNode.name}" data-creator="AMedia">
+                        <img src="${path}" class="w-full h-full object-cover cursor-pointer">
                     </div>
                 `;
-            }
+            });
         }
         
             function getStatusHtml(status) {
@@ -485,38 +512,39 @@ function createGalleryCard(gallery, path) {
             });
             suggestionsContainer.classList.remove('hidden');
         }
-
-        // --- Lightbox Logic ---
-        const lightboxImage = document.getElementById('lightbox-image');
-        const privacyToggleBtn = document.getElementById('privacy-toggle');
-        let currentImageIsPublic = true;
-
-        function openLightbox(imgElement) {
-            lightboxImage.src = imgElement.src;
-            currentImageIsPublic = true; // Reset to default
-            updatePrivacyIcon();
-            openModal('lightbox-modal');
-        }
-
-        function togglePrivacy() {
-            currentImageIsPublic = !currentImageIsPublic;
-            updatePrivacyIcon();
-        }
-
-        function updatePrivacyIcon() {
-            if (currentImageIsPublic) {
-                privacyToggleBtn.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>`;
-            } else {
-                privacyToggleBtn.innerHTML = `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" /></svg>`;
-            }
-        }
-        privacyToggleBtn.addEventListener('click', togglePrivacy);
-
-
+    
+        // Initialize the page on load
         document.addEventListener('DOMContentLoaded', () => {
             updateUI();
         });
     </script>
     <script src="organizer.js" defer></script>
+
+        <!-- Media Modal -->
+    <div id="media-modal" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center p-4 hidden z-[100]">
+        <!-- Image Display Area -->
+        <div class="relative w-full h-full flex items-center justify-center">
+            <img id="modal-image" src="" class="max-h-full max-w-full object-contain cursor-pointer">
+            
+            <!-- Overlay Container -->
+            <div id="modal-overlay" class="absolute inset-0 flex flex-col justify-between p-2">
+                <!-- Modal Header -->
+                <div class="w-full flex justify-between items-start text-white">
+                    <div>
+                        <h3 id="modal-event-name" class="font-bold text-lg"></h3>
+                        <p id="modal-creator-name" class="text-sm"></p>
+                    </div>
+                    <div id="modal-header-icons" class="flex items-center space-x-2">
+                        <!-- Icons will be dynamically loaded by JS -->
+                    </div>
+                </div>
+                <!-- Navigation -->
+                <div id="modal-nav" class="w-full flex justify-between items-center absolute top-1/2 left-0 transform -translate-y-1/2">
+                     <button id="prev-media" class="text-white bg-black bg-opacity-30 p-3 rounded-full m-2 hover:bg-opacity-50 transition-opacity"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg></button>
+                     <button id="next-media" class="text-white bg-black bg-opacity-30 p-3 rounded-full m-2 hover:bg-opacity-50 transition-opacity"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

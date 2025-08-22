@@ -26,6 +26,8 @@ function openMediaModal(element) {
     const modalOverlay = document.getElementById('modal-overlay');
     const modalEventName = document.getElementById('modal-event-name');
     const modalCreatorName = document.getElementById('modal-creator-name');
+    const modalHeaderIcons = mediaModal.querySelector('.flex.items-center.space-x-2');
+    const modalNav = document.getElementById('modal-nav');
     
     // Find the parent gallery container of the clicked element.
     const galleryContainer = element.closest('.gallery-level') || element.closest('#favorites-grid');
@@ -57,20 +59,24 @@ function openMediaModal(element) {
     (function(currentItems, startingIndex) {
         let currentImageIndex = startingIndex;
 
+        // Function to update the modal content
+        function updateModalContent() {
+            const currentItem = currentItems[currentImageIndex];
+            if (currentItem) {
+                modalImage.src = currentItem.querySelector('img').src;
+                modalEventName.textContent = currentItem.getAttribute('data-event');
+                modalCreatorName.textContent = `by ${currentItem.getAttribute('data-creator')}`;
+            }
+        }
+        
         function showNextMedia() {
             currentImageIndex = (currentImageIndex + 1) % currentItems.length;
-            const nextItem = currentItems[currentImageIndex];
-            modalImage.src = nextItem.querySelector('img').src;
-            modalEventName.textContent = nextItem.getAttribute('data-event');
-            modalCreatorName.textContent = `by ${nextItem.getAttribute('data-creator')}`;
+            updateModalContent();
         }
     
         function showPrevMedia() {
             currentImageIndex = (currentImageIndex - 1 + currentItems.length) % currentItems.length;
-            const prevItem = currentItems[currentImageIndex];
-            modalImage.src = prevItem.querySelector('img').src;
-            modalEventName.textContent = prevItem.getAttribute('data-event');
-            modalCreatorName.textContent = `by ${prevItem.getAttribute('data-creator')}`;
+            updateModalContent();
         }
         
         // Remove previous listeners to prevent duplicates
@@ -111,7 +117,8 @@ function openMediaModal(element) {
 
         // Add click listeners to modal parts
         mediaModal.onclick = (event) => {
-            if (event.target === mediaModal || event.target === modalImage) {
+            // Check if the click is on the modal's main container, the image, or the overlay
+            if (event.target === mediaModal || event.target === modalImage || event.target.id === 'modal-overlay') {
                 closeMediaModal();
             }
         };
