@@ -73,34 +73,34 @@
     <!-- Level 4: Actual Gallery -->
             <div id="level-4" class="gallery-level hidden">
                 <div class="columns-2 gap-4 lg:columns-4">
-                    <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Sensuality 2025" data-creator="AMedia">
+                    <div class="relative mb-4 break-inside-avoid cursor-pointer" data-open-media-modal data-event="Sensuality 2025" data-creator="AMedia">
                         <img src="https://placehold.co/600x800/f58220/ffffff?text=Photo+1" class="rounded-lg shadow-md w-full">
                     </div>
-                    <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Sensuality 2025" data-creator="AMedia">
+                    <div class="relative mb-4 break-inside-avoid cursor-pointer" data-open-media-modal data-event="Sensuality 2025" data-creator="AMedia">
                         <img src="https://placehold.co/600x600/213c63/ffffff?text=Photo+2" class="rounded-lg shadow-md w-full">
                     </div>
-                    <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Sensuality 2025" data-creator="AMedia">
+                    <div class="relative mb-4 break-inside-avoid cursor-pointer" data-open-media-modal data-event="Sensuality 2025" data-creator="AMedia">
                         <img src="https://placehold.co/600x900/f58220/ffffff?text=Photo+3" class="rounded-lg shadow-md w-full">
                     </div>
-                    <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Sensuality 2025" data-creator="AMedia">
+                    <div class="relative mb-4 break-inside-avoid cursor-pointer" data-open-media-modal data-event="Sensuality 2025" data-creator="AMedia">
                         <img src="https://placehold.co/600x700/213c63/ffffff?text=Photo+4" class="rounded-lg shadow-md w-full">
                     </div>
-                    <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Sensuality 2025" data-creator="AMedia">
+                    <div class="relative mb-4 break-inside-avoid cursor-pointer" data-open-media-modal data-event="Sensuality 2025" data-creator="AMedia">
                         <img src="https://placehold.co/600x850/f58220/ffffff?text=Photo+5" class="rounded-lg shadow-md w-full">
                     </div>
-                    <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Sensuality 2025" data-creator="AMedia">
+                    <div class="relative mb-4 break-inside-avoid cursor-pointer" data-open-media-modal data-event="Sensuality 2025" data-creator="AMedia">
                         <img src="https://placehold.co/600x650/213c63/ffffff?text=Photo+6" class="rounded-lg shadow-md w-full">
                     </div>
-                    <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Sensuality 2025" data-creator="AMedia">
+                    <div class="relative mb-4 break-inside-avoid cursor-pointer" data-open-media-modal data-event="Sensuality 2025" data-creator="AMedia">
                         <img src="https://placehold.co/600x750/f58220/ffffff?text=Photo+7" class="rounded-lg shadow-md w-full">
                     </div>
-                    <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Sensuality 2025" data-creator="AMedia">
+                    <div class="relative mb-4 break-inside-avoid cursor-pointer" data-open-media-modal data-event="Sensuality 2025" data-creator="AMedia">
                         <img src="https://placehold.co/600x950/213c63/ffffff?text=Photo+8" class="rounded-lg shadow-md w-full">
                     </div>
-                    <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Sensuality 2025" data-creator="AMedia">
+                    <div class="relative mb-4 break-inside-avoid cursor-pointer" data-open-media-modal data-event="Sensuality 2025" data-creator="AMedia">
                         <img src="https://placehold.co/600x550/f58220/ffffff?text=Photo+9" class="rounded-lg shadow-md w-full">
                     </div>
-                    <div class="relative mb-4 break-inside-avoid cursor-pointer" onclick="openMediaModal(this)" data-event="Sensuality 2025" data-creator="AMedia">
+                    <div class="relative mb-4 break-inside-avoid cursor-pointer" data-open-media-modal data-event="Sensuality 2025" data-creator="AMedia">
                         <img src="https://placehold.co/600x800/213c63/ffffff?text=Photo+10" class="rounded-lg shadow-md w-full">
                     </div>
                 </div>
@@ -138,7 +138,7 @@
             </div>
         </div>
     </div>
-
+    
     <script>
         const galleryContainer = document.getElementById('gallery-container');
         const breadcrumbNav = document.getElementById('breadcrumb-nav');
@@ -231,117 +231,13 @@
             updateCollaborators(level);
         }
         
-        // --- Media Modal Interaction ---
-        const mediaModal = document.getElementById('media-modal');
-        const modalImage = document.getElementById('modal-image');
-        const modalOverlay = document.getElementById('modal-overlay');
-        const modalEventName = document.getElementById('modal-event-name');
-        const modalCreatorName = document.getElementById('modal-creator-name');
-        const closeMediaModalBtn = document.getElementById('close-media-modal');
-        const nextBtn = document.getElementById('next-media');
-        const prevBtn = document.getElementById('prev-media');
-
-        let galleryItems = [];
-        let currentIndex = 0;
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        function toggleOverlay() {
-            modalOverlay.classList.toggle('hidden');
-        }
-
-        function openMediaModal(element) {
-            const gallery = element.closest('.gallery-level');
-            galleryItems = Array.from(gallery.querySelectorAll('.cursor-pointer'));
-            currentIndex = galleryItems.indexOf(element);
-            
-            if (currentIndex === -1) return;
-
-            showMedia(currentIndex);
-            mediaModal.classList.remove('hidden');
-            modalOverlay.classList.remove('hidden'); // Ensure overlay is visible on open
-        }
-
-        function showMedia(index) {
-            if (index < 0 || index >= galleryItems.length) {
-                return;
-            }
-            const item = galleryItems[index];
-            const img = item.querySelector('img');
-            const eventName = item.getAttribute('data-event') || breadcrumbTrail[breadcrumbTrail.length - 1].name;
-            const creatorName = item.getAttribute('data-creator') || 'Revelo';
-
-            modalImage.src = img.src;
-            modalEventName.textContent = eventName;
-            modalCreatorName.textContent = `by ${creatorName}`;
-            currentIndex = index;
-        }
-
-        function nextMedia() {
-            const nextIndex = (currentIndex + 1) % galleryItems.length;
-            showMedia(nextIndex);
-        }
-
-        function prevMedia() {
-            const prevIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
-            showMedia(prevIndex);
-        }
-
-        function closeMediaModal() {
-            mediaModal.classList.add('hidden');
-            modalImage.src = "";
-        }
-
-        // Swipe functionality
-        function handleSwipe() {
-            if (touchEndX < touchStartX - 50) { // Swiped left
-                nextMedia();
-            }
-            if (touchEndX > touchStartX + 50) { // Swiped right
-                prevMedia();
-            }
-        }
-
-        mediaModal.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, {passive: true});
-
-        mediaModal.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
-
-        // Click listeners
-        modalImage.addEventListener('click', toggleOverlay);
-        closeMediaModalBtn.addEventListener('click', closeMediaModal);
-        nextBtn.addEventListener('click', nextMedia);
-        prevBtn.addEventListener('click', prevMedia);
-
-        mediaModal.addEventListener('click', (event) => {
-            // Close only if clicking the background, not the image or overlay buttons
-            if (event.target === mediaModal) {
-                closeMediaModal();
-            }
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (!mediaModal.classList.contains('hidden')) {
-                if (e.key === 'ArrowRight') {
-                    nextMedia();
-                } else if (e.key === 'ArrowLeft') {
-                    prevMedia();
-                } else if (e.key === 'Escape') {
-                    closeMediaModal();
-                }
-            }
-        });
-
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             updateBreadcrumbs();
             updateCollaborators(1); // Start by showing collaborators for level 1
         });
     </script>
+    
     <script src="main.js" defer></script>
     <div id="footer-placeholder"></div>
 </body>

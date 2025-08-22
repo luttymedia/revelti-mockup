@@ -7,12 +7,15 @@ function closeModal(modalId) {
         modalOverlay.classList.remove('visible');
         // Wait for the transition to finish before removing the element
         setTimeout(() => {
-            modalOverlay.remove();
+            if (modalOverlay.parentNode) {
+                modalOverlay.remove();
+            }
         }, 300);
     }
 }
 
 // Functions for the media modal.
+// This function is now generic and accepts the clicked element as an argument.
 function openMediaModal(element) {
     const mediaModal = document.getElementById('media-modal');
     if (!mediaModal) {
@@ -24,14 +27,15 @@ function openMediaModal(element) {
     const modalEventName = document.getElementById('modal-event-name');
     const modalCreatorName = document.getElementById('modal-creator-name');
     
-    // Get all gallery items from the current view.
-    const favoritesGrid = document.getElementById('favorites-grid');
-    if (!favoritesGrid) {
-        console.error("Favorites grid not found.");
+    // Find the parent gallery container of the clicked element.
+    const galleryContainer = element.closest('.gallery-level') || element.closest('#favorites-grid');
+    if (!galleryContainer) {
+        console.error("Gallery container not found. Make sure the clicked element is inside a container with a class of '.gallery-level' or an id of '#favorites-grid'.");
         return;
     }
 
-    const galleryItems = Array.from(favoritesGrid.querySelectorAll('.cursor-pointer'));
+    // Get all gallery items from the current view.
+    const galleryItems = Array.from(galleryContainer.querySelectorAll('.cursor-pointer'));
     let currentIndex = galleryItems.indexOf(element);
 
     if (currentIndex === -1) return;
@@ -47,31 +51,83 @@ function openMediaModal(element) {
     const nextBtn = document.getElementById('next-media');
     const prevBtn = document.getElementById('prev-media');
     
-    if (closeBtn) closeBtn.onclick = () => closeMediaModal();
-    if (nextBtn) nextBtn.onclick = () => showNextMedia(galleryItems);
-    if (prevBtn) prevBtn.onclick = () => showPrevMedia(galleryItems);
+    // Use an IIFE (Immediately Invoked Function Expression) to create a closure
+    // for the current gallery items and index. This prevents issues with
+    // multiple galleries trying to use the same global variables.
+    (function(currentItems, startingIndex) {
+        let currentImageIndex = startingIndex;
 
-    function showNextMedia(items) {
-        currentIndex = (currentIndex + 1) % items.length;
-        const nextItem = items[currentIndex];
-        modalImage.src = nextItem.querySelector('img').src;
-        modalEventName.textContent = nextItem.getAttribute('data-event');
-        modalCreatorName.textContent = `by ${nextItem.getAttribute('data-creator')}`;
-    }
+        function showNextMedia() {
+            currentImageIndex = (currentImageIndex + 1) % currentItems.length;
+            const nextItem = currentItems[currentImageIndex];
+            modalImage.src = nextItem.querySelector('img').src;
+            modalEventName.textContent = nextItem.getAttribute('data-event');
+            modalCreatorName.textContent = `by ${nextItem.getAttribute('data-creator')}`;
+        }
+    
+        function showPrevMedia() {
+            currentImageIndex = (currentImageIndex - 1 + currentItems.length) % currentItems.length;
+            const prevItem = currentItems[currentImageIndex];
+            modalImage.src = prevItem.querySelector('img').src;
+            modalEventName.textContent = prevItem.getAttribute('data-event');
+            modalCreatorName.textContent = `by ${prevItem.getAttribute('data-creator')}`;
+        }
+        
+        // Remove previous listeners to prevent duplicates
+        if (nextBtn) nextBtn.onclick = null;
+        if (prevBtn) prevBtn.onclick = null;
 
-    function showPrevMedia(items) {
-        currentIndex = (currentIndex - 1 + items.length) % items.length;
-        const prevItem = items[currentIndex];
-        modalImage.src = prevItem.querySelector('img').src;
-        modalEventName.textContent = prevItem.getAttribute('data-event');
-        modalCreatorName.textContent = `by ${prevItem.getAttribute('data-creator')}`;
-    }
+        // Add new listeners
+        if (nextBtn) nextBtn.onclick = showNextMedia;
+        if (prevBtn) prevBtn.onclick = showPrevMedia;
+
+        // Handle swipe functionality
+        function handleSwipe(touchStartX, touchEndX) {
+            if (touchEndX < touchStartX - 50) { // Swiped left
+                showNextMedia();
+            }
+            if (touchEndX > touchStartX + 50) { // Swiped right
+                showPrevMedia();
+            }
+        }
+
+        // Add touch listeners
+        mediaModal.ontouchstart = e => {
+            mediaModal.touchStartX = e.changedTouches[0].screenX;
+        };
+        mediaModal.ontouchend = e => {
+            mediaModal.touchEndX = e.changedTouches[0].screenX;
+            handleSwipe(mediaModal.touchStartX, mediaModal.touchEndX);
+        };
+        
+        // Add keyboard listeners
+        document.onkeydown = e => {
+            if (!mediaModal.classList.contains('hidden')) {
+                if (e.key === 'ArrowRight') showNextMedia();
+                else if (e.key === 'ArrowLeft') showPrevMedia();
+                else if (e.key === 'Escape') closeMediaModal();
+            }
+        };
+
+        // Add click listeners to modal parts
+        mediaModal.onclick = (event) => {
+            if (event.target === mediaModal || event.target === modalImage) {
+                closeMediaModal();
+            }
+        };
+        if (closeBtn) closeBtn.onclick = closeMediaModal;
+
+    })(galleryItems, currentIndex);
 }
 
 function closeMediaModal() {
     const mediaModal = document.getElementById('media-modal');
     if (mediaModal) {
         mediaModal.classList.add('hidden');
+        // Clean up global listeners to avoid conflicts
+        document.onkeydown = null;
+        mediaModal.ontouchstart = null;
+        mediaModal.ontouchend = null;
     }
 }
 
@@ -131,46 +187,6 @@ function updateSelectedStylesDisplay() {
 
 // Function to attach listeners for the Media tab.
 function initializeMediaTabListeners() {
-    const mediaModal = document.getElementById('media-modal');
-    const modalImage = document.getElementById('modal-image');
-    const closeMediaModalBtn = document.getElementById('close-media-modal');
-    const nextBtn = document.getElementById('next-media');
-    const prevBtn = document.getElementById('prev-media');
-    
-    if (mediaModal) {
-        mediaModal.addEventListener('click', (event) => {
-            if (event.target === mediaModal) closeMediaModal();
-        });
-        mediaModal.addEventListener('touchstart', (e) => {
-            window.touchStartX = e.changedTouches[0].screenX;
-        }, {passive: true});
-        mediaModal.addEventListener('touchend', (e) => {
-            window.touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
-        document.addEventListener('keydown', (e) => {
-            if (!mediaModal.classList.contains('hidden')) {
-                if (e.key === 'ArrowRight') nextMedia();
-                else if (e.key === 'ArrowLeft') prevMedia();
-                else if (e.key === 'Escape') closeMediaModal();
-            }
-        });
-    }
-
-    if (modalImage) modalImage.addEventListener('click', (e) => e.stopPropagation());
-    if (closeMediaModalBtn) closeMediaModalBtn.addEventListener('click', closeMediaModal);
-    if (nextBtn) nextBtn.addEventListener('click', () => openMediaModal(nextBtn.nextElementSibling));
-    if (prevBtn) prevBtn.addEventListener('click', () => openMediaModal(prevBtn.previousElementSibling));
-
-    // Handle swipe functionality
-    function handleSwipe() {
-        if (window.touchEndX < window.touchStartX - 50) nextMedia();
-        if (window.touchEndX > window.touchStartX + 50) prevMedia();
-    }
-}
-
-// Function to attach listeners for the Profile tab.
-function initializeProfileTabListeners() {
     const stylesModal = document.getElementById('styles-modal');
     const editStylesBtn = document.getElementById('edit-styles-btn');
     const closeStylesModalBtn = document.getElementById('close-styles-modal');
@@ -305,6 +321,7 @@ function openSettingsModal() {
     }
 }
 
+
 // --- NAVBAR & FOOTER INITIALIZATION ---
 document.addEventListener("DOMContentLoaded", function() {
     // Load Navbar
@@ -416,9 +433,18 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         })
         .catch(error => console.error('Error fetching footer:', error));
-});
+        
+    // --- CENTRALIZED GALLERY LISTENERS ---
+    // Listen for clicks on any element that should open the media modal.
+    document.addEventListener('click', (event) => {
+        const galleryItem = event.target.closest('[data-open-media-modal]');
+        if (galleryItem) {
+            openMediaModal(galleryItem);
+        }
+    });
 
-// Initialize listeners for the Profile page if the element exists
-if (document.getElementById('profile')) {
-    initializeProfileTabListeners();
-}
+    // Initialize listeners for the Profile page if the element exists
+    if (document.getElementById('profile')) {
+        initializeProfileTabListeners();
+    }
+});
