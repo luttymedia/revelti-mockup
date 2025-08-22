@@ -376,11 +376,48 @@
     <script src="main.js" defer></script>
     <div id="footer-placeholder"></div>
 
+    <button id="installButton" class="hidden">Install App</button>
+
     <!-- Service worker for “Install App” banner -->
     <script>
     if ("serviceWorker" in navigator) {
         navigator.serviceWorker.register("/service-worker.js");
     }
+    </script>
+
+        <script>
+        let deferredPrompt;
+        const installButton = document.getElementById('installButton');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevents the default browser prompt from appearing
+            e.preventDefault();
+            // Stash the event so it can be triggered later.
+            deferredPrompt = e;
+            // Show the install button
+            installButton.classList.remove('hidden');
+        });
+
+        installButton.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                // Hide the button again
+                installButton.classList.add('hidden');
+                // Show the installation prompt
+                deferredPrompt.prompt();
+                // Wait for the user to respond to the prompt
+                const { outcome } = await deferredPrompt.userChoice;
+                // Log the outcome for debugging
+                console.log(`User response to the install prompt: ${outcome}`);
+                // We've used the prompt and can't use it again, throw it away
+                deferredPrompt = null;
+            }
+        });
+
+        // Optional: Hide the button if the app is already installed
+        window.addEventListener('appinstalled', () => {
+            installButton.classList.add('hidden');
+            console.log('PWA was installed.');
+        });
     </script>
 </body>
 </html>
