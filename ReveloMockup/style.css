@@ -20,6 +20,11 @@ body {
     }
 }
 
+/* Footer active state */
+.footer-link-active {
+    color: #213c63; /* revelo-blue */
+    font-weight: 700;
+}
 
 /* --- Custom Color Palette --- */
 /* Use these classes to apply brand colors */

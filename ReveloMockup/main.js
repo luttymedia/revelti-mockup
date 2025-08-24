@@ -401,7 +401,7 @@ function updateSelectedStylesDisplay(newStyles) {
         }
         
         if (confirmStylesBtn) {
-            confirmStylesBtn.addEventListener('click', () => {
+            confirmStylesBtn.onclick = () => {
                 // Get selected styles and update display
                 const newSelected = [];
                 if (stylesModalContent) {
@@ -413,7 +413,7 @@ function updateSelectedStylesDisplay(newStyles) {
                 // For now, we'll just update the display
                 updateSelectedStylesDisplay(newSelected);
                 closeStylesModal();
-            });
+            };
         }
         
         if (stylesModal && stylesModalContent) {
@@ -450,6 +450,29 @@ function updateSelectedStylesDisplay(newStyles) {
         }
     }
 
+function initializeFooter() {
+    const footerLinks = document.querySelectorAll('footer a');
+    const currentPath = window.location.pathname;
+
+    // Remove active class from all links first to ensure only one is active
+    footerLinks.forEach(link => {
+        link.classList.remove('footer-link-active');
+        link.classList.remove('revelo-blue'); // Ensure revelo-blue is removed
+        link.classList.add('text-gray-400'); // Add the gray color class
+    });
+
+    // Find the link that matches the current page and add the active class
+    // We check if the current path ends with the link's href for a robust match.
+    footerLinks.forEach(link => {
+        const linkHref = link.getAttribute('href');
+        
+        if (currentPath.endsWith(linkHref)) {
+            link.classList.add('footer-link-active');
+            link.classList.remove('text-gray-400');
+            link.classList.add('revelo-blue');
+        }
+    });
+}
 
 // --- NAVBAR & FOOTER INITIALIZATION ---
 document.addEventListener("DOMContentLoaded", function() {
@@ -559,6 +582,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const placeholder = document.getElementById('footer-placeholder');
             if (placeholder) {
                 placeholder.innerHTML = html;
+                initializeFooter();
             }
         })
         .catch(error => console.error('Error fetching footer:', error));
