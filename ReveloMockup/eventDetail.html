@@ -79,7 +79,7 @@
     
                 <!-- Interactive Elements for Attendees -->
                 <section class="p-6 border-t border-gray-200">
-                    <a href="ticketPurchase.html">
+                    <a id="buy-tickets-link" href="ticketPurchase.html">
                     <button class="w-full bg-revelo-orange text-white font-bold py-3 px-4 rounded-lg shadow-md hover:bg-orange-600 transition duration-300 text-lg">
                         Buy Tickets
                     </button>
@@ -300,9 +300,17 @@
         });
 
 
-        // Initialize the page with the 'details' tab visible.
+        // Handle Buy Tickets button to pass along promo code
         document.addEventListener('DOMContentLoaded', () => {
             switchTab('details');
+            
+            const buyTicketsLink = document.getElementById('buy-tickets-link');
+            const urlParams = new URLSearchParams(window.location.search);
+            const promoterCode = urlParams.get('promoter');
+            
+            if (promoterCode && promoterCode.toUpperCase() === 'JOHNDOE') {
+                buyTicketsLink.href = 'ticketPurchase.html?promo=LUTTY';
+            }
         });
     </script>
     <script src="main.js" defer></script>

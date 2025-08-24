@@ -20,7 +20,7 @@
 <body class="antialiased text-gray-800">
     <div id="navbar-placeholder"></div>
 
-    <!-- Main container with a max-width for larger screens -->
+    <!-- Main container with a max-w and shadow for larger screens -->
     <div class="max-w-2xl lg:max-w-7xl mx-auto bg-white shadow-lg overflow-hidden">
 
         <!-- Header Section -->
@@ -33,7 +33,24 @@
         
         <!-- Main Content -->
         <main class="p-6 bg-gray-50 pb-24"> <!-- Added padding-bottom for footer spacing -->
-            <div class="space-y-6">
+            <div class="space-y-4">
+                <!-- Discount Code Section (Collapsible) -->
+                <details class="bg-white border rounded-lg">
+                    <summary class="p-4 font-semibold revelo-blue cursor-pointer flex justify-between items-center text-lg">
+                        Discount Code
+                        <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </summary>
+                    <div class="p-4 border-t border-gray-200">
+                        <div class="flex items-center space-x-2">
+                            <input type="text" id="discount-code-input" placeholder="Enter code" class="flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:border-revelo-blue">
+                            <button id="apply-discount-btn" class="bg-revelo-orange text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-orange-600 transition duration-300 flex-shrink-0">
+                                Apply
+                            </button>
+                        </div>
+                        <div id="discount-message" class="mt-2 text-sm font-semibold"></div>
+                    </div>
+                </details>
+
                 <!-- Main Passes -->
                 <details class="bg-white border rounded-lg" open>
                     <summary class="p-4 font-semibold revelo-blue cursor-pointer flex justify-between items-center text-xl">Main Passes <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
@@ -242,11 +259,17 @@
 
         let cart = {};
         const distributionFee = 3.00;
+        const discountValue = 10.00;
+        let discountCode = null;
         let tshirtRowCounter = 0;
 
+        /**
+         * Updates the order summary section based on the current cart and discount.
+         */
         function updateSummary() {
             let totalItems = 0;
             let subtotal = 0;
+            let totalDiscount = 0;
             const cartDetailsContainer = document.getElementById('cart-details');
             cartDetailsContainer.innerHTML = '';
 
@@ -255,14 +278,20 @@
                     const quantity = cart[itemId];
                     totalItems += quantity;
                     const ticket = tickets.find(t => t.id == itemId);
-                    subtotal += quantity * ticket.price;
+                    
+                    let itemPrice = ticket.price;
+                    if (discountCode === 'LUTTY' && (itemId == 1 || itemId == 2)) {
+                        totalDiscount += quantity * discountValue;
+                    }
+                    
+                    subtotal += quantity * itemPrice;
 
                     const itemEl = document.createElement('div');
                     itemEl.className = 'flex justify-between items-center text-sm text-gray-700';
                     itemEl.innerHTML = `
                         <span>${quantity} x ${ticket.name}</span>
                         <div class="flex items-center">
-                            <span>€${(quantity * ticket.price).toFixed(2)}</span>
+                            <span>€${(quantity * itemPrice).toFixed(2)}</span>
                             <button class="cart-remove-btn p-1 text-red-500 hover:text-red-700 ml-2" data-item-id="${itemId}">&times;</button>
                         </div>
                     `;
@@ -271,6 +300,20 @@
             }
             
             let finalTotal = subtotal;
+            
+            // Apply the discount to the final total
+            if (totalDiscount > 0) {
+                 const discountEl = document.createElement('div');
+                 discountEl.className = 'flex justify-between text-sm text-green-600 font-semibold mt-2 pt-2 border-t';
+                 discountEl.innerHTML = `
+                     <span>Discount "LUTTY" Applied</span>
+                     <span>-€${totalDiscount.toFixed(2)}</span>
+                 `;
+                 cartDetailsContainer.appendChild(discountEl);
+                 finalTotal -= totalDiscount;
+            }
+
+            // Apply distribution fee if any items are in the cart
             if (totalItems > 0) {
                 const fee = totalItems * distributionFee;
                 finalTotal += fee;
@@ -290,6 +333,11 @@
             }
         }
         
+        /**
+         * Increases or decreases the quantity of a cart item.
+         * @param {string} itemId The ID of the item to update.
+         * @param {string} action 'increase' or 'decrease'.
+         */
         function updateCartItem(itemId, action) {
              if (!cart[itemId]) cart[itemId] = 0;
              if (action === 'increase') cart[itemId]++;
@@ -302,6 +350,9 @@
              updateSummary();
         }
 
+        /**
+         * Creates a new row for T-shirt size and quantity selection.
+         */
         function createTshirtRow() {
             const container = document.getElementById('tshirt-rows-container');
             const rowId = `tshirt-row-${tshirtRowCounter++}`;
@@ -380,8 +431,38 @@
                 }
             }
         });
+
+        // Event listener for the discount button
+        document.getElementById('apply-discount-btn').addEventListener('click', () => {
+            const codeInput = document.getElementById('discount-code-input');
+            const messageEl = document.getElementById('discount-message');
+            const code = codeInput.value.trim().toUpperCase();
+
+            if (code === 'LUTTY') {
+                discountCode = code;
+                messageEl.innerHTML = `Discount code "LUTTY" applied! <span id="clear-discount" class="revelo-blue font-bold cursor-pointer ml-2">Clear</span>`;
+                messageEl.classList.remove('text-red-500');
+                messageEl.classList.add('text-green-600');
+            } else {
+                discountCode = null;
+                messageEl.textContent = `Invalid discount code.`;
+                messageEl.classList.remove('text-green-600');
+                messageEl.classList.add('text-red-500');
+            }
+            updateSummary();
+        });
+
+        // Event listener for the clear discount link
+        document.getElementById('discount-message').addEventListener('click', (event) => {
+            if (event.target.id === 'clear-discount') {
+                discountCode = null;
+                document.getElementById('discount-code-input').value = '';
+                document.getElementById('discount-message').textContent = '';
+                updateSummary();
+            }
+        });
         
-        // --- Price Info Modal Interaction ---
+        // --- Price Info Modal Interaction --
         const priceInfoModal = document.getElementById('price-info-modal');
         const closePriceModalBtn = document.getElementById('close-price-modal');
         const priceInfoTriggers = document.querySelectorAll('.price-info-trigger');
@@ -398,6 +479,19 @@
         // Initial setup
         document.addEventListener('DOMContentLoaded', () => {
             createTshirtRow();
+
+            // Check for a promo code in the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const promoCode = urlParams.get('promo');
+            
+            if (promoCode && promoCode.toUpperCase() === 'LUTTY') {
+                document.getElementById('discount-code-input').value = 'LUTTY';
+                document.getElementById('apply-discount-btn').click();
+                const discountSection = document.querySelector('details');
+                if (discountSection) {
+                    discountSection.open = true;
+                }
+            }
         });
     </script>
     <script src="main.js" defer></script>
