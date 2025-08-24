@@ -117,8 +117,9 @@
                         
                         // Initialize tab-specific functionality
                         if (tabId === 'profile') {
-                            initializeProfileTabListeners();
+                            // Both of these functions are needed for the profile page
                             updateSelectedStylesDisplay();
+                            initializeMediaTabListeners();
                         } else if (tabId === 'media') {
                             initializeMediaTabListeners();
                         }
