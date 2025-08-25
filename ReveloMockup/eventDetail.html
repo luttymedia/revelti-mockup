@@ -181,6 +181,16 @@
                             <details><summary class="flex justify-between items-center cursor-pointer font-semibold text-lg revelo-blue py-2">Are there parking facilities at the venue? <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary><div class="pb-2 pt-1 pl-2"><p class="text-gray-700">Yes, Fira Gran Via has ample underground parking available. The daily rate is €20. We recommend using public transport as it is very convenient.</p></div></details>
                             <details><summary class="flex justify-between items-center cursor-pointer font-semibold text-lg revelo-blue py-2">Can I bring my own food and drinks? <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary><div class="pb-2 pt-1 pl-2"><p class="text-gray-700">Outside food and drinks are not permitted inside the venue. There will be a variety of food trucks and stalls available on-site.</p></div></details>
                         </div>
+
+                        <!-- Ask a question section -->
+                        <details class="bg-gray-50 border rounded-lg mt-6"><summary class="p-4 font-semibold revelo-blue cursor-pointer flex justify-between items-center">Ask a question<svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary><div class="p-4 border-t border-gray-200">
+                                <textarea id="question-text" class="w-full p-2 border border-gray-300 rounded-md" rows="4" placeholder="Type your question here..."></textarea>
+                                <button id="submit-question-btn" class="mt-2 w-full sm:w-auto bg-revelo-orange text-white font-bold py-2 px-6 rounded-lg shadow-md hover:bg-orange-600 transition duration-300">Submit Question</button>
+                            </div>
+                        </details>
+
+                        <!-- Dynamically added questions will go here -->
+                        <div id="submitted-questions-container" class="space-y-4 mt-6"></div>
                     </div>
                 </main>
             </div>
@@ -310,6 +320,31 @@
             
             if (promoterCode && promoterCode.toUpperCase() === 'JOHNDOE') {
                 buyTicketsLink.href = 'ticketPurchase.html?promo=LUTTY';
+            }
+        });
+
+        // --- Ask a Question Interaction ---
+        const questionTextarea = document.getElementById('question-text');
+        const submitQuestionBtn = document.getElementById('submit-question-btn');
+        const submittedQuestionsContainer = document.getElementById('submitted-questions-container');
+
+        submitQuestionBtn.addEventListener('click', () => {
+            const question = questionTextarea.value.trim();
+            if (question) {
+                // Create the HTML for the new question
+                const newQuestionHtml = `
+                    <div class="bg-gray-100 p-4 rounded-lg border border-gray-200">
+                        <div class="flex items-center space-x-2">
+                            <p class="font-semibold text-gray-800">Question pending answer</p>
+                        </div>
+                        <p class="text-gray-700 mt-2">${question}</p>
+                    </div>
+                `;
+                // Add the new question to the top of the list
+                submittedQuestionsContainer.insertAdjacentHTML('afterbegin', newQuestionHtml);
+
+                // Clear the textarea
+                questionTextarea.value = '';
             }
         });
     </script>
