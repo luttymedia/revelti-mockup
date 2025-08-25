@@ -5,16 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Revelo - Ticket Management</title>
     
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- Google Fonts: Nunito -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 
+    <!-- Your Custom Stylesheet -->
     <link rel="stylesheet" href="style.css">
+     
 </head>
 <body class="bg-gray-100 antialiased text-gray-800 pt-8">
-    
     <!-- Organizer-specific Navbar -->
     <div id="organizer-navbar-placeholder"></div>
 
@@ -65,7 +68,7 @@
                         <div class="mt-4">
                              <div class="overflow-x-auto">
                                 <table class="min-w-full bg-white border">
-                                    <thead class="bg-gray-50"><tr><th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Code</th><th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Discount</th><th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Uses</th><th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Status</th><th class="px-4 py-2"></th></tr></thead>
+                                    <thead class="bg-gray-50"><tr><th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Code</th><th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Promoter</th><th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Discount</th><th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Commission</th><th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Applicable To</th><th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Uses</th><th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Status</th><th class="px-4 py-2"></th></tr></thead>
                                     <tbody id="discount-codes-table" class="divide-y divide-gray-200">
                                         </tbody>
                                 </table>
@@ -88,7 +91,7 @@
                     <button onclick="openModal('help-modal')" class="text-gray-400 hover:text-revelo-orange">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
                     </button>
-                    <button onclick="closeModal('ticket-modal')" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+                    <button onclick="closeTicketManagementModal('ticket-modal')" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
                 </div>
             </header>
             
@@ -145,7 +148,7 @@
             <footer class="p-4 border-t flex justify-between bg-gray-50">
                 <button id="delete-ticket-btn" onclick="deleteTicket()" class="px-4 py-2 font-bold bg-red-600 text-white rounded-lg hidden">Delete</button>
                 <div class="flex space-x-2">
-                    <button onclick="closeModal('ticket-modal')" class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg">Cancel</button>
+                    <button onclick="closeTicketManagementModal('ticket-modal')" class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg">Cancel</button>
                     <button onclick="saveTicket()" class="px-4 py-2 font-bold bg-revelo-blue text-white rounded-lg">Save Ticket</button>
                 </div>
             </footer>
@@ -153,27 +156,70 @@
     </div>
     
     <div id="code-modal" class="modal fixed inset-0 flex items-center justify-center p-4 hidden z-50">
-        <div class="bg-white rounded-lg shadow-xl w-full max-w-md p-6 space-y-4">
-            <header class="flex justify-between items-center">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col">
+            <header class="p-4 border-b flex justify-between items-center">
                  <h3 id="code-modal-title" class="font-bold text-xl revelo-blue">Generate New Discount Code</h3>
-                 <button onclick="closeModal('code-modal')" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+                 <button onclick="closeTicketManagementModal('code-modal')" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
             </header>
-            <input type="hidden" id="editing-code-id">
-            <div id="edit-code-note" class="hidden text-sm bg-yellow-100 text-yellow-800 p-3 rounded-lg">For active codes, only the number of uses is editable.</div>
-            <div><label class="font-semibold text-gray-700">Discount Code</label><input id="code-text" type="text" placeholder="e.g., EARLYBIRD15" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
-            <div class="grid grid-cols-2 gap-4">
-                <div><label class="font-semibold text-gray-700">Discount Type</label><select id="code-type" class="w-full p-2 border border-gray-300 rounded-md mt-1"><option value="percentage">Percentage (%)</option><option value="fixed">Fixed Amount (€)</option></select></div>
-                <div><label class="font-semibold text-gray-700">Value</label><input id="code-value" type="number" placeholder="15" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
-            </div>
-            <div><label class="font-semibold text-gray-700">Total Uses Available</label><input id="code-uses" type="number" placeholder="100" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
-            <div>
-                <label class="font-semibold text-gray-700">Status</label>
-                <select id="code-status" class="w-full p-2 border border-gray-300 rounded-md mt-1"></select>
-            </div>
-            <div class="flex justify-end space-x-2">
-                <button onclick="closeModal('code-modal')" class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg">Cancel</button>
-                <button onclick="saveCode()" class="px-4 py-2 font-bold bg-revelo-blue text-white rounded-lg">Save Code</button>
-            </div>
+            <main class="p-6 space-y-4 overflow-y-auto">
+                <input type="hidden" id="editing-code-id">
+                <div id="edit-code-note" class="hidden text-sm bg-yellow-100 text-yellow-800 p-3 rounded-lg">For active codes, only the number of uses and commission structure are editable.</div>
+                
+                <h4 class="font-semibold text-lg revelo-blue">Discount Details</h4>
+                <div><label class="font-semibold text-gray-700">Discount Code</label><input id="code-text" type="text" placeholder="e.g., EARLYBIRD15" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                 <div><label class="font-semibold text-gray-700">Promoter Name (Optional)</label><input id="promoter-name" type="text" placeholder="e.g., John Doe" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div><label class="font-semibold text-gray-700">Discount Type</label><select id="code-type" class="w-full p-2 border border-gray-300 rounded-md mt-1"><option value="percentage">Percentage (%)</option><option value="fixed">Fixed Amount (€)</option></select></div>
+                    <div><label class="font-semibold text-gray-700">Value</label><input id="code-value" type="number" placeholder="15" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div><label class="font-semibold text-gray-700">Total Uses Available</label><input id="code-uses" type="number" placeholder="100" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                    <div>
+                        <label class="font-semibold text-gray-700">Status</label>
+                        <select id="code-status" class="w-full p-2 border border-gray-300 rounded-md mt-1"></select>
+                    </div>
+                </div>
+                <div>
+                    <label class="font-semibold text-gray-700">Applicable Ticket Types</label>
+                    <p class="text-sm text-gray-600">If no tickets are selected, the code will apply to all.</p>
+                    <div class="relative mt-1" id="ticket-multiselect-container">
+                        <button type="button" id="ticket-multiselect-button" onclick="toggleTicketDropdown()" class="w-full p-2 border border-gray-300 rounded-md text-left bg-white flex justify-between items-center">
+                            <span id="ticket-multiselect-text">Select tickets...</span>
+                            <svg class="w-4 h-4 text-gray-500 transform transition-transform" id="ticket-multiselect-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="ticket-multiselect-dropdown" class="hidden absolute z-20 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-40 overflow-y-auto">
+                            <!-- Checkboxes will be dynamically inserted here -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t mt-4">
+                    <h4 class="font-semibold text-lg revelo-blue">Promoter Commission</h4>
+                    <p class="text-sm text-gray-600 mb-2">Set a commission for the promoter for each ticket sold with this code.</p>
+                    <div class="flex space-x-4 mt-2">
+                        <label class="flex items-center"><input type="radio" name="commission-strategy" value="simple" class="mr-2" onchange="toggleCommissionStrategy(this.value)" checked> Simple Commission</label>
+                        <label class="flex items-center"><input type="radio" name="commission-strategy" value="tiered" class="mr-2" onchange="toggleCommissionStrategy(this.value)"> Tiered Commission</label>
+                    </div>
+                </div>
+
+                <div id="simple-commission-view">
+                    <div><label class="font-semibold text-gray-700">Commission per Ticket (€)</label><input id="simple-commission" type="number" placeholder="e.g., 10.00" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                </div>
+
+                <div id="tiered-commission-view" class="hidden space-y-4">
+                    <div><label class="font-semibold text-gray-700">Base Commission Rate (€)</label><input id="base-commission" type="number" placeholder="Commission for the first tickets" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                    <div id="commission-tiers-container" class="space-y-2">
+                        </div>
+                    <button type="button" onclick="addCommissionTier()" class="text-sm font-semibold revelo-blue hover:underline">+ Add Commission Tier</button>
+                </div>
+
+            </main>
+            <footer class="p-4 border-t flex justify-end bg-gray-50">
+                <div class="flex space-x-2">
+                    <button onclick="closeTicketManagementModal('code-modal')" class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg">Cancel</button>
+                    <button onclick="saveCode()" class="px-4 py-2 font-bold bg-revelo-blue text-white rounded-lg">Save Code</button>
+                </div>
+            </footer>
         </div>
     </div>
 
@@ -182,7 +228,7 @@
         <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col">
              <header class="p-4 border-b flex justify-between items-center">
                 <h3 class="font-bold text-xl revelo-blue">Ticket Creation Guide</h3>
-                <button onclick="closeModal('help-modal')" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+                <button onclick="closeTicketManagementModal('help-modal')" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
             </header>
             <main class="p-6 space-y-4 text-gray-700 overflow-y-auto">
                 <h4 class="font-bold text-lg revelo-blue">Ticket Status</h4>
@@ -246,10 +292,26 @@
         ];
         
         let discountCodesData = [
-            { id: 1, text: 'DJSPARKUS10', type: 'percentage', value: 10, uses: 100, claimed: 45, status: 'Active' },
-            { id: 2, text: 'VALENTINES', type: 'fixed', value: 5, uses: 150, claimed: 25, status: 'Active' },
-            { id: 3, text: 'EARLYBIRD', type: 'percentage', value: 15, uses: 50, claimed: 50, status: 'Inactive' },
-            { id: 4, text: 'NEWPROMO', type: 'fixed', value: 20, uses: 200, claimed: 0, status: 'Draft' },
+            { 
+                id: 1, text: 'DJSPARKUS10', promoterName: 'DJ Sparkus', type: 'percentage', value: 10, uses: 100, claimed: 45, status: 'Active',
+                applicableTicketIds: [1, 2],
+                commission: { strategy: 'tiered', baseRate: 10, tiers: [ { name: 'Silver', threshold: 20, rate: 12 }, { name: 'Golden', threshold: 50, rate: 15 } ] }
+            },
+            { 
+                id: 2, text: 'VALENTINES', promoterName: 'Jane Doe', type: 'fixed', value: 5, uses: 150, claimed: 25, status: 'Active',
+                applicableTicketIds: [], // Applies to all
+                commission: { strategy: 'simple', simpleRate: 8 }
+            },
+            { 
+                id: 3, text: 'EARLYBIRD', promoterName: '', type: 'percentage', value: 15, uses: 50, claimed: 50, status: 'Inactive',
+                applicableTicketIds: [1, 2, 5],
+                commission: { strategy: 'simple', simpleRate: 0 }
+            },
+            { 
+                id: 4, text: 'NEWPROMO', promoterName: 'John Appleseed', type: 'fixed', value: 20, uses: 200, claimed: 0, status: 'Draft',
+                applicableTicketIds: [3],
+                commission: { strategy: 'tiered', baseRate: 15, tiers: [ { name: '', threshold: 100, rate: 20 } ] }
+            },
         ];
 
 
@@ -296,6 +358,17 @@
                  currentPrice = Math.max(currentPrice, ...applicableRules.map(r => r.newPrice));
             }
             return currentPrice;
+        };
+        
+        const getCurrentCommission = (code) => {
+            if (code.commission.strategy === 'simple') return code.commission.simpleRate;
+
+            let currentRate = code.commission.baseRate;
+            const applicableTiers = code.commission.tiers.filter(tier => code.claimed >= tier.threshold);
+            if (applicableTiers.length > 0) {
+                currentRate = Math.max(currentRate, ...applicableTiers.map(t => t.rate));
+            }
+            return currentRate;
         };
 
         // --- RENDER FUNCTIONS ---
@@ -367,17 +440,60 @@
             discountCodesData.forEach(code => {
                 const row = document.createElement('tr');
                 const discountText = code.type === 'percentage' ? `${code.value}%` : formatCurrency(code.value);
+                
+                let commissionDisplay = formatCurrency(getCurrentCommission(code));
+                if (code.commission.strategy === 'tiered') {
+                    commissionDisplay += ' <span class="text-xs text-revelo-orange font-bold">⚡ Tiered</span>';
+                }
+
+                const applicableTicketsHtml = code.applicableTicketIds.length > 0
+                    ? code.applicableTicketIds.map(id => {
+                        const ticket = ticketsData.find(t => t.id === id);
+                        return ticket ? `<span class="ticket-tag">${ticket.name}</span>` : '';
+                    }).join('')
+                    : '<span class="ticket-tag all-tickets">All Tickets</span>';
+
                 row.innerHTML = `
-                    <td class="px-4 py-3 whitespace-nowrap font-semibold">${code.text}</td>
-                    <td class="px-4 py-3">${discountText}</td>
-                    <td class="px-4 py-3">${code.claimed} / ${code.uses}</td>
-                    <td class="px-4 py-3">${getCodeStatusBadge(code.status)}</td>
-                    <td class="px-4 py-3 text-right">
+                    <td class="px-4 py-3 whitespace-nowrap font-semibold align-top">${code.text}</td>
+                    <td class="px-4 py-3 align-top">${code.promoterName || 'N/A'}</td>
+                    <td class="px-4 py-3 align-top">${discountText}</td>
+                    <td class="px-4 py-3 align-top">
+                        <div>${commissionDisplay}</div>
+                        ${code.commission.strategy === 'tiered' ? renderCommissionSummary(code) : ''}
+                    </td>
+                    <td class="px-4 py-3 align-top"><div class="flex flex-wrap gap-1">${applicableTicketsHtml}</div></td>
+                    <td class="px-4 py-3 align-top">${code.claimed} / ${code.uses}</td>
+                    <td class="px-4 py-3 align-top">${getCodeStatusBadge(code.status)}</td>
+                    <td class="px-4 py-3 text-right align-top">
                         <button onclick="openCodeModal(${code.id})" class="text-sm font-semibold revelo-blue">Edit</button>
                     </td>
                 `;
                 tableBody.appendChild(row);
             });
+        };
+        
+        const renderCommissionSummary = (code) => {
+            const tiers = [
+                { rate: code.commission.baseRate, threshold: 0 }, 
+                ...code.commission.tiers
+            ].sort((a, b) => a.threshold - b.threshold);
+            
+            let html = '<ul class="text-xs text-gray-600 mt-1 space-y-1">';
+            const currentRate = getCurrentCommission(code);
+
+            tiers.forEach(tier => {
+                const tierName = tier.name ? ` (${tier.name})` : '';
+                if (tier.rate < currentRate) {
+                     html += `<li>✅ <span class="text-gray-500">Rate was ${formatCurrency(tier.rate)} from ${tier.threshold} sales</span></li>`;
+                } else if (tier.rate === currentRate) {
+                     html += `<li>➡️ <span class="font-bold">Current: ${formatCurrency(tier.rate)} from ${tier.threshold} sales${tierName}</span></li>`;
+                } else {
+                     html += `<li>🕒 Increases to ${formatCurrency(tier.rate)} after ${tier.threshold} sales${tierName}</li>`;
+                }
+            });
+            
+            html += '</ul>';
+            return html;
         };
 
         // --- MODAL LOGIC ---
@@ -390,8 +506,8 @@
                 modalBackdrop.classList.remove('hidden');
             }
         };
-
-        const closeModal = (modalId) => {
+        
+        function closeTicketManagementModal(modalId) {
             document.getElementById(modalId)?.classList.add('hidden');
             const isAnyModalOpen = Array.from(allModals).some(modal => !modal.classList.contains('hidden') && modal.id !== 'help-modal');
             if (!isAnyModalOpen) {
@@ -460,8 +576,20 @@
         const openCodeModal = (codeId = null) => {
             const note = document.getElementById('edit-code-note');
             const statusSelect = document.getElementById('code-status');
-            statusSelect.innerHTML = ''; // Clear previous options
+            statusSelect.innerHTML = ''; 
             document.getElementById('editing-code-id').value = codeId;
+
+            // Populate applicable tickets dropdown
+            const ticketsDropdown = document.getElementById('ticket-multiselect-dropdown');
+            ticketsDropdown.innerHTML = '';
+            ticketsData.forEach(ticket => {
+                ticketsDropdown.innerHTML += `
+                    <label class="flex items-center px-3 py-2 hover:bg-gray-100 cursor-pointer">
+                        <input type="checkbox" onchange="updateTicketSelectionText()" class="applicable-ticket-checkbox mr-2" value="${ticket.id}">
+                        <span class="ml-2 text-sm">${ticket.name}</span>
+                    </label>
+                `;
+            });
 
             const fieldsToDisable = ['code-text', 'code-type', 'code-value'];
             
@@ -471,6 +599,7 @@
                 note.classList.remove('hidden');
                 
                 document.getElementById('code-text').value = code.text;
+                document.getElementById('promoter-name').value = code.promoterName;
                 document.getElementById('code-type').value = code.type;
                 document.getElementById('code-value').value = code.value;
                 document.getElementById('code-uses').value = code.uses;
@@ -483,14 +612,45 @@
                 statusSelect.value = code.status;
                 
                 fieldsToDisable.forEach(id => document.getElementById(id).disabled = true);
+                
+                // Set checked tickets
+                document.querySelectorAll('.applicable-ticket-checkbox').forEach(checkbox => {
+                    checkbox.checked = code.applicableTicketIds.includes(parseInt(checkbox.value));
+                });
+                updateTicketSelectionText(); // Update dropdown text
+
+                // Commission section
+                const commissionStrategy = code.commission.strategy;
+                document.querySelector(`input[name="commission-strategy"][value="${commissionStrategy}"]`).checked = true;
+                toggleCommissionStrategy(commissionStrategy);
+                if (commissionStrategy === 'simple') {
+                    document.getElementById('simple-commission').value = code.commission.simpleRate;
+                } else {
+                    document.getElementById('base-commission').value = code.commission.baseRate;
+                    document.getElementById('commission-tiers-container').innerHTML = '';
+                    code.commission.tiers.forEach(tier => addCommissionTier(tier));
+                }
+
             } else {
-                 document.getElementById('code-modal-title').textContent = 'Generate New Discount Code';
+                document.getElementById('code-modal-title').textContent = 'Generate New Discount Code';
                 note.classList.add('hidden');
-                ['code-text', 'code-value', 'code-uses'].forEach(id => document.getElementById(id).value = '');
+                ['code-text', 'promoter-name', 'code-value', 'code-uses'].forEach(id => document.getElementById(id).value = '');
                 document.getElementById('code-type').value = 'percentage';
                 ['Draft', 'Active', 'Inactive'].forEach(s => statusSelect.add(new Option(s, s)));
                 statusSelect.value = 'Draft';
                 fieldsToDisable.forEach(id => document.getElementById(id).disabled = false);
+                
+                // Clear ticket selections
+                document.querySelectorAll('.applicable-ticket-checkbox').forEach(checkbox => checkbox.checked = false);
+                updateTicketSelectionText();
+
+                // Commission section
+                document.querySelector('input[name="commission-strategy"][value="simple"]').checked = true;
+                toggleCommissionStrategy('simple');
+                document.getElementById('simple-commission').value = '';
+                document.getElementById('base-commission').value = '';
+                document.getElementById('commission-tiers-container').innerHTML = '';
+
             }
             openModal('code-modal');
         };
@@ -498,6 +658,30 @@
         const togglePricingStrategy = (strategy) => {
             document.getElementById('simple-price-view').classList.toggle('hidden', strategy !== 'simple');
             document.getElementById('dynamic-price-view').classList.toggle('hidden', strategy !== 'dynamic');
+        };
+
+        const toggleCommissionStrategy = (strategy) => {
+            document.getElementById('simple-commission-view').classList.toggle('hidden', strategy !== 'simple');
+            document.getElementById('tiered-commission-view').classList.toggle('hidden', strategy !== 'tiered');
+        };
+
+        const toggleTicketDropdown = () => {
+            const dropdown = document.getElementById('ticket-multiselect-dropdown');
+            const arrow = document.getElementById('ticket-multiselect-arrow');
+            dropdown.classList.toggle('hidden');
+            arrow.classList.toggle('rotate-180');
+        };
+
+        const updateTicketSelectionText = () => {
+            const checkedCount = document.querySelectorAll('#ticket-multiselect-dropdown .applicable-ticket-checkbox:checked').length;
+            const buttonText = document.getElementById('ticket-multiselect-text');
+            if (checkedCount === 0) {
+                buttonText.textContent = 'All Tickets';
+            } else if (checkedCount === 1) {
+                buttonText.textContent = '1 ticket selected';
+            } else {
+                buttonText.textContent = `${checkedCount} tickets selected`;
+            }
         };
         
         const toggleScheduledDate = (status) => {
@@ -529,6 +713,25 @@
             requestAnimationFrame(() => ruleDiv.classList.add('rule-enter-active'));
         };
         
+        const addCommissionTier = (tier = null) => {
+            const container = document.getElementById('commission-tiers-container');
+            const tierDiv = document.createElement('div');
+            tierDiv.className = 'grid grid-cols-1 sm:grid-cols-4 gap-2 items-center commission-tier-enter';
+            
+            tierDiv.innerHTML = `
+                <input type="text" placeholder="Tier Name (e.g. Silver)" class="tier-name p-2 border border-gray-300 rounded-md sm:col-span-1" value="${tier?.name || ''}">
+                <div class="flex items-center space-x-2 sm:col-span-3">
+                    <span>When Tickets Sold ></span>
+                    <input type="number" placeholder="20" class="tier-threshold p-2 border border-gray-300 rounded-md w-24" value="${tier?.threshold || ''}">
+                    <span>New Rate (€)</span>
+                    <input type="number" placeholder="12.00" class="tier-rate p-2 border border-gray-300 rounded-md w-24" value="${tier?.rate || ''}">
+                    <button type="button" onclick="this.closest('.commission-tier-enter').remove()" class="text-red-500 hover:text-red-700 font-bold text-xl">&times;</button>
+                </div>
+            `;
+            container.appendChild(tierDiv);
+            requestAnimationFrame(() => tierDiv.classList.add('commission-tier-enter-active'));
+        };
+
         const updateRuleInputType = (selectElement) => {
             const valueInput = selectElement.nextElementSibling;
             valueInput.type = selectElement.value === 'date' ? 'date' : 'number';
@@ -579,7 +782,7 @@
                 ticketsData.unshift(ticketPayload);
             }
             renderTickets();
-            closeModal('ticket-modal');
+            closeTicketManagementModal('ticket-modal');
         };
 
         const deleteTicket = () => {
@@ -593,41 +796,86 @@
                  if (confirm('Are you sure you want to delete this ticket? This action cannot be undone.')) {
                     ticketsData = ticketsData.filter(t => t.id !== ticketId);
                     renderTickets();
-                    closeModal('ticket-modal');
+                    closeTicketManagementModal('ticket-modal');
                  }
             } else { // "Deleting" a new, unsaved ticket is just closing the modal
-                closeModal('ticket-modal');
+                closeTicketManagementModal('ticket-modal');
             }
         };
         
         const saveCode = () => {
             const codeId = parseInt(document.getElementById('editing-code-id').value);
             
+            // Get applicable ticket IDs
+            const applicableTicketIds = [];
+            document.querySelectorAll('#ticket-multiselect-dropdown .applicable-ticket-checkbox:checked').forEach(checkbox => {
+                applicableTicketIds.push(parseInt(checkbox.value));
+            });
+
+            const commissionStrategy = document.querySelector('input[name="commission-strategy"]:checked').value;
+            let commissionData = {};
+            if (commissionStrategy === 'simple') {
+                commissionData = {
+                    strategy: 'simple',
+                    simpleRate: parseFloat(document.getElementById('simple-commission').value) || 0
+                };
+            } else {
+                const tiers = [];
+                document.querySelectorAll('#commission-tiers-container > div').forEach(tierDiv => {
+                    tiers.push({
+                        name: tierDiv.querySelector('.tier-name').value,
+                        threshold: parseInt(tierDiv.querySelector('.tier-threshold').value) || 0,
+                        rate: parseFloat(tierDiv.querySelector('.tier-rate').value) || 0
+                    });
+                });
+                commissionData = {
+                    strategy: 'tiered',
+                    baseRate: parseFloat(document.getElementById('base-commission').value) || 0,
+                    tiers: tiers
+                };
+            }
+
             if (codeId) { // Editing
                 const index = discountCodesData.findIndex(c => c.id === codeId);
                 discountCodesData[index].uses = parseInt(document.getElementById('code-uses').value) || 0;
                 discountCodesData[index].status = document.getElementById('code-status').value;
+                discountCodesData[index].promoterName = document.getElementById('promoter-name').value;
+                discountCodesData[index].applicableTicketIds = applicableTicketIds;
+                discountCodesData[index].commission = commissionData;
             } else { // Creating
                  const newCode = {
                     id: Math.max(...discountCodesData.map(c => c.id), 0) + 1,
                     text: document.getElementById('code-text').value,
+                    promoterName: document.getElementById('promoter-name').value,
                     type: document.getElementById('code-type').value,
                     value: parseFloat(document.getElementById('code-value').value) || 0,
                     uses: parseInt(document.getElementById('code-uses').value) || 0,
                     claimed: 0,
-                    promoter: '', // Promoter field was removed from modal, so it's empty
-                    status: document.getElementById('code-status').value
+                    status: document.getElementById('code-status').value,
+                    applicableTicketIds: applicableTicketIds,
+                    commission: commissionData
                 };
                 discountCodesData.unshift(newCode);
             }
             renderDiscountCodes();
-            closeModal('code-modal');
+            closeTicketManagementModal('code-modal');
         };
 
         // --- INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', () => {
             renderTickets();
             renderDiscountCodes();
+
+            // Close ticket dropdown if clicking outside
+            window.addEventListener('click', function(e) {
+                const container = document.getElementById('ticket-multiselect-container');
+                const dropdown = document.getElementById('ticket-multiselect-dropdown');
+                const arrow = document.getElementById('ticket-multiselect-arrow');
+                if (container && !container.contains(e.target)) {
+                    dropdown.classList.add('hidden');
+                    arrow.classList.remove('rotate-180');
+                }
+            });
         });
     </script>
     <script src="organizer.js" defer></script>
