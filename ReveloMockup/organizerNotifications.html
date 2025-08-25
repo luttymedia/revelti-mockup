@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revelo - Notifications</title>
+    <title>Revelo - Organizer Notifications</title>
     
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -16,69 +16,65 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="antialiased text-gray-800">
-    <div id="navbar-placeholder"></div>
+    <div id="organizer-navbar-placeholder"></div>
 
-    <!-- Main container. This container is a flex column that manages the layout,
-         allowing the header and nav to stay fixed while the main content scrolls.
-         The `h-screen` class ensures it fills the viewport on mobile and a fixed
-         height on larger screens for modal-like appearance. -->
+    <!-- Main container -->
     <div class="max-w-2xl lg:max-w-7xl mx-auto bg-white shadow-lg flex flex-col h-full full-height-modal">
 
         <!-- Header Section -->
         <header class="p-6 flex items-center justify-between">
-            <h1 class="text-xl font-bold revelo-blue">Notifications</h1>
+            <h1 class="text-xl font-bold revelo-blue">Organizer Notifications</h1>
             <div class="flex items-center space-x-0 flex-shrink-0">
                 <!-- Settings Access Button -->
-                <a href="NotificationSettings.html" class="p-1.5 rounded-full hover:bg-gray-200" title="Notification Settings">
+                <a href="organizerNotificationSettings.html" class="p-1.5 rounded-full hover:bg-gray-200" title="Organizer Notification Settings">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                 </a>
             </div>
         </header>
         
-        <!-- Tab Navigation. The `flex-shrink-0` class prevents it from shrinking. -->
+        <!-- Tab Navigation -->
         <nav class="sticky top-12 flex-shrink-0 bg-white z-40 border-b border-gray-200">
             <div class="flex justify-around">
                 <button data-tab-target="all" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelo-blue transition duration-300">All</button>
-                <button data-tab-target="socialMedia" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelo-blue transition duration-300">Social & Media</button>
-                <button data-tab-target="eventsReminders" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelo-blue transition duration-300">Events & Reminders</button>
+                <button data-tab-target="salesPromoters" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelo-blue transition duration-300">Sales & Promoters</button>
+                <button data-tab-target="eventMedia" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelo-blue transition duration-300">Event & Media</button>
                 <button data-tab-target="systemAccount" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelo-blue transition duration-300">System & Account</button>
             </div>
         </nav>
 
-        <!-- Main Content Sections (Tabs). The `flex-1` class allows this section to grow and
-             take up all available vertical space, while `overflow-y-auto` makes it scrollable. -->
-        <main class="p-4 bg-gray-50 flex-1 overflow-y-auto" style="height: calc(100vh - 11rem);">
-<!-- All Tab -->
-<div id="all" class="tab-content active" style="min-height: calc(100vh - 11rem);">
-    <div class="text-right mb-4">
-        <button data-mark-all="all" class="text-sm font-semibold revelo-blue hover:underline">Mark all as read</button>
-    </div>
-    <div class="space-y-4"></div>
-</div>
+        <!-- Main Content Sections (Tabs) -->
+        <main class="p-4 bg-gray-50 overflow-y-auto">
+            <!-- All Tab -->
+            <div id="all" class="tab-content">
+                <div class="text-right mb-4">
+                    <button data-mark-all="all" class="text-sm font-semibold revelo-blue hover:underline">Mark all as read</button>
+                </div>
+                <div class="space-y-4"></div>
+            </div>
 
-<!-- Social & Media Tab -->
-<div id="socialMedia" class="tab-content hidden" style="min-height: calc(100vh - 11rem);">
-     <div class="text-right mb-4">
-        <button data-mark-all="socialMedia" class="text-sm font-semibold revelo-blue hover:underline">Mark all as read</button>
-    </div>
-    <div class="space-y-4"></div>
-</div>
+            <!-- Sales & Promoters Tab -->
+            <div id="salesPromoters" class="tab-content hidden">
+                 <div class="text-right mb-4">
+                    <button data-mark-all="salesPromoters" class="text-sm font-semibold revelo-blue hover:underline">Mark all as read</button>
+                </div>
+                <div class="space-y-4"></div>
+            </div>
 
-<!-- Events & Reminders Tab -->
-<div id="eventsReminders" class="tab-content hidden" style="min-height: calc(100vh - 11rem);">
-     <div class="text-right mb-4">
-        <button data-mark-all="eventsReminders" class="text-sm font-semibold revelo-blue hover:underline">Mark all as read</button>
-    </div>
-    <div class="space-y-4"></div>
-</div>
+            <!-- Event & Media Tab -->
+            <div id="eventMedia" class="tab-content hidden">
+                 <div class="text-right mb-4">
+                    <button data-mark-all="eventMedia" class="text-sm font-semibold revelo-blue hover:underline">Mark all as read</button>
+                </div>
+                <div class="space-y-4"></div>
+            </div>
 
-<!-- System & Account Tab -->
-<div id="systemAccount" class="tab-content hidden" style="min-height: calc(100vh - 11rem);">
-     <div class="text-right mb-4">
-        <button data-mark-all="systemAccount" class="text-sm font-semibold revelo-blue hover:underline">Mark all as read</button>
-    </div>
-    <div class="space-y-4"></div>
-</div>
+            <!-- System & Account Tab -->
+            <div id="systemAccount" class="tab-content hidden">
+                 <div class="text-right mb-4">
+                    <button data-mark-all="systemAccount" class="text-sm font-semibold revelo-blue hover:underline">Mark all as read</button>
+                </div>
+                <div class="space-y-4"></div>
+            </div>
         </main>
     </div>
 
@@ -88,11 +84,9 @@
 
         const tabButtons = notificationHost.querySelectorAll('.tab-button');
         const tabContents = notificationHost.querySelectorAll('.tab-content');
-        
-        // Get reference to the new settings button
         const settingsButton = notificationHost.querySelector('#settings-icon-button');
 
-        // Add logic for the settings button
+        // NEW: Add logic for the settings button
         if (settingsButton) {
             settingsButton.addEventListener('click', () => {
                 // Check if this component is running inside a modal
@@ -108,39 +102,23 @@
                     }
                 } else {
                     // If it's a standalone page, just navigate to the settings page
-                    window.location.href = 'notificationSettings.html';
+                    window.location.href = 'organizerNotificationSettings.html';
                 }
             });
         }
-        
-function switchTab(targetId) {
-    tabContents.forEach(content => {
-        content.classList.add('hidden');
-        content.classList.remove('active');
-    });
-    tabButtons.forEach(button => button.classList.remove('tab-active'));
-    const targetContent = notificationHost.querySelector(`#${targetId}`);
-    if (targetContent) {
-        targetContent.classList.remove('hidden');
-        targetContent.classList.add('active');
-        
-        // Force recalculation of tab height
-        setTimeout(() => {
-            targetContent.style.minHeight = 'auto';
-            targetContent.style.minHeight = `${Math.max(
-                targetContent.scrollHeight, 
-                window.innerHeight - 180
-            )}px`;
-        }, 10);
-    }
-    const targetButton = notificationHost.querySelector(`[data-tab-target="${targetId}"]`);
-    if (targetButton) targetButton.classList.add('tab-active');
-}
-        
+
+        function switchTab(targetId) {
+            tabContents.forEach(content => content.classList.add('hidden'));
+            tabButtons.forEach(button => button.classList.remove('tab-active'));
+            const targetContent = notificationHost.querySelector(`#${targetId}`);
+            if (targetContent) targetContent.classList.remove('hidden');
+            const targetButton = notificationHost.querySelector(`[data-tab-target="${targetId}"]`);
+            if (targetButton) targetButton.classList.add('tab-active');
+        }
 
         function createNotificationItem(notification) {
             const unreadIndicator = notification.read ? '' : '<div class="absolute -left-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-revelo-orange rounded-full"></div>';
-            const avatarSrc = notification.avatar || 'https://placehold.co/40x40/cccccc/ffffff?text=N';
+            const avatarSrc = notification.avatar || 'https://placehold.co/40x40/cccccc/ffffff?text=S';
             const isLink = notification.link;
             const sanitizedMessage = isLink ? notification.message.replace(/<[^>]*>/g, '').replace(/"/g, '&quot;') : '';
             const linkOverlay = isLink ? `<a href="${notification.link}" class="absolute inset-0 z-10" aria-label="${sanitizedMessage}"></a>` : '';
@@ -168,14 +146,31 @@ function switchTab(targetId) {
                 </div>`;
         }
 
-        let notificationsData = [ { id: 1, type: 'socialMedia', message: 'The official gallery for <strong>Sensuality & Essentiality</strong> has been updated by <strong>AMedia</strong>. Check out the new album: <strong>Workshops</strong>.', timestamp: '5m ago', avatar: 'https://placehold.co/40x40/f58220/ffffff?text=A', read: false, link: 'galleryNavigation.html' }, { id: 2, type: 'socialMedia', message: 'New photos from <strong>Barcelona Summer Fest</strong> are now available from <strong>AMedia</strong>, a creator you follow.', timestamp: '1h ago', avatar: 'https://placehold.co/40x40/f58220/ffffff?text=A', read: false }, { id: 3, type: 'socialMedia', message: '<strong>Sha Iborra</strong> has new artwork available. See their latest photos from <strong>Summer Fest 2024</strong>.', timestamp: '3h ago', avatar: 'https://placehold.co/40x40/f58220/ffffff?text=S', read: true }, { id: 4, type: 'socialMedia', message: 'The "Official Media" gallery for <strong>Sensuality 2025</strong> is now live!', timestamp: '2 days ago', avatar: 'https://placehold.co/40x40/f58220/ffffff?text=G', read: true, link: 'galleryNavigation.html' }, { id: 5, type: 'eventsReminders', message: 'New announcement for <strong>Sensuality & Essentiality</strong>: The workshop schedule has been updated.', timestamp: '10m ago', avatar: 'https://placehold.co/40x40/213c63/ffffff?text=E', read: false, link: 'eventDetail.html' }, { id: 6, type: 'eventsReminders', message: '<strong>Bachata Sensual Events</strong> has just posted a new event: <strong>Valencia Salsa Summit</strong>.', timestamp: '30m ago', avatar: 'https://placehold.co/40x40/213c63/ffffff?text=O', read: false }, { id: 7, type: 'eventsReminders', message: 'Reminder: <strong>BCN Bachata Congress</strong> starts in 1 week! View your ticket details and get ready.', timestamp: '4h ago', avatar: 'https://placehold.co/40x40/213c63/ffffff?text=R', read: true }, { id: 8, type: 'eventsReminders', message: 'Heads up! A new batch of "Sensuality Pass" tickets has been released for <strong>Sensuality & Essentiality</strong>.', timestamp: '1 day ago', avatar: 'https://placehold.co/40x40/213c63/ffffff?text=T', read: false, link: 'ticketPurchase.html' }, { id: 9, type: 'eventsReminders', message: 'The price for <strong>Madrid Bachata Masters</strong> will increase soon. Buy now to save!', timestamp: '3 days ago', avatar: 'https://placehold.co/40x40/213c63/ffffff?text=P', read: true }, { id: 10, type: 'eventsReminders', message: 'Your followed event, <strong>Seville Kizomba Immersion</strong>, is just one month away!', timestamp: '1 week ago', avatar: 'https://placehold.co/40x40/213c63/ffffff?text=C', read: true }, { id: 11, type: 'systemAccount', message: 'Your purchase is confirmed! Your ticket for <strong>Sensuality & Essentiality</strong> is now available in "My Tickets".', timestamp: '15m ago', avatar: 'https://placehold.co/40x40/cccccc/ffffff?text=S', read: false, link: 'purchaseDetails.html' }, { id: 12, type: 'systemAccount', message: 'Your review for <strong>Sensuality & Essentiality</strong> has been published. Thank you for your feedback!', timestamp: '6h ago', avatar: 'https://placehold.co/40x40/cccccc/ffffff?text=S', read: true }, { id: 13, type: 'systemAccount', message: 'Welcome to Revelo, <strong>Alex Johnson</strong>! Complete your profile by adding your favorite dance styles to get better recommendations.', timestamp: '4 days ago', avatar: 'https://placehold.co/40x40/cccccc/ffffff?text=S', read: false, link: 'attendeeDashboard.html' } ];
+        let notificationsData = [
+            // Sales & Promoters
+            { id: 1, type: 'salesPromoters', message: 'Congratulations! You\'ve sold <strong>100 tickets</strong> for <strong>Sensuality & Essentiality</strong>.', timestamp: '1h ago', avatar: 'images/organizerLogo.jpg', read: false, link: '#' },
+            { id: 2, type: 'salesPromoters', message: 'Your promoter <strong>John Doe</strong> has reached the <strong>Gold Tier</strong> by selling <strong>50 tickets</strong> for your event.', timestamp: '3h ago', avatar: 'https://placehold.co/40x40/cccccc/000000?text=JD', read: true, link: '#' },
+            { id: 3, type: 'salesPromoters', message: 'Your event page for <strong>Sensuality & Essentiality</strong> has received <strong>1,000 views</strong> this week.', timestamp: '2 days ago', avatar: 'images/organizerLogo.jpg', read: false, link: '#' },
+            { id: 4, type: 'salesPromoters', message: 'Your payment of <strong>€2,500</strong> for ticket sales has been sent to your bank account.', timestamp: '5m ago', avatar: 'https://placehold.co/40x40/213c63/ffffff?text=€', read: false, link: '#' },
+            { id: 5, type: 'salesPromoters', message: 'A refund request for ticket <strong>#12345</strong> has been submitted for <strong>Sensuality & Essentiality</strong>.', timestamp: '1 day ago', avatar: 'https://placehold.co/40x40/213c63/ffffff?text=R', read: true, link: '#' },
+
+            // Event & Media
+            { id: 6, type: 'eventMedia', message: '<strong>AMedia</strong> has published a new gallery for your event: <strong>Workshops - Day 1</strong>.', timestamp: '10m ago', avatar: 'https://placehold.co/40x40/f58220/ffffff?text=A', read: false, link: '#' },
+            { id: 7, type: 'eventMedia', message: '<strong>Lutty Moreira</strong> have accepted your invitation to be a collaborator for <strong>Sensuality & Essentiality</strong>.', timestamp: '30m ago', avatar: 'https://placehold.co/40x40/213c63/ffffff?text=A', read: false, link: '#' },
+            { id: 8, type: 'eventMedia', message: 'A new question from an attendee has been posted on your event\'s FAQ page.', timestamp: '2h ago', avatar: 'https://placehold.co/40x40/213c63/ffffff?text=?', read: true, link: '#' },
+
+            // System & Account
+            { id: 9, type: 'systemAccount', message: 'Welcome to Revelo, <strong>Bachata Sensual Events</strong>! Start by creating a new event or inviting collaborators.', timestamp: '15m ago', avatar: 'https://placehold.co/40x40/cccccc/ffffff?text=S', read: false, link: '#' },
+            { id: 10, type: 'systemAccount', message: 'New Feature Alert! You can now use the <strong>Advanced Analytics Dashboard</strong> to track your sales in real-time.', timestamp: '1 day ago', avatar: 'https://placehold.co/40x40/cccccc/ffffff?text=F', read: false, link: '#' },
+            { id: 11, type: 'systemAccount', message: 'Your password was successfully updated. If this wasn\'t you, please contact support immediately.', timestamp: '4 days ago', avatar: 'https://placehold.co/40x40/cccccc/ffffff?text=S', read: true, link: '#' }
+        ];
 
         function parseTimestamp(timestampStr) { const lowerCaseStr = timestampStr.toLowerCase(); if (lowerCaseStr === 'yesterday') return 1440; const num = parseInt(lowerCaseStr, 10); if (isNaN(num)) return Infinity; if (lowerCaseStr.includes('week')) return num * 10080; if (lowerCaseStr.includes('day')) return num * 1440; if (lowerCaseStr.includes('h')) return num * 60; if (lowerCaseStr.includes('m')) return num; return Infinity; }
         function markOneAsRead(id) { const notification = notificationsData.find(n => n.id === id); if (notification) { notification.read = true; renderNotifications(); } }
         function markAllAsRead(category = 'all') { notificationsData.forEach(n => { if (category === 'all' || n.type === category) n.read = true; }); renderNotifications(); }
 
         function renderNotifications() {
-            const tabs = { all: '', socialMedia: '', eventsReminders: '', systemAccount: '' };
+            const tabs = { all: '', salesPromoters: '', eventMedia: '', systemAccount: '' };
             const sorted = [...notificationsData].sort((a, b) => parseTimestamp(a.timestamp) - parseTimestamp(b.timestamp));
             sorted.forEach(n => {
                 const itemHtml = createNotificationItem(n);
@@ -220,7 +215,7 @@ function switchTab(targetId) {
         }
     });
     </script>
-    <script src="main.js" defer></script>
+    <script src="organizer.js" defer></script>
     <div id="footer-placeholder"></div>
 </body>
 </html>

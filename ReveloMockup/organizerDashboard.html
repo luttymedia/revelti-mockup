@@ -51,43 +51,6 @@
 
             <!-- Main Content Sections (Tabs) -->
             <main class="p-6 md:p-8">
-                <!-- Stats Tab -->
-                <div id="stats" class="tab-content hidden">
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                        <!-- Main Stat Card: Total Income -->
-                        <a href="incomeBreakdown.html" class="lg:col-span-2 block bg-white p-6 rounded-lg border border-gray-200 hover:shadow-xl hover:border-revelo-blue transition-all duration-300">
-                            <h3 class="text-base font-semibold text-gray-500 uppercase tracking-wider">Total Income</h3>
-                            <p class="text-5xl font-extrabold revelo-blue mt-2">€770,179.00</p>
-                            <div class="mt-6 pt-6 border-t border-gray-200 grid grid-cols-1 sm:grid-cols-3 gap-4">
-                                <div>
-                                    <h4 class="text-sm font-semibold text-gray-500">Net Profit</h4>
-                                    <p class="text-xl font-bold text-green-600 mt-1">€585,336.04</p>
-                                </div>
-                                <div>
-                                    <h4 class="text-sm font-semibold text-gray-500">Taxes</h4>
-                                    <p class="text-xl font-bold text-gray-700 mt-1">€161,737.60</p>
-                                </div>
-                                <div>
-                                    <h4 class="text-sm font-semibold text-gray-500">Commissions</h4>
-                                    <p class="text-xl font-bold text-gray-700 mt-1">€23,105.36</p>
-                                </div>
-                            </div>
-                        </a>
-
-                        <!-- Combined Secondary Card -->
-                        <a href="ticketBreakdown.html" class="block bg-white p-6 rounded-lg border border-gray-200 hover:shadow-xl hover:border-revelo-blue transition-all duration-300 flex flex-col justify-between">
-                            <div>
-                                <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Average Ticket Price</h3>
-                                <p class="text-4xl font-extrabold revelo-blue mt-2">€108.57</p>
-                            </div>
-                            <div class="mt-6 pt-6 border-t border-gray-200">
-                                <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Total Tickets sold</h3>
-                                <p class="text-4xl font-extrabold revelo-blue mt-2">7,094</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
                 <!-- Events Tab -->
                 <div id="events" class="tab-content">
                     <!-- Filters and Search -->
@@ -99,7 +62,7 @@
                             </div>
                         </div>
                         <div id="event-filters" class="flex space-x-2">
-                            <button onclick="filterEvents('upcoming')" class="filter-btn px-4 py-2 text-sm font-semibold bg-revelo-blue text-white rounded-lg">Upcoming</button>
+                            <button onclick="filterEvents('upcoming')" class="filter-btn px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-lg">Upcoming</button>
                             <button onclick="filterEvents('draft')" class="filter-btn px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-lg">Drafts</button>
                             <button onclick="filterEvents('past')" class="filter-btn px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-lg">Past Events</button>
                         </div>
@@ -162,6 +125,44 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Stats Tab -->
+                <div id="stats" class="tab-content hidden">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Main Stat Card: Total Income -->
+                        <a href="incomeBreakdown.html" class="lg:col-span-2 block bg-white p-6 rounded-lg border border-gray-200 hover:shadow-xl hover:border-revelo-blue transition-all duration-300">
+                            <h3 class="text-base font-semibold text-gray-500 uppercase tracking-wider">Total Income</h3>
+                            <p class="text-5xl font-extrabold revelo-blue mt-2">€770,179.00</p>
+                            <div class="mt-6 pt-6 border-t border-gray-200 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                <div>
+                                    <h4 class="text-sm font-semibold text-gray-500">Net Profit</h4>
+                                    <p class="text-xl font-bold text-green-600 mt-1">€585,336.04</p>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-gray-500">Taxes</h4>
+                                    <p class="text-xl font-bold text-gray-700 mt-1">€161,737.60</p>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-gray-500">Commissions</h4>
+                                    <p class="text-xl font-bold text-gray-700 mt-1">€23,105.36</p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Combined Secondary Card -->
+                        <a href="ticketBreakdown.html" class="block bg-white p-6 rounded-lg border border-gray-200 hover:shadow-xl hover:border-revelo-blue transition-all duration-300 flex flex-col justify-between">
+                            <div>
+                                <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Average Ticket Price</h3>
+                                <p class="text-4xl font-extrabold revelo-blue mt-2">€108.57</p>
+                            </div>
+                            <div class="mt-6 pt-6 border-t border-gray-200">
+                                <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Total Tickets sold</h3>
+                                <p class="text-4xl font-extrabold revelo-blue mt-2">7,094</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
 
                 <!-- Overview Tab -->
                 <div id="overview" class="tab-content hidden">
@@ -228,6 +229,11 @@
                                     <button class="w-full bg-revelo-blue text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-800 transition duration-300">Save Changes</button>
                                 </div>
                             </details>
+                            <!-- Notification Settings -->
+                            <a href="organizerNotificationSettings.html" class="w-full flex justify-between items-center cursor-pointer font-semibold text-lg revelo-blue p-3 bg-white border rounded-lg hover:bg-gray-50 transition-colors">
+                                <span>Notification Settings</span>
+                                <svg class="w-6 h-6 revelo-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            </a>
                             <!-- Account Settings -->
                             <details><summary class="flex justify-between items-center cursor-pointer font-semibold text-lg revelo-blue p-3 bg-white border rounded-lg">Account Settings <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
                                 <div class="p-4 space-y-4 bg-white border-x border-b rounded-b-lg">
@@ -305,7 +311,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             // Set "Events" as the default tab
             switchTab('events');
-            filterEvents('upcoming'); // Set initial filter for the events tab
+            // filterEvents('upcoming'); // Set initial filter for the events tab
         });
     </script>
     <script src="organizer.js" defer></script>

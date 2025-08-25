@@ -14,91 +14,6 @@ function closeModal(modalId) {
     }
 }
 
-// Open Notification Settings as a modal
-function openSettingsModal() {
-    if (document.getElementById('settings-modal-overlay')) return;
-
-    const modalOverlay = document.createElement('div');
-    modalOverlay.id = 'settings-modal-overlay';
-    modalOverlay.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50';
-    
-    const modalContent = document.createElement('div');
-    modalContent.className = 'bg-white rounded-lg shadow-xl w-full max-w-2xl mx-auto max-h-[90vh] overflow-hidden flex flex-col';
-    modalContent.innerHTML = `
-        <div class="p-6 border-b">
-            <div class="flex justify-between items-center">
-                <h2 class="text-2xl font-bold revelo-blue">Notification Settings</h2>
-                <button id="close-settings-modal" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">×</button>
-            </div>
-        </div>
-        <div class="overflow-y-auto flex-1 p-6">
-            <p class="text-center p-6">Loading notification settings...</p>
-        </div>
-    `;
-
-    modalOverlay.appendChild(modalContent);
-    document.body.appendChild(modalOverlay);
-
-    // Add close event listener
-    const closeButton = document.getElementById('close-settings-modal');
-    if (closeButton) {
-        closeButton.addEventListener('click', () => {
-            modalOverlay.remove();
-        });
-    }
-
-    // Close modal when clicking outside
-    modalOverlay.addEventListener('click', (event) => {
-        if (event.target === modalOverlay) {
-            modalOverlay.remove();
-        }
-    });
-
-    fetch('notificationSettings.html')
-        .then(response => response.text())
-        .then(html => {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-            
-            const settingsContainer = doc.querySelector('.max-w-2xl.mx-auto.bg-white');
-            
-            if (settingsContainer) {
-                const contentArea = modalContent.querySelector('.overflow-y-auto');
-                contentArea.innerHTML = '';
-                
-                // Remove the header from the fetched content since we already have one
-                const header = settingsContainer.querySelector('header');
-                if (header) header.remove();
-                
-                contentArea.appendChild(settingsContainer);
-
-                // Find and execute the initialization script.
-                const scriptElement = doc.querySelector('script:not([src])');
-                if (scriptElement) {
-                    const tempScript = document.createElement('script');
-                    tempScript.textContent = scriptElement.textContent;
-                    document.body.appendChild(tempScript).parentNode.removeChild(tempScript);
-
-                    if (typeof initializeSettingsComponent === 'function') {
-                        initializeSettingsComponent(settingsContainer);
-                    } else {
-                         // Fallback in case script execution fails
-                         console.error('initializeSettingsComponent function not found.');
-                    }
-                }
-
-            } else {
-                const contentArea = modalContent.querySelector('.overflow-y-auto');
-                contentArea.innerHTML = '<p class="text-center text-red-500 p-6">Error: Could not load settings content.</p>';
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching settings for modal:', error);
-            const contentArea = modalContent.querySelector('.overflow-y-auto');
-            contentArea.innerHTML = '<p class="text-center text-red-500 p-6">Error: Could not load settings.</p>';
-        });
-}
-
 // Functions for the media modal.
 // This function is now generic and accepts the clicked element as an argument.
 function openMediaModal(element) {
@@ -309,80 +224,7 @@ function updateSelectedStylesDisplay(newStyles) {
         stylesDisplay.appendChild(span);
     });
 }
-
-    /* Fetches notification content and displays it in a modal. */
-    function openNotificationsModal() {
-        if (document.getElementById('notifications-modal-overlay')) return;
-
-        const modalOverlay = document.createElement('div');
-        modalOverlay.id = 'notifications-modal-overlay';
-        modalOverlay.className = 'modal-overlay';
-
-        const modalContent = document.createElement('div');
-        modalContent.className = 'modal-content';
-        modalContent.innerHTML = '<p class="text-center p-6">Loading notifications...</p>';
-
-        modalOverlay.appendChild(modalContent);
-        document.body.appendChild(modalOverlay);
-
-        setTimeout(() => modalOverlay.classList.add('visible'), 10);
-
-        modalOverlay.addEventListener('click', (event) => {
-            if (event.target === modalOverlay) closeModal('notifications-modal-overlay');
-        });
-
-        fetch('attendeeNotifications.html')
-            .then(response => response.text())
-            .then(html => {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                
-                const notificationContainer = doc.querySelector('.max-w-2xl.mx-auto.bg-white');
-                const notificationScript = doc.querySelector('script:not([src])');
-
-                if (notificationContainer && notificationScript) {
-                    const closeButton = document.createElement('button');
-                    closeButton.innerHTML = '&times;';
-                    closeButton.className = 'absolute top-2 right-2 text-3xl leading-none text-gray-500 hover:text-gray-800 z-50';
-                    closeButton.setAttribute('aria-label', 'Close notifications');
-                    closeButton.onclick = () => closeModal('notifications-modal-overlay');
-                    
-                    const header = notificationContainer.querySelector('header');
-                    if(header) header.appendChild(closeButton);
-
-                    modalContent.innerHTML = '';
-                    modalContent.appendChild(notificationContainer);
-
-                    const scriptElement = document.createElement('script');
-                    scriptElement.textContent = notificationScript.textContent;
-                    document.body.appendChild(scriptElement).parentNode.removeChild(scriptElement);
-
-                    if (typeof initializeNotificationComponent === 'function') {
-                        const host = modalContent.querySelector('.max-w-2xl');
-                        initializeNotificationComponent(host);
-
-                        const settingsButton = host.querySelector('#settings-icon-button');
-                        if (settingsButton) {
-                            settingsButton.addEventListener('click', () => {
-                                if (window.innerWidth < 768) {
-                                    window.location.href = 'notificationSettings.html';
-                                } else {
-                                    openSettingsModal();
-                                }
-                            });
-                        }
-                    }
-                } else {
-                    modalContent.innerHTML = '<p class="text-center text-red-500 p-6">Error: Could not load notification content.</p>';
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching notifications for modal:', error);
-                modalContent.innerHTML = '<p class="text-center text-red-500 p-6">Error: Could not load notifications.</p>';
-            });
-    }
     
-
     // Function to attach listeners for the Media tab.
     function initializeMediaTabListeners() {
         const stylesModal = document.getElementById('styles-modal');
@@ -425,20 +267,8 @@ function updateSelectedStylesDisplay(newStyles) {
         }
         
         if (settingsLink) {
-            settingsLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                if (window.innerWidth < 768) {
-                    window.location.href = 'notificationSettings.html';
-                } else {
-                    // Check if openSettingsModal exists (for standalone pages)
-                    if (typeof openSettingsModal === 'function') {
-                        openSettingsModal();
-                    } else {
-                        // Fallback for standalone pages
-                        window.location.href = 'notificationSettings.html';
-                    }
-                }
-            });
+            // Fallback for standalone pages
+            window.location.href = 'notificationSettings.html';
         }
 
         // Initialize styles display
@@ -536,13 +366,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
 
                 if (notificationIconButton) {
-                    notificationIconButton.addEventListener('click', () => {
-                        if (window.innerWidth < 768) {
-                            window.location.href = 'attendeeNotifications.html';
-                        } else {
-                            openNotificationsModal();
-                        }
-                    });
+                    // Placeholder for future notification functionality
+                    // notificationIconButton.addEventListener('click', openNotificationsModal);
                 }
 
                 document.addEventListener('click', (event) => {

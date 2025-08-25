@@ -2,6 +2,22 @@
 // It loads the organizer navbar and handles its interactions,
 // as well as the media modal functionality for organizer pages.
 
+// --- MODAL & GLOBAL FUNCTIONS ---
+
+// Reusable function to close any modal.
+function closeModal(modalId) {
+    const modalOverlay = document.getElementById(modalId);
+    if (modalOverlay) {
+        modalOverlay.classList.remove('visible');
+        // Wait for the transition to finish before removing the element
+        setTimeout(() => {
+            if (modalOverlay.parentNode) {
+                modalOverlay.remove();
+            }
+        }, 300);
+    }
+}
+
 // --- MEDIA MODAL FUNCTIONS (COPIED FROM main.js AND ADAPTED) ---
 // This function is now generic and accepts the clicked element as an argument.
 function openMediaModal(element) {
@@ -190,6 +206,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 const hamburgerIcon = document.getElementById('organizer-hamburger-icon');
                 const mobileMenu = document.getElementById('organizer-mobile-menu');
+                const notificationIconButton = document.getElementById('organizer-notification-icon-button');
                 
                 if (hamburgerIcon && mobileMenu) {
                     hamburgerIcon.addEventListener('click', (event) => {

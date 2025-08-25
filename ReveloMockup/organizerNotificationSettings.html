@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="antialiased text-gray-800">
-    <div id="navbar-placeholder"></div>
+    <div id="organizer-navbar-placeholder"></div>
 
     <!-- Main container with a max-w-2xl for larger screens -->
     <div class="max-w-2xl lg:max-w-7xl mx-auto bg-white shadow-lg flex flex-col h-full full-height-modal">
@@ -50,10 +50,10 @@
             </div>
 
             <div class="space-y-4">
-                <!-- Events & Recommendations Category -->
+                <!-- Sales & Promoters Category -->
                 <details class="bg-white rounded-lg shadow-sm" open>
                     <summary class="p-4 font-semibold text-lg revelo-blue cursor-pointer flex justify-between items-center">
-                        Events & Recommendations
+                        Sales & Promoters
                         <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </summary>
                     <div class="p-4 border-t border-gray-200">
@@ -66,8 +66,8 @@
                         <div class="space-y-3">
                             <div class="flex justify-between items-center">
                                 <div class="flex-1">
-                                    <p class="text-gray-700">New events from followed organizers</p>
-                                    <p class="text-gray-500 text-sm">Get notified when an organizer you follow posts a new event.</p>
+                                    <p class="text-gray-700">Sales milestones</p>
+                                    <p class="text-gray-500 text-sm">Notifications when you reach a new ticket sales milestone.</p>
                                 </div>
                                 <div class="flex space-x-2">
                                     <div class="w-12 flex justify-center"><input type="checkbox" class="push-checkbox h-4 w-4 rounded border-gray-300 text-revelo-orange focus:ring-revelo-orange disabled:opacity-50 disabled:cursor-not-allowed" checked></div>
@@ -76,8 +76,8 @@
                             </div>
                             <div class="flex justify-between items-center">
                                 <div class="flex-1">
-                                    <p class="text-gray-700">Updates for my events</p>
-                                    <p class="text-gray-500 text-sm">Important announcements for events you have tickets for or are following.</p>
+                                    <p class="text-gray-700">Promoter activity</p>
+                                    <p class="text-gray-500 text-sm">Alerts when your promoters reach a new sales tier.</p>
                                 </div>
                                 <div class="flex space-x-2">
                                     <div class="w-12 flex justify-center"><input type="checkbox" class="push-checkbox h-4 w-4 rounded border-gray-300 text-revelo-orange focus:ring-revelo-orange disabled:opacity-50 disabled:cursor-not-allowed" checked></div>
@@ -86,42 +86,22 @@
                             </div>
                              <div class="flex justify-between items-center">
                                 <div class="flex-1">
-                                    <p class="text-gray-700">Event Reminders</p>
-                                    <p class="text-gray-500 text-sm">Reminders for your upcoming events, like 'starts in one week'.</p>
+                                    <p class="text-gray-700">Financial updates</p>
+                                    <p class="text-gray-500 text-sm">Notifications about payments, payouts, and refund requests.</p>
                                 </div>
                                 <div class="flex space-x-2">
                                     <div class="w-12 flex justify-center"><input type="checkbox" class="push-checkbox h-4 w-4 rounded border-gray-300 text-revelo-orange focus:ring-revelo-orange disabled:opacity-50 disabled:cursor-not-allowed" checked></div>
                                     <div class="w-12 flex justify-center"><input type="checkbox" class="email-checkbox h-4 w-4 rounded border-gray-300 text-revelo-orange focus:ring-revelo-orange disabled:opacity-50 disabled:cursor-not-allowed"></div>
                                 </div>
                             </div>
-                             <div class="flex justify-between items-center">
-                                <div class="flex-1">
-                                    <p class="text-gray-700">Ticket Price Alerts</p>
-                                    <p class="text-gray-500 text-sm">Get notified when ticket prices for events you follow are about to increase.</p>
-                                </div>
-                                <div class="flex space-x-2">
-                                    <div class="w-12 flex justify-center"><input type="checkbox" class="push-checkbox h-4 w-4 rounded border-gray-300 text-revelo-orange focus:ring-revelo-orange disabled:opacity-50 disabled:cursor-not-allowed"></div>
-                                    <div class="w-12 flex justify-center"><input type="checkbox" class="email-checkbox h-4 w-4 rounded border-gray-300 text-revelo-orange focus:ring-revelo-orange disabled:opacity-50 disabled:cursor-not-allowed" checked></div>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <div class="flex-1">
-                                    <p class="text-gray-700">Weekly event recommendations</p>
-                                    <p class="text-gray-500 text-sm">A curated summary of events you might like.</p>
-                                </div>
-                                <div class="flex space-x-2">
-                                    <div class="w-12 flex justify-center"><input type="checkbox" class="push-checkbox h-4 w-4 rounded border-gray-300 text-revelo-orange focus:ring-revelo-orange disabled:opacity-50 disabled:cursor-not-allowed"></div>
-                                    <div class="w-12 flex justify-center"><input type="checkbox" class="email-checkbox h-4 w-4 rounded border-gray-300 text-revelo-orange focus:ring-revelo-orange disabled:opacity-50 disabled:cursor-not-allowed" checked></div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </details>
 
-                <!-- Social & Media Category -->
+                <!-- Event & Media Category -->
                 <details class="bg-white rounded-lg shadow-sm">
                     <summary class="p-4 font-semibold text-lg revelo-blue cursor-pointer flex justify-between items-center">
-                        Social & Media
+                        Event & Media
                         <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </summary>
                      <div class="p-4 border-t border-gray-200">
@@ -134,8 +114,8 @@
                         <div class="space-y-3">
                             <div class="flex justify-between items-center">
                                 <div class="flex-1">
-                                    <p class="text-gray-700">New media from followed creators</p>
-                                    <p class="text-gray-500 text-sm">Alerts when a creator you follow publishes a new gallery.</p>
+                                    <p class="text-gray-700">Creator media uploads</p>
+                                    <p class="text-gray-500 text-sm">Alerts when a creator publishes a new gallery for your event.</p>
                                 </div>
                                 <div class="flex space-x-2">
                                     <div class="w-12 flex justify-center"><input type="checkbox" class="push-checkbox h-4 w-4 rounded border-gray-300 text-revelo-orange focus:ring-revelo-orange disabled:opacity-50 disabled:cursor-not-allowed" checked></div>
@@ -144,22 +124,22 @@
                             </div>
                              <div class="flex justify-between items-center">
                                 <div class="flex-1">
-                                    <p class="text-gray-700">Media Tagging</p>
-                                    <p class="text-gray-500 text-sm">Get notified when someone tags you in a photo or video.</p>
+                                    <p class="text-gray-700">Collaborator invites</p>
+                                    <p class="text-gray-500 text-sm">Notifications when a collaborator accepts your invitation.</p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <div class="w-12 flex justify-center"><input type="checkbox" class="push-checkbox h-4 w-4 rounded border-gray-300 text-revelo-orange focus:ring-revelo-orange disabled:opacity-50 disabled:cursor-not-allowed" checked></div>
+                                    <div class="w-12 flex justify-center"><input type="checkbox" class="email-checkbox h-4 w-4 rounded border-gray-300 text-revelo-orange focus:ring-revelo-orange disabled:opacity-50 disabled:cursor-not-allowed"></div>
+                                </div>
+                            </div>
+                             <div class="flex justify-between items-center">
+                                <div class="flex-1">
+                                    <p class="text-gray-700">Attendee questions</p>
+                                    <p class="text-gray-500 text-sm">Alerts for new questions posted on your event's FAQ page.</p>
                                 </div>
                                 <div class="flex space-x-2">
                                     <div class="w-12 flex justify-center"><input type="checkbox" class="push-checkbox h-4 w-4 rounded border-gray-300 text-revelo-orange focus:ring-revelo-orange disabled:opacity-50 disabled:cursor-not-allowed" checked></div>
                                     <div class="w-12 flex justify-center"><input type="checkbox" class="email-checkbox h-4 w-4 rounded border-gray-300 text-revelo-orange focus:ring-revelo-orange disabled:opacity-50 disabled:cursor-not-allowed" checked></div>
-                                </div>
-                            </div>
-                             <div class="flex justify-between items-center">
-                                <div class="flex-1">
-                                    <p class="text-gray-700">Gallery Updates</p>
-                                    <p class="text-gray-500 text-sm">Notifications when a gallery you follow is updated with new content.</p>
-                                </div>
-                                <div class="flex space-x-2">
-                                    <div class="w-12 flex justify-center"><input type="checkbox" class="push-checkbox h-4 w-4 rounded border-gray-300 text-revelo-orange focus:ring-revelo-orange disabled:opacity-50 disabled:cursor-not-allowed" checked></div>
-                                    <div class="w-12 flex justify-center"><input type="checkbox" class="email-checkbox h-4 w-4 rounded border-gray-300 text-revelo-orange focus:ring-revelo-orange disabled:opacity-50 disabled:cursor-not-allowed"></div>
                                 </div>
                             </div>
                         </div>
@@ -180,16 +160,6 @@
                         </div>
                         <!-- Settings Rows -->
                         <div class="space-y-3">
-                            <div class="flex justify-between items-center">
-                                <div class="flex-1">
-                                    <p class="text-gray-700">Purchase Confirmations</p>
-                                    <p class="text-gray-500 text-sm">Receive receipts and ticket confirmations.</p>
-                                </div>
-                                <div class="flex space-x-2">
-                                    <div class="w-12 flex justify-center"><input type="checkbox" class="push-checkbox h-4 w-4 rounded border-gray-300 text-revelo-orange focus:ring-revelo-orange disabled:opacity-50 disabled:cursor-not-allowed" checked></div>
-                                    <div class="w-12 flex justify-center"><input type="checkbox" class="email-checkbox h-4 w-4 rounded border-gray-300 text-revelo-orange focus:ring-revelo-orange disabled:opacity-50 disabled:cursor-not-allowed" checked></div>
-                                </div>
-                            </div>
                              <div class="flex justify-between items-center">
                                 <div class="flex-1">
                                     <p class="text-gray-700">Account Security</p>
@@ -287,7 +257,7 @@
             }
         });
     </script>
-    <script src="main.js" defer></script>
+    <script src="organizer.js" defer></script>
     <div id="footer-placeholder"></div>
 
 </body>
