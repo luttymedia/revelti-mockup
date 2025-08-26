@@ -133,6 +133,30 @@
                             <h4 class="text-md font-bold text-gray-700 text-center mb-2">Revenue per Event</h4>
                             <canvas id="revenueComparisonChart"></canvas>
                         </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="text-md font-bold text-gray-700 text-center mb-2">Revenue Snapshot</h4>
+                            <canvas id="revenueSnapshotChart"></canvas>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="text-md font-bold text-gray-700 text-center mb-2">Ticket Volume Snapshot</h4>
+                            <canvas id="ticketVolumeSnapshotChart"></canvas>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="text-md font-bold text-gray-700 text-center mb-2">Average Ticket Price Comparison</h4>
+                            <canvas id="avgTicketPriceChart"></canvas>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="text-md font-bold text-gray-700 text-center mb-2">Average Transaction Value (ATV)</h4>
+                            <canvas id="avgTransactionValueChart"></canvas>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="text-md font-bold text-gray-700 text-center mb-2">Promoter Contribution Analysis</h4>
+                            <canvas id="promoterContributionChart"></canvas>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="text-md font-bold text-gray-700 text-center mb-2">Discount Strategy Benchmark</h4>
+                            <canvas id="discountStrategyChart"></canvas>
+                        </div>
                     </div>
                 </div>
                 
@@ -167,7 +191,7 @@
 
     <script>
     $(document).ready(function() {
-        // --- DATA SOURCE (UPDATED) ---
+        // --- DATA SOURCE (SUMMARY) ---
         const allTicketData = [
             // Sensuality & Essentiality (21 entries)
             { event: 'Sensuality & Essentiality', ticketType: 'Essentiality Pass', ticketPrice: 220, qtySold: 148, discPerc: 0, discEuro: 9, discountCode: 'PROD8', promoter: 'ProDancers', total: 31228, date: '2024-08-06' },
@@ -226,6 +250,32 @@
             { event: 'Winter Bachata Gala', ticketType: 'Training Track', ticketPrice: 100, qtySold: 152, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 15200, date: '2024-12-06' }
         ];
         
+        // --- DATA SOURCE (RAW TRANSACTIONS FOR ATV CALCULATION) ---
+        // In a real application, this would be fetched. For this demo, it's included directly.
+        // This is a subset of the full transactions.json for brevity, but contains enough data for calculations.
+        const rawTransactionData = [
+            {"Transaction_ID": "TRN59218847", "Event_Name": "Sensuality & Essentiality", "Gross_Amount": 15, "Transaction_Type": "Sale"},
+            {"Transaction_ID": "TRN17730825", "Event_Name": "Sensuality & Essentiality", "Gross_Amount": 184, "Transaction_Type": "Sale"},
+            {"Transaction_ID": "TRN41292135", "Event_Name": "Sensuality & Essentiality", "Gross_Amount": 187, "Transaction_Type": "Sale"},
+            {"Transaction_ID": "TRN62198347", "Event_Name": "Sensuality & Essentiality", "Gross_Amount": 165.6, "Transaction_Type": "Sale"},
+            {"Transaction_ID": "TRN11259342", "Event_Name": "Sensuality & Essentiality", "Gross_Amount": 198, "Transaction_Type": "Sale"},
+            {"Transaction_ID": "TRN67340159", "Event_Name": "Sensuality & Essentiality", "Gross_Amount": 200, "Transaction_Type": "Sale"},
+            {"Transaction_ID": "TRN30294781", "Event_Name": "Sensuality & Essentiality", "Gross_Amount": 15, "Transaction_Type": "Sale"},
+            {"Transaction_ID": "TRN71358294", "Event_Name": "Sensuality & Essentiality", "Gross_Amount": 220, "Transaction_Type": "Sale"},
+            {"Transaction_ID": "TRN14982057", "Event_Name": "Sensuality & Essentiality", "Gross_Amount": 170, "Transaction_Type": "Sale"},
+            {"Transaction_ID": "TRN68219573", "Event_Name": "Sensuality & Essentiality", "Gross_Amount": 180, "Transaction_Type": "Sale"},
+            {"Transaction_ID": "TRN83140521", "Event_Name": "Barcelona Summer Fest", "Gross_Amount": 190, "Transaction_Type": "Sale"},
+            {"Transaction_ID": "TRN81240952", "Event_Name": "Barcelona Summer Fest", "Gross_Amount": 72, "Transaction_Type": "Sale"},
+            {"Transaction_ID": "TRN33827291", "Event_Name": "Barcelona Summer Fest", "Gross_Amount": 100, "Transaction_Type": "Sale"},
+            {"Transaction_ID": "TRN48915632", "Event_Name": "Barcelona Summer Fest", "Gross_Amount": 190, "Transaction_Type": "Sale"},
+            {"Transaction_ID": "TRN55183920", "Event_Name": "Barcelona Summer Fest", "Gross_Amount": 73.6, "Transaction_Type": "Refund"},
+            {"Transaction_ID": "TRN40582194", "Event_Name": "Barcelona Summer Fest", "Gross_Amount": 250, "Transaction_Type": "Sale"},
+            {"Transaction_ID": "TRN93596954", "Event_Name": "Winter Bachata Gala", "Gross_Amount": 210, "Transaction_Type": "Sale"},
+            {"Transaction_ID": "TRN79342751", "Event_Name": "Winter Bachata Gala", "Gross_Amount": 90, "Transaction_Type": "Sale"},
+            {"Transaction_ID": "TRN88125473", "Event_Name": "Winter Bachata Gala", "Gross_Amount": 135, "Transaction_Type": "Sale"},
+            {"Transaction_ID": "TRN92458173", "Event_Name": "Winter Bachata Gala", "Gross_Amount": 210, "Transaction_Type": "Sale"}
+        ];
+
         const mainEventData = allTicketData.filter(d => d.event === 'Sensuality & Essentiality');
         const bachataSensualEvents = allTicketData.filter(d => ['Sensuality & Essentiality', 'Barcelona Summer Fest', 'Winter Bachata Gala'].includes(d.event));
 
@@ -258,6 +308,7 @@
 
         // --- CHARTING ---
         function createChart(canvasElement, type, data, options) {
+            if (!canvasElement) return;
             const id = $(canvasElement).attr('id');
             if (charts[id]) {
                 charts[id].destroy();
@@ -422,7 +473,6 @@
             }, { responsive: true, plugins: { title: { display: false } } });
 
             const revenueWith = discountedTickets.reduce((s,d) => s+d.total, 0);
-            // CORRECTED: The filter for "Without Discount" is now the inverse of "With Discount"
             const revenueWithout = mainEventData.filter(d => d.discPerc === 0 && d.discEuro === 0).reduce((s,d) => s+d.total, 0);
             createChart($('#revenueWithVsWithoutDiscountsChart')[0], 'bar', {
                 labels: ['With Discount', 'Without Discount'],
@@ -430,19 +480,168 @@
             }, { responsive: true, plugins: { title: { display: false } } });
         }
         
-        // --- COMPARATIVE KPIS ---
+        // --- COMPARATIVE KPIS (UPDATED) ---
         function renderComparativeKpis() {
+            // --- DATA PREPARATION ---
+            // Use allTicketData for high-level summaries and rawTransactionData for detailed transaction-based metrics
+            const sensualityData = allTicketData.filter(d => d.event === 'Sensuality & Essentiality');
+            const otherEventsData = allTicketData.filter(d => d.event !== 'Sensuality & Essentiality');
+            
+            const sensualityTransactions = rawTransactionData.filter(d => d.Event_Name === 'Sensuality & Essentiality' && d.Transaction_Type === 'Sale');
+            const otherTransactions = rawTransactionData.filter(d => d.Event_Name !== 'Sensuality & Essentiality' && d.Transaction_Type === 'Sale');
+
+            // --- 1. S&E & MARKET AVERAGE CALCULATIONS ---
+            const sensualityTotalRevenue = sensualityData.reduce((sum, d) => sum + d.total, 0);
+            const sensualityTotalTickets = sensualityData.reduce((sum, d) => sum + d.qtySold, 0);
+            const sensualityAvgPrice = sensualityTotalTickets > 0 ? sensualityTotalRevenue / sensualityTotalTickets : 0;
+            const sensualityPromoterRevenue = sensualityData.filter(d => d.promoter !== 'N/A').reduce((sum, d) => sum + d.total, 0);
+            const sensualityPromoterRevenuePerc = sensualityTotalRevenue > 0 ? (sensualityPromoterRevenue / sensualityTotalRevenue) * 100 : 0;
+            const sensualityDiscountedTickets = sensualityData.filter(d => d.discPerc > 0 || d.discEuro > 0).reduce((sum, d) => sum + d.qtySold, 0);
+            const sensualityFullPriceTickets = sensualityTotalTickets - sensualityDiscountedTickets;
+            const sensualityDiscountedPerc = sensualityTotalTickets > 0 ? (sensualityDiscountedTickets / sensualityTotalTickets) * 100 : 0;
+            const sensualityFullPricePerc = 100 - sensualityDiscountedPerc;
+            
+            // CORRECTED ATV CALCULATION for Sensuality & Essentiality
+            const sensualityRevenueForATV = sensualityTransactions.reduce((sum, t) => sum + t.Gross_Amount, 0);
+            const sensualityTransactionCount = new Set(sensualityTransactions.map(t => t.Transaction_ID)).size;
+            const sensualityATV = sensualityTransactionCount > 0 ? sensualityRevenueForATV / sensualityTransactionCount : 0;
+
+            const otherEventNames = [...new Set(otherEventsData.map(d => d.event))];
+            const numOtherEvents = otherEventNames.length;
+
+            const marketStats = otherEventNames.map(eventName => {
+                const eventSummaryData = otherEventsData.filter(d => d.event === eventName);
+                const eventTransactionData = otherTransactions.filter(d => d.Event_Name === eventName);
+                
+                const totalRevenue = eventSummaryData.reduce((sum, d) => sum + d.total, 0);
+                const totalTickets = eventSummaryData.reduce((sum, d) => sum + d.qtySold, 0);
+                const promoterRevenue = eventSummaryData.filter(d => d.promoter !== 'N/A').reduce((sum, d) => sum + d.total, 0);
+                const promoterRevenuePerc = totalRevenue > 0 ? (promoterRevenue / totalRevenue) * 100 : 0;
+                const discountedTickets = eventSummaryData.filter(d => d.discPerc > 0 || d.discEuro > 0).reduce((sum, d) => sum + d.qtySold, 0);
+                const discountedTicketPerc = totalTickets > 0 ? (discountedTickets / totalTickets) * 100 : 0;
+                
+                // CORRECTED ATV CALCULATION for each other event
+                const revenueForATV = eventTransactionData.reduce((sum, t) => sum + t.Gross_Amount, 0);
+                const transactionCount = new Set(eventTransactionData.map(t => t.Transaction_ID)).size;
+                const atv = transactionCount > 0 ? revenueForATV / transactionCount : 0;
+
+                return { totalRevenue, totalTickets, promoterRevenuePerc, discountedTicketPerc, atv };
+            });
+
+            const marketAvgRevenue = numOtherEvents > 0 ? marketStats.reduce((sum, s) => sum + s.totalRevenue, 0) / numOtherEvents : 0;
+            const marketAvgTickets = numOtherEvents > 0 ? marketStats.reduce((sum, s) => sum + s.totalTickets, 0) / numOtherEvents : 0;
+            const marketAvgPrice = marketAvgTickets > 0 ? marketAvgRevenue / marketAvgTickets : 0;
+            const marketAvgPromoterPerc = numOtherEvents > 0 ? marketStats.reduce((sum, s) => sum + s.promoterRevenuePerc, 0) / numOtherEvents : 0;
+            const marketAvgDiscountedPerc = numOtherEvents > 0 ? marketStats.reduce((sum, s) => sum + s.discountedTicketPerc, 0) / numOtherEvents : 0;
+            const marketAvgFullPricePerc = 100 - marketAvgDiscountedPerc;
+            const marketAvgATV = numOtherEvents > 0 ? marketStats.reduce((sum, s) => sum + s.atv, 0) / numOtherEvents : 0;
+
+
+            // --- 2. RENDER CHARTS ---
+
+            // Chart 1: Tickets Sold per Event (Original)
             const ticketsByEvent = bachataSensualEvents.reduce((acc, d) => { acc[d.event] = (acc[d.event] || 0) + d.qtySold; return acc; }, {});
             createChart($('#ticketsSoldComparisonChart')[0], 'bar', {
                 labels: Object.keys(ticketsByEvent),
                 datasets: [{ label: 'Total Tickets Sold', data: Object.values(ticketsByEvent), backgroundColor: Object.keys(ticketsByEvent).map(e => e === 'Sensuality & Essentiality' ? '#f58220' : '#213c63') }]
-            }, { responsive: true, plugins: { title: { display: false } } });
+            }, { responsive: true, plugins: { title: { display: false }, legend: { display: false } } });
 
+            // Chart 2: Revenue per Event (Original)
             const revenueByEvent = bachataSensualEvents.reduce((acc, d) => { acc[d.event] = (acc[d.event] || 0) + d.total; return acc; }, {});
             createChart($('#revenueComparisonChart')[0], 'bar', {
                 labels: Object.keys(revenueByEvent),
                 datasets: [{ label: 'Total Revenue', data: Object.values(revenueByEvent), backgroundColor: Object.keys(revenueByEvent).map(e => e === 'Sensuality & Essentiality' ? '#f58220' : '#213c63') }]
-            }, { responsive: true, indexAxis: 'y', plugins: { title: { display: false } } });
+            }, { responsive: true, plugins: { title: { display: false }, legend: { display: false } } });
+
+            // Chart 3: Revenue Snapshot (Split)
+            createChart($('#revenueSnapshotChart')[0], 'bar', {
+                labels: ['Sensuality & Essentiality', 'Market Average'],
+                datasets: [{
+                    label: 'Total Revenue (€)',
+                    data: [sensualityTotalRevenue, marketAvgRevenue],
+                    backgroundColor: ['#f58220', '#213c63']
+                }]
+            }, {
+                responsive: true,
+                plugins: { legend: { display: false } }
+            });
+
+            // Chart 4: Ticket Volume Snapshot (Split)
+            createChart($('#ticketVolumeSnapshotChart')[0], 'bar', {
+                labels: ['Sensuality & Essentiality', 'Market Average'],
+                datasets: [{
+                    label: 'Total Tickets Sold',
+                    data: [sensualityTotalTickets, marketAvgTickets],
+                    backgroundColor: ['#f58220', '#213c63']
+                }]
+            }, {
+                responsive: true,
+                plugins: { legend: { display: false } }
+            });
+
+            // Chart 5: Average Ticket Price Comparison
+            createChart($('#avgTicketPriceChart')[0], 'bar', {
+                labels: ['Sensuality & Essentiality', 'Market Average'],
+                datasets: [{
+                    label: 'Average Ticket Price (€)',
+                    data: [sensualityAvgPrice, marketAvgPrice],
+                    backgroundColor: ['#f58220', '#213c63']
+                }]
+            }, {
+                responsive: true,
+                plugins: { legend: { display: false } }
+            });
+
+            // Chart 6: Average Transaction Value (ATV) - NEW
+            createChart($('#avgTransactionValueChart')[0], 'bar', {
+                labels: ['Sensuality & Essentiality', 'Market Average'],
+                datasets: [{
+                    label: 'Average Transaction Value (€)',
+                    data: [sensualityATV, marketAvgATV],
+                    backgroundColor: ['#f58220', '#213c63']
+                }]
+            }, {
+                responsive: true,
+                plugins: { legend: { display: false } }
+            });
+
+            // Chart 7: Promoter Contribution Analysis
+            createChart($('#promoterContributionChart')[0], 'bar', {
+                labels: ['Sensuality & Essentiality', 'Market Average'],
+                datasets: [{
+                    label: 'Promoter Revenue %',
+                    data: [sensualityPromoterRevenuePerc, marketAvgPromoterPerc],
+                    backgroundColor: ['#f58220', '#213c63']
+                }]
+            }, {
+                responsive: true,
+                plugins: { legend: { display: false } },
+                scales: { y: { ticks: { callback: value => value.toFixed(0) + '%' } } }
+            });
+
+            // Chart 8: Discount Strategy Benchmark
+            createChart($('#discountStrategyChart')[0], 'bar', {
+                labels: ['Sensuality & Essentiality', 'Market Average'],
+                datasets: [
+                    {
+                        label: 'Discounted %',
+                        data: [sensualityDiscountedPerc, marketAvgDiscountedPerc],
+                        backgroundColor: '#f58220' // Color updated
+                    },
+                    {
+                        label: 'Full Price %',
+                        data: [sensualityFullPricePerc, marketAvgFullPricePerc],
+                        backgroundColor: '#213c63' // Color updated
+                    }
+                ]
+            }, {
+                responsive: true,
+                plugins: { legend: { position: 'top' } },
+                scales: {
+                    x: { stacked: true },
+                    y: { stacked: true, max: 100, ticks: { callback: value => value + '%' } }
+                }
+            });
         }
 
         // --- DETAILED BREAKDOWN ---
