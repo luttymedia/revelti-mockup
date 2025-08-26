@@ -103,14 +103,14 @@
 <script>
     // --- Mock Data ---
     const eventsData = [
-        { id: 1, name: 'Sensuality & Essentiality', date: '2025-11-01', location: 'Barcelona', rating: 4.8, isFeatured: true, isTrending: true, relevance: 1, poster: 'https://goandance-media-cache-prod.s3.eu-central-1.amazonaws.com/poster_full/event/poster/2025/05/23/6830eaeb459d1543987602.jpg', url: 'eventDetail.html' },
-        { id: 2, name: 'Madrid Bachata Masters', date: '2025-10-17', location: 'Madrid', rating: 4.9, isFeatured: true, isTrending: false, relevance: 1, poster: 'https://placehold.co/600x400/f58220/ffffff?text=Featured' },
-        { id: 3, name: 'Valencia Salsa Summit', date: '2026-01-20', location: 'Valencia', rating: 4.7, isFeatured: true, isTrending: false, relevance: 1, poster: 'https://placehold.co/600x400/f58220/ffffff?text=Featured' },
-        { id: 4, name: 'BCN Bachata Congress', date: '2025-10-10', location: 'Barcelona', rating: 4.6, isFeatured: false, isTrending: true, relevance: 2, poster: 'https://placehold.co/600x400/213c63/ffffff?text=Trending' },
-        { id: 5, name: 'Seville Kizomba Immersion', date: '2025-11-20', location: 'Seville', rating: 4.8, isFeatured: false, isTrending: true, relevance: 2, poster: 'https://placehold.co/600x400/213c63/ffffff?text=Trending' },
-        { id: 6, name: 'Zaragoza Dance Fest', date: '2025-09-28', location: 'Zaragoza', rating: 4.5, isFeatured: false, isTrending: true, relevance: 2, poster: 'https://placehold.co/600x400/213c63/ffffff?text=Trending' },
-        { id: 7, name: 'Salsa Spring Fest', date: '2025-09-05', location: 'Madrid', rating: 4.2, isFeatured: false, isTrending: false, relevance: 3, poster: 'https://placehold.co/600x400/cccccc/ffffff?text=Event' },
-        { id: 8, name: 'Kizomba Connection', date: '2025-09-19', location: 'Valencia', rating: 4.4, isFeatured: false, isTrending: false, relevance: 3, poster: 'https://placehold.co/600x400/cccccc/ffffff?text=Event' },
+        { id: 1, name: 'Sensuality & Essentiality', date: '2025-11-01', location: 'Barcelona', rating: 4.8, isFeatured: true, isTrending: true, relevance: 1, poster: 'https://goandance-media-cache-prod.s3.eu-central-1.amazonaws.com/poster_full/event/poster/2025/05/23/6830eaeb459d1543987602.jpg', url: 'eventDetail.html', isFollowed: true },
+        { id: 2, name: 'Madrid Bachata Masters', date: '2025-10-17', location: 'Madrid', rating: 4.9, isFeatured: true, isTrending: false, relevance: 1, poster: 'https://placehold.co/600x400/f58220/ffffff?text=Featured', isFollowed: false },
+        { id: 3, name: 'Valencia Salsa Summit', date: '2026-01-20', location: 'Valencia', rating: 4.7, isFeatured: true, isTrending: false, relevance: 1, poster: 'https://placehold.co/600x400/f58220/ffffff?text=Featured', isFollowed: false },
+        { id: 4, name: 'BCN Bachata Congress', date: '2025-10-10', location: 'Barcelona', rating: 4.6, isFeatured: false, isTrending: true, relevance: 2, poster: 'https://placehold.co/600x400/213c63/ffffff?text=Trending', isFollowed: true },
+        { id: 5, name: 'Seville Kizomba Immersion', date: '2025-11-20', location: 'Seville', rating: 4.8, isFeatured: false, isTrending: true, relevance: 2, poster: 'https://placehold.co/600x400/213c63/ffffff?text=Trending', isFollowed: false },
+        { id: 6, name: 'Zaragoza Dance Fest', date: '2025-09-28', location: 'Zaragoza', rating: 4.5, isFeatured: false, isTrending: true, relevance: 2, poster: 'https://placehold.co/600x400/213c63/ffffff?text=Trending', isFollowed: false },
+        { id: 7, name: 'Salsa Spring Fest', date: '2025-09-05', location: 'Madrid', rating: 4.2, isFeatured: false, isTrending: false, relevance: 3, poster: 'https://placehold.co/600x400/cccccc/ffffff?text=Event', isFollowed: false },
+        { id: 8, name: 'Kizomba Connection', date: '2025-09-19', location: 'Valencia', rating: 4.4, isFeatured: false, isTrending: false, relevance: 3, poster: 'https://placehold.co/600x400/cccccc/ffffff?text=Event', isFollowed: false },
     ];
 
     const orderPicker = document.getElementById('order-picker');
@@ -167,6 +167,15 @@
             } else if (eventData.isTrending) {
                  card.querySelector('.tag-container').innerHTML = `<div class="bg-revelo-blue text-white text-xs font-bold px-2 py-1 rounded-md">TRENDING</div>`;
             }
+            
+            // Set the follow button based on the isFollowed property
+            const followButton = card.querySelector('.space-x-1 button:first-child');
+            if (eventData.isFollowed) {
+                followButton.outerHTML = `<button class="p-1.5 bg-green-600 rounded-full text-white hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></button>`;
+            } else {
+                 followButton.outerHTML = `<button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelo-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></button>`;
+            }
+
 
             if (eventData.url) {
                 const link = document.createElement('a');
