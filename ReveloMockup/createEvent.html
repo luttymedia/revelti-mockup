@@ -152,7 +152,7 @@
                     <!-- Step 4: Collaborators -->
                     <div id="step-4" class="step-content hidden space-y-4">
                         <h3 class="font-bold text-lg revelo-blue">Invite Collaborators</h3>
-                        <p class="text-sm text-gray-600">Invite Creators and Promoters to your event.</p>
+                        <p class="text-sm text-gray-600">Invite Media Creators and Promoters to your event.</p>
                         <div class="relative">
                             <label class="font-semibold text-gray-700">Search by Username or Email</label>
                             <input type="text" id="collaborator-search" onkeyup="handleSearch(event)" placeholder="e.g., AMedia or John Doe" class="w-full p-2 border border-gray-300 rounded-md mt-1">
@@ -401,9 +401,9 @@
 
         // --- Step 4: Collaborator Search Simulation ---
         const mockCollaborators = [
-            { name: 'AMedia', type: 'Creator' },
+            { name: 'AMedia', type: 'Media Creator' },
             { name: 'John Doe', type: 'Promoter' },
-            { name: 'Visuals Pro', type: 'Creator' }
+            { name: 'Lutty Moreira', type: 'Media Creator' }
         ];
         
         const searchInput = document.getElementById('collaborator-search');
@@ -428,7 +428,7 @@
                     item.className = 'p-2 hover:bg-gray-100 cursor-pointer flex items-center';
                     item.innerHTML = `
                         <span>${collab.name}</span>
-                        <span class="text-xs font-bold ml-2 ${collab.type === 'Creator' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800'} px-2 py-1 rounded-full">${collab.type}</span>
+                        <span class="text-xs font-bold ml-2 ${collab.type === 'Media Creator' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800'} px-2 py-1 rounded-full">${collab.type}</span>
                     `;
                     item.onclick = () => addCollaborator(collab);
                     suggestionsContainer.appendChild(item);
@@ -446,7 +446,7 @@
             tag.className = 'inline-flex items-center bg-gray-100 rounded-full px-3 py-1 text-sm font-semibold text-gray-800 border';
             tag.innerHTML = `
                 <span>${collaborator.name}</span>
-                <span class="text-xs font-bold ml-2 ${collaborator.type === 'Creator' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800'} px-2 py-1 rounded-full">${collaborator.type}</span>
+                <span class="text-xs font-bold ml-2 ${collaborator.type === 'Media Creator' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800'} px-2 py-1 rounded-full">${collaborator.type}</span>
                 <button onclick="removeCollaborator(this)" class="ml-2 text-red-500 hover:text-red-700 font-bold">&times;</button>
             `;
             

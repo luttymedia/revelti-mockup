@@ -22,16 +22,18 @@
     <div class="max-w-2xl lg:max-w-7xl mx-auto bg-white shadow-lg overflow-hidden mb-6">
 
         <!-- Header Section -->
-        <header class="relative h-48 bg-gray-900">
-            <img src="images/eventPoster.jpg" alt="Sensuality 2025 banner" class="absolute inset-0 w-full h-full object-cover">
-            
-            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent flex items-end p-6">
-                <div>
-                    <h1 class="text-white text-3xl font-extrabold leading-tight">Sensuality 2025</h1>
-                    <p class="text-white text-lg opacity-90">Galleries</p>
+        <a href="galleryNavigation.html">
+            <header class="relative h-48 bg-gray-900">
+                <img src="images/eventPoster.jpg" alt="Sensuality 2025 banner" class="absolute inset-0 w-full h-full object-cover">
+                
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent flex items-end p-6">
+                    <div>
+                        <h1 class="text-white text-3xl font-extrabold leading-tight">Sensuality 2025</h1>
+                        <p class="text-white text-lg opacity-90">Galleries</p>
+                    </div>
                 </div>
-            </div>
-        </header>
+            </header>
+        </a>
         
         <!-- Main Content -->
         <main class="p-6 bg-gray-50">
@@ -269,7 +271,7 @@
             if (collaborators.length > 0) {
                 const title = document.createElement('span');
                 title.className = 'text-sm font-semibold text-gray-600';
-                title.textContent = collaborators.length > 1 ? 'Creators:' : 'Creator:';
+                title.textContent = collaborators.length > 1 ? 'Visual Creatives:' : 'Visual Creative:';
                 collaboratorsDisplay.appendChild(title);
 
                 collaborators.forEach(c => {
