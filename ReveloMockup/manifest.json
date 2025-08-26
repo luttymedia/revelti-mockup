@@ -1,6 +1,6 @@
 {
-  "name": "Revelo",
-  "short_name": "Revelo",
+  "name": "revelo",
+  "short_name": "revelo",
   "start_url": "/homePage.html",
   "display": "standalone",
   "background_color": "#ffffff",
