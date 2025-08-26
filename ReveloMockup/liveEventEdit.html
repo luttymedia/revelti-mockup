@@ -124,18 +124,35 @@
                             <h3 class="font-bold text-lg revelo-blue">Post a New Update</h3>
                             <input id="new-update-title" type="text" placeholder="Update Title" class="w-full p-2 border rounded-md mt-2">
                             <textarea id="new-update-desc" placeholder="Update description..." rows="4" class="w-full p-2 border rounded-md mt-2"></textarea>
-                            <div class="flex justify-between items-center mt-2">
-                                <div>
-                                    <button onclick="document.getElementById('update-image-upload').click()" class="text-sm font-semibold text-gray-600 hover:revelo-blue flex items-center"><svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>Add Image</button>
-                                    <input type="file" id="update-image-upload" class="hidden" onchange="handleImageUpload(event)">
-                                    <div id="image-preview" class="mt-2"></div>
+                            <div id="image-upload-container" class="mt-2">
+                                <div class="flex items-center space-x-4">
+                                    <button id="add-image-btn" onclick="document.getElementById('update-image-upload').click()" class="text-sm font-semibold text-gray-600 hover:revelo-blue flex items-center">
+                                        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>Add Image
+                                    </button>
+                                    <button id="remove-image-btn" onclick="removeImage()" class="text-sm font-semibold text-red-600 hover:text-red-800 flex items-center hidden">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg>Remove Image
+                                    </button>
                                 </div>
-                                <div id="update-button-container">
-                                    <button onclick="postUpdate()" class="px-4 py-2 font-bold bg-revelo-blue text-white rounded-lg">Post Update</button>
-                                </div>
+                                <input type="file" id="update-image-upload" class="hidden" onchange="handleImageUpload(event)">
+                                <div id="image-preview" class="mt-2 w-1/2"></div>
+                            </div>
+                            <div class="text-right mt-2" id="update-button-container">
+                                <button onclick="postUpdate()" class="px-4 py-2 font-bold bg-revelo-blue text-white rounded-lg">Post Update</button>
                             </div>
                         </div>
                         <div id="updates-content" class="space-y-4">
+                            <!-- New announcement with image and editor buttons -->
+                            <div class="border-l-4 border-revelo-orange pl-4 relative" data-update-id="3" data-update-title="Instructor Spotlight: Judith Cordero" data-update-text="We are excited to welcome Judith Cordero to Sensuality & Essentiality 2025! She brings elegance, precision, and artistry to you. Learn from one of the most influential figures in the dance world!" data-update-image="images/judith.png">
+                                <div class="absolute top-0 right-0 flex space-x-1">
+                                    <button id="edit-update-3-icon" onclick="editUpdate(3)" class="p-1 bg-white rounded-full hover:bg-gray-100"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-600"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" /></svg></button>
+                                    <button onclick="deleteUpdate(3)" class="p-1 bg-white rounded-full hover:bg-gray-100"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-red-600"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg></button>
+                                </div>
+                                <h3 class="font-bold text-lg revelo-blue">Instructor Spotlight: Judith Cordero</h3>
+                                <p class="text-sm text-gray-500 mb-1">Posted on: Aug 26, 2025</p>
+                                <img src="images/judith.png" alt="Judith Cordero portrait" class="w-full h-auto rounded-lg my-2 lg:w-1/2" onerror="this.onerror=null;this.src='https://placehold.co/800x450/213c63/ffffff?text=Judith+Cordero';">
+                                <p class="text-gray-700">We are excited to welcome Judith Cordero to Sensuality & Essentiality 2025! She brings elegance, precision, and artistry to you. Learn from one of the most influential figures in the dance world!</p>
+                            </div>
+                            <!-- Existing updates follow -->
                             <div class="border-l-4 border-revelo-orange pl-4 relative" data-update-id="1">
                                 <div class="absolute top-0 right-0 flex space-x-1">
                                     <button id="edit-update-1-icon" onclick="editUpdate(1)" class="p-1 bg-white rounded-full hover:bg-gray-100"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-600"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" /></svg></button>
@@ -194,7 +211,7 @@
                         <div id="faq-content" class="space-y-2">
                             <details data-faq-id="1"><summary class="flex justify-between items-center cursor-pointer font-semibold text-lg revelo-blue py-2">What is the refund policy? <div class="flex space-x-1"><button id="edit-faq-1-icon" onclick="openEditFaqModal(1, event)" class="p-1 rounded-full hover:bg-gray-200"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-600 no-rotate"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" /></svg></button><button onclick="removeFaq(1, event)" class="p-1 rounded-full hover:bg-gray-200"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-red-600 no-rotate"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg></button></div></summary><div class="pb-2 pt-1 pl-2"><p class="text-gray-700">Tickets are non-refundable but can be transferred to another person up to 7 days before the event. Please contact support for assistance.</p></div></details>
                             <details data-faq-id="2"><summary class="flex justify-between items-center cursor-pointer font-semibold text-lg revelo-blue py-2">Are there parking facilities at the venue? <div class="flex space-x-1"><button id="edit-faq-2-icon" onclick="openEditFaqModal(2, event)" class="p-1 rounded-full hover:bg-gray-200"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-600 no-rotate"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" /></svg></button><button onclick="removeFaq(2, event)" class="p-1 rounded-full hover:bg-gray-200"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-red-600 no-rotate"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg></button></div></summary><div class="pb-2 pt-1 pl-2"><p class="text-gray-700">Yes, Fira Gran Via has ample underground parking available. The daily rate is €20. We recommend using public transport as it is very convenient.</p></div></details>
-                            <details data-faq-id="3"><summary class="flex justify-between items-center cursor-pointer font-semibold text-lg revelo-blue py-2">Can I bring my own food and drinks? <div class="flex space-x-1"><button id="edit-faq-3-icon" onclick="openEditFaqModal(3, event)" class="p-1 rounded-full hover:bg-gray-200"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-600 no-rotate"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" /></svg></button><button onclick="removeFaq(3, event)" class="p-1 rounded-full hover:bg-gray-200"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-red-600 no-rotate"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg></button></div></summary><div class="pb-2 pt-1 pl-2"><p class="text-gray-700">Yes, Fira Gran Via has ample underground parking available. The daily rate is €20. We recommend using public transport as it is very convenient.</p></div></details>
+                            <details data-faq-id="3"><summary class="flex justify-between items-center cursor-pointer font-semibold text-lg revelo-blue py-2">Can I bring my own food and drinks? <div class="flex space-x-1"><button id="edit-faq-3-icon" onclick="openEditFaqModal(3, event)" class="p-1 rounded-full hover:bg-gray-200"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-600 no-rotate"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" /></svg></button><button onclick="removeFaq(3, event)" class="p-1 rounded-full hover:bg-gray-200"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-red-600 no-rotate"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg></button></div></summary><div class="pb-2 pt-1 pl-2"><p class="text-gray-700">Outside food and drinks are not permitted inside the venue. There will be a variety of food trucks and stalls available on-site.</p></div></details>
                         </div>
                     </div>
                 </main>
@@ -299,6 +316,7 @@
         let currentListType = ''; // 'artists' or 'tags'
         let currentReviewId = null;
         let editingUpdateId = null; 
+        let editingUpdateImage = null;
 
         function openModal(modalId) {
             closeAllModals();
@@ -545,8 +563,32 @@
             if (!updateElement) return;
             document.getElementById('updates').parentElement.scrollTop = 0;
             editingUpdateId = updateId;
-            document.getElementById('new-update-title').value = updateElement.querySelector('h3').textContent;
-            document.getElementById('new-update-desc').value = updateElement.querySelector('p.text-gray-700').textContent;
+            
+            // Get content from data attributes to avoid issues with HTML formatting
+            const title = updateElement.getAttribute('data-update-title');
+            const text = updateElement.getAttribute('data-update-text');
+            const image = updateElement.getAttribute('data-update-image');
+
+            document.getElementById('new-update-title').value = title;
+            document.getElementById('new-update-desc').value = text;
+            
+            const imagePreview = document.getElementById('image-preview');
+            imagePreview.innerHTML = '';
+            if (image) {
+                const img = document.createElement('img');
+                img.src = image;
+                img.alt = 'Preview';
+                img.className = 'w-full h-auto rounded-lg lg:w-1/2';
+                imagePreview.appendChild(img);
+                editingUpdateImage = image;
+                document.getElementById('add-image-btn').classList.add('hidden');
+                document.getElementById('remove-image-btn').classList.remove('hidden');
+            } else {
+                editingUpdateImage = null;
+                document.getElementById('add-image-btn').classList.remove('hidden');
+                document.getElementById('remove-image-btn').classList.add('hidden');
+            }
+
             document.getElementById('new-update-title').focus();
 
             const buttonContainer = document.getElementById('update-button-container');
@@ -560,24 +602,110 @@
             if (!editingUpdateId) return;
             const updateElement = document.querySelector(`[data-update-id='${editingUpdateId}']`);
             if (!updateElement) return;
-
-            updateElement.querySelector('h3').textContent = document.getElementById('new-update-title').value;
-            updateElement.querySelector('p.text-gray-700').textContent = document.getElementById('new-update-desc').value;
             
-            markAsEdited('update', editingUpdateId);
+            const newTitle = document.getElementById('new-update-title').value;
+            const newText = document.getElementById('new-update-desc').value;
+            
+            // Update the HTML content
+            updateElement.querySelector('h3').textContent = newTitle;
+            updateElement.querySelector('p.text-gray-700').textContent = newText;
+            
+            // Update the data attributes
+            updateElement.setAttribute('data-update-title', newTitle);
+            updateElement.setAttribute('data-update-text', newText);
+            
+            if (editingUpdateImage) {
+                 const newImg = document.createElement('img');
+                 newImg.src = editingUpdateImage;
+                 newImg.alt = 'New Update Image';
+                 newImg.className = 'w-full h-auto rounded-lg my-2 lg:w-1/2';
+                 newImg.setAttribute('onerror', "this.onerror=null;this.src='https://placehold.co/800x450/213c63/ffffff?text=Image+Placeholder';");
+                 const existingImg = updateElement.querySelector('img');
+                 if (existingImg) {
+                    existingImg.replaceWith(newImg);
+                 } else {
+                    updateElement.insertBefore(newImg, updateElement.querySelector('p.text-gray-700'));
+                 }
+                 updateElement.setAttribute('data-update-image', editingUpdateImage);
+            } else {
+                // If the user removed the image, remove it from the update element
+                const existingImg = updateElement.querySelector('img');
+                if (existingImg) {
+                    existingImg.remove();
+                }
+                updateElement.removeAttribute('data-update-image');
+            }
+            
+            markAsEdited('updates', editingUpdateId);
             cancelUpdateEdit();
         }
 
         function cancelUpdateEdit() {
             editingUpdateId = null;
+            editingUpdateImage = null;
             document.getElementById('new-update-title').value = '';
             document.getElementById('new-update-desc').value = '';
+            document.getElementById('image-preview').innerHTML = '';
+            document.getElementById('add-image-btn').classList.remove('hidden');
+            document.getElementById('remove-image-btn').classList.add('hidden');
             document.getElementById('update-button-container').innerHTML = `<button onclick="postUpdate()" class="px-4 py-2 font-bold bg-revelo-blue text-white rounded-lg">Post Update</button>`;
         }
         
         function postUpdate() {
+            const title = document.getElementById('new-update-title').value;
+            const text = document.getElementById('new-update-desc').value;
+            const image = editingUpdateImage;
+            
+            if (!title || !text) {
+                alert('Please fill out both the title and description.');
+                return;
+            }
+
+            const updatesContainer = document.getElementById('updates-content');
+            const newUpdateId = Date.now();
+            const newUpdateHTML = `
+                <div class="border-l-4 border-revelo-orange pl-4 relative" data-update-id="${newUpdateId}" data-update-title="${title}" data-update-text="${text}" ${image ? `data-update-image="${image}"` : ''}>
+                    <div class="absolute top-0 right-0 flex space-x-1">
+                        <button id="edit-update-${newUpdateId}-icon" onclick="editUpdate(${newUpdateId})" class="p-1 bg-white rounded-full hover:bg-gray-100"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-600"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" /></svg></button>
+                        <button onclick="deleteUpdate(${newUpdateId})" class="p-1 bg-white rounded-full hover:bg-gray-100"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-red-600"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg></button>
+                    </div>
+                    <h3 class="font-bold text-lg revelo-blue">${title}</h3>
+                    <p class="text-sm text-gray-500 mb-1">Posted on: ${new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>
+                    ${image ? `<img src="${image}" alt="Update Image" class="w-full h-auto rounded-lg my-2 lg:w-1/2" onerror="this.onerror=null;this.src='https://placehold.co/800x450/213c63/ffffff?text=Image+Placeholder';">` : ''}
+                    <p class="text-gray-700">${text}</p>
+                </div>
+            `;
+            
+            updatesContainer.insertAdjacentHTML('afterbegin', newUpdateHTML);
+            
             markAsEdited('updates');
             cancelUpdateEdit();
+        }
+        
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.className = 'w-full h-auto rounded-lg';
+                    const preview = document.getElementById('image-preview');
+                    preview.innerHTML = '';
+                    preview.appendChild(img);
+                    editingUpdateImage = e.target.result;
+                    document.getElementById('add-image-btn').classList.add('hidden');
+                    document.getElementById('remove-image-btn').classList.remove('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+        
+        function removeImage() {
+            editingUpdateImage = null;
+            document.getElementById('image-preview').innerHTML = '';
+            document.getElementById('add-image-btn').classList.remove('hidden');
+            document.getElementById('remove-image-btn').classList.add('hidden');
         }
 
         function openEditFaqModal(faqId, event) {
