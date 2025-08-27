@@ -18,7 +18,7 @@
     <!-- Organizer-specific Navbar -->
     <div id="organizer-navbar-placeholder"></div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
         <!-- Header Section -->
         <header class="mb-8">
@@ -98,14 +98,14 @@
     </div>
 
     <!-- Modal Backdrop -->
-    <div id="modal-backdrop" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40" onclick="closeModal()"></div>
+    <div id="modal-backdrop" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40" onclick="closeDetailsModal()"></div>
 
     <!-- Details Modal -->
     <div id="details-modal" class="modal fixed inset-0 flex items-center justify-center p-4 hidden z-50">
         <div class="bg-white rounded-lg shadow-xl w-full max-w-3xl max-h-[90vh] flex flex-col">
             <header class="p-4 border-b flex justify-between items-center">
                 <h3 id="modal-title" class="font-bold text-xl revelo-blue"></h3>
-                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+                <button onclick="closeDetailsModal()" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
             </header>
             <main id="modal-body" class="p-6 space-y-4 overflow-y-auto">
                 <!-- Details will be injected here -->
@@ -281,7 +281,7 @@
             modalBackdrop.classList.remove('hidden');
         }
 
-        function closeModal() {
+        function closeDetailsModal() {
             modal.classList.add('hidden');
             modalBackdrop.classList.add('hidden');
         }
