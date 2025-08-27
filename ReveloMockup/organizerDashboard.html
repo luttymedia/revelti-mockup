@@ -132,19 +132,19 @@
                         <!-- Main Stat Card: Total Income -->
                         <a href="incomeBreakdown.html" class="lg:col-span-2 block bg-white p-6 rounded-lg border border-gray-200 hover:shadow-xl hover:border-revelo-blue transition-all duration-300">
                             <h3 class="text-base font-semibold text-gray-500 uppercase tracking-wider">Total Income</h3>
-                            <p class="text-5xl font-extrabold revelo-blue mt-2">€770,179.00</p>
+                            <p id="totalIncomeStat" class="text-5xl font-extrabold revelo-blue mt-2">€0.00</p>
                             <div class="mt-6 pt-6 border-t border-gray-200 grid grid-cols-1 sm:grid-cols-3 gap-4">
                                 <div>
                                     <h4 class="text-sm font-semibold text-gray-500">Net Profit</h4>
-                                    <p class="text-xl font-bold text-green-600 mt-1">€585,336.04</p>
+                                    <p id="netProfitStat" class="text-xl font-bold text-green-600 mt-1">€0.00</p>
                                 </div>
                                 <div>
                                     <h4 class="text-sm font-semibold text-gray-500">Taxes</h4>
-                                    <p class="text-xl font-bold text-gray-700 mt-1">€161,737.60</p>
+                                    <p id="taxesStat" class="text-xl font-bold text-gray-700 mt-1">€0.00</p>
                                 </div>
                                 <div>
                                     <h4 class="text-sm font-semibold text-gray-500">Commissions</h4>
-                                    <p class="text-xl font-bold text-gray-700 mt-1">€23,105.36</p>
+                                    <p id="commissionsStat" class="text-xl font-bold text-gray-700 mt-1">€0.00</p>
                                 </div>
                             </div>
                         </a>
@@ -153,11 +153,11 @@
                         <a href="ticketBreakdown.html" class="block bg-white p-6 rounded-lg border border-gray-200 hover:shadow-xl hover:border-revelo-blue transition-all duration-300 flex flex-col justify-between">
                             <div>
                                 <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Average Ticket Price</h3>
-                                <p class="text-4xl font-extrabold revelo-blue mt-2">€108.57</p>
+                                <p id="avgTicketPriceStat" class="text-4xl font-extrabold revelo-blue mt-2">€0.00</p>
                             </div>
                             <div class="mt-6 pt-6 border-t border-gray-200">
                                 <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Total Tickets sold</h3>
-                                <p class="text-4xl font-extrabold revelo-blue mt-2">7,094</p>
+                                <p id="totalTicketsStat" class="text-4xl font-extrabold revelo-blue mt-2">0</p>
                             </div>
                         </a>
                     </div>
@@ -307,11 +307,62 @@
             });
         }
 
+        // --- Stats Calculation Logic ---
+        async function loadStats() {
+            try {
+                const response = await fetch('data/transactions.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const transactions = await response.json();
+
+                let totalIncome = 0;
+                let netProfit = 0;
+                let taxes = 0;
+                let commissions = 0;
+                let totalTickets = 0;
+
+                transactions.forEach(t => {
+                    const multiplier = t.Transaction_Type === 'Refund' ? -1 : 1;
+                    
+                    totalIncome += (parseFloat(t.Gross_Amount) || 0) * multiplier;
+                    netProfit += (parseFloat(t.Net_Amount) || 0) * multiplier;
+                    taxes += (parseFloat(t.IVA) || 0) * multiplier;
+                    commissions += (parseFloat(t.Promoter_Commission) || 0) * multiplier;
+                    
+                    if (t.Transaction_Type === 'Sale') {
+                        totalTickets += parseInt(t.Qty, 10) || 0;
+                    }
+                });
+
+                const avgTicketPrice = totalTickets > 0 ? totalIncome / totalTickets : 0;
+
+                const formatCurrency = (value) => `€${value.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+                // Update the DOM
+                document.getElementById('totalIncomeStat').textContent = formatCurrency(totalIncome);
+                document.getElementById('netProfitStat').textContent = formatCurrency(netProfit);
+                document.getElementById('taxesStat').textContent = formatCurrency(taxes);
+                document.getElementById('commissionsStat').textContent = formatCurrency(commissions);
+                document.getElementById('avgTicketPriceStat').textContent = formatCurrency(avgTicketPrice);
+                document.getElementById('totalTicketsStat').textContent = totalTickets.toLocaleString('de-DE');
+
+            } catch (error) {
+                console.error("Failed to load or process transaction data:", error);
+                // Optionally, display an error message in the UI
+                const statsTab = document.getElementById('stats');
+                statsTab.innerHTML = `<p class="text-center text-red-500">Could not load stats. Please try again later.</p>`;
+            }
+        }
+
         // --- Page Initialization ---
         document.addEventListener('DOMContentLoaded', () => {
             // Set "Events" as the default tab
             switchTab('events');
             // filterEvents('upcoming'); // Set initial filter for the events tab
+            
+            // Load stats from JSON
+            loadStats();
         });
     </script>
     <script src="organizer.js" defer></script>

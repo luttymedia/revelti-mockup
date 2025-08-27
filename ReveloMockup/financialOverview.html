@@ -17,9 +17,22 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 
+    <!-- DataTables.js for advanced tables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.colVis.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    
+
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="style.css">
-    
     
 </head>
 <body class="bg-gray-100 antialiased text-gray-800 pt-8">
@@ -92,51 +105,39 @@
                 <svg class="w-6 h-6 transform transition-transform accordion-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
             </summary>
             <div class="p-6 md:p-8 border-t border-gray-200">
-                <!-- Filters -->
-                <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-6 items-end">
-                    <!-- Date Range -->
-                    <div class="flex-1 w-full md:w-auto">
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">Date Range</label>
-                        <div class="flex space-x-2">
-                            <input type="date" id="explorer-startDate" class="w-1/2 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-revelo-blue">
-                            <input type="date" id="explorer-endDate" class="w-1/2 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-revelo-blue">
-                        </div>
-                    </div>
-                    <!-- Transaction Type and Buttons -->
-                    <div class="flex flex-1 items-end w-full md:w-auto">
-                        <div class="flex-1">
-                            <label class="block text-sm font-semibold text-gray-700 mb-1">Transaction Type</label>
-                            <div class="flex rounded-lg border border-gray-300">
-                                <button class="transaction-type-btn flex-1 p-2 rounded-l-lg bg-revelo-blue text-white" data-type="All">All</button>
-                                <button class="transaction-type-btn flex-1 p-2 border-l border-r border-gray-300" data-type="Sale">Sales</button>
-                                <button class="transaction-type-btn flex-1 p-2 rounded-r-lg" data-type="Refund">Refunds</button>
-                            </div>
-                        </div>
-                        <div class="flex-1 md:flex-initial pl-2 flex space-x-2">
-                            <button id="reset-table-filters-btn" class="w-full bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg hover:bg-gray-300 transition">Reset</button>
-                            <button id="exportBtn" class="w-full bg-revelo-orange text-white font-bold py-2 px-4 rounded-lg hover:bg-orange-600 transition">Export</button>
-                        </div>
-                    </div>
-                </div>
-                
                 <!-- Transactions Table -->
                 <div class="overflow-x-auto">
                     <table class="min-w-full bg-white" id="transaction-explorer-table">
-                        <thead class="bg-gray-50 border-b-2 border-gray-200">
-                            <tr id="table-header-row">
-                                <!-- Table Headers will be dynamically inserted here -->
+                        <thead>
+                            <tr>
+                                <th>Transaction ID</th>
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Event</th>
+                                <th>Ticket</th>
+                                <th>Attendee</th>
+                                <th>Promoter</th>
+                                <th>Code</th>
+                                <th>Qty</th>
+                                <th>Commission</th>
+                                <th>Base</th>
+                                <th>IVA</th>
+                                <th>Gross</th>
+                                <th>Fees</th>
+                                <th>Net</th>
+                                <th>Method</th>
+                                <th>Status</th>
+                                <th>Payout ID</th>
                             </tr>
                         </thead>
-                        <tbody id="transactionsTableBody" class="divide-y divide-gray-200">
+                        <tbody id="transactionsTableBody">
                             <!-- Rows will be dynamically inserted here -->
                             <tr>
-                                <td colspan="17" class="text-center p-4">Loading transactions...</td>
+                                <td colspan="18" class="text-center p-4">Loading transactions...</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <!-- Pagination -->
-                <div id="pagination" class="flex justify-between items-center mt-4"></div>
             </div>
         </details>
 
@@ -188,213 +189,100 @@
     <!-- Manage Payouts Modal -->
     <div id="managePayoutsModal" class="modal-overlay">
         <div class="modal-content">
-            <button onclick="closeModal('managePayoutsModal')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
-            <h2 class="text-xl font-bold mb-4 revelo-blue">Manage Payout Settings</h2>
-            <p class="text-gray-600 mb-4">Update your banking information for future payouts. Your current account ends in ••••1234.</p>
-            <form class="space-y-4">
-                <div>
-                    <label for="accountHolder" class="block text-sm font-semibold text-gray-700">Account Holder Name</label>
-                    <input type="text" id="accountHolder" class="mt-1 w-full p-2 border border-gray-300 rounded-lg" value="John Doe">
-                </div>
-                <div>
-                    <label for="iban" class="block text-sm font-semibold text-gray-700">IBAN</label>
-                    <input type="text" id="iban" class="mt-1 w-full p-2 border border-gray-300 rounded-lg" value="ES9121000418450200051332">
-                </div>
-                <div>
-                    <label for="bankName" class="block text-sm font-semibold text-gray-700">Bank Name</label>
-                    <input type="text" id="bankName" class="mt-1 w-full p-2 border border-gray-300 rounded-lg" value="Santander">
-                </div>
-                <div class="flex justify-end">
-                    <button type="button" onclick="closeModal('managePayoutsModal')" class="bg-revelo-blue text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-800 transition">Save Changes</button>
-                </div>
-            </form>
+            <!-- Padded inner container -->
+            <div class="p-8 relative">
+                <button id="closeManagePayoutsModalBtn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-3xl leading-none">&times;</button>
+                <h2 class="text-2xl font-bold mb-2 revelo-blue">Manage Payout Settings</h2>
+                <p class="text-gray-600 mb-6">Update your banking information for future payouts. Your current account ends in ••••1234.</p>
+                <form class="space-y-4">
+                    <div>
+                        <label for="accountHolder" class="block text-sm font-semibold text-gray-700">Account Holder Name</label>
+                        <input type="text" id="accountHolder" class="mt-1 w-full p-3 border border-gray-300 rounded-lg" value="John Doe">
+                    </div>
+                    <div>
+                        <label for="iban" class="block text-sm font-semibold text-gray-700">IBAN</label>
+                        <input type="text" id="iban" class="mt-1 w-full p-3 border border-gray-300 rounded-lg" value="ES9121000418450200051332">
+                    </div>
+                    <div>
+                        <label for="bankName" class="block text-sm font-semibold text-gray-700">Bank Name</label>
+                        <input type="text" id="bankName" class="mt-1 w-full p-3 border border-gray-300 rounded-lg" value="Santander">
+                    </div>
+                    <div class="flex justify-end pt-4">
+                        <button id="savePayoutChangesBtn" type="button" class="bg-revelo-blue text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-800 transition">Save Changes</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
     <!-- Payout History Modal -->
     <div id="payoutHistoryModal" class="modal-overlay">
-        <div class="modal-content max-w-2xl">
-            <button onclick="closeModal('payoutHistoryModal')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
-            <h2 class="text-xl font-bold mb-4 revelo-blue">Payout History</h2>
-            <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Payout ID</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
-                            <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Amount</th>
-                            <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody id="payoutsTableBody" class="bg-white divide-y divide-gray-200">
-                        <!-- Payout history rows will be injected here -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- Column Filter Modal -->
-    <div id="columnFilterModal" class="modal-overlay">
-        <div class="modal-content max-w-sm">
-            <button onclick="closeModal('columnFilterModal')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
-            <h2 id="column-filter-title" class="text-xl font-bold mb-4 revelo-blue">Filter</h2>
-            <div class="relative mb-4">
-                <input type="text" id="column-filter-search" placeholder="Search..." class="w-full p-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-revelo-blue">
-                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        <div class="modal-content max-w-3xl">
+            <!-- Padded inner container -->
+            <div class="p-8 relative">
+                <button id="closePayoutHistoryModalBtn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-3xl leading-none">&times;</button>
+                <h2 class="text-2xl font-bold mb-4 revelo-blue">Payout History</h2>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Payout ID</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
+                                <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Amount</th>
+                                <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="payoutsTableBody" class="bg-white divide-y divide-gray-200">
+                            <!-- Payout history rows will be injected here -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <div id="column-filter-options" class="max-h-60 overflow-y-auto space-y-1 mb-4">
-                <!-- Checkbox options will be dynamically inserted here -->
-            </div>
-            <div class="flex justify-between space-x-2">
-                <button id="column-filter-reset" class="flex-1 bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg hover:bg-gray-300 transition">Reset</button>
-                <button id="column-filter-apply" class="flex-1 bg-revelo-blue text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-800 transition">Apply</button>
-            </div>
         </div>
     </div>
-
-    <!-- Export Modal -->
-    <div id="exportModal" class="modal-overlay">
-        <div class="modal-content max-w-sm">
-            <button onclick="closeModal('exportModal')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
-            <h2 class="text-xl font-bold mb-4 revelo-blue">Export Transactions</h2>
-            <p class="text-gray-600 mb-6">Choose your preferred export format.</p>
-            <div class="flex flex-col space-y-4">
-                <button id="exportCsvBtn" class="bg-gray-200 text-gray-700 font-bold py-3 px-4 rounded-lg hover:bg-gray-300 transition">Export to CSV</button>
-                <button id="exportExcelBtn" class="bg-gray-200 text-gray-700 font-bold py-3 px-4 rounded-lg hover:bg-gray-300 transition">Export to Excel</button>
-                <button id="exportPdfBtn" class="bg-gray-200 text-gray-700 font-bold py-3 px-4 rounded-lg hover:bg-gray-300 transition">Export to PDF</button>
-            </div>
-        </div>
-    </div>
-
 
     <script>
-        // Global function to close modals
-        function closeModal(modalId) {
+        // --- MODAL & GLOBAL FUNCTIONS (NON-CONFLICTING) ---
+        function openFinancialModal(modalId) {
             const modal = document.getElementById(modalId);
             if (modal) {
-                modal.style.display = 'none';
+                modal.classList.add('visible');
+            }
+        }
+
+        function closeFinancialModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('visible');
             }
         }
         
-        // This function needs to be outside the onload listener to be accessible globally
-        function createExportFile(data, type) {
-            let content;
-            let filename;
-            const headers = Object.keys(data[0]);
-
-            switch (type) {
-                case 'csv':
-                    // Create CSV content
-                    const csvRows = data.map(t => 
-                        headers.map(header => {
-                            let val = t[header];
-                            if (header === 'Transaction_Date' && val instanceof Date) {
-                                val = formatDate(val);
-                            }
-                            if (typeof val === 'string' && val.includes(',')) {
-                                return `"${val}"`;
-                            }
-                            return val;
-                        }).join(',')
-                    );
-                    content = "data:text/csv;charset=utf-8," + headers.join(',') + '\n' + csvRows.join('\n');
-                    filename = 'transactions_export.csv';
-                    break;
-                case 'excel':
-                    // Create a simple table HTML that can be opened by Excel
-                    const tableHtml = `
-                        <table>
-                            <thead>
-                                <tr>${headers.map(h => `<th>${h}</th>`).join('')}</tr>
-                            </thead>
-                            <tbody>
-                                ${data.map(t => `
-                                    <tr>
-                                        ${headers.map(h => {
-                                            let val = t[h];
-                                            if (h === 'Transaction_Date' && val instanceof Date) {
-                                                val = formatDate(val);
-                                            }
-                                            return `<td>${val}</td>`;
-                                        }).join('')}
-                                    </tr>
-                                `).join('')}
-                            </tbody>
-                        </table>
-                    `;
-                    content = "data:application/vnd.ms-excel;charset=utf-8," + encodeURIComponent(tableHtml);
-                    filename = 'transactions_export.xls';
-                    break;
-                case 'pdf':
-                     // This is a placeholder. A real PDF export would require a library like jsPDF.
-                     // The user is not expecting a full library implementation but a functional button
-                     // and a message box.
-                    alert('PDF export functionality is not yet implemented. Please try CSV or Excel.');
-                    return;
-            }
-            
-            if (type !== 'pdf') {
-                const link = document.createElement("a");
-                link.setAttribute("href", content);
-                link.setAttribute("download", filename);
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            }
-        }
-
-
         window.addEventListener('load', () => {
             // The JSON file is expected to be in a 'data' sub-folder
             const JSON_URL = './data/transactions.json';
 
             // --- STATE MANAGEMENT ---
             let allTransactions = [];
-            let filteredTransactions = [];
             let revenueChart = null;
-            let currentPage = 1;
-            const rowsPerPage = 10;
-            let sortConfig = { key: 'Transaction_Date', direction: 'descending' };
+            let transactionTable;
+            
             const payoutHistoryData = [
                 { id: 'POUT-202406-01', date: '2024-06-07', amount: 2005.15, status: 'Completed' },
                 { id: 'POUT-202407-15', date: '2024-07-16', amount: 4500.80, status: 'Completed' },
                 { id: 'POUT-202408-20', date: '2024-08-21', amount: 1532.00, status: 'Completed' },
             ];
             
-            // Filters for the main table (Transaction Explorer)
-            const columnFilters = {};
-            
-            // The list of headers that should have a filter icon
-            const filterableHeaders = [
-                'Transaction_ID', 'Transaction_Type', 'Event_Name', 'Ticket_Type', 'Attendee_Name',
-                'Promoter_Name', 'Discount_Code_Used', 'Payment_Method', 'Status', 'Payout_ID'
-            ];
-            
             // --- DOM ELEMENTS ---
-            const tableBody = document.getElementById('transactionsTableBody');
-            const paginationContainer = document.getElementById('pagination');
-            const explorerStartDateInput = document.getElementById('explorer-startDate');
-            const explorerEndDateInput = document.getElementById('explorer-endDate');
             const analysisStartDateInput = document.getElementById('analysis-startDate');
             const analysisEndDateInput = document.getElementById('analysis-endDate');
-            const transactionTypeBtns = document.querySelectorAll('.transaction-type-btn');
-            const exportBtn = document.getElementById('exportBtn');
-            const tableHeaderRow = document.querySelector('#table-header-row');
             const managePayoutsBtn = document.getElementById('manage-payout-btn');
             const viewHistoryBtn = document.getElementById('view-history-btn');
             const payoutsTableBody = document.getElementById('payoutsTableBody');
-            const columnFilterModal = document.getElementById('columnFilterModal');
-            const columnFilterTitle = document.getElementById('column-filter-title');
-            const columnFilterOptions = document.getElementById('column-filter-options');
-            const columnFilterSearch = document.getElementById('column-filter-search');
-            const resetTableFiltersBtn = document.getElementById('reset-table-filters-btn');
-            const exportModal = document.getElementById('exportModal');
-            const exportCsvBtn = document.getElementById('exportCsvBtn');
-            const exportExcelBtn = document.getElementById('exportExcelBtn');
-            const exportPdfBtn = document.getElementById('exportPdfBtn');
+            
+            // Modal Buttons
+            const closeManagePayoutsModalBtn = document.getElementById('closeManagePayoutsModalBtn');
+            const savePayoutChangesBtn = document.getElementById('savePayoutChangesBtn');
+            const closePayoutHistoryModalBtn = document.getElementById('closePayoutHistoryModalBtn');
 
 
             // --- UTILITY FUNCTIONS ---
@@ -414,11 +302,6 @@
                 return `${year}-${month}-${day}`;
             };
             
-            function openModal(modalId) {
-                document.getElementById(modalId).style.display = 'flex';
-            }
-
-
             // --- DATA FETCHING & INITIALIZATION ---
             async function loadAndProcessData() {
                 try {
@@ -429,76 +312,36 @@
                     const rawData = await response.json();
                     
                     if (rawData && rawData.length > 0) {
-                        const headers = Object.keys(rawData[0]);
-                        renderTableHeaders(headers);
-
-                    allTransactions = rawData.map(row => {
+                        allTransactions = rawData.map(row => {
                             const newRow = {};
-                            headers.forEach(header => {
-                                let value = row[header];
-                                if (['Promoter_Commission', 'Base', 'IVA', 'Gross_Amount', 'Fees', 'Net_Amount', 'Qty'].includes(header)) {
+                            for(const key in row) {
+                                let value = row[key];
+                                if (['Promoter_Commission', 'Base', 'IVA', 'Gross_Amount', 'Fees', 'Net_Amount', 'Qty'].includes(key)) {
                                     const parsedValue = parseFloat(value);
                                     value = isNaN(parsedValue) ? 0 : parsedValue;
-                                } else if (header === 'Transaction_Date') {
+                                } else if (key === 'Transaction_Date') {
                                     const datePart = value.split(' ')[0];
                                     value = new Date(datePart);
                                 }
-                                newRow[header] = value;
-                            });
+                                newRow[key] = value;
+                            }
                             return newRow;
                         });
-
                         
-                        filteredTransactions = [...allTransactions];
                         initializeApp();
                     } else {
                         console.error("JSON file is empty or invalid.");
-                        tableBody.innerHTML = `<tr><td colspan="17" class="text-center p-4 text-red-500">JSON file is empty or invalid.</td></tr>`;
+                        document.getElementById('transactionsTableBody').innerHTML = `<tr><td colspan="18" class="text-center p-4 text-red-500">JSON file is empty or invalid.</td></tr>`;
                     }
                 } catch (error) {
                     console.error("Error fetching JSON:", error);
-                    tableBody.innerHTML = `<tr><td colspan="17" class="text-center p-4 text-red-500">Error loading data. Please check the file path and make sure the file is available at <strong>${JSON_URL}</strong>.</td></tr>`;
+                    document.getElementById('transactionsTableBody').innerHTML = `<tr><td colspan="18" class="text-center p-4 text-red-500">Error loading data. Please check the file path and make sure the file is available at <strong>${JSON_URL}</strong>.</td></tr>`;
                 }
             }
             
-            function renderTableHeaders(headers) {
-                tableHeaderRow.innerHTML = '';
-                const displayHeaders = [
-                    'ID', 'Date', 'Type', 'Event', 'Ticket', 'Attendee', 'Promoter', 'Code', 'Qty',
-                    'Commission', 'Base', 'IVA', 'Gross', 'Fees', 'Net', 'Method', 'Status', 'PayId'
-                ];
-                const columnKeys = [
-                    'Transaction_ID', 'Transaction_Date', 'Transaction_Type', 'Event_Name', 
-                    'Ticket_Type', 'Attendee_Name', 'Promoter_Name', 'Discount_Code_Used', 'Qty',
-                    'Promoter_Commission', 'Base', 'IVA', 'Gross_Amount', 'Fees', 
-                    'Net_Amount', 'Payment_Method', 'Status', 'Payout_ID'
-                ];
-                 
-                columnKeys.forEach((key, index) => {
-                    const th = document.createElement('th');
-                    th.className = 'p-4 text-left text-sm font-bold text-gray-700 cursor-pointer';
-                    th.setAttribute('data-sort', key);
-                    
-                    let headerContent = `<div class="flex items-center">${displayHeaders[index]} <span class="ml-2 text-gray-400 sort-indicator">↕</span>`;
-                    
-                    if (filterableHeaders.includes(key)) {
-                         headerContent += `
-                            <button class="filter-icon ml-2" data-column-key="${key}" data-column-name="${displayHeaders[index]}">
-                                <svg class="w-4 h-4 text-gray-400 hover:text-revelo-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-4.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
-                            </button>
-                        `;
-                    }
-
-                    headerContent += '</div>';
-                    th.innerHTML = headerContent;
-                    tableHeaderRow.appendChild(th);
-                });
-            }
-
-            
             function initializeApp() {
                 if (allTransactions.length === 0) {
-                     tableBody.innerHTML = `<tr><td colspan="17" class="text-center p-4">No transactions to display.</td></tr>`;
+                     document.getElementById('transactionsTableBody').innerHTML = `<tr><td colspan="18" class="text-center p-4">No transactions to display.</td></tr>`;
                     return;
                 }
                 
@@ -506,15 +349,13 @@
                 if (dates.length > 0) {
                     const minDate = formatDate(new Date(Math.min(...dates)));
                     const maxDate = formatDate(new Date(Math.max(...dates)));
-                    explorerStartDateInput.value = minDate;
-                    explorerEndDateInput.value = maxDate;
                     analysisStartDateInput.value = minDate;
                     analysisEndDateInput.value = maxDate;
                 }
                 
-                setupEventListeners();
                 calculateNextPayout();
-                applyFiltersAndRender();
+                renderTransactionTable(allTransactions);
+                applyFiltersAndRenderAnalysis();
             }
             
             function calculateNextPayout() {
@@ -549,138 +390,22 @@
 
             // --- EVENT LISTENERS ---
             function setupEventListeners() {
-                explorerStartDateInput.addEventListener('change', applyFiltersAndRender);
-                explorerEndDateInput.addEventListener('change', applyFiltersAndRender);
-                analysisStartDateInput.addEventListener('change', applyFiltersAndRender);
-                analysisEndDateInput.addEventListener('change', applyFiltersAndRender);
+                // Page listeners
+                analysisStartDateInput.addEventListener('change', applyFiltersAndRenderAnalysis);
+                analysisEndDateInput.addEventListener('change', applyFiltersAndRenderAnalysis);
                 
-                transactionTypeBtns.forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        transactionTypeBtns.forEach(b => {
-                            b.classList.remove('bg-revelo-blue', 'text-white');
-                            b.classList.add('bg-gray-50', 'text-gray-800');
-                        });
-                        btn.classList.add('bg-revelo-blue', 'text-white');
-                        btn.classList.remove('bg-gray-50', 'text-gray-800');
-                        columnFilters['Transaction_Type'] = btn.dataset.type;
-                        applyFiltersAndRender();
-                    });
-                });
-
-                document.querySelectorAll('th[data-sort]').forEach(header => {
-                    header.addEventListener('click', (event) => {
-                        // Ignore clicks on the filter icon
-                        if (event.target.closest('.filter-icon')) {
-                            return;
-                        }
-                        const sortKey = header.dataset.sort;
-                        const direction = sortConfig.key === sortKey && sortConfig.direction === 'ascending' ? 'descending' : 'ascending';
-                        sortConfig = { key: sortKey, direction };
-                        
-                        document.querySelectorAll('th[data-sort] .sort-indicator').forEach(span => {
-                            span.textContent = '↕';
-                            span.classList.remove('text-revelo-blue');
-                            span.classList.add('text-gray-400');
-                        });
-                        const indicator = header.querySelector('.sort-indicator');
-                        indicator.textContent = direction === 'ascending' ? '▲' : '▼';
-                        indicator.classList.add('text-revelo-blue');
-
-                        applyFiltersAndRender();
-                    });
-                });
-                
-                document.querySelectorAll('.filter-icon').forEach(icon => {
-                    icon.addEventListener('click', (e) => {
-                        const key = e.currentTarget.dataset.columnKey;
-                        const name = e.currentTarget.dataset.columnName;
-                        openColumnFilterModal(key, name);
-                    });
-                });
-                
-                document.getElementById('column-filter-apply').addEventListener('click', () => {
-                    const key = columnFilterModal.dataset.columnKey;
-                    const selectedValues = Array.from(document.querySelectorAll('#column-filter-options input:checked')).map(cb => cb.value);
-                    columnFilters[key] = selectedValues;
-                    applyFiltersAndRender();
-                    closeModal('columnFilterModal');
-                });
-                
-                document.getElementById('column-filter-reset').addEventListener('click', () => {
-                     const key = columnFilterModal.dataset.columnKey;
-                     columnFilters[key] = [];
-                     document.querySelectorAll('#column-filter-options input').forEach(cb => cb.checked = false);
-                });
-                
-                columnFilterSearch.addEventListener('input', (e) => {
-                    const query = e.target.value.toLowerCase();
-                    Array.from(columnFilterOptions.children).forEach(item => {
-                        const checkbox = item.querySelector('input');
-                        if (checkbox.value.toLowerCase().includes(query)) {
-                            item.style.display = 'flex';
-                        } else {
-                            item.style.display = 'none';
-                        }
-                    });
-                });
-                
-                exportBtn.addEventListener('click', () => openModal('exportModal'));
-                exportCsvBtn.addEventListener('click', () => { createExportFile(filteredTransactions, 'csv'); closeModal('exportModal'); });
-                exportExcelBtn.addEventListener('click', () => { createExportFile(filteredTransactions, 'excel'); closeModal('exportModal'); });
-                exportPdfBtn.addEventListener('click', () => { createExportFile(filteredTransactions, 'pdf'); closeModal('exportModal'); });
-
-                managePayoutsBtn.addEventListener('click', () => openModal('managePayoutsModal'));
+                // Modal open listeners
+                managePayoutsBtn.addEventListener('click', () => openFinancialModal('managePayoutsModal'));
                 viewHistoryBtn.addEventListener('click', openPayoutsHistoryModal);
                 
-                // Add listener for the new reset filters button
-                resetTableFiltersBtn.addEventListener('click', resetTableFilters);
-            }
-            
-            function openColumnFilterModal(key, name) {
-                columnFilterTitle.textContent = `Filter by ${name}`;
-                columnFilterModal.dataset.columnKey = key;
-                
-                const uniqueValues = [...new Set(allTransactions.map(t => t[key]))]
-                    .filter(v => v !== null && v !== undefined && v !== '').sort();
-                
-                const currentFilters = Array.isArray(columnFilters[key]) ? columnFilters[key] : [];
-                
-                columnFilterOptions.innerHTML = uniqueValues.map(value => `
-                    <label class="flex items-center space-x-2">
-                        <input type="checkbox" value="${value}" class="rounded text-revelo-blue" ${currentFilters.includes(value) ? 'checked' : ''}>
-                        <span>${value}</span>
-                    </label>
-                `).join('');
-                
-                openModal('columnFilterModal');
+                // Modal close listeners
+                closeManagePayoutsModalBtn.addEventListener('click', () => closeFinancialModal('managePayoutsModal'));
+                savePayoutChangesBtn.addEventListener('click', () => closeFinancialModal('managePayoutsModal'));
+                closePayoutHistoryModalBtn.addEventListener('click', () => closeFinancialModal('payoutHistoryModal'));
             }
 
-
-            // --- FILTERING, SORTING, AND RENDERINg ---
-            function applyFiltersAndRender() {
-                // Filter the table data based on multiple criteria
-                const tableFilteredTransactions = allTransactions.filter(t => {
-                    const explorerStartDate = new Date(explorerStartDateInput.value);
-                    const explorerEndDate = new Date(explorerEndDateInput.value);
-                    explorerEndDate.setHours(23, 59, 59, 999);
-                    const dateMatch = t.Transaction_Date instanceof Date && !isNaN(t.Transaction_Date.getTime()) && t.Transaction_Date >= explorerStartDate && t.Transaction_Date <= explorerEndDate;
-
-                    const typeMatch = (columnFilters['Transaction_Type'] === 'All' || !columnFilters['Transaction_Type']) || t.Transaction_Type === columnFilters['Transaction_Type'];
-                    
-                    const columnFilterMatch = Object.keys(columnFilters).every(key => {
-                        const filterValue = columnFilters[key];
-                        if (!filterValue || filterValue.length === 0 || filterValue === 'All') return true;
-                        
-                        if (Array.isArray(filterValue)) {
-                            return filterValue.includes(String(t[key]));
-                        } else {
-                           return String(t[key]).toLowerCase().includes(String(filterValue).toLowerCase());
-                        }
-                    });
-                    
-                    return dateMatch && typeMatch && columnFilterMatch;
-                });
-
+            // --- FILTERING, SORTING, AND RENDERING ---
+            function applyFiltersAndRenderAnalysis() {
                 const analysisStartDate = new Date(analysisStartDateInput.value);
                 const analysisEndDate = new Date(analysisEndDateInput.value);
                 analysisEndDate.setHours(23, 59, 59, 999);
@@ -688,153 +413,163 @@
                     return t.Transaction_Date instanceof Date && !isNaN(t.Transaction_Date.getTime()) && t.Transaction_Date >= analysisStartDate && t.Transaction_Date <= analysisEndDate;
                 });
 
-                tableFilteredTransactions.sort((a, b) => {
-                    const valA = a[sortConfig.key];
-                    const valB = b[sortConfig.key];
-                    
-                    let comparison = 0;
-                    if (valA > valB) {
-                        comparison = 1;
-                    } else if (valA < valB) {
-                        comparison = -1;
-                    }
-                    
-                    return sortConfig.direction === 'descending' ? comparison * -1 : comparison;
-                });
-                
-                filteredTransactions = tableFilteredTransactions;
-
-                currentPage = 1;
-                renderTable();
-                renderPagination();
                 updateMetrics(analysisFilteredTransactions);
                 renderChart(analysisFilteredTransactions);
             }
 
-            function resetTableFilters() {
-                // Reset date filters
-                const dates = allTransactions.map(t => t.Transaction_Date).filter(d => d instanceof Date && !isNaN(d));
-                if (dates.length > 0) {
-                    const minDate = formatDate(new Date(Math.min(...dates)));
-                    const maxDate = formatDate(new Date(Math.max(...dates)));
-                    explorerStartDateInput.value = minDate;
-                    explorerEndDateInput.value = maxDate;
-                }
-
-                // Reset transaction type buttons
-                transactionTypeBtns.forEach(b => {
-                    b.classList.remove('bg-revelo-blue', 'text-white');
-                    b.classList.add('bg-gray-50', 'text-gray-800');
-                });
-                const allBtn = document.querySelector('.transaction-type-btn[data-type="All"]');
-                if (allBtn) {
-                     allBtn.classList.add('bg-revelo-blue', 'text-white');
-                     allBtn.classList.remove('bg-gray-50', 'text-gray-800');
-                     
-                }
-                
-                // Clear all column filters by deleting the keys from the object
-                for (const key in columnFilters) {
-                    delete columnFilters[key];
-                }
-                
-                // Re-apply filters to update the table
-                applyFiltersAndRender();
-            }
-
-            function renderAllComponents() {
-                renderTable();
-                renderPagination();
-                updateMetrics(filteredTransactions);
-                renderChart(filteredTransactions);
-            }
-
             // --- TABLE & PAGINATION ---
-            function renderTable() {
-                const start = (currentPage - 1) * rowsPerPage;
-                const end = start + rowsPerPage;
-                const paginatedItems = filteredTransactions.slice(start, end);
-
-                tableBody.innerHTML = paginatedItems.map(t => {
-                    const cells = [
-                        t.Transaction_ID, t.Transaction_Date.toLocaleDateString(), t.Transaction_Type, t.Event_Name, t.Ticket_Type, 
-                        t.Attendee_Name, t.Promoter_Name, t.Discount_Code_Used || '', t.Qty,
-                        formatCurrency(t.Promoter_Commission), formatCurrency(t.Base), formatCurrency(t.IVA), 
-                        formatCurrency(t.Gross_Amount), formatCurrency(t.Fees), formatCurrency(t.Net_Amount), 
-                        t.Payment_Method, t.Status, t.Payout_ID
-                    ];
-                    
-                    const cellHtml = cells.map((cellValue, index) => {
-                        let cellClass = 'p-4 whitespace-nowrap text-sm text-gray-700';
-                        let content = cellValue;
-                        
-                        if ([9, 10, 11, 12, 13, 14].includes(index)) {
-                            cellClass = 'p-4 whitespace-nowrap text-sm text-right text-gray-900 font-medium';
-                            if (index === 14) {
-                                cellClass = 'p-4 whitespace-nowrap text-sm text-right font-bold text-green-600';
-                            }
-                        }
-                        
-                        if (index === 16) {
-                            const statusClass = t.Status === 'Completed' ? 'bg-green-100 text-green-800' : (t.Status === 'Refunded' ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800');
-                            content = `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusClass}">${t.Status || 'N/A'}</span>`;
-                            cellClass = 'p-4 whitespace-nowrap text-sm text-center';
-                        }
-                        
-                        return `<td class="${cellClass}">${content}</td>`;
-                    }).join('');
-                    
-                    return `<tr class="hover:bg-gray-50">${cellHtml}</tr>`;
-                }).join('');
-                
-                if (paginatedItems.length === 0) {
-                    tableBody.innerHTML = `<tr><td colspan="18" class="text-center p-4">No transactions found for the selected filters.</td></tr>`;
+            function renderTransactionTable(data) {
+                if (transactionTable) {
+                    transactionTable.destroy();
                 }
-            }
-
-            function renderPagination() {
-                const pageCount = Math.ceil(filteredTransactions.length / rowsPerPage);
-                paginationContainer.innerHTML = '';
-                if (pageCount <= 1) return;
-
-                const startRecord = Math.min((currentPage - 1) * rowsPerPage + 1, filteredTransactions.length);
-                const endRecord = Math.min(currentPage * rowsPerPage, filteredTransactions.length);
                 
-                const info = document.createElement('div');
-                info.className = 'text-sm text-gray-700';
-                info.textContent = `Showing ${startRecord} to ${endRecord} of ${filteredTransactions.length} results`;
+                transactionTable = $('#transaction-explorer-table').DataTable({
+                    data: data,
+                    columns: [
+                        { data: 'Transaction_ID' },
+                        { data: 'Transaction_Date', render: (d) => d ? new Date(d).toLocaleDateString() : '' },
+                        { data: 'Transaction_Type' },
+                        { data: 'Event_Name' },
+                        { data: 'Ticket_Type' },
+                        { data: 'Attendee_Name' },
+                        { data: 'Promoter_Name' },
+                        { data: 'Discount_Code_Used', defaultContent: '' },
+                        { data: 'Qty' },
+                        { data: 'Promoter_Commission', render: (d) => formatCurrency(d) },
+                        { data: 'Base', render: (d) => formatCurrency(d) },
+                        { data: 'IVA', render: (d) => formatCurrency(d) },
+                        { data: 'Gross_Amount', render: (d) => formatCurrency(d) },
+                        { data: 'Fees', render: (d) => formatCurrency(d) },
+                        { data: 'Net_Amount', render: (d) => formatCurrency(d) },
+                        { data: 'Payment_Method' },
+                        { data: 'Status' },
+                        { data: 'Payout_ID' }
+                    ],
+                    dom: "lBfrtip",
+                    buttons: [
+                        {
+                            extend: 'collection',
+                            text: 'Export',
+                            buttons: [
+                                'csv',
+                                'excel',
+                                'pdf'
+                            ]
+                        }
+                    ],
+                    initComplete: function () {
+                        var table = this.api();
+                        
+                        // Add date filters
+                        var dateFilterHtml = `
+                            <div class="inline-flex items-center space-x-2 ml-4">
+                                <label for="startDate">From:</label>
+                                <input type="date" id="startDate" class="border border-gray-300 rounded-md p-1">
+                                <label for="endDate">To:</label>
+                                <input type="date" id="endDate" class="border border-gray-300 rounded-md p-1">
+                            </div>
+                        `;
+                        $('.dataTables_filter').prepend(dateFilterHtml);
 
-                const buttons = document.createElement('div');
-                buttons.className = 'flex space-x-2';
-                
-                const prevButton = document.createElement('button');
-                prevButton.textContent = 'Previous';
-                prevButton.className = 'pagination-btn';
-                prevButton.disabled = currentPage === 1;
-                prevButton.addEventListener('click', () => {
-                    if (currentPage > 1) {
-                        currentPage--;
-                        renderTable();
-                        renderPagination();
+                        $('#startDate, #endDate').on('change', function() {
+                            table.draw();
+                        });
+
+                        $.fn.dataTable.ext.search.push(
+                            function(settings, data, dataIndex) {
+                                var min = $('#startDate').val();
+                                var max = $('#endDate').val();
+                                var date = new Date(data[1]);
+
+                                if (
+                                    (min === "" || new Date(min) <= date) &&
+                                    (max === "" || new Date(max) >= date)
+                                ) {
+                                    return true;
+                                }
+                                return false;
+                            }
+                        );
+
+                        table.columns().every(function (idx) {
+                            var column = this;
+                            var header = $(column.header());
+                            var title = header.text();
+                            
+                            // Make header font smaller
+                            header.css('font-size', '0.875rem');
+
+                            header.html(title + ' <span class="filter-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 inline-block"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Interface / Filter"> <path id="Vector" d="M20 5.6001C20 5.04005 19.9996 4.75981 19.8906 4.5459C19.7948 4.35774 19.6423 4.20487 19.4542 4.10899C19.2403 4 18.9597 4 18.3996 4H5.59961C5.03956 4 4.75981 4 4.5459 4.10899C4.35774 4.20487 4.20487 4.35774 4.10899 4.5459C4 4.75981 4 5.04005 4 5.6001V6.33736C4 6.58195 4 6.70433 4.02763 6.81942C4.05213 6.92146 4.09263 7.01893 4.14746 7.1084C4.20928 7.20928 4.29591 7.29591 4.46875 7.46875L9.53149 12.5315C9.70443 12.7044 9.79044 12.7904 9.85228 12.8914C9.90711 12.9808 9.94816 13.0786 9.97266 13.1807C10 13.2946 10 13.4155 10 13.6552V18.411C10 19.2682 10 19.6971 10.1805 19.9552C10.3382 20.1806 10.5814 20.331 10.8535 20.3712C11.1651 20.4172 11.5487 20.2257 12.3154 19.8424L13.1154 19.4424C13.4365 19.2819 13.5966 19.2013 13.7139 19.0815C13.8176 18.9756 13.897 18.8485 13.9453 18.7084C14 18.5499 14 18.37 14 18.011V13.6626C14 13.418 14 13.2958 14.0276 13.1807C14.0521 13.0786 14.0926 12.9808 14.1475 12.8914C14.2089 12.7911 14.2947 12.7053 14.4653 12.5347L14.4688 12.5315L19.5315 7.46875C19.7044 7.2958 19.7904 7.20932 19.8523 7.1084C19.9071 7.01893 19.9482 6.92146 19.9727 6.81942C20 6.70551 20 6.58444 20 6.3448V5.6001Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g> </g></svg></span>');
+
+                            header.find('.filter-icon').on('click', function (e) {
+                                e.stopPropagation();
+                                $('.filter-modal').remove(); 
+
+                                var modal = $(`<div class="filter-modal"></div>`).appendTo('body');
+                                modal.css({
+                                    top: header.offset().top + header.outerHeight(),
+                                    left: header.offset().left
+                                });
+                                
+                                var searchStr = column.search().replace(/[\^\$]/g, '').split('|');
+                                var currentFilter = searchStr.filter(v => v !== "");
+
+                                var values = column.data().unique().sort().toArray();
+                                
+                                var optionsContainer = $('<div class="options-container"></div>').appendTo(modal);
+                                optionsContainer.append(`<div><label><input type="checkbox" class="select-all"> Select All</label></div><hr class="my-1">`);
+                                
+                                values.forEach(function (value) {
+                                    if (value !== null) {
+                                        var isChecked = currentFilter.length === 0 || currentFilter.includes(String(value).replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1"));
+                                        optionsContainer.append(`<div><label><input type="checkbox" class="filter-value" value="${value}" ${isChecked ? 'checked' : ''}> ${value || '(Empty)'}</label></div>`);
+                                    }
+                                });
+                                
+                                var allChecked = optionsContainer.find('.filter-value:not(:checked)').length === 0;
+                                optionsContainer.find('.select-all').prop('checked', allChecked);
+
+
+                                modal.append(`<div class="mt-2 flex justify-end space-x-2"><button class="cancel-filter-btn bg-gray-200 text-gray-700 px-3 py-1 rounded-md text-sm">Cancel</button><button class="apply-filter-btn bg-revelo-blue text-white px-3 py-1 rounded-md text-sm">Apply</button></div>`);
+                                modal.show();
+
+                                modal.find('.select-all').on('change', function () {
+                                    var isChecked = $(this).is(':checked');
+                                    modal.find('.filter-value').prop('checked', isChecked);
+                                });
+
+                                modal.find('.apply-filter-btn').on('click', function () {
+                                    var selectedValues = [];
+                                    modal.find('.filter-value:checked').each(function () {
+                                        selectedValues.push('^' + $.fn.dataTable.util.escapeRegex($(this).val()) + '$');
+                                    });
+                                    column.search(selectedValues.join('|'), true, false).draw();
+                                    modal.remove();
+                                });
+
+                                modal.find('.cancel-filter-btn').on('click', function () {
+                                    modal.remove();
+                                });
+                            });
+                        });
+
+                        // Add Reset Filters button next to the search field
+                        var resetButton = $('<button id="resetFilters" class="dt-button bg-revelo-orange hover:bg-orange-600" style="margin-left: 10px;">Reset Filters</button>')
+                            .on('click', function() {
+                                transactionTable.search('').columns().search('').draw();
+                                $('.dataTables_filter input').val('');
+                                $('#startDate, #endDate').val('');
+                                transactionTable.draw();
+                            });
+                        $('.dataTables_filter').append(resetButton);
                     }
                 });
 
-                const nextButton = document.createElement('button');
-                nextButton.textContent = 'Next';
-                nextButton.className = 'pagination-btn';
-                nextButton.disabled = currentPage === pageCount;
-                nextButton.addEventListener('click', () => {
-                    if (currentPage < pageCount) {
-                        currentPage++;
-                        renderTable();
-                        renderPagination();
+                $(document).on('click', function (e) {
+                    if (!$(e.target).closest('.filter-modal, .filter-icon').length) {
+                        $('.filter-modal').remove();
                     }
                 });
-                
-                buttons.appendChild(prevButton);
-                buttons.appendChild(nextButton);
-                paginationContainer.appendChild(info);
-                paginationContainer.appendChild(buttons);
             }
 
             // --- METRICS & CHART ---
@@ -937,7 +672,7 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${payout.id}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${payout.date}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-right text-gray-500">${formatCurrency(payout.amount)}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-right text-gray-500">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusClass}">${payout.status}</span>
                             </td>
                         </tr>
@@ -947,11 +682,13 @@
 
             function openPayoutsHistoryModal() {
                 renderPayoutsTable();
-                openModal('payoutHistoryModal');
+                openFinancialModal('payoutHistoryModal');
             }
 
+            // --- SETUP LISTENERS THAT DON'T DEPEND ON DATA ---
+            setupEventListeners();
 
-            // --- START THE APP ---
+            // --- START THE APP'S DATA-DEPENDENT PARTS ---
             loadAndProcessData();
         });
     </script>

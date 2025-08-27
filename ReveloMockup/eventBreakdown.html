@@ -162,14 +162,6 @@
                 
                 <!-- Detailed Breakdown Tab -->
                 <div id="detailed-breakdown" class="tab-content hidden">
-                    <div class="bg-white rounded-lg p-6 mb-8">
-                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                            <button data-modal="eventFilterModal" class="filter-btn w-full bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg">Filter Events</button>
-                            <button data-modal="ticketTypeFilterModal" class="filter-btn w-full bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg">Filter Ticket Types</button>
-                            <button data-modal="promoterFilterModal" class="filter-btn w-full bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg">Filter Promoters</button>
-                            <button id="resetFilters" class="w-full bg-orange-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-orange-600">Reset Filters</button>
-                        </div>
-                    </div>
                     <table id="masterTable" class="display" style="width:100%">
                         <thead>
                            <tr><th>Event</th><th>Ticket Type</th><th>Ticket Price</th><th>Qty Sold</th><th>Disc. %</th><th>Disc. €</th><th>Disc. Code</th><th>Promoter</th><th>Total</th></tr>
@@ -184,11 +176,6 @@
             </main>
         </div>
     </div>
-    
-    <!-- Filter Modals -->
-    <div id="eventFilterModal" class="modal-overlay"><div class="modal-content"><button class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button><h2 class="text-xl font-bold mb-4">Filter by Event</h2><div id="eventFilterOptions"></div><button class="apply-filter mt-4 bg-revelo-blue text-white w-full py-2 rounded">Apply</button></div></div>
-    <div id="ticketTypeFilterModal" class="modal-overlay"><div class="modal-content"><button class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button><h2 class="text-xl font-bold mb-4">Filter by Ticket Type</h2><div id="ticketTypeFilterOptions"></div><button class="apply-filter mt-4 bg-revelo-blue text-white w-full py-2 rounded">Apply</button></div></div>
-    <div id="promoterFilterModal" class="modal-overlay"><div class="modal-content"><button class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button><h2 class="text-xl font-bold mb-4">Filter by Promoter</h2><div id="promoterFilterOptions"></div><button class="apply-filter mt-4 bg-revelo-blue text-white w-full py-2 rounded">Apply</button></div></div>
     
     <!-- Info Modals -->
     <div id="promoterEffectivenessInfoModal" class="modal-overlay"><div class="modal-content"><button class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button><h2 class="text-xl font-bold mb-4">What is Promoter Effectiveness?</h2><p class="text-gray-600">This chart helps you evaluate your promoters. Each bubble is a promoter. <br><br><b>How far right a bubble is:</b> Shows how many tickets they sold. <br><b>How high up a bubble is:</b> Shows the average price of the tickets they sold. <br><b>The size of the bubble:</b> Shows the total revenue they generated. <br><br>Ideal promoters are high up, far to the right, and have a large bubble.</p></div></div>
@@ -236,58 +223,43 @@
 
         function processTransactions(transactions) {
             // Create a map of the maximum price for each ticket type to use as the standard price.
-            // This is more robust than using the most frequent price.
             const priceMap = {};
             transactions.forEach(t => {
-                if (t.Transaction_Type === 'Sale') {
+                if (t.Transaction_Type === 'Sale' && t.Qty > 0) {
                     const key = `${t.Event_Name}|${t.Ticket_Type}`;
-                    priceMap[key] = Math.max(priceMap[key] || 0, t.Gross_Amount);
+                    const pricePerTicket = t.Gross_Amount / t.Qty;
+                    priceMap[key] = Math.max(priceMap[key] || 0, pricePerTicket);
                 }
             });
 
-            // Group transactions to summarize them
-            const grouped = {};
-            transactions.forEach(t => {
-                if (t.Transaction_Type !== 'Sale') return; // Only process sales
-
-                const promoter = t.Promoter_Name || 'N/A';
-                const discountCode = t.Discount_Code_Used || null;
-                // Group by event, ticket type, promoter, and discount code to aggregate similar sales
-                const key = `${t.Event_Name}|${t.Ticket_Type}|${promoter}|${discountCode}`;
-
-                if (!grouped[key]) {
+            // Process each transaction, now including refunds
+            return transactions
+                .map(t => {
                     const priceMapKey = `${t.Event_Name}|${t.Ticket_Type}`;
-                    grouped[key] = {
+                    const standardPrice = priceMap[priceMapKey] || (t.Qty > 0 ? t.Gross_Amount / t.Qty : 0);
+                    const actualPrice = (t.Qty > 0) ? t.Gross_Amount / t.Qty : 0;
+
+                    const discountAmount = standardPrice - actualPrice;
+                    
+                    const discEuro = discountAmount > 0 ? discountAmount : 0;
+                    const discPerc = standardPrice > 0 ? (discEuro / standardPrice) * 100 : 0;
+
+                    // Use a multiplier to make refund values negative
+                    const multiplier = t.Transaction_Type === 'Refund' ? -1 : 1;
+
+                    return {
                         event: t.Event_Name,
                         ticketType: t.Ticket_Type,
-                        ticketPrice: priceMap[priceMapKey] || t.Gross_Amount, // Use the determined standard price
-                        promoter: promoter,
-                        discountCode: discountCode,
+                        ticketPrice: actualPrice,
+                        promoter: t.Promoter_Name || 'N/A',
+                        discountCode: t.Discount_Code_Used || null,
                         date: t.Transaction_Date.split(' ')[0],
-                        qtySold: 0,
-                        total: 0,
+                        qtySold: t.Qty * multiplier,
+                        total: t.Gross_Amount * multiplier,
+                        discEuro: discEuro,
+                        discPerc: discPerc,
                     };
-                }
-                grouped[key].qtySold += 1;
-                grouped[key].total += t.Gross_Amount;
-            });
-
-            // Convert the grouped object back to an array and calculate final discount info
-            return Object.values(grouped).map(item => {
-                const originalTotal = item.ticketPrice * item.qtySold;
-                const discountAmount = originalTotal - item.total;
-                
-                // Calculate per-ticket discount in Euros and as a percentage
-                item.discEuro = item.qtySold > 0 ? discountAmount / item.qtySold : 0;
-                item.discPerc = item.ticketPrice > 0 ? (item.discEuro / item.ticketPrice) * 100 : 0;
-
-                // Ensure discounts aren't negative due to minor price fluctuations
-                if (item.discEuro < 0) {
-                    item.discEuro = 0;
-                    item.discPerc = 0;
-                }
-                return item;
-            });
+                });
         }
         
         // --- INITIALIZATION ---
@@ -297,15 +269,12 @@
             
             // --- SETUP EVENT LISTENERS & POPULATE FILTERS FIRST ---
             setupEventListeners();
-            populateModal('eventFilterModal', [...new Set(allTicketData.map(item => item.event))]);
-            populateModal('ticketTypeFilterModal', [...new Set(allTicketData.map(item => item.ticketType))]);
-            populateModal('promoterFilterModal', [...new Set(allTicketData.map(item => item.promoter))].filter(p => p !== 'N/A'));
             
             // --- SET & APPLY DEFAULT STATE ---
-            // Check the box for the default event
-            $('#eventFilterOptions input[value="Sensuality & Essentiality"]').prop('checked', true);
-            // Apply filters based on the checked box
-            applyAllFilters(); 
+            // Apply filters based on the default event
+            if(masterTable) {
+                masterTable.column(0).search('Sensuality & Essentiality', true, false).draw();
+            }
             
             // Render charts for the default active tab
             renderSalesOverview(); 
@@ -339,28 +308,14 @@
             });
             
             // Modal & Filter Listeners
-            $('.filter-btn, .info-btn').on('click', function() { $(`#${$(this).data('modal')}`).addClass('visible'); });
+            $('.info-btn').on('click', function() { $(`#${$(this).data('modal')}`).addClass('visible'); });
             $('.modal-overlay').on('click', function(e) { 
                 if (e.target === this) $(this).removeClass('visible'); 
             });
             $('.close-modal').on('click', function() { 
                 $(this).closest('.modal-overlay').removeClass('visible'); 
             });
-            
-            $('.apply-filter').on('click', function() {
-                $(this).closest('.modal-overlay').removeClass('visible');
-                applyAllFilters();
-            });
-
-            $('#resetFilters').on('click', function() {
-                            // Clear all checkboxes in all modals
-                            $('.modal-content input').prop('checked', false);
-                            // Re-check the box for the default event
-                            $('#eventFilterOptions input[value="Sensuality & Essentiality"]').prop('checked', true);
-                            // Apply the default filter state
-                            applyAllFilters();
-                        });
-                      }
+        }
 
         // --- CHARTING ---
         function createChart(canvasElement, type, data, options) {
@@ -525,11 +480,8 @@
         // --- PRICING & DISCOUNTS ---
         function renderPricingAndDiscounts() {
             const mainEventData = getFilteredEventData('Sensuality & Essentiality');
-            const discountedTickets = mainEventData.filter(d => (d.discPerc > 0) || (d.discEuro > 0));
-            const totalDiscountValue = mainEventData.reduce((sum, d) => {
-                const discount = d.discPerc > 0 ? (d.ticketPrice * d.discPerc / 100) * d.qtySold : d.discEuro * d.qtySold;
-                return sum + discount;
-            }, 0);
+            const discountedTickets = mainEventData.filter(d => d.discountCode);
+            const totalDiscountValue = discountedTickets.reduce((sum, d) => sum + (d.discEuro * d.qtySold), 0);
 
             $('#pricing-kpis').html(`
                 <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">% Sold with Discount</h3><p class="text-3xl font-bold revelo-blue">${((discountedTickets.reduce((sum, d) => sum + d.qtySold, 0) / mainEventData.reduce((sum, d) => sum + d.qtySold, 0)) * 100 || 0).toFixed(1)}%</p></div>
@@ -537,23 +489,36 @@
             `);
 
             const priceTiers = mainEventData.reduce((acc, d) => {
-                const tier = d.ticketPrice < 50 ? '€0-50' : d.ticketPrice <= 150 ? '€51-150' : '€151+';
-                acc[tier] = (acc[tier] || 0) + d.qtySold;
+                const price = d.ticketPrice;
+                let tier;
+                if (price < 50) tier = '<€50';
+                else if (price >= 50 && price < 101) tier = '€50-100';
+                else if (price >= 101 && price < 200) tier = '€101-200';
+                else tier = '€201+';
+                
+                if (!acc[tier]) acc[tier] = 0;
+                acc[tier] += d.qtySold;
                 return acc;
             }, {});
+
             createChart($('#salesByPriceTierChart')[0], 'bar', {
                 labels: Object.keys(priceTiers),
                 datasets: [{ label: 'Tickets Sold', data: Object.values(priceTiers), backgroundColor: generateColors(Object.keys(priceTiers).length) }]
             }, { responsive: true, plugins: { title: { display: false } } });
             
-            const discountUsage = discountedTickets.reduce((acc, d) => { acc[d.discountCode] = (acc[d.discountCode] || 0) + d.qtySold; return acc; }, {});
+            const discountUsage = discountedTickets.reduce((acc, d) => { 
+                if (d.discountCode) {
+                    acc[d.discountCode] = (acc[d.discountCode] || 0) + d.qtySold; 
+                }
+                return acc; 
+            }, {});
             createChart($('#discountCodeUsageChart')[0], 'pie', {
                 labels: Object.keys(discountUsage),
                 datasets: [{ data: Object.values(discountUsage), backgroundColor: generateColors(Object.keys(discountUsage).length) }]
             }, { responsive: true, plugins: { title: { display: false } } });
 
             const revenueWith = discountedTickets.reduce((s,d) => s+d.total, 0);
-            const revenueWithout = mainEventData.filter(d => d.discPerc === 0 && d.discEuro === 0).reduce((s,d) => s+d.total, 0);
+            const revenueWithout = mainEventData.filter(d => !d.discountCode).reduce((s,d) => s+d.total, 0);
             createChart($('#revenueWithVsWithoutDiscountsChart')[0], 'bar', {
                 labels: ['With Discount', 'Without Discount'],
                 datasets: [{ label: 'Revenue', data: [revenueWith, revenueWithout], backgroundColor: generateColors(2) }]
@@ -573,7 +538,7 @@
             const sensualityAvgPrice = sensualityTotalTickets > 0 ? sensualityTotalRevenue / sensualityTotalTickets : 0;
             const sensualityPromoterRevenue = sensualityData.filter(d => d.promoter !== 'N/A').reduce((sum, d) => sum + d.total, 0);
             const sensualityPromoterRevenuePerc = sensualityTotalRevenue > 0 ? (sensualityPromoterRevenue / sensualityTotalRevenue) * 100 : 0;
-            const sensualityDiscountedTickets = sensualityData.filter(d => d.discPerc > 0 || d.discEuro > 0).reduce((sum, d) => sum + d.qtySold, 0);
+            const sensualityDiscountedTickets = sensualityData.filter(d => d.discountCode).reduce((sum, d) => sum + d.qtySold, 0);
             const sensualityDiscountedPerc = sensualityTotalTickets > 0 ? (sensualityDiscountedTickets / sensualityTotalTickets) * 100 : 0;
             const sensualityFullPricePerc = 100 - sensualityDiscountedPerc;
             const sensualityTransactionCount = new Set(sensualityTransactions.map(t => t.Transaction_ID)).size;
@@ -590,7 +555,7 @@
                 const totalTickets = eventSummaryData.reduce((sum, d) => sum + d.qtySold, 0);
                 const promoterRevenue = eventSummaryData.filter(d => d.promoter !== 'N/A').reduce((sum, d) => sum + d.total, 0);
                 const promoterRevenuePerc = totalRevenue > 0 ? (promoterRevenue / totalRevenue) * 100 : 0;
-                const discountedTickets = eventSummaryData.filter(d => d.discPerc > 0 || d.discEuro > 0).reduce((sum, d) => sum + d.qtySold, 0);
+                const discountedTickets = eventSummaryData.filter(d => d.discountCode).reduce((sum, d) => sum + d.qtySold, 0);
                 const discountedTicketPerc = totalTickets > 0 ? (discountedTickets / totalTickets) * 100 : 0;
                 const transactionCount = new Set(eventTransactionData.map(t => t.Transaction_ID)).size;
                 const atv = transactionCount > 0 ? eventTransactionData.reduce((sum, t) => sum + t.Gross_Amount, 0) / transactionCount : 0;
@@ -653,9 +618,9 @@
         }
 
 
-        // --- DETAILED BREAKDOWN TABLE ---
+// --- DETAILED BREAKDOWN TABLE ---
         function renderDetailedBreakdown(data) {
-             if (masterTable) {
+            if (masterTable) {
                 masterTable.clear().rows.add(data).draw();
                 return;
             }
@@ -672,42 +637,93 @@
                     { data: 'promoter' },
                     { data: 'total', render: $.fn.dataTable.render.number(',', '.', 2, '€') }
                 ],
-                // Added 'l' to show the length menu (Show X entries)
-                dom: 'lBfrtip',
-                buttons: ['csv', 'excel', 'pdf']
+                dom: "lBfrtip",
+                buttons: [
+                        {
+                            extend: 'collection',
+                            text: 'Export',
+                            buttons: [
+                                'csv',
+                                'excel',
+                                'pdf'
+                            ]
+                        }
+                    ],
+                initComplete: function () {
+                    this.api().columns().every(function (idx) {
+                        var column = this;
+                        var header = $(column.header());
+                        var title = header.text();
+                        header.css('font-size', '0.875rem');
+                        header.html(title + ' <span class="filter-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 inline-block"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Interface / Filter"> <path id="Vector" d="M20 5.6001C20 5.04005 19.9996 4.75981 19.8906 4.5459C19.7948 4.35774 19.6423 4.20487 19.4542 4.10899C19.2403 4 18.9597 4 18.3996 4H5.59961C5.03956 4 4.75981 4 4.5459 4.10899C4.35774 4.20487 4.20487 4.35774 4.10899 4.5459C4 4.75981 4 5.04005 4 5.6001V6.33736C4 6.58195 4 6.70433 4.02763 6.81942C4.05213 6.92146 4.09263 7.01893 4.14746 7.1084C4.20928 7.20928 4.29591 7.29591 4.46875 7.46875L9.53149 12.5315C9.70443 12.7044 9.79044 12.7904 9.85228 12.8914C9.90711 12.9808 9.94816 13.0786 9.97266 13.1807C10 13.2946 10 13.4155 10 13.6552V18.411C10 19.2682 10 19.6971 10.1805 19.9552C10.3382 20.1806 10.5814 20.331 10.8535 20.3712C11.1651 20.4172 11.5487 20.2257 12.3154 19.8424L13.1154 19.4424C13.4365 19.2819 13.5966 19.2013 13.7139 19.0815C13.8176 18.9756 13.897 18.8485 13.9453 18.7084C14 18.5499 14 18.37 14 18.011V13.6626C14 13.418 14 13.2958 14.0276 13.1807C14.0521 13.0786 14.0926 12.9808 14.1475 12.8914C14.2089 12.7911 14.2947 12.7053 14.4653 12.5347L14.4688 12.5315L19.5315 7.46875C19.7044 7.2958 19.7904 7.20932 19.8523 7.1084C19.9071 7.01893 19.9482 6.92146 19.9727 6.81942C20 6.70551 20 6.58444 20 6.3448V5.6001Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g> </g></svg></span>');
+
+                        header.find('.filter-icon').on('click', function (e) {
+                            e.stopPropagation();
+                            $('.filter-modal').remove(); 
+
+                            var modal = $(`<div class="filter-modal"></div>`).appendTo('body');
+                            modal.css({
+                                top: header.offset().top + header.outerHeight(),
+                                left: header.offset().left
+                            });
+                            
+                            var searchStr = column.search().replace(/[\^\$]/g, '').split('|');
+                            var currentFilter = searchStr.filter(v => v !== "");
+
+                            var values = column.data().unique().sort().toArray();
+                            
+                            var optionsContainer = $('<div class="options-container"></div>').appendTo(modal);
+                            optionsContainer.append(`<div><label><input type="checkbox" class="select-all"> Select All</label></div><hr class="my-1">`);
+                            
+                            values.forEach(function (value) {
+                                if (value !== null) {
+                                    var isChecked = currentFilter.length === 0 || currentFilter.includes(String(value).replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1"));
+                                    optionsContainer.append(`<div><label><input type="checkbox" class="filter-value" value="${value}" ${isChecked ? 'checked' : ''}> ${value || '(Empty)'}</label></div>`);
+                                }
+                            });
+                            
+                            var allChecked = optionsContainer.find('.filter-value:not(:checked)').length === 0;
+                            optionsContainer.find('.select-all').prop('checked', allChecked);
+
+
+                            modal.append(`<div class="mt-2 flex justify-end space-x-2"><button class="cancel-filter-btn bg-gray-200 text-gray-700 px-3 py-1 rounded-md text-sm">Cancel</button><button class="apply-filter-btn bg-revelo-blue text-white px-3 py-1 rounded-md text-sm">Apply</button></div>`);
+                            modal.show();
+
+                            modal.find('.select-all').on('change', function () {
+                                var isChecked = $(this).is(':checked');
+                                modal.find('.filter-value').prop('checked', isChecked);
+                            });
+
+                            modal.find('.apply-filter-btn').on('click', function () {
+                                var selectedValues = [];
+                                modal.find('.filter-value:checked').each(function () {
+                                    selectedValues.push($.fn.dataTable.util.escapeRegex($(this).val()));
+                                });
+                                column.search(selectedValues.join('|'), true, false).draw();
+                                modal.remove();
+                            });
+
+                            modal.find('.cancel-filter-btn').on('click', function () {
+                                modal.remove();
+                            });
+                        });
+                    });
+
+                    // Add Reset Filters button next to the search field
+                    var resetButton = $('<button id="resetFilters" class="dt-button bg-revelo-orange hover:bg-orange-600" style="margin-left: 10px;">Reset Filters</button>')
+                        .on('click', function() {
+                            masterTable.search('').columns().search('').draw();
+                            $('.dataTables_filter input').val('');
+                        });
+                    $('.dataTables_filter').append(resetButton);
+                }
             });
-        }
-        
-        // --- MODAL & FILTER LOGIC ---
-        function populateModal(modalId, options) {
-            const optionsDivId = modalId.replace('Modal', 'Options');
-            const container = $(`#${optionsDivId}`);
-            container.empty();
-            options.forEach(opt => {
-                const inputId = `${optionsDivId}-${opt.replace(/[^a-zA-Z0-9]/g, '-')}`; // Sanitize ID
-                container.append(`<div><input type="checkbox" id="${inputId}" value="${opt}" class="mr-2"><label for="${inputId}">${opt}</label></div>`);
+
+            $(document).on('click', function (e) {
+                if (!$(e.target).closest('.filter-modal, .filter-icon').length) {
+                    $('.filter-modal').remove();
+                }
             });
-        }
-
-
-        function applyAllFilters() {
-            // Get selected values from each modal
-            const getSelectedRegex = (modalId) => {
-                const selected = $(`#${modalId} input:checked`).map((_, el) => $(el).val()).get();
-                if (selected.length === 0) return '';
-                // Escape special regex characters and join with '|' for an OR condition
-                return selected.map(s => s.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1")).join('|');
-            };
-
-            const eventFilter = getSelectedRegex('eventFilterModal');
-            const typeFilter = getSelectedRegex('ticketTypeFilterModal');
-            const promoterFilter = getSelectedRegex('promoterFilterModal');
-
-            // Apply filters to the DataTable using regex search
-            masterTable.column(0).search(eventFilter, true, false);      // Event column
-            masterTable.column(1).search(typeFilter, true, false);      // Ticket Type column
-            masterTable.column(7).search(promoterFilter, true, false);  // Promoter column
-            masterTable.draw();
         }
 
         // --- KICK OFF THE APPLICATION ---

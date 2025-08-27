@@ -44,22 +44,28 @@
                 <h1 class="text-3xl font-extrabold revelo-blue">Ticket Breakdown</h1>
                 <p class="text-gray-500">Deep dive into your ticket sales performance.</p>
             </div>
-            <a href="organizerDashboard.html" class="px-4 py-2 bg-revelo-blue text-white rounded-lg hover:bg-blue-800 transition duration-300 flex items-center justify-center">
+            <a href="organizerDashboard.html" class="mt-4 md:mt-0 px-4 py-2 bg-revelo-blue text-white rounded-lg hover:bg-blue-800 transition duration-300 flex items-center justify-center">
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                 Organizer Dashboard
             </a>
         </header>
 
         <!-- KPI Cards -->
-        <div id="kpi-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"></div>
+        <div id="kpi-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- KPIs will be loaded here -->
+             <div class="bg-white p-4 rounded-lg border animate-pulse"><div class="h-4 bg-gray-200 rounded w-3/4 mb-2"></div><div class="h-8 bg-gray-300 rounded w-1/2"></div></div>
+             <div class="bg-white p-4 rounded-lg border animate-pulse"><div class="h-4 bg-gray-200 rounded w-3/4 mb-2"></div><div class="h-8 bg-gray-300 rounded w-1/2"></div></div>
+             <div class="bg-white p-4 rounded-lg border animate-pulse"><div class="h-4 bg-gray-200 rounded w-3/4 mb-2"></div><div class="h-8 bg-gray-300 rounded w-1/2"></div></div>
+             <div class="bg-white p-4 rounded-lg border animate-pulse"><div class="h-4 bg-gray-200 rounded w-3/4 mb-2"></div><div class="h-8 bg-gray-300 rounded w-1/2"></div></div>
+        </div>
 
         <!-- Filters Section -->
         <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <button data-modal="eventFilterModal" class="filter-btn w-full bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg">Filter Events</button>
-                <button data-modal="ticketTypeFilterModal" class="filter-btn w-full bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg">Filter Ticket Types</button>
-                <button data-modal="promoterFilterModal" class="filter-btn w-full bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg">Filter Promoters</button>
-                <button id="resetFilters" class="w-full bg-revelo-orange text-white font-bold py-2 px-4 rounded-lg hover:bg-orange-600">Reset Filters</button>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <button data-modal="eventFilterModal" class="filter-btn w-full bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg hover:bg-gray-300 transition">Filter Events</button>
+                <button data-modal="ticketTypeFilterModal" class="filter-btn w-full bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg hover:bg-gray-300 transition">Filter Ticket Types</button>
+                <button data-modal="promoterFilterModal" class="filter-btn w-full bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg hover:bg-gray-300 transition">Filter Promoters</button>
+                <button id="resetTopFilters" class="w-full bg-revelo-orange text-white font-bold py-2 px-4 rounded-lg hover:bg-orange-600 transition">Reset Filters</button>
             </div>
         </div>
 
@@ -88,7 +94,7 @@
             <details>
                 <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg revelo-blue p-4">
                     More Stats
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <svg class="w-5 h-5 accordion-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </summary>
                 <div class="p-6 border-t border-gray-200">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -134,65 +140,225 @@
                 <thead>
                     <tr><th>Event</th><th>Ticket Type</th><th>Price</th><th>Qty Sold</th><th>Disc. %</th><th>Disc. €</th><th>Disc. Code</th><th>Promoter</th><th>Total</th></tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                     <tr>
+                        <td colspan="9" class="text-center p-4">Loading data...</td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>
 
     <!-- Filter Modals -->
-    <div id="eventFilterModal" class="modal-overlay"><div class="modal-content"><button class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button><h2 class="text-xl font-bold mb-4">Filter by Event</h2><div id="eventFilterOptions"></div><button class="apply-filter mt-4 bg-revelo-blue text-white w-full py-2 rounded">Apply</button></div></div>
-    <div id="ticketTypeFilterModal" class="modal-overlay"><div class="modal-content"><button class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button><h2 class="text-xl font-bold mb-4">Filter by Ticket Type</h2><div id="ticketTypeFilterOptions"></div><button class="apply-filter mt-4 bg-revelo-blue text-white w-full py-2 rounded">Apply</button></div></div>
-    <div id="promoterFilterModal" class="modal-overlay"><div class="modal-content"><button class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button><h2 class="text-xl font-bold mb-4">Filter by Promoter</h2><div id="promoterFilterOptions"></div><button class="apply-filter mt-4 bg-revelo-blue text-white w-full py-2 rounded">Apply</button></div></div>
+    <div id="eventFilterModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="p-8 relative">
+                <button class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button>
+                <h2 class="text-xl font-bold mb-4">Filter by Event</h2>
+                <div id="eventFilterOptions" class="overflow-y-auto max-h-64"></div>
+                <button class="apply-filter mt-4 bg-revelo-blue text-white w-full py-2 rounded">Apply</button>
+            </div>
+        </div>
+    </div>
+    <div id="ticketTypeFilterModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="p-8 relative">
+                <button class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button>
+                <h2 class="text-xl font-bold mb-4">Filter by Ticket Type</h2>
+                <div id="ticketTypeFilterOptions" class="overflow-y-auto max-h-64"></div>
+                <button class="apply-filter mt-4 bg-revelo-blue text-white w-full py-2 rounded">Apply</button>
+            </div>
+        </div>
+    </div>
+    <div id="promoterFilterModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="p-8 relative">
+                <button class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button>
+                <h2 class="text-xl font-bold mb-4">Filter by Promoter</h2>
+                <div id="promoterFilterOptions" class="overflow-y-auto max-h-64"></div>
+                <button class="apply-filter mt-4 bg-revelo-blue text-white w-full py-2 rounded">Apply</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Info Modals -->
-    <div id="discountImpactInfoModal" class="modal-overlay"><div class="modal-content"><button class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button><h2 class="text-xl font-bold mb-4">What is Discount Impact?</h2><p class="text-gray-600">This chart shows the difference between tickets sold with a discount code versus those sold at full price for each event. It helps you understand how much you rely on discounts to drive sales.</p></div></div>
-    <div id="revenueByTypeInfoModal" class="modal-overlay"><div class="modal-content"><button class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button><h2 class="text-xl font-bold mb-4">What is Revenue by Ticket Type?</h2><p class="text-gray-600">This chart compares the total money generated by each type of ticket (e.g., Full Pass, Party Pass). It helps you identify which ticket categories are your most profitable.</p></div></div>
-    <div id="promoterEffectivenessInfoModal" class="modal-overlay"><div class="modal-content"><button class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button><h2 class="text-xl font-bold mb-4">What is Promoter Effectiveness?</h2><p class="text-gray-600">This chart helps you evaluate your promoters. Each bubble is a promoter. <br><br><b>How far right a bubble is:</b> Shows how many tickets they sold. <br><b>How high up a bubble is:</b> Shows the average price of the tickets they sold. <br><b>The size of the bubble:</b> Shows the total revenue they generated. <br><br>Ideal promoters are high up, far to the right, and have a large bubble.</p></div></div>
+    <div id="discountImpactInfoModal" class="modal-overlay"><div class="modal-content"><div class="p-8 relative"><button class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button><h2 class="text-xl font-bold mb-4">What is Discount Impact?</h2><p class="text-gray-600">This chart shows the difference between tickets sold with a discount code versus those sold at full price for each event. It helps you understand how much you rely on discounts to drive sales.</p></div></div></div>
+    <div id="revenueByTypeInfoModal" class="modal-overlay"><div class="modal-content"><div class="p-8 relative"><button class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button><h2 class="text-xl font-bold mb-4">What is Revenue by Ticket Type?</h2><p class="text-gray-600">This chart compares the total money generated by each type of ticket (e.g., Full Pass, Party Pass). It helps you identify which ticket categories are your most profitable.</p></div></div></div>
+    <div id="promoterEffectivenessInfoModal" class="modal-overlay"><div class="modal-content"><div class="p-8 relative"><button class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button><h2 class="text-xl font-bold mb-4">What is Promoter Effectiveness?</h2><p class="text-gray-600">This chart helps you evaluate your promoters. <br><br><b>How far right a bubble is:</b> Shows how many tickets they sold. <br><b>How high up a bubble is:</b> Shows the average price of the tickets they sold. <br><b>The size of the bubble:</b> Shows the total revenue they generated. <br><br>Ideal promoters are high up, far to the right, and have a large bubble.</p></div></div></div>
 
 
     <script>
     $(document).ready(function() {
         // --- DATA SOURCE ---
-        const ticketData = [
-            { event: 'Sensuality & Essentiality', ticketType: 'Sensuality Pass', price: 190, qtySold: 194, promoter: 'ProDancers', total: 36860, discPercentage: 10, discEuro: 0, discountCode: 'PROD9' },
-            { event: 'Sensuality & Essentiality', ticketType: 'Sensuality Pass', price: 220, qtySold: 283, promoter: 'PartyPros', total: 62260, discPercentage: 15, discEuro: 0, discountCode: 'PART8' },
-            { event: 'Sensuality & Essentiality', ticketType: 'Sensuality Pass', price: 190, qtySold: 294, promoter: 'N/A', total: 55860, discPercentage: 0, discEuro: 0, discountCode: null },
-            { event: 'Sensuality & Essentiality', ticketType: 'Essentiality Pass', price: 220, qtySold: 184, promoter: 'N/A', total: 40480, discPercentage: 0, discEuro: 0, discountCode: null },
-            { event: 'Sensuality & Essentiality', ticketType: 'Essentiality Pass', price: 220, qtySold: 159, promoter: 'SensualPromo', total: 34980, discPercentage: 10, discEuro: 0, discountCode: 'SENS5' },
-            { event: 'Sensuality & Essentiality', ticketType: 'J&J Pro', price: 15, qtySold: 80, promoter: 'LatinStars', total: 1200, discPercentage: 5, discEuro: 0, discountCode: 'LATI17' },
-            { event: 'Sensuality & Essentiality', ticketType: 'J&J Amateur', price: 10, qtySold: 190, promoter: 'PartyPros', total: 760, discPercentage: 0, discEuro: 6, discountCode: 'PART12' },
-            { event: 'Barcelona Summer Fest', ticketType: 'Full Pass', price: 180, qtySold: 111, promoter: 'ProDancers', total: 19980, discPercentage: 15, discEuro: 0, discountCode: 'PROD19' },
-            { event: 'Barcelona Summer Fest', ticketType: 'J&J Amateur', price: 10, qtySold: 294, promoter: 'LatinStars', total: 1176, discPercentage: 0, discEuro: 6, discountCode: 'LATI9' },
-            { event: 'Winter Bachata Gala', ticketType: 'Full Pass', price: 180, qtySold: 225, promoter: 'DanceWorld', total: 40500, discPercentage: 15, discEuro: 0, discountCode: 'DANC9' },
-            { event: 'Winter Bachata Gala', ticketType: 'Party Pass', price: 35, qtySold: 270, promoter: 'SensualPromo', total: 9450, discPercentage: 10, discEuro: 0, discountCode: 'SENS16' },
-            { event: 'Winter Bachata Gala', ticketType: 'Training Track', price: 120, qtySold: 261, promoter: 'N/A', total: 31320, discPercentage: 0, discEuro: 0, discountCode: null },
-        ];
+        const JSON_URL = 'data/transactions.json';
 
+        // --- GLOBAL STATE ---
+        let allTicketData = [];
         let charts = {};
+        let table;
         const chartColors = ['#213c63', '#f58220', '#36a2eb', '#ffcd56', '#4bc0c0', '#9966ff', '#ff9f40'];
         
-        const table = $('#ticketTable').DataTable({
-            data: ticketData,
-            columns: [ 
-                { data: 'event' }, 
-                { data: 'ticketType' }, 
-                { data: 'price', render: $.fn.dataTable.render.number(',', '.', 2, '€') }, 
-                { data: 'qtySold' },
-                { data: 'discPercentage', render: (d) => `${d}%` },
-                { data: 'discEuro', render: $.fn.dataTable.render.number(',', '.', 2, '€') },
-                { data: 'discountCode', defaultContent: 'N/A' },
-                { data: 'promoter' }, 
-                { data: 'total', render: $.fn.dataTable.render.number(',', '.', 2, '€') } 
-            ],
-            dom: 'Bfrtip',
-            buttons: ['csv', 'excel', 'pdf'],
-            responsive: true,
-        });
+        // --- DATA FETCHING & PROCESSING ---
+        async function loadAndProcessData() {
+            try {
+                const response = await fetch(JSON_URL);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const rawData = await response.json();
+                
+                if (rawData && rawData.length > 0) {
+                    allTicketData = processTransactions(rawData);
+                    initializeApp();
+                } else {
+                    console.error("JSON file is empty or invalid.");
+                    $('#ticketTable tbody').html(`<tr><td colspan="9" class="text-center p-4 text-red-500">JSON file is empty or invalid.</td></tr>`);
+                }
+            } catch (error) {
+                console.error("Error fetching or processing JSON:", error);
+                $('#ticketTable tbody').html(`<tr><td colspan="9" class="text-center p-4 text-red-500">Error loading data. Please check the file path and make sure the file is available at <strong>${JSON_URL}</strong>.</td></tr>`);
+            }
+        }
 
-        function updateDashboard(filteredData) {
-            updateKpis(filteredData);
-            updateCharts(filteredData);
-            table.clear().rows.add(filteredData).draw();
+        function processTransactions(transactions) {
+            const priceMap = {};
+            transactions.forEach(t => {
+                if (t.Transaction_Type === 'Sale' && t.Qty > 0) {
+                    const key = `${t.Event_Name}|${t.Ticket_Type}`;
+                    const pricePerTicket = t.Gross_Amount / t.Qty;
+                    priceMap[key] = Math.max(priceMap[key] || 0, pricePerTicket);
+                }
+            });
+
+            return transactions
+                .map(t => {
+                    const priceMapKey = `${t.Event_Name}|${t.Ticket_Type}`;
+                    const standardPrice = priceMap[priceMapKey] || (t.Qty > 0 ? t.Gross_Amount / t.Qty : 0);
+                    const actualPrice = (t.Qty > 0) ? t.Gross_Amount / t.Qty : 0;
+
+                    const discountAmount = standardPrice - actualPrice;
+                    const discEuro = discountAmount > 0 ? discountAmount * t.Qty : 0;
+                    const discPerc = standardPrice > 0 ? (discountAmount / standardPrice) * 100 : 0;
+
+                    // Use a multiplier to make refund values negative
+                    const multiplier = t.Transaction_Type === 'Refund' ? -1 : 1;
+
+                    return {
+                        event: t.Event_Name,
+                        ticketType: t.Ticket_Type,
+                        price: actualPrice,
+                        promoter: t.Promoter_Name || 'N/A',
+                        discountCode: t.Discount_Code_Used || null,
+                        qtySold: t.Qty * multiplier,
+                        total: t.Gross_Amount * multiplier,
+                        discEuro: discEuro,
+                        discPerc: discPerc,
+                    };
+                });
+        }
+
+        function initializeApp() {
+            renderTicketTable(allTicketData);
+            populateFilterModals();
+            setupEventListeners();
+            updateDashboard(allTicketData);
+        }
+
+        function renderTicketTable(data) {
+             if (table) {
+                table.destroy();
+            }
+            table = $('#ticketTable').DataTable({
+                data: data,
+                columns: [ 
+                    { data: 'event' }, 
+                    { data: 'ticketType' }, 
+                    { data: 'price', render: $.fn.dataTable.render.number(',', '.', 2, '€') }, 
+                    { data: 'qtySold' },
+                    { data: 'discPerc', render: (d) => d ? `${d.toFixed(1)}%` : '0%' },
+                    { data: 'discEuro', render: $.fn.dataTable.render.number(',', '.', 2, '€') },
+                    { data: 'discountCode', defaultContent: 'N/A' },
+                    { data: 'promoter' }, 
+                    { data: 'total', render: $.fn.dataTable.render.number(',', '.', 2, '€') } 
+                ],
+                dom: "lBfrtip",
+                buttons: [
+                    {
+                        extend: 'collection',
+                        text: 'Export',
+                        buttons: ['csv', 'excel', 'pdf']
+                    }
+                ],
+                responsive: true,
+                initComplete: function () {
+                    var api = this.api();
+                    api.columns().every(function () {
+                        var column = this;
+                        var header = $(column.header());
+                        var title = header.text();
+                        header.css('font-size', '0.875rem');
+                        header.html(title + ' <span class="filter-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 inline-block"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Interface / Filter"> <path id="Vector" d="M20 5.6001C20 5.04005 19.9996 4.75981 19.8906 4.5459C19.7948 4.35774 19.6423 4.20487 19.4542 4.10899C19.2403 4 18.9597 4 18.3996 4H5.59961C5.03956 4 4.75981 4 4.5459 4.10899C4.35774 4.20487 4.20487 4.35774 4.10899 4.5459C4 4.75981 4 5.04005 4 5.6001V6.33736C4 6.58195 4 6.70433 4.02763 6.81942C4.05213 6.92146 4.09263 7.01893 4.14746 7.1084C4.20928 7.20928 4.29591 7.29591 4.46875 7.46875L9.53149 12.5315C9.70443 12.7044 9.79044 12.7904 9.85228 12.8914C9.90711 12.9808 9.94816 13.0786 9.97266 13.1807C10 13.2946 10 13.4155 10 13.6552V18.411C10 19.2682 10 19.6971 10.1805 19.9552C10.3382 20.1806 10.5814 20.331 10.8535 20.3712C11.1651 20.4172 11.5487 20.2257 12.3154 19.8424L13.1154 19.4424C13.4365 19.2819 13.5966 19.2013 13.7139 19.0815C13.8176 18.9756 13.897 18.8485 13.9453 18.7084C14 18.5499 14 18.37 14 18.011V13.6626C14 13.418 14 13.2958 14.0276 13.1807C14.0521 13.0786 14.0926 12.9808 14.1475 12.8914C14.2089 12.7911 14.2947 12.7053 14.4653 12.5347L14.4688 12.5315L19.5315 7.46875C19.7044 7.2958 19.7904 7.20932 19.8523 7.1084C19.9071 7.01893 19.9482 6.92146 19.9727 6.81942C20 6.70551 20 6.58444 20 6.3448V5.6001Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g> </g></svg></span>');
+
+                        header.find('.filter-icon').on('click', function (e) {
+                            e.stopPropagation();
+                            $('.filter-modal').remove(); 
+                            
+                            var modal = $(`<div class="filter-modal"></div>`).appendTo('body').css({ top: header.offset().top + header.outerHeight(), left: header.offset().left });
+                            var currentFilter = column.search().replace(/[\^\$]/g, '').split('|').filter(v => v !== "");
+                            var values = column.data().unique().sort().toArray();
+                            
+                            var optionsContainer = $('<div class="options-container"></div>').appendTo(modal);
+                            optionsContainer.append(`<div><label><input type="checkbox" class="select-all"> Select All</label></div><hr class="my-1">`);
+                            
+                            values.forEach(function (value) {
+                                if (value !== null) {
+                                    var isChecked = currentFilter.length === 0 || currentFilter.includes(String(value).replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1"));
+                                    optionsContainer.append(`<div><label><input type="checkbox" class="filter-value" value="${value}" ${isChecked ? 'checked' : ''}> ${value || '(Empty)'}</label></div>`);
+                                }
+                            });
+                            
+                            var allChecked = optionsContainer.find('.filter-value:not(:checked)').length === 0;
+                            optionsContainer.find('.select-all').prop('checked', allChecked);
+
+                            modal.append(`<div class="mt-2 flex justify-end space-x-2"><button class="cancel-filter-btn bg-gray-200 text-gray-700 px-3 py-1 rounded-md text-sm">Cancel</button><button class="apply-filter-btn bg-revelo-blue text-white px-3 py-1 rounded-md text-sm">Apply</button></div>`);
+                            modal.show();
+
+                            modal.find('.select-all').on('change', function () {
+                                var isChecked = $(this).is(':checked');
+                                modal.find('.filter-value').prop('checked', isChecked);
+                            });
+
+                            modal.find('.apply-filter-btn').on('click', function () {
+                                var selectedValues = [];
+                                modal.find('.filter-value:checked').each(function () {
+                                    selectedValues.push('^' + $.fn.dataTable.util.escapeRegex($(this).val()) + '$');
+                                });
+                                column.search(selectedValues.join('|'), true, false).draw();
+                                modal.remove();
+                            });
+
+                            modal.find('.cancel-filter-btn').on('click', function () {
+                                modal.remove();
+                            });
+                        });
+                    });
+
+                    var resetButton = $('<button id="resetTableFilters" class="dt-button bg-revelo-orange hover:bg-orange-600" style="margin-left: 10px;">Reset Filters</button>')
+                        .on('click', function() {
+                           $('#resetTopFilters').click();
+                        });
+                    $('.dataTables_filter').append(resetButton);
+                }
+            });
+
+            $(document).on('click', function (e) {
+                if (!$(e.target).closest('.filter-modal, .filter-icon').length) {
+                    $('.filter-modal').remove();
+                }
+            });
+        }
+
+        function updateDashboard(data) {
+            updateKpis(data);
+            updateCharts(data);
         }
 
         function updateKpis(data) {
@@ -220,6 +386,7 @@
         }
 
         function createChart(ctx, type, data, options) {
+            if (!ctx) return;
             if (charts[ctx.canvas.id]) { charts[ctx.canvas.id].destroy(); }
             charts[ctx.canvas.id] = new Chart(ctx, { type, data, options });
         }
@@ -303,15 +470,13 @@
 
             const datasets = Object.entries(promoterStats).map(([promoter, stats], index) => {
                  const avgRevenue = stats.ticketsSold > 0 ? stats.totalRevenue / stats.ticketsSold : 0;
-                 const avgDiscount = stats.grossRevenue > 0 ? (1 - (stats.totalRevenue / stats.grossRevenue)) * 100 : 0;
                  return {
                     label: promoter,
                     data: [{
                         x: stats.ticketsSold,
                         y: avgRevenue,
                         r: stats.totalRevenue / 1500,
-                        totalRevenue: stats.totalRevenue,
-                        avgDiscount: avgDiscount
+                        totalRevenue: stats.totalRevenue
                     }],
                     backgroundColor: chartColors[index % chartColors.length]
                  }
@@ -322,14 +487,6 @@
             }, { 
                 responsive: true, 
                 maintainAspectRatio: false, 
-                onClick: (e, elements) => {
-                    if (elements.length > 0) {
-                        const promoterName = datasets[elements[0].datasetIndex].label;
-                        table.search(promoterName).draw();
-                    } else {
-                        table.search('').draw();
-                    }
-                },
                 plugins: { 
                     title: { display: false },
                     legend: { display: false },
@@ -341,8 +498,7 @@
                                     `${c.dataset.label}`,
                                     `Tickets Sold: ${dataPoint.x}`,
                                     `Total Revenue: €${dataPoint.totalRevenue.toFixed(2)}`,
-                                    `Avg Revenue/Ticket: €${dataPoint.y.toFixed(2)}`,
-                                    `Avg Discount: ${dataPoint.avgDiscount.toFixed(2)}%`
+                                    `Avg Revenue/Ticket: €${dataPoint.y.toFixed(2)}`
                                 ];
                             }
                         } 
@@ -356,23 +512,38 @@
         }
 
         // --- MODAL & FILTER LOGIC ---
+        function populateFilterModals() {
+            const events = [...new Set(allTicketData.map(item => item.event))].sort();
+            const ticketTypes = [...new Set(allTicketData.map(item => item.ticketType))].sort();
+            const promoters = [...new Set(allTicketData.map(item => item.promoter))].sort();
+            
+            populateModal('eventFilter', events);
+            populateModal('ticketTypeFilter', ticketTypes);
+            populateModal('promoterFilter', promoters);
+        }
+
         function populateModal(filterId, options) {
             const container = $(`#${filterId}Options`);
             container.empty();
             options.forEach(opt => {
-                container.append(`<div><input type="checkbox" id="${filterId}-${opt}" value="${opt}" class="mr-2"><label for="${filterId}-${opt}">${opt}</label></div>`);
+                container.append(`<div><label class="flex items-center p-2 hover:bg-gray-100 rounded-md cursor-pointer"><input type="checkbox" value="${opt}" class="mr-2 h-4 w-4 rounded border-gray-300 text-revelo-blue focus:ring-revelo-blue"><span>${opt}</span></label></div>`);
             });
         }
 
-        populateModal('eventFilter', [...new Set(ticketData.map(item => item.event))]);
-        populateModal('ticketTypeFilter', [...new Set(ticketData.map(item => item.ticketType))]);
-        populateModal('promoterFilter', [...new Set(ticketData.map(item => item.promoter))].filter(p => p !== 'N/A'));
-
-        $('.filter-btn').on('click', function() { $(`#${$(this).data('modal')}`).css('display', 'flex'); });
-        $('.modal-overlay').on('click', function(e) { if (e.target === this) $(this).hide(); });
-        $('.apply-filter').on('click', function() { $(this).closest('.modal-overlay').hide(); applyAllFilters(); });
-        $('.info-btn').on('click', function() { $(`#${$(this).data('modal')}`).css('display', 'flex'); });
-        $('.close-modal').on('click', function() { $(this).closest('.modal-overlay').hide(); });
+        function setupEventListeners() {
+            $('.filter-btn').on('click', function() { $(`#${$(this).data('modal')}`).addClass('visible'); });
+            $('.modal-overlay').on('click', function(e) { if (e.target === this) $(this).removeClass('visible'); });
+            $('.apply-filter').on('click', function() { $(this).closest('.modal-overlay').removeClass('visible'); applyAllFilters(); });
+            $('.info-btn').on('click', function() { $(`#${$(this).data('modal')}`).addClass('visible'); });
+            $('.close-modal').on('click', function() { $(this).closest('.modal-overlay').removeClass('visible'); });
+            $('#resetTopFilters').on('click', function() {
+                $('.modal-content input[type="checkbox"]').prop('checked', false);
+                applyAllFilters();
+                if (table) {
+                    table.search('').columns().search('').draw();
+                }
+            });
+        }
 
         function applyAllFilters() {
             const getSelected = (modalId) => $(`#${modalId}Options input:checked`).map((_, el) => $(el).val()).get();
@@ -380,22 +551,19 @@
             const selectedTypes = getSelected('ticketTypeFilter');
             const selectedPromoters = getSelected('promoterFilter');
 
-            const filteredData = ticketData.filter(item => {
-                const eventMatch = selectedEvents.length === 0 || selectedEvents.includes(item.event);
-                const typeMatch = selectedTypes.length === 0 || selectedTypes.includes(item.ticketType);
-                const promoterMatch = selectedPromoters.length === 0 || selectedPromoters.includes(item.promoter);
-                return eventMatch && typeMatch && promoterMatch;
-            });
+            // Apply filters to DataTable
+            table.column(0).search(selectedEvents.join('|'), true, false);
+            table.column(1).search(selectedTypes.join('|'), true, false);
+            table.column(7).search(selectedPromoters.join('|'), true, false);
+            table.draw();
+            
+            // Update charts and KPIs based on the filtered data from the table
+            const filteredData = table.rows({ search: 'applied' }).data().toArray();
             updateDashboard(filteredData);
         }
-
-        $('#resetFilters').on('click', function() {
-            $('.modal-content input').prop('checked', false);
-            applyAllFilters();
-        });
-
+        
         // --- INITIAL LOAD ---
-        updateDashboard(ticketData);
+        loadAndProcessData();
     });
     </script>
     <script src="organizer.js" defer></script>
