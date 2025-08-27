@@ -127,7 +127,7 @@
                 <div class="flex items-start p-3 bg-white rounded-lg shadow-sm relative notification-item ${hoverClasses}" data-id="${notification.id}">
                     ${linkOverlay}
                     ${unreadIndicator}
-                    <img src="${avatarSrc}" onerror="this.onerror=null;this.src='https://placehold.co/40x40/cccccc/ffffff?text=N';" alt="${notification.type} Icon" class="w-10 h-10 rounded-full object-cover mr-3">
+                    <img src="${avatarSrc}" onerror="this.onerror=null;this.src='https://placehold.co/40x40/cccccc/ffffff?text=N';" alt="${notification.type} Icon" class="w-10 h-10 rounded-full object-cover shadow-md mr-3">
                     <div class="flex-1">
                         <p class="text-sm leading-snug group-hover:text-revelo-blue">${notification.message}</p>
                         <p class="text-xs text-gray-500 mt-1">${notification.timestamp}</p>
@@ -148,9 +148,9 @@
 
         let notificationsData = [
             // Sales & Promoters
-            { id: 1, type: 'salesPromoters', message: 'Congratulations! You\'ve sold <strong>100 tickets</strong> for <strong>Sensuality & Essentiality</strong>.', timestamp: '1h ago', avatar: 'images/organizerLogo.jpg', read: false, link: 'eventBreakdown.html' },
+            { id: 1, type: 'salesPromoters', message: 'Congratulations! You\'ve sold <strong>100 tickets</strong> for <strong>Sensuality & Essentiality</strong>.', timestamp: '1h ago', avatar: 'images/organizerAvatar.png', read: false, link: 'eventBreakdown.html' },
             { id: 2, type: 'salesPromoters', message: 'Your promoter <strong>John Doe</strong> has reached the <strong>Gold Tier</strong> by selling <strong>50 tickets</strong> for your event <strong>Sensuality & Essentiality</strong>.', timestamp: '3h ago', avatar: 'https://placehold.co/40x40/cccccc/000000?text=JD', read: true, link: 'eventCollaboratorManagement.html' },
-            { id: 3, type: 'salesPromoters', message: 'Your event page for <strong>Sensuality & Essentiality</strong> has received <strong>1,000 views</strong> this week.', timestamp: '2 days ago', avatar: 'images/organizerLogo.jpg', read: false, link: '#' },
+            { id: 3, type: 'salesPromoters', message: 'Your event page for <strong>Sensuality & Essentiality</strong> has received <strong>1,000 views</strong> this week.', timestamp: '2 days ago', avatar: 'images/organizerAvatar.png', read: false, link: '#' },
             { id: 4, type: 'salesPromoters', message: 'Your payment of <strong>€2,500</strong> for ticket sales has been sent to your bank account.', timestamp: '5m ago', avatar: 'https://placehold.co/40x40/213c63/ffffff?text=€', read: false, link: 'financialOverview.html' },
             { id: 5, type: 'salesPromoters', message: 'A refund request for ticket <strong>#12345</strong> has been submitted for <strong>Sensuality & Essentiality</strong>.', timestamp: '1 day ago', avatar: 'https://placehold.co/40x40/213c63/ffffff?text=R', read: true, link: 'financialOverview.html' },
 

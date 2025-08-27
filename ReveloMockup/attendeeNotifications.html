@@ -149,7 +149,7 @@ function switchTab(targetId) {
                 <div class="flex items-start p-3 bg-white rounded-lg shadow-sm relative notification-item ${hoverClasses}" data-id="${notification.id}">
                     ${linkOverlay}
                     ${unreadIndicator}
-                    <img src="${avatarSrc}" onerror="this.onerror=null;this.src='https://placehold.co/40x40/cccccc/ffffff?text=N';" alt="${notification.type} Icon" class="w-10 h-10 rounded-full object-cover mr-3">
+                    <img src="${avatarSrc}" onerror="this.onerror=null;this.src='https://placehold.co/40x40/cccccc/ffffff?text=N';" alt="${notification.type} Icon" class="w-10 h-10 rounded-full object-cover shadow-md mr-3">
                     <div class="flex-1">
                         <p class="text-sm leading-snug group-hover:text-revelo-blue">${notification.message}</p>
                         <p class="text-xs text-gray-500 mt-1">${notification.timestamp}</p>

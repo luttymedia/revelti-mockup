@@ -432,11 +432,11 @@
                         const headers = Object.keys(rawData[0]);
                         renderTableHeaders(headers);
 
-                        allTransactions = rawData.map(row => {
+                    allTransactions = rawData.map(row => {
                             const newRow = {};
                             headers.forEach(header => {
                                 let value = row[header];
-                                if (['Promoter_Commission', 'Base', 'IVA', 'Gross_Amount', 'Fees', 'Net_Amount'].includes(header)) {
+                                if (['Promoter_Commission', 'Base', 'IVA', 'Gross_Amount', 'Fees', 'Net_Amount', 'Qty'].includes(header)) {
                                     const parsedValue = parseFloat(value);
                                     value = isNaN(parsedValue) ? 0 : parsedValue;
                                 } else if (header === 'Transaction_Date') {
@@ -447,6 +447,7 @@
                             });
                             return newRow;
                         });
+
                         
                         filteredTransactions = [...allTransactions];
                         initializeApp();
@@ -463,12 +464,12 @@
             function renderTableHeaders(headers) {
                 tableHeaderRow.innerHTML = '';
                 const displayHeaders = [
-                    'ID', 'Date', 'Type', 'Event', 'Ticket', 'Attendee', 'Promoter', 'Code',
+                    'ID', 'Date', 'Type', 'Event', 'Ticket', 'Attendee', 'Promoter', 'Code', 'Qty',
                     'Commission', 'Base', 'IVA', 'Gross', 'Fees', 'Net', 'Method', 'Status', 'PayId'
                 ];
                 const columnKeys = [
                     'Transaction_ID', 'Transaction_Date', 'Transaction_Type', 'Event_Name', 
-                    'Ticket_Type', 'Attendee_Name', 'Promoter_Name', 'Discount_Code_Used',
+                    'Ticket_Type', 'Attendee_Name', 'Promoter_Name', 'Discount_Code_Used', 'Qty',
                     'Promoter_Commission', 'Base', 'IVA', 'Gross_Amount', 'Fees', 
                     'Net_Amount', 'Payment_Method', 'Status', 'Payout_ID'
                 ];
@@ -493,6 +494,7 @@
                     tableHeaderRow.appendChild(th);
                 });
             }
+
             
             function initializeApp() {
                 if (allTransactions.length === 0) {
@@ -756,24 +758,25 @@
                 tableBody.innerHTML = paginatedItems.map(t => {
                     const cells = [
                         t.Transaction_ID, t.Transaction_Date.toLocaleDateString(), t.Transaction_Type, t.Event_Name, t.Ticket_Type, 
-                        t.Attendee_Name, t.Promoter_Name, t.Discount_Code_Used || '', formatCurrency(t.Promoter_Commission),
-                        formatCurrency(t.Base), formatCurrency(t.IVA), formatCurrency(t.Gross_Amount), 
-                        formatCurrency(t.Fees), formatCurrency(t.Net_Amount), t.Payment_Method, t.Status, t.Payout_ID
+                        t.Attendee_Name, t.Promoter_Name, t.Discount_Code_Used || '', t.Qty,
+                        formatCurrency(t.Promoter_Commission), formatCurrency(t.Base), formatCurrency(t.IVA), 
+                        formatCurrency(t.Gross_Amount), formatCurrency(t.Fees), formatCurrency(t.Net_Amount), 
+                        t.Payment_Method, t.Status, t.Payout_ID
                     ];
                     
                     const cellHtml = cells.map((cellValue, index) => {
                         let cellClass = 'p-4 whitespace-nowrap text-sm text-gray-700';
                         let content = cellValue;
                         
-                        if ([8, 9, 10, 11, 12, 13].includes(index)) {
+                        if ([9, 10, 11, 12, 13, 14].includes(index)) {
                             cellClass = 'p-4 whitespace-nowrap text-sm text-right text-gray-900 font-medium';
-                            if (index === 13) {
+                            if (index === 14) {
                                 cellClass = 'p-4 whitespace-nowrap text-sm text-right font-bold text-green-600';
                             }
                         }
                         
-                        if (index === 15) {
-                            const statusClass = t.Status === 'Completed' ? 'bg-green-100 text-green-800' : (t.Status === 'Refund' ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800');
+                        if (index === 16) {
+                            const statusClass = t.Status === 'Completed' ? 'bg-green-100 text-green-800' : (t.Status === 'Refunded' ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800');
                             content = `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusClass}">${t.Status || 'N/A'}</span>`;
                             cellClass = 'p-4 whitespace-nowrap text-sm text-center';
                         }
@@ -785,7 +788,7 @@
                 }).join('');
                 
                 if (paginatedItems.length === 0) {
-                    tableBody.innerHTML = `<tr><td colspan="17" class="text-center p-4">No transactions found for the selected filters.</td></tr>`;
+                    tableBody.innerHTML = `<tr><td colspan="18" class="text-center p-4">No transactions found for the selected filters.</td></tr>`;
                 }
             }
 
