@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revelo - Notifications</title>
+    <title>Revelti - Notifications</title>
     
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -26,7 +26,7 @@
 
         <!-- Header Section -->
         <header class="p-6 flex items-center justify-between">
-            <h1 class="text-xl font-bold revelo-blue">Notifications</h1>
+            <h1 class="text-xl font-bold revelti-blue">Notifications</h1>
             <div class="flex items-center space-x-0 flex-shrink-0">
                 <!-- Settings Access Button -->
                 <a href="notificationSettings.html" class="p-1.5 rounded-full hover:bg-gray-200" title="Notification Settings">
@@ -38,10 +38,10 @@
         <!-- Tab Navigation. The `flex-shrink-0` class prevents it from shrinking. -->
         <nav class="sticky top-12 flex-shrink-0 bg-white z-40 border-b border-gray-200">
             <div class="flex justify-around">
-                <button data-tab-target="all" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelo-blue transition duration-300">All</button>
-                <button data-tab-target="socialMedia" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelo-blue transition duration-300">Social & Media</button>
-                <button data-tab-target="eventsReminders" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelo-blue transition duration-300">Events & Reminders</button>
-                <button data-tab-target="systemAccount" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelo-blue transition duration-300">System & Account</button>
+                <button data-tab-target="all" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelti-blue transition duration-300">All</button>
+                <button data-tab-target="socialMedia" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelti-blue transition duration-300">Social & Media</button>
+                <button data-tab-target="eventsReminders" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelti-blue transition duration-300">Events & Reminders</button>
+                <button data-tab-target="systemAccount" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelti-blue transition duration-300">System & Account</button>
             </div>
         </nav>
 
@@ -51,7 +51,7 @@
 <!-- All Tab -->
 <div id="all" class="tab-content active" style="min-height: calc(100vh - 11rem);">
     <div class="text-right mb-4">
-        <button data-mark-all="all" class="text-sm font-semibold revelo-blue hover:underline">Mark all as read</button>
+        <button data-mark-all="all" class="text-sm font-semibold revelti-blue hover:underline">Mark all as read</button>
     </div>
     <div class="space-y-4"></div>
 </div>
@@ -59,7 +59,7 @@
 <!-- Social & Media Tab -->
 <div id="socialMedia" class="tab-content hidden" style="min-height: calc(100vh - 11rem);">
      <div class="text-right mb-4">
-        <button data-mark-all="socialMedia" class="text-sm font-semibold revelo-blue hover:underline">Mark all as read</button>
+        <button data-mark-all="socialMedia" class="text-sm font-semibold revelti-blue hover:underline">Mark all as read</button>
     </div>
     <div class="space-y-4"></div>
 </div>
@@ -67,7 +67,7 @@
 <!-- Events & Reminders Tab -->
 <div id="eventsReminders" class="tab-content hidden" style="min-height: calc(100vh - 11rem);">
      <div class="text-right mb-4">
-        <button data-mark-all="eventsReminders" class="text-sm font-semibold revelo-blue hover:underline">Mark all as read</button>
+        <button data-mark-all="eventsReminders" class="text-sm font-semibold revelti-blue hover:underline">Mark all as read</button>
     </div>
     <div class="space-y-4"></div>
 </div>
@@ -75,7 +75,7 @@
 <!-- System & Account Tab -->
 <div id="systemAccount" class="tab-content hidden" style="min-height: calc(100vh - 11rem);">
      <div class="text-right mb-4">
-        <button data-mark-all="systemAccount" class="text-sm font-semibold revelo-blue hover:underline">Mark all as read</button>
+        <button data-mark-all="systemAccount" class="text-sm font-semibold revelti-blue hover:underline">Mark all as read</button>
     </div>
     <div class="space-y-4"></div>
 </div>
@@ -139,7 +139,7 @@ function switchTab(targetId) {
         
 
         function createNotificationItem(notification) {
-            const unreadIndicator = notification.read ? '' : '<div class="absolute -left-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-revelo-orange rounded-full"></div>';
+            const unreadIndicator = notification.read ? '' : '<div class="absolute -left-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-revelti-orange rounded-full"></div>';
             const avatarSrc = notification.avatar || 'https://placehold.co/40x40/cccccc/ffffff?text=N';
             const isLink = notification.link;
             const sanitizedMessage = isLink ? notification.message.replace(/<[^>]*>/g, '').replace(/"/g, '&quot;') : '';
@@ -151,7 +151,7 @@ function switchTab(targetId) {
                     ${unreadIndicator}
                     <img src="${avatarSrc}" onerror="this.onerror=null;this.src='https://placehold.co/40x40/cccccc/ffffff?text=N';" alt="${notification.type} Icon" class="w-10 h-10 rounded-full object-cover shadow-md mr-3">
                     <div class="flex-1">
-                        <p class="text-sm leading-snug group-hover:text-revelo-blue">${notification.message}</p>
+                        <p class="text-sm leading-snug group-hover:text-revelti-blue">${notification.message}</p>
                         <p class="text-xs text-gray-500 mt-1">${notification.timestamp}</p>
                     </div>
                     <div class="relative z-20">
@@ -168,7 +168,7 @@ function switchTab(targetId) {
                 </div>`;
         }
 
-        let notificationsData = [ { id: 1, type: 'socialMedia', message: 'The official gallery for <strong>Sensuality & Essentiality</strong> has been updated by <strong>AMedia</strong>. Check out the new album: <strong>Workshops</strong>.', timestamp: '5m ago', avatar: 'https://placehold.co/40x40/f58220/ffffff?text=A', read: false, link: 'galleryNavigation.html' }, { id: 2, type: 'socialMedia', message: 'New photos from <strong>Barcelona Summer Fest</strong> are now available from <strong>AMedia</strong>, a Visual Creative you follow.', timestamp: '1h ago', avatar: 'https://placehold.co/40x40/f58220/ffffff?text=A', read: false }, { id: 3, type: 'socialMedia', message: '<strong>Sha Iborra</strong> has new artwork available. See their latest photos from <strong>Summer Fest 2024</strong>.', timestamp: '3h ago', avatar: 'https://placehold.co/40x40/f58220/ffffff?text=S', read: true }, { id: 4, type: 'socialMedia', message: 'The "Official Media" gallery for <strong>Sensuality 2025</strong> is now live!', timestamp: '2 days ago', avatar: 'https://placehold.co/40x40/f58220/ffffff?text=G', read: true, link: 'galleryNavigation.html' }, { id: 5, type: 'eventsReminders', message: 'New announcement for <strong>Sensuality & Essentiality</strong>: The workshop schedule has been updated.', timestamp: '10m ago', avatar: 'https://placehold.co/40x40/213c63/ffffff?text=E', read: false, link: 'eventDetail.html' }, { id: 6, type: 'eventsReminders', message: '<strong>Bachata Sensual Events</strong> has just posted a new event: <strong>Valencia Salsa Summit</strong>.', timestamp: '30m ago', avatar: 'https://placehold.co/40x40/213c63/ffffff?text=O', read: false }, { id: 7, type: 'eventsReminders', message: 'Reminder: <strong>BCN Bachata Congress</strong> starts in 1 week! View your ticket details and get ready.', timestamp: '4h ago', avatar: 'https://placehold.co/40x40/213c63/ffffff?text=R', read: true }, { id: 8, type: 'eventsReminders', message: 'Heads up! A new batch of "Sensuality Pass" tickets has been released for <strong>Sensuality & Essentiality</strong>.', timestamp: '1 day ago', avatar: 'https://placehold.co/40x40/213c63/ffffff?text=T', read: false, link: 'ticketPurchase.html' }, { id: 9, type: 'eventsReminders', message: 'The price for <strong>Madrid Bachata Masters</strong> will increase soon. Buy now to save!', timestamp: '3 days ago', avatar: 'https://placehold.co/40x40/213c63/ffffff?text=P', read: true }, { id: 10, type: 'eventsReminders', message: 'Your followed event, <strong>Seville Kizomba Immersion</strong>, is just one month away!', timestamp: '1 week ago', avatar: 'https://placehold.co/40x40/213c63/ffffff?text=C', read: true }, { id: 11, type: 'systemAccount', message: 'Your purchase is confirmed! Your ticket for <strong>Sensuality & Essentiality</strong> is now available in "My Tickets".', timestamp: '15m ago', avatar: 'https://placehold.co/40x40/cccccc/ffffff?text=S', read: false, link: 'purchaseDetails.html' }, { id: 12, type: 'systemAccount', message: 'Your review for <strong>Sensuality & Essentiality</strong> has been published. Thank you for your feedback!', timestamp: '6h ago', avatar: 'https://placehold.co/40x40/cccccc/ffffff?text=S', read: true }, { id: 13, type: 'systemAccount', message: 'Welcome to Revelo, <strong>Alex Johnson</strong>! Complete your profile by adding your favorite dance styles to get better recommendations.', timestamp: '4 days ago', avatar: 'https://placehold.co/40x40/cccccc/ffffff?text=S', read: false, link: 'attendeeDashboard.html' } ];
+        let notificationsData = [ { id: 1, type: 'socialMedia', message: 'The official gallery for <strong>Sensuality & Essentiality</strong> has been updated by <strong>AMedia</strong>. Check out the new album: <strong>Workshops</strong>.', timestamp: '5m ago', avatar: 'https://placehold.co/40x40/f58220/ffffff?text=A', read: false, link: 'galleryNavigation.html' }, { id: 2, type: 'socialMedia', message: 'New photos from <strong>Barcelona Summer Fest</strong> are now available from <strong>AMedia</strong>, a Visual Creative you follow.', timestamp: '1h ago', avatar: 'https://placehold.co/40x40/f58220/ffffff?text=A', read: false }, { id: 3, type: 'socialMedia', message: '<strong>Sha Iborra</strong> has new artwork available. See their latest photos from <strong>Summer Fest 2024</strong>.', timestamp: '3h ago', avatar: 'https://placehold.co/40x40/f58220/ffffff?text=S', read: true }, { id: 4, type: 'socialMedia', message: 'The "Official Media" gallery for <strong>Sensuality 2025</strong> is now live!', timestamp: '2 days ago', avatar: 'https://placehold.co/40x40/f58220/ffffff?text=G', read: true, link: 'galleryNavigation.html' }, { id: 5, type: 'eventsReminders', message: 'New announcement for <strong>Sensuality & Essentiality</strong>: The workshop schedule has been updated.', timestamp: '10m ago', avatar: 'https://placehold.co/40x40/213c63/ffffff?text=E', read: false, link: 'eventDetail.html' }, { id: 6, type: 'eventsReminders', message: '<strong>Bachata Sensual Events</strong> has just posted a new event: <strong>Valencia Salsa Summit</strong>.', timestamp: '30m ago', avatar: 'https://placehold.co/40x40/213c63/ffffff?text=O', read: false }, { id: 7, type: 'eventsReminders', message: 'Reminder: <strong>BCN Bachata Congress</strong> starts in 1 week! View your ticket details and get ready.', timestamp: '4h ago', avatar: 'https://placehold.co/40x40/213c63/ffffff?text=R', read: true }, { id: 8, type: 'eventsReminders', message: 'Heads up! A new batch of "Sensuality Pass" tickets has been released for <strong>Sensuality & Essentiality</strong>.', timestamp: '1 day ago', avatar: 'https://placehold.co/40x40/213c63/ffffff?text=T', read: false, link: 'ticketPurchase.html' }, { id: 9, type: 'eventsReminders', message: 'The price for <strong>Madrid Bachata Masters</strong> will increase soon. Buy now to save!', timestamp: '3 days ago', avatar: 'https://placehold.co/40x40/213c63/ffffff?text=P', read: true }, { id: 10, type: 'eventsReminders', message: 'Your followed event, <strong>Seville Kizomba Immersion</strong>, is just one month away!', timestamp: '1 week ago', avatar: 'https://placehold.co/40x40/213c63/ffffff?text=C', read: true }, { id: 11, type: 'systemAccount', message: 'Your purchase is confirmed! Your ticket for <strong>Sensuality & Essentiality</strong> is now available in "My Tickets".', timestamp: '15m ago', avatar: 'https://placehold.co/40x40/cccccc/ffffff?text=S', read: false, link: 'purchaseDetails.html' }, { id: 12, type: 'systemAccount', message: 'Your review for <strong>Sensuality & Essentiality</strong> has been published. Thank you for your feedback!', timestamp: '6h ago', avatar: 'https://placehold.co/40x40/cccccc/ffffff?text=S', read: true }, { id: 13, type: 'systemAccount', message: 'Welcome to Revelti, <strong>Alex Johnson</strong>! Complete your profile by adding your favorite dance styles to get better recommendations.', timestamp: '4 days ago', avatar: 'https://placehold.co/40x40/cccccc/ffffff?text=S', read: false, link: 'attendeeDashboard.html' } ];
 
         function parseTimestamp(timestampStr) { const lowerCaseStr = timestampStr.toLowerCase(); if (lowerCaseStr === 'yesterday') return 1440; const num = parseInt(lowerCaseStr, 10); if (isNaN(num)) return Infinity; if (lowerCaseStr.includes('week')) return num * 10080; if (lowerCaseStr.includes('day')) return num * 1440; if (lowerCaseStr.includes('h')) return num * 60; if (lowerCaseStr.includes('m')) return num; return Infinity; }
         function markOneAsRead(id) { const notification = notificationsData.find(n => n.id === id); if (notification) { notification.read = true; renderNotifications(); } }

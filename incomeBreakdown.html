@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revelo - Income Breakdown</title>
+    <title>Revelti - Income Breakdown</title>
     
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -40,10 +40,10 @@
 
         <header class="flex flex-col md:flex-row justify-between items-center mb-8">
             <div>
-                <h1 class="text-3xl font-extrabold revelo-blue">Income Breakdown</h1>
+                <h1 class="text-3xl font-extrabold revelti-blue">Income Breakdown</h1>
                 <p class="text-gray-500">Analyze your event revenue streams.</p>
             </div>
-            <a href="organizerDashboard.html" class="mt-4 md:mt-0 px-4 py-2 bg-revelo-blue text-white rounded-lg hover:bg-blue-800 transition duration-300 flex items-center justify-center">
+            <a href="organizerDashboard.html" class="mt-4 md:mt-0 px-4 py-2 bg-revelti-blue text-white rounded-lg hover:bg-blue-800 transition duration-300 flex items-center justify-center">
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                 Organizer Dashboard
             </a>
@@ -175,7 +175,7 @@
                 $('#kpi-cards').html(`
                     <div class="bg-white p-6 rounded-lg border border-gray-200">
                         <h3 class="text-sm font-semibold text-gray-500 uppercase">Total Income</h3>
-                        <p class="text-3xl font-extrabold revelo-blue mt-2">${formatCurrency(totalIncome)}</p>
+                        <p class="text-3xl font-extrabold revelti-blue mt-2">${formatCurrency(totalIncome)}</p>
                     </div>
                     <div class="bg-white p-6 rounded-lg border border-gray-200">
                         <h3 class="text-sm font-semibold text-gray-500 uppercase">Total Net Profit</h3>
@@ -183,7 +183,7 @@
                     </div>
                     <div class="bg-white p-6 rounded-lg border border-gray-200">
                         <h3 class="text-sm font-semibold text-gray-500 uppercase">Average Income / Event</h3>
-                        <p class="text-3xl font-extrabold revelo-blue mt-2">${formatCurrency(avgIncome)}</p>
+                        <p class="text-3xl font-extrabold revelti-blue mt-2">${formatCurrency(avgIncome)}</p>
                     </div>
                 `);
             };
@@ -304,7 +304,7 @@
                                 optionsContainer.find('.select-all').prop('checked', allChecked);
 
 
-                                modal.append(`<div class="mt-2 flex justify-end space-x-2"><button class="cancel-filter-btn bg-gray-200 text-gray-700 px-3 py-1 rounded-md text-sm">Cancel</button><button class="apply-filter-btn bg-revelo-blue text-white px-3 py-1 rounded-md text-sm">Apply</button></div>`);
+                                modal.append(`<div class="mt-2 flex justify-end space-x-2"><button class="cancel-filter-btn bg-gray-200 text-gray-700 px-3 py-1 rounded-md text-sm">Cancel</button><button class="apply-filter-btn bg-revelti-blue text-white px-3 py-1 rounded-md text-sm">Apply</button></div>`);
                                 modal.show();
 
                                 modal.find('.select-all').on('change', function () {
@@ -328,7 +328,7 @@
                         });
 
                         // Add Reset Filters button next to the search field
-                        var resetButton = $('<button id="resetFilters" class="dt-button bg-revelo-orange hover:bg-orange-600" style="margin-left: 10px;">Reset Filters</button>')
+                        var resetButton = $('<button id="resetFilters" class="dt-button bg-revelti-orange hover:bg-orange-600" style="margin-left: 10px;">Reset Filters</button>')
                             .on('click', function() {
                                 tableInstance.search('').columns().search('').draw();
                                 $('.dataTables_filter input').val('');

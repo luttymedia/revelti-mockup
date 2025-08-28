@@ -196,14 +196,14 @@ function renderStylesInModal() {
 
     const allStyles = ['Bachata Sensual', 'Salsa On1', 'Kizomba', 'Zouk', 'Bachata Fusion', 'Salsa On2'];
     // [Unverified] Fetch selected styles from a global variable or storage
-    const selectedStyles = window.reveloSelectedStyles || ['Bachata Sensual', 'Kizomba']; 
+    const selectedStyles = window.reveltiSelectedStyles || ['Bachata Sensual', 'Kizomba']; 
 
     container.innerHTML = '';
     allStyles.forEach(style => {
         const isChecked = selectedStyles.includes(style);
         const label = document.createElement('label');
         label.className = 'flex justify-between items-center p-2 rounded-md hover:bg-gray-100 cursor-pointer';
-        label.innerHTML = `<span class="text-gray-700">${style}</span><input type="checkbox" value="${style}" class="h-5 w-5 rounded border-gray-300 text-revelo-orange focus:ring-revelo-orange" ${isChecked ? 'checked' : ''}>`;
+        label.innerHTML = `<span class="text-gray-700">${style}</span><input type="checkbox" value="${style}" class="h-5 w-5 rounded border-gray-300 text-revelti-orange focus:ring-revelti-orange" ${isChecked ? 'checked' : ''}>`;
         container.appendChild(label);
     });
 }
@@ -213,13 +213,13 @@ function updateSelectedStylesDisplay(newStyles) {
     if (!stylesDisplay) return;
 
     // [Unverified] This would typically come from a server or user data
-    window.reveloSelectedStyles = newStyles || window.reveloSelectedStyles || ['Bachata Sensual', 'Kizomba'];
-    const selectedStyles = window.reveloSelectedStyles;
+    window.reveltiSelectedStyles = newStyles || window.reveltiSelectedStyles || ['Bachata Sensual', 'Kizomba'];
+    const selectedStyles = window.reveltiSelectedStyles;
 
     stylesDisplay.innerHTML = '';
     selectedStyles.forEach(style => {
         const span = document.createElement('span');
-        span.className = 'bg-revelo-orange text-white text-sm font-semibold px-3 py-1 rounded-full';
+        span.className = 'bg-revelti-orange text-white text-sm font-semibold px-3 py-1 rounded-full';
         span.textContent = style;
         stylesDisplay.appendChild(span);
     });
@@ -287,7 +287,7 @@ function initializeFooter() {
     // Remove active class from all links first to ensure only one is active
     footerLinks.forEach(link => {
         link.classList.remove('footer-link-active');
-        link.classList.remove('revelo-blue'); // Ensure revelo-blue is removed
+        link.classList.remove('revelti-blue'); // Ensure revelti-blue is removed
         link.classList.add('text-gray-400'); // Add the gray color class
     });
 
@@ -299,7 +299,7 @@ function initializeFooter() {
         if (currentPath.endsWith(linkHref)) {
             link.classList.add('footer-link-active');
             link.classList.remove('text-gray-400');
-            link.classList.add('revelo-blue');
+            link.classList.add('revelti-blue');
         }
     });
 }

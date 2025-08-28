@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revelo - Ticket Management</title>
+    <title>Revelti - Ticket Management</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -27,14 +27,14 @@
         <header class="flex flex-col md:flex-row justify-between items-center mb-6">
             <div>
                 <div class="flex items-center">
-                    <h1 class="text-3xl font-extrabold revelo-blue">Sensuality & Essentiality</h1>
+                    <h1 class="text-3xl font-extrabold revelti-blue">Sensuality & Essentiality</h1>
                     <span class="ml-4 text-sm font-bold bg-green-100 text-green-800 px-3 py-1 rounded-full whitespace-nowrap">On Sale</span>
                 </div>
                 <p class="text-gray-600">Ticket Management Dashboard</p>
             </div>
             <div class="flex space-x-2 mt-4 md:mt-0">
                 <a href="eventDetailOrganizerView.html" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition duration-300">View Public Page</a>
-                <a href="eventLiveEdit.html" class="px-4 py-2 bg-revelo-blue text-white rounded-lg hover:bg-blue-800 transition duration-300">Live Edit Page</a>
+                <a href="eventLiveEdit.html" class="px-4 py-2 bg-revelti-blue text-white rounded-lg hover:bg-blue-800 transition duration-300">Live Edit Page</a>
             </div>
         </header>
         
@@ -42,7 +42,7 @@
             <main class="p-6 md:p-8">
                 <div class="space-y-8">
                     <details open>
-                        <summary class="flex justify-between items-center cursor-pointer font-bold text-xl revelo-blue">Ticket Types & Pricing <svg class="w-5 h-5 transform transition-transform accordion-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
+                        <summary class="flex justify-between items-center cursor-pointer font-bold text-xl revelti-blue">Ticket Types & Pricing <svg class="w-5 h-5 transform transition-transform accordion-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
                         <div class="mt-4">
                             <div class="overflow-x-auto">
                                 <table class="min-w-full bg-white">
@@ -59,12 +59,12 @@
                                         </tbody>
                                 </table>
                             </div>
-                            <button onclick="openTicketModal()" class="w-full md:w-auto mt-4 px-4 py-2 font-bold bg-revelo-blue text-white rounded-lg hover:bg-blue-800">Create New Ticket Type</button>
+                            <button onclick="openTicketModal()" class="w-full md:w-auto mt-4 px-4 py-2 font-bold bg-revelti-blue text-white rounded-lg hover:bg-blue-800">Create New Ticket Type</button>
                         </div>
                     </details>
                     
                     <details>
-                        <summary class="flex justify-between items-center cursor-pointer font-bold text-xl revelo-blue">Discount Codes <svg class="w-5 h-5 transform transition-transform accordion-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
+                        <summary class="flex justify-between items-center cursor-pointer font-bold text-xl revelti-blue">Discount Codes <svg class="w-5 h-5 transform transition-transform accordion-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
                         <div class="mt-4">
                              <div class="overflow-x-auto">
                                 <table class="min-w-full bg-white border">
@@ -73,7 +73,7 @@
                                         </tbody>
                                 </table>
                             </div>
-                            <button onclick="openCodeModal()" class="w-full md:w-auto mt-4 px-4 py-2 font-bold bg-revelo-blue text-white rounded-lg hover:bg-blue-800">Generate New Code</button>
+                            <button onclick="openCodeModal()" class="w-full md:w-auto mt-4 px-4 py-2 font-bold bg-revelti-blue text-white rounded-lg hover:bg-blue-800">Generate New Code</button>
                         </div>
                     </details>
                 </div>
@@ -86,9 +86,9 @@
     <div id="ticket-modal" class="modal fixed inset-0 flex items-center justify-center p-4 hidden z-50">
         <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col">
             <header class="p-4 border-b flex justify-between items-center">
-                <h3 id="ticket-modal-title" class="font-bold text-xl revelo-blue">Create New Ticket Type</h3>
+                <h3 id="ticket-modal-title" class="font-bold text-xl revelti-blue">Create New Ticket Type</h3>
                 <div class="flex items-center space-x-2">
-                    <button onclick="openModal('help-modal')" class="text-gray-400 hover:text-revelo-orange">
+                    <button onclick="openModal('help-modal')" class="text-gray-400 hover:text-revelti-orange">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
                     </button>
                     <button onclick="closeTicketManagementModal('ticket-modal')" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
@@ -130,7 +130,7 @@
                     <div><label class="font-semibold text-gray-700">Base Price (€)</label><input id="base-price" type="number" placeholder="The first price tier" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
                     <div id="pricing-rules-container" class="space-y-2">
                         </div>
-                    <button type="button" onclick="addPricingRule()" class="text-sm font-semibold revelo-blue hover:underline">+ Add Pricing Rule</button>
+                    <button type="button" onclick="addPricingRule()" class="text-sm font-semibold revelti-blue hover:underline">+ Add Pricing Rule</button>
                     
                     <div class="pt-4 border-t">
                         <label class="flex items-center text-sm">
@@ -149,7 +149,7 @@
                 <button id="delete-ticket-btn" onclick="deleteTicket()" class="px-4 py-2 font-bold bg-red-600 text-white rounded-lg hidden">Delete</button>
                 <div class="flex space-x-2">
                     <button onclick="closeTicketManagementModal('ticket-modal')" class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg">Cancel</button>
-                    <button onclick="saveTicket()" class="px-4 py-2 font-bold bg-revelo-blue text-white rounded-lg">Save Ticket</button>
+                    <button onclick="saveTicket()" class="px-4 py-2 font-bold bg-revelti-blue text-white rounded-lg">Save Ticket</button>
                 </div>
             </footer>
         </div>
@@ -158,14 +158,14 @@
     <div id="code-modal" class="modal fixed inset-0 flex items-center justify-center p-4 hidden z-50">
         <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col">
             <header class="p-4 border-b flex justify-between items-center">
-                 <h3 id="code-modal-title" class="font-bold text-xl revelo-blue">Generate New Discount Code</h3>
+                 <h3 id="code-modal-title" class="font-bold text-xl revelti-blue">Generate New Discount Code</h3>
                  <button onclick="closeTicketManagementModal('code-modal')" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
             </header>
             <main class="p-6 space-y-4 overflow-y-auto">
                 <input type="hidden" id="editing-code-id">
                 <div id="edit-code-note" class="hidden text-sm bg-yellow-100 text-yellow-800 p-3 rounded-lg">For active codes, only the number of uses and commission structure are editable.</div>
                 
-                <h4 class="font-semibold text-lg revelo-blue">Discount Details</h4>
+                <h4 class="font-semibold text-lg revelti-blue">Discount Details</h4>
                 <div><label class="font-semibold text-gray-700">Discount Code</label><input id="code-text" type="text" placeholder="e.g., EARLYBIRD15" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
                  <div><label class="font-semibold text-gray-700">Promoter Name (Optional)</label><input id="promoter-name" type="text" placeholder="e.g., John Doe" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
                 <div class="grid grid-cols-2 gap-4">
@@ -194,7 +194,7 @@
                 </div>
 
                 <div class="pt-4 border-t mt-4">
-                    <h4 class="font-semibold text-lg revelo-blue">Promoter Commission</h4>
+                    <h4 class="font-semibold text-lg revelti-blue">Promoter Commission</h4>
                     <p class="text-sm text-gray-600 mb-2">Set a commission for the promoter for each ticket sold with this code.</p>
                     <div class="flex space-x-4 mt-2">
                         <label class="flex items-center"><input type="radio" name="commission-strategy" value="simple" class="mr-2" onchange="toggleCommissionStrategy(this.value)" checked> Simple Commission</label>
@@ -210,14 +210,14 @@
                     <div><label class="font-semibold text-gray-700">Base Commission Rate (€)</label><input id="base-commission" type="number" placeholder="Commission for the first tickets" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
                     <div id="commission-tiers-container" class="space-y-2">
                         </div>
-                    <button type="button" onclick="addCommissionTier()" class="text-sm font-semibold revelo-blue hover:underline">+ Add Commission Tier</button>
+                    <button type="button" onclick="addCommissionTier()" class="text-sm font-semibold revelti-blue hover:underline">+ Add Commission Tier</button>
                 </div>
 
             </main>
             <footer class="p-4 border-t flex justify-end bg-gray-50">
                 <div class="flex space-x-2">
                     <button onclick="closeTicketManagementModal('code-modal')" class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg">Cancel</button>
-                    <button onclick="saveCode()" class="px-4 py-2 font-bold bg-revelo-blue text-white rounded-lg">Save Code</button>
+                    <button onclick="saveCode()" class="px-4 py-2 font-bold bg-revelti-blue text-white rounded-lg">Save Code</button>
                 </div>
             </footer>
         </div>
@@ -227,11 +227,11 @@
     <div id="help-modal" class="modal fixed inset-0 flex items-center justify-center p-4 hidden z-50" style="z-index: 60;">
         <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col">
              <header class="p-4 border-b flex justify-between items-center">
-                <h3 class="font-bold text-xl revelo-blue">Ticket Creation Guide</h3>
+                <h3 class="font-bold text-xl revelti-blue">Ticket Creation Guide</h3>
                 <button onclick="closeTicketManagementModal('help-modal')" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
             </header>
             <main class="p-6 space-y-4 text-gray-700 overflow-y-auto">
-                <h4 class="font-bold text-lg revelo-blue">Ticket Status</h4>
+                <h4 class="font-bold text-lg revelti-blue">Ticket Status</h4>
                 <p>A ticket's status controls its visibility and availability on your public event page.</p>
                 <ul class="list-disc list-inside space-y-1 pl-2">
                     <li><b>On Sale:</b> The ticket is live and can be purchased immediately.</li>
@@ -239,14 +239,14 @@
                     <li><b>Scheduled:</b> The ticket will automatically become "On Sale" at a future date you specify.</li>
                 </ul>
 
-                <h4 class="font-bold text-lg revelo-blue pt-4 border-t mt-4">Pricing Strategy</h4>
+                <h4 class="font-bold text-lg revelti-blue pt-4 border-t mt-4">Pricing Strategy</h4>
                 <p>Choose how your ticket's price is determined.</p>
                 <ul class="list-disc list-inside space-y-1 pl-2">
                     <li><b>Simple Price:</b> The ticket has one fixed price that does not change.</li>
                     <li><b>Dynamic Pricing:</b> The ticket price changes automatically based on rules you set. This is perfect for early-bird discounts or creating urgency.</li>
                 </ul>
 
-                <h4 class="font-bold text-lg revelo-blue pt-4 border-t mt-4">Understanding Dynamic Pricing</h4>
+                <h4 class="font-bold text-lg revelti-blue pt-4 border-t mt-4">Understanding Dynamic Pricing</h4>
                 <p>When you select Dynamic Pricing, you set a <b>Base Price</b> and then add <b>Pricing Rules</b>. Each rule defines a future price increase.</p>
                 <p><b>Example:</b></p>
                 <div class="bg-gray-50 p-3 rounded-md border text-sm">
@@ -256,7 +256,7 @@
                 </div>
                 <p class="mt-2">This setup means the ticket will cost €170 initially, then automatically jump to €190 on September 2nd, and finally to €220 on October 2nd.</p>
             
-                <h4 class="font-bold text-lg revelo-blue pt-4 border-t mt-4">Display Final Price (Strikethrough)</h4>
+                <h4 class="font-bold text-lg revelti-blue pt-4 border-t mt-4">Display Final Price (Strikethrough)</h4>
                 <p>This feature shows a higher, "final" price with a strikethrough next to the current price, highlighting the discount for buyers (e.g., <span class="line-through">€220.00</span> €190.00).</p>
                 <ul class="list-disc list-inside space-y-1 pl-2">
                     <li><b>By default</b>, the system automatically uses the highest price from your dynamic rules as the final price.</li>
@@ -379,7 +379,7 @@
                 const row = document.createElement('tr');
                 let priceDisplay = formatCurrency(getCurrentPrice(ticket));
                 if (ticket.pricing.strategy === 'dynamic') {
-                    priceDisplay += ' <span class="text-xs text-revelo-orange font-bold">⚡ Dynamic</span>';
+                    priceDisplay += ' <span class="text-xs text-revelti-orange font-bold">⚡ Dynamic</span>';
                 }
 
                 row.innerHTML = `
@@ -391,7 +391,7 @@
                     <td class="px-4 py-3 align-top">${ticket.sold} / ${ticket.quantity}</td>
                     <td class="px-4 py-3 align-top">${getStatusBadge(ticket)}</td>
                     <td class="px-4 py-3 text-right align-top">
-                        <button onclick="openTicketModal(${ticket.id})" class="text-sm font-semibold revelo-blue">Edit</button>
+                        <button onclick="openTicketModal(${ticket.id})" class="text-sm font-semibold revelti-blue">Edit</button>
                     </td>
                 `;
                 tableBody.appendChild(row);
@@ -443,7 +443,7 @@
                 
                 let commissionDisplay = formatCurrency(getCurrentCommission(code));
                 if (code.commission.strategy === 'tiered') {
-                    commissionDisplay += ' <span class="text-xs text-revelo-orange font-bold">⚡ Tiered</span>';
+                    commissionDisplay += ' <span class="text-xs text-revelti-orange font-bold">⚡ Tiered</span>';
                 }
 
                 const applicableTicketsHtml = code.applicableTicketIds.length > 0
@@ -465,7 +465,7 @@
                     <td class="px-4 py-3 align-top">${code.claimed} / ${code.uses}</td>
                     <td class="px-4 py-3 align-top">${getCodeStatusBadge(code.status)}</td>
                     <td class="px-4 py-3 text-right align-top">
-                        <button onclick="openCodeModal(${code.id})" class="text-sm font-semibold revelo-blue">Edit</button>
+                        <button onclick="openCodeModal(${code.id})" class="text-sm font-semibold revelti-blue">Edit</button>
                     </td>
                 `;
                 tableBody.appendChild(row);

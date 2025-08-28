@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revelo - Create New Event</title>
+    <title>Revelti - Create New Event</title>
     
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -25,10 +25,10 @@
 
                 <header class="flex flex-col md:flex-row justify-between items-center mb-8">
             <div>
-                <h1 class="text-3xl font-extrabold revelo-blue">Create a New Event</h1>
+                <h1 class="text-3xl font-extrabold revelti-blue">Create a New Event</h1>
                 <p class="text-gray-500">Follow the steps to get your event ready for the public.</p>
             </div>
-            <a href="organizerDashboard.html" class="px-4 py-2 bg-revelo-blue text-white rounded-lg hover:bg-blue-800 transition duration-300 flex items-center justify-center">
+            <a href="organizerDashboard.html" class="px-4 py-2 bg-revelti-blue text-white rounded-lg hover:bg-blue-800 transition duration-300 flex items-center justify-center">
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                 Organizer Dashboard
             </a>
@@ -40,8 +40,8 @@
             <div class="p-6 border-b border-gray-200">
                 <div class="flex justify-between items-center">
                     <div id="step-1-indicator" onclick="jumpToStep(1)" class="step-indicator active text-center cursor-pointer">
-                        <div class="w-8 h-8 mx-auto rounded-full bg-revelo-blue text-white flex items-center justify-center font-bold">1</div>
-                        <p class="text-xs mt-1 font-semibold revelo-blue">Core Details</p>
+                        <div class="w-8 h-8 mx-auto rounded-full bg-revelti-blue text-white flex items-center justify-center font-bold">1</div>
+                        <p class="text-xs mt-1 font-semibold revelti-blue">Core Details</p>
                     </div>
                     <div class="flex-1 h-px bg-gray-300 mx-4"></div>
                     <div id="step-2-indicator" onclick="jumpToStep(2)" class="step-indicator text-center">
@@ -81,7 +81,7 @@
 
                     <!-- Step 2: Description & Media -->
                     <div id="step-2" class="step-content hidden space-y-6">
-                        <div><label class="font-semibold text-gray-700">Promotional Media</label><p class="text-sm text-gray-500">Upload assets that will be shown on the public event page.</p><div class="mt-2 p-6 border-2 border-dashed border-gray-300 rounded-lg text-center"><p>Drag & drop files here or <button class="font-semibold revelo-blue">browse files</button></p></div></div>
+                        <div><label class="font-semibold text-gray-700">Promotional Media</label><p class="text-sm text-gray-500">Upload assets that will be shown on the public event page.</p><div class="mt-2 p-6 border-2 border-dashed border-gray-300 rounded-lg text-center"><p>Drag & drop files here or <button class="font-semibold revelti-blue">browse files</button></p></div></div>
                         <div><label class="font-semibold text-gray-700">Event Description</label><textarea class="w-full p-2 border border-gray-300 rounded-md mt-1" rows="6" placeholder="Tell attendees all about your event..."></textarea></div>
                         <div><label class="font-semibold text-gray-700">Artists & Instructors</label><input type="text" placeholder="e.g., Korke & Judith, Alonso & Noelia (comma separated)" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
                         <div><label class="font-semibold text-gray-700">Tags</label><input type="text" placeholder="e.g., Bachata, Salsa, Zouk (comma separated)" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
@@ -94,7 +94,7 @@
                         
                         <!-- Ticket Creation Form -->
                         <div id="ticket-creation-form" class="p-4 border rounded-lg bg-gray-50 space-y-4">
-                            <h3 id="ticket-form-title" class="font-bold text-lg revelo-blue">Add New Ticket Type</h3>
+                            <h3 id="ticket-form-title" class="font-bold text-lg revelti-blue">Add New Ticket Type</h3>
                             <input type="hidden" id="editing-ticket-id">
                             <div><label class="font-semibold text-gray-700">Ticket Name</label><input id="ticket-name" type="text" placeholder="e.g., Weekend Pass" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -128,7 +128,7 @@
                             <div id="dynamic-price-view" class="hidden space-y-4">
                                 <div><label class="font-semibold text-gray-700">Base Price (€)</label><input id="base-price" type="number" placeholder="The first price tier" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
                                 <div id="pricing-rules-container" class="space-y-2"></div>
-                                <button type="button" onclick="addPricingRule()" class="text-sm font-semibold revelo-blue hover:underline">+ Add Pricing Rule</button>
+                                <button type="button" onclick="addPricingRule()" class="text-sm font-semibold revelti-blue hover:underline">+ Add Pricing Rule</button>
                                 
                                 <div class="pt-4 border-t">
                                     <label class="flex items-center text-sm">
@@ -143,7 +143,7 @@
                             </div>
                              <div class="flex justify-end space-x-2 pt-4">
                                 <button id="cancel-edit-btn" onclick="resetTicketForm()" class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg hidden">Cancel Edit</button>
-                                <button onclick="saveTicket()" class="px-4 py-2 font-bold bg-revelo-blue text-white rounded-lg">Save Ticket</button>
+                                <button onclick="saveTicket()" class="px-4 py-2 font-bold bg-revelti-blue text-white rounded-lg">Save Ticket</button>
                             </div>
                         </div>
                     </div>
@@ -151,7 +151,7 @@
 
                     <!-- Step 4: Collaborators -->
                     <div id="step-4" class="step-content hidden space-y-4">
-                        <h3 class="font-bold text-lg revelo-blue">Invite Collaborators</h3>
+                        <h3 class="font-bold text-lg revelti-blue">Invite Collaborators</h3>
                         <p class="text-sm text-gray-600">Invite Media Creators and Promoters to your event.</p>
                         <div class="relative">
                             <label class="font-semibold text-gray-700">Search by Username or Email</label>
@@ -175,8 +175,8 @@
             <!-- Navigation Buttons -->
             <footer class="p-6 border-t border-gray-200 flex justify-between items-center">
                 <button id="prev-btn" onclick="navigateStep(-1)" class="px-6 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg hidden">Previous</button>
-                <button id="draft-btn" class="px-6 py-2 font-semibold text-revelo-blue rounded-lg hover:bg-gray-100">Save as Draft</button>
-                <button id="next-btn" onclick="navigateStep(1)" class="px-6 py-2 font-bold bg-revelo-blue text-white rounded-lg">Next Step</button>
+                <button id="draft-btn" class="px-6 py-2 font-semibold text-revelti-blue rounded-lg hover:bg-gray-100">Save as Draft</button>
+                <button id="next-btn" onclick="navigateStep(1)" class="px-6 py-2 font-bold bg-revelti-blue text-white rounded-lg">Next Step</button>
             </footer>
         </div>
     </div>
@@ -195,22 +195,22 @@
                 const circle = indicator.querySelector('div');
                 const text = indicator.querySelector('p');
                 if (i < step) {
-                    circle.classList.add('bg-revelo-blue', 'text-white');
+                    circle.classList.add('bg-revelti-blue', 'text-white');
                     circle.classList.remove('bg-gray-300', 'text-gray-600');
-                    text.classList.add('revelo-blue');
+                    text.classList.add('revelti-blue');
                     text.classList.remove('text-gray-500');
                     indicator.classList.add('cursor-pointer');
                 } else if (i === step) {
-                    circle.classList.add('bg-revelo-blue', 'text-white');
+                    circle.classList.add('bg-revelti-blue', 'text-white');
                     circle.classList.remove('bg-gray-300', 'text-gray-600');
-                    text.classList.add('revelo-blue');
+                    text.classList.add('revelti-blue');
                     text.classList.remove('text-gray-500');
                     indicator.classList.remove('cursor-pointer');
                 } else {
                     circle.classList.add('bg-gray-300', 'text-gray-600');
-                    circle.classList.remove('bg-revelo-blue', 'text-white');
+                    circle.classList.remove('bg-revelti-blue', 'text-white');
                     text.classList.add('text-gray-500');
-                    text.classList.remove('revelo-blue');
+                    text.classList.remove('revelti-blue');
                     indicator.classList.remove('cursor-pointer');
                 }
             }
@@ -346,7 +346,7 @@
             const container = document.getElementById('ticket-summary-container');
             container.innerHTML = '';
             if (eventTickets.length > 0 && container.querySelector('h3') === null) {
-                 container.innerHTML = '<h3 class="font-bold text-lg revelo-blue">Created Tickets</h3>';
+                 container.innerHTML = '<h3 class="font-bold text-lg revelti-blue">Created Tickets</h3>';
             }
             eventTickets.forEach(ticket => {
                 const summaryDiv = document.createElement('div');
@@ -357,7 +357,7 @@
                         <p class="font-semibold">${ticket.name}</p>
                         <p class="text-sm text-gray-600">Pricing: ${strategyText}</p>
                     </div>
-                    <button onclick="editTicket(${ticket.id})" class="text-sm font-semibold revelo-blue">Edit</button>
+                    <button onclick="editTicket(${ticket.id})" class="text-sm font-semibold revelti-blue">Edit</button>
                 `;
                 container.appendChild(summaryDiv);
             });

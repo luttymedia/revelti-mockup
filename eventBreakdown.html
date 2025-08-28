@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revelo - Event Breakdown</title>
+    <title>Revelti - Event Breakdown</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -44,14 +44,14 @@
         <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
             <div>
                 <div class="flex items-center">
-                    <h1 class="text-3xl font-extrabold revelo-blue">Sensuality & Essentiality</h1>
+                    <h1 class="text-3xl font-extrabold revelti-blue">Sensuality & Essentiality</h1>
                     <span class="ml-4 text-sm font-bold bg-green-100 text-green-800 px-3 py-1 rounded-full whitespace-nowrap">On Sale</span>
                 </div>
                 <p class="text-gray-600 mt-1">Insights from ticket sales, promoters, and discounts</p>
             </div>
             <div class="flex space-x-2 mt-4 md:mt-0">
                 <a href="eventDetailOrganizerView.html" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition duration-300">View Public Page</a>
-                <a href="eventLiveEdit.html" class="px-4 py-2 bg-revelo-blue text-white rounded-lg hover:bg-blue-800 transition duration-300">Live Edit Page</a>
+                <a href="eventLiveEdit.html" class="px-4 py-2 bg-revelti-blue text-white rounded-lg hover:bg-blue-800 transition duration-300">Live Edit Page</a>
             </div>
         </header>
 
@@ -91,7 +91,7 @@
                             <div class="flex items-center justify-center mb-2">
                                 <h4 class="text-md font-bold text-gray-700">Promoter Effectiveness</h4>
                                 <button class="info-btn ml-2" data-modal="promoterEffectivenessInfoModal">
-                                    <svg class="w-5 h-5 text-gray-400 hover:text-revelo-blue" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                                    <svg class="w-5 h-5 text-gray-400 hover:text-revelti-blue" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
                                 </button>
                             </div>
                             <canvas id="promoterEffectivenessChart"></canvas>
@@ -357,9 +357,9 @@
             const totalTickets = mainEventData.reduce((sum, d) => sum + d.qtySold, 0);
             const totalRevenue = mainEventData.reduce((sum, d) => sum + d.total, 0);
             $('#sales-kpis').html(`
-                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">Total Tickets Sold</h3><p class="text-3xl font-bold revelo-blue">${totalTickets}</p></div>
-                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">Total Revenue</h3><p class="text-3xl font-bold revelo-blue">€${totalRevenue.toLocaleString('de-DE', {minimumFractionDigits: 2})}</p></div>
-                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">Avg. Ticket Price</h3><p class="text-3xl font-bold revelo-blue">€${(totalRevenue/totalTickets || 0).toFixed(2)}</p></div>
+                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">Total Tickets Sold</h3><p class="text-3xl font-bold revelti-blue">${totalTickets}</p></div>
+                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">Total Revenue</h3><p class="text-3xl font-bold revelti-blue">€${totalRevenue.toLocaleString('de-DE', {minimumFractionDigits: 2})}</p></div>
+                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">Avg. Ticket Price</h3><p class="text-3xl font-bold revelti-blue">€${(totalRevenue/totalTickets || 0).toFixed(2)}</p></div>
             `);
             
             const salesByMonth = mainEventData.reduce((acc, d) => {
@@ -409,8 +409,8 @@
             const promoterRevenue = promoterData.reduce((s,d) => s+d.total, 0);
             
             $('#promoter-kpis').html(`
-                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">Top Promoter</h3><p class="text-3xl font-bold revelo-blue">${topPromoterName}</p></div>
-                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">Promoter Revenue</h3><p class="text-3xl font-bold revelo-blue">€${promoterRevenue.toLocaleString('de-DE', {minimumFractionDigits: 2})}</p></div>
+                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">Top Promoter</h3><p class="text-3xl font-bold revelti-blue">${topPromoterName}</p></div>
+                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">Promoter Revenue</h3><p class="text-3xl font-bold revelti-blue">€${promoterRevenue.toLocaleString('de-DE', {minimumFractionDigits: 2})}</p></div>
             `);
 
             const promoterStats = promoterData.reduce((acc, d) => {
@@ -484,8 +484,8 @@
             const totalDiscountValue = discountedTickets.reduce((sum, d) => sum + (d.discEuro * d.qtySold), 0);
 
             $('#pricing-kpis').html(`
-                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">% Sold with Discount</h3><p class="text-3xl font-bold revelo-blue">${((discountedTickets.reduce((sum, d) => sum + d.qtySold, 0) / mainEventData.reduce((sum, d) => sum + d.qtySold, 0)) * 100 || 0).toFixed(1)}%</p></div>
-                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">Total Discount Value</h3><p class="text-3xl font-bold revelo-blue">€${totalDiscountValue.toLocaleString('de-DE', {minimumFractionDigits: 2})}</p></div>
+                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">% Sold with Discount</h3><p class="text-3xl font-bold revelti-blue">${((discountedTickets.reduce((sum, d) => sum + d.qtySold, 0) / mainEventData.reduce((sum, d) => sum + d.qtySold, 0)) * 100 || 0).toFixed(1)}%</p></div>
+                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">Total Discount Value</h3><p class="text-3xl font-bold revelti-blue">€${totalDiscountValue.toLocaleString('de-DE', {minimumFractionDigits: 2})}</p></div>
             `);
 
             const priceTiers = mainEventData.reduce((acc, d) => {
@@ -686,7 +686,7 @@
                             optionsContainer.find('.select-all').prop('checked', allChecked);
 
 
-                            modal.append(`<div class="mt-2 flex justify-end space-x-2"><button class="cancel-filter-btn bg-gray-200 text-gray-700 px-3 py-1 rounded-md text-sm">Cancel</button><button class="apply-filter-btn bg-revelo-blue text-white px-3 py-1 rounded-md text-sm">Apply</button></div>`);
+                            modal.append(`<div class="mt-2 flex justify-end space-x-2"><button class="cancel-filter-btn bg-gray-200 text-gray-700 px-3 py-1 rounded-md text-sm">Cancel</button><button class="apply-filter-btn bg-revelti-blue text-white px-3 py-1 rounded-md text-sm">Apply</button></div>`);
                             modal.show();
 
                             modal.find('.select-all').on('change', function () {
@@ -710,7 +710,7 @@
                     });
 
                     // Add Reset Filters button next to the search field
-                    var resetButton = $('<button id="resetFilters" class="dt-button bg-revelo-orange hover:bg-orange-600" style="margin-left: 10px;">Reset Filters</button>')
+                    var resetButton = $('<button id="resetFilters" class="dt-button bg-revelti-orange hover:bg-orange-600" style="margin-left: 10px;">Reset Filters</button>')
                         .on('click', function() {
                             masterTable.search('').columns().search('').draw();
                             $('.dataTables_filter input').val('');

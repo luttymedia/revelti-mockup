@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revelo - Organizer Notifications</title>
+    <title>Revelti - Organizer Notifications</title>
     
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -23,7 +23,7 @@
 
         <!-- Header Section -->
         <header class="p-6 flex items-center justify-between">
-            <h1 class="text-xl font-bold revelo-blue">Organizer Notifications</h1>
+            <h1 class="text-xl font-bold revelti-blue">Organizer Notifications</h1>
             <div class="flex items-center space-x-0 flex-shrink-0">
                 <!-- Settings Access Button -->
                 <a href="organizerNotificationSettings.html" class="p-1.5 rounded-full hover:bg-gray-200" title="Organizer Notification Settings">
@@ -35,10 +35,10 @@
         <!-- Tab Navigation -->
         <nav class="sticky top-12 flex-shrink-0 bg-white z-40 border-b border-gray-200">
             <div class="flex justify-around">
-                <button data-tab-target="all" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelo-blue transition duration-300">All</button>
-                <button data-tab-target="salesPromoters" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelo-blue transition duration-300">Sales & Promoters</button>
-                <button data-tab-target="eventMedia" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelo-blue transition duration-300">Event & Media</button>
-                <button data-tab-target="systemAccount" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelo-blue transition duration-300">System & Account</button>
+                <button data-tab-target="all" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelti-blue transition duration-300">All</button>
+                <button data-tab-target="salesPromoters" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelti-blue transition duration-300">Sales & Promoters</button>
+                <button data-tab-target="eventMedia" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelti-blue transition duration-300">Event & Media</button>
+                <button data-tab-target="systemAccount" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelti-blue transition duration-300">System & Account</button>
             </div>
         </nav>
 
@@ -47,7 +47,7 @@
             <!-- All Tab -->
             <div id="all" class="tab-content">
                 <div class="text-right mb-4">
-                    <button data-mark-all="all" class="text-sm font-semibold revelo-blue hover:underline">Mark all as read</button>
+                    <button data-mark-all="all" class="text-sm font-semibold revelti-blue hover:underline">Mark all as read</button>
                 </div>
                 <div class="space-y-4"></div>
             </div>
@@ -55,7 +55,7 @@
             <!-- Sales & Promoters Tab -->
             <div id="salesPromoters" class="tab-content hidden">
                  <div class="text-right mb-4">
-                    <button data-mark-all="salesPromoters" class="text-sm font-semibold revelo-blue hover:underline">Mark all as read</button>
+                    <button data-mark-all="salesPromoters" class="text-sm font-semibold revelti-blue hover:underline">Mark all as read</button>
                 </div>
                 <div class="space-y-4"></div>
             </div>
@@ -63,7 +63,7 @@
             <!-- Event & Media Tab -->
             <div id="eventMedia" class="tab-content hidden">
                  <div class="text-right mb-4">
-                    <button data-mark-all="eventMedia" class="text-sm font-semibold revelo-blue hover:underline">Mark all as read</button>
+                    <button data-mark-all="eventMedia" class="text-sm font-semibold revelti-blue hover:underline">Mark all as read</button>
                 </div>
                 <div class="space-y-4"></div>
             </div>
@@ -71,7 +71,7 @@
             <!-- System & Account Tab -->
             <div id="systemAccount" class="tab-content hidden">
                  <div class="text-right mb-4">
-                    <button data-mark-all="systemAccount" class="text-sm font-semibold revelo-blue hover:underline">Mark all as read</button>
+                    <button data-mark-all="systemAccount" class="text-sm font-semibold revelti-blue hover:underline">Mark all as read</button>
                 </div>
                 <div class="space-y-4"></div>
             </div>
@@ -117,7 +117,7 @@
         }
 
         function createNotificationItem(notification) {
-            const unreadIndicator = notification.read ? '' : '<div class="absolute -left-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-revelo-orange rounded-full"></div>';
+            const unreadIndicator = notification.read ? '' : '<div class="absolute -left-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-revelti-orange rounded-full"></div>';
             const avatarSrc = notification.avatar || 'https://placehold.co/40x40/cccccc/ffffff?text=S';
             const isLink = notification.link;
             const sanitizedMessage = isLink ? notification.message.replace(/<[^>]*>/g, '').replace(/"/g, '&quot;') : '';
@@ -129,7 +129,7 @@
                     ${unreadIndicator}
                     <img src="${avatarSrc}" onerror="this.onerror=null;this.src='https://placehold.co/40x40/cccccc/ffffff?text=N';" alt="${notification.type} Icon" class="w-10 h-10 rounded-full object-cover shadow-md mr-3">
                     <div class="flex-1">
-                        <p class="text-sm leading-snug group-hover:text-revelo-blue">${notification.message}</p>
+                        <p class="text-sm leading-snug group-hover:text-revelti-blue">${notification.message}</p>
                         <p class="text-xs text-gray-500 mt-1">${notification.timestamp}</p>
                     </div>
                     <div class="relative z-20">
@@ -160,7 +160,7 @@
             { id: 8, type: 'eventMedia', message: 'A new question from an attendee has been posted on your event\'s FAQ page.', timestamp: '2h ago', avatar: 'https://placehold.co/40x40/213c63/ffffff?text=?', read: true, link: '#' },
 
             // System & Account
-            { id: 9, type: 'systemAccount', message: 'Welcome to Revelo, <strong>Bachata Sensual Events</strong>! Start by creating a new event or inviting collaborators.', timestamp: '15m ago', avatar: 'https://placehold.co/40x40/cccccc/ffffff?text=S', read: false, link: '#' },
+            { id: 9, type: 'systemAccount', message: 'Welcome to Revelti, <strong>Bachata Sensual Events</strong>! Start by creating a new event or inviting collaborators.', timestamp: '15m ago', avatar: 'https://placehold.co/40x40/cccccc/ffffff?text=S', read: false, link: '#' },
             { id: 10, type: 'systemAccount', message: 'New Feature Alert! You can now use the <strong>Advanced Analytics Dashboard</strong> to track your sales in real-time.', timestamp: '1 day ago', avatar: 'https://placehold.co/40x40/cccccc/ffffff?text=F', read: false, link: 'ticketBreakdown.html' },
             { id: 11, type: 'systemAccount', message: 'Your password was successfully updated. If this wasn\'t you, please contact support immediately.', timestamp: '4 days ago', avatar: 'https://placehold.co/40x40/cccccc/ffffff?text=S', read: true, link: '#' }
         ];

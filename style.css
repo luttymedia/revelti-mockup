@@ -1,5 +1,5 @@
 /* ----------------------------------
-   Revelo Webapp - Global Stylesheet
+   Revelti Webapp - Global Stylesheet
    ---------------------------------- */
 
 /* --- Base & Font Styles --- */
@@ -22,17 +22,17 @@ body {
 
 /* Footer active state */
 .footer-link-active {
-    color: #213c63; /* revelo-blue */
+    color: #213c63; /* revelti-blue */
     font-weight: 700;
 }
 
 /* --- Custom Color Palette --- */
 /* Use these classes to apply brand colors */
-.revelo-blue { color: #213c63; }
-.revelo-orange { color: #f58220; }
-.bg-revelo-blue { background-color: #213c63; }
-.bg-revelo-orange { background-color: #f58220; }
-.border-revelo-orange { border-color: #f58220; }
+.revelti-blue { color: #213c63; }
+.revelti-orange { color: #f58220; }
+.bg-revelti-blue { background-color: #213c63; }
+.bg-revelti-orange { background-color: #f58220; }
+.border-revelti-orange { border-color: #f58220; }
 
 /* --- Component Styles --- */
 
@@ -73,8 +73,8 @@ details > summary::-webkit-details-marker {
 
 /* --- Custom Styles for Organizer Pages --- */
 .organizer-tab-active {
-    border-bottom: 3px solid #213c63; /* Revelo Blue */
-    color: #213c63; /* Revelo Blue */
+    border-bottom: 3px solid #213c63; /* Revelti Blue */
+    color: #213c63; /* Revelti Blue */
     font-weight: 700;
 }
 
@@ -176,7 +176,7 @@ details[open] > summary svg.accordion-arrow {
     transition: opacity 0.3s ease-in-out; /* Fade-in transition */
 }
 /* Fix for toggle switch colors */
-.peer:checked ~ .peer-checked\:bg-revelo-orange {
+.peer:checked ~ .peer-checked\:bg-revelti-orange {
   background-color: #f58220 !important;
 }
 
@@ -281,7 +281,7 @@ th:hover .sort-indicator {
 }
 .filter-modal input[type="checkbox"] {
     margin-right: 8px;
-    accent-color: #213c63; /* revelo-blue */
+    accent-color: #213c63; /* revelti-blue */
 }
 .dt-buttons {
     display: inline-block;
@@ -308,7 +308,7 @@ details[open] .accordion-arrow {
     right: 12px;
     width: 9px;
     height: 9px;
-    background-color: #f58220; /* revelo-orange */
+    background-color: #f58220; /* revelti-orange */
     border-radius: 50%;
     border: 1px solid white;
 }
@@ -336,7 +336,7 @@ div.dt-button-background {
 /* Styles individual buttons within the dropdown */
 .dt-button-collection .dt-button {
     background: none !important;
-    color: #213c63 !important; /* revelo-blue */
+    color: #213c63 !important; /* revelti-blue */
     border: none !important;
     box-shadow: none !important;
     text-align: left;

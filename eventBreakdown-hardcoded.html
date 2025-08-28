@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revelo - Event Breakdown Hardcoded</title>
+    <title>Revelti - Event Breakdown Hardcoded</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -44,14 +44,14 @@
         <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
             <div>
                 <div class="flex items-center">
-                    <h1 class="text-3xl font-extrabold revelo-blue">Sensuality & Essentiality</h1>
+                    <h1 class="text-3xl font-extrabold revelti-blue">Sensuality & Essentiality</h1>
                     <span class="ml-4 text-sm font-bold bg-green-100 text-green-800 px-3 py-1 rounded-full whitespace-nowrap">On Sale</span>
                 </div>
                 <p class="text-gray-600 mt-1">Insights from ticket sales, promoters, and discounts</p>
             </div>
             <div class="flex space-x-2 mt-4 md:mt-0">
                 <a href="eventDetailOrganizerView.html" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition duration-300">View Public Page</a>
-                <a href="eventLiveEdit.html" class="px-4 py-2 bg-revelo-blue text-white rounded-lg hover:bg-blue-800 transition duration-300">Live Edit Page</a>
+                <a href="eventLiveEdit.html" class="px-4 py-2 bg-revelti-blue text-white rounded-lg hover:bg-blue-800 transition duration-300">Live Edit Page</a>
             </div>
         </header>
 
@@ -91,7 +91,7 @@
                             <div class="flex items-center justify-center mb-2">
                                 <h4 class="text-md font-bold text-gray-700">Promoter Effectiveness</h4>
                                 <button class="info-btn ml-2" data-modal="promoterEffectivenessInfoModal">
-                                    <svg class="w-5 h-5 text-gray-400 hover:text-revelo-blue" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                                    <svg class="w-5 h-5 text-gray-400 hover:text-revelti-blue" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
                                 </button>
                             </div>
                             <canvas id="promoterEffectivenessChart"></canvas>
@@ -181,9 +181,9 @@
     </div>
     
     <!-- Filter Modals -->
-    <div id="eventFilterModal" class="modal-overlay"><div class="modal-content"><button class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button><h2 class="text-xl font-bold mb-4">Filter by Event</h2><div id="eventFilterOptions"></div><button class="apply-filter mt-4 bg-revelo-blue text-white w-full py-2 rounded">Apply</button></div></div>
-    <div id="ticketTypeFilterModal" class="modal-overlay"><div class="modal-content"><button class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button><h2 class="text-xl font-bold mb-4">Filter by Ticket Type</h2><div id="ticketTypeFilterOptions"></div><button class="apply-filter mt-4 bg-revelo-blue text-white w-full py-2 rounded">Apply</button></div></div>
-    <div id="promoterFilterModal" class="modal-overlay"><div class="modal-content"><button class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button><h2 class="text-xl font-bold mb-4">Filter by Promoter</h2><div id="promoterFilterOptions"></div><button class="apply-filter mt-4 bg-revelo-blue text-white w-full py-2 rounded">Apply</button></div></div>
+    <div id="eventFilterModal" class="modal-overlay"><div class="modal-content"><button class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button><h2 class="text-xl font-bold mb-4">Filter by Event</h2><div id="eventFilterOptions"></div><button class="apply-filter mt-4 bg-revelti-blue text-white w-full py-2 rounded">Apply</button></div></div>
+    <div id="ticketTypeFilterModal" class="modal-overlay"><div class="modal-content"><button class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button><h2 class="text-xl font-bold mb-4">Filter by Ticket Type</h2><div id="ticketTypeFilterOptions"></div><button class="apply-filter mt-4 bg-revelti-blue text-white w-full py-2 rounded">Apply</button></div></div>
+    <div id="promoterFilterModal" class="modal-overlay"><div class="modal-content"><button class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button><h2 class="text-xl font-bold mb-4">Filter by Promoter</h2><div id="promoterFilterOptions"></div><button class="apply-filter mt-4 bg-revelti-blue text-white w-full py-2 rounded">Apply</button></div></div>
     
     <!-- Info Modals -->
     <div id="promoterEffectivenessInfoModal" class="modal-overlay"><div class="modal-content"><button class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button><h2 class="text-xl font-bold mb-4">What is Promoter Effectiveness?</h2><p class="text-gray-600">This chart helps you evaluate your promoters. Each bubble is a promoter. <br><br><b>How far right a bubble is:</b> Shows how many tickets they sold. <br><b>How high up a bubble is:</b> Shows the average price of the tickets they sold. <br><b>The size of the bubble:</b> Shows the total revenue they generated. <br><br>Ideal promoters are high up, far to the right, and have a large bubble.</p></div></div>
@@ -330,9 +330,9 @@
             const totalTickets = mainEventData.reduce((sum, d) => sum + d.qtySold, 0);
             const totalRevenue = mainEventData.reduce((sum, d) => sum + d.total, 0);
             $('#sales-kpis').html(`
-                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">Total Tickets Sold</h3><p class="text-3xl font-bold revelo-blue">${totalTickets}</p></div>
-                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">Total Revenue</h3><p class="text-3xl font-bold revelo-blue">€${totalRevenue.toLocaleString('de-DE', {minimumFractionDigits: 2})}</p></div>
-                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">Avg. Ticket Price</h3><p class="text-3xl font-bold revelo-blue">€${(totalRevenue/totalTickets).toFixed(2)}</p></div>
+                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">Total Tickets Sold</h3><p class="text-3xl font-bold revelti-blue">${totalTickets}</p></div>
+                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">Total Revenue</h3><p class="text-3xl font-bold revelti-blue">€${totalRevenue.toLocaleString('de-DE', {minimumFractionDigits: 2})}</p></div>
+                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">Avg. Ticket Price</h3><p class="text-3xl font-bold revelti-blue">€${(totalRevenue/totalTickets).toFixed(2)}</p></div>
             `);
             
             const salesByMonth = mainEventData.reduce((acc, d) => {
@@ -375,8 +375,8 @@
             const promoterRevenue = promoterData.reduce((s,d) => s+d.total, 0);
             
             $('#promoter-kpis').html(`
-                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">Top Promoter</h3><p class="text-3xl font-bold revelo-blue">${topPromoterName}</p></div>
-                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">Promoter Revenue</h3><p class="text-3xl font-bold revelo-blue">€${promoterRevenue.toLocaleString('de-DE', {minimumFractionDigits: 2})}</p></div>
+                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">Top Promoter</h3><p class="text-3xl font-bold revelti-blue">${topPromoterName}</p></div>
+                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">Promoter Revenue</h3><p class="text-3xl font-bold revelti-blue">€${promoterRevenue.toLocaleString('de-DE', {minimumFractionDigits: 2})}</p></div>
             `);
 
             const promoterStats = promoterData.reduce((acc, d) => {
@@ -452,8 +452,8 @@
             }, 0);
 
             $('#pricing-kpis').html(`
-                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">% Sold with Discount</h3><p class="text-3xl font-bold revelo-blue">${((discountedTickets.reduce((sum, d) => sum + d.qtySold, 0) / mainEventData.reduce((sum, d) => sum + d.qtySold, 0)) * 100).toFixed(1)}%</p></div>
-                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">Total Discount Value</h3><p class="text-3xl font-bold revelo-blue">€${totalDiscountValue.toLocaleString('de-DE', {minimumFractionDigits: 2})}</p></div>
+                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">% Sold with Discount</h3><p class="text-3xl font-bold revelti-blue">${((discountedTickets.reduce((sum, d) => sum + d.qtySold, 0) / mainEventData.reduce((sum, d) => sum + d.qtySold, 0)) * 100).toFixed(1)}%</p></div>
+                <div class="bg-gray-50 p-4 rounded-lg text-center"><h3 class="text-sm font-semibold text-gray-500">Total Discount Value</h3><p class="text-3xl font-bold revelti-blue">€${totalDiscountValue.toLocaleString('de-DE', {minimumFractionDigits: 2})}</p></div>
             `);
 
             const priceTiers = mainEventData.reduce((acc, d) => {

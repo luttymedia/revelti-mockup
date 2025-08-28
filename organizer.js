@@ -230,16 +230,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 if (langEn && langEs) {
                     langEn.addEventListener('click', () => {
-                        langEn.classList.add('revelo-orange');
+                        langEn.classList.add('revelti-orange');
                         langEn.classList.remove('text-gray-700');
                         langEs.classList.add('text-gray-700');
-                        langEs.classList.remove('revelo-orange');
+                        langEs.classList.remove('revelti-orange');
                     });
                     langEs.addEventListener('click', () => {
-                        langEs.classList.add('revelo-orange');
+                        langEs.classList.add('revelti-orange');
                         langEs.classList.remove('text-gray-700');
                         langEn.classList.add('text-gray-700');
-                        langEn.classList.remove('revelo-orange');
+                        langEn.classList.remove('revelti-orange');
                     });
                 }
             }
