@@ -300,7 +300,7 @@ details[open] .accordion-arrow {
     transform: rotate(180deg);
 }
 
-/* Styles from liveEventEdit.html */
+/* Styles from eventLiveEdit.html */
 .change-dot {
     display: none;
     position: absolute;
