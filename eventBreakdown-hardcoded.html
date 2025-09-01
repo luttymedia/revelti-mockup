@@ -44,7 +44,7 @@
         <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
             <div>
                 <div class="flex items-center">
-                    <h1 class="text-3xl font-extrabold revelti-blue">Sensuality & Essentiality</h1>
+                    <h1 class="text-3xl font-extrabold revelti-blue">Bachata Geneva Festival 2026 - The Festival of Nations</h1>
                     <span class="ml-4 text-sm font-bold bg-green-100 text-green-800 px-3 py-1 rounded-full whitespace-nowrap">On Sale</span>
                 </div>
                 <p class="text-gray-600 mt-1">Insights from ticket sales, promoters, and discounts</p>
@@ -193,28 +193,28 @@
     $(document).ready(function() {
         // --- DATA SOURCE (SUMMARY) ---
         const allTicketData = [
-            // Sensuality & Essentiality (21 entries)
-            { event: 'Sensuality & Essentiality', ticketType: 'Essentiality Pass', ticketPrice: 220, qtySold: 148, discPerc: 0, discEuro: 9, discountCode: 'PROD8', promoter: 'ProDancers', total: 31228, date: '2024-08-06' },
-            { event: 'Sensuality & Essentiality', ticketType: 'Sensuality Pass', ticketPrice: 190, qtySold: 294, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 55860, date: '2024-08-09' },
-            { event: 'Sensuality & Essentiality', ticketType: 'Sensuality Pass', ticketPrice: 220, qtySold: 283, discPerc: 15, discEuro: 0, discountCode: 'PART8', promoter: 'PartyPros', total: 52921, date: '2024-08-11' },
-            { event: 'Sensuality & Essentiality', ticketType: 'J&J Amateur', ticketPrice: 10, qtySold: 190, discPerc: 0, discEuro: 6, discountCode: 'PART12', promoter: 'PartyPros', total: 760, date: '2024-08-25' },
-            { event: 'Sensuality & Essentiality', ticketType: 'Essentiality Training Track', ticketPrice: 100, qtySold: 49, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 4900, date: '2024-09-08' },
-            { event: 'Sensuality & Essentiality', ticketType: 'Essentiality Training Track', ticketPrice: 100, qtySold: 130, discPerc: 0, discEuro: 7, discountCode: 'PART20', promoter: 'PartyPros', total: 12090, date: '2024-09-25' },
-            { event: 'Sensuality & Essentiality', ticketType: 'Sensuality Training Track', ticketPrice: 100, qtySold: 271, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 27100, date: '2024-10-30' },
-            { event: 'Sensuality & Essentiality', ticketType: 'J&J Pro', ticketPrice: 15, qtySold: 221, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 3315, date: '2024-11-09' },
-            { event: 'Sensuality & Essentiality', ticketType: 'J&J Amateur', ticketPrice: 10, qtySold: 146, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 1460, date: '2024-11-11' },
-            { event: 'Sensuality & Essentiality', ticketType: 'Sensuality Training Track', ticketPrice: 100, qtySold: 293, discPerc: 15, discEuro: 0, discountCode: 'DANC20', promoter: 'DanceWorld', total: 24905, date: '2024-11-18' },
-            { event: 'Sensuality & Essentiality', ticketType: 'J&J Pro', ticketPrice: 15, qtySold: 250, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 3750, date: '2024-11-21' },
-            { event: 'Sensuality & Essentiality', ticketType: 'Sensuality Training Track', ticketPrice: 100, qtySold: 31, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 3100, date: '2024-11-23' },
-            { event: 'Sensuality & Essentiality', ticketType: 'Sensuality Training Track', ticketPrice: 100, qtySold: 218, discPerc: 15, discEuro: 0, discountCode: 'DANC16', promoter: 'DanceWorld', total: 18530, date: '2024-11-28' },
-            { event: 'Sensuality & Essentiality', ticketType: 'Essentiality Training Track', ticketPrice: 100, qtySold: 260, discPerc: 5, discEuro: 0, discountCode: 'LATI16', promoter: 'LatinStars', total: 24700, date: '2024-12-10' },
-            { event: 'Sensuality & Essentiality', ticketType: 'Sensuality Pass', ticketPrice: 190, qtySold: 194, discPerc: 10, discEuro: 0, discountCode: 'PRO09', promoter: 'ProDancers', total: 33174, date: '2024-12-20' },
-            { event: 'Sensuality & Essentiality', ticketType: 'Essentiality Pass', ticketPrice: 220, qtySold: 184, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 40480, date: '2025-02-01' },
-            { event: 'Sensuality & Essentiality', ticketType: 'Essentiality Training Track', ticketPrice: 100, qtySold: 281, discPerc: 5, discEuro: 0, discountCode: 'PRO011', promoter: 'ProDancers', total: 26695, date: '2025-02-22' },
-            { event: 'Sensuality & Essentiality', ticketType: 'J&J Pro', ticketPrice: 15, qtySold: 80, discPerc: 5, discEuro: 0, discountCode: 'LATI17', promoter: 'LatinStars', total: 1140, date: '2025-03-17' },
-            { event: 'Sensuality & Essentiality', ticketType: 'J&J Amateur', ticketPrice: 10, qtySold: 107, discPerc: 5, discEuro: 0, discountCode: 'DANC18', promoter: 'DanceWorld', total: 1016.5, date: '2025-04-06' },
-            { event: 'Sensuality & Essentiality', ticketType: 'Essentiality Pass', ticketPrice: 220, qtySold: 159, discPerc: 10, discEuro: 0, discountCode: 'SENS5', promoter: 'SensualPromo', total: 31482, date: '2025-05-11' },
-            { event: 'Sensuality & Essentiality', ticketType: 'Sensuality Training Track', ticketPrice: 100, qtySold: 275, discPerc: 5, discEuro: 0, discountCode: 'PRO011', promoter: 'ProDancers', total: 26125, date: '2025-07-26' },
+            // Bachata Geneva Festival 2026 - The Festival of Nations (21 entries)
+            { event: 'Bachata Geneva Festival 2026 - The Festival of Nations', ticketType: 'Essentiality Pass', ticketPrice: 220, qtySold: 148, discPerc: 0, discEuro: 9, discountCode: 'PROD8', promoter: 'ProDancers', total: 31228, date: '2024-08-06' },
+            { event: 'Bachata Geneva Festival 2026 - The Festival of Nations', ticketType: 'Sensuality Pass', ticketPrice: 190, qtySold: 294, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 55860, date: '2024-08-09' },
+            { event: 'Bachata Geneva Festival 2026 - The Festival of Nations', ticketType: 'Sensuality Pass', ticketPrice: 220, qtySold: 283, discPerc: 15, discEuro: 0, discountCode: 'PART8', promoter: 'PartyPros', total: 52921, date: '2024-08-11' },
+            { event: 'Bachata Geneva Festival 2026 - The Festival of Nations', ticketType: 'J&J Amateur', ticketPrice: 10, qtySold: 190, discPerc: 0, discEuro: 6, discountCode: 'PART12', promoter: 'PartyPros', total: 760, date: '2024-08-25' },
+            { event: 'Bachata Geneva Festival 2026 - The Festival of Nations', ticketType: 'Essentiality Training Track', ticketPrice: 100, qtySold: 49, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 4900, date: '2024-09-08' },
+            { event: 'Bachata Geneva Festival 2026 - The Festival of Nations', ticketType: 'Essentiality Training Track', ticketPrice: 100, qtySold: 130, discPerc: 0, discEuro: 7, discountCode: 'PART20', promoter: 'PartyPros', total: 12090, date: '2024-09-25' },
+            { event: 'Bachata Geneva Festival 2026 - The Festival of Nations', ticketType: 'Sensuality Training Track', ticketPrice: 100, qtySold: 271, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 27100, date: '2024-10-30' },
+            { event: 'Bachata Geneva Festival 2026 - The Festival of Nations', ticketType: 'J&J Pro', ticketPrice: 15, qtySold: 221, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 3315, date: '2024-11-09' },
+            { event: 'Bachata Geneva Festival 2026 - The Festival of Nations', ticketType: 'J&J Amateur', ticketPrice: 10, qtySold: 146, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 1460, date: '2024-11-11' },
+            { event: 'Bachata Geneva Festival 2026 - The Festival of Nations', ticketType: 'Sensuality Training Track', ticketPrice: 100, qtySold: 293, discPerc: 15, discEuro: 0, discountCode: 'DANC20', promoter: 'DanceWorld', total: 24905, date: '2024-11-18' },
+            { event: 'Bachata Geneva Festival 2026 - The Festival of Nations', ticketType: 'J&J Pro', ticketPrice: 15, qtySold: 250, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 3750, date: '2024-11-21' },
+            { event: 'Bachata Geneva Festival 2026 - The Festival of Nations', ticketType: 'Sensuality Training Track', ticketPrice: 100, qtySold: 31, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 3100, date: '2024-11-23' },
+            { event: 'Bachata Geneva Festival 2026 - The Festival of Nations', ticketType: 'Sensuality Training Track', ticketPrice: 100, qtySold: 218, discPerc: 15, discEuro: 0, discountCode: 'DANC16', promoter: 'DanceWorld', total: 18530, date: '2024-11-28' },
+            { event: 'Bachata Geneva Festival 2026 - The Festival of Nations', ticketType: 'Essentiality Training Track', ticketPrice: 100, qtySold: 260, discPerc: 5, discEuro: 0, discountCode: 'LATI16', promoter: 'LatinStars', total: 24700, date: '2024-12-10' },
+            { event: 'Bachata Geneva Festival 2026 - The Festival of Nations', ticketType: 'Sensuality Pass', ticketPrice: 190, qtySold: 194, discPerc: 10, discEuro: 0, discountCode: 'PRO09', promoter: 'ProDancers', total: 33174, date: '2024-12-20' },
+            { event: 'Bachata Geneva Festival 2026 - The Festival of Nations', ticketType: 'Essentiality Pass', ticketPrice: 220, qtySold: 184, discPerc: 0, discEuro: 0, discountCode: null, promoter: 'N/A', total: 40480, date: '2025-02-01' },
+            { event: 'Bachata Geneva Festival 2026 - The Festival of Nations', ticketType: 'Essentiality Training Track', ticketPrice: 100, qtySold: 281, discPerc: 5, discEuro: 0, discountCode: 'PRO011', promoter: 'ProDancers', total: 26695, date: '2025-02-22' },
+            { event: 'Bachata Geneva Festival 2026 - The Festival of Nations', ticketType: 'J&J Pro', ticketPrice: 15, qtySold: 80, discPerc: 5, discEuro: 0, discountCode: 'LATI17', promoter: 'LatinStars', total: 1140, date: '2025-03-17' },
+            { event: 'Bachata Geneva Festival 2026 - The Festival of Nations', ticketType: 'J&J Amateur', ticketPrice: 10, qtySold: 107, discPerc: 5, discEuro: 0, discountCode: 'DANC18', promoter: 'DanceWorld', total: 1016.5, date: '2025-04-06' },
+            { event: 'Bachata Geneva Festival 2026 - The Festival of Nations', ticketType: 'Essentiality Pass', ticketPrice: 220, qtySold: 159, discPerc: 10, discEuro: 0, discountCode: 'SENS5', promoter: 'SensualPromo', total: 31482, date: '2025-05-11' },
+            { event: 'Bachata Geneva Festival 2026 - The Festival of Nations', ticketType: 'Sensuality Training Track', ticketPrice: 100, qtySold: 275, discPerc: 5, discEuro: 0, discountCode: 'PRO011', promoter: 'ProDancers', total: 26125, date: '2025-07-26' },
 
             // Barcelona Summer Fest (9 entries)
             { event: 'Barcelona Summer Fest', ticketType: 'J&J Amateur', ticketPrice: 10, qtySold: 294, discPerc: 0, discEuro: 6, discountCode: 'LATI9', promoter: 'LatinStars', total: 1176, date: '2024-11-15' },
@@ -254,16 +254,16 @@
         // In a real application, this would be fetched. For this demo, it's included directly.
         // This is a subset of the full transactions.json for brevity, but contains enough data for calculations.
         const rawTransactionData = [
-            {"Transaction_ID": "TRN59218847", "Event_Name": "Sensuality & Essentiality", "Gross_Amount": 15, "Transaction_Type": "Sale"},
-            {"Transaction_ID": "TRN17730825", "Event_Name": "Sensuality & Essentiality", "Gross_Amount": 184, "Transaction_Type": "Sale"},
-            {"Transaction_ID": "TRN41292135", "Event_Name": "Sensuality & Essentiality", "Gross_Amount": 187, "Transaction_Type": "Sale"},
-            {"Transaction_ID": "TRN62198347", "Event_Name": "Sensuality & Essentiality", "Gross_Amount": 165.6, "Transaction_Type": "Sale"},
-            {"Transaction_ID": "TRN11259342", "Event_Name": "Sensuality & Essentiality", "Gross_Amount": 198, "Transaction_Type": "Sale"},
-            {"Transaction_ID": "TRN67340159", "Event_Name": "Sensuality & Essentiality", "Gross_Amount": 200, "Transaction_Type": "Sale"},
-            {"Transaction_ID": "TRN30294781", "Event_Name": "Sensuality & Essentiality", "Gross_Amount": 15, "Transaction_Type": "Sale"},
-            {"Transaction_ID": "TRN71358294", "Event_Name": "Sensuality & Essentiality", "Gross_Amount": 220, "Transaction_Type": "Sale"},
-            {"Transaction_ID": "TRN14982057", "Event_Name": "Sensuality & Essentiality", "Gross_Amount": 170, "Transaction_Type": "Sale"},
-            {"Transaction_ID": "TRN68219573", "Event_Name": "Sensuality & Essentiality", "Gross_Amount": 180, "Transaction_Type": "Sale"},
+            {"Transaction_ID": "TRN59218847", "Event_Name": "Bachata Geneva Festival 2026 - The Festival of Nations", "Gross_Amount": 15, "Transaction_Type": "Sale"},
+            {"Transaction_ID": "TRN17730825", "Event_Name": "Bachata Geneva Festival 2026 - The Festival of Nations", "Gross_Amount": 184, "Transaction_Type": "Sale"},
+            {"Transaction_ID": "TRN41292135", "Event_Name": "Bachata Geneva Festival 2026 - The Festival of Nations", "Gross_Amount": 187, "Transaction_Type": "Sale"},
+            {"Transaction_ID": "TRN62198347", "Event_Name": "Bachata Geneva Festival 2026 - The Festival of Nations", "Gross_Amount": 165.6, "Transaction_Type": "Sale"},
+            {"Transaction_ID": "TRN11259342", "Event_Name": "Bachata Geneva Festival 2026 - The Festival of Nations", "Gross_Amount": 198, "Transaction_Type": "Sale"},
+            {"Transaction_ID": "TRN67340159", "Event_Name": "Bachata Geneva Festival 2026 - The Festival of Nations", "Gross_Amount": 200, "Transaction_Type": "Sale"},
+            {"Transaction_ID": "TRN30294781", "Event_Name": "Bachata Geneva Festival 2026 - The Festival of Nations", "Gross_Amount": 15, "Transaction_Type": "Sale"},
+            {"Transaction_ID": "TRN71358294", "Event_Name": "Bachata Geneva Festival 2026 - The Festival of Nations", "Gross_Amount": 220, "Transaction_Type": "Sale"},
+            {"Transaction_ID": "TRN14982057", "Event_Name": "Bachata Geneva Festival 2026 - The Festival of Nations", "Gross_Amount": 170, "Transaction_Type": "Sale"},
+            {"Transaction_ID": "TRN68219573", "Event_Name": "Bachata Geneva Festival 2026 - The Festival of Nations", "Gross_Amount": 180, "Transaction_Type": "Sale"},
             {"Transaction_ID": "TRN83140521", "Event_Name": "Barcelona Summer Fest", "Gross_Amount": 190, "Transaction_Type": "Sale"},
             {"Transaction_ID": "TRN81240952", "Event_Name": "Barcelona Summer Fest", "Gross_Amount": 72, "Transaction_Type": "Sale"},
             {"Transaction_ID": "TRN33827291", "Event_Name": "Barcelona Summer Fest", "Gross_Amount": 100, "Transaction_Type": "Sale"},
@@ -276,8 +276,8 @@
             {"Transaction_ID": "TRN92458173", "Event_Name": "Winter Bachata Gala", "Gross_Amount": 210, "Transaction_Type": "Sale"}
         ];
 
-        const mainEventData = allTicketData.filter(d => d.event === 'Sensuality & Essentiality');
-        const bachataSensualEvents = allTicketData.filter(d => ['Sensuality & Essentiality', 'Barcelona Summer Fest', 'Winter Bachata Gala'].includes(d.event));
+        const mainEventData = allTicketData.filter(d => d.event === 'Bachata Geneva Festival 2026 - The Festival of Nations');
+        const bachataSensualEvents = allTicketData.filter(d => ['Bachata Geneva Festival 2026 - The Festival of Nations', 'Barcelona Summer Fest', 'Winter Bachata Gala'].includes(d.event));
 
         let charts = {};
         const chartColors = ['#213c63', '#f58220', '#36a2eb', '#ffcd56', '#4bc0c0', '#9966ff', '#ff9f40'];
@@ -484,11 +484,11 @@
         function renderComparativeKpis() {
             // --- DATA PREPARATION ---
             // Use allTicketData for high-level summaries and rawTransactionData for detailed transaction-based metrics
-            const sensualityData = allTicketData.filter(d => d.event === 'Sensuality & Essentiality');
-            const otherEventsData = allTicketData.filter(d => d.event !== 'Sensuality & Essentiality');
+            const sensualityData = allTicketData.filter(d => d.event === 'Bachata Geneva Festival 2026 - The Festival of Nations');
+            const otherEventsData = allTicketData.filter(d => d.event !== 'Bachata Geneva Festival 2026 - The Festival of Nations');
             
-            const sensualityTransactions = rawTransactionData.filter(d => d.Event_Name === 'Sensuality & Essentiality' && d.Transaction_Type === 'Sale');
-            const otherTransactions = rawTransactionData.filter(d => d.Event_Name !== 'Sensuality & Essentiality' && d.Transaction_Type === 'Sale');
+            const sensualityTransactions = rawTransactionData.filter(d => d.Event_Name === 'Bachata Geneva Festival 2026 - The Festival of Nations' && d.Transaction_Type === 'Sale');
+            const otherTransactions = rawTransactionData.filter(d => d.Event_Name !== 'Bachata Geneva Festival 2026 - The Festival of Nations' && d.Transaction_Type === 'Sale');
 
             // --- 1. S&E & MARKET AVERAGE CALCULATIONS ---
             const sensualityTotalRevenue = sensualityData.reduce((sum, d) => sum + d.total, 0);
@@ -501,7 +501,7 @@
             const sensualityDiscountedPerc = sensualityTotalTickets > 0 ? (sensualityDiscountedTickets / sensualityTotalTickets) * 100 : 0;
             const sensualityFullPricePerc = 100 - sensualityDiscountedPerc;
             
-            // CORRECTED ATV CALCULATION for Sensuality & Essentiality
+            // CORRECTED ATV CALCULATION for Bachata Geneva Festival 2026 - The Festival of Nations
             const sensualityRevenueForATV = sensualityTransactions.reduce((sum, t) => sum + t.Gross_Amount, 0);
             const sensualityTransactionCount = new Set(sensualityTransactions.map(t => t.Transaction_ID)).size;
             const sensualityATV = sensualityTransactionCount > 0 ? sensualityRevenueForATV / sensualityTransactionCount : 0;
@@ -543,19 +543,19 @@
             const ticketsByEvent = bachataSensualEvents.reduce((acc, d) => { acc[d.event] = (acc[d.event] || 0) + d.qtySold; return acc; }, {});
             createChart($('#ticketsSoldComparisonChart')[0], 'bar', {
                 labels: Object.keys(ticketsByEvent),
-                datasets: [{ label: 'Total Tickets Sold', data: Object.values(ticketsByEvent), backgroundColor: Object.keys(ticketsByEvent).map(e => e === 'Sensuality & Essentiality' ? '#f58220' : '#213c63') }]
+                datasets: [{ label: 'Total Tickets Sold', data: Object.values(ticketsByEvent), backgroundColor: Object.keys(ticketsByEvent).map(e => e === 'Bachata Geneva Festival 2026 - The Festival of Nations' ? '#f58220' : '#213c63') }]
             }, { responsive: true, plugins: { title: { display: false }, legend: { display: false } } });
 
             // Chart 2: Revenue per Event (Original)
             const revenueByEvent = bachataSensualEvents.reduce((acc, d) => { acc[d.event] = (acc[d.event] || 0) + d.total; return acc; }, {});
             createChart($('#revenueComparisonChart')[0], 'bar', {
                 labels: Object.keys(revenueByEvent),
-                datasets: [{ label: 'Total Revenue', data: Object.values(revenueByEvent), backgroundColor: Object.keys(revenueByEvent).map(e => e === 'Sensuality & Essentiality' ? '#f58220' : '#213c63') }]
+                datasets: [{ label: 'Total Revenue', data: Object.values(revenueByEvent), backgroundColor: Object.keys(revenueByEvent).map(e => e === 'Bachata Geneva Festival 2026 - The Festival of Nations' ? '#f58220' : '#213c63') }]
             }, { responsive: true, plugins: { title: { display: false }, legend: { display: false } } });
 
             // Chart 3: Revenue Snapshot (Split)
             createChart($('#revenueSnapshotChart')[0], 'bar', {
-                labels: ['Sensuality & Essentiality', 'Market Average'],
+                labels: ['Bachata Geneva Festival 2026 - The Festival of Nations', 'Market Average'],
                 datasets: [{
                     label: 'Total Revenue (€)',
                     data: [sensualityTotalRevenue, marketAvgRevenue],
@@ -568,7 +568,7 @@
 
             // Chart 4: Ticket Volume Snapshot (Split)
             createChart($('#ticketVolumeSnapshotChart')[0], 'bar', {
-                labels: ['Sensuality & Essentiality', 'Market Average'],
+                labels: ['Bachata Geneva Festival 2026 - The Festival of Nations', 'Market Average'],
                 datasets: [{
                     label: 'Total Tickets Sold',
                     data: [sensualityTotalTickets, marketAvgTickets],
@@ -581,7 +581,7 @@
 
             // Chart 5: Average Ticket Price Comparison
             createChart($('#avgTicketPriceChart')[0], 'bar', {
-                labels: ['Sensuality & Essentiality', 'Market Average'],
+                labels: ['Bachata Geneva Festival 2026 - The Festival of Nations', 'Market Average'],
                 datasets: [{
                     label: 'Average Ticket Price (€)',
                     data: [sensualityAvgPrice, marketAvgPrice],
@@ -594,7 +594,7 @@
 
             // Chart 6: Average Transaction Value (ATV) - NEW
             createChart($('#avgTransactionValueChart')[0], 'bar', {
-                labels: ['Sensuality & Essentiality', 'Market Average'],
+                labels: ['Bachata Geneva Festival 2026 - The Festival of Nations', 'Market Average'],
                 datasets: [{
                     label: 'Average Transaction Value (€)',
                     data: [sensualityATV, marketAvgATV],
@@ -607,7 +607,7 @@
 
             // Chart 7: Promoter Contribution Analysis
             createChart($('#promoterContributionChart')[0], 'bar', {
-                labels: ['Sensuality & Essentiality', 'Market Average'],
+                labels: ['Bachata Geneva Festival 2026 - The Festival of Nations', 'Market Average'],
                 datasets: [{
                     label: 'Promoter Revenue %',
                     data: [sensualityPromoterRevenuePerc, marketAvgPromoterPerc],
@@ -621,7 +621,7 @@
 
             // Chart 8: Discount Strategy Benchmark
             createChart($('#discountStrategyChart')[0], 'bar', {
-                labels: ['Sensuality & Essentiality', 'Market Average'],
+                labels: ['Bachata Geneva Festival 2026 - The Festival of Nations', 'Market Average'],
                 datasets: [
                     {
                         label: 'Discounted %',

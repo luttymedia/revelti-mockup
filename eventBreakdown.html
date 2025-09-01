@@ -44,7 +44,7 @@
         <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
             <div>
                 <div class="flex items-center">
-                    <h1 class="text-3xl font-extrabold revelti-blue">Sensuality & Essentiality</h1>
+                    <h1 class="text-3xl font-extrabold revelti-blue">Bachata Geneva Festival 2026 - The Festival of Nations</h1>
                     <span class="ml-4 text-sm font-bold bg-green-100 text-green-800 px-3 py-1 rounded-full whitespace-nowrap">On Sale</span>
                 </div>
                 <p class="text-gray-600 mt-1">Insights from ticket sales, promoters, and discounts</p>
@@ -273,7 +273,7 @@
             // --- SET & APPLY DEFAULT STATE ---
             // Apply filters based on the default event
             if(masterTable) {
-                masterTable.column(0).search('Sensuality & Essentiality', true, false).draw();
+                masterTable.column(0).search('Bachata Geneva Festival 2026 - The Festival of Nations', true, false).draw();
             }
             
             // Render charts for the default active tab
@@ -344,7 +344,7 @@
 
         // --- SALES OVERVIEW ---
         function renderSalesOverview() {
-            const mainEventData = getFilteredEventData('Sensuality & Essentiality');
+            const mainEventData = getFilteredEventData('Bachata Geneva Festival 2026 - The Festival of Nations');
             if (mainEventData.length === 0) {
                 // Handle case where there is no data for this event to prevent errors
                 $('#sales-kpis').html('<p class="text-center col-span-3">No sales data available for this event.</p>');
@@ -402,7 +402,7 @@
         
         // --- PROMOTER PERFORMANCE ---
         function renderPromoterPerformance() {
-            const mainEventData = getFilteredEventData('Sensuality & Essentiality');
+            const mainEventData = getFilteredEventData('Bachata Geneva Festival 2026 - The Festival of Nations');
             const promoterData = mainEventData.filter(d => d.promoter !== 'N/A');
             const promoterSales = promoterData.reduce((acc, d) => { acc[d.promoter] = (acc[d.promoter] || 0) + d.qtySold; return acc; }, {});
             const topPromoterName = Object.keys(promoterSales).length > 0 ? Object.entries(promoterSales).sort((a,b) => b[1]-a[1])[0][0] : 'None';
@@ -479,7 +479,7 @@
 
         // --- PRICING & DISCOUNTS ---
         function renderPricingAndDiscounts() {
-            const mainEventData = getFilteredEventData('Sensuality & Essentiality');
+            const mainEventData = getFilteredEventData('Bachata Geneva Festival 2026 - The Festival of Nations');
             const discountedTickets = mainEventData.filter(d => d.discountCode);
             const totalDiscountValue = discountedTickets.reduce((sum, d) => sum + (d.discEuro * d.qtySold), 0);
 
@@ -527,11 +527,11 @@
         
         // --- COMPARATIVE KPIS ---
         function renderComparativeKpis() {
-            const sensualityData = getFilteredEventData('Sensuality & Essentiality');
-            const otherEventsData = allTicketData.filter(d => d.event !== 'Sensuality & Essentiality');
+            const sensualityData = getFilteredEventData('Bachata Geneva Festival 2026 - The Festival of Nations');
+            const otherEventsData = allTicketData.filter(d => d.event !== 'Bachata Geneva Festival 2026 - The Festival of Nations');
             
-            const sensualityTransactions = rawTransactionData.filter(d => d.Event_Name === 'Sensuality & Essentiality' && d.Transaction_Type === 'Sale');
-            const otherTransactions = rawTransactionData.filter(d => d.Event_Name !== 'Sensuality & Essentiality' && d.Transaction_Type === 'Sale');
+            const sensualityTransactions = rawTransactionData.filter(d => d.Event_Name === 'Bachata Geneva Festival 2026 - The Festival of Nations' && d.Transaction_Type === 'Sale');
+            const otherTransactions = rawTransactionData.filter(d => d.Event_Name !== 'Bachata Geneva Festival 2026 - The Festival of Nations' && d.Transaction_Type === 'Sale');
 
             const sensualityTotalRevenue = sensualityData.reduce((sum, d) => sum + d.total, 0);
             const sensualityTotalTickets = sensualityData.reduce((sum, d) => sum + d.qtySold, 0);
@@ -574,42 +574,42 @@
             const ticketsByEvent = allTicketData.reduce((acc, d) => { acc[d.event] = (acc[d.event] || 0) + d.qtySold; return acc; }, {});
             createChart($('#ticketsSoldComparisonChart')[0], 'bar', {
                 labels: Object.keys(ticketsByEvent),
-                datasets: [{ label: 'Total Tickets Sold', data: Object.values(ticketsByEvent), backgroundColor: Object.keys(ticketsByEvent).map(e => e === 'Sensuality & Essentiality' ? '#f58220' : '#213c63') }]
+                datasets: [{ label: 'Total Tickets Sold', data: Object.values(ticketsByEvent), backgroundColor: Object.keys(ticketsByEvent).map(e => e === 'Bachata Geneva Festival 2026 - The Festival of Nations' ? '#f58220' : '#213c63') }]
             }, { responsive: true, plugins: { title: { display: false }, legend: { display: false } } });
 
             const revenueByEvent = allTicketData.reduce((acc, d) => { acc[d.event] = (acc[d.event] || 0) + d.total; return acc; }, {});
             createChart($('#revenueComparisonChart')[0], 'bar', {
                 labels: Object.keys(revenueByEvent),
-                datasets: [{ label: 'Total Revenue', data: Object.values(revenueByEvent), backgroundColor: Object.keys(revenueByEvent).map(e => e === 'Sensuality & Essentiality' ? '#f58220' : '#213c63') }]
+                datasets: [{ label: 'Total Revenue', data: Object.values(revenueByEvent), backgroundColor: Object.keys(revenueByEvent).map(e => e === 'Bachata Geneva Festival 2026 - The Festival of Nations' ? '#f58220' : '#213c63') }]
             }, { responsive: true, plugins: { title: { display: false }, legend: { display: false } } });
 
             createChart($('#revenueSnapshotChart')[0], 'bar', {
-                labels: ['Sensuality & Essentiality', 'Market Average'],
+                labels: ['Bachata Geneva Festival 2026 - The Festival of Nations', 'Market Average'],
                 datasets: [{ label: 'Total Revenue (€)', data: [sensualityTotalRevenue, marketAvgRevenue], backgroundColor: ['#f58220', '#213c63'] }]
             }, { responsive: true, plugins: { legend: { display: false } } });
 
             createChart($('#ticketVolumeSnapshotChart')[0], 'bar', {
-                labels: ['Sensuality & Essentiality', 'Market Average'],
+                labels: ['Bachata Geneva Festival 2026 - The Festival of Nations', 'Market Average'],
                 datasets: [{ label: 'Total Tickets Sold', data: [sensualityTotalTickets, marketAvgTickets], backgroundColor: ['#f58220', '#213c63'] }]
             }, { responsive: true, plugins: { legend: { display: false } } });
 
             createChart($('#avgTicketPriceChart')[0], 'bar', {
-                labels: ['Sensuality & Essentiality', 'Market Average'],
+                labels: ['Bachata Geneva Festival 2026 - The Festival of Nations', 'Market Average'],
                 datasets: [{ label: 'Average Ticket Price (€)', data: [sensualityAvgPrice, marketAvgPrice], backgroundColor: ['#f58220', '#213c63'] }]
             }, { responsive: true, plugins: { legend: { display: false } } });
 
             createChart($('#avgTransactionValueChart')[0], 'bar', {
-                labels: ['Sensuality & Essentiality', 'Market Average'],
+                labels: ['Bachata Geneva Festival 2026 - The Festival of Nations', 'Market Average'],
                 datasets: [{ label: 'Average Transaction Value (€)', data: [sensualityATV, marketAvgATV], backgroundColor: ['#f58220', '#213c63'] }]
             }, { responsive: true, plugins: { legend: { display: false } } });
 
             createChart($('#promoterContributionChart')[0], 'bar', {
-                labels: ['Sensuality & Essentiality', 'Market Average'],
+                labels: ['Bachata Geneva Festival 2026 - The Festival of Nations', 'Market Average'],
                 datasets: [{ label: 'Promoter Revenue %', data: [sensualityPromoterRevenuePerc, marketAvgPromoterPerc], backgroundColor: ['#f58220', '#213c63'] }]
             }, { responsive: true, plugins: { legend: { display: false } }, scales: { y: { ticks: { callback: value => value.toFixed(0) + '%' } } } });
 
             createChart($('#discountStrategyChart')[0], 'bar', {
-                labels: ['Sensuality & Essentiality', 'Market Average'],
+                labels: ['Bachata Geneva Festival 2026 - The Festival of Nations', 'Market Average'],
                 datasets: [
                     { label: 'Discounted %', data: [sensualityDiscountedPerc, marketAvgDiscountedPerc], backgroundColor: '#f58220' },
                     { label: 'Full Price %', data: [sensualityFullPricePerc, marketAvgFullPricePerc], backgroundColor: '#213c63' }

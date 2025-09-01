@@ -1,314 +1,314 @@
 Transaction_ID,Transaction_Date,Transaction_Type,Event_Name,Ticket_Type,Attendee_Name,Promoter_Name,Discount_Code_Used,Promoter_Commission,Base,IVA,Gross_Amount,Fees,Net_Amount,Payment_Method,Status,Payout_ID
 TRN83140521,2024-06-03 14:22:15,Sale,Barcelona Summer Fest,Full Pass,Liam Garcia,,,,157.02,32.98,190,5.7,184.3,Credit Card,Completed,POUT-202406-01
-TRN59218847,2024-06-05 19:01:48,Sale,Sensuality & Essentiality,J&J Amateur,Ava Martinez,,,,12.40,2.60,15,0.45,14.55,Stripe,Completed,POUT-202406-01
-TRN17730825,2024-06-06 21:45:11,Sale,Sensuality & Essentiality,Essentiality Pass,Noah Rodriguez,PartyPros,PART8,10.00,152.07,31.93,184,5.52,178.48,PayPal,Completed,POUT-202406-01
+TRN59218847,2024-06-05 19:01:48,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,J&J Amateur,Ava Martinez,,,,12.40,2.60,15,0.45,14.55,Stripe,Completed,POUT-202406-01
+TRN17730825,2024-06-06 21:45:11,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Noah Rodriguez,PartyPros,PART8,10.00,152.07,31.93,184,5.52,178.48,PayPal,Completed,POUT-202406-01
 TRN81240952,2024-06-08 11:30:59,Sale,Barcelona Summer Fest,Party Pass,Isabella Smith,DJ Sparkus,DJSPARKUS10,5.00,59.50,12.50,72,2.16,69.84,Credit Card,Completed,POUT-202406-01
 TRN93596954,2024-06-10 9:15:33,Sale,Winter Bachata Gala,Gala Full Pass,Lucas Brown,,,,173.55,36.45,210,6.3,203.7,Credit Card,Completed,POUT-202406-01
-TRN41292135,2024-06-11 16:55:01,Sale,Sensuality & Essentiality,Sensuality Pass,Sophia Jones,SensualPromo,SENS15,10.00,154.55,32.45,187,5.61,181.39,Stripe,Completed,POUT-202406-01
+TRN41292135,2024-06-11 16:55:01,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Sophia Jones,SensualPromo,SENS15,10.00,154.55,32.45,187,5.61,181.39,Stripe,Completed,POUT-202406-01
 TRN33827291,2024-06-13 12:05:27,Sale,Barcelona Summer Fest,Day Pass - Sat,Mason Williams,,,,82.64,17.36,100,3,97,PayPal,Completed,POUT-202406-01
-TRN62198347,2024-06-15 8:40:19,Sale,Sensuality & Essentiality,Essentiality Training Track,Mia Davis,ProDancers,PROD8,10.00,136.86,28.74,165.6,4.97,160.63,Credit Card,Completed,POUT-202406-01
+TRN62198347,2024-06-15 8:40:19,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Training Track,Mia Davis,ProDancers,PROD8,10.00,136.86,28.74,165.6,4.97,160.63,Credit Card,Completed,POUT-202406-01
 TRN79342751,2024-06-17 22:10:45,Sale,Winter Bachata Gala,Gala Party Pass,Ethan Miller,,,,74.38,15.62,90,2.7,87.3,Stripe,Completed,POUT-202406-01
-TRN11259342,2024-06-19 13:25:52,Sale,Sensuality & Essentiality,Sensuality Pass,Amelia Wilson,DanceWorld,DANCE10,10.00,163.64,34.36,198,5.94,192.06,Credit Card,Completed,POUT-202406-01
+TRN11259342,2024-06-19 13:25:52,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Amelia Wilson,DanceWorld,DANCE10,10.00,163.64,34.36,198,5.94,192.06,Credit Card,Completed,POUT-202406-01
 TRN48915632,2024-06-20 18:00:14,Sale,Barcelona Summer Fest,Full Pass,James Moore,,,,157.02,32.98,190,5.7,184.3,PayPal,Pending,POUT-202406-01
-TRN67340159,2024-06-22 10:50:38,Sale,Sensuality & Essentiality,Essentiality Pass,Charlotte Taylor,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202406-01
+TRN67340159,2024-06-22 10:50:38,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Charlotte Taylor,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202406-01
 TRN88125473,2024-06-24 15:15:21,Sale,Winter Bachata Gala,Workshop Pass,Benjamin Anderson,DJ Sparkus,DJSPARKUS10,10.00,111.57,23.43,135,4.05,130.95,Stripe,Completed,POUT-202406-01
-TRN30294781,2024-06-26 20:30:05,Sale,Sensuality & Essentiality,J&J Amateur,Harper Thomas,,,,12.40,2.60,15,0.45,14.55,Credit Card,Completed,POUT-202406-01
+TRN30294781,2024-06-26 20:30:05,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,J&J Amateur,Harper Thomas,,,,12.40,2.60,15,0.45,14.55,Credit Card,Completed,POUT-202406-01
 TRN55183920,2024-06-28 9:05:49,Refund,Barcelona Summer Fest,Party Pass,Evelyn Jackson,PartyPros,PART8,5.00,60.83,12.77,73.6,2.21,71.39,PayPal,Refunded,POUT-202406-01
-TRN71358294,2024-06-30 11:20:17,Sale,Sensuality & Essentiality,Sensuality Pass,Alexander White,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202406-01
+TRN71358294,2024-06-30 11:20:17,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Alexander White,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202406-01
 TRN92458173,2024-07-01 17:45:55,Sale,Winter Bachata Gala,Gala Full Pass,Emily Harris,,,,173.55,36.45,210,6.3,203.7,Stripe,Completed,POUT-202406-01
-TRN14982057,2024-07-03 14:00:28,Sale,Sensuality & Essentiality,Essentiality Pass,Daniel Martin,SensualPromo,SENS15,10.00,140.50,29.50,170,5.1,164.9,Credit Card,Completed,POUT-202406-01
+TRN14982057,2024-07-03 14:00:28,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Daniel Martin,SensualPromo,SENS15,10.00,140.50,29.50,170,5.1,164.9,Credit Card,Completed,POUT-202406-01
 TRN40582194,2024-07-05 10:10:10,Sale,Barcelona Summer Fest,VIP Pass,Abigail Thompson,,,,206.61,43.39,250,7.5,242.5,PayPal,Completed,POUT-202406-01
-TRN68219573,2024-07-07 19:30:46,Sale,Sensuality & Essentiality,Essentiality Training Track,Michael Garcia,,,,148.76,31.24,180,5.4,174.6,Credit Card,Completed,POUT-202406-01
+TRN68219573,2024-07-07 19:30:46,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Training Track,Michael Garcia,,,,148.76,31.24,180,5.4,174.6,Credit Card,Completed,POUT-202406-01
 TRN85320918,2024-07-09 23:55:01,Sale,Winter Bachata Gala,Gala Party Pass,Madison Martinez,ProDancers,PROD8,10.00,68.43,14.37,82.8,2.48,80.32,Stripe,Completed,POUT-202406-01
-TRN23918475,2024-07-11 12:40:33,Sale,Sensuality & Essentiality,Sensuality Pass,David Robinson,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202406-01
+TRN23918475,2024-07-11 12:40:33,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,David Robinson,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202406-01
 TRN50183742,2024-07-13 16:20:57,Sale,Barcelona Summer Fest,Full Pass,Elizabeth Clark,DanceWorld,DANCE10,10.00,141.32,29.68,171,5.13,165.87,PayPal,Completed,POUT-202407-02
-TRN77492158,2024-07-15 9:05:14,Sale,Sensuality & Essentiality,J&J Amateur,Matthew Lewis,,,,12.40,2.60,15,0.45,14.55,Stripe,Completed,POUT-202407-02
+TRN77492158,2024-07-15 9:05:14,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,J&J Amateur,Matthew Lewis,,,,12.40,2.60,15,0.45,14.55,Stripe,Completed,POUT-202407-02
 TRN19283746,2024-07-17 11:50:39,Sale,Winter Bachata Gala,Workshop Pass,Chloe Rodriguez,,,,123.97,26.03,150,4.5,145.5,Credit Card,Completed,POUT-202407-02
-TRN46510982,2024-07-19 18:10:22,Sale,Sensuality & Essentiality,Essentiality Pass,Christopher Lee,DJ Sparkus,DJSPARKUS10,10.00,148.76,31.24,180,5.4,174.6,PayPal,Completed,POUT-202407-02
+TRN46510982,2024-07-19 18:10:22,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Christopher Lee,DJ Sparkus,DJSPARKUS10,10.00,148.76,31.24,180,5.4,174.6,PayPal,Completed,POUT-202407-02
 TRN83749210,2024-07-21 21:30:06,Sale,Barcelona Summer Fest,Party Pass,Jessica Walker,,,,66.12,13.88,80,2.4,77.6,Credit Card,Completed,POUT-202407-02
-TRN31098472,2024-07-23 13:20:48,Sale,Sensuality & Essentiality,Sensuality Pass,Andrew Hall,,,,181.82,38.18,220,6.6,213.4,Stripe,Completed,POUT-202407-02
+TRN31098472,2024-07-23 13:20:48,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Andrew Hall,,,,181.82,38.18,220,6.6,213.4,Stripe,Completed,POUT-202407-02
 TRN58327619,2024-07-25 10:00:15,Sale,Winter Bachata Gala,Gala Full Pass,Olivia Allen,PartyPros,PART8,10.00,159.67,33.53,193.2,5.8,187.4,Credit Card,Pending,POUT-202407-02
-TRN95648173,2024-07-27 14:45:59,Sale,Sensuality & Essentiality,Essentiality Training Track,Joshua Young,,,,148.76,31.24,180,5.4,174.6,PayPal,Completed,POUT-202407-02
+TRN95648173,2024-07-27 14:45:59,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Training Track,Joshua Young,,,,148.76,31.24,180,5.4,174.6,PayPal,Completed,POUT-202407-02
 TRN22917458,2024-07-29 17:55:41,Sale,Barcelona Summer Fest,Day Pass - Sat,Mia Hernandez,SensualPromo,SENS15,5.00,70.25,14.75,85,2.55,82.45,Credit Card,Completed,POUT-202407-02
-TRN50183921,2024-07-31 20:05:27,Sale,Sensuality & Essentiality,Essentiality Pass,William King,,,,165.29,34.71,200,6,194,Stripe,Completed,POUT-202407-02
+TRN50183921,2024-07-31 20:05:27,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,William King,,,,165.29,34.71,200,6,194,Stripe,Completed,POUT-202407-02
 TRN87492158,2024-08-02 8:30:19,Sale,Winter Bachata Gala,Gala Party Pass,Ava Wright,ProDancers,PROD8,10.00,68.43,14.37,82.8,2.48,80.32,Credit Card,Completed,POUT-202407-02
-TRN14729583,2024-08-04 12:15:04,Refund,Sensuality & Essentiality,Sensuality Pass,James Lopez,,,,181.82,38.18,220,6.6,213.4,PayPal,Refunded,POUT-202407-02
+TRN14729583,2024-08-04 12:15:04,Refund,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,James Lopez,,,,181.82,38.18,220,6.6,213.4,PayPal,Refunded,POUT-202407-02
 TRN41958217,2024-08-06 19:40:48,Sale,Barcelona Summer Fest,Full Pass,Isabella Hill,DanceWorld,DANCE10,10.00,141.32,29.68,171,5.13,165.87,Credit Card,Completed,POUT-202407-02
-TRN79271458,2024-08-08 22:00:11,Sale,Sensuality & Essentiality,J&J Amateur,Lucas Scott,,,,12.40,2.60,15,0.45,14.55,Stripe,Completed,POUT-202407-02
+TRN79271458,2024-08-08 22:00:11,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,J&J Amateur,Lucas Scott,,,,12.40,2.60,15,0.45,14.55,Stripe,Completed,POUT-202407-02
 TRN36509872,2024-08-10 11:25:36,Sale,Winter Bachata Gala,Gala Full Pass,Sophia Green,,,,173.55,36.45,210,6.3,203.7,Credit Card,Completed,POUT-202407-02
-TRN63738195,2024-08-12 16:05:59,Sale,Sensuality & Essentiality,Essentiality Pass,Mason Adams,,,,165.29,34.71,200,6,194,PayPal,Completed,POUT-202407-02
+TRN63738195,2024-08-12 16:05:59,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Mason Adams,,,,165.29,34.71,200,6,194,PayPal,Completed,POUT-202407-02
 TRN90967428,2024-08-14 9:50:41,Sale,Barcelona Summer Fest,VIP Pass,Amelia Baker,DJ Sparkus,DJSPARKUS10,10.00,185.95,39.05,225,6.75,218.25,Credit Card,Completed,POUT-202407-02
-TRN18295761,2024-08-16 14:10:25,Sale,Sensuality & Essentiality,Essentiality Training Track,Ethan Nelson,,,,148.76,31.24,180,5.4,174.6,Stripe,Completed,POUT-202407-02
+TRN18295761,2024-08-16 14:10:25,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Training Track,Ethan Nelson,,,,148.76,31.24,180,5.4,174.6,Stripe,Completed,POUT-202407-02
 TRN45524094,2024-08-18 18:30:08,Sale,Winter Bachata Gala,Workshop Pass,Harper Carter,,,,123.97,26.03,150,4.5,145.5,Credit Card,Completed,POUT-202407-02
-TRN72752427,2024-08-20 23:00:51,Sale,Sensuality & Essentiality,Sensuality Pass,Evelyn Mitchell,,,,181.82,38.18,220,6.6,213.4,PayPal,Completed,POUT-202407-02
+TRN72752427,2024-08-20 23:00:51,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Evelyn Mitchell,,,,181.82,38.18,220,6.6,213.4,PayPal,Completed,POUT-202407-02
 TRN99980760,2024-08-22 10:45:33,Sale,Barcelona Summer Fest,Party Pass,Alexander Perez,,,,66.12,13.88,80,2.4,77.6,Stripe,Completed,POUT-202408-03
-TRN27209093,2024-08-24 15:20:16,Sale,Sensuality & Essentiality,J&J Amateur,Abigail Roberts,PartyPros,PART8,,11.40,2.40,13.8,0.41,13.39,Credit Card,Completed,POUT-202408-03
+TRN27209093,2024-08-24 15:20:16,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,J&J Amateur,Abigail Roberts,PartyPros,PART8,,11.40,2.40,13.8,0.41,13.39,Credit Card,Completed,POUT-202408-03
 TRN54437426,2024-08-26 19:55:59,Sale,Winter Bachata Gala,Gala Party Pass,Emily Turner,,,,74.38,15.62,90,2.7,87.3,PayPal,Completed,POUT-202408-03
-TRN81665759,2024-08-28 8:10:42,Sale,Sensuality & Essentiality,Essentiality Pass,Michael Phillips,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202408-03
+TRN81665759,2024-08-28 8:10:42,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Michael Phillips,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202408-03
 TRN38894092,2024-08-30 12:30:25,Sale,Barcelona Summer Fest,Full Pass,Madison Campbell,SensualPromo,SENS15,10.00,133.47,28.03,161.5,4.85,156.65,Stripe,Completed,POUT-202408-03
-TRN66122425,2024-09-01 17:00:08,Sale,Sensuality & Essentiality,Sensuality Pass,David Parker,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202408-03
+TRN66122425,2024-09-01 17:00:08,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,David Parker,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202408-03
 TRN93350758,2024-09-03 21:25:51,Sale,Winter Bachata Gala,Gala Full Pass,Elizabeth Evans,ProDancers,PROD8,10.00,159.67,33.53,193.2,5.8,187.4,PayPal,Completed,POUT-202408-03
-TRN20579091,2024-09-05 9:40:34,Sale,Sensuality & Essentiality,Essentiality Training Track,Matthew Edwards,,,,148.76,31.24,180,5.4,174.6,Credit Card,Completed,POUT-202408-03
+TRN20579091,2024-09-05 9:40:34,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Training Track,Matthew Edwards,,,,148.76,31.24,180,5.4,174.6,Credit Card,Completed,POUT-202408-03
 TRN47807424,2024-09-07 14:00:17,Sale,Barcelona Summer Fest,Day Pass - Sat,Chloe Collins,,,,82.64,17.36,100,3,97,Stripe,Completed,POUT-202408-03
-TRN75035757,2024-09-09 18:20:00,Sale,Sensuality & Essentiality,Essentiality Pass,Christopher Stewart,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202408-03
+TRN75035757,2024-09-09 18:20:00,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Christopher Stewart,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202408-03
 TRN2264090,2024-09-11 22:45:43,Sale,Winter Bachata Gala,Workshop Pass,Jessica Sanchez,DanceWorld,DANCE10,10.00,111.57,23.43,135,4.05,130.95,PayPal,Completed,POUT-202408-03
-TRN29492423,2024-09-13 10:05:26,Sale,Sensuality & Essentiality,Sensuality Pass,Andrew Morris,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202408-03
+TRN29492423,2024-09-13 10:05:26,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Andrew Morris,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202408-03
 TRN56720756,2024-09-15 15:30:09,Sale,Barcelona Summer Fest,VIP Pass,Olivia Rogers,,,,206.61,43.39,250,7.5,242.5,Stripe,Pending,POUT-202408-03
-TRN83949089,2024-09-17 19:55:52,Sale,Sensuality & Essentiality,J&J Amateur,Joshua Reed,DJ Sparkus,DJSPARKUS10,,11.16,2.34,13.5,0.41,13.09,Credit Card,Completed,POUT-202408-03
+TRN83949089,2024-09-17 19:55:52,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,J&J Amateur,Joshua Reed,DJ Sparkus,DJSPARKUS10,,11.16,2.34,13.5,0.41,13.09,Credit Card,Completed,POUT-202408-03
 TRN11177422,2024-09-19 8:20:35,Sale,Winter Bachata Gala,Gala Party Pass,Mia Cook,,,,74.38,15.62,90,2.7,87.3,PayPal,Completed,POUT-202408-03
-TRN38405755,2024-09-21 12:40:18,Refund,Sensuality & Essentiality,Essentiality Pass,William Morgan,PartyPros,PART8,10.00,152.07,31.93,184,5.52,178.48,Credit Card,Refunded,POUT-202408-03
+TRN38405755,2024-09-21 12:40:18,Refund,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,William Morgan,PartyPros,PART8,10.00,152.07,31.93,184,5.52,178.48,Credit Card,Refunded,POUT-202408-03
 TRN65634088,2024-09-23 17:00:01,Sale,Barcelona Summer Fest,Full Pass,Ava Bell,,,,157.02,32.98,190,5.7,184.3,Stripe,Completed,POUT-202408-03
-TRN92862421,2024-09-25 21:25:44,Sale,Sensuality & Essentiality,Sensuality Pass,James Murphy,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202408-03
+TRN92862421,2024-09-25 21:25:44,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,James Murphy,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202408-03
 TRN20090754,2024-09-27 9:50:27,Sale,Winter Bachata Gala,Gala Full Pass,Isabella Bailey,,,,173.55,36.45,210,6.3,203.7,PayPal,Completed,POUT-202408-03
-TRN47319087,2024-09-29 14:15:10,Sale,Sensuality & Essentiality,Essentiality Training Track,Lucas Rivera,,,,148.76,31.24,180,5.4,174.6,Credit Card,Completed,POUT-202409-04
+TRN47319087,2024-09-29 14:15:10,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Training Track,Lucas Rivera,,,,148.76,31.24,180,5.4,174.6,Credit Card,Completed,POUT-202409-04
 TRN74547420,2024-10-01 18:40:53,Sale,Barcelona Summer Fest,Party Pass,Sophia Cooper,SensualPromo,SENS15,5.00,56.20,11.80,68,2.04,65.96,Stripe,Completed,POUT-202409-04
-TRN1775753,2024-10-03 23:00:36,Sale,Sensuality & Essentiality,Essentiality Pass,Mason Richardson,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202409-04
+TRN1775753,2024-10-03 23:00:36,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Mason Richardson,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202409-04
 TRN28904086,2024-10-05 10:25:19,Sale,Winter Bachata Gala,Workshop Pass,Amelia Cox,ProDancers,PROD8,10.00,114.05,23.95,138,4.14,133.86,PayPal,Completed,POUT-202409-04
-TRN56132419,2024-10-07 15:50:02,Sale,Sensuality & Essentiality,Sensuality Pass,Ethan Howard,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202409-04
+TRN56132419,2024-10-07 15:50:02,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Ethan Howard,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202409-04
 TRN83360752,2024-10-09 20:15:45,Sale,Barcelona Summer Fest,Day Pass - Sat,Harper Ward,DanceWorld,DANCE10,5.00,74.38,15.62,90,2.7,87.3,Stripe,Completed,POUT-202409-04
-TRN10589085,2024-10-11 8:40:28,Sale,Sensuality & Essentiality,J&J Amateur,Evelyn Torres,,,,12.40,2.60,15,0.45,14.55,Credit Card,Completed,POUT-202409-04
+TRN10589085,2024-10-11 8:40:28,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,J&J Amateur,Evelyn Torres,,,,12.40,2.60,15,0.45,14.55,Credit Card,Completed,POUT-202409-04
 TRN37817418,2024-10-13 13:00:11,Sale,Winter Bachata Gala,Gala Party Pass,Alexander Peterson,DJ Sparkus,DJSPARKUS10,10.00,66.94,14.06,81,2.43,78.57,PayPal,Completed,POUT-202409-04
-TRN65045751,2024-10-15 17:25:54,Sale,Sensuality & Essentiality,Essentiality Pass,Abigail Gray,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202409-04
+TRN65045751,2024-10-15 17:25:54,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Abigail Gray,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202409-04
 TRN92274084,2024-10-17 21:50:37,Sale,Barcelona Summer Fest,VIP Pass,Emily James,,,,206.61,43.39,250,7.5,242.5,Stripe,Completed,POUT-202409-04
-TRN19502417,2024-10-19 10:15:20,Sale,Sensuality & Essentiality,Sensuality Pass,Michael Watson,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202409-04
+TRN19502417,2024-10-19 10:15:20,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Michael Watson,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202409-04
 TRN46730750,2024-10-21 14:40:03,Sale,Winter Bachata Gala,Gala Full Pass,Madison Brooks,,,,173.55,36.45,210,6.3,203.7,PayPal,Pending,POUT-202409-04
-TRN73959083,2024-10-23 19:05:46,Sale,Sensuality & Essentiality,Essentiality Training Track,David Kelly,PartyPros,PART8,10.00,136.86,28.74,165.6,4.97,160.63,Credit Card,Completed,POUT-202409-04
+TRN73959083,2024-10-23 19:05:46,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Training Track,David Kelly,PartyPros,PART8,10.00,136.86,28.74,165.6,4.97,160.63,Credit Card,Completed,POUT-202409-04
 TRN1227416,2024-10-25 23:30:29,Sale,Barcelona Summer Fest,Full Pass,Elizabeth Sanders,,,,157.02,32.98,190,5.7,184.3,Stripe,Completed,POUT-202409-04
-TRN28455749,2024-10-27 11:55:12,Sale,Sensuality & Essentiality,J&J Amateur,Matthew Price,,,,12.40,2.60,15,0.45,14.55,Credit Card,Completed,POUT-202409-04
+TRN28455749,2024-10-27 11:55:12,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,J&J Amateur,Matthew Price,,,,12.40,2.60,15,0.45,14.55,Credit Card,Completed,POUT-202409-04
 TRN55684082,2024-10-29 16:20:55,Refund,Winter Bachata Gala,Workshop Pass,Chloe Bennett,,,,123.97,26.03,150,4.5,145.5,PayPal,Refunded,POUT-202409-04
-TRN82912415,2024-10-31 20:45:38,Sale,Sensuality & Essentiality,Essentiality Pass,Christopher Wood,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202409-04
+TRN82912415,2024-10-31 20:45:38,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Christopher Wood,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202409-04
 TRN10140748,2024-11-02 9:10:21,Sale,Barcelona Summer Fest,Party Pass,Jessica Barnes,SensualPromo,SENS15,5.00,56.20,11.80,68,2.04,65.96,Stripe,Completed,POUT-202411-05
-TRN37369081,2024-11-04 13:30:04,Sale,Sensuality & Essentiality,Sensuality Pass,Andrew Ross,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202411-05
+TRN37369081,2024-11-04 13:30:04,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Andrew Ross,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202411-05
 TRN64597414,2024-11-06 17:55:47,Sale,Winter Bachata Gala,Gala Party Pass,Olivia Henderson,ProDancers,PROD8,10.00,68.43,14.37,82.8,2.48,80.32,PayPal,Completed,POUT-202411-05
-TRN91825747,2024-11-08 22:20:30,Sale,Sensuality & Essentiality,Essentiality Training Track,Joshua Coleman,,,,148.76,31.24,180,5.4,174.6,Credit Card,Completed,POUT-202411-05
+TRN91825747,2024-11-08 22:20:30,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Training Track,Joshua Coleman,,,,148.76,31.24,180,5.4,174.6,Credit Card,Completed,POUT-202411-05
 TRN19054080,2024-11-10 10:45:13,Sale,Barcelona Summer Fest,Day Pass - Sat,Mia Perry,DanceWorld,DANCE10,5.00,74.38,15.62,90,2.7,87.3,Stripe,Completed,POUT-202411-05
-TRN46282413,2024-11-12 15:05:56,Sale,Sensuality & Essentiality,Essentiality Pass,William Powell,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202411-05
+TRN46282413,2024-11-12 15:05:56,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,William Powell,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202411-05
 TRN73510746,2024-11-14 19:30:39,Sale,Winter Bachata Gala,Gala Full Pass,Ava Long,DJ Sparkus,DJSPARKUS10,10.00,156.20,32.80,189,5.67,183.33,PayPal,Completed,POUT-202411-05
-TRN598412,2024-11-16 8:00:22,Sale,Sensuality & Essentiality,Sensuality Pass,James Patterson,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202411-05
+TRN598412,2024-11-16 8:00:22,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,James Patterson,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202411-05
 TRN27812412,2024-11-18 12:20:05,Sale,Barcelona Summer Fest,VIP Pass,Isabella Hughes,,,,206.61,43.39,250,7.5,242.5,Stripe,Error,POUT-202411-05
-TRN55040745,2024-11-20 16:45:48,Sale,Sensuality & Essentiality,J&J Amateur,Lucas Flores,,,,12.40,2.60,15,0.45,14.55,Credit Card,Completed,POUT-202411-05
+TRN55040745,2024-11-20 16:45:48,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,J&J Amateur,Lucas Flores,,,,12.40,2.60,15,0.45,14.55,Credit Card,Completed,POUT-202411-05
 TRN82269078,2024-11-22 21:10:31,Sale,Winter Bachata Gala,Workshop Pass,Sophia Washington,PartyPros,PART8,10.00,114.05,23.95,138,4.14,133.86,PayPal,Completed,POUT-202411-05
-TRN9497411,2024-11-24 9:35:14,Sale,Sensuality & Essentiality,Essentiality Pass,Mason Butler,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202411-05
+TRN9497411,2024-11-24 9:35:14,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Mason Butler,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202411-05
 TRN36725744,2024-11-26 14:00:57,Sale,Barcelona Summer Fest,Full Pass,Amelia Simmons,,,,157.02,32.98,190,5.7,184.3,Stripe,Completed,POUT-202411-05
-TRN63954077,2024-11-28 18:25:40,Sale,Sensuality & Essentiality,Sensuality Pass,Ethan Foster,SensualPromo,SENS15,10.00,154.55,32.45,187,5.61,181.39,Credit Card,Completed,POUT-202411-05
+TRN63954077,2024-11-28 18:25:40,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Ethan Foster,SensualPromo,SENS15,10.00,154.55,32.45,187,5.61,181.39,Credit Card,Completed,POUT-202411-05
 TRN91182410,2024-11-30 22:50:23,Sale,Winter Bachata Gala,Gala Party Pass,Harper Gonzales,,,,74.38,15.62,90,2.7,87.3,PayPal,Completed,POUT-202411-05
-TRN18410743,2024-12-02 11:15:06,Sale,Sensuality & Essentiality,Essentiality Training Track,Evelyn Bryant,ProDancers,PROD8,10.00,136.86,28.74,165.6,4.97,160.63,Credit Card,Completed,POUT-202411-05
+TRN18410743,2024-12-02 11:15:06,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Training Track,Evelyn Bryant,ProDancers,PROD8,10.00,136.86,28.74,165.6,4.97,160.63,Credit Card,Completed,POUT-202411-05
 TRN45639076,2024-12-04 15:40:49,Sale,Barcelona Summer Fest,Party Pass,Alexander Alexander,,,,66.12,13.88,80,2.4,77.6,Stripe,Completed,POUT-202411-05
-TRN72867409,2024-12-06 20:05:32,Sale,Sensuality & Essentiality,Essentiality Pass,Abigail Russell,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202411-05
+TRN72867409,2024-12-06 20:05:32,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Abigail Russell,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202411-05
 TRN9995742,2024-12-08 8:30:15,Sale,Winter Bachata Gala,Gala Full Pass,Emily Griffin,DanceWorld,DANCE10,10.00,156.20,32.80,189,5.67,183.33,PayPal,Pending,POUT-202412-06
-TRN27224075,2024-12-10 12:50:58,Sale,Sensuality & Essentiality,Sensuality Pass,Michael Diaz,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202412-06
+TRN27224075,2024-12-10 12:50:58,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Michael Diaz,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202412-06
 TRN54452408,2024-12-12 17:15:41,Refund,Barcelona Summer Fest,Day Pass - Sat,Madison Hayes,,,,82.64,17.36,100,3,97,Stripe,Refunded,POUT-202412-06
-TRN81680741,2024-12-14 21:40:24,Sale,Sensuality & Essentiality,J&J Amateur,David Myers,,,,12.40,2.60,15,0.45,14.55,Credit Card,Completed,POUT-202412-06
+TRN81680741,2024-12-14 21:40:24,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,J&J Amateur,David Myers,,,,12.40,2.60,15,0.45,14.55,Credit Card,Completed,POUT-202412-06
 TRN909407,2024-12-16 10:05:07,Sale,Winter Bachata Gala,Workshop Pass,Elizabeth Ford,DJ Sparkus,DJSPARKUS10,10.00,111.57,23.43,135,4.05,130.95,PayPal,Completed,POUT-202412-06
-TRN36337406,2024-12-18 14:30:50,Sale,Sensuality & Essentiality,Essentiality Pass,Matthew Hamilton,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202412-06
+TRN36337406,2024-12-18 14:30:50,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Matthew Hamilton,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202412-06
 TRN63565739,2024-12-20 18:55:33,Sale,Barcelona Summer Fest,VIP Pass,Chloe Graham,,,,206.61,43.39,250,7.5,242.5,Stripe,Completed,POUT-202412-06
-TRN90794072,2024-12-22 23:20:16,Sale,Sensuality & Essentiality,Sensuality Pass,Christopher Sullivan,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202412-06
+TRN90794072,2024-12-22 23:20:16,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Christopher Sullivan,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202412-06
 TRN18022405,2024-12-24 11:45:59,Sale,Winter Bachata Gala,Gala Party Pass,Jessica Wallace,PartyPros,PART8,10.00,68.43,14.37,82.8,2.48,80.32,PayPal,Completed,POUT-202412-06
-TRN45250738,2024-12-26 16:10:42,Sale,Sensuality & Essentiality,Essentiality Training Track,Andrew Woods,,,,148.76,31.24,180,5.4,174.6,Credit Card,Completed,POUT-202412-06
+TRN45250738,2024-12-26 16:10:42,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Training Track,Andrew Woods,,,,148.76,31.24,180,5.4,174.6,Credit Card,Completed,POUT-202412-06
 TRN72479071,2024-12-28 20:35:25,Sale,Barcelona Summer Fest,Full Pass,Olivia Cole,SensualPromo,SENS15,10.00,133.47,28.03,161.5,4.85,156.65,Stripe,Completed,POUT-202412-06
-TRN99707404,2024-12-30 9:00:08,Sale,Sensuality & Essentiality,Essentiality Pass,Joshua West,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202412-06
+TRN99707404,2024-12-30 9:00:08,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Joshua West,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202412-06
 TRN26935737,2025-01-01 13:25:51,Sale,Winter Bachata Gala,Gala Full Pass,Mia Jordan,ProDancers,PROD8,10.00,159.67,33.53,193.2,5.8,187.4,PayPal,Completed,POUT-202412-06
-TRN54164070,2025-01-03 17:50:34,Sale,Sensuality & Essentiality,Sensuality Pass,William Owens,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202412-06
+TRN54164070,2025-01-03 17:50:34,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,William Owens,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202412-06
 TRN81392403,2025-01-05 22:15:17,Sale,Barcelona Summer Fest,Party Pass,Ava Reynolds,DanceWorld,DANCE10,5.00,59.50,12.50,72,2.16,69.84,Stripe,Completed,POUT-202412-06
-TRN8620736,2025-01-07 10:40:00,Sale,Sensuality & Essentiality,J&J Amateur,James Fisher,,,,12.40,2.60,15,0.45,14.55,Credit Card,Completed,POUT-202412-06
+TRN8620736,2025-01-07 10:40:00,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,J&J Amateur,James Fisher,,,,12.40,2.60,15,0.45,14.55,Credit Card,Completed,POUT-202412-06
 TRN35849069,2025-01-09 15:05:43,Sale,Winter Bachata Gala,Workshop Pass,Isabella Ellis,,,,123.97,26.03,150,4.5,145.5,PayPal,Completed,POUT-202412-06
-TRN63077402,2025-01-11 19:30:26,Sale,Sensuality & Essentiality,Essentiality Pass,Lucas Harrison,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202412-06
+TRN63077402,2025-01-11 19:30:26,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Lucas Harrison,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202412-06
 TRN90305735,2025-01-13 8:00:09,Sale,Barcelona Summer Fest,Day Pass - Sat,Sophia Gibson,DJ Sparkus,DJSPARKUS10,5.00,74.38,15.62,90,2.7,87.3,Stripe,Completed,POUT-202501-07
-TRN17534068,2025-01-15 12:25:52,Sale,Sensuality & Essentiality,Sensuality Pass,Mason McDonald,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202501-07
+TRN17534068,2025-01-15 12:25:52,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Mason McDonald,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202501-07
 TRN44762401,2025-01-17 16:50:35,Sale,Winter Bachata Gala,Gala Party Pass,Amelia Cruz,,,,74.38,15.62,90,2.7,87.3,PayPal,Completed,POUT-202501-07
-TRN71990734,2025-01-19 21:15:18,Sale,Sensuality & Essentiality,Essentiality Training Track,Ethan Marshall,,,,148.76,31.24,180,5.4,174.6,Credit Card,Completed,POUT-202501-07
+TRN71990734,2025-01-19 21:15:18,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Training Track,Ethan Marshall,,,,148.76,31.24,180,5.4,174.6,Credit Card,Completed,POUT-202501-07
 TRN99219067,2025-01-21 9:40:01,Sale,Barcelona Summer Fest,VIP Pass,Harper Ortiz,PartyPros,PART8,10.00,190.08,39.92,230,6.9,223.1,Stripe,Completed,POUT-202501-07
-TRN26447400,2025-01-23 14:05:44,Sale,Sensuality & Essentiality,Essentiality Pass,Evelyn Gomez,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202501-07
+TRN26447400,2025-01-23 14:05:44,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Evelyn Gomez,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202501-07
 TRN53675733,2025-01-25 18:30:27,Sale,Winter Bachata Gala,Gala Full Pass,Alexander Murray,SensualPromo,SENS15,10.00,147.52,30.98,178.5,5.36,173.14,PayPal,Completed,POUT-202501-07
-TRN80904066,2025-01-27 22:55:10,Sale,Sensuality & Essentiality,Sensuality Pass,Abigail Freeman,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202501-07
+TRN80904066,2025-01-27 22:55:10,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Abigail Freeman,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202501-07
 TRN7132400,2025-01-29 11:20:53,Sale,Barcelona Summer Fest,Full Pass,Emily Wells,ProDancers,PROD8,10.00,144.46,30.34,174.8,5.24,169.56,Stripe,Completed,POUT-202501-07
-TRN34360733,2025-01-31 15:45:36,Sale,Sensuality & Essentiality,J&J Amateur,Michael Webb,,,,12.40,2.60,15,0.45,14.55,Credit Card,Completed,POUT-202501-07
+TRN34360733,2025-01-31 15:45:36,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,J&J Amateur,Michael Webb,,,,12.40,2.60,15,0.45,14.55,Credit Card,Completed,POUT-202501-07
 TRN61589066,2025-02-02 20:10:19,Sale,Winter Bachata Gala,Workshop Pass,Madison Simpson,DanceWorld,DANCE10,10.00,111.57,23.43,135,4.05,130.95,PayPal,Completed,POUT-202501-07
-TRN88817399,2025-02-04 8:35:02,Refund,Sensuality & Essentiality,Essentiality Pass,David Stevens,,,,165.29,34.71,200,6,194,Credit Card,Refunded,POUT-202501-07
+TRN88817399,2025-02-04 8:35:02,Refund,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,David Stevens,,,,165.29,34.71,200,6,194,Credit Card,Refunded,POUT-202501-07
 TRN16045732,2025-02-06 13:00:45,Sale,Barcelona Summer Fest,Party Pass,Elizabeth Tucker,,,,66.12,13.88,80,2.4,77.6,Stripe,Completed,POUT-202501-07
-TRN43274065,2025-02-08 17:25:28,Sale,Sensuality & Essentiality,Sensuality Pass,Matthew Porter,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202501-07
+TRN43274065,2025-02-08 17:25:28,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Matthew Porter,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202501-07
 TRN70502398,2025-02-10 21:50:11,Sale,Winter Bachata Gala,Gala Party Pass,Chloe Hunter,DJ Sparkus,DJSPARKUS10,10.00,66.94,14.06,81,2.43,78.57,PayPal,Completed,POUT-202501-07
-TRN97730731,2025-02-12 10:15:54,Sale,Sensuality & Essentiality,Essentiality Training Track,Christopher Hicks,,,,148.76,31.24,180,5.4,174.6,Credit Card,Error,POUT-202501-07
+TRN97730731,2025-02-12 10:15:54,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Training Track,Christopher Hicks,,,,148.76,31.24,180,5.4,174.6,Credit Card,Error,POUT-202501-07
 TRN24959064,2025-02-14 14:40:37,Sale,Barcelona Summer Fest,Day Pass - Sat,Jessica Crawford,,,,82.64,17.36,100,3,97,Stripe,Completed,POUT-202501-07
-TRN52187397,2025-02-16 19:05:20,Sale,Sensuality & Essentiality,Essentiality Pass,Andrew Boyd,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202502-08
+TRN52187397,2025-02-16 19:05:20,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Andrew Boyd,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202502-08
 TRN79415730,2025-02-18 23:30:03,Sale,Winter Bachata Gala,Gala Full Pass,Olivia Mason,PartyPros,PART8,10.00,159.67,33.53,193.2,5.8,187.4,PayPal,Completed,POUT-202502-08
-TRN6644063,2025-02-20 11:55:46,Sale,Sensuality & Essentiality,Sensuality Pass,Joshua Burns,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202502-08
+TRN6644063,2025-02-20 11:55:46,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Joshua Burns,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202502-08
 TRN33872396,2025-02-22 16:20:29,Sale,Barcelona Summer Fest,VIP Pass,Mia Warren,SensualPromo,SENS15,10.00,175.62,36.88,212.5,6.38,206.12,Stripe,Completed,POUT-202502-08
-TRN61100729,2025-02-24 20:45:12,Sale,Sensuality & Essentiality,J&J Amateur,William Gordon,,,,12.40,2.60,15,0.45,14.55,Credit Card,Completed,POUT-202502-08
+TRN61100729,2025-02-24 20:45:12,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,J&J Amateur,William Gordon,,,,12.40,2.60,15,0.45,14.55,Credit Card,Completed,POUT-202502-08
 TRN88329062,2025-02-26 9:10:55,Sale,Winter Bachata Gala,Workshop Pass,Ava Shaw,ProDancers,PROD8,10.00,114.05,23.95,138,4.14,133.86,PayPal,Completed,POUT-202502-08
-TRN15557395,2025-03-01 13:35:38,Sale,Sensuality & Essentiality,Essentiality Pass,James Holmes,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202502-08
+TRN15557395,2025-03-01 13:35:38,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,James Holmes,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202502-08
 TRN42785728,2025-03-03 18:00:21,Sale,Barcelona Summer Fest,Full Pass,Isabella Rice,DanceWorld,DANCE10,10.00,141.32,29.68,171,5.13,165.87,Stripe,Pending,POUT-202502-08
-TRN70014061,2025-03-05 22:25:04,Sale,Sensuality & Essentiality,Sensuality Pass,Lucas Hunt,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202502-08
+TRN70014061,2025-03-05 22:25:04,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Lucas Hunt,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202502-08
 TRN97242394,2025-03-07 10:50:47,Sale,Winter Bachata Gala,Gala Party Pass,Sophia Black,,,,74.38,15.62,90,2.7,87.3,PayPal,Completed,POUT-202502-08
-TRN24470727,2025-03-09 15:15:30,Sale,Sensuality & Essentiality,Essentiality Training Track,Mason Robertson,DJ Sparkus,DJSPARKUS10,10.00,133.88,28.12,162,4.86,157.14,Credit Card,Completed,POUT-202502-08
+TRN24470727,2025-03-09 15:15:30,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Training Track,Mason Robertson,DJ Sparkus,DJSPARKUS10,10.00,133.88,28.12,162,4.86,157.14,Credit Card,Completed,POUT-202502-08
 TRN51699060,2025-03-11 19:40:13,Sale,Barcelona Summer Fest,Party Pass,Amelia Stone,,,,66.12,13.88,80,2.4,77.6,Stripe,Completed,POUT-202502-08
-TRN78927393,2025-03-13 8:05:56,Sale,Sensuality & Essentiality,Essentiality Pass,Ethan Fox,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202502-08
+TRN78927393,2025-03-13 8:05:56,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Ethan Fox,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202502-08
 TRN6155726,2025-03-15 12:30:39,Sale,Winter Bachata Gala,Gala Full Pass,Harper Boyd,,,,173.55,36.45,210,6.3,203.7,PayPal,Completed,POUT-202502-08
-TRN33384059,2025-03-17 16:55:22,Sale,Sensuality & Essentiality,Sensuality Pass,Evelyn Day,PartyPros,PART8,10.00,167.27,35.13,202.4,6.07,196.33,Credit Card,Completed,POUT-202502-08
+TRN33384059,2025-03-17 16:55:22,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Evelyn Day,PartyPros,PART8,10.00,167.27,35.13,202.4,6.07,196.33,Credit Card,Completed,POUT-202502-08
 TRN60612392,2025-03-19 21:20:05,Sale,Barcelona Summer Fest,Day Pass - Sat,Alexander Montgomery,,,,82.64,17.36,100,3,97,Stripe,Completed,POUT-202502-08
-TRN87840725,2025-03-21 9:45:48,Sale,Sensuality & Essentiality,J&J Amateur,Abigail Henry,,,,12.40,2.60,15,0.45,14.55,Credit Card,Completed,POUT-202502-08
+TRN87840725,2025-03-21 9:45:48,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,J&J Amateur,Abigail Henry,,,,12.40,2.60,15,0.45,14.55,Credit Card,Completed,POUT-202502-08
 TRN15069058,2025-03-23 14:10:31,Sale,Winter Bachata Gala,Workshop Pass,Emily Kennedy,SensualPromo,SENS15,10.00,105.37,22.13,127.5,3.83,123.67,PayPal,Completed,POUT-202502-08
-TRN42297391,2025-03-25 18:35:14,Sale,Sensuality & Essentiality,Essentiality Pass,Michael Warren,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202503-09
+TRN42297391,2025-03-25 18:35:14,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Michael Warren,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202503-09
 TRN69525724,2025-03-27 23:00:57,Sale,Barcelona Summer Fest,VIP Pass,Madison Ford,,,,206.61,43.39,250,7.5,242.5,Stripe,Completed,POUT-202503-09
-TRN96754057,2025-03-29 11:25:40,Sale,Sensuality & Essentiality,Sensuality Pass,David Snyder,ProDancers,PROD8,10.00,167.27,35.13,202.4,6.07,196.33,Credit Card,Completed,POUT-202503-09
+TRN96754057,2025-03-29 11:25:40,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,David Snyder,ProDancers,PROD8,10.00,167.27,35.13,202.4,6.07,196.33,Credit Card,Completed,POUT-202503-09
 TRN23982390,2025-03-31 15:50:23,Sale,Winter Bachata Gala,Gala Party Pass,Elizabeth Lawson,,,,74.38,15.62,90,2.7,87.3,PayPal,Completed,POUT-202503-09
-TRN51210723,2025-04-02 20:15:06,Sale,Sensuality & Essentiality,Essentiality Training Track,Matthew Meyer,DanceWorld,DANCE10,10.00,133.88,28.12,162,4.86,157.14,Credit Card,Error,POUT-202503-09
+TRN51210723,2025-04-02 20:15:06,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Training Track,Matthew Meyer,DanceWorld,DANCE10,10.00,133.88,28.12,162,4.86,157.14,Credit Card,Error,POUT-202503-09
 TRN78439056,2025-04-04 8:40:49,Sale,Barcelona Summer Fest,Full Pass,Chloe Schmidt,,,,157.02,32.98,190,5.7,184.3,Stripe,Completed,POUT-202503-09
-TRN5667389,2025-04-06 13:05:32,Sale,Sensuality & Essentiality,Essentiality Pass,Christopher Hanson,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202503-09
+TRN5667389,2025-04-06 13:05:32,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Christopher Hanson,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202503-09
 TRN32895722,2025-04-08 17:30:15,Sale,Winter Bachata Gala,Gala Full Pass,Jessica Dunn,DJ Sparkus,DJSPARKUS10,10.00,156.20,32.80,189,5.67,183.33,PayPal,Completed,POUT-202503-09
-TRN60124055,2025-04-10 21:55:58,Sale,Sensuality & Essentiality,Sensuality Pass,Andrew Palmer,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202503-09
+TRN60124055,2025-04-10 21:55:58,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Andrew Palmer,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202503-09
 TRN87352388,2025-04-12 10:20:41,Sale,Barcelona Summer Fest,Party Pass,Olivia Perkins,,,,66.12,13.88,80,2.4,77.6,Stripe,Completed,POUT-202503-09
-TRN14580721,2025-04-14 14:45:24,Refund,Sensuality & Essentiality,J&J Amateur,Joshua Mills,,,,12.40,2.60,15,0.45,14.55,Credit Card,Refunded,POUT-202503-09
+TRN14580721,2025-04-14 14:45:24,Refund,Bachata Geneva Festival 2026 - The Festival of Nations,J&J Amateur,Joshua Mills,,,,12.40,2.60,15,0.45,14.55,Credit Card,Refunded,POUT-202503-09
 TRN41809054,2025-04-16 19:10:07,Sale,Winter Bachata Gala,Workshop Pass,Mia Nichols,PartyPros,PART8,10.00,114.05,23.95,138,4.14,133.86,PayPal,Completed,POUT-202503-09
-TRN69037387,2025-04-18 23:35:50,Sale,Sensuality & Essentiality,Essentiality Pass,William Grant,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202503-09
+TRN69037387,2025-04-18 23:35:50,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,William Grant,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202503-09
 TRN96265720,2025-04-20 11:59:33,Sale,Barcelona Summer Fest,Day Pass - Sat,Ava Knight,SensualPromo,SENS15,5.00,70.25,14.75,85,2.55,82.45,Stripe,Completed,POUT-202503-09
-TRN23494053,2025-04-22 16:24:16,Sale,Sensuality & Essentiality,Sensuality Pass,James Ferguson,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202503-09
+TRN23494053,2025-04-22 16:24:16,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,James Ferguson,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202503-09
 TRN50722386,2025-04-24 20:48:59,Sale,Winter Bachata Gala,Gala Party Pass,Isabella Rose,ProDancers,PROD8,10.00,68.43,14.37,82.8,2.48,80.32,PayPal,Completed,POUT-202503-09
-TRN77950719,2025-04-26 9:13:42,Sale,Sensuality & Essentiality,Essentiality Training Track,Lucas Stone,,,,148.76,31.24,180,5.4,174.6,Credit Card,Completed,POUT-202503-09
+TRN77950719,2025-04-26 9:13:42,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Training Track,Lucas Stone,,,,148.76,31.24,180,5.4,174.6,Credit Card,Completed,POUT-202503-09
 TRN5179052,2025-04-28 13:38:25,Sale,Barcelona Summer Fest,VIP Pass,Sophia Hawkins,DanceWorld,DANCE10,10.00,185.95,39.05,225,6.75,218.25,Stripe,Completed,POUT-202504-10
-TRN32407385,2025-04-30 18:03:08,Sale,Sensuality & Essentiality,Essentiality Pass,Mason Kelley,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202504-10
+TRN32407385,2025-04-30 18:03:08,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Mason Kelley,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202504-10
 TRN59635718,2025-05-02 22:27:51,Sale,Winter Bachata Gala,Gala Full Pass,Amelia Butler,,,,173.55,36.45,210,6.3,203.7,PayPal,Completed,POUT-202504-10
-TRN86864051,2025-05-04 10:52:34,Sale,Sensuality & Essentiality,Sensuality Pass,Ethan Simmons,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202504-10
+TRN86864051,2025-05-04 10:52:34,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Ethan Simmons,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202504-10
 TRN14092384,2025-05-06 15:17:17,Sale,Barcelona Summer Fest,Full Pass,Harper Foster,,,,157.02,32.98,190,5.7,184.3,Stripe,Completed,POUT-202504-10
-TRN41320717,2025-05-08 19:42:00,Sale,Sensuality & Essentiality,J&J Amateur,Evelyn Gonzales,,,,12.40,2.60,15,0.45,14.55,Credit Card,Completed,POUT-202504-10
+TRN41320717,2025-05-08 19:42:00,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,J&J Amateur,Evelyn Gonzales,,,,12.40,2.60,15,0.45,14.55,Credit Card,Completed,POUT-202504-10
 TRN68549050,2025-05-10 8:06:43,Sale,Winter Bachata Gala,Workshop Pass,Alexander Bryant,DJ Sparkus,DJSPARKUS10,10.00,111.57,23.43,135,4.05,130.95,PayPal,Completed,POUT-202504-10
-TRN95777383,2025-05-12 12:31:26,Sale,Sensuality & Essentiality,Essentiality Pass,Abigail Alexander,,,,165.29,34.71,200,6,194,Credit Card,Pending,POUT-202504-10
+TRN95777383,2025-05-12 12:31:26,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Abigail Alexander,,,,165.29,34.71,200,6,194,Credit Card,Pending,POUT-202504-10
 TRN23005716,2025-05-14 16:56:09,Sale,Barcelona Summer Fest,Party Pass,Emily Russell,PartyPros,PART8,5.00,60.83,12.77,73.6,2.21,71.39,Stripe,Completed,POUT-202504-10
-TRN50234049,2025-05-16 21:20:52,Sale,Sensuality & Essentiality,Sensuality Pass,Michael Griffin,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202504-10
+TRN50234049,2025-05-16 21:20:52,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Michael Griffin,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202504-10
 TRN77462382,2025-05-18 9:45:35,Sale,Winter Bachata Gala,Gala Party Pass,Madison Hayes,SensualPromo,SENS15,10.00,63.22,13.28,76.5,2.3,74.2,PayPal,Completed,POUT-202504-10
-TRN4690715,2025-05-20 14:10:18,Sale,Sensuality & Essentiality,Essentiality Training Track,David Myers,,,,148.76,31.24,180,5.4,174.6,Credit Card,Completed,POUT-202504-10
+TRN4690715,2025-05-20 14:10:18,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Training Track,David Myers,,,,148.76,31.24,180,5.4,174.6,Credit Card,Completed,POUT-202504-10
 TRN31919048,2025-05-22 18:35:01,Sale,Barcelona Summer Fest,Day Pass - Sat,Elizabeth Ford,ProDancers,PROD8,5.00,76.03,15.97,92,2.76,89.24,Stripe,Completed,POUT-202504-10
-TRN59147381,2025-05-24 22:59:44,Sale,Sensuality & Essentiality,Essentiality Pass,Matthew Hamilton,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202504-10
+TRN59147381,2025-05-24 22:59:44,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Matthew Hamilton,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202504-10
 TRN86375714,2025-05-26 11:24:27,Sale,Winter Bachata Gala,Gala Full Pass,Chloe Graham,DanceWorld,DANCE10,10.00,156.20,32.80,189,5.67,183.33,PayPal,Completed,POUT-202504-10
-TRN13604047,2025-05-28 15:49:10,Sale,Sensuality & Essentiality,Sensuality Pass,Christopher Sullivan,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202504-10
+TRN13604047,2025-05-28 15:49:10,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Christopher Sullivan,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202504-10
 TRN40832380,2025-05-30 20:13:53,Sale,Barcelona Summer Fest,VIP Pass,Jessica Wallace,,,,206.61,43.39,250,7.5,242.5,Stripe,Completed,POUT-202504-10
-TRN68060713,2025-06-01 8:38:36,Sale,Sensuality & Essentiality,J&J Amateur,Andrew Woods,,,,12.40,2.60,15,0.45,14.55,Credit Card,Completed,POUT-202506-11
+TRN68060713,2025-06-01 8:38:36,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,J&J Amateur,Andrew Woods,,,,12.40,2.60,15,0.45,14.55,Credit Card,Completed,POUT-202506-11
 TRN95289046,2025-06-03 13:03:19,Sale,Winter Bachata Gala,Workshop Pass,Olivia Cole,DJ Sparkus,DJSPARKUS10,10.00,111.57,23.43,135,4.05,130.95,PayPal,Completed,POUT-202506-11
-TRN22517379,2025-06-05 17:28:02,Sale,Sensuality & Essentiality,Essentiality Pass,Joshua West,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202506-11
+TRN22517379,2025-06-05 17:28:02,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Joshua West,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202506-11
 TRN49745712,2025-06-07 21:52:45,Sale,Barcelona Summer Fest,Full Pass,Mia Jordan,,,,157.02,32.98,190,5.7,184.3,Stripe,Completed,POUT-202506-11
-TRN76974045,2025-06-09 10:17:28,Sale,Sensuality & Essentiality,Sensuality Pass,William Owens,PartyPros,PART8,10.00,167.27,35.13,202.4,6.07,196.33,Credit Card,Completed,POUT-202506-11
+TRN76974045,2025-06-09 10:17:28,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,William Owens,PartyPros,PART8,10.00,167.27,35.13,202.4,6.07,196.33,Credit Card,Completed,POUT-202506-11
 TRN4202378,2025-06-11 14:42:11,Sale,Winter Bachata Gala,Gala Party Pass,Ava Reynolds,,,,74.38,15.62,90,2.7,87.3,PayPal,Completed,POUT-202506-11
-TRN31430711,2025-06-13 19:06:54,Sale,Sensuality & Essentiality,Essentiality Training Track,James Fisher,SensualPromo,SENS15,10.00,126.45,26.55,153,4.59,148.41,Credit Card,Completed,POUT-202506-11
+TRN31430711,2025-06-13 19:06:54,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Training Track,James Fisher,SensualPromo,SENS15,10.00,126.45,26.55,153,4.59,148.41,Credit Card,Completed,POUT-202506-11
 TRN58659044,2025-06-15 7:31:37,Sale,Barcelona Summer Fest,Party Pass,Isabella Ellis,,,,66.12,13.88,80,2.4,77.6,Stripe,Completed,POUT-202506-11
-TRN85887377,2025-06-17 11:56:20,Sale,Sensuality & Essentiality,Essentiality Pass,Lucas Harrison,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202506-11
+TRN85887377,2025-06-17 11:56:20,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Lucas Harrison,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202506-11
 TRN13115710,2025-06-19 16:21:03,Sale,Winter Bachata Gala,Gala Full Pass,Sophia Gibson,ProDancers,PROD8,10.00,159.67,33.53,193.2,5.8,187.4,PayPal,Completed,POUT-202506-11
-TRN40344043,2025-06-21 20:45:46,Sale,Sensuality & Essentiality,Sensuality Pass,Mason McDonald,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202506-11
+TRN40344043,2025-06-21 20:45:46,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Mason McDonald,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202506-11
 TRN67572376,2025-06-23 9:10:29,Sale,Barcelona Summer Fest,Day Pass - Sat,Amelia Cruz,DanceWorld,DANCE10,5.00,74.38,15.62,90,2.7,87.3,Stripe,Completed,POUT-202506-11
-TRN94800709,2025-06-25 13:35:12,Refund,Sensuality & Essentiality,J&J Amateur,Ethan Marshall,,,,12.40,2.60,15,0.45,14.55,Credit Card,Refunded,POUT-202506-11
+TRN94800709,2025-06-25 13:35:12,Refund,Bachata Geneva Festival 2026 - The Festival of Nations,J&J Amateur,Ethan Marshall,,,,12.40,2.60,15,0.45,14.55,Credit Card,Refunded,POUT-202506-11
 TRN22029042,2025-06-27 17:59:55,Sale,Winter Bachata Gala,Workshop Pass,Harper Ortiz,,,,123.97,26.03,150,4.5,145.5,PayPal,Completed,POUT-202506-11
-TRN49257375,2025-06-29 22:24:38,Sale,Sensuality & Essentiality,Essentiality Pass,Evelyn Gomez,,,,165.29,34.71,200,6,194,Credit Card,Error,POUT-202506-11
+TRN49257375,2025-06-29 22:24:38,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Evelyn Gomez,,,,165.29,34.71,200,6,194,Credit Card,Error,POUT-202506-11
 TRN76485708,2025-07-01 10:49:21,Sale,Barcelona Summer Fest,VIP Pass,Alexander Murray,DJ Sparkus,DJSPARKUS10,10.00,185.95,39.05,225,6.75,218.25,Stripe,Completed,POUT-202506-11
-TRN3714041,2025-07-03 15:14:04,Sale,Sensuality & Essentiality,Sensuality Pass,Abigail Freeman,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202506-11
+TRN3714041,2025-07-03 15:14:04,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Abigail Freeman,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202506-11
 TRN30942374,2025-07-05 19:38:47,Sale,Winter Bachata Gala,Gala Party Pass,Emily Wells,,,,74.38,15.62,90,2.7,87.3,PayPal,Completed,POUT-202507-12
-TRN58170707,2025-07-07 8:03:30,Sale,Sensuality & Essentiality,Essentiality Training Track,Michael Webb,PartyPros,PART8,10.00,136.86,28.74,165.6,4.97,160.63,Credit Card,Completed,POUT-202507-12
+TRN58170707,2025-07-07 8:03:30,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Training Track,Michael Webb,PartyPros,PART8,10.00,136.86,28.74,165.6,4.97,160.63,Credit Card,Completed,POUT-202507-12
 TRN85399040,2025-07-09 12:28:13,Sale,Barcelona Summer Fest,Full Pass,Madison Simpson,,,,157.02,32.98,190,5.7,184.3,Stripe,Completed,POUT-202507-12
-TRN12627373,2025-07-11 16:52:56,Sale,Sensuality & Essentiality,Essentiality Pass,David Stevens,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202507-12
+TRN12627373,2025-07-11 16:52:56,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,David Stevens,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202507-12
 TRN39855706,2025-07-13 21:17:39,Sale,Winter Bachata Gala,Gala Full Pass,Elizabeth Tucker,SensualPromo,SENS15,10.00,147.52,30.98,178.5,5.36,173.14,PayPal,Completed,POUT-202507-12
-TRN67084039,2025-07-15 9:42:22,Sale,Sensuality & Essentiality,Sensuality Pass,Matthew Porter,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202507-12
+TRN67084039,2025-07-15 9:42:22,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Matthew Porter,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202507-12
 TRN94312372,2025-07-17 14:07:05,Sale,Barcelona Summer Fest,Party Pass,Chloe Hunter,ProDancers,PROD8,5.00,60.83,12.77,73.6,2.21,71.39,Stripe,Completed,POUT-202507-12
-TRN21540705,2025-07-19 18:31:48,Sale,Sensuality & Essentiality,J&J Amateur,Christopher Hicks,,,,12.40,2.60,15,0.45,14.55,Credit Card,Completed,POUT-202507-12
+TRN21540705,2025-07-19 18:31:48,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,J&J Amateur,Christopher Hicks,,,,12.40,2.60,15,0.45,14.55,Credit Card,Completed,POUT-202507-12
 TRN48769038,2025-07-21 22:56:31,Sale,Winter Bachata Gala,Workshop Pass,Jessica Crawford,DanceWorld,DANCE10,10.00,111.57,23.43,135,4.05,130.95,PayPal,Completed,POUT-202507-12
-TRN75997371,2025-07-23 11:21:14,Sale,Sensuality & Essentiality,Essentiality Pass,Andrew Boyd,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202507-12
+TRN75997371,2025-07-23 11:21:14,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Andrew Boyd,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202507-12
 TRN3225704,2025-07-25 15:45:57,Sale,Barcelona Summer Fest,Day Pass - Sat,Olivia Mason,,,,82.64,17.36,100,3,97,Stripe,Completed,POUT-202507-12
-TRN30454037,2025-07-27 20:10:40,Sale,Sensuality & Essentiality,Sensuality Pass,Joshua Burns,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202507-12
+TRN30454037,2025-07-27 20:10:40,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Joshua Burns,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202507-12
 TRN57682370,2025-07-29 8:35:23,Sale,Winter Bachata Gala,Gala Party Pass,Mia Warren,DJ Sparkus,DJSPARKUS10,10.00,66.94,14.06,81,2.43,78.57,PayPal,Completed,POUT-202507-12
-TRN84910703,2025-07-31 13:00:06,Sale,Sensuality & Essentiality,Essentiality Training Track,William Gordon,,,,148.76,31.24,180,5.4,174.6,Credit Card,Completed,POUT-202507-12
+TRN84910703,2025-07-31 13:00:06,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Training Track,William Gordon,,,,148.76,31.24,180,5.4,174.6,Credit Card,Completed,POUT-202507-12
 TRN12139036,2025-08-02 17:24:49,Sale,Barcelona Summer Fest,VIP Pass,Ava Shaw,,,,206.61,43.39,250,7.5,242.5,Stripe,Completed,POUT-202507-12
-TRN39367369,2025-08-04 21:49:32,Sale,Sensuality & Essentiality,Essentiality Pass,James Holmes,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202507-12
+TRN39367369,2025-08-04 21:49:32,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,James Holmes,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202507-12
 TRN66595702,2025-08-06 10:14:15,Sale,Winter Bachata Gala,Gala Full Pass,Isabella Rice,PartyPros,PART8,10.00,159.67,33.53,193.2,5.8,187.4,PayPal,Completed,POUT-202507-12
-TRN93824035,2025-08-08 14:38:58,Sale,Sensuality & Essentiality,Sensuality Pass,Lucas Hunt,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202508-13
+TRN93824035,2025-08-08 14:38:58,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Lucas Hunt,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202508-13
 TRN21052368,2025-08-10 19:03:41,Sale,Barcelona Summer Fest,Full Pass,Sophia Black,SensualPromo,SENS15,10.00,133.47,28.03,161.5,4.85,156.65,Stripe,Completed,POUT-202508-13
-TRN48280701,2025-08-12 7:28:24,Sale,Sensuality & Essentiality,J&J Amateur,Mason Robertson,,,,12.40,2.60,15,0.45,14.55,Credit Card,Completed,POUT-202508-13
+TRN48280701,2025-08-12 7:28:24,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,J&J Amateur,Mason Robertson,,,,12.40,2.60,15,0.45,14.55,Credit Card,Completed,POUT-202508-13
 TRN75509034,2025-08-14 11:53:07,Sale,Winter Bachata Gala,Workshop Pass,Amelia Stone,ProDancers,PROD8,10.00,114.05,23.95,138,4.14,133.86,PayPal,Completed,POUT-202508-13
 TRN55508311,2025-08-15 13:03:09,Sale,Barcelona Summer Fest,Day Pass - Sat,Elijah Taylor,,,,82.64,17.36,100,3,97,Stripe,Completed,POUT-202508-14
-TRN79391030,2025-08-16 4:54:19,Sale,Sensuality & Essentiality,Essentiality Pass,Ava Moore,DanceWorld,DANCE10,10.00,148.76,31.24,180,5.4,174.6,Credit Card,Completed,POUT-202508-14
+TRN79391030,2025-08-16 4:54:19,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Ava Moore,DanceWorld,DANCE10,10.00,148.76,31.24,180,5.4,174.6,Credit Card,Completed,POUT-202508-14
 TRN33887037,2025-08-17 1:21:40,Sale,Barcelona Summer Fest,Party Pass,Olivia Martin,,,,66.12,13.88,80,2.4,77.6,PayPal,Completed,POUT-202508-14
 TRN31976076,2025-08-18 6:17:51,Sale,Winter Bachata Gala,Workshop Pass,Liam Anderson,ProDancers,PROD8,10.00,114.05,23.95,138,4.14,133.86,Stripe,Completed,POUT-202508-14
 TRN41530965,2025-08-19 12:44:27,Sale,Barcelona Summer Fest,Full Pass,Noah Jackson,,,,157.02,32.98,190,5.7,184.3,Stripe,Completed,POUT-202508-14
-TRN57451680,2025-08-20 18:31:37,Sale,Sensuality & Essentiality,J&J Amateur,Ava Williams,,,,12.40,2.60,15,0.45,14.55,PayPal,Completed,POUT-202508-14
-TRN82281856,2025-08-21 21:07:07,Sale,Sensuality & Essentiality,Sensuality Pass,Lucas Rodriguez,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202508-14
-TRN50697745,2025-08-23 0:23:25,Sale,Sensuality & Essentiality,Essentiality Training Track,James Johnson,PartyPros,PART8,10.00,136.86,28.74,165.6,4.97,160.63,Stripe,Completed,POUT-202508-14
+TRN57451680,2025-08-20 18:31:37,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,J&J Amateur,Ava Williams,,,,12.40,2.60,15,0.45,14.55,PayPal,Completed,POUT-202508-14
+TRN82281856,2025-08-21 21:07:07,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Lucas Rodriguez,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202508-14
+TRN50697745,2025-08-23 0:23:25,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Training Track,James Johnson,PartyPros,PART8,10.00,136.86,28.74,165.6,4.97,160.63,Stripe,Completed,POUT-202508-14
 TRN44889657,2025-08-23 9:24:25,Sale,Barcelona Summer Fest,Full Pass,Isabella Moore,,,,157.02,32.98,190,5.7,184.3,Credit Card,Completed,POUT-202508-14
 TRN32353723,2025-08-24 22:56:56,Sale,Barcelona Summer Fest,Full Pass,Isabella Martin,,,,157.02,32.98,190,5.7,184.3,PayPal,Completed,POUT-202508-14
 TRN23095304,2025-08-26 12:21:56,Sale,Winter Bachata Gala,Gala Party Pass,James Martinez,,,,74.38,15.62,90,2.7,87.3,Credit Card,Completed,POUT-202508-14
-TRN51608985,2025-08-27 16:51:30,Sale,Sensuality & Essentiality,Sensuality Pass,Henry Wilson,SensualPromo,SENS15,10.00,154.55,32.45,187,5.61,181.39,Stripe,Completed,POUT-202508-14
+TRN51608985,2025-08-27 16:51:30,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Henry Wilson,SensualPromo,SENS15,10.00,154.55,32.45,187,5.61,181.39,Stripe,Completed,POUT-202508-14
 TRN15416049,2025-08-29 6:17:41,Sale,Winter Bachata Gala,Gala Full Pass,Charlotte Garcia,,,,173.55,36.45,210,6.3,203.7,Stripe,Completed,POUT-202508-14
-TRN42938178,2025-08-30 8:33:04,Sale,Sensuality & Essentiality,Essentiality Pass,Liam Johnson,,,,165.29,34.71,200,6,194,PayPal,Completed,POUT-202508-14
-TRN21759239,2025-08-31 3:00:15,Sale,Sensuality & Essentiality,J&J Amateur,Elijah Davis,DJ Sparkus,DJSPARKUS10,,11.16,2.34,13.5,0.41,13.09,Stripe,Completed,POUT-202508-14
+TRN42938178,2025-08-30 8:33:04,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Liam Johnson,,,,165.29,34.71,200,6,194,PayPal,Completed,POUT-202508-14
+TRN21759239,2025-08-31 3:00:15,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,J&J Amateur,Elijah Davis,DJ Sparkus,DJSPARKUS10,,11.16,2.34,13.5,0.41,13.09,Stripe,Completed,POUT-202508-14
 TRN49575883,2025-09-01 10:33:14,Sale,Barcelona Summer Fest,VIP Pass,Noah Miller,PartyPros,PART8,10.00,190.08,39.92,230,6.9,223.1,Credit Card,Completed,POUT-202509-15
-TRN59902348,2025-09-02 9:12:02,Sale,Sensuality & Essentiality,Essentiality Pass,Henry Moore,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202509-15
-TRN49271295,2025-09-03 7:11:47,Sale,Sensuality & Essentiality,Essentiality Training Track,Henry Brown,,,,148.76,31.24,180,5.4,174.6,Credit Card,Pending,POUT-202509-15
-TRN48482065,2025-09-03 14:14:41,Sale,Sensuality & Essentiality,Sensuality Pass,Henry Gonzalez,,,,181.82,38.18,220,6.6,213.4,PayPal,Completed,POUT-202509-15
-TRN51564614,2025-09-04 15:37:34,Sale,Sensuality & Essentiality,Essentiality Training Track,Evelyn Thomas,DanceWorld,DANCE10,10.00,133.88,28.12,162,4.86,157.14,Credit Card,Completed,POUT-202509-15
-TRN27289569,2025-09-06 5:25:29,Sale,Sensuality & Essentiality,Sensuality Pass,James Jones,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202509-15
+TRN59902348,2025-09-02 9:12:02,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Henry Moore,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202509-15
+TRN49271295,2025-09-03 7:11:47,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Training Track,Henry Brown,,,,148.76,31.24,180,5.4,174.6,Credit Card,Pending,POUT-202509-15
+TRN48482065,2025-09-03 14:14:41,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Henry Gonzalez,,,,181.82,38.18,220,6.6,213.4,PayPal,Completed,POUT-202509-15
+TRN51564614,2025-09-04 15:37:34,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Training Track,Evelyn Thomas,DanceWorld,DANCE10,10.00,133.88,28.12,162,4.86,157.14,Credit Card,Completed,POUT-202509-15
+TRN27289569,2025-09-06 5:25:29,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,James Jones,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202509-15
 TRN66649733,2025-09-07 14:14:13,Sale,Winter Bachata Gala,Gala Party Pass,Lucas Davis,,,,74.38,15.62,90,2.7,87.3,Stripe,Completed,POUT-202509-15
 TRN82200384,2025-09-08 20:30:45,Sale,Barcelona Summer Fest,Party Pass,Noah Moore,,,,66.12,13.88,80,2.4,77.6,PayPal,Completed,POUT-202509-15
-TRN79393041,2025-09-10 10:14:04,Sale,Sensuality & Essentiality,Sensuality Pass,Evelyn Martin,,,,181.82,38.18,220,6.6,213.4,PayPal,Completed,POUT-202509-15
-TRN88582299,2025-09-11 20:23:45,Sale,Sensuality & Essentiality,Sensuality Pass,Alexander Rodriguez,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202509-15
-TRN71372547,2025-09-12 17:15:35,Sale,Sensuality & Essentiality,J&J Amateur,Elijah Gonzalez,,,,12.40,2.60,15,0.45,14.55,Stripe,Completed,POUT-202509-15
+TRN79393041,2025-09-10 10:14:04,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Evelyn Martin,,,,181.82,38.18,220,6.6,213.4,PayPal,Completed,POUT-202509-15
+TRN88582299,2025-09-11 20:23:45,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Alexander Rodriguez,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202509-15
+TRN71372547,2025-09-12 17:15:35,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,J&J Amateur,Elijah Gonzalez,,,,12.40,2.60,15,0.45,14.55,Stripe,Completed,POUT-202509-15
 TRN57697198,2025-09-13 14:26:06,Sale,Winter Bachata Gala,Gala Full Pass,Alexander Taylor,,,,173.55,36.45,210,6.3,203.7,Stripe,Completed,POUT-202509-15
 TRN23812845,2025-09-14 2:44:03,Sale,Winter Bachata Gala,Workshop Pass,Alexander Martin,,,,123.97,26.03,150,4.5,145.5,Credit Card,Error,POUT-202509-15
 TRN84288673,2025-09-14 10:10:48,Sale,Barcelona Summer Fest,VIP Pass,Oliver Miller,ProDancers,PROD8,10.00,190.08,39.92,230,6.9,223.1,Stripe,Completed,POUT-202509-15
 TRN96228383,2025-09-16 2:07:05,Sale,Winter Bachata Gala,Gala Full Pass,Lucas Miller,,,,173.55,36.45,210,6.3,203.7,PayPal,Completed,POUT-202509-15
-TRN88220311,2025-09-16 5:40:24,Sale,Sensuality & Essentiality,Essentiality Pass,Benjamin Hernandez,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202509-15
+TRN88220311,2025-09-16 5:40:24,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Benjamin Hernandez,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202509-15
 TRN66060424,2025-09-16 11:39:46,Sale,Winter Bachata Gala,Workshop Pass,Benjamin Hernandez,,,,123.97,26.03,150,4.5,145.5,Stripe,Completed,POUT-202509-15
-TRN58913348,2025-09-17 10:43:16,Sale,Sensuality & Essentiality,Essentiality Pass,Henry Moore,,,,165.29,34.71,200,6,194,Stripe,Completed,POUT-202509-15
+TRN58913348,2025-09-17 10:43:16,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Henry Moore,,,,165.29,34.71,200,6,194,Stripe,Completed,POUT-202509-15
 TRN41113063,2025-09-18 10:04:36,Sale,Winter Bachata Gala,Gala Full Pass,Amelia Jackson,,,,173.55,36.45,210,6.3,203.7,Credit Card,Completed,POUT-202509-15
 TRN63283253,2025-09-19 13:21:49,Sale,Winter Bachata Gala,Gala Party Pass,Lucas Wilson,SensualPromo,SENS15,10.00,63.22,13.28,76.5,2.3,74.2,Stripe,Completed,POUT-202509-15
 TRN91557088,2025-09-21 0:07:04,Sale,Barcelona Summer Fest,Party Pass,Amelia Rodriguez,,,,66.12,13.88,80,2.4,77.6,Stripe,Completed,POUT-202509-15
-TRN14959142,2025-09-22 9:12:44,Sale,Sensuality & Essentiality,Essentiality Training Track,William Miller,DJ Sparkus,DJSPARKUS10,10.00,133.88,28.12,162,4.86,157.14,Credit Card,Completed,POUT-202509-15
+TRN14959142,2025-09-22 9:12:44,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Training Track,William Miller,DJ Sparkus,DJSPARKUS10,10.00,133.88,28.12,162,4.86,157.14,Credit Card,Completed,POUT-202509-15
 TRN33519888,2025-09-23 15:47:33,Sale,Winter Bachata Gala,Workshop Pass,Isabella Davis,,,,123.97,26.03,150,4.5,145.5,PayPal,Completed,POUT-202509-15
-TRN90858102,2025-09-24 16:33:43,Sale,Sensuality & Essentiality,Sensuality Pass,James Jackson,,,,181.82,38.18,220,6.6,213.4,PayPal,Completed,POUT-202510-16
-TRN90393246,2025-09-26 9:33:14,Sale,Sensuality & Essentiality,Essentiality Pass,Mia Wilson,,,,165.29,34.71,200,6,194,Stripe,Completed,POUT-202510-16
-TRN45922883,2025-09-27 19:24:22,Refund,Sensuality & Essentiality,Sensuality Pass,Henry Miller,,,,181.82,38.18,220,6.6,213.4,PayPal,Refunded,POUT-202510-16
+TRN90858102,2025-09-24 16:33:43,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,James Jackson,,,,181.82,38.18,220,6.6,213.4,PayPal,Completed,POUT-202510-16
+TRN90393246,2025-09-26 9:33:14,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Mia Wilson,,,,165.29,34.71,200,6,194,Stripe,Completed,POUT-202510-16
+TRN45922883,2025-09-27 19:24:22,Refund,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Henry Miller,,,,181.82,38.18,220,6.6,213.4,PayPal,Refunded,POUT-202510-16
 TRN47883210,2025-09-29 7:09:07,Sale,Winter Bachata Gala,Gala Full Pass,Emma Garcia,,,,173.55,36.45,210,6.3,203.7,PayPal,Completed,POUT-202510-16
 TRN80436423,2025-09-29 18:31:37,Sale,Winter Bachata Gala,Gala Party Pass,Oliver Smith,,,,74.38,15.62,90,2.7,87.3,Credit Card,Completed,POUT-202510-16
 TRN96277940,2025-10-01 2:49:15,Sale,Barcelona Summer Fest,Day Pass - Sat,Lucas Lopez,SensualPromo,SENS15,5.00,70.25,14.75,85,2.55,82.45,Credit Card,Completed,POUT-202510-16
 TRN91696085,2025-10-01 10:48:02,Sale,Winter Bachata Gala,Workshop Pass,Elijah Jones,DanceWorld,DANCE10,10.00,111.57,23.43,135,4.05,130.95,Credit Card,Completed,POUT-202510-16
-TRN70155694,2025-10-02 23:25:21,Sale,Sensuality & Essentiality,Sensuality Pass,Lucas Martin,,,,181.82,38.18,220,6.6,213.4,PayPal,Completed,POUT-202510-16
-TRN85871212,2025-10-03 16:21:44,Sale,Sensuality & Essentiality,J&J Amateur,Lucas Williams,,,,12.40,2.60,15,0.45,14.55,Stripe,Completed,POUT-202510-16
+TRN70155694,2025-10-02 23:25:21,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Lucas Martin,,,,181.82,38.18,220,6.6,213.4,PayPal,Completed,POUT-202510-16
+TRN85871212,2025-10-03 16:21:44,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,J&J Amateur,Lucas Williams,,,,12.40,2.60,15,0.45,14.55,Stripe,Completed,POUT-202510-16
 TRN64835698,2025-10-04 15:47:06,Sale,Winter Bachata Gala,Workshop Pass,Henry Wilson,PartyPros,PART8,10.00,114.05,23.95,138,4.14,133.86,Credit Card,Completed,POUT-202510-16
-TRN34346592,2025-10-06 0:23:20,Sale,Sensuality & Essentiality,Essentiality Pass,Henry Garcia,ProDancers,PROD8,10.00,152.07,31.93,184,5.52,178.48,Stripe,Completed,POUT-202510-16
-TRN48434621,2025-10-06 18:11:42,Sale,Sensuality & Essentiality,Sensuality Pass,Liam Davis,,,,181.82,38.18,220,6.6,213.4,Stripe,Completed,POUT-202510-16
-TRN23321526,2025-10-07 19:10:42,Sale,Sensuality & Essentiality,Essentiality Pass,Amelia Jones,,,,165.29,34.71,200,6,194,PayPal,Completed,POUT-202510-16
+TRN34346592,2025-10-06 0:23:20,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Henry Garcia,ProDancers,PROD8,10.00,152.07,31.93,184,5.52,178.48,Stripe,Completed,POUT-202510-16
+TRN48434621,2025-10-06 18:11:42,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Liam Davis,,,,181.82,38.18,220,6.6,213.4,Stripe,Completed,POUT-202510-16
+TRN23321526,2025-10-07 19:10:42,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Amelia Jones,,,,165.29,34.71,200,6,194,PayPal,Completed,POUT-202510-16
 TRN64700085,2025-10-08 11:32:03,Sale,Barcelona Summer Fest,Full Pass,Benjamin Miller,,,,157.02,32.98,190,5.7,184.3,Stripe,Completed,POUT-202510-16
 TRN26987796,2025-10-09 23:13:28,Sale,Barcelona Summer Fest,Full Pass,Mia Williams,,,,157.02,32.98,190,5.7,184.3,Stripe,Completed,POUT-202510-16
-TRN88582236,2025-10-11 11:22:20,Sale,Sensuality & Essentiality,J&J Amateur,Olivia Hernandez,,,,12.40,2.60,15,0.45,14.55,Stripe,Completed,POUT-202510-16
+TRN88582236,2025-10-11 11:22:20,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,J&J Amateur,Olivia Hernandez,,,,12.40,2.60,15,0.45,14.55,Stripe,Completed,POUT-202510-16
 TRN96236967,2025-10-12 17:16:11,Sale,Winter Bachata Gala,Gala Full Pass,Henry Johnson,,,,173.55,36.45,210,6.3,203.7,PayPal,Completed,POUT-202510-16
-TRN82604297,2025-10-13 14:14:18,Sale,Sensuality & Essentiality,Sensuality Pass,Noah Wilson,,,,181.82,38.18,220,6.6,213.4,PayPal,Completed,POUT-202510-16
+TRN82604297,2025-10-13 14:14:18,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Noah Wilson,,,,181.82,38.18,220,6.6,213.4,PayPal,Completed,POUT-202510-16
 TRN17281389,2025-10-15 1:21:55,Sale,Winter Bachata Gala,Gala Full Pass,Amelia Miller,,,,173.55,36.45,210,6.3,203.7,Credit Card,Completed,POUT-202510-16
 TRN58428131,2025-10-15 9:37:10,Sale,Barcelona Summer Fest,Party Pass,Amelia Miller,,,,66.12,13.88,80,2.4,77.6,Stripe,Completed,POUT-202510-16
 TRN62725586,2025-10-16 11:31:17,Sale,Winter Bachata Gala,Workshop Pass,Alexander Martin,,,,123.97,26.03,150,4.5,145.5,Credit Card,Completed,POUT-202510-16
-TRN16544081,2025-10-18 1:31:39,Sale,Sensuality & Essentiality,J&J Amateur,Emma Miller,,,,12.40,2.60,15,0.45,14.55,Stripe,Completed,POUT-202510-16
-TRN67868078,2025-10-19 2:44:03,Sale,Sensuality & Essentiality,Sensuality Pass,Lucas Davis,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202510-16
+TRN16544081,2025-10-18 1:31:39,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,J&J Amateur,Emma Miller,,,,12.40,2.60,15,0.45,14.55,Stripe,Completed,POUT-202510-16
+TRN67868078,2025-10-19 2:44:03,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Lucas Davis,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202510-16
 TRN78553259,2025-10-20 2:11:58,Sale,Barcelona Summer Fest,Full Pass,Evelyn Williams,,,,157.02,32.98,190,5.7,184.3,Stripe,Completed,POUT-202511-17
-TRN84236980,2025-10-21 2:42:07,Sale,Sensuality & Essentiality,Sensuality Pass,Oliver Anderson,,,,181.82,38.18,220,6.6,213.4,PayPal,Completed,POUT-202511-17
+TRN84236980,2025-10-21 2:42:07,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Oliver Anderson,,,,181.82,38.18,220,6.6,213.4,PayPal,Completed,POUT-202511-17
 TRN39316584,2025-10-22 9:41:07,Sale,Barcelona Summer Fest,Party Pass,Benjamin Williams,,,,66.12,13.88,80,2.4,77.6,PayPal,Completed,POUT-202511-17
-TRN64846467,2025-10-22 17:34:03,Sale,Sensuality & Essentiality,Essentiality Pass,Lucas Garcia,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202511-17
-TRN82885934,2025-10-23 15:46:27,Sale,Sensuality & Essentiality,Essentiality Pass,Oliver Moore,SensualPromo,SENS15,10.00,140.50,29.50,170,5.1,164.9,Stripe,Completed,POUT-202511-17
-TRN59639591,2025-10-24 16:35:10,Sale,Sensuality & Essentiality,Essentiality Pass,Oliver Rodriguez,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202511-17
-TRN18318260,2025-10-26 5:27:14,Sale,Sensuality & Essentiality,J&J Amateur,Emma Wilson,PartyPros,PART8,,11.40,2.40,13.8,0.41,13.39,Stripe,Completed,POUT-202511-17
-TRN31958223,2025-10-26 23:23:44,Sale,Sensuality & Essentiality,Essentiality Pass,Benjamin Rodriguez,DJ Sparkus,DJSPARKUS10,10.00,148.76,31.24,180,5.4,174.6,PayPal,Pending,POUT-202511-17
+TRN64846467,2025-10-22 17:34:03,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Lucas Garcia,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202511-17
+TRN82885934,2025-10-23 15:46:27,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Oliver Moore,SensualPromo,SENS15,10.00,140.50,29.50,170,5.1,164.9,Stripe,Completed,POUT-202511-17
+TRN59639591,2025-10-24 16:35:10,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Oliver Rodriguez,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202511-17
+TRN18318260,2025-10-26 5:27:14,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,J&J Amateur,Emma Wilson,PartyPros,PART8,,11.40,2.40,13.8,0.41,13.39,Stripe,Completed,POUT-202511-17
+TRN31958223,2025-10-26 23:23:44,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Benjamin Rodriguez,DJ Sparkus,DJSPARKUS10,10.00,148.76,31.24,180,5.4,174.6,PayPal,Pending,POUT-202511-17
 TRN81792370,2025-10-27 19:15:36,Sale,Barcelona Summer Fest,Party Pass,Noah Wilson,,,,66.12,13.88,80,2.4,77.6,Credit Card,Completed,POUT-202511-17
-TRN79948439,2025-10-28 17:41:51,Sale,Sensuality & Essentiality,Essentiality Pass,Alexander Garcia,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202511-17
+TRN79948439,2025-10-28 17:41:51,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Alexander Garcia,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202511-17
 TRN51187445,2025-10-29 18:31:21,Sale,Winter Bachata Gala,Gala Full Pass,William Lopez,,,,173.55,36.45,210,6.3,203.7,PayPal,Completed,POUT-202511-17
 TRN87814278,2025-10-31 8:08:42,Sale,Barcelona Summer Fest,Full Pass,Henry Anderson,,,,157.02,32.98,190,5.7,184.3,PayPal,Completed,POUT-202511-17
 TRN53982823,2025-11-01 10:29:10,Sale,Barcelona Summer Fest,VIP Pass,Noah Miller,DJ Sparkus,DJSPARKUS10,10.00,185.95,39.05,225,6.75,218.25,PayPal,Completed,POUT-202511-17
 TRN66649733,2025-11-01 23:36:25,Refund,Winter Bachata Gala,Workshop Pass,Evelyn Gonzalez,,,,123.97,26.03,150,4.5,145.5,Credit Card,Refunded,POUT-202511-17
-TRN87930863,2025-11-03 14:00:23,Sale,Sensuality & Essentiality,Sensuality Pass,Noah Gonzalez,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202511-17
-TRN26685810,2025-11-04 12:47:03,Sale,Sensuality & Essentiality,Essentiality Pass,Harper Miller,,,,165.29,34.71,200,6,194,Stripe,Completed,POUT-202511-17
+TRN87930863,2025-11-03 14:00:23,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Noah Gonzalez,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202511-17
+TRN26685810,2025-11-04 12:47:03,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Harper Miller,,,,165.29,34.71,200,6,194,Stripe,Completed,POUT-202511-17
 TRN66352924,2025-11-06 1:21:11,Sale,Barcelona Summer Fest,Day Pass - Sat,Lucas Smith,,,,82.64,17.36,100,3,97,Credit Card,Completed,POUT-202511-17
-TRN33722251,2025-11-07 5:40:15,Sale,Sensuality & Essentiality,Essentiality Training Track,William Lopez,ProDancers,PROD8,10.00,136.86,28.74,165.6,4.97,160.63,Stripe,Completed,POUT-202511-17
-TRN96228383,2025-11-08 7:11:03,Sale,Sensuality & Essentiality,Essentiality Training Track,James Smith,,,,148.76,31.24,180,5.4,174.6,Stripe,Completed,POUT-202511-17
+TRN33722251,2025-11-07 5:40:15,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Training Track,William Lopez,ProDancers,PROD8,10.00,136.86,28.74,165.6,4.97,160.63,Stripe,Completed,POUT-202511-17
+TRN96228383,2025-11-08 7:11:03,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Training Track,James Smith,,,,148.76,31.24,180,5.4,174.6,Stripe,Completed,POUT-202511-17
 TRN46282329,2025-11-09 10:39:13,Sale,Barcelona Summer Fest,VIP Pass,Evelyn Moore,DanceWorld,DANCE10,10.00,185.95,39.05,225,6.75,218.25,PayPal,Completed,POUT-202511-17
 TRN15416049,2025-11-10 11:42:04,Sale,Winter Bachata Gala,Workshop Pass,Alexander Martin,,,,123.97,26.03,150,4.5,145.5,Stripe,Completed,POUT-202511-17
-TRN59938260,2025-11-11 11:21:13,Sale,Sensuality & Essentiality,Essentiality Pass,Benjamin Hernandez,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202511-17
+TRN59938260,2025-11-11 11:21:13,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Essentiality Pass,Benjamin Hernandez,,,,165.29,34.71,200,6,194,Credit Card,Completed,POUT-202511-17
 TRN36519266,2025-11-13 0:30:16,Sale,Barcelona Summer Fest,Party Pass,Harper Davis,,,,66.12,13.88,80,2.4,77.6,Credit Card,Completed,POUT-202511-17
-TRN96841398,2025-11-13 13:30:35,Sale,Sensuality & Essentiality,J&J Amateur,Benjamin Moore,,,,12.40,2.60,15,0.45,14.55,PayPal,Completed,POUT-202511-17
+TRN96841398,2025-11-13 13:30:35,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,J&J Amateur,Benjamin Moore,,,,12.40,2.60,15,0.45,14.55,PayPal,Completed,POUT-202511-17
 TRN94635170,2025-11-14 13:59:17,Sale,Winter Bachata Gala,Gala Party Pass,Amelia Jones,,,,74.38,15.62,90,2.7,87.3,PayPal,Completed,POUT-202511-17
-TRN26987796,2025-11-16 2:44:27,Sale,Sensuality & Essentiality,Sensuality Pass,Noah Smith,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202511-17
-TRN39316584,2025-11-17 6:17:15,Sale,Sensuality & Essentiality,Sensuality Pass,Elijah Jones,SensualPromo,SENS15,10.00,154.55,32.45,187,5.61,181.39,Credit Card,Completed,POUT-202511-17
+TRN26987796,2025-11-16 2:44:27,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Noah Smith,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202511-17
+TRN39316584,2025-11-17 6:17:15,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Elijah Jones,SensualPromo,SENS15,10.00,154.55,32.45,187,5.61,181.39,Credit Card,Completed,POUT-202511-17
 TRN33887037,2025-11-18 10:48:07,Sale,Barcelona Summer Fest,Day Pass - Sat,Lucas Garcia,PartyPros,PART8,5.00,76.03,15.97,92,2.76,89.24,Stripe,Completed,POUT-202511-17
 TRN79391030,2025-11-19 12:44:21,Sale,Winter Bachata Gala,Gala Full Pass,Henry Davis,,,,173.55,36.45,210,6.3,203.7,PayPal,Completed,POUT-202511-17
 TRN31976076,2025-11-20 18:03:07,Sale,Barcelona Summer Fest,Party Pass,Lucas Jackson,,,,66.12,13.88,80,2.4,77.6,PayPal,Completed,POUT-202511-17
-TRN62725586,2025-11-21 21:04:47,Sale,Sensuality & Essentiality,Sensuality Pass,Evelyn Hernandez,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202511-17
+TRN62725586,2025-11-21 21:04:47,Sale,Bachata Geneva Festival 2026 - The Festival of Nations,Sensuality Pass,Evelyn Hernandez,,,,181.82,38.18,220,6.6,213.4,Credit Card,Completed,POUT-202511-17

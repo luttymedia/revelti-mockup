@@ -119,21 +119,21 @@
             {
                 id: 1, name: 'DJ Sparkus', avatar: 'https://placehold.co/80x80/213c63/ffffff?text=DS',
                 events: [
-                    { name: 'Sensuality & Essentiality', status: 'Confirmed', sales: 45, revenue: 9500.50, date: '2025-11-01', fullDate: 'Nov 1-2, 2025', code: 'DJSPARKUS10' },
+                    { name: 'Bachata Geneva Festival 2026 - The Festival of Nations', status: 'Confirmed', sales: 45, revenue: 9500.50, date: '2025-11-01', fullDate: 'Nov 1-2, 2025', code: 'DJSPARKUS10' },
                     { name: 'Winter Bachata Gala', status: 'Confirmed', sales: 120, revenue: 25800.00, date: '2025-01-15', fullDate: 'Jan 15-18, 2025', code: 'DJSPARKUS15' }
                 ]
             },
             {
                 id: 2, name: 'ProDancers', avatar: 'https://placehold.co/80x80/213c63/ffffff?text=PD',
                 events: [
-                    { name: 'Sensuality & Essentiality', status: 'Confirmed', sales: 148, revenue: 31228.00, date: '2025-11-01', fullDate: 'Nov 1-2, 2025', code: 'PROD8' },
+                    { name: 'Bachata Geneva Festival 2026 - The Festival of Nations', status: 'Confirmed', sales: 148, revenue: 31228.00, date: '2025-11-01', fullDate: 'Nov 1-2, 2025', code: 'PROD8' },
                     { name: 'Barcelona Summer Fest', status: 'Completed', sales: 50, revenue: 5400.00, date: '2024-07-20', fullDate: 'Jul 20-22, 2024', code: 'PROD6' }
                 ]
             },
             {
                 id: 3, name: 'PartyPros', avatar: 'https://placehold.co/80x80/213c63/ffffff?text=PP',
                 events: [
-                    { name: 'Sensuality & Essentiality', status: 'Confirmed', sales: 603, revenue: 65771.00, date: '2025-11-01', fullDate: 'Nov 1-2, 2025', code: 'PART8' },
+                    { name: 'Bachata Geneva Festival 2026 - The Festival of Nations', status: 'Confirmed', sales: 603, revenue: 65771.00, date: '2025-11-01', fullDate: 'Nov 1-2, 2025', code: 'PART8' },
                     { name: 'Barcelona Summer Fest', status: 'Completed', sales: 85, revenue: 9180.00, date: '2024-07-20', fullDate: 'Jul 20-22, 2024', code: 'PART15' },
                     { name: 'Winter Bachata Gala', status: 'Confirmed', sales: 150, revenue: 32250.00, date: '2025-01-15', fullDate: 'Jan 15-18, 2025', code: 'PART10' }
                 ]
@@ -141,26 +141,26 @@
             {
                 id: 4, name: 'DanceWorld', avatar: 'https://placehold.co/80x80/213c63/ffffff?text=DW',
                 events: [
-                    { name: 'Sensuality & Essentiality', status: 'Confirmed', sales: 78, revenue: 15000.00, date: '2025-11-01', fullDate: 'Nov 1-2, 2025', code: 'DANCE10' },
+                    { name: 'Bachata Geneva Festival 2026 - The Festival of Nations', status: 'Confirmed', sales: 78, revenue: 15000.00, date: '2025-11-01', fullDate: 'Nov 1-2, 2025', code: 'DANCE10' },
                     { name: 'Barcelona Summer Fest', status: 'Completed', sales: 65, revenue: 7020.00, date: '2024-07-20', fullDate: 'Jul 20-22, 2024', code: 'DANC5' }
                 ]
             },
             {
                 id: 5, name: 'SensualPromo', avatar: 'https://placehold.co/80x80/213c63/ffffff?text=SP',
                 events: [
-                    { name: 'Sensuality & Essentiality', status: 'Confirmed', sales: 112, revenue: 21000.00, date: '2025-11-01', fullDate: 'Nov 1-2, 2025', code: 'SENS15' },
+                    { name: 'Bachata Geneva Festival 2026 - The Festival of Nations', status: 'Confirmed', sales: 112, revenue: 21000.00, date: '2025-11-01', fullDate: 'Nov 1-2, 2025', code: 'SENS15' },
                     { name: 'Winter Bachata Gala', status: 'Confirmed', sales: 95, revenue: 20425.00, date: '2025-01-15', fullDate: 'Jan 15-18, 2025', code: 'SENS17' }
                 ]
             },
              {
                 id: 6, name: 'John Doe', avatar: 'https://placehold.co/80x80/cccccc/ffffff?text=JD',
                 events: [
-                    { name: 'Sensuality & Essentiality', status: 'Pending', sales: 0, revenue: 0, date: '2025-11-01', fullDate: 'Nov 1-2, 2025', code: null }
+                    { name: 'Bachata Geneva Festival 2026 - The Festival of Nations', status: 'Pending', sales: 0, revenue: 0, date: '2025-11-01', fullDate: 'Nov 1-2, 2025', code: null }
                 ]
             }
         ];
 
-        const allEvents = ["Sensuality & Essentiality", "Barcelona Summer Fest", "Winter Bachata Gala"];
+        const allEvents = ["Bachata Geneva Festival 2026 - The Festival of Nations", "Barcelona Summer Fest", "Winter Bachata Gala"];
         let currentEventFilter = 'all';
 
         // --- UTILITY FUNCTIONS ---
@@ -260,7 +260,7 @@
             eventsHtml += '<tbody class="divide-y divide-gray-200">';
 
             promoter.events.forEach(event => {
-                const eventNameHtml = event.name === 'Sensuality & Essentiality'
+                const eventNameHtml = event.name === 'Bachata Geneva Festival 2026 - The Festival of Nations'
                     ? `<a href="eventCollaboratorManagement.html" class="font-semibold revelti-blue hover:underline">${event.name}</a>`
                     : `<p class="font-semibold">${event.name}</p>`;
 
