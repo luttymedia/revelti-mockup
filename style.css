@@ -81,6 +81,14 @@ details>summary::-webkit-details-marker {
     font-weight: 700;
 }
 
+.creative-tab-active {
+    border-bottom: 3px solid #f58220;
+    /* Revelti Orange */
+    color: #213c63;
+    /* Revelti Blue */
+    font-weight: 700;
+}
+
 /* Simple transition for tree view expansion */
 .tree-content {
     transition: max-height 0.3s ease-in-out;

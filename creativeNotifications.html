@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revelti - Creative Notifications</title>
+
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        revelti: {
+                            blue: '#213c63',
+                            orange: '#f58220',
+                            purple: '#6b21a8',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+
+    <!-- Google Fonts: Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Your Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-gray-100 antialiased text-gray-800 pt-8">
+    <!-- Creative-specific Navbar -->
+    <div id="creative-navbar-placeholder"></div>
+
+    <!-- Main container -->
+    <div
+        class="max-w-2xl md:max-w-full lg:max-w-full mx-auto bg-white shadow-md flex flex-col h-full full-height-modal">
+
+        <!-- Header Section -->
+        <header class="p-6 flex items-center justify-between">
+            <h1 class="text-xl font-bold revelti-blue">Creative Notifications</h1>
+            <div class="flex items-center space-x-0 flex-shrink-0">
+                <!-- Settings Access Button -->
+                <a href="creativeNotificationSettings.html"
+                    class="p-1.5 rounded-full hover:bg-gray-200 transition-colors"
+                    title="Creative Notification Settings">
+                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
+                        </path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                </a>
+            </div>
+        </header>
+
+        <!-- Tab Navigation -->
+        <nav class="sticky top-12 flex-shrink-0 bg-white z-40 border-b border-gray-200">
+            <div class="flex justify-around">
+                <button data-tab-target="all" class="tab-button btn-mobile-tab">All</button>
+                <button data-tab-target="media" class="tab-button btn-mobile-tab">Media</button>
+                <button data-tab-target="sales" class="tab-button btn-mobile-tab">Earnings</button>
+                <button data-tab-target="system" class="tab-button btn-mobile-tab">System</button>
+            </div>
+        </nav>
+
+        <!-- Main Content Sections -->
+        <main class="p-4 bg-gray-50 flex-1 overflow-y-auto">
+            <!-- All Tab -->
+            <div id="all" class="tab-content">
+                <div class="text-right mb-4">
+                    <button data-mark-all="all" class="text-sm font-semibold revelti-blue hover:underline">Mark all as
+                        read</button>
+                </div>
+                <div class="space-y-4"></div>
+            </div>
+
+            <!-- Media Tab -->
+            <div id="media" class="tab-content hidden">
+                <div class="text-right mb-4">
+                    <button data-mark-all="media" class="text-sm font-semibold revelti-blue hover:underline">Mark all as
+                        read</button>
+                </div>
+                <div class="space-y-4"></div>
+            </div>
+
+            <!-- Earnings Tab -->
+            <div id="sales" class="tab-content hidden">
+                <div class="text-right mb-4">
+                    <button data-mark-all="sales" class="text-sm font-semibold revelti-blue hover:underline">Mark all as
+                        read</button>
+                </div>
+                <div class="space-y-4"></div>
+            </div>
+
+            <!-- System Tab -->
+            <div id="system" class="tab-content hidden">
+                <div class="text-right mb-4">
+                    <button data-mark-all="system" class="text-sm font-semibold revelti-blue hover:underline">Mark all
+                        as read</button>
+                </div>
+                <div class="space-y-4"></div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function initializeNotificationComponent(notificationHost) {
+            if (!notificationHost) return;
+
+            const tabButtons = notificationHost.querySelectorAll('.tab-button');
+            const tabContents = notificationHost.querySelectorAll('.tab-content');
+
+            function switchTab(targetId) {
+                tabContents.forEach(content => content.classList.add('hidden'));
+                tabButtons.forEach(button => button.classList.remove('tab-active'));
+                const targetContent = notificationHost.querySelector(`#${targetId}`);
+                if (targetContent) targetContent.classList.remove('hidden');
+                const targetButton = notificationHost.querySelector(`[data-tab-target="${targetId}"]`);
+                if (targetButton) targetButton.classList.add('tab-active');
+            }
+
+            function createNotificationItem(notification) {
+                const unreadIndicator = notification.read ? '' : '<div class="absolute -left-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-revelti-orange rounded-full"></div>';
+                const avatarSrc = notification.avatar || 'https://placehold.co/40x40/cccccc/ffffff?text=N';
+                return `
+                <div class="flex items-start p-3 bg-white rounded-lg shadow-sm relative notification-item" data-id="${notification.id}">
+                    ${unreadIndicator}
+                    <img src="${avatarSrc}" onerror="this.onerror=null;this.src='https://placehold.co/40x40/cccccc/ffffff?text=N';" alt="Icon" class="w-10 h-10 rounded-full object-cover shadow-md mr-3">
+                    <div class="flex-1">
+                        <p class="text-sm leading-snug">${notification.message}</p>
+                        <p class="text-xs text-gray-500 mt-1">${notification.timestamp}</p>
+                    </div>
+                </div>`;
+            }
+
+            let notificationsData = [
+                { id: 1, type: 'media', message: 'Your <strong>Bachata Geneva 2026</strong> gallery just reached 1,000 views.', timestamp: '2h ago', avatar: 'https://placehold.co/40x40/213c63/ffffff?text=V', read: false },
+                { id: 2, type: 'sales', message: 'A high-resolution photo from <strong>Saturday Social</strong> was purchased for €15.00.', timestamp: '4h ago', avatar: 'https://placehold.co/40x40/22c55e/ffffff?text=%E2%82%AC', read: false },
+                { id: 5, type: 'media', message: 'New collaboration request for <strong>Barcelona Summer Fest</strong>.', timestamp: '6h ago', avatar: 'https://placehold.co/40x40/f58220/ffffff?text=C', read: false },
+                { id: 6, type: 'sales', message: 'Your payout of <strong>€142.50</strong> has been processed.', timestamp: '8h ago', avatar: 'https://placehold.co/40x40/22c55e/ffffff?text=%E2%82%AC', read: false },
+                { id: 7, type: 'media', message: 'Someone liked 15 photos in your <strong>Jack & Jill</strong> gallery.', timestamp: '12h ago', avatar: 'https://placehold.co/40x40/213c63/ffffff?text=L', read: true },
+                { id: 3, type: 'media', message: 'Bachata Geneva invited you to cover <strong>Winter Congress 2026</strong>.', timestamp: '1d ago', avatar: 'https://placehold.co/40x40/f58220/ffffff?text=I', read: true },
+                { id: 8, type: 'media', message: 'Event Organizer <strong>Bachata Geneva</strong> left a comment on your media.', timestamp: '1d ago', avatar: 'images/organizerAvatar.png', read: true },
+                { id: 9, type: 'system', message: 'System maintenance scheduled for <strong>March 5th, 02:00 AM</strong>.', timestamp: '2d ago', avatar: 'https://placehold.co/40x40/cccccc/ffffff?text=S', read: true },
+                { id: 4, type: 'system', message: 'Welcome to Revelti Creative! Complete your profile to get more visibility.', timestamp: '3d ago', avatar: 'https://placehold.co/40x40/cccccc/ffffff?text=S', read: true }
+            ];
+
+            function renderNotifications() {
+                const tabs = { all: '', media: '', sales: '', system: '' };
+                notificationsData.forEach(n => {
+                    const itemHtml = createNotificationItem(n);
+                    tabs.all += itemHtml;
+                    if (tabs.hasOwnProperty(n.type)) tabs[n.type] += itemHtml;
+                });
+                for (const key in tabs) {
+                    const container = notificationHost.querySelector(`#${key} .space-y-4`);
+                    if (container) container.innerHTML = tabs[key];
+                }
+            }
+
+            tabButtons.forEach(button => button.addEventListener('click', () => switchTab(button.dataset.tabTarget)));
+
+            switchTab('all');
+            renderNotifications();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const pageHost = document.querySelector('.max-w-2xl.mx-auto.bg-white');
+            if (pageHost) {
+                initializeNotificationComponent(pageHost);
+            }
+        });
+    </script>
+    <script src="creative.js" defer></script>
+</body>
+
+</html>

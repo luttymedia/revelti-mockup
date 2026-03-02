@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revelti - Creative Dashboard</title>
+
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        revelti: {
+                            blue: '#213c63',
+                            orange: '#f58220',
+                            purple: '#6b21a8',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+
+    <!-- Google Fonts: Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Your Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-gray-100 antialiased text-gray-800 pt-8">
+    <!-- Creative-specific Navbar -->
+    <div id="creative-navbar-placeholder"></div>
+
+    <!-- Main container -->
+    <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- Header Section -->
+        <header class="flex flex-col md:flex-row justify-between items-center mb-6">
+            <a href="creativeDashboard.html" class="flex items-center mb-4 md:mb-0">
+                <img src="images/creatorLogo.png" alt="Creative Avatar"
+                    class="w-20 h-20 rounded-full object-cover shadow-md"
+                    onerror="this.onerror=null;this.src='https://placehold.co/80x80/213c63/ffffff?text=AM';">
+                <div class="ml-4">
+                    <h1 class="text-3xl font-extrabold revelti-blue">AMedia</h1>
+                    <p class="text-gray-500">Creative Dashboard</p>
+                </div>
+            </a>
+        </header>
+
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <!-- Tab Navigation -->
+            <nav class="border-b border-gray-200">
+                <div class="flex">
+                    <button onclick="switchTab('events')"
+                        class="tab-button flex-1 py-4 px-1 text-center text-gray-500 hover:revelti-blue font-semibold transition duration-300 creative-tab-active">Events</button>
+                    <button onclick="switchTab('stats')"
+                        class="tab-button flex-1 py-4 px-1 text-center text-gray-500 hover:revelti-blue font-semibold transition duration-300">Quick
+                        Stats</button>
+                    <button onclick="switchTab('overview')"
+                        class="tab-button flex-1 py-4 px-1 text-center text-gray-500 hover:revelti-blue font-semibold transition duration-300">Overview</button>
+                    <button onclick="switchTab('profile')"
+                        class="tab-button flex-1 py-4 px-1 text-center text-gray-500 hover:revelti-blue font-semibold transition duration-300">Profile</button>
+                </div>
+            </nav>
+
+            <!-- Main Content Sections (Tabs) -->
+            <main class="p-6 md:p-8">
+                <!-- Events Tab -->
+                <div id="events" class="tab-content">
+                    <div class="flex flex-col md:flex-row items-center justify-between mb-6">
+                        <div class="relative w-full md:w-1/3 mb-4 md:mb-0">
+                            <input type="text" placeholder="Search my events..."
+                                class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-revelti-blue">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div id="event-filters" class="flex space-x-2">
+                            <button onclick="filterEvents('all')"
+                                class="filter-btn px-4 py-2 text-sm font-semibold bg-revelti-blue text-white rounded-lg">All
+                                Events</button>
+                            <button onclick="filterEvents('public')"
+                                class="filter-btn px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-lg">Public</button>
+                            <button onclick="filterEvents('private')"
+                                class="filter-btn px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-lg">Private</button>
+                            <button onclick="filterEvents('pending')"
+                                class="filter-btn px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-lg">Pending</button>
+                        </div>
+                    </div>
+                    <!-- Media Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Bachata Geneva 2026 (Public) -->
+                        <div class="event-card bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 shadow-sm transition-transform hover:scale-[1.02]"
+                            data-status="public">
+                            <div class="relative">
+                                <img src="images/eventPoster.png" alt="Event Cover" class="w-full h-48 object-cover"
+                                    onerror="this.onerror=null;this.src='https://placehold.co/600x400/213c63/ffffff?text=Bachata+Geneva+2026';">
+                                <div class="absolute top-2 right-2">
+                                    <span
+                                        class="text-xs font-bold bg-green-100 text-green-800 px-2 py-1 rounded-full">Public</span>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h4 class="font-bold text-lg revelti-blue">Bachata Geneva 2026</h4>
+                                <p class="text-sm text-gray-500 mt-1">4 Galleries • 355 Photos / 15 Videos</p>
+                                <div class="flex justify-between items-center mt-4">
+                                    <span class="text-xs text-gray-400">Owner: Bachata Geneva</span>
+                                    <a href="creativeEventView.html"
+                                        class="px-4 py-2 text-sm font-bold bg-revelti-blue text-white rounded-lg hover:bg-blue-800">Manage</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Private Event Mock -->
+                        <div class="event-card bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 shadow-sm transition-transform hover:scale-[1.02]"
+                            data-status="private">
+                            <div class="relative">
+                                <img src="https://placehold.co/600x400/213c63/ffffff?text=Private+Corporate+Event"
+                                    alt="Event Cover" class="w-full h-48 object-cover">
+                                <div class="absolute top-2 right-2">
+                                    <span
+                                        class="text-xs font-bold bg-gray-100 text-gray-800 px-2 py-1 rounded-full">Private</span>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h4 class="font-bold text-lg revelti-blue">Corporate Gala 2026</h4>
+                                <p class="text-sm text-gray-500 mt-1">2 Galleries • 120 Photos</p>
+                                <div class="flex justify-between items-center mt-4">
+                                    <span class="text-xs text-gray-400">Owner: Private Client</span>
+                                    <a href="#"
+                                        class="px-4 py-2 text-sm font-bold bg-revelti-blue text-white rounded-lg hover:bg-blue-800">Manage</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pending Event Mock -->
+                        <div class="event-card bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 shadow-sm transition-transform hover:scale-[1.02]"
+                            data-status="pending">
+                            <div class="relative">
+                                <img src="https://placehold.co/600x400/f58220/ffffff?text=Zouk+Marathon+2026"
+                                    alt="Event Cover" class="w-full h-48 object-cover">
+                                <div class="absolute top-2 right-2">
+                                    <span
+                                        class="text-xs font-bold bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">Pending</span>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h4 class="font-bold text-lg revelti-blue">Zouk Marathon 2026</h4>
+                                <p class="text-sm text-gray-500 mt-1">Waiting for collaborator approval</p>
+                                <div class="flex justify-between items-center mt-4">
+                                    <span class="text-xs text-gray-400">Owner: Zouk Lovers</span>
+                                    <button
+                                        class="px-4 py-2 text-sm font-bold bg-yellow-500 text-white rounded-lg hover:bg-yellow-600">Review</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Tab -->
+                <div id="stats" class="tab-content hidden">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Total Assets -->
+                        <div
+                            class="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                            <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Total Assets</h3>
+                            <p class="text-4xl font-extrabold revelti-blue mt-2">1,342</p>
+                            <div class="mt-4 pt-4 border-t border-gray-100 grid grid-cols-2 gap-2 text-center">
+                                <div>
+                                    <p class="text-xs text-gray-500 uppercase">Photos</p>
+                                    <p class="font-bold text-gray-700">1,250</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500 uppercase">Videos</p>
+                                    <p class="font-bold text-gray-700">92</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Visibility -->
+                        <div
+                            class="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                            <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Portfolio Views
+                            </h3>
+                            <p class="text-4xl font-extrabold revelti-blue mt-2">12,480</p>
+                            <p class="text-sm text-green-600 font-bold mt-1">↑ 12% from last month</p>
+                        </div>
+
+                        <!-- Storage -->
+                        <div
+                            class="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                            <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Storage Used</h3>
+                            <p class="text-4xl font-extrabold revelti-blue mt-2">42.5 GB</p>
+                            <div class="w-full bg-gray-200 rounded-full h-2 mt-4">
+                                <div class="bg-revelti-blue h-2 rounded-full" style="width: 42.5%"></div>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-2 text-right">42.5 GB of 100 GB</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Overview Tab -->
+                <div id="overview" class="tab-content hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Engagement Card -->
+                        <a href="creativeAudienceEngagement.html"
+                            class="block bg-gray-50 p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md hover:border-revelti-blue transition-all">
+                            <h3 class="text-lg font-bold revelti-blue">Audience Engagement</h3>
+                            <div class="mt-2 flex justify-between">
+                                <p class="text-gray-600 text-sm">Free Downloads: <strong>4,892</strong></p>
+                                <p class="text-gray-600 text-sm">Premium Sales: <strong>645</strong></p>
+                            </div>
+                        </a>
+
+                        <!-- Financial Card -->
+                        <a href="creativeRevenue.html"
+                            class="block bg-gray-50 p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md hover:border-revelti-blue transition-all">
+                            <h3 class="text-lg font-bold revelti-blue">Financial Summary</h3>
+                            <div class="mt-2 flex justify-between">
+                                <p class="text-gray-600 text-sm">Gross Revenue: <strong>€4,515.00</strong></p>
+                                <p class="text-green-600 text-sm font-bold">Earnings: €3,160.50</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Profile Tab -->
+                <div id="profile" class="tab-content hidden space-y-6">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="lg:col-span-2 space-y-6">
+                            <!-- Public Profile Info -->
+                            <details open>
+                                <summary
+                                    class="flex justify-between items-center cursor-pointer font-semibold text-lg revelti-blue p-3 bg-white border rounded-lg">
+                                    Public Profile Info <svg class="w-5 h-5 transform transition-transform" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </summary>
+                                <div class="p-4 space-y-4 bg-white border-x border-b rounded-b-lg">
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                        <div>
+                                            <label class="font-semibold text-gray-700">Avatar Image</label>
+                                            <div class="mt-1 flex items-center space-x-4">
+                                                <img src="images/creatorLogo.png" alt="Current Avatar"
+                                                    class="w-20 h-20 rounded-full object-cover shadow-md"
+                                                    onerror="this.onerror=null;this.src='https://placehold.co/80x80/213c63/ffffff?text=AM';">
+                                                <button
+                                                    class="px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-lg">Upload
+                                                    New</button>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label class="font-semibold text-gray-700">Banner Image</label>
+                                            <div class="mt-1 flex items-center space-x-4">
+                                                <div class="bg-black rounded-md overflow-hidden h-16 w-32">
+                                                    <img src="images/creatorLogo.png" alt="Current Banner"
+                                                        class="w-full h-full object-contain"
+                                                        onerror="this.onerror=null;this.src='https://placehold.co/128x64/6b21a8/ffffff?text=Banner';">
+                                                </div>
+                                                <button
+                                                    class="px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-lg">Upload
+                                                    New</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="border-t pt-4">
+                                        <label class="font-semibold text-gray-700">Display Name:</label>
+                                        <input type="text" value="AMedia"
+                                            class="w-full p-2 border border-gray-300 rounded-md mt-1">
+                                    </div>
+                                    <div>
+                                        <label class="font-semibold text-gray-700">Bio:</label>
+                                        <textarea class="w-full p-2 border border-gray-300 rounded-md mt-1"
+                                            rows="3">Professional dance photography and videography. Capturing the essence of movement and passion.</textarea>
+                                    </div>
+                                    <button
+                                        class="w-full bg-revelti-blue text-white font-semibold text-sm py-2 px-4 rounded-md hover:bg-blue-800 transition duration-300">Save
+                                        Changes</button>
+                                </div>
+                            </details>
+
+                            <!-- Notification Settings -->
+                            <a href="creativeNotificationSettings.html"
+                                class="w-full flex justify-between items-center cursor-pointer font-semibold text-lg revelti-blue p-3 bg-white border rounded-lg hover:bg-gray-50 transition-colors">
+                                <span>Notification Settings</span>
+                                <svg class="w-6 h-6 revelti-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
+                                    </path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Tab Switching Logic
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        function switchTab(targetId) {
+            tabContents.forEach(content => content.classList.add('hidden'));
+            tabButtons.forEach(button => button.classList.remove('creative-tab-active'));
+
+            document.getElementById(targetId)?.classList.remove('hidden');
+            document.querySelector(`[onclick="switchTab('${targetId}')"]`)?.classList.add('creative-tab-active');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            switchTab('events');
+            filterEvents('all'); // Set initial filter for the events tab
+        });
+    </script>
+    <script src="creative.js" defer></script>
+</body>
+
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revelti - Media Management</title>
+
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        revelti: {
+                            blue: '#213c63',
+                            orange: '#f58220',
+                            purple: '#6b21a8'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+
+    <!-- Google Fonts: Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Your Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body class="bg-gray-100 antialiased text-gray-800 pt-8">
+    <!-- Creative-specific Navbar -->
+    <div id="creative-navbar-placeholder"></div>
+
+    <!-- Main container -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- Header Section -->
+        <header class="mb-8">
+            <h1 class="text-3xl font-extrabold revelti-blue">Media Management</h1>
+            <p class="text-gray-600">Overview of events you are collaborating with</p>
+        </header>
+
+        <!-- Events List -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- Bachata Geneva Festival 2026 -->
+            <div
+                class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 border border-gray-100">
+                <div class="relative h-48">
+                    <img src="images/eventPoster1.jpg" alt="Bachata Geneva Festival 2026"
+                        class="w-full h-full object-cover"
+                        onerror="this.onerror=null;this.src='https://placehold.co/600x400/213c63/ffffff?text=BGF+2026';">
+                    <div class="absolute top-4 right-4">
+                        <span class="bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-full uppercase">On
+                            Sale</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h2 class="text-xl font-bold revelti-blue mb-2">Bachata Geneva Festival 2026</h2>
+                    <p class="text-gray-500 text-sm mb-4">The Festival of Nations</p>
+
+                    <div class="flex items-center text-sm text-gray-600 mb-4">
+                        <svg class="w-5 h-5 mr-2 text-revelti-orange" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                            </path>
+                        </svg>
+                        Oct 08 - 12, 2026
+                    </div>
+
+                    <div class="flex items-center text-sm text-gray-600 mb-6">
+                        <svg class="w-5 h-5 mr-2 text-revelti-orange" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                            </path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        Geneva, Switzerland
+                    </div>
+
+                    <a href="creativeEventMediaManagement.html"
+                        class="block w-full text-center bg-revelti-blue text-white font-bold py-3 rounded-lg hover:bg-blue-800 transition duration-300">
+                        Manage Media
+                    </a>
+                </div>
+            </div>
+
+            <!-- Barcelona Summer Fest -->
+            <div
+                class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 border border-gray-100 opacity-90">
+                <div class="relative h-48 grayscale">
+                    <img src="https://placehold.co/600x400/213c63/ffffff?text=BSF+2026" alt="Barcelona Summer Fest"
+                        class="w-full h-full object-cover">
+                    <div class="absolute top-4 right-4">
+                        <span
+                            class="bg-gray-100 text-gray-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Archived</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h2 class="text-xl font-bold text-gray-400 mb-2">Barcelona Summer Fest 2026</h2>
+                    <p class="text-gray-400 text-sm mb-4">Summer Bachata Celebration</p>
+
+                    <div class="flex items-center text-sm text-gray-400 mb-4">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                            </path>
+                        </svg>
+                        Jul 15 - 19, 2026
+                    </div>
+
+                    <div class="flex items-center text-sm text-gray-400 mb-6">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                            </path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        Barcelona, Spain
+                    </div>
+
+                    <button disabled
+                        class="block w-full text-center bg-gray-200 text-gray-500 font-bold py-3 rounded-lg cursor-not-allowed">
+                        View Records
+                    </button>
+                </div>
+            </div>
+
+            <!-- Empty State / Placeholder -->
+            <div
+                class="bg-gray-50 rounded-xl border-2 border-dashed border-gray-300 flex flex-col items-center justify-center p-8 text-center h-full min-h-[400px]">
+                <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mb-4">
+                    <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                </div>
+                <h3 class="font-bold text-gray-500">New Collaboration</h3>
+                <p class="text-sm text-gray-400 mt-2">When an event organizer invites you to collaborate, it will appear
+                    here.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="creative.js" defer></script>
+</body>
+
+</html>

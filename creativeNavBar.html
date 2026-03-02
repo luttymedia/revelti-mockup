@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revelti Organizer Navigation</title>
+    <title>Revelti Creative Navigation</title>
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Tailwind Configuration -->
@@ -16,6 +16,7 @@
                         revelti: {
                             blue: '#213c63',
                             orange: '#f58220',
+                            purple: '#6b21a8'
                         }
                     }
                 }
@@ -31,31 +32,31 @@
 
     <!-- 
   This navbar is designed to be loaded into a placeholder div, 
-  for example: <div id="organizer-navbar-placeholder"></div> 
+  for example: <div id="creative-navbar-placeholder"></div> 
 -->
 
-    <nav class="fixed top-0 left-0 right-0 bg-revelti-blue shadow-md z-50" style="font-family: 'Nunito', sans-serif;">
+    <nav class="fixed top-0 left-0 right-0 bg-revelti-purple shadow-md z-50" style="font-family: 'Nunito', sans-serif;">
         <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-12">
                 <!-- Logo -->
                 <div class="flex-shrink-0">
-                    <a href="organizerDashboard.html">
+                    <a href="creativeDashboard.html">
                         <!-- Using the white text version of the logo -->
                         <img class="h-6" src="images/reveltiLogoWhite.png" alt="Revelti Logo"
-                            onerror="this.onerror=null;this.src='https://placehold.co/120x32/ffffff/213c63?text=revelti';">
+                            onerror="this.onerror=null;this.src='https://placehold.co/120x32/ffffff/6b21a8?text=revelti';">
                     </a>
                 </div>
 
-                <!-- Organizer View Title (Desktop) -->
+                <!-- Creative View Title (Desktop) -->
                 <div class="hidden md:flex items-center">
-                    <span class="font-semibold text-sm text-white/80 tracking-wide">ORGANIZER VIEW</span>
+                    <span class="font-semibold text-sm text-white/80 tracking-wide">CREATIVE VIEW</span>
                 </div>
 
                 <!-- Icons -->
                 <div class="flex items-center space-x-0">
                     <!-- Notification Icon -->
-                    <a href="organizerNotifications.html" class="p-1.5 rounded-full hover:bg-white/20"
-                        title="Organizer Notifications">
+                    <a href="creativeNotifications.html" class="p-1.5 rounded-full hover:bg-white/20"
+                        title="Creative Notifications">
                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
@@ -63,7 +64,7 @@
                         </svg>
                     </a>
                     <!-- Hamburger Icon -->
-                    <button id="organizer-hamburger-icon" class="p-1.5 rounded-full hover:bg-white/20">
+                    <button id="creative-hamburger-icon" class="p-1.5 rounded-full hover:bg-white/20">
                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M4 6h16M4 12h16M4 18h16"></path>
@@ -74,20 +75,23 @@
         </div>
 
         <!-- Mobile Menu -->
-        <div id="organizer-mobile-menu"
+        <div id="creative-mobile-menu"
             class="hidden max-w-full mx-auto px-4 pt-2 pb-4 space-y-2 bg-white border-t border-gray-200">
             <div class="flex items-center justify-end space-x-2 px-2 py-1">
-                <span id="organizer-lang-en" class="font-bold revelti-orange cursor-pointer">EN</span>
+                <span id="creative-lang-en" class="font-bold text-revelti-orange cursor-pointer">EN</span>
                 <span>|</span>
-                <span id="organizer-lang-es" class="font-bold text-gray-700 cursor-pointer">ES</span>
+                <span id="creative-lang-es" class="font-bold text-gray-700 cursor-pointer">ES</span>
             </div>
-            <a href="organizerDashboard.html"
+            <a href="creativeDashboard.html"
                 class="flex items-center justify-end space-x-2 px-2 py-1 text-gray-700 font-semibold hover:bg-gray-100 rounded-md"><span>Dashboard</span></a>
-            <a href="createEvent.html"
-                class="flex items-center justify-end space-x-2 px-2 py-1 text-gray-700 font-semibold hover:bg-gray-100 rounded-md"><span>Create
-                    Event</span></a>
-            <a href="#"
-                class="flex items-center justify-end space-x-2 px-2 py-1 text-gray-700 font-semibold hover:bg-gray-100 rounded-md"><span>Contact</span></a>
+            <a href="creativeEventView.html"
+                class="flex items-center justify-end space-x-2 px-2 py-1 text-gray-700 font-semibold hover:bg-gray-100 rounded-md"><span>My
+                    Events</span></a>
+            <a href="creativeRevenue.html"
+                class="flex items-center justify-end space-x-2 px-2 py-1 text-gray-700 font-semibold hover:bg-gray-100 rounded-md"><span>Revenue</span></a>
+            <a href="creativeProfile.html"
+                class="flex items-center justify-end space-x-2 px-2 py-1 text-gray-700 font-semibold hover:bg-gray-100 rounded-md"><span>Public
+                    Profile</span></a>
             <div class="border-t border-gray-200 !my-2"></div>
             <div class="px-2 pt-1 text-right text-sm text-gray-500">Switch accounts</div>
             <a href="homePage.html"
@@ -96,18 +100,18 @@
                     <span class="font-semibold">Alex Johnson</span>
                     <div class="text-sm text-gray-500">Attendee</div>
                 </div>
-                <img class="h-10 w-10 rounded-full shadow-md object-cover"
-                    src="https://placehold.co/80x80/213c63/ffffff?text=A" alt="Alex Johnson Avatar">
+                <img class="h-10 w-10 rounded-full object-cover shadow-sm"
+                    src="https://placehold.co/80x80/213c63/ffffff?text=A" alt="Attendee Avatar">
             </a>
-            <a href="creativeDashboard.html"
+            <a href="organizerDashboard.html"
                 class="flex items-center justify-end space-x-3 px-2 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
                 <div class="text-right">
-                    <span class="font-semibold">AMedia</span>
-                    <div class="text-sm text-gray-500">Creative</div>
+                    <span class="font-semibold">Bachata Geneva</span>
+                    <div class="text-sm text-gray-500">Organizer</div>
                 </div>
-                <img class="h-10 w-10 rounded-full shadow-md object-cover" src="images/creatorLogo.png"
-                    alt="AMedia Avatar"
-                    onerror="this.onerror=null;this.src='https://placehold.co/80x80/213c63/ffffff?text=AM';">
+                <img class="h-10 w-10 rounded-full object-cover shadow-sm" src="images/organizerAvatar.png"
+                    alt="Organizer Avatar"
+                    onerror="this.onerror=null;this.src='https://placehold.co/80x80/213c63/ffffff?text=B';">
             </a>
             <a href="#"
                 class="flex items-center justify-end space-x-2 px-2 py-1 text-gray-700 font-semibold hover:bg-gray-100 rounded-md">

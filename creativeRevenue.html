@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revelti - Revenue (Creative View)</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        revelti: {
+                            blue: '#213c63',
+                            orange: '#f58220',
+                            purple: '#6b21a8',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Chart.js for Revenue Chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        .creative-tab-active {
+            border-bottom: 3px solid #f58220;
+            color: #213c63;
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<body class="antialiased text-gray-800 bg-gray-100 pt-8" data-page-type="creative-revenue">
+    <!-- Creative Navigation Bar -->
+    <div id="creative-navbar-placeholder"></div>
+
+    <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- Header Section -->
+        <header class="flex flex-col md:flex-row justify-between md:items-center mb-6">
+            <div>
+                <div class="flex items-center">
+                    <h1 class="text-3xl font-extrabold text-revelti-blue">Revenue Dashboard</h1>
+                </div>
+                <p class="text-gray-600 mt-1">Track your earnings across all active events</p>
+            </div>
+            <div class="flex space-x-2 mt-4 md:mt-0">
+                <button onclick="document.getElementById('payout-modal').classList.remove('hidden');"
+                    class="px-6 py-2 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition duration-300 shadow-md flex items-center">
+                    Request Payout
+                </button>
+            </div>
+        </header>
+
+        <!-- KPI Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white rounded-lg p-6 shadow-md border-t-4 border-gray-300">
+                <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Gross Premium Sales</p>
+                <p class="text-3xl font-extrabold text-gray-800 mt-2">€4,515.00</p>
+                <div class="mt-4 flex items-center text-sm">
+                    <span class="text-green-600 font-bold flex items-center">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                        12%
+                    </span>
+                    <span class="text-gray-500 ml-2">vs last month</span>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg p-6 shadow-md border-t-4 border-revelti-orange">
+                <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Total Sales (Nov)</h3>
+                <p class="text-3xl font-extrabold text-revelti-orange mt-2">€3,160.50</p>
+                <div class="mt-4 text-sm text-gray-500">
+                    Net after Organizer (20%) & Platform (10%) splits.
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg p-6 shadow-md border-t-4 border-green-500">
+                <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Available for Payout</p>
+                <p class="text-3xl font-extrabold text-green-600 mt-2">€1,240.00</p>
+                <div class="mt-4 text-sm flex justify-between items-center text-gray-500">
+                    <span>Pending Clearance: €1,920.50</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            <!-- Main Chart Area -->
+            <div class="lg:col-span-2 space-y-8">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold text-gray-800">Earnings Overview</h2>
+                        <select
+                            class="border-gray-300 rounded-md text-sm focus:ring-revelti-blue focus:border-revelti-blue">
+                            <option>Last 6 Months</option>
+                            <option>Year to Date</option>
+                            <option>All Time</option>
+                        </select>
+                    </div>
+                    <div class="relative h-72 w-full">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Recent Top Performing Assets -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-6">Top Performing Media</h2>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="text-sm font-semibold text-gray-500 bg-gray-50 border-b border-gray-200">
+                                    <th class="py-3 px-4">Asset</th>
+                                    <th class="py-3 px-4">Event</th>
+                                    <th class="py-3 px-4 text-center">Unit Price</th>
+                                    <th class="py-3 px-4 text-center">Sales</th>
+                                    <th class="py-3 px-4 text-right">Your Cut (70%)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm text-gray-700 divide-y divide-gray-100">
+                                <tr class="hover:bg-gray-50 transition">
+                                    <td class="py-3 px-4 flex items-center">
+                                        <div
+                                            class="w-10 h-10 bg-revelti-blue rounded object-cover mr-3 overflow-hidden">
+                                            <img src="https://placehold.co/100x100/213c63/ffffff?text=V"
+                                                class="w-full h-full object-cover">
+                                        </div>
+                                        <span class="font-bold">Jack & Jill Final Video</span>
+                                    </td>
+                                    <td class="py-3 px-4">Bachata Geneva 2026</td>
+                                    <td class="py-3 px-4 text-center">€9.99</td>
+                                    <td class="py-3 px-4 text-center font-bold">142</td>
+                                    <td class="py-3 px-4 text-right font-bold text-green-600">€993.00</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition">
+                                    <td class="py-3 px-4 flex items-center">
+                                        <div
+                                            class="w-10 h-10 bg-revelti-blue rounded object-cover mr-3 overflow-hidden">
+                                            <img src="https://placehold.co/100x100/213c63/ffffff?text=P"
+                                                class="w-full h-full object-cover">
+                                        </div>
+                                        <span class="font-bold">Gero & Migle Workshop</span>
+                                    </td>
+                                    <td class="py-3 px-4">Bachata Geneva 2026</td>
+                                    <td class="py-3 px-4 text-center">€4.99</td>
+                                    <td class="py-3 px-4 text-center font-bold">87</td>
+                                    <td class="py-3 px-4 text-right font-bold text-green-600">€303.89</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition">
+                                    <td class="py-3 px-4 flex items-center">
+                                        <div
+                                            class="w-10 h-10 bg-revelti-orange rounded object-cover mr-3 overflow-hidden">
+                                            <img src="https://placehold.co/100x100/f58220/ffffff?text=P"
+                                                class="w-full h-full object-cover">
+                                        </div>
+                                        <span class="font-bold">Social Dance Album</span>
+                                    </td>
+                                    <td class="py-3 px-4">Paris Sensual Fest</td>
+                                    <td class="py-3 px-4 text-center">€14.99</td>
+                                    <td class="py-3 px-4 text-center font-bold">54</td>
+                                    <td class="py-3 px-4 text-right font-bold text-green-600">€566.62</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Side Column -->
+            <div class="lg:col-span-1 space-y-8">
+
+                <!-- Payout History -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-6">Payout History</h2>
+                    <ul class="space-y-4">
+                        <li class="flex justify-between items-center py-2 border-b border-gray-100 last:border-0">
+                            <div>
+                                <p class="font-bold text-gray-700">Bank Transfer (•••4421)</p>
+                                <p class="text-xs text-gray-500">Oct 01, 2025</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold text-gray-800">€850.00</p>
+                                <p class="text-xs font-bold text-green-600">Completed</p>
+                            </div>
+                        </li>
+                        <li class="flex justify-between items-center py-2 border-b border-gray-100 last:border-0">
+                            <div>
+                                <p class="font-bold text-gray-700">Bank Transfer (•••4421)</p>
+                                <p class="text-xs text-gray-500">Sep 01, 2025</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold text-gray-800">€1,200.00</p>
+                                <p class="text-xs font-bold text-green-600">Completed</p>
+                            </div>
+                        </li>
+                        <li class="flex justify-between items-center py-2 border-b border-gray-100 last:border-0">
+                            <div>
+                                <p class="font-bold text-gray-700">Stripe Account</p>
+                                <p class="text-xs text-gray-500">Aug 01, 2025</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold text-gray-800">€450.50</p>
+                                <p class="text-xs font-bold text-green-600">Completed</p>
+                            </div>
+                        </li>
+                    </ul>
+                    <a href="#"
+                        class="block mt-4 text-center text-sm font-semibold text-revelti-blue hover:underline">View
+                        All Transactions</a>
+                </div>
+
+                <!-- Event Split Explanation -->
+                <div class="bg-gray-50 rounded-lg shadow-sm border border-gray-200 p-6">
+                    <h3 class="font-bold text-lg text-gray-800 mb-3">Understanding Splits</h3>
+                    <p class="text-sm text-gray-600 mb-4">When a user purchases one of your premium media items, the
+                        gross revenue is automatically divided according to the smart contract.</p>
+
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 rounded-full bg-revelti-blue mr-2"></div>
+                                <span class="text-sm font-bold">You (Creative)</span>
+                            </div>
+                            <span class="text-sm font-bold">70%</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 rounded-full bg-revelti-orange mr-2"></div>
+                                <span class="text-sm font-bold text-gray-600">Event Organizer</span>
+                            </div>
+                            <span class="text-sm text-gray-600">20%</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 rounded-full bg-gray-400 mr-2"></div>
+                                <span class="text-sm font-bold text-gray-500">Revelti Platform</span>
+                            </div>
+                            <span class="text-sm text-gray-500">10%</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Payout Modal -->
+    <div id="payout-modal"
+        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-sm">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Request Payout</h3>
+            <p class="text-sm text-gray-600 mb-4">You have <span class="font-bold text-green-600">€1,240.00</span>
+                available to withdraw.</p>
+
+            <label class="block text-sm font-semibold text-gray-700 mb-1">Amount to withdraw</label>
+            <div class="relative mb-4">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500 font-bold">€</span>
+                <input type="number" value="1240.00"
+                    class="w-full pl-8 p-2 border border-gray-300 rounded focus:ring-revelti-blue focus:border-revelti-blue">
+            </div>
+
+            <label class="block text-sm font-semibold text-gray-700 mb-1">Send to</label>
+            <select
+                class="w-full mb-6 p-2 border border-gray-300 rounded focus:ring-revelti-blue focus:border-revelti-blue text-sm">
+                <option>Bank Transfer (•••4421)</option>
+                <option>Add New Bank Account...</option>
+            </select>
+
+            <div class="flex justify-end space-x-3">
+                <button onclick="document.getElementById('payout-modal').classList.add('hidden');"
+                    class="px-4 py-2 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300">Cancel</button>
+                <button
+                    onclick="alert('Simulating payout request...'); document.getElementById('payout-modal').classList.add('hidden');"
+                    class="px-4 py-2 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700">Confirm
+                    Transfer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script src="creative.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Chart.js implementation for Revenue
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+
+            // Simulating 6 months of earnings data (Creative's 70% cut)
+            const mockData = [120, 350, 480, 220, 850, 1140.50];
+            const labels = ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'];
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Earnings (€)',
+                        data: mockData,
+                        backgroundColor: '#213c63', // revelti-blue
+                        borderRadius: 4,
+                        barThickness: 32
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += '€' + context.parsed.y.toFixed(2);
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                borderDash: [2, 4],
+                                color: '#e5e7eb', // Tailwind gray-200
+                                drawBorder: false
+                            },
+                            ticks: {
+                                callback: function (value) {
+                                    return '€' + value;
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false,
+                                drawBorder: false
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
