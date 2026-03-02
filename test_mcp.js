@@ -3,7 +3,7 @@ const { spawn } = require('child_process');
 const proc = spawn('cmd', ['/c', 'npx', '-y', '@modelcontextprotocol/server-github', 'luttymedia/revelo-mockup'], {
     env: {
         ...process.env,
-        GITHUB_PERSONAL_ACCESS_TOKEN: 'PLACEHOLDER_TOKEN'
+        GITHUB_PERSONAL_ACCESS_TOKEN: process.env.GITHUB_PERSONAL_ACCESS_TOKEN
     }
 });
 
