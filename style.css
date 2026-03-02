@@ -5,8 +5,10 @@
 /* --- Base & Font Styles --- */
 body {
     font-family: 'Nunito', sans-serif;
-    background-color: #f0f2f5; /* Light gray background */
-    padding-top: 3rem; /* Added padding to prevent content from being hidden behind the fixed navbar */
+    background-color: #f0f2f5;
+    /* Light gray background */
+    padding-top: 3rem;
+    /* Added padding to prevent content from being hidden behind the fixed navbar */
 }
 
 /* Add padding to the bottom of the body on smaller screens 
@@ -16,23 +18,20 @@ body {
 */
 @media (max-width: 1023px) {
     body {
-        padding-bottom: 3.5rem; /* Space for the new mobile footer */
+        padding-bottom: 3.5rem;
+        /* Space for the new mobile footer */
     }
 }
 
 /* Footer active state */
 .footer-link-active {
-    color: #213c63; /* revelti-blue */
+    color: #213c63;
+    /* revelti-blue */
     font-weight: 700;
 }
 
 /* --- Custom Color Palette --- */
-/* Use these classes to apply brand colors */
-.revelti-blue { color: #213c63; }
-.revelti-orange { color: #f58220; }
-.bg-revelti-blue { background-color: #213c63; }
-.bg-revelti-orange { background-color: #f58220; }
-.border-revelti-orange { border-color: #f58220; }
+/* Colors are now defined and mapped through the Tailwind CSS config block in the document <head> */
 
 /* --- Component Styles --- */
 
@@ -45,12 +44,14 @@ body {
 }
 
 /* Accordion (Details/Summary) Arrow Rotation */
-details > summary {
+details>summary {
     list-style: none;
 }
-details > summary::-webkit-details-marker {
+
+details>summary::-webkit-details-marker {
     display: none;
 }
+
 /* This rule is too general and is rotating all SVGs. Let's make it more specific. */
 /* details[open] > summary svg {
     transform: rotate(180deg);
@@ -73,8 +74,10 @@ details > summary::-webkit-details-marker {
 
 /* --- Custom Styles for Organizer Pages --- */
 .organizer-tab-active {
-    border-bottom: 3px solid #213c63; /* Revelti Blue */
-    color: #213c63; /* Revelti Blue */
+    border-bottom: 3px solid #213c63;
+    /* Revelti Blue */
+    color: #213c63;
+    /* Revelti Blue */
     font-weight: 700;
 }
 
@@ -84,100 +87,146 @@ details > summary::-webkit-details-marker {
     max-height: 0;
     overflow: hidden;
 }
-.tree-item.open > .tree-content {
-    max-height: 500px; /* Adjust as needed */
+
+.tree-item.open>.tree-content {
+    max-height: 500px;
+    /* Adjust as needed */
 }
-.tree-item > div > svg {
+
+.tree-item>div>svg {
     transition: transform 0.3s ease-in-out;
 }
-.tree-item.open > div > svg {
+
+.tree-item.open>div>svg {
     transform: rotate(90deg);
 }
 
 /* --- Styles for ticketManagement & liveEventEdit --- */
 /* This more specific rule will only rotate SVGs that have the 'accordion-arrow' class */
-details[open] > summary svg.accordion-arrow { 
-    transform: rotate(180deg); 
+details[open]>summary svg.accordion-arrow {
+    transform: rotate(180deg);
 }
+
 .rule-enter {
     max-height: 0;
     opacity: 0;
     transform: translateY(-10px);
     transition: max-height 0.3s ease-out, opacity 0.3s ease-out, transform 0.3s ease-out;
 }
+
 .rule-enter-active {
-    max-height: 100px; /* Adjust as needed */
+    max-height: 100px;
+    /* Adjust as needed */
     opacity: 1;
     transform: translateY(0);
 }
+
 .commission-tier-enter {
     max-height: 0;
     opacity: 0;
     transform: translateY(-10px);
     transition: max-height 0.3s ease-out, opacity 0.3s ease-out, transform 0.3s ease-out;
 }
+
 .commission-tier-enter-active {
-    max-height: 100px; /* Adjust as needed */
+    max-height: 100px;
+    /* Adjust as needed */
     opacity: 1;
     transform: translateY(0);
 }
+
 .ticket-tag {
     display: inline-block;
-    background-color: #e5e7eb; /* gray-200 */
-    color: #374151; /* gray-700 */
+    background-color: #e5e7eb;
+    /* gray-200 */
+    color: #374151;
+    /* gray-700 */
     padding: 0.25rem 0.5rem;
-    border-radius: 0.375rem; /* rounded-md */
-    font-size: 0.75rem; /* text-xs */
+    border-radius: 0.375rem;
+    /* rounded-md */
+    font-size: 0.75rem;
+    /* text-xs */
     font-weight: 500;
 }
+
 .ticket-tag.all-tickets {
-    background-color: #dbeafe; /* blue-100 */
-    color: #1e40af; /* blue-800 */
+    background-color: #dbeafe;
+    /* blue-100 */
+    color: #1e40af;
+    /* blue-800 */
 }
+
 /* Custom dropdown for ticket selection */
 #ticket-multiselect-dropdown label:hover {
-    background-color: #f9fafb; /* gray-50 */
+    background-color: #f9fafb;
+    /* gray-50 */
 }
+
 /* Styles for mediaManagement */
 .tree-content {
     transition: max-height 0.3s ease-in-out;
     max-height: 0;
     overflow: hidden;
 }
-.tree-item.open > .tree-content {
-    max-height: 500px; /* Adjust as needed */
+
+.tree-item.open>.tree-content {
+    max-height: 500px;
+    /* Adjust as needed */
 }
-.tree-item > div > svg {
+
+.tree-item>div>svg {
     transition: transform 0.3s ease-in-out;
 }
-.tree-item.open > div > svg {
+
+.tree-item.open>div>svg {
     transform: rotate(90deg);
 }
 
 /* Custom styles for DataTables */
-.dt-button { background-color: #213c63 !important; color: white !important; border-radius: 0.5rem !important; padding: 0.5rem 1rem !important; margin: 0 0.25rem !important; border: none !important; }
-.dt-button:hover { background-color: #1a3050 !important; }
-.dataTables_wrapper .dataTables_filter input { border: 1px solid #d1d5db; border-radius: 0.5rem; padding: 0.5rem; }
+.dt-button {
+    background-color: #213c63 !important;
+    color: white !important;
+    border-radius: 0.5rem !important;
+    padding: 0.5rem 1rem !important;
+    margin: 0 0.25rem !important;
+    border: none !important;
+}
+
+.dt-button:hover {
+    background-color: #1a3050 !important;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+}
 
 /* --- MODAL STYLES (UPDATED) --- */
-.modal-overlay { 
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    right: 0; 
-    bottom: 0; 
-    background: rgba(0,0,0,0.6); /* Darkened overlay slightly */
-    display: none; /* Hidden by default */
-    justify-content: center; 
-    align-items: center; 
-    z-index: 1000; 
-    padding: 1rem; /* Add padding for smaller screens */
-    opacity: 0; /* Start fully transparent */
-    transition: opacity 0.3s ease-in-out; /* Fade-in transition */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    /* Darkened overlay slightly */
+    display: none;
+    /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 1rem;
+    /* Add padding for smaller screens */
+    opacity: 0;
+    /* Start fully transparent */
+    transition: opacity 0.3s ease-in-out;
+    /* Fade-in transition */
 }
+
 /* Fix for toggle switch colors */
-.peer:checked ~ .peer-checked\:bg-revelti-orange {
-  background-color: #f58220 !important;
+.peer:checked~.peer-checked\:bg-revelti-orange {
+    background-color: #f58220 !important;
 }
 
 /* This style will be added by JS to show the modal */
@@ -186,23 +235,33 @@ details[open] > summary svg.accordion-arrow {
     opacity: 1;
 }
 
-.modal-content { 
-    background: white; 
-    padding: 0; /* Remove padding, as the fetched content has its own */
-    border-radius: 0.5rem; 
-    width: 100%; /* Full width on small screens */
-    max-width: 672px; /* max-w-2xl from Tailwind, to match notification content */
-    max-height: 90vh; /* Limit height to 90% of viewport */
-    display: flex; /* Use flexbox to manage inner content */
-    flex-direction: column; /* Stack content vertically */
-    overflow: hidden; /* Hide overflow on the modal itself */
-    position: relative; 
-    transform: scale(0.95); /* Start slightly smaller */
-    transition: transform 0.3s ease-in-out; /* Pop-in transition */
+.modal-content {
+    background: white;
+    padding: 0;
+    /* Remove padding, as the fetched content has its own */
+    border-radius: 0.5rem;
+    width: 100%;
+    /* Full width on small screens */
+    max-width: 672px;
+    /* max-w-2xl from Tailwind, to match notification content */
+    max-height: 90vh;
+    /* Limit height to 90% of viewport */
+    display: flex;
+    /* Use flexbox to manage inner content */
+    flex-direction: column;
+    /* Stack content vertically */
+    overflow: hidden;
+    /* Hide overflow on the modal itself */
+    position: relative;
+    transform: scale(0.95);
+    /* Start slightly smaller */
+    transition: transform 0.3s ease-in-out;
+    /* Pop-in transition */
 }
 
 .modal-overlay.visible .modal-content {
-    transform: scale(1); /* Scale to full size when visible */
+    transform: scale(1);
+    /* Scale to full size when visible */
 }
 
 /* When the notification container is inside the modal, remove its shadow and margin */
@@ -215,11 +274,27 @@ details[open] > summary svg.accordion-arrow {
 
 
 /* Accordion arrow */
-details > summary { list-style: none; }
-details > summary::-webkit-details-marker { display: none; }
-details > summary svg { transition: transform 0.2s; }
-details[open] > summary svg { transform: rotate(180deg); }
-details[open] > summary svg.no-rotate { transform: none; } /* This overrides the rotation */
+details>summary {
+    list-style: none;
+}
+
+details>summary::-webkit-details-marker {
+    display: none;
+}
+
+details>summary svg {
+    transition: transform 0.2s;
+}
+
+details[open]>summary svg {
+    transform: rotate(180deg);
+}
+
+details[open]>summary svg.no-rotate {
+    transform: none;
+}
+
+/* This overrides the rotation */
 
 /* Custom styles for pagination and sorting */
 .pagination-btn {
@@ -228,29 +303,39 @@ details[open] > summary svg.no-rotate { transform: none; } /* This overrides the
     font-weight: 600;
     transition: background-color 0.3s;
 }
+
 .pagination-btn.active {
     background-color: #213c63;
     color: white;
 }
+
 .pagination-btn:not(.active) {
     background-color: #e5e7eb;
     color: #374151;
 }
+
 .pagination-btn:disabled {
     background-color: #f3f4f6;
     color: #9ca3af;
     cursor: not-allowed;
 }
+
 .sort-indicator {
     opacity: 0.5;
     transition: opacity 0.3s;
 }
+
 th:hover .sort-indicator {
     opacity: 1;
 }
 
 /* Styles from eventBreakdown.html */
-.tab-button.active { border-bottom: 3px solid #213c63; color: #213c63; font-weight: 700; }
+.tab-button.active {
+    border-bottom: 3px solid #213c63;
+    color: #213c63;
+    font-weight: 700;
+}
+
 .filter-icon {
     cursor: pointer;
     margin-left: 8px;
@@ -259,6 +344,7 @@ th:hover .sort-indicator {
     width: 16px;
     height: 16px;
 }
+
 .filter-modal {
     position: absolute;
     background-color: white;
@@ -268,24 +354,30 @@ th:hover .sort-indicator {
     display: none;
     max-height: 250px;
     overflow-y: auto;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
+
 .filter-modal .options-container {
     margin-bottom: 10px;
 }
+
 .filter-modal label {
     display: block;
     padding: 4px 0;
     font-weight: normal;
 }
+
 .filter-modal input[type="checkbox"] {
     margin-right: 8px;
-    accent-color: #213c63; /* revelti-blue */
+    accent-color: #213c63;
+    /* revelti-blue */
 }
+
 .dt-buttons {
     display: inline-block;
 }
+
 .reset-btn-container {
     display: inline-block;
     margin-left: 10px;
@@ -296,6 +388,7 @@ th:hover .sort-indicator {
 .accordion-arrow {
     transition: transform 0.2s;
 }
+
 details[open] .accordion-arrow {
     transform: rotate(180deg);
 }
@@ -308,10 +401,12 @@ details[open] .accordion-arrow {
     right: 12px;
     width: 9px;
     height: 9px;
-    background-color: #f58220; /* revelti-orange */
+    background-color: #f58220;
+    /* revelti-orange */
     border-radius: 50%;
     border: 1px solid white;
 }
+
 .change-dot.visible {
     display: block;
 }
@@ -326,7 +421,8 @@ div.dt-button-background {
 /* Styles the dropdown container */
 .dt-button-collection {
     background-color: white !important;
-    border: 1px solid #e2e8f0 !important; /* light gray border */
+    border: 1px solid #e2e8f0 !important;
+    /* light gray border */
     border-radius: 0.5rem !important;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
     padding: 0.5rem !important;
@@ -336,7 +432,8 @@ div.dt-button-background {
 /* Styles individual buttons within the dropdown */
 .dt-button-collection .dt-button {
     background: none !important;
-    color: #213c63 !important; /* revelti-blue */
+    color: #213c63 !important;
+    /* revelti-blue */
     border: none !important;
     box-shadow: none !important;
     text-align: left;
@@ -347,5 +444,27 @@ div.dt-button-background {
 
 /* Hover effect for the dropdown buttons */
 .dt-button-collection .dt-button:hover {
-    background-color: #f8fafc !important; /* very light gray */
+    background-color: #f8fafc !important;
+    /* very light gray */
+}
+
+/* --- Mobile Components --- */
+.btn-mobile-tab {
+    flex: 1 1 0%;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    text-align: center;
+    color: #6b7280;
+    /* text-gray-500 */
+    transition-duration: 300ms;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-mobile-tab.tab-active,
+.btn-mobile-tab:hover {
+    color: #213c63;
+    /* revelti-blue */
 }

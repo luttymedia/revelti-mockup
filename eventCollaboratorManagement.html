@@ -7,6 +7,23 @@
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        revelti: {
+                            blue: '#213c63',
+                            orange: '#f58220',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
     
     <!-- Google Fonts: Nunito -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,7 +55,7 @@
             </div>
         </header>
         
-        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
             <main class="p-6 md:p-8 space-y-6">
                 
                 <!-- Creators Section -->

@@ -1,13 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Revelti - Organizer Dashboard</title>
-    
+
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        revelti: {
+                            blue: '#213c63',
+                            orange: '#f58220',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+
     <!-- Google Fonts: Nunito -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,6 +34,7 @@
     <!-- Your Custom Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="bg-gray-100 antialiased text-gray-800 pt-8">
     <!-- Organizer-specific Navbar -->
     <div id="organizer-navbar-placeholder"></div>
@@ -26,26 +45,37 @@
         <!-- Header Section -->
         <header class="flex flex-col md:flex-row justify-between items-center mb-6">
             <a href="organizerDashboard.html" class="flex items-center mb-4 md:mb-0">
-                <img src="images/organizerAvatar.png" alt="Organizer Avatar" class="w-20 h-20 rounded-full object-cover shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/80x80/213c63/ffffff?text=BS';">
+                <img src="images/organizerAvatar.png" alt="Organizer Avatar"
+                    class="w-20 h-20 rounded-full object-cover shadow-md"
+                    onerror="this.onerror=null;this.src='https://placehold.co/80x80/213c63/ffffff?text=BS';">
                 <div class="ml-4">
                     <h1 class="text-3xl font-extrabold revelti-blue">Bachata Geneva</h1>
                     <p class="text-gray-500">Organizer Dashboard</p>
                 </div>
             </a>
-            <a href="createEvent.html" class="px-4 py-2 bg-revelti-blue text-white rounded-lg hover:bg-blue-800 transition duration-300 flex items-center justify-center">
-                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+            <a href="createEvent.html"
+                class="px-4 py-2 bg-revelti-blue text-white rounded-lg hover:bg-blue-800 transition duration-300 flex items-center justify-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                </svg>
                 Create New Event
             </a>
         </header>
-        
-        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
             <!-- Tab Navigation -->
             <nav class="border-b border-gray-200">
                 <div class="flex">
-                    <button onclick="switchTab('events')" class="tab-button flex-1 py-4 px-1 text-center text-gray-500 hover:revelti-blue font-semibold transition duration-300 organizer-tab-active">Events</button>
-                    <button onclick="switchTab('stats')" class="tab-button flex-1 py-4 px-1 text-center text-gray-500 hover:revelti-blue font-semibold transition duration-300">Quick Stats</button>
-                    <button onclick="switchTab('overview')" class="tab-button flex-1 py-4 px-1 text-center text-gray-500 hover:revelti-blue font-semibold transition duration-300">Overview</button>
-                    <button onclick="switchTab('profile')" class="tab-button flex-1 py-4 px-1 text-center text-gray-500 hover:revelti-blue font-semibold transition duration-300">Profile</button>
+                    <button onclick="switchTab('events')"
+                        class="tab-button flex-1 py-4 px-1 text-center text-gray-500 hover:revelti-blue font-semibold transition duration-300 organizer-tab-active">Events</button>
+                    <button onclick="switchTab('stats')"
+                        class="tab-button flex-1 py-4 px-1 text-center text-gray-500 hover:revelti-blue font-semibold transition duration-300">Quick
+                        Stats</button>
+                    <button onclick="switchTab('overview')"
+                        class="tab-button flex-1 py-4 px-1 text-center text-gray-500 hover:revelti-blue font-semibold transition duration-300">Overview</button>
+                    <button onclick="switchTab('profile')"
+                        class="tab-button flex-1 py-4 px-1 text-center text-gray-500 hover:revelti-blue font-semibold transition duration-300">Profile</button>
                 </div>
             </nav>
 
@@ -56,26 +86,40 @@
                     <!-- Filters and Search -->
                     <div class="flex flex-col md:flex-row items-center justify-between mb-6">
                         <div class="relative w-full md:w-1/3 mb-4 md:mb-0">
-                            <input type="text" placeholder="Search my events..." class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-revelti-blue">
+                            <input type="text" placeholder="Search my events..."
+                                class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-revelti-blue">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
                             </div>
                         </div>
                         <div id="event-filters" class="flex space-x-2">
-                            <button onclick="filterEvents('upcoming')" class="filter-btn px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-lg">Upcoming</button>
-                            <button onclick="filterEvents('draft')" class="filter-btn px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-lg">Drafts</button>
-                            <button onclick="filterEvents('past')" class="filter-btn px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-lg">Past Events</button>
+                            <button onclick="filterEvents('upcoming')"
+                                class="filter-btn px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-lg">Upcoming</button>
+                            <button onclick="filterEvents('draft')"
+                                class="filter-btn px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-lg">Drafts</button>
+                            <button onclick="filterEvents('past')"
+                                class="filter-btn px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-lg">Past
+                                Events</button>
                         </div>
                     </div>
                     <!-- Event Cards Grid -->
                     <div id="event-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <!-- Event Card 1 -->
-                        <div class="event-card bg-white rounded-lg shadow-md overflow-hidden border border-gray-200" data-status="upcoming">
-                            <img src="images/eventPoster.png" alt="Event Poster" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Event';">
+                        <div class="event-card bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 shadow-sm"
+                            data-status="upcoming">
+                            <img src="images/eventPoster.png" alt="Event Poster" class="w-full h-48 object-cover"
+                                onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Event';">
                             <div class="p-4">
                                 <div class="flex justify-between items-start">
-                                    <h4 class="font-bold text-lg revelti-blue">Bachata Geneva Festival 2026 - The Festival of Nations</h4>
-                                    <span class="text-xs font-bold bg-green-100 text-green-800 px-2 py-1 rounded-full whitespace-nowrap">On Sale</span>
+                                    <h4 class="font-bold text-lg revelti-blue">Bachata Geneva Festival 2026 - The
+                                        Festival of Nations</h4>
+                                    <span
+                                        class="text-xs font-bold bg-green-100 text-green-800 px-2 py-1 rounded-full whitespace-nowrap">On
+                                        Sale</span>
                                 </div>
                                 <p class="text-sm text-gray-500 mt-1">Oct 08-12, 2026 | Geneva</p>
                                 <div class="flex justify-between items-end mt-4">
@@ -83,17 +127,21 @@
                                         <p class="font-semibold text-gray-700">Revenue: €12,500</p>
                                         <p class="text-gray-500">350 / 500 sold</p>
                                     </div>
-                                    <a href="eventLiveEdit.html" class="px-4 py-2 text-sm font-bold bg-revelti-blue text-white rounded-lg hover:bg-blue-800">Manage</a>
+                                    <a href="eventLiveEdit.html"
+                                        class="px-4 py-2 text-sm font-bold bg-revelti-blue text-white rounded-lg hover:bg-blue-800">Manage</a>
                                 </div>
                             </div>
                         </div>
                         <!-- Event Card 2 -->
-                        <div class="event-card bg-white rounded-lg shadow-md overflow-hidden border border-gray-200" data-status="draft">
-                            <img src="https://placehold.co/600x400/213c63/ffffff?text=Event" alt="Event Poster" class="w-full h-48 object-cover">
+                        <div class="event-card bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 shadow-sm"
+                            data-status="draft">
+                            <img src="https://placehold.co/600x400/213c63/ffffff?text=Event" alt="Event Poster"
+                                class="w-full h-48 object-cover">
                             <div class="p-4">
                                 <div class="flex justify-between items-start">
                                     <h4 class="font-bold text-lg revelti-blue">BCN Zouk Congress</h4>
-                                    <span class="text-xs font-bold bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">Draft</span>
+                                    <span
+                                        class="text-xs font-bold bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">Draft</span>
                                 </div>
                                 <p class="text-sm text-gray-500 mt-1">Dec 5-8, 2025 | Barcelona</p>
                                 <div class="flex justify-between items-end mt-4">
@@ -101,17 +149,21 @@
                                         <p class="font-semibold text-gray-700">Revenue: €0</p>
                                         <p class="text-gray-500">0 / 800 sold</p>
                                     </div>
-                                    <a href="#" class="px-4 py-2 text-sm font-bold bg-revelti-blue text-white rounded-lg hover:bg-blue-800">Manage</a>
+                                    <a href="#"
+                                        class="px-4 py-2 text-sm font-bold bg-revelti-blue text-white rounded-lg hover:bg-blue-800">Manage</a>
                                 </div>
                             </div>
                         </div>
                         <!-- Event Card 3 -->
-                        <div class="event-card bg-white rounded-lg shadow-md overflow-hidden border border-gray-200" data-status="past">
-                            <img src="https://placehold.co/600x400/cccccc/ffffff?text=Past+Event" alt="Event Poster" class="w-full h-48 object-cover">
+                        <div class="event-card bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 shadow-sm"
+                            data-status="past">
+                            <img src="https://placehold.co/600x400/cccccc/ffffff?text=Past+Event" alt="Event Poster"
+                                class="w-full h-48 object-cover">
                             <div class="p-4">
                                 <div class="flex justify-between items-start">
                                     <h4 class="font-bold text-lg revelti-blue">Summer Fest 2024</h4>
-                                    <span class="text-xs font-bold bg-gray-200 text-gray-800 px-2 py-1 rounded-full">Completed</span>
+                                    <span
+                                        class="text-xs font-bold bg-gray-200 text-gray-800 px-2 py-1 rounded-full">Completed</span>
                                 </div>
                                 <p class="text-sm text-gray-500 mt-1">Jul 15-17, 2024 | Barcelona</p>
                                 <div class="flex justify-between items-end mt-4">
@@ -119,7 +171,8 @@
                                         <p class="font-semibold text-gray-700">Revenue: €29,650</p>
                                         <p class="text-gray-500">593 / 600 sold</p>
                                     </div>
-                                    <a href="#" class="px-4 py-2 text-sm font-bold bg-gray-400 text-white rounded-lg cursor-not-allowed">Manage</a>
+                                    <a href="#"
+                                        class="px-4 py-2 text-sm font-bold bg-gray-400 text-white rounded-lg cursor-not-allowed">Manage</a>
                                 </div>
                             </div>
                         </div>
@@ -130,7 +183,8 @@
                 <div id="stats" class="tab-content hidden">
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                         <!-- Main Stat Card: Total Income -->
-                        <a href="incomeBreakdown.html" class="lg:col-span-2 block bg-white p-6 rounded-lg border border-gray-200 hover:shadow-xl hover:border-revelti-blue transition-all duration-300">
+                        <a href="incomeBreakdown.html"
+                            class="lg:col-span-2 block bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-xl hover:border-revelti-blue transition-all duration-300">
                             <h3 class="text-base font-semibold text-gray-500 uppercase tracking-wider">Total Income</h3>
                             <p id="totalIncomeStat" class="text-5xl font-extrabold revelti-blue mt-2">€0.00</p>
                             <div class="mt-6 pt-6 border-t border-gray-200 grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -150,13 +204,16 @@
                         </a>
 
                         <!-- Combined Secondary Card -->
-                        <a href="ticketBreakdown.html" class="block bg-white p-6 rounded-lg border border-gray-200 hover:shadow-xl hover:border-revelti-blue transition-all duration-300 flex flex-col justify-between">
+                        <a href="ticketBreakdown.html"
+                            class="block bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-xl hover:border-revelti-blue transition-all duration-300 flex flex-col justify-between">
                             <div>
-                                <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Average Ticket Price</h3>
+                                <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Average Ticket
+                                    Price</h3>
                                 <p id="avgTicketPriceStat" class="text-4xl font-extrabold revelti-blue mt-2">€0.00</p>
                             </div>
                             <div class="mt-6 pt-6 border-t border-gray-200">
-                                <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Total Tickets sold</h3>
+                                <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Total Tickets
+                                    sold</h3>
                                 <p id="totalTicketsStat" class="text-4xl font-extrabold revelti-blue mt-2">0</p>
                             </div>
                         </a>
@@ -168,22 +225,28 @@
                 <div id="overview" class="tab-content hidden">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Manage Card 1: Creators -->
-                        <a href="creatorsOverview.html" class="block bg-gray-50 p-6 rounded-lg border border-gray-200 hover:shadow-md hover:border-revelti-blue transition-all">
+                        <a href="creatorsOverview.html"
+                            class="block bg-gray-50 p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md hover:border-revelti-blue transition-all">
                             <h3 class="text-lg font-bold revelti-blue">Media Creators Overview</h3>
-                            <p class="text-gray-600 mt-1"><strong>2</strong> Active Collaborators / <strong>2</strong> Pending Invitations</p>
+                            <p class="text-gray-600 mt-1"><strong>2</strong> Active Collaborators / <strong>2</strong>
+                                Pending Invitations</p>
                         </a>
                         <!-- Manage Card 2: Promoters -->
-                        <a href="promotersOverview.html" class="block bg-gray-50 p-6 rounded-lg border border-gray-200 hover:shadow-md hover:border-revelti-blue transition-all">
+                        <a href="promotersOverview.html"
+                            class="block bg-gray-50 p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md hover:border-revelti-blue transition-all">
                             <h3 class="text-lg font-bold revelti-blue">Promoters Overview</h3>
                             <p class="text-gray-600 mt-1">Top Promoter: <strong>PartyPros</strong></p>
                         </a>
                         <!-- Manage Card 3: Galleries -->
-                        <a href="galleriesOverview.html" class="block bg-gray-50 p-6 rounded-lg border border-gray-200 hover:shadow-md hover:border-revelti-blue transition-all">
+                        <a href="galleriesOverview.html"
+                            class="block bg-gray-50 p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md hover:border-revelti-blue transition-all">
                             <h3 class="text-lg font-bold revelti-blue">Galleries Overview</h3>
-                            <p class="text-gray-600 mt-1"><strong>1,327</strong> Total Media Files / <strong>1</strong> Pending Approval</p>
+                            <p class="text-gray-600 mt-1"><strong>1,327</strong> Total Media Files / <strong>1</strong>
+                                Pending Approval</p>
                         </a>
                         <!-- Manage Card 4: Financials -->
-                        <a href="financialOverview.html" class="block bg-gray-50 p-6 rounded-lg border border-gray-200 hover:shadow-md hover:border-revelti-blue transition-all">
+                        <a href="financialOverview.html"
+                            class="block bg-gray-50 p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md hover:border-revelti-blue transition-all">
                             <h3 class="text-lg font-bold revelti-blue">Financial Overview</h3>
                             <p class="text-gray-600 mt-1">Next Payout: €4.795,10 on Nov 17, 2025</p>
                         </a>
@@ -195,69 +258,140 @@
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                         <div class="lg:col-span-2 space-y-6">
                             <!-- Public Profile Info -->
-                            <details><summary class="flex justify-between items-center cursor-pointer font-semibold text-lg revelti-blue p-3 bg-white border rounded-lg">Public Profile Info <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
+                            <details>
+                                <summary
+                                    class="flex justify-between items-center cursor-pointer font-semibold text-lg revelti-blue p-3 bg-white border rounded-lg">
+                                    Public Profile Info <svg class="w-5 h-5 transform transition-transform" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path>
+                                    </svg></summary>
                                 <div class="p-4 space-y-4 bg-white border-x border-b rounded-b-lg">
                                     <!-- Avatar and Banner Upload -->
                                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                         <div>
                                             <label class="font-semibold text-gray-700">Avatar Image</label>
                                             <div class="mt-1 flex items-center space-x-4">
-                                                <img src="images/organizerAvatar.png" alt="Current Avatar" class="w-20 h-20 rounded-full object-cover shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/80x80/213c63/ffffff?text=BS';">
-                                                <button class="px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-lg">Upload New</button>
+                                                <img src="images/organizerAvatar.png" alt="Current Avatar"
+                                                    class="w-20 h-20 rounded-full object-cover shadow-md"
+                                                    onerror="this.onerror=null;this.src='https://placehold.co/80x80/213c63/ffffff?text=BS';">
+                                                <button
+                                                    class="px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-lg">Upload
+                                                    New</button>
                                             </div>
                                         </div>
                                         <div>
                                             <label class="font-semibold text-gray-700">Banner Image</label>
                                             <div class="mt-1 flex items-center space-x-4">
-                                                <img src="images/organizerLogo.png" alt="Current Banner" class="w-32 h-16 object-cover rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/128x64/213c63/ffffff?text=Banner';">
-                                                <button class="px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-lg">Upload New</button>
+                                                <img src="images/organizerLogo.png" alt="Current Banner"
+                                                    class="w-32 h-16 object-cover rounded-md"
+                                                    onerror="this.onerror=null;this.src='https://placehold.co/128x64/213c63/ffffff?text=Banner';">
+                                                <button
+                                                    class="px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-lg">Upload
+                                                    New</button>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="border-t pt-4">
                                         <label class="font-semibold text-gray-700">Organizer Name:</label>
-                                        <input type="text" value="Bachata Geneva" class="w-full p-2 border border-gray-300 rounded-md mt-1">
+                                        <input type="text" value="Bachata Geneva"
+                                            class="w-full p-2 border border-gray-300 rounded-md mt-1">
                                     </div>
-                                    <div><label class="font-semibold text-gray-700">Public Description:</label><textarea class="w-full p-2 border border-gray-300 rounded-md mt-1" rows="4">Leading organizers of premier bachata and salsa events in Barcelona. We bring world-class artists and a passionate community together for unforgettable dance experiences.</textarea></div>
+                                    <div><label class="font-semibold text-gray-700">Public Description:</label><textarea
+                                            class="w-full p-2 border border-gray-300 rounded-md mt-1"
+                                            rows="4">Leading organizers of premier bachata and salsa events in Barcelona. We bring world-class artists and a passionate community together for unforgettable dance experiences.</textarea>
+                                    </div>
                                     <div><label class="font-semibold text-gray-700">Social Media Links:</label>
                                         <div class="space-y-2 mt-1">
-                                            <input type="url" placeholder="Instagram URL" class="w-full p-2 border border-gray-300 rounded-md">
-                                            <input type="url" placeholder="YouTube URL" class="w-full p-2 border border-gray-300 rounded-md">
-                                            <input type="url" placeholder="Website URL" class="w-full p-2 border border-gray-300 rounded-md">
+                                            <input type="url" placeholder="Instagram URL"
+                                                class="w-full p-2 border border-gray-300 rounded-md">
+                                            <input type="url" placeholder="YouTube URL"
+                                                class="w-full p-2 border border-gray-300 rounded-md">
+                                            <input type="url" placeholder="Website URL"
+                                                class="w-full p-2 border border-gray-300 rounded-md">
                                         </div>
                                     </div>
-                                    <button class="w-full bg-revelti-blue text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-800 transition duration-300">Save Changes</button>
+                                    <button
+                                        class="w-full bg-revelti-blue text-white font-semibold text-sm py-2 px-4 rounded-md hover:bg-blue-800 transition duration-300">Save
+                                        Changes</button>
                                 </div>
                             </details>
                             <!-- Notification Settings -->
-                            <a href="organizerNotificationSettings.html" class="w-full flex justify-between items-center cursor-pointer font-semibold text-lg revelti-blue p-3 bg-white border rounded-lg hover:bg-gray-50 transition-colors">
+                            <a href="organizerNotificationSettings.html"
+                                class="w-full flex justify-between items-center cursor-pointer font-semibold text-lg revelti-blue p-3 bg-white border rounded-lg hover:bg-gray-50 transition-colors">
                                 <span>Notification Settings</span>
-                                <svg class="w-6 h-6 revelti-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                <svg class="w-6 h-6 revelti-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
+                                    </path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
                             </a>
                             <!-- Account Settings -->
-                            <details><summary class="flex justify-between items-center cursor-pointer font-semibold text-lg revelti-blue p-3 bg-white border rounded-lg">Account Settings <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
+                            <details>
+                                <summary
+                                    class="flex justify-between items-center cursor-pointer font-semibold text-lg revelti-blue p-3 bg-white border rounded-lg">
+                                    Account Settings <svg class="w-5 h-5 transform transition-transform" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path>
+                                    </svg></summary>
                                 <div class="p-4 space-y-4 bg-white border-x border-b rounded-b-lg">
                                     <div><label class="font-semibold text-gray-700">Change Password:</label>
-                                        <input type="password" placeholder="Current Password" class="w-full p-2 border border-gray-300 rounded-md mt-1">
-                                        <input type="password" placeholder="New Password" class="w-full p-2 border border-gray-300 rounded-md mt-2">
-                                        <input type="password" placeholder="Confirm New Password" class="w-full p-2 border border-gray-300 rounded-md mt-2">
+                                        <input type="password" placeholder="Current Password"
+                                            class="w-full p-2 border border-gray-300 rounded-md mt-1">
+                                        <input type="password" placeholder="New Password"
+                                            class="w-full p-2 border border-gray-300 rounded-md mt-2">
+                                        <input type="password" placeholder="Confirm New Password"
+                                            class="w-full p-2 border border-gray-300 rounded-md mt-2">
                                     </div>
-                                    <button class="w-full bg-revelti-blue text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-800 transition duration-300">Update Password</button>
+                                    <button
+                                        class="w-full bg-revelti-blue text-white font-semibold text-sm py-2 px-4 rounded-md hover:bg-blue-800 transition duration-300">Update
+                                        Password</button>
                                     <div class="border-t pt-4 mt-4">
-                                         <button class="w-full bg-red-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-700 transition duration-300">Delete Account</button>
+                                        <button
+                                            class="w-full bg-red-600 text-white font-semibold text-sm py-2 px-4 rounded-md hover:bg-red-700 transition duration-300">Delete
+                                            Account</button>
                                     </div>
                                 </div>
                             </details>
                         </div>
                         <div class="space-y-6">
-                             <!-- Reviews Received -->
-                             <div class="bg-white p-4 rounded-lg border">
+                            <!-- Reviews Received -->
+                            <div class="bg-white p-4 rounded-lg border border-gray-100 shadow-sm">
                                 <h3 class="font-semibold text-lg revelti-blue mb-3">Recent Reviews</h3>
                                 <div class="space-y-4">
-                                    <div class="bg-gray-50 p-3 rounded-lg border border-gray-200">
-                                        <div class="flex items-center mb-1"><div class="flex text-yellow-400"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg></div></div>
-                                        <p class="text-gray-700 text-sm">"The best events in Barcelona, hands down..."</p>
-                                        <p class="text-xs italic text-gray-500 mt-1">From: Bachata Geneva Festival 2026 - The Festival of Nations</p>
+                                    <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 shadow-sm">
+                                        <div class="flex items-center mb-1">
+                                            <div class="flex text-yellow-400"><svg class="w-4 h-4" fill="currentColor"
+                                                    viewBox="0 0 20 20">
+                                                    <path
+                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                                    </path>
+                                                </svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path
+                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                                    </path>
+                                                </svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path
+                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                                    </path>
+                                                </svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path
+                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                                    </path>
+                                                </svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path
+                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                                    </path>
+                                                </svg></div>
+                                        </div>
+                                        <p class="text-gray-700 text-sm">"The best events in Barcelona, hands down..."
+                                        </p>
+                                        <p class="text-xs italic text-gray-500 mt-1">From: Bachata Geneva Festival 2026
+                                            - The Festival of Nations</p>
                                     </div>
                                 </div>
                             </div>
@@ -276,7 +410,7 @@
         function switchTab(targetId) {
             tabContents.forEach(content => content.classList.add('hidden'));
             tabButtons.forEach(button => button.classList.remove('organizer-tab-active'));
-            
+
             document.getElementById(targetId)?.classList.remove('hidden');
             document.querySelector(`[onclick="switchTab('${targetId}')"]`)?.classList.add('organizer-tab-active');
         }
@@ -324,12 +458,12 @@
 
                 transactions.forEach(t => {
                     const multiplier = t.Transaction_Type === 'Refund' ? -1 : 1;
-                    
+
                     totalIncome += (parseFloat(t.Gross_Amount) || 0) * multiplier;
                     netProfit += (parseFloat(t.Net_Amount) || 0) * multiplier;
                     taxes += (parseFloat(t.IVA) || 0) * multiplier;
                     commissions += (parseFloat(t.Promoter_Commission) || 0) * multiplier;
-                    
+
                     if (t.Transaction_Type === 'Sale') {
                         totalTickets += parseInt(t.Qty, 10) || 0;
                     }
@@ -360,11 +494,12 @@
             // Set "Events" as the default tab
             switchTab('events');
             // filterEvents('upcoming'); // Set initial filter for the events tab
-            
+
             // Load stats from JSON
             loadStats();
         });
     </script>
     <script src="organizer.js" defer></script>
 </body>
+
 </html>

@@ -7,6 +7,23 @@
     
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        revelti: {
+                            blue: '#213c63',
+                            orange: '#f58220',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
     
     <!-- Google Fonts: Nunito -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,7 +38,7 @@
     <!-- Main container with a max-width for larger screens -->
     <div class="max-w-2xl md:max-w-full lg:max-w-full mx-auto">
         <!-- New grid container for two-column layout on large screens -->
-        <div id="main-grid-container" class="bg-white shadow-lg overflow-hidden lg:grid lg:grid-cols-3 lg:gap-8">
+        <div id="main-grid-container" class="bg-white shadow-md overflow-hidden lg:grid lg:grid-cols-3 lg:gap-8">
             
             <!-- Left Column: Header Section and Follow button -->
             <!-- The lg:col-span-1 class makes this section take up 1 column on large screens -->

@@ -7,6 +7,23 @@
     
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        revelti: {
+                            blue: '#213c63',
+                            orange: '#f58220',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
     
     <!-- Google Fonts: Nunito -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +36,7 @@
     <div id="navbar-placeholder"></div>
 
     <!-- Main container with a max-w-2xl for larger screens -->
-    <div class="max-w-2xl md:max-w-full lg:max-w-full mx-auto bg-white shadow-lg flex flex-col h-full full-height-modal">
+    <div class="max-w-2xl md:max-w-full lg:max-w-full mx-auto bg-white shadow-md flex flex-col h-full full-height-modal">
 
         <!-- Header Section -->
         <header class="p-6">

@@ -1,13 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Revelti - Income Breakdown</title>
-    
+
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        revelti: {
+                            blue: '#213c63',
+                            orange: '#f58220',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+
     <!-- Google Fonts: Nunito -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +36,8 @@
 
     <!-- DataTables.js for advanced tables -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
@@ -31,6 +50,7 @@
     <!-- Your Custom Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="bg-gray-100 antialiased text-gray-800 pt-8">
     <!-- Organizer-specific Navbar -->
     <div id="organizer-navbar-placeholder"></div>
@@ -43,20 +63,24 @@
                 <h1 class="text-3xl font-extrabold revelti-blue">Income Breakdown</h1>
                 <p class="text-gray-500">Analyze your event revenue streams.</p>
             </div>
-            <a href="organizerDashboard.html" class="mt-4 md:mt-0 px-4 py-2 bg-revelti-blue text-white rounded-lg hover:bg-blue-800 transition duration-300 flex items-center justify-center">
-                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+            <a href="organizerDashboard.html"
+                class="mt-4 md:mt-0 px-4 py-2 text-sm font-semibold bg-revelti-blue text-white rounded-md hover:bg-blue-800 transition duration-300 flex items-center justify-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
                 Organizer Dashboard
             </a>
         </header>
 
         <!-- KPI Cards -->
-        <div id="kpi-cards" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div id="kpi-cards" class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <!-- KPI cards will be dynamically inserted here -->
         </div>
 
         <!-- Chart and Table Section -->
-        <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
-            
+        <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
+
             <!-- Bar Chart -->
             <div class="mb-10 h-80">
                 <canvas id="incomeChart"></canvas>
@@ -105,7 +129,7 @@
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
                     const transactions = await response.json();
-                    
+
                     if (transactions && transactions.length > 0) {
                         allIncomeData = processIncomeData(transactions);
                         initializeApp(allIncomeData);
@@ -131,7 +155,7 @@
                             commissions: 0,
                         };
                     }
-                    
+
                     // Use a multiplier to subtract amounts for refunds
                     const multiplier = t.Transaction_Type === 'Refund' ? -1 : 1;
 
@@ -150,13 +174,13 @@
             function initializeApp(data) {
                 renderTable(data);
                 updateDashboard();
-                
+
                 // Listen for table redraw events (search, filter, sort) to update KPIs and chart
-                if(tableInstance) {
+                if (tableInstance) {
                     tableInstance.on('draw.dt', updateDashboard);
                 }
             }
-            
+
             // --- DASHBOARD UPDATE ---
             function updateDashboard() {
                 if (!tableInstance) return;
@@ -173,15 +197,15 @@
                 const avgIncome = data.length > 0 ? totalIncome / data.length : 0;
 
                 $('#kpi-cards').html(`
-                    <div class="bg-white p-6 rounded-lg border border-gray-200">
+                    <div class="bg-white p-6 rounded-lg border border-gray-100 shadow-sm">
                         <h3 class="text-sm font-semibold text-gray-500 uppercase">Total Income</h3>
                         <p class="text-3xl font-extrabold revelti-blue mt-2">${formatCurrency(totalIncome)}</p>
                     </div>
-                    <div class="bg-white p-6 rounded-lg border border-gray-200">
+                    <div class="bg-white p-6 rounded-lg border border-gray-100 shadow-sm">
                         <h3 class="text-sm font-semibold text-gray-500 uppercase">Total Net Profit</h3>
                         <p class="text-3xl font-extrabold text-green-600 mt-2">${formatCurrency(totalNetProfit)}</p>
                     </div>
-                    <div class="bg-white p-6 rounded-lg border border-gray-200">
+                    <div class="bg-white p-6 rounded-lg border border-gray-100 shadow-sm">
                         <h3 class="text-sm font-semibold text-gray-500 uppercase">Average Income / Event</h3>
                         <p class="text-3xl font-extrabold revelti-blue mt-2">${formatCurrency(avgIncome)}</p>
                     </div>
@@ -221,7 +245,7 @@
                             legend: { display: false },
                             tooltip: {
                                 callbacks: {
-                                    label: function(context) {
+                                    label: function (context) {
                                         const item = data[context.dataIndex];
                                         return item ? [
                                             `Event: ${item.event}`,
@@ -277,34 +301,34 @@
 
                             header.find('.filter-icon').on('click', function (e) {
                                 e.stopPropagation();
-                                $('.filter-modal').remove(); 
+                                $('.filter-modal').remove();
 
                                 var modal = $(`<div class="filter-modal"></div>`).appendTo('body');
                                 modal.css({
                                     top: header.offset().top + header.outerHeight(),
                                     left: header.offset().left
                                 });
-                                
+
                                 var searchStr = column.search().replace(/[\^\$]/g, '').split('|');
                                 var currentFilter = searchStr.filter(v => v !== "");
 
                                 var values = column.data().unique().sort().toArray();
-                                
+
                                 var optionsContainer = $('<div class="options-container"></div>').appendTo(modal);
                                 optionsContainer.append(`<div><label><input type="checkbox" class="select-all"> Select All</label></div><hr class="my-1">`);
-                                
+
                                 values.forEach(function (value) {
                                     if (value !== null) {
                                         var isChecked = currentFilter.length === 0 || currentFilter.includes(String(value).replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1"));
                                         optionsContainer.append(`<div><label><input type="checkbox" class="filter-value" value="${value}" ${isChecked ? 'checked' : ''}> ${value || '(Empty)'}</label></div>`);
                                     }
                                 });
-                                
+
                                 var allChecked = optionsContainer.find('.filter-value:not(:checked)').length === 0;
                                 optionsContainer.find('.select-all').prop('checked', allChecked);
 
 
-                                modal.append(`<div class="mt-2 flex justify-end space-x-2"><button class="cancel-filter-btn bg-gray-200 text-gray-700 px-3 py-1 rounded-md text-sm">Cancel</button><button class="apply-filter-btn bg-revelti-blue text-white px-3 py-1 rounded-md text-sm">Apply</button></div>`);
+                                modal.append(`<div class="mt-2 flex justify-end space-x-2"><button class="cancel-filter-btn bg-gray-200 text-gray-700 px-3 py-1 text-xs font-medium rounded">Cancel</button><button class="apply-filter-btn bg-revelti-blue text-white px-3 py-1 text-xs font-medium rounded">Apply</button></div>`);
                                 modal.show();
 
                                 modal.find('.select-all').on('change', function () {
@@ -328,8 +352,8 @@
                         });
 
                         // Add Reset Filters button next to the search field
-                        var resetButton = $('<button id="resetFilters" class="dt-button bg-revelti-orange hover:bg-orange-600" style="margin-left: 10px;">Reset Filters</button>')
-                            .on('click', function() {
+                        var resetButton = $('<button id="resetFilters" class="dt-button px-3 py-1 text-xs font-medium rounded bg-revelti-orange text-white hover:bg-orange-600" style="margin-left: 10px;">Reset Filters</button>')
+                            .on('click', function () {
                                 tableInstance.search('').columns().search('').draw();
                                 $('.dataTables_filter input').val('');
                             });
@@ -343,11 +367,12 @@
                     }
                 });
             }
-            
+
             // --- KICK OFF THE APPLICATION ---
             loadAndProcessData();
         });
     </script>
     <script src="organizer.js" defer></script>
 </body>
+
 </html>

@@ -7,6 +7,23 @@
     
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        revelti: {
+                            blue: '#213c63',
+                            orange: '#f58220',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
     
     <!-- Google Fonts: Nunito -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,7 +39,7 @@
          allowing the header and nav to stay fixed while the main content scrolls.
          The `h-screen` class ensures it fills the viewport on mobile and a fixed
          height on larger screens for modal-like appearance. -->
-    <div class="max-w-2xl md:max-w-full lg:max-w-full mx-auto bg-white shadow-lg flex flex-col h-full full-height-modal">
+    <div class="max-w-2xl md:max-w-full lg:max-w-full mx-auto bg-white shadow-md flex flex-col h-full full-height-modal">
 
         <!-- Header Section -->
         <header class="p-6 flex items-center justify-between">
@@ -38,10 +55,10 @@
         <!-- Tab Navigation. The `flex-shrink-0` class prevents it from shrinking. -->
         <nav class="sticky top-12 flex-shrink-0 bg-white z-40 border-b border-gray-200">
             <div class="flex justify-around">
-                <button data-tab-target="all" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelti-blue transition duration-300">All</button>
-                <button data-tab-target="socialMedia" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelti-blue transition duration-300">Social & Media</button>
-                <button data-tab-target="eventsReminders" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelti-blue transition duration-300">Events & Reminders</button>
-                <button data-tab-target="systemAccount" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelti-blue transition duration-300">System & Account</button>
+                <button data-tab-target="all" class="tab-button btn-mobile-tab">All</button>
+                <button data-tab-target="socialMedia" class="tab-button btn-mobile-tab">Social & Media</button>
+                <button data-tab-target="eventsReminders" class="tab-button btn-mobile-tab">Events & Reminders</button>
+                <button data-tab-target="systemAccount" class="tab-button btn-mobile-tab">System & Account</button>
             </div>
         </nav>
 
@@ -158,7 +175,7 @@ function switchTab(targetId) {
                         <button class="p-1 rounded-full hover:bg-gray-100 text-gray-400 ml-2 context-menu-button" title="More options">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path></svg>
                         </button>
-                        <div class="absolute top-0 right-8 w-48 bg-white border border-gray-200 rounded-lg shadow-lg p-2 z-50 hidden context-menu">
+                        <div class="absolute top-0 right-8 w-48 bg-white border border-gray-100 shadow-sm rounded-lg shadow-md p-2 z-50 hidden context-menu">
                             <button data-mark-one="${notification.id}" class="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100">Mark read</button>
                             <button class="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100">Mute notifications</button>
                             <button class="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100">Hide this</button>

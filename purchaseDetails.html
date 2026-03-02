@@ -7,6 +7,23 @@
     
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        revelti: {
+                            blue: '#213c63',
+                            orange: '#f58220',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
     
     <!-- Google Fonts: Nunito -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +36,7 @@
     <div id="navbar-placeholder"></div>
 
     <!-- Main container with a max-width for larger screens -->
-    <div class="max-w-2xl md:max-w-full lg:max-w-full mx-auto bg-white shadow-lg overflow-hidden">
+    <div class="max-w-2xl md:max-w-full lg:max-w-full mx-auto bg-white shadow-md overflow-hidden">
 
         <!-- Header Section -->
         <header class="p-6 border-b">
@@ -40,7 +57,7 @@
 
             <!-- Event Card -->
             <a href="eventDetail.html" class="block hover:shadow-xl transition-shadow duration-300">
-                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 shadow-sm">
                     <div class="relative">
                         <img src="images/eventPoster.png" alt="Event Poster" class="w-full h-40 lg:h-48 object-cover">
                         <div class="absolute top-2 right-2 flex space-x-1">
@@ -60,7 +77,7 @@
             
             <!-- Organizer Card -->
             <a href="organizerPortfolio.html" class="block hover:shadow-xl transition-shadow duration-300">
-                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 flex items-center p-4">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 shadow-sm flex items-center p-4">
                     <img src="images/organizerAvatar.png" alt="Organizer Avatar" class="w-16 h-16 rounded-full object-cover shadow-md">
                     <div class="ml-4 flex-grow">
                         <p class="text-sm text-gray-500">Organized by</p>

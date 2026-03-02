@@ -1,13 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Revelti - My Dashboard</title>
-    
+
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        revelti: {
+                            blue: '#213c63',
+                            orange: '#f58220',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+
     <!-- Google Fonts: Nunito -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,29 +33,36 @@
 
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="antialiased text-gray-800">
     <!-- Navbar Placeholder -->
     <div id="navbar-placeholder"></div>
 
     <!-- Main container with a max-width for larger screens -->
-    <div class="max-w-2xl md:max-w-full lg:max-w-full mx-auto bg-white shadow-lg overflow-hidden">
+    <div class="max-w-2xl md:max-w-full lg:max-w-full mx-auto bg-white shadow-md overflow-hidden">
 
         <!-- Header Section -->
         <header class="p-6 flex items-center">
-            <img src="https://placehold.co/80x80/213c63/ffffff?text=A" alt="User Avatar" class="w-20 h-20 rounded-full object-cover shadow-md">
+            <img src="https://placehold.co/80x80/213c63/ffffff?text=A" alt="User Avatar"
+                class="w-20 h-20 rounded-full object-cover shadow-md">
             <div class="ml-4">
                 <h1 class="text-3xl font-extrabold revelti-blue">Alex Johnson</h1>
                 <p class="text-gray-500">Attendee Dashboard</p>
             </div>
         </header>
-        
+
         <!-- Tab Navigation -->
         <nav class="border-t border-b border-gray-200">
-            <div class="flex justify-around">
-                <button data-tab-id="following" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelti-blue transition duration-300 tab-active">Following</button>
-                <button data-tab-id="media" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelti-blue transition duration-300">Media</button>
-                <button data-tab-id="tickets" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelti-blue transition duration-300">My Tickets</button>
-                <button data-tab-id="profile" class="tab-button flex-1 py-3 px-1 text-center text-gray-500 hover:revelti-blue transition duration-300">Profile</button>
+            <div class="flex justify-around overflow-x-auto whitespace-nowrap scrollbar-hide">
+                <button data-tab-id="following"
+                    class="tab-button btn-mobile-tab tab-active">Following</button>
+                <button data-tab-id="media"
+                    class="tab-button btn-mobile-tab">Media</button>
+                <button data-tab-id="tickets"
+                    class="tab-button btn-mobile-tab">My
+                    Tickets</button>
+                <button data-tab-id="profile"
+                    class="tab-button btn-mobile-tab">Profile</button>
             </div>
         </nav>
 
@@ -64,7 +89,7 @@
             </div>
         </main>
     </div>
-    
+
     <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
 
@@ -82,7 +107,7 @@
         async function loadTabContent(tabId) {
             const container = document.getElementById(tabId);
             const fileName = tabContentMap[tabId];
-            
+
             // Remove any dynamically added modals from previous tab loads
             const existingMediaModal = document.getElementById('media-modal');
             if (existingMediaModal) existingMediaModal.remove();
@@ -101,36 +126,36 @@
                 const html = await response.text();
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(html, 'text/html');
-                
-                const tabContent = doc.getElementById(tabId);
-                
-                if (tabContent) {
-                        // Clear existing content and inject the new HTML
-                        container.innerHTML = tabContent.innerHTML;
 
-                        // Find and inject modals from the fetched content.
-                        const mediaModal = doc.getElementById('media-modal');
-                        if (mediaModal) document.body.appendChild(mediaModal);
-                        
-                        const stylesModal = doc.getElementById('styles-modal');
-                        if (stylesModal) document.body.appendChild(stylesModal);
-                        
-                        // Initialize tab-specific functionality
-                        if (tabId === 'profile') {
-                            // Both of these functions are needed for the profile page
-                            updateSelectedStylesDisplay();
-                            initializeMediaTabListeners();
-                        } else if (tabId === 'media') {
-                            initializeMediaTabListeners();
-                        }
-                    } else {
-                        container.innerHTML = `<p>Error: Could not find content with ID "${tabId}" in ${fileName}.</p>`;
+                const tabContent = doc.getElementById(tabId);
+
+                if (tabContent) {
+                    // Clear existing content and inject the new HTML
+                    container.innerHTML = tabContent.innerHTML;
+
+                    // Find and inject modals from the fetched content.
+                    const mediaModal = doc.getElementById('media-modal');
+                    if (mediaModal) document.body.appendChild(mediaModal);
+
+                    const stylesModal = doc.getElementById('styles-modal');
+                    if (stylesModal) document.body.appendChild(stylesModal);
+
+                    // Initialize tab-specific functionality
+                    if (tabId === 'profile') {
+                        // Both of these functions are needed for the profile page
+                        updateSelectedStylesDisplay();
+                        initializeMediaTabListeners();
+                    } else if (tabId === 'media') {
+                        initializeMediaTabListeners();
                     }
-                } catch (error) {
-                    console.error(`Error fetching tab content for ${tabId}:`, error);
-                    container.innerHTML = `<p>Could not load the content. Please try again later.</p>`;
+                } else {
+                    container.innerHTML = `<p>Error: Could not find content with ID "${tabId}" in ${fileName}.</p>`;
                 }
+            } catch (error) {
+                console.error(`Error fetching tab content for ${tabId}:`, error);
+                container.innerHTML = `<p>Could not load the content. Please try again later.</p>`;
             }
+        }
 
         // Main function to handle switching between tabs.
         function switchTab(tabId) {
@@ -173,4 +198,5 @@
     <!-- External JavaScript for all global functions and modals -->
     <script src="main.js" defer></script>
 </body>
+
 </html>

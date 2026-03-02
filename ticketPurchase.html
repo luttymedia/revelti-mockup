@@ -7,6 +7,23 @@
     
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        revelti: {
+                            blue: '#213c63',
+                            orange: '#f58220',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
     
     <!-- Google Fonts: Nunito -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,7 +38,7 @@
     <div id="navbar-placeholder"></div>
 
     <!-- Main container with a max-w and shadow for larger screens -->
-    <div class="max-w-2xl md:max-w-full lg:max-w-full mx-auto bg-white shadow-lg overflow-hidden">
+    <div class="max-w-2xl md:max-w-full lg:max-w-full mx-auto bg-white shadow-md overflow-hidden">
 
         <!-- Header Section -->
         <header class="p-6 border-b text-center">
@@ -56,7 +73,7 @@
                     <summary class="p-4 font-semibold revelti-blue cursor-pointer flex justify-between items-center text-xl">Main Passes <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
                     <div class="p-4 border-t border-gray-200 space-y-4">
                         <!-- Sensuality Pass Card -->
-                        <div class="bg-gray-50 p-4 rounded-lg border">
+                        <div class="bg-gray-50 p-4 rounded-lg border border-gray-100 shadow-sm">
                             <div class="flex justify-between items-start">
                                 <div>
                                     <h3 class="font-bold text-lg revelti-blue">Sensuality Pass</h3>
@@ -83,7 +100,7 @@
                             </div>
                         </div>
                         <!-- Essentiality Pass Card -->
-                        <div class="bg-gray-50 p-4 rounded-lg border">
+                        <div class="bg-gray-50 p-4 rounded-lg border border-gray-100 shadow-sm">
                             <div class="flex justify-between items-start">
                                 <div>
                                     <h3 class="font-bold text-lg revelti-blue">Essentiality Pass</h3>
@@ -117,7 +134,7 @@
                     <summary class="p-4 font-semibold revelti-blue cursor-pointer flex justify-between items-center text-xl">Training Tracks <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
                     <div class="p-4 border-t border-gray-200 space-y-4">
                         <!-- Sensuality Training Track -->
-                        <div class="bg-gray-50 p-4 rounded-lg border">
+                        <div class="bg-gray-50 p-4 rounded-lg border border-gray-100 shadow-sm">
                             <div class="flex justify-between items-start">
                                 <div>
                                     <h3 class="font-bold text-lg revelti-blue">Sensuality Training Track</h3>
@@ -134,7 +151,7 @@
                             </div>
                         </div>
                         <!-- Essentiality Training Track -->
-                        <div class="bg-gray-50 p-4 rounded-lg border">
+                        <div class="bg-gray-50 p-4 rounded-lg border border-gray-100 shadow-sm">
                             <div class="flex justify-between items-start">
                                 <div>
                                     <h3 class="font-bold text-lg revelti-blue">Essentiality Training Track</h3>
@@ -157,7 +174,7 @@
                 <details class="bg-white border rounded-lg">
                     <summary class="p-4 font-semibold revelti-blue cursor-pointer flex justify-between items-center text-xl">Jack & Jill <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
                     <div class="p-4 border-t border-gray-200 space-y-4">
-                         <div class="bg-gray-50 p-4 rounded-lg border">
+                         <div class="bg-gray-50 p-4 rounded-lg border border-gray-100 shadow-sm">
                             <div class="flex justify-between items-start">
                                 <div><h3 class="font-bold text-lg revelti-blue">J&J Amateur</h3><p class="text-sm text-gray-600 mt-1">For non-professional dancers.</p><p class="text-xs text-gray-500 mt-1">3 more entries available before price increases.</p></div>
                                 <p class="font-bold text-xl revelti-orange">€10.00</p>
@@ -170,7 +187,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="bg-gray-50 p-4 rounded-lg border">
+                        <div class="bg-gray-50 p-4 rounded-lg border border-gray-100 shadow-sm">
                             <div class="flex justify-between items-start">
                                 <div><h3 class="font-bold text-lg revelti-blue">J&J Pro</h3><p class="text-sm text-gray-600 mt-1">For professional dancers and instructors.</p><p class="text-xs text-gray-500 mt-1">5 more entries available before price increases.</p></div>
                                 <p class="font-bold text-xl revelti-orange">€15.00</p>
@@ -190,7 +207,7 @@
                 <details class="bg-white border rounded-lg">
                     <summary class="p-4 font-semibold revelti-blue cursor-pointer flex justify-between items-center text-xl">Add-ons <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></summary>
                     <div class="p-4 border-t border-gray-200 space-y-4">
-                        <div class="bg-gray-50 p-4 rounded-lg border">
+                        <div class="bg-gray-50 p-4 rounded-lg border border-gray-100 shadow-sm">
                             <div class="flex justify-between items-start">
                                 <div>
                                     <h3 class="font-bold text-lg revelti-blue">Official T-shirt</h3>

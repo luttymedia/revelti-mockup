@@ -7,6 +7,23 @@
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        revelti: {
+                            blue: '#213c63',
+                            orange: '#f58220',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
     
     <!-- Google Fonts: Nunito -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,7 +72,7 @@
             </div>
         </header>
 
-        <div class="bg-white rounded-lg shadow-lg">
+        <div class="bg-white rounded-lg shadow-md">
             <!-- Tab Navigation -->
             <nav class="border-b border-gray-200">
                 <div class="flex justify-around -mb-px">
@@ -70,7 +87,7 @@
             <main class="p-6 md:p-8">
                 <!-- Sales Overview Tab -->
                 <div id="sales-overview" class="tab-content">
-                    <div id="sales-kpis" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8"></div>
+                    <div id="sales-kpis" class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8"></div>
                     <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
                         <div class="lg:col-span-3 bg-gray-50 p-4 rounded-lg">
                             <h4 class="text-md font-bold text-gray-700 text-center mb-2">Ticket Sales Over Time</h4>
@@ -85,7 +102,7 @@
 
                 <!-- Promoter Performance Tab -->
                 <div id="promoter-performance" class="tab-content hidden">
-                    <div id="promoter-kpis" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8"></div>
+                    <div id="promoter-kpis" class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8"></div>
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                         <div class="bg-gray-50 p-4 rounded-lg h-96">
                             <div class="flex items-center justify-center mb-2">
@@ -105,7 +122,7 @@
 
                 <!-- Pricing & Discounts Tab -->
                 <div id="pricing-discounts" class="tab-content hidden">
-                    <div id="pricing-kpis" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8"></div>
+                    <div id="pricing-kpis" class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8"></div>
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                         <div class="bg-gray-50 p-4 rounded-lg">
                             <h4 class="text-md font-bold text-gray-700 text-center mb-2">Sales by Price Tier</h4>

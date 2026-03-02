@@ -1,13 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Revelti - Ticket Breakdown</title>
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        revelti: {
+                            blue: '#213c63',
+                            orange: '#f58220',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+
     <!-- Google Fonts: Nunito -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +36,8 @@
 
     <!-- DataTables.js for advanced tables -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
@@ -32,6 +51,7 @@
     <link rel="stylesheet" href="style.css">
 
 </head>
+
 <body class="bg-gray-100 antialiased text-gray-800 pt-8">
     <!-- Organizer-specific Navbar -->
     <div id="organizer-navbar-placeholder"></div>
@@ -44,57 +64,100 @@
                 <h1 class="text-3xl font-extrabold revelti-blue">Ticket Breakdown</h1>
                 <p class="text-gray-500">Deep dive into your ticket sales performance.</p>
             </div>
-            <a href="organizerDashboard.html" class="mt-4 md:mt-0 px-4 py-2 bg-revelti-blue text-white rounded-lg hover:bg-blue-800 transition duration-300 flex items-center justify-center">
-                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+            <a href="organizerDashboard.html"
+                class="mt-4 md:mt-0 px-4 py-2 text-sm font-semibold bg-revelti-blue text-white rounded-md hover:bg-blue-800 transition duration-300 flex items-center justify-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
                 Organizer Dashboard
             </a>
         </header>
 
         <!-- KPI Cards -->
-        <div id="kpi-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div id="kpi-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
             <!-- KPIs will be loaded here -->
-             <div class="bg-white p-4 rounded-lg border animate-pulse"><div class="h-4 bg-gray-200 rounded w-3/4 mb-2"></div><div class="h-8 bg-gray-300 rounded w-1/2"></div></div>
-             <div class="bg-white p-4 rounded-lg border animate-pulse"><div class="h-4 bg-gray-200 rounded w-3/4 mb-2"></div><div class="h-8 bg-gray-300 rounded w-1/2"></div></div>
-             <div class="bg-white p-4 rounded-lg border animate-pulse"><div class="h-4 bg-gray-200 rounded w-3/4 mb-2"></div><div class="h-8 bg-gray-300 rounded w-1/2"></div></div>
-             <div class="bg-white p-4 rounded-lg border animate-pulse"><div class="h-4 bg-gray-200 rounded w-3/4 mb-2"></div><div class="h-8 bg-gray-300 rounded w-1/2"></div></div>
+            <div class="bg-white p-4 rounded-lg border animate-pulse">
+                <div class="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+                <div class="h-8 bg-gray-300 rounded w-1/2"></div>
+            </div>
+            <div class="bg-white p-4 rounded-lg border animate-pulse">
+                <div class="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+                <div class="h-8 bg-gray-300 rounded w-1/2"></div>
+            </div>
+            <div class="bg-white p-4 rounded-lg border animate-pulse">
+                <div class="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+                <div class="h-8 bg-gray-300 rounded w-1/2"></div>
+            </div>
+            <div class="bg-white p-4 rounded-lg border animate-pulse">
+                <div class="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+                <div class="h-8 bg-gray-300 rounded w-1/2"></div>
+            </div>
         </div>
 
         <!-- Filters Section -->
-        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <button data-modal="eventFilterModal" class="filter-btn w-full bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg hover:bg-gray-300 transition">Filter Events</button>
-                <button data-modal="ticketTypeFilterModal" class="filter-btn w-full bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg hover:bg-gray-300 transition">Filter Ticket Types</button>
-                <button data-modal="promoterFilterModal" class="filter-btn w-full bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg hover:bg-gray-300 transition">Filter Promoters</button>
-                <button id="resetTopFilters" class="w-full bg-revelti-orange text-white font-bold py-2 px-4 rounded-lg hover:bg-orange-600 transition">Reset Filters</button>
+                <button data-modal="eventFilterModal"
+                    class="filter-btn w-full px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition">Filter
+                    Events</button>
+                <button data-modal="ticketTypeFilterModal"
+                    class="filter-btn w-full px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition">Filter
+                    Ticket Types</button>
+                <button data-modal="promoterFilterModal"
+                    class="filter-btn w-full px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition">Filter
+                    Promoters</button>
+                <button id="resetTopFilters"
+                    class="w-full px-4 py-2 text-sm font-semibold bg-revelti-orange text-white rounded-md hover:bg-orange-600 transition">Reset
+                    Filters</button>
             </div>
+        </div>
+
+        <!-- Tabs for navigation -->
+        <div class="flex border-b border-gray-200 mb-8">
+            <a href="organizerDashboard.html"
+                class="tab-button bg-gray-200 text-gray-700 font-semibold px-1 py-4 text-center rounded-t-lg hover:bg-gray-300 transition duration-300">
+                Event Dashboard
+            </a>
+            <a href="eventBreakdown.html"
+                class="tab-button bg-gray-200 text-gray-700 font-semibold px-1 py-4 text-center rounded-t-lg hover:bg-gray-300 transition duration-300">
+                Sales Breakdown
+            </a>
+            <button
+                class="tab-button active bg-white text-revelti-blue font-bold px-1 py-4 text-center rounded-t-lg border-t border-l border-r border-gray-200">
+                Ticket Breakdown
+            </button>
         </div>
 
         <!-- Charts Grid -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-            <div class="bg-white rounded-lg shadow-lg p-6">
+            <div class="bg-white rounded-lg shadow-md p-6">
                 <h4 class="text-md font-bold text-gray-700 text-center mb-2">Promoter Performance</h4>
                 <canvas id="promoterChart"></canvas>
             </div>
-            <div class="bg-white rounded-lg shadow-lg p-6">
+            <div class="bg-white rounded-lg shadow-md p-6">
                 <h4 class="text-md font-bold text-gray-700 text-center mb-2">Sales by Ticket Type</h4>
                 <canvas id="ticketTypeChart"></canvas>
             </div>
-            <div class="bg-white rounded-lg shadow-lg p-6">
-                 <h4 class="text-md font-bold text-gray-700 text-center mb-2">Best-Selling Events</h4>
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h4 class="text-md font-bold text-gray-700 text-center mb-2">Best-Selling Events</h4>
                 <canvas id="eventSalesChart"></canvas>
             </div>
-            <div class="bg-white rounded-lg shadow-lg p-6">
+            <div class="bg-white rounded-lg shadow-md p-6">
                 <h4 class="text-md font-bold text-gray-700 text-center mb-2">Sales by Price Tier</h4>
                 <canvas id="priceTierChart"></canvas>
             </div>
         </div>
 
         <!-- More Stats Section -->
-        <div class="bg-white rounded-lg shadow-lg mb-8">
+        <div class="bg-white rounded-lg shadow-md mb-8">
             <details>
-                <summary class="flex justify-between items-center cursor-pointer font-semibold text-lg revelti-blue p-4">
+                <summary
+                    class="flex justify-between items-center cursor-pointer font-semibold text-lg revelti-blue p-4">
                     More Stats
-                    <svg class="w-5 h-5 accordion-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <svg class="w-5 h-5 accordion-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
                 </summary>
                 <div class="p-6 border-t border-gray-200">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -102,7 +165,12 @@
                             <div class="flex items-center justify-center mb-2">
                                 <h4 class="text-md font-bold text-gray-700">Discount Impact</h4>
                                 <button class="info-btn ml-2" data-modal="discountImpactInfoModal">
-                                    <svg class="w-5 h-5 text-gray-400 hover:text-revelti-blue" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                                    <svg class="w-5 h-5 text-gray-400 hover:text-revelti-blue" fill="currentColor"
+                                        viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
                                 </button>
                             </div>
                             <div class="h-80"><canvas id="discountImpactChart"></canvas></div>
@@ -110,23 +178,33 @@
                         <div>
                             <div class="flex items-center justify-center mb-2">
                                 <h4 class="text-md font-bold text-gray-700">Revenue by Ticket Type</h4>
-                                 <button class="info-btn ml-2" data-modal="revenueByTypeInfoModal">
-                                    <svg class="w-5 h-5 text-gray-400 hover:text-revelti-blue" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                                <button class="info-btn ml-2" data-modal="revenueByTypeInfoModal">
+                                    <svg class="w-5 h-5 text-gray-400 hover:text-revelti-blue" fill="currentColor"
+                                        viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
                                 </button>
                             </div>
                             <div class="h-80"><canvas id="revenueByTypeChart"></canvas></div>
                         </div>
                         <div class="lg:col-span-2">
-                             <div class="flex items-center justify-center mb-2">
+                            <div class="flex items-center justify-center mb-2">
                                 <h4 class="text-md font-bold text-gray-700">Promoter Effectiveness</h4>
                                 <button class="info-btn ml-2" data-modal="promoterEffectivenessInfoModal">
-                                    <svg class="w-5 h-5 text-gray-400 hover:text-revelti-blue" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                                    <svg class="w-5 h-5 text-gray-400 hover:text-revelti-blue" fill="currentColor"
+                                        viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
                                 </button>
                             </div>
                             <div class="flex justify-center h-96">
-                               <div class="w-full lg:w-4/5 relative">
+                                <div class="w-full lg:w-4/5 relative">
                                     <canvas id="promoterEffectivenessChart"></canvas>
-                               </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -135,13 +213,23 @@
         </div>
 
         <!-- Data Table Section -->
-        <div class="bg-white rounded-lg shadow-lg p-6">
+        <div class="bg-white rounded-lg shadow-md p-6">
             <table id="ticketTable" class="display" style="width:100%">
                 <thead>
-                    <tr><th>Event</th><th>Ticket Type</th><th>Price</th><th>Qty Sold</th><th>Disc. %</th><th>Disc. €</th><th>Disc. Code</th><th>Promoter</th><th>Total</th></tr>
+                    <tr>
+                        <th>Event</th>
+                        <th>Ticket Type</th>
+                        <th>Price</th>
+                        <th>Qty Sold</th>
+                        <th>Disc. %</th>
+                        <th>Disc. €</th>
+                        <th>Disc. Code</th>
+                        <th>Promoter</th>
+                        <th>Total</th>
+                    </tr>
                 </thead>
                 <tbody>
-                     <tr>
+                    <tr>
                         <td colspan="9" class="text-center p-4">Loading data...</td>
                     </tr>
                 </tbody>
@@ -182,390 +270,421 @@
     </div>
 
     <!-- Info Modals -->
-    <div id="discountImpactInfoModal" class="modal-overlay"><div class="modal-content"><div class="p-8 relative"><button class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button><h2 class="text-xl font-bold mb-4">What is Discount Impact?</h2><p class="text-gray-600">This chart shows the difference between tickets sold with a discount code versus those sold at full price for each event. It helps you understand how much you rely on discounts to drive sales.</p></div></div></div>
-    <div id="revenueByTypeInfoModal" class="modal-overlay"><div class="modal-content"><div class="p-8 relative"><button class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button><h2 class="text-xl font-bold mb-4">What is Revenue by Ticket Type?</h2><p class="text-gray-600">This chart compares the total money generated by each type of ticket (e.g., Full Pass, Party Pass). It helps you identify which ticket categories are your most profitable.</p></div></div></div>
-    <div id="promoterEffectivenessInfoModal" class="modal-overlay"><div class="modal-content"><div class="p-8 relative"><button class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button><h2 class="text-xl font-bold mb-4">What is Promoter Effectiveness?</h2><p class="text-gray-600">This chart helps you evaluate your promoters. <br><br><b>How far right a bubble is:</b> Shows how many tickets they sold. <br><b>How high up a bubble is:</b> Shows the average price of the tickets they sold. <br><b>The size of the bubble:</b> Shows the total revenue they generated. <br><br>Ideal promoters are high up, far to the right, and have a large bubble.</p></div></div></div>
+    <div id="discountImpactInfoModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="p-8 relative"><button
+                    class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button>
+                <h2 class="text-xl font-bold mb-4">What is Discount Impact?</h2>
+                <p class="text-gray-600">This chart shows the difference between tickets sold with a discount code
+                    versus those sold at full price for each event. It helps you understand how much you rely on
+                    discounts to drive sales.</p>
+            </div>
+        </div>
+    </div>
+    <div id="revenueByTypeInfoModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="p-8 relative"><button
+                    class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button>
+                <h2 class="text-xl font-bold mb-4">What is Revenue by Ticket Type?</h2>
+                <p class="text-gray-600">This chart compares the total money generated by each type of ticket (e.g.,
+                    Full Pass, Party Pass). It helps you identify which ticket categories are your most profitable.</p>
+            </div>
+        </div>
+    </div>
+    <div id="promoterEffectivenessInfoModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="p-8 relative"><button
+                    class="close-modal absolute top-4 right-4 text-gray-500 hover:text-gray-800">&times;</button>
+                <h2 class="text-xl font-bold mb-4">What is Promoter Effectiveness?</h2>
+                <p class="text-gray-600">This chart helps you evaluate your promoters. <br><br><b>How far right a bubble
+                        is:</b> Shows how many tickets they sold. <br><b>How high up a bubble is:</b> Shows the average
+                    price of the tickets they sold. <br><b>The size of the bubble:</b> Shows the total revenue they
+                    generated. <br><br>Ideal promoters are high up, far to the right, and have a large bubble.</p>
+            </div>
+        </div>
+    </div>
 
 
     <script>
-    $(document).ready(function() {
-        // --- DATA SOURCE ---
-        const JSON_URL = 'data/transactions.json';
+        $(document).ready(function () {
+            // --- DATA SOURCE ---
+            const JSON_URL = 'data/transactions.json';
 
-        // --- GLOBAL STATE ---
-        let allTicketData = [];
-        let charts = {};
-        let table;
-        const chartColors = ['#213c63', '#f58220', '#36a2eb', '#ffcd56', '#4bc0c0', '#9966ff', '#ff9f40'];
-        
-        // --- DATA FETCHING & PROCESSING ---
-        async function loadAndProcessData() {
-            try {
-                const response = await fetch(JSON_URL);
-                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                const rawData = await response.json();
-                
-                if (rawData && rawData.length > 0) {
-                    allTicketData = processTransactions(rawData);
-                    initializeApp();
-                } else {
-                    console.error("JSON file is empty or invalid.");
-                    $('#ticketTable tbody').html(`<tr><td colspan="9" class="text-center p-4 text-red-500">JSON file is empty or invalid.</td></tr>`);
-                }
-            } catch (error) {
-                console.error("Error fetching or processing JSON:", error);
-                $('#ticketTable tbody').html(`<tr><td colspan="9" class="text-center p-4 text-red-500">Error loading data. Please check the file path and make sure the file is available at <strong>${JSON_URL}</strong>.</td></tr>`);
-            }
-        }
+            // --- GLOBAL STATE ---
+            let allTicketData = [];
+            let charts = {};
+            let table;
+            const chartColors = ['#213c63', '#f58220', '#36a2eb', '#ffcd56', '#4bc0c0', '#9966ff', '#ff9f40'];
 
-        function processTransactions(transactions) {
-            const priceMap = {};
-            transactions.forEach(t => {
-                if (t.Transaction_Type === 'Sale' && t.Qty > 0) {
-                    const key = `${t.Event_Name}|${t.Ticket_Type}`;
-                    const pricePerTicket = t.Gross_Amount / t.Qty;
-                    priceMap[key] = Math.max(priceMap[key] || 0, pricePerTicket);
-                }
-            });
+            // --- DATA FETCHING & PROCESSING ---
+            async function loadAndProcessData() {
+                try {
+                    const response = await fetch(JSON_URL);
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    const rawData = await response.json();
 
-            return transactions
-                .map(t => {
-                    const priceMapKey = `${t.Event_Name}|${t.Ticket_Type}`;
-                    const standardPrice = priceMap[priceMapKey] || (t.Qty > 0 ? t.Gross_Amount / t.Qty : 0);
-                    const actualPrice = (t.Qty > 0) ? t.Gross_Amount / t.Qty : 0;
-
-                    const discountAmount = standardPrice - actualPrice;
-                    const discEuro = discountAmount > 0 ? discountAmount * t.Qty : 0;
-                    const discPerc = standardPrice > 0 ? (discountAmount / standardPrice) * 100 : 0;
-
-                    // Use a multiplier to make refund values negative
-                    const multiplier = t.Transaction_Type === 'Refund' ? -1 : 1;
-
-                    return {
-                        event: t.Event_Name,
-                        ticketType: t.Ticket_Type,
-                        price: actualPrice,
-                        promoter: t.Promoter_Name || 'N/A',
-                        discountCode: t.Discount_Code_Used || null,
-                        qtySold: t.Qty * multiplier,
-                        total: t.Gross_Amount * multiplier,
-                        discEuro: discEuro,
-                        discPerc: discPerc,
-                    };
-                });
-        }
-
-        function initializeApp() {
-            renderTicketTable(allTicketData);
-            populateFilterModals();
-            setupEventListeners();
-            updateDashboard(allTicketData);
-        }
-
-        function renderTicketTable(data) {
-             if (table) {
-                table.destroy();
-            }
-            table = $('#ticketTable').DataTable({
-                data: data,
-                columns: [ 
-                    { data: 'event' }, 
-                    { data: 'ticketType' }, 
-                    { data: 'price', render: $.fn.dataTable.render.number(',', '.', 2, '€') }, 
-                    { data: 'qtySold' },
-                    { data: 'discPerc', render: (d) => d ? `${d.toFixed(1)}%` : '0%' },
-                    { data: 'discEuro', render: $.fn.dataTable.render.number(',', '.', 2, '€') },
-                    { data: 'discountCode', defaultContent: 'N/A' },
-                    { data: 'promoter' }, 
-                    { data: 'total', render: $.fn.dataTable.render.number(',', '.', 2, '€') } 
-                ],
-                dom: "lBfrtip",
-                buttons: [
-                    {
-                        extend: 'collection',
-                        text: 'Export',
-                        buttons: ['csv', 'excel', 'pdf']
+                    if (rawData && rawData.length > 0) {
+                        allTicketData = processTransactions(rawData);
+                        initializeApp();
+                    } else {
+                        console.error("JSON file is empty or invalid.");
+                        $('#ticketTable tbody').html(`<tr><td colspan="9" class="text-center p-4 text-red-500">JSON file is empty or invalid.</td></tr>`);
                     }
-                ],
-                responsive: true,
-                initComplete: function () {
-                    var api = this.api();
-                    api.columns().every(function () {
-                        var column = this;
-                        var header = $(column.header());
-                        var title = header.text();
-                        header.css('font-size', '0.875rem');
-                        header.html(title + ' <span class="filter-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 inline-block"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Interface / Filter"> <path id="Vector" d="M20 5.6001C20 5.04005 19.9996 4.75981 19.8906 4.5459C19.7948 4.35774 19.6423 4.20487 19.4542 4.10899C19.2403 4 18.9597 4 18.3996 4H5.59961C5.03956 4 4.75981 4 4.5459 4.10899C4.35774 4.20487 4.20487 4.35774 4.10899 4.5459C4 4.75981 4 5.04005 4 5.6001V6.33736C4 6.58195 4 6.70433 4.02763 6.81942C4.05213 6.92146 4.09263 7.01893 4.14746 7.1084C4.20928 7.20928 4.29591 7.29591 4.46875 7.46875L9.53149 12.5315C9.70443 12.7044 9.79044 12.7904 9.85228 12.8914C9.90711 12.9808 9.94816 13.0786 9.97266 13.1807C10 13.2946 10 13.4155 10 13.6552V18.411C10 19.2682 10 19.6971 10.1805 19.9552C10.3382 20.1806 10.5814 20.331 10.8535 20.3712C11.1651 20.4172 11.5487 20.2257 12.3154 19.8424L13.1154 19.4424C13.4365 19.2819 13.5966 19.2013 13.7139 19.0815C13.8176 18.9756 13.897 18.8485 13.9453 18.7084C14 18.5499 14 18.37 14 18.011V13.6626C14 13.418 14 13.2958 14.0276 13.1807C14.0521 13.0786 14.0926 12.9808 14.1475 12.8914C14.2089 12.7911 14.2947 12.7053 14.4653 12.5347L14.4688 12.5315L19.5315 7.46875C19.7044 7.2958 19.7904 7.20932 19.8523 7.1084C19.9071 7.01893 19.9482 6.92146 19.9727 6.81942C20 6.70551 20 6.58444 20 6.3448V5.6001Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g> </g></svg></span>');
+                } catch (error) {
+                    console.error("Error fetching or processing JSON:", error);
+                    $('#ticketTable tbody').html(`<tr><td colspan="9" class="text-center p-4 text-red-500">Error loading data. Please check the file path and make sure the file is available at <strong>${JSON_URL}</strong>.</td></tr>`);
+                }
+            }
 
-                        header.find('.filter-icon').on('click', function (e) {
-                            e.stopPropagation();
-                            $('.filter-modal').remove(); 
-                            
-                            var modal = $(`<div class="filter-modal"></div>`).appendTo('body').css({ top: header.offset().top + header.outerHeight(), left: header.offset().left });
-                            var currentFilter = column.search().replace(/[\^\$]/g, '').split('|').filter(v => v !== "");
-                            var values = column.data().unique().sort().toArray();
-                            
-                            var optionsContainer = $('<div class="options-container"></div>').appendTo(modal);
-                            optionsContainer.append(`<div><label><input type="checkbox" class="select-all"> Select All</label></div><hr class="my-1">`);
-                            
-                            values.forEach(function (value) {
-                                if (value !== null) {
-                                    var isChecked = currentFilter.length === 0 || currentFilter.includes(String(value).replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1"));
-                                    optionsContainer.append(`<div><label><input type="checkbox" class="filter-value" value="${value}" ${isChecked ? 'checked' : ''}> ${value || '(Empty)'}</label></div>`);
-                                }
-                            });
-                            
-                            var allChecked = optionsContainer.find('.filter-value:not(:checked)').length === 0;
-                            optionsContainer.find('.select-all').prop('checked', allChecked);
+            function processTransactions(transactions) {
+                const priceMap = {};
+                transactions.forEach(t => {
+                    if (t.Transaction_Type === 'Sale' && t.Qty > 0) {
+                        const key = `${t.Event_Name}|${t.Ticket_Type}`;
+                        const pricePerTicket = t.Gross_Amount / t.Qty;
+                        priceMap[key] = Math.max(priceMap[key] || 0, pricePerTicket);
+                    }
+                });
 
-                            modal.append(`<div class="mt-2 flex justify-end space-x-2"><button class="cancel-filter-btn bg-gray-200 text-gray-700 px-3 py-1 rounded-md text-sm">Cancel</button><button class="apply-filter-btn bg-revelti-blue text-white px-3 py-1 rounded-md text-sm">Apply</button></div>`);
-                            modal.show();
+                return transactions
+                    .map(t => {
+                        const priceMapKey = `${t.Event_Name}|${t.Ticket_Type}`;
+                        const standardPrice = priceMap[priceMapKey] || (t.Qty > 0 ? t.Gross_Amount / t.Qty : 0);
+                        const actualPrice = (t.Qty > 0) ? t.Gross_Amount / t.Qty : 0;
 
-                            modal.find('.select-all').on('change', function () {
-                                var isChecked = $(this).is(':checked');
-                                modal.find('.filter-value').prop('checked', isChecked);
-                            });
+                        const discountAmount = standardPrice - actualPrice;
+                        const discEuro = discountAmount > 0 ? discountAmount * t.Qty : 0;
+                        const discPerc = standardPrice > 0 ? (discountAmount / standardPrice) * 100 : 0;
 
-                            modal.find('.apply-filter-btn').on('click', function () {
-                                var selectedValues = [];
-                                modal.find('.filter-value:checked').each(function () {
-                                    selectedValues.push('^' + $.fn.dataTable.util.escapeRegex($(this).val()) + '$');
-                                });
-                                column.search(selectedValues.join('|'), true, false).draw();
-                                modal.remove();
-                            });
+                        // Use a multiplier to make refund values negative
+                        const multiplier = t.Transaction_Type === 'Refund' ? -1 : 1;
 
-                            modal.find('.cancel-filter-btn').on('click', function () {
-                                modal.remove();
-                            });
-                        });
+                        return {
+                            event: t.Event_Name,
+                            ticketType: t.Ticket_Type,
+                            price: actualPrice,
+                            promoter: t.Promoter_Name || 'N/A',
+                            discountCode: t.Discount_Code_Used || null,
+                            qtySold: t.Qty * multiplier,
+                            total: t.Gross_Amount * multiplier,
+                            discEuro: discEuro,
+                            discPerc: discPerc,
+                        };
                     });
+            }
 
-                    var resetButton = $('<button id="resetTableFilters" class="dt-button bg-revelti-orange hover:bg-orange-600" style="margin-left: 10px;">Reset Filters</button>')
-                        .on('click', function() {
-                           $('#resetTopFilters').click();
-                        });
-                    $('.dataTables_filter').append(resetButton);
-                }
-            });
+            function initializeApp() {
+                renderTicketTable(allTicketData);
+                populateFilterModals();
+                setupEventListeners();
+                updateDashboard(allTicketData);
+            }
 
-            $(document).on('click', function (e) {
-                if (!$(e.target).closest('.filter-modal, .filter-icon').length) {
-                    $('.filter-modal').remove();
-                }
-            });
-        }
-
-        function updateDashboard(data) {
-            updateKpis(data);
-            updateCharts(data);
-        }
-
-        function updateKpis(data) {
-            const totalTickets = data.reduce((sum, item) => sum + item.qtySold, 0);
-            const totalIncome = data.reduce((sum, item) => sum + item.total, 0);
-            const avgPrice = totalTickets > 0 ? totalIncome / totalTickets : 0;
-            const promoterSales = data.reduce((acc, item) => { if (item.promoter !== 'N/A') { acc[item.promoter] = (acc[item.promoter] || 0) + item.qtySold; } return acc; }, {});
-            const topPromoter = Object.keys(promoterSales).length > 0 ? Object.entries(promoterSales).sort((a, b) => b[1] - a[1])[0][0] : 'N/A';
-            $('#kpi-cards').html(`
-                <div class="bg-white p-4 rounded-lg border"><h3 class="text-sm font-semibold text-gray-500">Total Tickets Sold</h3><p class="text-2xl font-bold revelti-blue mt-1">${totalTickets.toLocaleString()}</p></div>
-                <div class="bg-white p-4 rounded-lg border"><h3 class="text-sm font-semibold text-gray-500">Total Income</h3><p class="text-2xl font-bold revelti-blue mt-1">€${totalIncome.toLocaleString('de-DE', {minimumFractionDigits: 2})}</p></div>
-                <div class="bg-white p-4 rounded-lg border"><h3 class="text-sm font-semibold text-gray-500">Avg. Ticket Price</h3><p class="text-2xl font-bold revelti-blue mt-1">€${avgPrice.toFixed(2)}</p></div>
-                <div class="bg-white p-4 rounded-lg border"><h3 class="text-sm font-semibold text-gray-500">Top Promoter</h3><p class="text-2xl font-bold revelti-blue mt-1">${topPromoter}</p></div>
-            `);
-        }
-
-        function updateCharts(data) {
-            updatePromoterChart(data);
-            updateTicketTypeChart(data);
-            updateEventSalesChart(data);
-            updatePriceTierChart(data);
-            updateDiscountImpactChart(data);
-            updateRevenueByTypeChart(data);
-            updatePromoterEffectivenessChart(data);
-        }
-
-        function createChart(ctx, type, data, options) {
-            if (!ctx) return;
-            if (charts[ctx.canvas.id]) { charts[ctx.canvas.id].destroy(); }
-            charts[ctx.canvas.id] = new Chart(ctx, { type, data, options });
-        }
-        
-        function updatePromoterChart(data) {
-            const promoterData = data.reduce((acc, item) => { if (item.promoter !== 'N/A') { acc[item.promoter] = (acc[item.promoter] || 0) + item.qtySold; } return acc; }, {});
-            const sortedPromoters = Object.entries(promoterData).sort((a,b) => b[1] - a[1]);
-            createChart($('#promoterChart')[0].getContext('2d'), 'bar', {
-                labels: sortedPromoters.map(p => p[0]),
-                datasets: [{ label: 'Tickets Sold', data: sortedPromoters.map(p => p[1]), backgroundColor: chartColors }]
-            }, { responsive: true, plugins: { title: { display: false } } });
-        }
-
-        function updateTicketTypeChart(data) {
-            const typeData = data.reduce((acc, item) => { acc[item.ticketType] = (acc[item.ticketType] || 0) + item.qtySold; return acc; }, {});
-            createChart($('#ticketTypeChart')[0].getContext('2d'), 'doughnut', {
-                labels: Object.keys(typeData),
-                datasets: [{ data: Object.values(typeData), backgroundColor: chartColors }]
-            }, { responsive: true, plugins: { title: { display: false } } });
-        }
-
-        function updateEventSalesChart(data) {
-            const eventData = data.reduce((acc, item) => { acc[item.event] = (acc[item.event] || 0) + item.qtySold; return acc; }, {});
-            const sortedEvents = Object.entries(eventData).sort((a,b) => b[1] - a[1]);
-            createChart($('#eventSalesChart')[0].getContext('2d'), 'bar', {
-                labels: sortedEvents.map(e => e[0]),
-                datasets: [{ label: 'Tickets Sold', data: sortedEvents.map(e => e[1]), backgroundColor: chartColors }]
-            }, { indexAxis: 'y', responsive: true, plugins: { title: { display: false } } });
-        }
-        
-        function updatePriceTierChart(data) {
-            const tiers = { '€0-50': 0, '€51-100': 0, '€101-200': 0, '€201+': 0 };
-            data.forEach(item => {
-                if (item.price <= 50) tiers['€0-50'] += item.qtySold;
-                else if (item.price <= 100) tiers['€51-100'] += item.qtySold;
-                else if (item.price <= 200) tiers['€101-200'] += item.qtySold;
-                else tiers['€201+'] += item.qtySold;
-            });
-            createChart($('#priceTierChart')[0].getContext('2d'), 'bar', {
-                labels: Object.keys(tiers),
-                datasets: [{ label: 'Tickets Sold', data: Object.values(tiers), backgroundColor: chartColors.slice(0,4) }]
-            }, { responsive: true, plugins: { title: { display: false } } });
-        }
-
-        function updateDiscountImpactChart(data) {
-            const discountData = data.reduce((acc, item) => {
-                const key = item.event;
-                if (!acc[key]) acc[key] = { discounted: 0, nonDiscounted: 0 };
-                if (item.discountCode) acc[key].discounted += item.qtySold;
-                else acc[key].nonDiscounted += item.qtySold;
-                return acc;
-            }, {});
-            createChart($('#discountImpactChart')[0].getContext('2d'), 'bar', {
-                labels: Object.keys(discountData),
-                datasets: [
-                    { label: 'Discounted Sales', data: Object.values(discountData).map(d => d.discounted), backgroundColor: '#f58220' },
-                    { label: 'Full Price Sales', data: Object.values(discountData).map(d => d.nonDiscounted), backgroundColor: '#213c63' }
-                ]
-            }, { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true } }, plugins: { title: { display: false } } });
-        }
-
-        function updateRevenueByTypeChart(data) {
-            const revenueData = data.reduce((acc, item) => { acc[item.ticketType] = (acc[item.ticketType] || 0) + item.total; return acc; }, {});
-            const sortedRevenue = Object.entries(revenueData).sort((a,b) => b[1] - a[1]);
-            createChart($('#revenueByTypeChart')[0].getContext('2d'), 'bar', {
-                labels: sortedRevenue.map(r => r[0]),
-                datasets: [{ label: 'Total Revenue', data: sortedRevenue.map(r => r[1]), backgroundColor: chartColors }]
-            }, { responsive: true, maintainAspectRatio: false, plugins: { title: { display: false } } });
-        }
-
-        function updatePromoterEffectivenessChart(data) {
-            const promoterStats = data.filter(item => item.promoter !== 'N/A').reduce((acc, item) => {
-                if (!acc[item.promoter]) {
-                    acc[item.promoter] = { ticketsSold: 0, totalRevenue: 0, grossRevenue: 0 };
-                }
-                acc[item.promoter].ticketsSold += item.qtySold;
-                acc[item.promoter].totalRevenue += item.total;
-                acc[item.promoter].grossRevenue += item.price * item.qtySold;
-                return acc;
-            }, {});
-
-            const datasets = Object.entries(promoterStats).map(([promoter, stats], index) => {
-                 const avgRevenue = stats.ticketsSold > 0 ? stats.totalRevenue / stats.ticketsSold : 0;
-                 return {
-                    label: promoter,
-                    data: [{
-                        x: stats.ticketsSold,
-                        y: avgRevenue,
-                        r: stats.totalRevenue / 1500,
-                        totalRevenue: stats.totalRevenue
-                    }],
-                    backgroundColor: chartColors[index % chartColors.length]
-                 }
-            });
-
-            createChart($('#promoterEffectivenessChart')[0].getContext('2d'), 'bubble', {
-                datasets: datasets
-            }, { 
-                responsive: true, 
-                maintainAspectRatio: false, 
-                plugins: { 
-                    title: { display: false },
-                    legend: { display: false },
-                    tooltip: { 
-                        callbacks: { 
-                            label: (c) => {
-                                const dataPoint = c.raw;
-                                return [
-                                    `${c.dataset.label}`,
-                                    `Tickets Sold: ${dataPoint.x}`,
-                                    `Total Revenue: €${dataPoint.totalRevenue.toFixed(2)}`,
-                                    `Avg Revenue/Ticket: €${dataPoint.y.toFixed(2)}`
-                                ];
-                            }
-                        } 
-                    } 
-                }, 
-                scales: { 
-                    x: { title: { display: true, text: 'Tickets Sold' } }, 
-                    y: { title: { display: true, text: 'Average Revenue per Ticket (€)' } } 
-                } 
-            });
-        }
-
-        // --- MODAL & FILTER LOGIC ---
-        function populateFilterModals() {
-            const events = [...new Set(allTicketData.map(item => item.event))].sort();
-            const ticketTypes = [...new Set(allTicketData.map(item => item.ticketType))].sort();
-            const promoters = [...new Set(allTicketData.map(item => item.promoter))].sort();
-            
-            populateModal('eventFilter', events);
-            populateModal('ticketTypeFilter', ticketTypes);
-            populateModal('promoterFilter', promoters);
-        }
-
-        function populateModal(filterId, options) {
-            const container = $(`#${filterId}Options`);
-            container.empty();
-            options.forEach(opt => {
-                container.append(`<div><label class="flex items-center p-2 hover:bg-gray-100 rounded-md cursor-pointer"><input type="checkbox" value="${opt}" class="mr-2 h-4 w-4 rounded border-gray-300 text-revelti-blue focus:ring-revelti-blue"><span>${opt}</span></label></div>`);
-            });
-        }
-
-        function setupEventListeners() {
-            $('.filter-btn').on('click', function() { $(`#${$(this).data('modal')}`).addClass('visible'); });
-            $('.modal-overlay').on('click', function(e) { if (e.target === this) $(this).removeClass('visible'); });
-            $('.apply-filter').on('click', function() { $(this).closest('.modal-overlay').removeClass('visible'); applyAllFilters(); });
-            $('.info-btn').on('click', function() { $(`#${$(this).data('modal')}`).addClass('visible'); });
-            $('.close-modal').on('click', function() { $(this).closest('.modal-overlay').removeClass('visible'); });
-            $('#resetTopFilters').on('click', function() {
-                $('.modal-content input[type="checkbox"]').prop('checked', false);
-                applyAllFilters();
+            function renderTicketTable(data) {
                 if (table) {
-                    table.search('').columns().search('').draw();
+                    table.destroy();
                 }
-            });
-        }
+                table = $('#ticketTable').DataTable({
+                    data: data,
+                    columns: [
+                        { data: 'event' },
+                        { data: 'ticketType' },
+                        { data: 'price', render: $.fn.dataTable.render.number(',', '.', 2, '€') },
+                        { data: 'qtySold' },
+                        { data: 'discPerc', render: (d) => d ? `${d.toFixed(1)}%` : '0%' },
+                        { data: 'discEuro', render: $.fn.dataTable.render.number(',', '.', 2, '€') },
+                        { data: 'discountCode', defaultContent: 'N/A' },
+                        { data: 'promoter' },
+                        { data: 'total', render: $.fn.dataTable.render.number(',', '.', 2, '€') }
+                    ],
+                    dom: "lBfrtip",
+                    buttons: [
+                        {
+                            extend: 'collection',
+                            text: 'Export',
+                            buttons: ['csv', 'excel', 'pdf']
+                        }
+                    ],
+                    responsive: true,
+                    initComplete: function () {
+                        var api = this.api();
+                        api.columns().every(function () {
+                            var column = this;
+                            var header = $(column.header());
+                            var title = header.text();
+                            header.css('font-size', '0.875rem');
+                            header.html(title + ' <span class="filter-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 inline-block"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Interface / Filter"> <path id="Vector" d="M20 5.6001C20 5.04005 19.9996 4.75981 19.8906 4.5459C19.7948 4.35774 19.6423 4.20487 19.4542 4.10899C19.2403 4 18.9597 4 18.3996 4H5.59961C5.03956 4 4.75981 4 4.5459 4.10899C4.35774 4.20487 4.20487 4.35774 4.10899 4.5459C4 4.75981 4 5.04005 4 5.6001V6.33736C4 6.58195 4 6.70433 4.02763 6.81942C4.05213 6.92146 4.09263 7.01893 4.14746 7.1084C4.20928 7.20928 4.29591 7.29591 4.46875 7.46875L9.53149 12.5315C9.70443 12.7044 9.79044 12.7904 9.85228 12.8914C9.90711 12.9808 9.94816 13.0786 9.97266 13.1807C10 13.2946 10 13.4155 10 13.6552V18.411C10 19.2682 10 19.6971 10.1805 19.9552C10.3382 20.1806 10.5814 20.331 10.8535 20.3712C11.1651 20.4172 11.5487 20.2257 12.3154 19.8424L13.1154 19.4424C13.4365 19.2819 13.5966 19.2013 13.7139 19.0815C13.8176 18.9756 13.897 18.8485 13.9453 18.7084C14 18.5499 14 18.37 14 18.011V13.6626C14 13.418 14 13.2958 14.0276 13.1807C14.0521 13.0786 14.0926 12.9808 14.1475 12.8914C14.2089 12.7911 14.2947 12.7053 14.4653 12.5347L14.4688 12.5315L19.5315 7.46875C19.7044 7.2958 19.7904 7.20932 19.8523 7.1084C19.9071 7.01893 19.9482 6.92146 19.9727 6.81942C20 6.70551 20 6.58444 20 6.3448V5.6001Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g> </g></svg></span>');
 
-        function applyAllFilters() {
-            const getSelected = (modalId) => $(`#${modalId}Options input:checked`).map((_, el) => $(el).val()).get();
-            const selectedEvents = getSelected('eventFilter');
-            const selectedTypes = getSelected('ticketTypeFilter');
-            const selectedPromoters = getSelected('promoterFilter');
+                            header.find('.filter-icon').on('click', function (e) {
+                                e.stopPropagation();
+                                $('.filter-modal').remove();
 
-            // Apply filters to DataTable
-            table.column(0).search(selectedEvents.join('|'), true, false);
-            table.column(1).search(selectedTypes.join('|'), true, false);
-            table.column(7).search(selectedPromoters.join('|'), true, false);
-            table.draw();
-            
-            // Update charts and KPIs based on the filtered data from the table
-            const filteredData = table.rows({ search: 'applied' }).data().toArray();
-            updateDashboard(filteredData);
-        }
-        
-        // --- INITIAL LOAD ---
-        loadAndProcessData();
-    });
+                                var modal = $(`<div class="filter-modal"></div>`).appendTo('body').css({ top: header.offset().top + header.outerHeight(), left: header.offset().left });
+                                var currentFilter = column.search().replace(/[\^\$]/g, '').split('|').filter(v => v !== "");
+                                var values = column.data().unique().sort().toArray();
+
+                                var optionsContainer = $('<div class="options-container"></div>').appendTo(modal);
+                                optionsContainer.append(`<div><label><input type="checkbox" class="select-all"> Select All</label></div><hr class="my-1">`);
+
+                                values.forEach(function (value) {
+                                    if (value !== null) {
+                                        var isChecked = currentFilter.length === 0 || currentFilter.includes(String(value).replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1"));
+                                        optionsContainer.append(`<div><label><input type="checkbox" class="filter-value" value="${value}" ${isChecked ? 'checked' : ''}> ${value || '(Empty)'}</label></div>`);
+                                    }
+                                });
+
+                                var allChecked = optionsContainer.find('.filter-value:not(:checked)').length === 0;
+                                optionsContainer.find('.select-all').prop('checked', allChecked);
+
+                                modal.append(`<div class="mt-2 flex justify-end space-x-2"><button class="cancel-filter-btn bg-gray-200 text-gray-700 px-3 py-1 rounded-md text-sm">Cancel</button><button class="apply-filter-btn bg-revelti-blue text-white px-3 py-1 rounded-md text-sm">Apply</button></div>`);
+                                modal.show();
+
+                                modal.find('.select-all').on('change', function () {
+                                    var isChecked = $(this).is(':checked');
+                                    modal.find('.filter-value').prop('checked', isChecked);
+                                });
+
+                                modal.find('.apply-filter-btn').on('click', function () {
+                                    var selectedValues = [];
+                                    modal.find('.filter-value:checked').each(function () {
+                                        selectedValues.push('^' + $.fn.dataTable.util.escapeRegex($(this).val()) + '$');
+                                    });
+                                    column.search(selectedValues.join('|'), true, false).draw();
+                                    modal.remove();
+                                });
+
+                                modal.find('.cancel-filter-btn').on('click', function () {
+                                    modal.remove();
+                                });
+                            });
+                        });
+
+                        var resetButton = $('<button id="resetTableFilters" class="dt-button bg-revelti-orange hover:bg-orange-600" style="margin-left: 10px;">Reset Filters</button>')
+                            .on('click', function () {
+                                $('#resetTopFilters').click();
+                            });
+                        $('.dataTables_filter').append(resetButton);
+                    }
+                });
+
+                $(document).on('click', function (e) {
+                    if (!$(e.target).closest('.filter-modal, .filter-icon').length) {
+                        $('.filter-modal').remove();
+                    }
+                });
+            }
+
+            function updateDashboard(data) {
+                updateKpis(data);
+                updateCharts(data);
+            }
+
+            function updateKpis(data) {
+                const totalTickets = data.reduce((sum, item) => sum + item.qtySold, 0);
+                const totalIncome = data.reduce((sum, item) => sum + item.total, 0);
+                const avgPrice = totalTickets > 0 ? totalIncome / totalTickets : 0;
+                const promoterSales = data.reduce((acc, item) => { if (item.promoter !== 'N/A') { acc[item.promoter] = (acc[item.promoter] || 0) + item.qtySold; } return acc; }, {});
+                const topPromoter = Object.keys(promoterSales).length > 0 ? Object.entries(promoterSales).sort((a, b) => b[1] - a[1])[0][0] : 'N/A';
+                $('#kpi-cards').html(`
+                <div class="bg-white p-4 rounded-lg border border-gray-100 shadow-sm"><h3 class="text-sm font-semibold text-gray-500">Total Tickets Sold</h3><p class="text-2xl font-bold revelti-blue mt-1">${totalTickets.toLocaleString()}</p></div>
+                <div class="bg-white p-4 rounded-lg border border-gray-100 shadow-sm"><h3 class="text-sm font-semibold text-gray-500">Total Income</h3><p class="text-2xl font-bold revelti-blue mt-1">€${totalIncome.toLocaleString('de-DE', { minimumFractionDigits: 2 })}</p></div>
+                <div class="bg-white p-4 rounded-lg border border-gray-100 shadow-sm"><h3 class="text-sm font-semibold text-gray-500">Avg. Ticket Price</h3><p class="text-2xl font-bold revelti-blue mt-1">€${avgPrice.toFixed(2)}</p></div>
+                <div class="bg-white p-4 rounded-lg border border-gray-100 shadow-sm"><h3 class="text-sm font-semibold text-gray-500">Top Promoter</h3><p class="text-2xl font-bold revelti-blue mt-1">${topPromoter}</p></div>
+            `);
+            }
+
+            function updateCharts(data) {
+                updatePromoterChart(data);
+                updateTicketTypeChart(data);
+                updateEventSalesChart(data);
+                updatePriceTierChart(data);
+                updateDiscountImpactChart(data);
+                updateRevenueByTypeChart(data);
+                updatePromoterEffectivenessChart(data);
+            }
+
+            function createChart(ctx, type, data, options) {
+                if (!ctx) return;
+                if (charts[ctx.canvas.id]) { charts[ctx.canvas.id].destroy(); }
+                charts[ctx.canvas.id] = new Chart(ctx, { type, data, options });
+            }
+
+            function updatePromoterChart(data) {
+                const promoterData = data.reduce((acc, item) => { if (item.promoter !== 'N/A') { acc[item.promoter] = (acc[item.promoter] || 0) + item.qtySold; } return acc; }, {});
+                const sortedPromoters = Object.entries(promoterData).sort((a, b) => b[1] - a[1]);
+                createChart($('#promoterChart')[0].getContext('2d'), 'bar', {
+                    labels: sortedPromoters.map(p => p[0]),
+                    datasets: [{ label: 'Tickets Sold', data: sortedPromoters.map(p => p[1]), backgroundColor: chartColors }]
+                }, { responsive: true, plugins: { title: { display: false } } });
+            }
+
+            function updateTicketTypeChart(data) {
+                const typeData = data.reduce((acc, item) => { acc[item.ticketType] = (acc[item.ticketType] || 0) + item.qtySold; return acc; }, {});
+                createChart($('#ticketTypeChart')[0].getContext('2d'), 'doughnut', {
+                    labels: Object.keys(typeData),
+                    datasets: [{ data: Object.values(typeData), backgroundColor: chartColors }]
+                }, { responsive: true, plugins: { title: { display: false } } });
+            }
+
+            function updateEventSalesChart(data) {
+                const eventData = data.reduce((acc, item) => { acc[item.event] = (acc[item.event] || 0) + item.qtySold; return acc; }, {});
+                const sortedEvents = Object.entries(eventData).sort((a, b) => b[1] - a[1]);
+                createChart($('#eventSalesChart')[0].getContext('2d'), 'bar', {
+                    labels: sortedEvents.map(e => e[0]),
+                    datasets: [{ label: 'Tickets Sold', data: sortedEvents.map(e => e[1]), backgroundColor: chartColors }]
+                }, { indexAxis: 'y', responsive: true, plugins: { title: { display: false } } });
+            }
+
+            function updatePriceTierChart(data) {
+                const tiers = { '€0-50': 0, '€51-100': 0, '€101-200': 0, '€201+': 0 };
+                data.forEach(item => {
+                    if (item.price <= 50) tiers['€0-50'] += item.qtySold;
+                    else if (item.price <= 100) tiers['€51-100'] += item.qtySold;
+                    else if (item.price <= 200) tiers['€101-200'] += item.qtySold;
+                    else tiers['€201+'] += item.qtySold;
+                });
+                createChart($('#priceTierChart')[0].getContext('2d'), 'bar', {
+                    labels: Object.keys(tiers),
+                    datasets: [{ label: 'Tickets Sold', data: Object.values(tiers), backgroundColor: chartColors.slice(0, 4) }]
+                }, { responsive: true, plugins: { title: { display: false } } });
+            }
+
+            function updateDiscountImpactChart(data) {
+                const discountData = data.reduce((acc, item) => {
+                    const key = item.event;
+                    if (!acc[key]) acc[key] = { discounted: 0, nonDiscounted: 0 };
+                    if (item.discountCode) acc[key].discounted += item.qtySold;
+                    else acc[key].nonDiscounted += item.qtySold;
+                    return acc;
+                }, {});
+                createChart($('#discountImpactChart')[0].getContext('2d'), 'bar', {
+                    labels: Object.keys(discountData),
+                    datasets: [
+                        { label: 'Discounted Sales', data: Object.values(discountData).map(d => d.discounted), backgroundColor: '#f58220' },
+                        { label: 'Full Price Sales', data: Object.values(discountData).map(d => d.nonDiscounted), backgroundColor: '#213c63' }
+                    ]
+                }, { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true } }, plugins: { title: { display: false } } });
+            }
+
+            function updateRevenueByTypeChart(data) {
+                const revenueData = data.reduce((acc, item) => { acc[item.ticketType] = (acc[item.ticketType] || 0) + item.total; return acc; }, {});
+                const sortedRevenue = Object.entries(revenueData).sort((a, b) => b[1] - a[1]);
+                createChart($('#revenueByTypeChart')[0].getContext('2d'), 'bar', {
+                    labels: sortedRevenue.map(r => r[0]),
+                    datasets: [{ label: 'Total Revenue', data: sortedRevenue.map(r => r[1]), backgroundColor: chartColors }]
+                }, { responsive: true, maintainAspectRatio: false, plugins: { title: { display: false } } });
+            }
+
+            function updatePromoterEffectivenessChart(data) {
+                const promoterStats = data.filter(item => item.promoter !== 'N/A').reduce((acc, item) => {
+                    if (!acc[item.promoter]) {
+                        acc[item.promoter] = { ticketsSold: 0, totalRevenue: 0, grossRevenue: 0 };
+                    }
+                    acc[item.promoter].ticketsSold += item.qtySold;
+                    acc[item.promoter].totalRevenue += item.total;
+                    acc[item.promoter].grossRevenue += item.price * item.qtySold;
+                    return acc;
+                }, {});
+
+                const datasets = Object.entries(promoterStats).map(([promoter, stats], index) => {
+                    const avgRevenue = stats.ticketsSold > 0 ? stats.totalRevenue / stats.ticketsSold : 0;
+                    return {
+                        label: promoter,
+                        data: [{
+                            x: stats.ticketsSold,
+                            y: avgRevenue,
+                            r: stats.totalRevenue / 1500,
+                            totalRevenue: stats.totalRevenue
+                        }],
+                        backgroundColor: chartColors[index % chartColors.length]
+                    }
+                });
+
+                createChart($('#promoterEffectivenessChart')[0].getContext('2d'), 'bubble', {
+                    datasets: datasets
+                }, {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: { display: false },
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: (c) => {
+                                    const dataPoint = c.raw;
+                                    return [
+                                        `${c.dataset.label}`,
+                                        `Tickets Sold: ${dataPoint.x}`,
+                                        `Total Revenue: €${dataPoint.totalRevenue.toFixed(2)}`,
+                                        `Avg Revenue/Ticket: €${dataPoint.y.toFixed(2)}`
+                                    ];
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: { title: { display: true, text: 'Tickets Sold' } },
+                        y: { title: { display: true, text: 'Average Revenue per Ticket (€)' } }
+                    }
+                });
+            }
+
+            // --- MODAL & FILTER LOGIC ---
+            function populateFilterModals() {
+                const events = [...new Set(allTicketData.map(item => item.event))].sort();
+                const ticketTypes = [...new Set(allTicketData.map(item => item.ticketType))].sort();
+                const promoters = [...new Set(allTicketData.map(item => item.promoter))].sort();
+
+                populateModal('eventFilter', events);
+                populateModal('ticketTypeFilter', ticketTypes);
+                populateModal('promoterFilter', promoters);
+            }
+
+            function populateModal(filterId, options) {
+                const container = $(`#${filterId}Options`);
+                container.empty();
+                options.forEach(opt => {
+                    container.append(`<div><label class="flex items-center p-2 hover:bg-gray-100 rounded-md cursor-pointer"><input type="checkbox" value="${opt}" class="mr-2 h-4 w-4 rounded border-gray-300 text-revelti-blue focus:ring-revelti-blue"><span>${opt}</span></label></div>`);
+                });
+            }
+
+            function setupEventListeners() {
+                $('.filter-btn').on('click', function () { $(`#${$(this).data('modal')}`).addClass('visible'); });
+                $('.modal-overlay').on('click', function (e) { if (e.target === this) $(this).removeClass('visible'); });
+                $('.apply-filter').on('click', function () { $(this).closest('.modal-overlay').removeClass('visible'); applyAllFilters(); });
+                $('.info-btn').on('click', function () { $(`#${$(this).data('modal')}`).addClass('visible'); });
+                $('.close-modal').on('click', function () { $(this).closest('.modal-overlay').removeClass('visible'); });
+                $('#resetTopFilters').on('click', function () {
+                    $('.modal-content input[type="checkbox"]').prop('checked', false);
+                    applyAllFilters();
+                    if (table) {
+                        table.search('').columns().search('').draw();
+                    }
+                });
+            }
+
+            function applyAllFilters() {
+                const getSelected = (modalId) => $(`#${modalId}Options input:checked`).map((_, el) => $(el).val()).get();
+                const selectedEvents = getSelected('eventFilter');
+                const selectedTypes = getSelected('ticketTypeFilter');
+                const selectedPromoters = getSelected('promoterFilter');
+
+                // Apply filters to DataTable
+                table.column(0).search(selectedEvents.join('|'), true, false);
+                table.column(1).search(selectedTypes.join('|'), true, false);
+                table.column(7).search(selectedPromoters.join('|'), true, false);
+                table.draw();
+
+                // Update charts and KPIs based on the filtered data from the table
+                const filteredData = table.rows({ search: 'applied' }).data().toArray();
+                updateDashboard(filteredData);
+            }
+
+            // --- INITIAL LOAD ---
+            loadAndProcessData();
+        });
     </script>
     <script src="organizer.js" defer></script>
 </body>
+
 </html>
