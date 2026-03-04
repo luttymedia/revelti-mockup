@@ -97,60 +97,6 @@ function closeMediaModal() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    // Fetch the creative-specific navbar.
-    fetch('creativeNavBar.html')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.text();
-        })
-        .then(html => {
-            const placeholder = document.getElementById('creative-navbar-placeholder');
-            if (placeholder) {
-                placeholder.innerHTML = html;
-
-                const hamburgerIcon = document.getElementById('creative-hamburger-icon');
-                const mobileMenu = document.getElementById('creative-mobile-menu');
-
-                if (hamburgerIcon && mobileMenu) {
-                    hamburgerIcon.addEventListener('click', (event) => {
-                        event.stopPropagation();
-                        mobileMenu.classList.toggle('hidden');
-                    });
-                }
-
-                document.addEventListener('click', (event) => {
-                    if (mobileMenu && hamburgerIcon) {
-                        const isClickInsideMenu = mobileMenu.contains(event.target);
-                        const isClickOnHamburgerIcon = hamburgerIcon.contains(event.target);
-                        if (!isClickInsideMenu && !isClickOnHamburgerIcon && !mobileMenu.classList.contains('hidden')) {
-                            mobileMenu.classList.add('hidden');
-                        }
-                    }
-                });
-
-                const langEn = document.getElementById('creative-lang-en');
-                const langEs = document.getElementById('creative-lang-es');
-
-                if (langEn && langEs) {
-                    langEn.addEventListener('click', () => {
-                        langEn.classList.add('text-revelti-orange');
-                        langEn.classList.remove('text-gray-700');
-                        langEs.classList.add('text-gray-700');
-                        langEs.classList.remove('text-revelti-orange');
-                    });
-                    langEs.addEventListener('click', () => {
-                        langEs.classList.add('text-revelti-orange');
-                        langEs.classList.remove('text-gray-700');
-                        langEn.classList.add('text-gray-700');
-                        langEn.classList.remove('text-revelti-orange');
-                    });
-                }
-            }
-        })
-        .catch(error => console.error('Error fetching creative navbar:', error));
-
     // Listen for clicks on any element that should open the media modal.
     document.addEventListener('click', (event) => {
         const galleryItem = event.target.closest('[data-open-media-modal]');

@@ -33,313 +33,335 @@
     </style>
 </head>
 
-<body class="antialiased text-gray-800 bg-gray-100 pt-8" data-page-type="creative-profile">
+<body class="dashboard-layout bg-gray-100 antialiased text-gray-800" data-role="creative">
     <!-- Creative Navigation Bar -->
     <div id="creative-navbar-placeholder"></div>
 
-    <!-- Cover Image -->
-    <div class="w-full h-64 md:h-80 bg-gray-800 relative">
-        <img src="https://placehold.co/1920x400/2a1b3d/ffffff?text=AMedia+Studios" alt="Cover Image"
-            class="w-full h-full object-cover opacity-80">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-    </div>
+    <div class="dashboard-main-area">
+        <aside id="sidebar-placeholder" class="sidebar-container bg-white z-20"></aside>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-24 relative z-10">
+        <div class="main-wrapper">
+            <main class="page-content">
 
-        <!-- Profile Header Card -->
-        <div
-            class="bg-white rounded-xl shadow-lg p-6 md:p-8 flex flex-col md:flex-row items-center md:items-end md:justify-between mb-8">
-            <div class="flex flex-col md:flex-row items-center md:items-end text-center md:text-left">
-                <!-- Avatar -->
-                <div class="relative">
-                    <img src="images/creatorLogo.png" alt="AMedia Logo"
-                        class="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white shadow-md object-cover"
-                        onerror="this.onerror=null;this.src='https://placehold.co/200x200/213c63/ffffff?text=AM';">
-                    <!-- Verification Badge -->
-                    <div class="absolute bottom-2 right-2 bg-green-500 text-white p-1 rounded-full border-2 border-white shadow-sm"
-                        title="Verified Professional Partner">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
-                            </path>
-                        </svg>
-                    </div>
+                <!-- Cover Image -->
+                <div class="w-full h-64 md:h-80 bg-gray-800 relative">
+                    <img src="https://placehold.co/1920x400/2a1b3d/ffffff?text=AMediaSocial.TV" alt="Cover Image"
+                        class="w-full h-full object-cover opacity-80">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                 </div>
 
-                <!-- Info -->
-                <div class="mt-4 md:mt-0 md:ml-6 mb-2">
-                    <h1 class="text-3xl font-extrabold text-gray-800">AMedia</h1>
-                    <p class="text-revelti-blue font-bold flex items-center justify-center md:justify-start mt-1">
-                        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path>
-                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                        </svg>
-                        Professional Media Studio
-                    </p>
-                    <div class="flex items-center space-x-4 mt-3 text-sm text-gray-600 justify-center md:justify-start">
-                        <span class="flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
-                                </path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            </svg> Geneva, Switzerland</span>
-                        <span class="flex items-center"><svg class="w-4 h-4 mr-1" fill="currentColor"
-                                viewBox="0 0 20 20">
-                                <path
-                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                </path>
-                            </svg> 4.9 (128 Reviews)</span>
-                    </div>
-                </div>
-            </div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-24 relative z-10">
 
-            <!-- Action Buttons -->
-            <div
-                class="mt-6 md:mt-0 flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3 w-full md:w-auto mb-2">
-                <button onclick="document.getElementById('hire-modal').classList.remove('hidden');"
-                    class="flex-1 md:flex-none px-6 py-3 bg-revelti-orange text-white font-bold rounded-lg hover:bg-orange-600 transition shadow-md flex justify-center items-center">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
-                        </path>
-                    </svg>
-                    Hire Me
-                </button>
-                <button
-                    class="flex-1 md:flex-none px-6 py-3 bg-gray-200 text-gray-800 font-bold rounded-lg hover:bg-gray-300 transition shadow-sm flex justify-center items-center">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1">
-                        </path>
-                    </svg>
-                    Copy Link
-                </button>
-            </div>
-        </div>
+                    <!-- Profile Header Card -->
+                    <div
+                        class="bg-white rounded-xl shadow-lg p-6 md:p-8 flex flex-col md:flex-row items-center md:items-end md:justify-between mb-8">
+                        <div class="flex flex-col md:flex-row items-center md:items-end text-center md:text-left">
+                            <!-- Avatar -->
+                            <div class="relative">
+                                <img src="images/creatorLogo.png" alt="AMedia Logo"
+                                    class="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white shadow-md object-contain bg-black p-2"
+                                    onerror="this.onerror=null;this.src='https://placehold.co/200x200/213c63/ffffff?text=AM';">
+                                <!-- Verification Badge -->
+                                <div class="absolute bottom-2 right-2 bg-green-500 text-white p-1 rounded-full border-2 border-white shadow-sm"
+                                    title="Verified Professional Partner">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 13l4 4L19 7">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-
-            <!-- Left Sidebar (Bio & Details) -->
-            <div class="lg:col-span-1 space-y-6">
-
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h3 class="font-bold text-lg text-gray-800 mb-3 border-b pb-2">About AMedia</h3>
-                    <p class="text-gray-700 text-sm leading-relaxed">
-                        We are a passionate team of visual storytellers focusing exclusively on the Latin dance scene
-                        across Europe. With over 5 years of experience recording premium festivals, our goal is to
-                        capture the connection, musicality, and energy of every dance floor.
-                    </p>
-
-                    <div class="mt-6 pt-4 border-t border-gray-100 flex justify-center space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-revelti-blue transition"><svg class="w-6 h-6"
-                                fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919A118.66 118.66 0 0112 2.163zm0 1.802c-3.14 0-3.484.01-4.695.063c-2.555.115-3.806 1.36-3.92 3.92C3.25 9.276 3.24 9.614 3.24 12c0 2.387.01 2.724.063 3.93.114 2.56 1.365 3.806 3.92 3.92 1.21.054 1.555.063 4.695.063 3.14 0 3.484-.01 4.695-.063 2.555-.114 3.806-1.36 3.92-3.92.053-1.206.063-1.543.063-3.93s-.01-2.724-.063-3.93c-.114-2.56-1.365-3.806-3.92-3.92C15.484 3.975 15.14 3.965 12 3.965zM12 8.25a3.75 3.75 0 100 7.5 3.75 3.75 0 000-7.5zm0 1.8a1.95 1.95 0 110 3.9 1.95 1.95 0 010-3.9zm4.62-4.155a.938.938 0 100 1.875.938.938 0 000-1.875z" />
-                            </svg></a>
-                        <a href="#" class="text-gray-400 hover:text-revelti-blue transition"><svg class="w-6 h-6"
-                                fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-                            </svg></a>
-                        <a href="#" class="text-gray-400 hover:text-revelti-blue transition"><svg class="w-6 h-6"
-                                fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
-                            </svg></a>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h3 class="font-bold text-lg text-gray-800 mb-4 border-b pb-2">Equipment Details</h3>
-                    <ul class="space-y-2 text-sm text-gray-700">
-                        <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-revelti-blue" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z">
-                                </path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            </svg> Sony A7S III (x2)</li>
-                        <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-revelti-blue" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z">
-                                </path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            </svg> Sony FX3</li>
-                        <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-revelti-blue" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9">
-                                </path>
-                            </svg> DJI RS 3 Pro Gimbal</li>
-                        <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-revelti-blue" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z">
-                                </path>
-                            </svg> Rode Wireless GO II</li>
-                    </ul>
-                </div>
-
-            </div>
-
-            <!-- Right Content Area (Galleries) -->
-            <div class="lg:col-span-2">
-
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <!-- Tabs -->
-                    <div class="border-b border-gray-200">
-                        <nav class="flex -mb-px">
-                            <button
-                                class="flex-1 py-4 px-1 text-center font-bold text-revelti-blue border-b-2 border-revelti-orange focus:outline-none">
-                                Completed Events (14)
-                            </button>
-                            <button
-                                class="flex-1 py-4 px-1 text-center font-semibold text-gray-500 hover:text-gray-700 focus:outline-none transition">
-                                Reviews
-                            </button>
-                        </nav>
-                    </div>
-
-                    <!-- Content -->
-                    <div class="p-6">
-
-                        <!-- Filters -->
-                        <div class="flex justify-between items-center mb-6">
-                            <h2 class="text-xl font-bold text-gray-800">Galleries</h2>
-                            <select
-                                class="border-gray-300 rounded-md text-sm focus:ring-revelti-blue focus:border-revelti-blue px-3 py-1 bg-gray-50 border">
-                                <option>Sort by Date: Newest First</option>
-                                <option>Sort by Date: Oldest First</option>
-                                <option>Most Popular</option>
-                            </select>
+                            <!-- Info -->
+                            <div class="mt-4 md:mt-0 md:ml-6 mb-2">
+                                <h1 class="text-3xl font-extrabold text-gray-800">AMedia</h1>
+                                <p
+                                    class="text-revelti-blue font-bold flex items-center justify-center md:justify-start mt-1">
+                                    <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path>
+                                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                                    </svg>
+                                    Professional Media Studio
+                                </p>
+                                <div
+                                    class="flex items-center space-x-4 mt-3 text-sm text-gray-600 justify-center md:justify-start">
+                                    <span class="flex items-center"><svg class="w-4 h-4 mr-1" fill="none"
+                                            stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                            </path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        </svg> Geneva, Switzerland</span>
+                                    <span class="flex items-center"><svg class="w-4 h-4 mr-1" fill="currentColor"
+                                            viewBox="0 0 20 20">
+                                            <path
+                                                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                            </path>
+                                        </svg> 4.9 (128 Reviews)</span>
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- Gallery Grid -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <!-- Action Buttons -->
+                        <div
+                            class="mt-6 md:mt-0 flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3 w-full md:w-auto mb-2">
+                            <button onclick="document.getElementById('hire-modal').classList.remove('hidden');"
+                                class="flex-1 md:flex-none px-6 py-3 bg-revelti-orange text-white font-bold rounded-lg hover:bg-orange-600 transition shadow-md flex justify-center items-center">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                    </path>
+                                </svg>
+                                Hire Me
+                            </button>
+                            <button
+                                class="flex-1 md:flex-none px-6 py-3 bg-gray-200 text-gray-800 font-bold rounded-lg hover:bg-gray-300 transition shadow-sm flex justify-center items-center">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1">
+                                    </path>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
 
-                            <!-- Event Card 1 -->
-                            <div
-                                class="border border-gray-200 rounded-lg overflow-hidden group hover:shadow-lg transition cursor-pointer">
-                                <div class="relative h-48 bg-gray-200 overflow-hidden">
-                                    <img src="https://placehold.co/600x400/2a1b3d/ffffff?text=Bachata+Geneva+2026"
-                                        class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                                    <!-- Badges -->
-                                    <div class="absolute top-3 right-3 flex flex-col items-end space-y-2">
-                                        <span
-                                            class="bg-gray-900/80 text-white text-xs font-bold px-2 py-1 rounded backdrop-blur-sm">Photographer</span>
-                                        <span
-                                            class="bg-gray-900/80 text-white text-xs font-bold px-2 py-1 rounded backdrop-blur-sm">Videographer</span>
-                                    </div>
-                                    <!-- Play Icon overlay if video -->
-                                    <div
-                                        class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20">
-                                        <span
-                                            class="bg-white/90 text-revelti-blue font-bold py-2 px-4 rounded-full shadow-lg">View
-                                            Galleries</span>
-                                    </div>
-                                </div>
-                                <div class="p-4 bg-white">
-                                    <h3 class="font-bold text-lg text-gray-800 mb-1">Bachata Geneva Festival 2026</h3>
-                                    <p class="text-sm text-gray-500 mb-3 flex items-center"><svg class="w-4 h-4 mr-1"
-                                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                            </path>
-                                        </svg> Oct 8-12, 2026</p>
-                                    <div class="flex items-center space-x-2 border-t pt-3">
-                                        <span
-                                            class="bg-green-100 text-green-800 text-xs font-bold px-2 py-1 rounded">Free
-                                            Sets Available</span>
-                                        <span
-                                            class="bg-revelti-orange/10 text-revelti-orange text-xs font-bold px-2 py-1 rounded border border-revelti-orange/20">Premium
-                                            Media</span>
-                                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                        <!-- Left Sidebar (Bio & Details) -->
+                        <div class="lg:col-span-1 space-y-6">
+
+                            <div class="bg-white rounded-lg shadow-md p-6">
+                                <h3 class="font-bold text-lg text-gray-800 mb-3 border-b pb-2">About AMedia</h3>
+                                <p class="text-gray-700 text-sm leading-relaxed">
+                                    We are a passionate team of visual storytellers focusing exclusively on the Latin
+                                    dance scene
+                                    across Europe. With over 5 years of experience recording premium festivals, our goal
+                                    is to
+                                    capture the connection, musicality, and energy of every dance floor.
+                                </p>
+
+                                <div class="mt-6 pt-4 border-t border-gray-100 flex justify-center space-x-4">
+                                    <a href="#" class="text-gray-400 hover:text-revelti-blue transition"><svg
+                                            class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919A118.66 118.66 0 0112 2.163zm0 1.802c-3.14 0-3.484.01-4.695.063c-2.555.115-3.806 1.36-3.92 3.92C3.25 9.276 3.24 9.614 3.24 12c0 2.387.01 2.724.063 3.93.114 2.56 1.365 3.806 3.92 3.92 1.21.054 1.555.063 4.695.063 3.14 0 3.484-.01 4.695-.063 2.555-.114 3.806-1.36 3.92-3.92.053-1.206.063-1.543.063-3.93s-.01-2.724-.063-3.93c-.114-2.56-1.365-3.806-3.92-3.92C15.484 3.975 15.14 3.965 12 3.965zM12 8.25a3.75 3.75 0 100 7.5 3.75 3.75 0 000-7.5zm0 1.8a1.95 1.95 0 110 3.9 1.95 1.95 0 010-3.9zm4.62-4.155a.938.938 0 100 1.875.938.938 0 000-1.875z" />
+                                        </svg></a>
+                                    <a href="#" class="text-gray-400 hover:text-revelti-blue transition"><svg
+                                            class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                        </svg></a>
+                                    <a href="#" class="text-gray-400 hover:text-revelti-blue transition"><svg
+                                            class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
+                                        </svg></a>
                                 </div>
                             </div>
 
-                            <!-- Event Card 2 -->
-                            <div
-                                class="border border-gray-200 rounded-lg overflow-hidden group hover:shadow-lg transition cursor-pointer">
-                                <div class="relative h-48 bg-gray-200 overflow-hidden">
-                                    <img src="https://placehold.co/600x400/2a1b3d/ffffff?text=Paris+Sensual+Fest"
-                                        class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                                    <div class="absolute top-3 right-3 flex flex-col items-end space-y-2">
-                                        <span
-                                            class="bg-gray-900/80 text-white text-xs font-bold px-2 py-1 rounded backdrop-blur-sm">Photographer</span>
-                                    </div>
-                                    <div
-                                        class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20">
-                                        <span
-                                            class="bg-white/90 text-revelti-blue font-bold py-2 px-4 rounded-full shadow-lg">View
-                                            Galleries</span>
-                                    </div>
-                                </div>
-                                <div class="p-4 bg-white">
-                                    <h3 class="font-bold text-lg text-gray-800 mb-1">Paris Sensual Festival 2025</h3>
-                                    <p class="text-sm text-gray-500 mb-3 flex items-center"><svg class="w-4 h-4 mr-1"
+                            <div class="bg-white rounded-lg shadow-md p-6">
+                                <h3 class="font-bold text-lg text-gray-800 mb-4 border-b pb-2">Equipment Details</h3>
+                                <ul class="space-y-2 text-sm text-gray-700">
+                                    <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-revelti-blue"
                                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                                d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z">
                                             </path>
-                                        </svg> May 14-18, 2025</p>
-                                    <div class="flex items-center space-x-2 border-t pt-3">
-                                        <span
-                                            class="bg-revelti-orange/10 text-revelti-orange text-xs font-bold px-2 py-1 rounded border border-revelti-orange/20">Premium
-                                            Media</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Event Card 3 -->
-                            <div
-                                class="border border-gray-200 rounded-lg overflow-hidden group hover:shadow-lg transition cursor-pointer">
-                                <div class="relative h-48 bg-gray-200 overflow-hidden">
-                                    <img src="https://placehold.co/600x400/2a1b3d/ffffff?text=Madrid+Zouk+Open"
-                                        class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                                    <div class="absolute top-3 right-3 flex flex-col items-end space-y-2">
-                                        <span
-                                            class="bg-gray-900/80 text-white text-xs font-bold px-2 py-1 rounded backdrop-blur-sm">Videographer</span>
-                                    </div>
-                                    <div
-                                        class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20">
-                                        <span
-                                            class="bg-white/90 text-revelti-blue font-bold py-2 px-4 rounded-full shadow-lg">View
-                                            Galleries</span>
-                                    </div>
-                                </div>
-                                <div class="p-4 bg-white">
-                                    <h3 class="font-bold text-lg text-gray-800 mb-1">Madrid Zouk Open 2025</h3>
-                                    <p class="text-sm text-gray-500 mb-3 flex items-center"><svg class="w-4 h-4 mr-1"
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        </svg> Sony A7S III (x2)</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-revelti-blue"
                                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                                d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z">
                                             </path>
-                                        </svg> Mar 1-3, 2025</p>
-                                    <div class="flex items-center space-x-2 border-t pt-3">
-                                        <span
-                                            class="bg-green-100 text-green-800 text-xs font-bold px-2 py-1 rounded">Free
-                                            Sets Available</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Dummy card to show grid alignment -->
-                            <div
-                                class="border border-gray-200 border-dashed rounded-lg flex flex-col items-center justify-center p-8 text-gray-400 bg-gray-50/50 hover:bg-gray-50 transition cursor-pointer min-h-[300px]">
-                                <h3 class="font-bold text-lg mb-2">View 11 more events</h3>
-                                <p class="text-sm text-center">Click here to see all historical portfolios.</p>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        </svg> Sony FX3</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-revelti-blue"
+                                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9">
+                                            </path>
+                                        </svg> DJI RS 3 Pro Gimbal</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-revelti-blue"
+                                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z">
+                                            </path>
+                                        </svg> Rode Wireless GO II</li>
+                                </ul>
                             </div>
 
                         </div>
-                    </div>
-                </div>
 
-            </div>
+                        <!-- Right Content Area (Galleries) -->
+                        <div class="lg:col-span-2">
+
+                            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                                <!-- Tabs -->
+                                <div class="border-b border-gray-200">
+                                    <nav class="flex -mb-px">
+                                        <button
+                                            class="flex-1 py-4 px-1 text-center font-bold text-revelti-blue border-b-2 border-revelti-orange focus:outline-none">
+                                            Completed Events (14)
+                                        </button>
+                                        <button
+                                            class="flex-1 py-4 px-1 text-center font-semibold text-gray-500 hover:text-gray-700 focus:outline-none transition">
+                                            Reviews
+                                        </button>
+                                    </nav>
+                                </div>
+
+                                <!-- Content -->
+                                <div class="p-6">
+
+                                    <!-- Filters -->
+                                    <div class="flex justify-between items-center mb-6">
+                                        <h2 class="text-xl font-bold text-gray-800">Galleries</h2>
+                                        <select
+                                            class="border-gray-300 rounded-md text-sm focus:ring-revelti-blue focus:border-revelti-blue px-3 py-1 bg-gray-50 border">
+                                            <option>Sort by Date: Newest First</option>
+                                            <option>Sort by Date: Oldest First</option>
+                                            <option>Most Popular</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Gallery Grid -->
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+                                        <!-- Event Card 1 -->
+                                        <div
+                                            class="border border-gray-200 rounded-lg overflow-hidden group hover:shadow-lg transition cursor-pointer">
+                                            <div class="relative h-48 bg-gray-200 overflow-hidden">
+                                                <img src="https://placehold.co/600x400/2a1b3d/ffffff?text=Bachata+Geneva+2026"
+                                                    class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                                                <!-- Badges -->
+                                                <div class="absolute top-3 right-3 flex flex-col items-end space-y-2">
+                                                    <span
+                                                        class="bg-gray-900/80 text-white text-xs font-bold px-2 py-1 rounded backdrop-blur-sm">Photographer</span>
+                                                    <span
+                                                        class="bg-gray-900/80 text-white text-xs font-bold px-2 py-1 rounded backdrop-blur-sm">Videographer</span>
+                                                </div>
+                                                <!-- Play Icon overlay if video -->
+                                                <div
+                                                    class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20">
+                                                    <span
+                                                        class="bg-white/90 text-revelti-blue font-bold py-2 px-4 rounded-full shadow-lg">View
+                                                        Galleries</span>
+                                                </div>
+                                            </div>
+                                            <div class="p-4 bg-white">
+                                                <h3 class="font-bold text-lg text-gray-800 mb-1">Bachata Geneva Festival
+                                                    2026</h3>
+                                                <p class="text-sm text-gray-500 mb-3 flex items-center"><svg
+                                                        class="w-4 h-4 mr-1" fill="none" stroke="currentColor"
+                                                        viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                                        </path>
+                                                    </svg> Oct 8-12, 2026</p>
+                                                <div class="flex items-center space-x-2 border-t pt-3">
+                                                    <span
+                                                        class="bg-green-100 text-green-800 text-xs font-bold px-2 py-1 rounded">Free
+                                                        Sets Available</span>
+                                                    <span
+                                                        class="bg-revelti-orange/10 text-revelti-orange text-xs font-bold px-2 py-1 rounded border border-revelti-orange/20">Premium
+                                                        Media</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Event Card 2 -->
+                                        <div
+                                            class="border border-gray-200 rounded-lg overflow-hidden group hover:shadow-lg transition cursor-pointer">
+                                            <div class="relative h-48 bg-gray-200 overflow-hidden">
+                                                <img src="https://placehold.co/600x400/2a1b3d/ffffff?text=Paris+Sensual+Fest"
+                                                    class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                                                <div class="absolute top-3 right-3 flex flex-col items-end space-y-2">
+                                                    <span
+                                                        class="bg-gray-900/80 text-white text-xs font-bold px-2 py-1 rounded backdrop-blur-sm">Photographer</span>
+                                                </div>
+                                                <div
+                                                    class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20">
+                                                    <span
+                                                        class="bg-white/90 text-revelti-blue font-bold py-2 px-4 rounded-full shadow-lg">View
+                                                        Galleries</span>
+                                                </div>
+                                            </div>
+                                            <div class="p-4 bg-white">
+                                                <h3 class="font-bold text-lg text-gray-800 mb-1">Paris Sensual Festival
+                                                    2025</h3>
+                                                <p class="text-sm text-gray-500 mb-3 flex items-center"><svg
+                                                        class="w-4 h-4 mr-1" fill="none" stroke="currentColor"
+                                                        viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                                        </path>
+                                                    </svg> May 14-18, 2025</p>
+                                                <div class="flex items-center space-x-2 border-t pt-3">
+                                                    <span
+                                                        class="bg-revelti-orange/10 text-revelti-orange text-xs font-bold px-2 py-1 rounded border border-revelti-orange/20">Premium
+                                                        Media</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Event Card 3 -->
+                                        <div
+                                            class="border border-gray-200 rounded-lg overflow-hidden group hover:shadow-lg transition cursor-pointer">
+                                            <div class="relative h-48 bg-gray-200 overflow-hidden">
+                                                <img src="https://placehold.co/600x400/2a1b3d/ffffff?text=Madrid+Zouk+Open"
+                                                    class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                                                <div class="absolute top-3 right-3 flex flex-col items-end space-y-2">
+                                                    <span
+                                                        class="bg-gray-900/80 text-white text-xs font-bold px-2 py-1 rounded backdrop-blur-sm">Videographer</span>
+                                                </div>
+                                                <div
+                                                    class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20">
+                                                    <span
+                                                        class="bg-white/90 text-revelti-blue font-bold py-2 px-4 rounded-full shadow-lg">View
+                                                        Galleries</span>
+                                                </div>
+                                            </div>
+                                            <div class="p-4 bg-white">
+                                                <h3 class="font-bold text-lg text-gray-800 mb-1">Madrid Zouk Open 2025
+                                                </h3>
+                                                <p class="text-sm text-gray-500 mb-3 flex items-center"><svg
+                                                        class="w-4 h-4 mr-1" fill="none" stroke="currentColor"
+                                                        viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                                        </path>
+                                                    </svg> Mar 1-3, 2025</p>
+                                                <div class="flex items-center space-x-2 border-t pt-3">
+                                                    <span
+                                                        class="bg-green-100 text-green-800 text-xs font-bold px-2 py-1 rounded">Free
+                                                        Sets Available</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Dummy card to show grid alignment -->
+                                        <div
+                                            class="border border-gray-200 border-dashed rounded-lg flex flex-col items-center justify-center p-8 text-gray-400 bg-gray-50/50 hover:bg-gray-50 transition cursor-pointer min-h-[300px]">
+                                            <h3 class="font-bold text-lg mb-2">View 11 more events</h3>
+                                            <p class="text-sm text-center">Click here to see all historical portfolios.
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+            </main>
         </div>
     </div>
 
@@ -356,18 +378,21 @@
             </button>
 
             <h3 class="text-2xl font-bold text-gray-800 mb-2">Contact AMedia</h3>
-            <p class="text-gray-600 mb-6">Interested in hiring AMedia for your next event? Drop a message below.</p>
+            <p class="text-gray-600 mb-6">Interested in hiring AMedia for your next event? Drop a message
+                below.</p>
 
             <form id="hire-form"
                 onsubmit="event.preventDefault(); alert('Message sent successfully! AMedia will contact you shortly.'); document.getElementById('hire-modal').classList.add('hidden');">
                 <div class="space-y-4">
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">Your Name / Organization</label>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Your Name /
+                            Organization</label>
                         <input type="text" required
                             class="w-full p-2 border border-gray-300 rounded focus:ring-revelti-blue focus:border-revelti-blue">
                     </div>
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">Event Dates / Name</label>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Event Dates /
+                            Name</label>
                         <input type="text" required
                             class="w-full p-2 border border-gray-300 rounded focus:ring-revelti-blue focus:border-revelti-blue">
                     </div>
@@ -392,6 +417,7 @@
     <!-- Loading Footer -->
     <div id="footer-placeholder"></div>
 
+    <script src="layout-injector.js" defer></script>
     <script src="creative.js" defer></script>
 </body>
 

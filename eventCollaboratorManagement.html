@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Revelti - Colaborator Management</title>
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -24,7 +25,7 @@
         }
     </script>
 
-    
+
     <!-- Google Fonts: Nunito -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,109 +33,158 @@
 
     <!-- Your Custom Stylesheet -->
     <link rel="stylesheet" href="style.css">
-     
+
 </head>
-<body class="bg-gray-100 antialiased text-gray-800 pt-8">
-    <!-- Organizer-specific Navbar -->
+
+<body class="dashboard-layout bg-gray-100 antialiased text-gray-800" data-role="organizer">
+    <!-- Navbar Placeholder -->
     <div id="organizer-navbar-placeholder"></div>
 
-    <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        
-        <!-- Header Section -->
-        <header class="flex flex-col md:flex-row justify-between items-center mb-6">
-            <div>
-                <div class="flex items-center">
-                    <h1 class="text-3xl font-extrabold revelti-blue">Bachata Geneva Festival 2026 - The Festival of Nations</h1>
-                    <span class="ml-4 text-sm font-bold bg-green-100 text-green-800 px-3 py-1 rounded-full whitespace-nowrap">On Sale</span>
-                </div>
-                <p class="text-gray-600">Collaborator Management</p>
-            </div>
-            <div class="flex space-x-2 mt-4 md:mt-0">
-                <a href="eventDetailOrganizerView.html" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition duration-300">View Public Page</a>
-                <a href="eventLiveEdit.html" class="px-4 py-2 bg-revelti-blue text-white rounded-lg hover:bg-blue-800 transition duration-300">Live Edit Page</a>
-            </div>
-        </header>
-        
-        <div class="bg-white rounded-lg shadow-md overflow-hidden">
-            <main class="p-6 md:p-8 space-y-6">
-                
-                <!-- Creators Section -->
-                <details open class="border rounded-lg">
-                    <summary class="flex justify-between items-center cursor-pointer p-4">
-                        <h2 class="font-bold text-xl revelti-blue">Media Creators</h2>
-                        <svg class="w-5 h-5 transform transition-transform accordion-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </summary>
-                    <div class="p-4 border-t">
-                        <div class="flex justify-end mb-4">
-                            <button onclick="openInviteModal('creator')" class="px-4 py-2 font-bold bg-revelti-blue text-white rounded-lg hover:bg-blue-800 text-sm">Invite Media Creator</button>
-                        </div>
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full bg-white">
-                                <thead class="bg-gray-50">
-                                    <tr>
-                                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Media Creator</th>
-                                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Collaborating Galleries</th>
-                                        <th class="px-4 py-2"></th>
-                                    </tr>
-                                </thead>
-                                <tbody id="creators-table-body" class="divide-y divide-gray-200">
-                                    <!-- Creator rows will be injected by JS -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </details>
+    <div class="dashboard-main-area">
+        <aside id="sidebar-placeholder" class="sidebar-container bg-white z-20"></aside>
 
-                <!-- Promoters Section -->
-                <details open class="border rounded-lg">
-                    <summary class="flex justify-between items-center cursor-pointer p-4">
-                        <h2 class="font-bold text-xl revelti-blue">Promoters</h2>
-                        <svg class="w-5 h-5 transform transition-transform accordion-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </summary>
-                    <div class="p-4 border-t">
-                        <div class="flex justify-end mb-4">
-                            <button onclick="openInviteModal('promoter')" class="px-4 py-2 font-bold bg-revelti-blue text-white rounded-lg hover:bg-blue-800 text-sm">Invite Promoter</button>
-                        </div>
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full bg-white">
-                                <thead class="bg-gray-50">
-                                    <tr>
-                                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Promoter</th>
-                                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Discount Code</th>
-                                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Sales / Uses</th>
-                                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Revenue</th>
-                                        <th class="px-4 py-2"></th>
-                                    </tr>
-                                </thead>
-                                <tbody id="promoters-table-body" class="divide-y divide-gray-200">
-                                    <!-- Promoter rows will be injected by JS -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </details>
+        <div class="main-wrapper">
+            <main class="page-content">
 
+                <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+                    <!-- Header Section -->
+                    <header class="flex flex-col md:flex-row justify-between items-center mb-6">
+                        <div>
+                            <div class="flex items-center">
+                                <h1 class="text-3xl font-extrabold revelti-blue">Bachata Geneva Festival 2026 - The
+                                    Festival of
+                                    Nations</h1>
+                                <span
+                                    class="ml-4 text-sm font-bold bg-green-100 text-green-800 px-3 py-1 rounded-full whitespace-nowrap">On
+                                    Sale</span>
+                            </div>
+                            <p class="text-gray-600">Collaborator Management</p>
+                        </div>
+                        <div class="flex space-x-2 mt-4 md:mt-0">
+                            <a href="eventDetailOrganizerView.html"
+                                class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition duration-300">View
+                                Public Page</a>
+                            <a href="eventLiveEdit.html"
+                                class="px-4 py-2 bg-revelti-blue text-white rounded-lg hover:bg-blue-800 transition duration-300">Live
+                                Edit Page</a>
+                        </div>
+                    </header>
+
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <main class="p-6 md:p-8 space-y-6">
+
+                            <!-- Creators Section -->
+                            <details open class="border rounded-lg">
+                                <summary class="flex justify-between items-center cursor-pointer p-4">
+                                    <h2 class="font-bold text-xl revelti-blue">Media Creators</h2>
+                                    <svg class="w-5 h-5 transform transition-transform accordion-arrow" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7">
+                                        </path>
+                                    </svg>
+                                </summary>
+                                <div class="p-4 border-t">
+                                    <div class="flex justify-end mb-4">
+                                        <button onclick="openInviteModal('creator')"
+                                            class="px-4 py-2 font-bold bg-revelti-blue text-white rounded-lg hover:bg-blue-800 text-sm">Invite
+                                            Media Creator</button>
+                                    </div>
+                                    <div class="overflow-x-auto">
+                                        <table class="min-w-full bg-white">
+                                            <thead class="bg-gray-50">
+                                                <tr>
+                                                    <th
+                                                        class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
+                                                        Media Creator</th>
+                                                    <th
+                                                        class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
+                                                        Status</th>
+                                                    <th
+                                                        class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
+                                                        Collaborating Galleries</th>
+                                                    <th class="px-4 py-2"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="creators-table-body" class="divide-y divide-gray-200">
+                                                <!-- Creator rows will be injected by JS -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </details>
+
+                            <!-- Promoters Section -->
+                            <details open class="border rounded-lg">
+                                <summary class="flex justify-between items-center cursor-pointer p-4">
+                                    <h2 class="font-bold text-xl revelti-blue">Promoters</h2>
+                                    <svg class="w-5 h-5 transform transition-transform accordion-arrow" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7">
+                                        </path>
+                                    </svg>
+                                </summary>
+                                <div class="p-4 border-t">
+                                    <div class="flex justify-end mb-4">
+                                        <button onclick="openInviteModal('promoter')"
+                                            class="px-4 py-2 font-bold bg-revelti-blue text-white rounded-lg hover:bg-blue-800 text-sm">Invite
+                                            Promoter</button>
+                                    </div>
+                                    <div class="overflow-x-auto">
+                                        <table class="min-w-full bg-white">
+                                            <thead class="bg-gray-50">
+                                                <tr>
+                                                    <th
+                                                        class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
+                                                        Promoter</th>
+                                                    <th
+                                                        class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
+                                                        Status</th>
+                                                    <th
+                                                        class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
+                                                        Discount Code</th>
+                                                    <th
+                                                        class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
+                                                        Sales / Uses</th>
+                                                    <th
+                                                        class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
+                                                        Revenue</th>
+                                                    <th class="px-4 py-2"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="promoters-table-body" class="divide-y divide-gray-200">
+                                                <!-- Promoter rows will be injected by JS -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </details>
+
+                        </main>
+                    </div>
             </main>
         </div>
     </div>
 
     <!-- Modal Backdrop -->
     <div id="modal-backdrop" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40" onclick="closeAllModals()"></div>
-    
+
     <!-- Edit Creator Modal -->
     <div id="edit-creator-modal" class="modal fixed inset-0 flex items-center justify-center p-4 hidden z-50">
         <div class="bg-white rounded-lg shadow-xl w-full max-w-lg max-h-[90vh] flex flex-col">
             <header class="p-4 border-b flex justify-between items-center">
                 <h3 id="creator-modal-title" class="font-bold text-xl revelti-blue"></h3>
-                <button onclick="closeAllModals()" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+                <button onclick="closeAllModals()"
+                    class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
             </header>
             <main class="p-6 space-y-4 overflow-y-auto">
                 <input type="hidden" id="editing-creator-id">
                 <div>
                     <label class="font-semibold text-gray-700">Gallery Permissions</label>
-                    <p class="text-sm text-gray-500 mb-2">Grant or revoke access to specific gallery folders for this event.</p>
+                    <p class="text-sm text-gray-500 mb-2">Grant or revoke access to specific gallery folders for this
+                        event.</p>
                     <div id="gallery-permissions-tree" class="space-y-2 border p-3 rounded-md max-h-60 overflow-y-auto">
                         <!-- Tree generated by JS -->
                     </div>
@@ -142,12 +192,17 @@
             </main>
             <footer class="p-4 border-t flex justify-between items-center bg-gray-50">
                 <div>
-                    <button id="creator-revoke-btn" onclick="handleCreatorAction('Revoked')" class="px-4 py-2 font-bold bg-red-600 text-white rounded-lg text-sm">Revoke Access</button>
-                    <button id="creator-cancel-btn" onclick="handleCreatorAction('Cancelled')" class="px-4 py-2 font-bold bg-revelti-orange hover:bg-orange-600 text-white rounded-lg text-sm">Cancel Invitation</button>
+                    <button id="creator-revoke-btn" onclick="handleCreatorAction('Revoked')"
+                        class="px-4 py-2 font-bold bg-red-600 text-white rounded-lg text-sm">Revoke Access</button>
+                    <button id="creator-cancel-btn" onclick="handleCreatorAction('Cancelled')"
+                        class="px-4 py-2 font-bold bg-revelti-orange hover:bg-orange-600 text-white rounded-lg text-sm">Cancel
+                        Invitation</button>
                 </div>
                 <div class="space-x-2">
-                    <button onclick="closeAllModals()" class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg">Cancel</button>
-                    <button onclick="saveCreator()" class="px-4 py-2 font-bold bg-revelti-blue text-white rounded-lg">Save Changes</button>
+                    <button onclick="closeAllModals()"
+                        class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg">Cancel</button>
+                    <button onclick="saveCreator()"
+                        class="px-4 py-2 font-bold bg-revelti-blue text-white rounded-lg">Save Changes</button>
                 </div>
             </footer>
         </div>
@@ -158,12 +213,15 @@
         <div class="bg-white rounded-lg shadow-xl w-full max-w-lg">
             <header class="p-4 border-b flex justify-between items-center">
                 <h3 id="manage-promoter-modal-title" class="font-bold text-xl revelti-blue"></h3>
-                <button onclick="closeAllModals()" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+                <button onclick="closeAllModals()"
+                    class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
             </header>
             <main class="p-6 space-y-4 text-center">
-                 <input type="hidden" id="editing-promoter-id">
-                <p>Visit the Ticket Management dashboard to create, assign, and monitor all promoter-specific discount codes.</p>
-                <a href="ticketManagement.html" class="inline-block w-full px-6 py-3 font-bold bg-revelti-blue text-white rounded-lg hover:bg-blue-800 transition duration-300">
+                <input type="hidden" id="editing-promoter-id">
+                <p>Visit the Ticket Management dashboard to create, assign, and monitor all promoter-specific discount
+                    codes.</p>
+                <a href="ticketManagement.html"
+                    class="inline-block w-full px-6 py-3 font-bold bg-revelti-blue text-white rounded-lg hover:bg-blue-800 transition duration-300">
                     Go to Ticket Management
                 </a>
             </main>
@@ -176,12 +234,15 @@
             <h3 id="cancel-promoter-modal-title" class="font-bold text-xl revelti-blue"></h3>
             <p>Are you sure you want to cancel this pending invitation?</p>
             <div class="flex justify-end space-x-2 pt-4 border-t">
-                <button onclick="closeAllModals()" class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg">Back</button>
-                <button onclick="handlePromoterAction('Cancelled')" class="px-4 py-2 font-bold bg-revelti-orange hover:bg-orange-600 text-white rounded-lg">Cancel Invitation</button>
+                <button onclick="closeAllModals()"
+                    class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg">Back</button>
+                <button onclick="handlePromoterAction('Cancelled')"
+                    class="px-4 py-2 font-bold bg-revelti-orange hover:bg-orange-600 text-white rounded-lg">Cancel
+                    Invitation</button>
             </div>
         </div>
     </div>
-    
+
     <!-- Generic Invite Modal -->
     <div id="invite-modal" class="modal fixed inset-0 flex items-center justify-center p-4 hidden z-50">
         <div class="bg-white rounded-lg shadow-xl w-full max-w-md p-6 space-y-4">
@@ -189,8 +250,10 @@
             <p id="invite-modal-text"></p>
             <input type="text" id="invite-modal-search" class="w-full p-2 border border-gray-300 rounded-md mt-1">
             <div class="flex justify-end space-x-2">
-                <button onclick="closeAllModals()" class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg">Cancel</button>
-                <button onclick="alert('Invitation sent!'); closeAllModals();" class="px-4 py-2 font-bold bg-revelti-blue text-white rounded-lg">Send Invite</button>
+                <button onclick="closeAllModals()"
+                    class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg">Cancel</button>
+                <button onclick="alert('Invitation sent!'); closeAllModals();"
+                    class="px-4 py-2 font-bold bg-revelti-blue text-white rounded-lg">Send Invite</button>
             </div>
         </div>
     </div>
@@ -218,21 +281,29 @@
 
         const galleryStructure = {
             id: 'root', name: 'Bachta Geneva 2026', children: [
-                { id: 'sat', name: 'Saturday 01-Nov', children: [
-                    { id: 'sat-photos', name: 'Photos', children: [
-                        { id: 'workshops', name: 'Workshops', children: [] },
-                        { id: 'jandj', name: 'Jack & Jill', children: [] },
-                    ]},
-                    { id: 'sat-videos', name: 'Videos', children: [] }
-                ]},
-                { id: 'sun', name: 'Sunday 02-Nov', children: [
-                    { id: 'sun-photos', name: 'Photos', children: [
-                        { id: 'sun-social', name: 'Sunday Social', children: [] },
-                    ]}
-                ]}
+                {
+                    id: 'sat', name: 'Saturday 01-Nov', children: [
+                        {
+                            id: 'sat-photos', name: 'Photos', children: [
+                                { id: 'workshops', name: 'Workshops', children: [] },
+                                { id: 'jandj', name: 'Jack & Jill', children: [] },
+                            ]
+                        },
+                        { id: 'sat-videos', name: 'Videos', children: [] }
+                    ]
+                },
+                {
+                    id: 'sun', name: 'Sunday 02-Nov', children: [
+                        {
+                            id: 'sun-photos', name: 'Photos', children: [
+                                { id: 'sun-social', name: 'Sunday Social', children: [] },
+                            ]
+                        }
+                    ]
+                }
             ]
         };
-        
+
         const galleryNameMap = {};
         function flattenGallery(node) {
             galleryNameMap[node.id] = node.name;
@@ -264,7 +335,7 @@
             collaboratorsData.creators.forEach(creator => {
                 const row = document.createElement('tr');
                 const isActionable = creator.status === 'Confirmed' || creator.status === 'Pending';
-                
+
                 const permissionNames = creator.permissions.map(id => galleryNameMap[id]).filter(Boolean);
 
                 let permissionsHtml;
@@ -311,7 +382,7 @@
                     </td>
                     <td class="px-4 py-3">${getStatusBadge(promoter.status)}</td>
                     <td class="px-4 py-3 font-mono text-sm">${promoter.code || '<span class="text-gray-400 italic">None</span>'}</td>
-                    <td class="px-4 py-3">${promoter.uses > 0 ? `${promoter.sales} / ${promoter.uses}`: '-'}</td>
+                    <td class="px-4 py-3">${promoter.uses > 0 ? `${promoter.sales} / ${promoter.uses}` : '-'}</td>
                     <td class="px-4 py-3">${promoter.revenue > 0 ? formatCurrency(promoter.revenue) : '<span class="text-gray-400">-</span>'}</td>
                     <td class="px-4 py-3 text-right">
                         <button onclick="openPromoterModal(${promoter.id})" class="text-sm font-semibold revelti-blue" ${!isActionable ? 'disabled' : ''}>Manage</button>
@@ -353,7 +424,7 @@
             const isChecked = creatorPermissions.includes(node.id);
             let html = `<div class="space-y-2" style="padding-left: ${level * 1.5}rem;">`;
             html += `<label class="flex items-center"><input type="checkbox" data-id="${node.id}" ${isChecked ? 'checked' : ''} class="mr-2 h-4 w-4"> ${node.name}</label>`;
-            
+
             if (node.children && node.children.length > 0) {
                 const childrenContainer = document.createElement('div');
                 node.children.forEach(child => {
@@ -371,7 +442,7 @@
 
             document.getElementById('editing-creator-id').value = creator.id;
             document.getElementById('creator-modal-title').textContent = `Edit Creator: ${creator.name}`;
-            
+
             const treeContainer = document.getElementById('gallery-permissions-tree');
             treeContainer.innerHTML = buildPermissionTree(galleryStructure, creator.permissions);
 
@@ -381,7 +452,7 @@
             document.getElementById('edit-creator-modal').classList.remove('hidden');
             modalBackdrop.classList.remove('hidden');
         }
-        
+
         function handleCreatorAction(newStatus) {
             const creatorId = parseInt(document.getElementById('editing-creator-id').value);
             const creator = collaboratorsData.creators.find(c => c.id === creatorId);
@@ -399,7 +470,7 @@
             const creatorId = parseInt(document.getElementById('editing-creator-id').value);
             const creator = collaboratorsData.creators.find(c => c.id === creatorId);
             if (!creator) return;
-            
+
             const newPermissions = [];
             document.querySelectorAll('#gallery-permissions-tree input[type="checkbox"]:checked').forEach(checkbox => {
                 newPermissions.push(checkbox.dataset.id);
@@ -425,7 +496,7 @@
             }
             modalBackdrop.classList.remove('hidden');
         }
-        
+
         function handlePromoterAction(newStatus) {
             const promoterId = parseInt(document.getElementById('editing-promoter-id').value);
             const promoter = collaboratorsData.promoters.find(p => p.id === promoterId);
@@ -434,7 +505,7 @@
             renderPromoters();
             closeAllModals();
         }
-        
+
         function setupCascadingCheckboxes() {
             const treeContainer = document.getElementById('gallery-permissions-tree');
             treeContainer.addEventListener('change', (e) => {
@@ -442,7 +513,7 @@
                     const checkbox = e.target;
                     const parentDiv = checkbox.closest('div[style]');
                     const childCheckboxes = parentDiv.querySelectorAll('input[type="checkbox"]');
-                    
+
                     for (let i = 1; i < childCheckboxes.length; i++) {
                         childCheckboxes[i].checked = checkbox.checked;
                     }
@@ -457,6 +528,9 @@
             setupCascadingCheckboxes();
         });
     </script>
+    <script src="layout-injector.js" defer></script>
     <script src="organizer.js" defer></script>
+    <div id="footer-placeholder"></div>
 </body>
+
 </html>

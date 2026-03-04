@@ -1,4 +1,4 @@
-// This script is specifically for the Organizer user journey.
+﻿// This script is specifically for the Organizer user journey.
 // It loads the organizer navbar and handles its interactions,
 // as well as the media modal functionality for organizer pages.
 
@@ -31,7 +31,7 @@ function openMediaModal(element) {
     const modalCreatorName = document.getElementById('modal-creator-name');
     const modalHeaderIcons = mediaModal.querySelector('.flex.items-center.space-x-2');
     const modalNav = document.getElementById('modal-nav');
-
+    
     // Find the parent gallery container of the clicked element.
     const galleryContainer = element.closest('#gallery-grid');
     if (!galleryContainer) {
@@ -44,7 +44,7 @@ function openMediaModal(element) {
     let currentIndex = galleryItems.indexOf(element);
 
     if (currentIndex === -1) return;
-
+    
     // Update content and show the modal
     modalImage.src = element.querySelector('img').src;
     modalEventName.textContent = element.getAttribute('data-event');
@@ -53,7 +53,7 @@ function openMediaModal(element) {
 
     // Dynamically show/hide buttons based on page context
     const pageType = document.body.getAttribute('data-page-type');
-
+    
     if (pageType === 'media-management') {
         // Show management-specific buttons
         modalHeaderIcons.innerHTML = `
@@ -68,9 +68,9 @@ function openMediaModal(element) {
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
             </svg>
         </button>
-        <button id="close-media-modal" class="p-2 rounded-full hover:bg-white/20 text-4xl leading-none">×</button>
+        <button id="close-media-modal" class="p-2 rounded-full hover:bg-white/20 text-4xl leading-none">├ù</button>
         `;
-
+        
         // Wait for the DOM to update before attaching the event listener
         setTimeout(() => {
             const privacyToggleBtn = document.getElementById('privacy-toggle');
@@ -81,8 +81,8 @@ function openMediaModal(element) {
                     if (iconPath) {
                         const currentState = privacyToggleBtn.getAttribute('data-state');
 
-                        const publicPath = "M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.50 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178ZM15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z";
-                        const privatePath = "M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88";
+                    const publicPath = "M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.50 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178ZM15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z";
+                    const privatePath = "M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88";
 
                         if (currentState === 'public') {
                             iconPath.setAttribute('d', privatePath);
@@ -97,13 +97,13 @@ function openMediaModal(element) {
                 });
             }
         }, 0);
-    } else {
+        } else {
         // Show attendee-specific icons
         modalHeaderIcons.innerHTML = `
             <button class="p-2 rounded-full hover:bg-white/20"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg></button>
             <button class="p-2 rounded-full hover:bg-white/20"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path></svg></button>
             <button class="p-2 rounded-full hover:bg-white/20"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg></button>
-            <button id="close-media-modal" class="p-2 rounded-full hover:bg-white/20 text-4xl leading-none">×</button>
+            <button id="close-media-modal" class="p-2 rounded-full hover:bg-white/20 text-4xl leading-none">├ù</button>
         `;
         // Show navigation buttons for other pages
         if (modalNav) modalNav.classList.remove('hidden');
@@ -113,10 +113,10 @@ function openMediaModal(element) {
     const closeBtn = document.getElementById('close-media-modal');
     const nextBtn = document.getElementById('next-media');
     const prevBtn = document.getElementById('prev-media');
-
+    
     // Use an IIFE (Immediately Invoked Function Expression) to create a closure
     // for the current gallery items and index.
-    (function (currentItems, startingIndex) {
+    (function(currentItems, startingIndex) {
         let currentImageIndex = startingIndex;
         // Function to update the modal content
         function updateModalContent() {
@@ -190,7 +190,62 @@ function closeMediaModal() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
+    // Fetch the organizer-specific navbar.
+    fetch('organizerNavBar.html')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then(html => {
+            const placeholder = document.getElementById('organizer-navbar-placeholder');
+            if (placeholder) {
+                placeholder.innerHTML = html;
+
+                const hamburgerIcon = document.getElementById('organizer-hamburger-icon');
+                const mobileMenu = document.getElementById('organizer-mobile-menu');
+                const notificationIconButton = document.getElementById('organizer-notification-icon-button');
+                
+                if (hamburgerIcon && mobileMenu) {
+                    hamburgerIcon.addEventListener('click', (event) => {
+                        event.stopPropagation();
+                        mobileMenu.classList.toggle('hidden');
+                    });
+                }
+
+                document.addEventListener('click', (event) => {
+                    if (mobileMenu && hamburgerIcon) {
+                        const isClickInsideMenu = mobileMenu.contains(event.target);
+                        const isClickOnHamburgerIcon = hamburgerIcon.contains(event.target);
+                        if (!isClickInsideMenu && !isClickOnHamburgerIcon && !mobileMenu.classList.contains('hidden')) {
+                            mobileMenu.classList.add('hidden');
+                        }
+                    }
+                });
+
+                const langEn = document.getElementById('organizer-lang-en');
+                const langEs = document.getElementById('organizer-lang-es');
+
+                if (langEn && langEs) {
+                    langEn.addEventListener('click', () => {
+                        langEn.classList.add('revelti-orange');
+                        langEn.classList.remove('text-gray-700');
+                        langEs.classList.add('text-gray-700');
+                        langEs.classList.remove('revelti-orange');
+                    });
+                    langEs.addEventListener('click', () => {
+                        langEs.classList.add('revelti-orange');
+                        langEs.classList.remove('text-gray-700');
+                        langEn.classList.add('text-gray-700');
+                        langEn.classList.remove('revelti-orange');
+                    });
+                }
+            }
+        })
+        .catch(error => console.error('Error fetching organizer navbar:', error));
+
     // Listen for clicks on any element that should open the media modal.
     document.addEventListener('click', (event) => {
         const galleryItem = event.target.closest('[data-open-media-modal]');

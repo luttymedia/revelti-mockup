@@ -51,60 +51,68 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="bg-gray-100 antialiased text-gray-800 pt-8">
-    <!-- Organizer-specific Navbar -->
+<body class="dashboard-layout bg-gray-100 antialiased text-gray-800" data-role="organizer">
+    <!-- Navbar Placeholder -->
     <div id="organizer-navbar-placeholder"></div>
 
-    <!-- Main container -->
-    <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="dashboard-main-area">
+        <aside id="sidebar-placeholder" class="sidebar-container bg-white z-20"></aside>
 
-        <header class="flex flex-col md:flex-row justify-between items-center mb-8">
-            <div>
-                <h1 class="text-3xl font-extrabold revelti-blue">Income Breakdown</h1>
-                <p class="text-gray-500">Analyze your event revenue streams.</p>
-            </div>
-            <a href="organizerDashboard.html"
-                class="mt-4 md:mt-0 px-4 py-2 text-sm font-semibold bg-revelti-blue text-white rounded-md hover:bg-blue-800 transition duration-300 flex items-center justify-center">
-                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                </svg>
-                Organizer Dashboard
-            </a>
-        </header>
+        <div class="main-wrapper">
+            <main class="page-content">
+                <!-- Main container -->
+                <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-        <!-- KPI Cards -->
-        <div id="kpi-cards" class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-            <!-- KPI cards will be dynamically inserted here -->
-        </div>
+                    <header class="flex flex-col md:flex-row justify-between items-center mb-8">
+                        <div>
+                            <h1 class="text-3xl font-extrabold revelti-blue">Income Breakdown</h1>
+                            <p class="text-gray-500">Analyze your event revenue streams.</p>
+                        </div>
+                        <a href="organizerDashboard.html"
+                            class="mt-4 md:mt-0 px-4 py-2 text-sm font-semibold bg-revelti-blue text-white rounded-md hover:bg-blue-800 transition duration-300 flex items-center justify-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                            </svg>
+                            Organizer Dashboard
+                        </a>
+                    </header>
 
-        <!-- Chart and Table Section -->
-        <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
+                    <!-- KPI Cards -->
+                    <div id="kpi-cards" class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                        <!-- KPI cards will be dynamically inserted here -->
+                    </div>
 
-            <!-- Bar Chart -->
-            <div class="mb-10 h-80">
-                <canvas id="incomeChart"></canvas>
-            </div>
+                    <!-- Chart and Table Section -->
+                    <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
 
-            <!-- Data Table -->
-            <div class="overflow-x-auto">
-                <table id="incomeTable" class="display" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>Event Name</th>
-                            <th>Total Income</th>
-                            <th>Net Profit</th>
-                            <th>Taxes (IVA)</th>
-                            <th>Commissions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="incomeTableBody">
-                        <tr>
-                            <td colspan="5" class="text-center p-4">Loading data...</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                        <!-- Bar Chart -->
+                        <div class="mb-10 h-80">
+                            <canvas id="incomeChart"></canvas>
+                        </div>
+
+                        <!-- Data Table -->
+                        <div class="overflow-x-auto">
+                            <table id="incomeTable" class="display" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Event Name</th>
+                                        <th>Total Income</th>
+                                        <th>Net Profit</th>
+                                        <th>Taxes (IVA)</th>
+                                        <th>Commissions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="incomeTableBody">
+                                    <tr>
+                                        <td colspan="5" class="text-center p-4">Loading data...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
         </div>
     </div>
 
@@ -372,6 +380,7 @@
             loadAndProcessData();
         });
     </script>
+    <script src="layout-injector.js" defer></script>
     <script src="organizer.js" defer></script>
 </body>
 

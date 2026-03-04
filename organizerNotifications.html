@@ -34,87 +34,98 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="antialiased text-gray-800">
+<body class="dashboard-layout bg-gray-100 antialiased text-gray-800" data-role="organizer">
+    <!-- Navbar Placeholder -->
     <div id="organizer-navbar-placeholder"></div>
 
-    <!-- Main container -->
-    <div
-        class="max-w-2xl md:max-w-full lg:max-w-full mx-auto bg-white shadow-md flex flex-col h-full full-height-modal">
+    <div class="dashboard-main-area">
+        <aside id="sidebar-placeholder" class="sidebar-container bg-white z-20"></aside>
 
-        <!-- Header Section -->
-        <header class="p-6 flex items-center justify-between">
-            <h1 class="text-xl font-bold revelti-blue">Organizer Notifications</h1>
-            <div class="flex items-center space-x-0 flex-shrink-0">
-                <!-- Settings Access Button -->
-                <a href="organizerNotificationSettings.html" class="p-1.5 rounded-full hover:bg-gray-200"
-                    title="Organizer Notification Settings">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
-                        </path>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                    </svg>
-                </a>
-            </div>
-        </header>
+        <div class="main-wrapper">
+            <main class="page-content">
+                <!-- Main container -->
+                <div
+                    class="max-w-2xl md:max-w-full lg:max-w-full mx-auto bg-white shadow-md flex flex-col h-full full-height-modal">
 
-        <!-- Tab Navigation -->
-        <nav class="sticky top-12 flex-shrink-0 bg-white z-40 border-b border-gray-200">
-            <div class="flex justify-around">
-                <button data-tab-target="all"
-                    class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:revelti-blue transition duration-300">All</button>
-                <button data-tab-target="salesPromoters"
-                    class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:revelti-blue transition duration-300">Sales
-                    & Promoters</button>
-                <button data-tab-target="eventMedia"
-                    class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:revelti-blue transition duration-300">Event
-                    & Media</button>
-                <button data-tab-target="systemAccount"
-                    class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:revelti-blue transition duration-300">System
-                    & Account</button>
-            </div>
-        </nav>
+                    <!-- Header Section -->
+                    <header class="p-6 flex items-center justify-between">
+                        <h1 class="text-xl font-bold revelti-blue">Organizer Notifications</h1>
+                        <div class="flex items-center space-x-0 flex-shrink-0">
+                            <!-- Settings Access Button -->
+                            <a href="organizerNotificationSettings.html" class="p-1.5 rounded-full hover:bg-gray-200"
+                                title="Organizer Notification Settings">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
+                                    </path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </header>
 
-        <!-- Main Content Sections (Tabs) -->
-        <main class="p-4 bg-gray-50 overflow-y-auto">
-            <!-- All Tab -->
-            <div id="all" class="tab-content">
-                <div class="text-right mb-4">
-                    <button data-mark-all="all" class="text-sm font-semibold revelti-blue hover:underline">Mark all as
-                        read</button>
+                    <!-- Tab Navigation -->
+                    <nav class="sticky top-12 flex-shrink-0 bg-white z-40 border-b border-gray-200">
+                        <div class="flex justify-around">
+                            <button data-tab-target="all"
+                                class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:revelti-blue transition duration-300">All</button>
+                            <button data-tab-target="salesPromoters"
+                                class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:revelti-blue transition duration-300">Sales
+                                & Promoters</button>
+                            <button data-tab-target="eventMedia"
+                                class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:revelti-blue transition duration-300">Event
+                                & Media</button>
+                            <button data-tab-target="systemAccount"
+                                class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:revelti-blue transition duration-300">System
+                                & Account</button>
+                        </div>
+                    </nav>
+
+                    <!-- Main Content Sections (Tabs) -->
+                    <main class="p-4 bg-gray-50 overflow-y-auto">
+                        <!-- All Tab -->
+                        <div id="all" class="tab-content">
+                            <div class="text-right mb-4">
+                                <button data-mark-all="all"
+                                    class="text-sm font-semibold revelti-blue hover:underline">Mark all as
+                                    read</button>
+                            </div>
+                            <div class="space-y-4"></div>
+                        </div>
+
+                        <!-- Sales & Promoters Tab -->
+                        <div id="salesPromoters" class="tab-content hidden">
+                            <div class="text-right mb-4">
+                                <button data-mark-all="salesPromoters"
+                                    class="text-sm font-semibold revelti-blue hover:underline">Mark all as read</button>
+                            </div>
+                            <div class="space-y-4"></div>
+                        </div>
+
+                        <!-- Event & Media Tab -->
+                        <div id="eventMedia" class="tab-content hidden">
+                            <div class="text-right mb-4">
+                                <button data-mark-all="eventMedia"
+                                    class="text-sm font-semibold revelti-blue hover:underline">Mark
+                                    all as read</button>
+                            </div>
+                            <div class="space-y-4"></div>
+                        </div>
+
+                        <!-- System & Account Tab -->
+                        <div id="systemAccount" class="tab-content hidden">
+                            <div class="text-right mb-4">
+                                <button data-mark-all="systemAccount"
+                                    class="text-sm font-semibold revelti-blue hover:underline">Mark all as read</button>
+                            </div>
+                            <div class="space-y-4"></div>
+                        </div>
+                    </main>
                 </div>
-                <div class="space-y-4"></div>
-            </div>
-
-            <!-- Sales & Promoters Tab -->
-            <div id="salesPromoters" class="tab-content hidden">
-                <div class="text-right mb-4">
-                    <button data-mark-all="salesPromoters"
-                        class="text-sm font-semibold revelti-blue hover:underline">Mark all as read</button>
-                </div>
-                <div class="space-y-4"></div>
-            </div>
-
-            <!-- Event & Media Tab -->
-            <div id="eventMedia" class="tab-content hidden">
-                <div class="text-right mb-4">
-                    <button data-mark-all="eventMedia" class="text-sm font-semibold revelti-blue hover:underline">Mark
-                        all as read</button>
-                </div>
-                <div class="space-y-4"></div>
-            </div>
-
-            <!-- System & Account Tab -->
-            <div id="systemAccount" class="tab-content hidden">
-                <div class="text-right mb-4">
-                    <button data-mark-all="systemAccount"
-                        class="text-sm font-semibold revelti-blue hover:underline">Mark all as read</button>
-                </div>
-                <div class="space-y-4"></div>
-            </div>
-        </main>
+            </main>
+        </div>
     </div>
 
     <script>
@@ -254,6 +265,7 @@
             }
         });
     </script>
+    <script src="layout-injector.js" defer></script>
     <script src="organizer.js" defer></script>
     <div id="footer-placeholder"></div>
 </body>

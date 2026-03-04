@@ -29,218 +29,232 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body class="antialiased text-gray-800 bg-gray-100 pt-8" data-page-type="creative-engagement">
+<body class="dashboard-layout bg-gray-100 antialiased text-gray-800" data-role="creative">
     <!-- Creative Navigation Bar -->
     <div id="creative-navbar-placeholder"></div>
 
-    <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="dashboard-main-area">
+        <aside id="sidebar-placeholder" class="sidebar-container bg-white z-20"></aside>
 
-        <!-- Header Section -->
-        <header class="flex flex-col md:flex-row justify-between md:items-center mb-6">
-            <div>
-                <h1 class="text-3xl font-extrabold text-revelti-blue">Audience Engagement</h1>
-                <p class="text-gray-600 mt-1">Deep dive into how audiences interact with your media</p>
-            </div>
-            <div class="flex space-x-2 mt-4 md:mt-0">
-                <a href="creativeDashboard.html"
-                    class="px-4 py-2 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 transition duration-300 flex items-center">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                    </svg>
-                    Back to Dashboard
-                </a>
-            </div>
-        </header>
+        <div class="main-wrapper">
+            <main class="page-content">
+                <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-        <!-- KPI Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <div class="bg-white rounded-lg p-6 shadow-md border-t-4 border-revelti-blue">
-                <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Total Impressions</p>
-                <p class="text-3xl font-extrabold text-gray-800 mt-2">124.8K</p>
-                <div class="mt-4 flex items-center text-sm">
-                    <span class="text-green-600 font-bold flex items-center">
-                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-                        </svg>
-                        8.4%
-                    </span>
-                    <span class="text-gray-500 ml-2">vs last month</span>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-lg p-6 shadow-md border-t-4 border-green-500">
-                <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Free Downloads</p>
-                <p class="text-3xl font-extrabold text-gray-800 mt-2">12,654</p>
-                <div class="mt-4 flex items-center text-sm text-gray-500">
-                    High engagement in BGF 2026
-                </div>
-            </div>
-
-            <div class="bg-white rounded-lg p-6 shadow-md border-t-4 border-revelti-orange">
-                <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Premium Sales</p>
-                <p class="text-3xl font-extrabold text-revelti-orange mt-2">1,842</p>
-                <div class="mt-4 flex items-center text-sm">
-                    <span class="text-green-600 font-bold flex items-center">
-                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-                        </svg>
-                        15.2%
-                    </span>
-                    <span class="text-gray-500 ml-2">Conversion up</span>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-lg p-6 shadow-md border-t-4 border-revelti-purple">
-                <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Avg. Engagement Rate</p>
-                <p class="text-3xl font-extrabold text-revelti-purple mt-2">14.6%</p>
-                <div class="mt-4 text-sm text-gray-500">
-                    Top 5% of Creatives
-                </div>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-
-            <!-- Engagement Trends Chart -->
-            <div class="lg:col-span-2 space-y-8">
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-xl font-bold text-gray-800">Engagement Trends</h2>
-                        <select
-                            class="border-gray-300 rounded-md text-sm focus:ring-revelti-blue focus:border-revelti-blue pointer-events-none">
-                            <option>Last 6 Months</option>
-                            <option>Year to Date</option>
-                        </select>
-                    </div>
-                    <div class="relative h-72 w-full">
-                        <canvas id="engagementChart"></canvas>
-                    </div>
-                </div>
-
-                <!-- Engagement per Event Table -->
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h2 class="text-xl font-bold text-gray-800 mb-6">Engagement by Event</h2>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse">
-                            <thead>
-                                <tr class="text-sm font-semibold text-gray-500 bg-gray-50 border-b border-gray-200">
-                                    <th class="py-3 px-4">Event</th>
-                                    <th class="py-3 px-4 text-center">Views</th>
-                                    <th class="py-3 px-4 text-center">Free Downloads</th>
-                                    <th class="py-3 px-4 text-center">Premium Sales</th>
-                                    <th class="py-3 px-4 text-right">Rate</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-sm text-gray-700 divide-y divide-gray-100">
-                                <tr class="hover:bg-gray-50 transition">
-                                    <td class="py-3 px-4">
-                                        <span class="font-bold">Bachata Geneva 2026</span>
-                                    </td>
-                                    <td class="py-3 px-4 text-center">42.5K</td>
-                                    <td class="py-3 px-4 text-center">4,892</td>
-                                    <td class="py-3 px-4 text-center font-bold">645</td>
-                                    <td class="py-3 px-4 text-right font-bold text-revelti-blue">12.8%</td>
-                                </tr>
-                                <tr class="hover:bg-gray-50 transition">
-                                    <td class="py-3 px-4">
-                                        <span class="font-bold">Paris Sensual Fest</span>
-                                    </td>
-                                    <td class="py-3 px-4 text-center">28.1K</td>
-                                    <td class="py-3 px-4 text-center">3,120</td>
-                                    <td class="py-3 px-4 text-center font-bold">412</td>
-                                    <td class="py-3 px-4 text-right font-bold text-revelti-blue">13.2%</td>
-                                </tr>
-                                <tr class="hover:bg-gray-50 transition">
-                                    <td class="py-3 px-4">
-                                        <span class="font-bold">BCN Congress 2025</span>
-                                    </td>
-                                    <td class="py-3 px-4 text-center">18.9K</td>
-                                    <td class="py-3 px-4 text-center">2,450</td>
-                                    <td class="py-3 px-4 text-center font-bold">287</td>
-                                    <td class="py-3 px-4 text-right font-bold text-revelti-blue">14.5%</td>
-                                </tr>
-                                <tr class="hover:bg-gray-50 transition">
-                                    <td class="py-3 px-4">
-                                        <span class="font-bold">Milan Fusion Dance</span>
-                                    </td>
-                                    <td class="py-3 px-4 text-center">15.2K</td>
-                                    <td class="py-3 px-4 text-center">1,202</td>
-                                    <td class="py-3 px-4 text-center font-bold">198</td>
-                                    <td class="py-3 px-4 text-right font-bold text-revelti-blue">9.2%</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Side Column -->
-            <div class="lg:col-span-1 space-y-8">
-                <!-- Engagement Insights -->
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h2 class="text-xl font-bold text-gray-800 mb-6">AI Insights</h2>
-                    <div class="space-y-4">
-                        <div class="p-4 bg-blue-50 border-l-4 border-revelti-blue rounded-r-lg">
-                            <p class="text-sm font-bold text-revelti-blue mb-1">High Interest Peak</p>
-                            <p class="text-xs text-gray-600">Your "Friday Night Finals" video in Geneva saw a 300% spike
-                                in views during Saturday mornings.</p>
+                    <!-- Header Section -->
+                    <header class="flex flex-col md:flex-row justify-between md:items-center mb-6">
+                        <div>
+                            <h1 class="text-3xl font-extrabold text-revelti-blue">Audience Engagement</h1>
+                            <p class="text-gray-600 mt-1">Deep dive into how audiences interact with your media</p>
                         </div>
-                        <div class="p-4 bg-orange-50 border-l-4 border-revelti-orange rounded-r-lg">
-                            <p class="text-sm font-bold text-revelti-orange mb-1">Conversion Tip</p>
-                            <p class="text-xs text-gray-600">Audiences in Paris choose Premium downloads 25% more often
-                                when bundled with artist tags.</p>
+                        <div class="flex space-x-2 mt-4 md:mt-0">
+                            <a href="creativeDashboard.html"
+                                class="px-4 py-2 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 transition duration-300 flex items-center">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                                </svg>
+                                Back to Dashboard
+                            </a>
                         </div>
-                        <div class="p-4 bg-purple-50 border-l-4 border-revelti-purple rounded-r-lg">
-                            <p class="text-sm font-bold text-revelti-purple mb-1">Global Reach</p>
-                            <p class="text-xs text-gray-600">Your media reached users in 14 countries this month. Top
-                                country: Spain (40%).</p>
+                    </header>
+
+                    <!-- KPI Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                        <div class="bg-white rounded-lg p-6 shadow-md border-t-4 border-revelti-blue">
+                            <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Total Impressions</p>
+                            <p class="text-3xl font-extrabold text-gray-800 mt-2">124.8K</p>
+                            <div class="mt-4 flex items-center text-sm">
+                                <span class="text-green-600 font-bold flex items-center">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                                    </svg>
+                                    8.4%
+                                </span>
+                                <span class="text-gray-500 ml-2">vs last month</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-6 shadow-md border-t-4 border-green-500">
+                            <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Free Downloads</p>
+                            <p class="text-3xl font-extrabold text-gray-800 mt-2">12,654</p>
+                            <div class="mt-4 flex items-center text-sm text-gray-500">
+                                High engagement in BGF 2026
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-6 shadow-md border-t-4 border-revelti-orange">
+                            <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Premium Sales</p>
+                            <p class="text-3xl font-extrabold text-revelti-orange mt-2">1,842</p>
+                            <div class="mt-4 flex items-center text-sm">
+                                <span class="text-green-600 font-bold flex items-center">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                                    </svg>
+                                    15.2%
+                                </span>
+                                <span class="text-gray-500 ml-2">Conversion up</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-6 shadow-md border-t-4 border-revelti-purple">
+                            <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Avg. Engagement Rate
+                            </p>
+                            <p class="text-3xl font-extrabold text-revelti-purple mt-2">14.6%</p>
+                            <div class="mt-4 text-sm text-gray-500">
+                                Top 5% of Creatives
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Most Engaging Media Assets -->
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h2 class="text-xl font-bold text-gray-800 mb-6">Hot Media</h2>
-                    <ul class="space-y-4">
-                        <li class="flex items-center">
-                            <img src="https://placehold.co/60x60/213c63/ffffff?text=V"
-                                class="w-12 h-12 rounded object-cover shadow-sm mr-4">
-                            <div class="flex-grow">
-                                <p class="text-sm font-bold text-gray-800">Finals Showreel</p>
-                                <p class="text-xs text-gray-500">2,456 Interactions</p>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                        <!-- Engagement Trends Chart -->
+                        <div class="lg:col-span-2 space-y-8">
+                            <div class="bg-white rounded-lg shadow-md p-6">
+                                <div class="flex justify-between items-center mb-6">
+                                    <h2 class="text-xl font-bold text-gray-800">Engagement Trends</h2>
+                                    <select
+                                        class="border-gray-300 rounded-md text-sm focus:ring-revelti-blue focus:border-revelti-blue pointer-events-none">
+                                        <option>Last 6 Months</option>
+                                        <option>Year to Date</option>
+                                    </select>
+                                </div>
+                                <div class="relative h-72 w-full">
+                                    <canvas id="engagementChart"></canvas>
+                                </div>
                             </div>
-                            <span class="text-revelti-blue font-bold text-xs">+12%</span>
-                        </li>
-                        <li class="flex items-center">
-                            <img src="https://placehold.co/60x60/f58220/ffffff?text=P"
-                                class="w-12 h-12 rounded object-cover shadow-sm mr-4">
-                            <div class="flex-grow">
-                                <p class="text-sm font-bold text-gray-800">Workshop Candid #4</p>
-                                <p class="text-xs text-gray-500">1,892 Interactions</p>
+
+                            <!-- Engagement per Event Table -->
+                            <div class="bg-white rounded-lg shadow-md p-6">
+                                <h2 class="text-xl font-bold text-gray-800 mb-6">Engagement by Event</h2>
+                                <div class="overflow-x-auto">
+                                    <table class="w-full text-left border-collapse">
+                                        <thead>
+                                            <tr
+                                                class="text-sm font-semibold text-gray-500 bg-gray-50 border-b border-gray-200">
+                                                <th class="py-3 px-4">Event</th>
+                                                <th class="py-3 px-4 text-center">Views</th>
+                                                <th class="py-3 px-4 text-center">Free Downloads</th>
+                                                <th class="py-3 px-4 text-center">Premium Sales</th>
+                                                <th class="py-3 px-4 text-right">Rate</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-sm text-gray-700 divide-y divide-gray-100">
+                                            <tr class="hover:bg-gray-50 transition">
+                                                <td class="py-3 px-4">
+                                                    <span class="font-bold">Bachata Geneva 2026</span>
+                                                </td>
+                                                <td class="py-3 px-4 text-center">42.5K</td>
+                                                <td class="py-3 px-4 text-center">4,892</td>
+                                                <td class="py-3 px-4 text-center font-bold">645</td>
+                                                <td class="py-3 px-4 text-right font-bold text-revelti-blue">12.8%</td>
+                                            </tr>
+                                            <tr class="hover:bg-gray-50 transition">
+                                                <td class="py-3 px-4">
+                                                    <span class="font-bold">Paris Sensual Fest</span>
+                                                </td>
+                                                <td class="py-3 px-4 text-center">28.1K</td>
+                                                <td class="py-3 px-4 text-center">3,120</td>
+                                                <td class="py-3 px-4 text-center font-bold">412</td>
+                                                <td class="py-3 px-4 text-right font-bold text-revelti-blue">13.2%</td>
+                                            </tr>
+                                            <tr class="hover:bg-gray-50 transition">
+                                                <td class="py-3 px-4">
+                                                    <span class="font-bold">BCN Congress 2025</span>
+                                                </td>
+                                                <td class="py-3 px-4 text-center">18.9K</td>
+                                                <td class="py-3 px-4 text-center">2,450</td>
+                                                <td class="py-3 px-4 text-center font-bold">287</td>
+                                                <td class="py-3 px-4 text-right font-bold text-revelti-blue">14.5%</td>
+                                            </tr>
+                                            <tr class="hover:bg-gray-50 transition">
+                                                <td class="py-3 px-4">
+                                                    <span class="font-bold">Milan Fusion Dance</span>
+                                                </td>
+                                                <td class="py-3 px-4 text-center">15.2K</td>
+                                                <td class="py-3 px-4 text-center">1,202</td>
+                                                <td class="py-3 px-4 text-center font-bold">198</td>
+                                                <td class="py-3 px-4 text-right font-bold text-revelti-blue">9.2%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                            <span class="text-revelti-blue font-bold text-xs">+8%</span>
-                        </li>
-                        <li class="flex items-center">
-                            <img src="https://placehold.co/60x60/6b21a8/ffffff?text=P"
-                                class="w-12 h-12 rounded object-cover shadow-sm mr-4">
-                            <div class="flex-grow">
-                                <p class="text-sm font-bold text-gray-800">Artist Portrait Set</p>
-                                <p class="text-xs text-gray-500">1,204 Interactions</p>
+                        </div>
+
+                        <!-- Side Column -->
+                        <div class="lg:col-span-1 space-y-8">
+                            <!-- Engagement Insights -->
+                            <div class="bg-white rounded-lg shadow-md p-6">
+                                <h2 class="text-xl font-bold text-gray-800 mb-6">AI Insights</h2>
+                                <div class="space-y-4">
+                                    <div class="p-4 bg-blue-50 border-l-4 border-revelti-blue rounded-r-lg">
+                                        <p class="text-sm font-bold text-revelti-blue mb-1">High Interest Peak</p>
+                                        <p class="text-xs text-gray-600">Your "Friday Night Finals" video in Geneva saw
+                                            a 300% spike
+                                            in views during Saturday mornings.</p>
+                                    </div>
+                                    <div class="p-4 bg-orange-50 border-l-4 border-revelti-orange rounded-r-lg">
+                                        <p class="text-sm font-bold text-revelti-orange mb-1">Conversion Tip</p>
+                                        <p class="text-xs text-gray-600">Audiences in Paris choose Premium downloads 25%
+                                            more often
+                                            when bundled with artist tags.</p>
+                                    </div>
+                                    <div class="p-4 bg-purple-50 border-l-4 border-revelti-purple rounded-r-lg">
+                                        <p class="text-sm font-bold text-revelti-purple mb-1">Global Reach</p>
+                                        <p class="text-xs text-gray-600">Your media reached users in 14 countries this
+                                            month. Top
+                                            country: Spain (40%).</p>
+                                    </div>
+                                </div>
                             </div>
-                            <span class="text-revelti-blue font-bold text-xs">+5%</span>
-                        </li>
-                    </ul>
+
+                            <!-- Most Engaging Media Assets -->
+                            <div class="bg-white rounded-lg shadow-md p-6">
+                                <h2 class="text-xl font-bold text-gray-800 mb-6">Hot Media</h2>
+                                <ul class="space-y-4">
+                                    <li class="flex items-center">
+                                        <img src="https://placehold.co/60x60/213c63/ffffff?text=V"
+                                            class="w-12 h-12 rounded object-cover shadow-sm mr-4">
+                                        <div class="flex-grow">
+                                            <p class="text-sm font-bold text-gray-800">Finals Showreel</p>
+                                            <p class="text-xs text-gray-500">2,456 Interactions</p>
+                                        </div>
+                                        <span class="text-revelti-blue font-bold text-xs">+12%</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <img src="https://placehold.co/60x60/f58220/ffffff?text=P"
+                                            class="w-12 h-12 rounded object-cover shadow-sm mr-4">
+                                        <div class="flex-grow">
+                                            <p class="text-sm font-bold text-gray-800">Workshop Candid #4</p>
+                                            <p class="text-xs text-gray-500">1,892 Interactions</p>
+                                        </div>
+                                        <span class="text-revelti-blue font-bold text-xs">+8%</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <img src="https://placehold.co/60x60/6b21a8/ffffff?text=P"
+                                            class="w-12 h-12 rounded object-cover shadow-sm mr-4">
+                                        <div class="flex-grow">
+                                            <p class="text-sm font-bold text-gray-800">Artist Portrait Set</p>
+                                            <p class="text-xs text-gray-500">1,204 Interactions</p>
+                                        </div>
+                                        <span class="text-revelti-blue font-bold text-xs">+5%</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </main>
         </div>
     </div>
 
     <!-- Loading Footer -->
     <div id="footer-placeholder"></div>
 
+    <script src="layout-injector.js" defer></script>
     <script src="creative.js" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {

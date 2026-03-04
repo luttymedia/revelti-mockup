@@ -36,82 +36,91 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="bg-gray-100 antialiased text-gray-800 pt-8">
+<body class="dashboard-layout bg-gray-100 antialiased text-gray-800" data-role="creative">
     <!-- Creative-specific Navbar -->
     <div id="creative-navbar-placeholder"></div>
 
-    <!-- Main container -->
-    <div
-        class="max-w-2xl md:max-w-full lg:max-w-full mx-auto bg-white shadow-md flex flex-col h-full full-height-modal">
+    <div class="dashboard-main-area">
+        <aside id="sidebar-placeholder" class="sidebar-container bg-white z-20"></aside>
 
-        <!-- Header Section -->
-        <header class="p-6 flex items-center justify-between">
-            <h1 class="text-xl font-bold revelti-blue">Creative Notifications</h1>
-            <div class="flex items-center space-x-0 flex-shrink-0">
-                <!-- Settings Access Button -->
-                <a href="creativeNotificationSettings.html"
-                    class="p-1.5 rounded-full hover:bg-gray-200 transition-colors"
-                    title="Creative Notification Settings">
-                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
-                        </path>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                    </svg>
-                </a>
-            </div>
-        </header>
+        <div class="main-wrapper">
+            <main class="page-content">
+                <div class="max-w-4xl mx-auto bg-white shadow-md flex flex-col h-full full-height-modal">
 
-        <!-- Tab Navigation -->
-        <nav class="sticky top-12 flex-shrink-0 bg-white z-40 border-b border-gray-200">
-            <div class="flex justify-around">
-                <button data-tab-target="all" class="tab-button btn-mobile-tab">All</button>
-                <button data-tab-target="media" class="tab-button btn-mobile-tab">Media</button>
-                <button data-tab-target="sales" class="tab-button btn-mobile-tab">Earnings</button>
-                <button data-tab-target="system" class="tab-button btn-mobile-tab">System</button>
-            </div>
-        </nav>
+                    <!-- Header Section -->
+                    <header class="p-6 flex items-center justify-between">
+                        <h1 class="text-xl font-bold revelti-blue">Creative Notifications</h1>
+                        <div class="flex items-center space-x-0 flex-shrink-0">
+                            <!-- Settings Access Button -->
+                            <a href="creativeNotificationSettings.html"
+                                class="p-1.5 rounded-full hover:bg-gray-200 transition-colors"
+                                title="Creative Notification Settings">
+                                <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
+                                    </path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </header>
 
-        <!-- Main Content Sections -->
-        <main class="p-4 bg-gray-50 flex-1 overflow-y-auto">
-            <!-- All Tab -->
-            <div id="all" class="tab-content">
-                <div class="text-right mb-4">
-                    <button data-mark-all="all" class="text-sm font-semibold revelti-blue hover:underline">Mark all as
-                        read</button>
+                    <!-- Tab Navigation -->
+                    <nav class="sticky top-12 flex-shrink-0 bg-white z-40 border-b border-gray-200">
+                        <div class="flex justify-around">
+                            <button data-tab-target="all" class="tab-button btn-mobile-tab">All</button>
+                            <button data-tab-target="media" class="tab-button btn-mobile-tab">Media</button>
+                            <button data-tab-target="sales" class="tab-button btn-mobile-tab">Earnings</button>
+                            <button data-tab-target="system" class="tab-button btn-mobile-tab">System</button>
+                        </div>
+                    </nav>
+
+                    <!-- Main Content Sections -->
+                    <main class="p-4 bg-gray-50 flex-1 overflow-y-auto">
+                        <!-- All Tab -->
+                        <div id="all" class="tab-content">
+                            <div class="text-right mb-4">
+                                <button data-mark-all="all"
+                                    class="text-sm font-semibold revelti-blue hover:underline">Mark all as
+                                    read</button>
+                            </div>
+                            <div class="space-y-4"></div>
+                        </div>
+
+                        <!-- Media Tab -->
+                        <div id="media" class="tab-content hidden">
+                            <div class="text-right mb-4">
+                                <button data-mark-all="media"
+                                    class="text-sm font-semibold revelti-blue hover:underline">Mark all as
+                                    read</button>
+                            </div>
+                            <div class="space-y-4"></div>
+                        </div>
+
+                        <!-- Earnings Tab -->
+                        <div id="sales" class="tab-content hidden">
+                            <div class="text-right mb-4">
+                                <button data-mark-all="sales"
+                                    class="text-sm font-semibold revelti-blue hover:underline">Mark all as
+                                    read</button>
+                            </div>
+                            <div class="space-y-4"></div>
+                        </div>
+
+                        <!-- System Tab -->
+                        <div id="system" class="tab-content hidden">
+                            <div class="text-right mb-4">
+                                <button data-mark-all="system"
+                                    class="text-sm font-semibold revelti-blue hover:underline">Mark all
+                                    as read</button>
+                            </div>
+                            <div class="space-y-4"></div>
+                        </div>
+                    </main>
                 </div>
-                <div class="space-y-4"></div>
-            </div>
-
-            <!-- Media Tab -->
-            <div id="media" class="tab-content hidden">
-                <div class="text-right mb-4">
-                    <button data-mark-all="media" class="text-sm font-semibold revelti-blue hover:underline">Mark all as
-                        read</button>
-                </div>
-                <div class="space-y-4"></div>
-            </div>
-
-            <!-- Earnings Tab -->
-            <div id="sales" class="tab-content hidden">
-                <div class="text-right mb-4">
-                    <button data-mark-all="sales" class="text-sm font-semibold revelti-blue hover:underline">Mark all as
-                        read</button>
-                </div>
-                <div class="space-y-4"></div>
-            </div>
-
-            <!-- System Tab -->
-            <div id="system" class="tab-content hidden">
-                <div class="text-right mb-4">
-                    <button data-mark-all="system" class="text-sm font-semibold revelti-blue hover:underline">Mark all
-                        as read</button>
-                </div>
-                <div class="space-y-4"></div>
-            </div>
-        </main>
+        </div>
     </div>
 
     <script>
@@ -182,6 +191,7 @@
             }
         });
     </script>
+    <script src="layout-injector.js" defer></script>
     <script src="creative.js" defer></script>
 </body>
 

@@ -55,177 +55,205 @@
 
 </head>
 
-<body class="bg-gray-100 antialiased text-gray-800 pt-8">
-    <!-- Organizer-specific Navbar -->
+<body class="dashboard-layout bg-gray-100 antialiased text-gray-800" data-role="organizer">
+    <!-- Navbar Placeholder -->
     <div id="organizer-navbar-placeholder"></div>
 
-    <!-- Main container -->
-    <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="dashboard-main-area">
+        <aside id="sidebar-placeholder" class="sidebar-container bg-white z-20"></aside>
 
-        <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-            <div>
-                <div class="flex items-center">
-                    <h1 class="text-3xl font-extrabold revelti-blue">Bachata Geneva Festival 2026 - The Festival of
-                        Nations</h1>
-                    <span
-                        class="ml-4 text-sm font-bold bg-green-100 text-green-800 px-3 py-1 rounded-full whitespace-nowrap">On
-                        Sale</span>
-                </div>
-                <p class="text-gray-600 mt-1">Insights from ticket sales, promoters, and discounts</p>
-            </div>
-            <div class="flex space-x-2 mt-4 md:mt-0">
-                <a href="eventDetailOrganizerView.html"
-                    class="px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition duration-300">View
-                    Public Page</a>
-                <a href="eventLiveEdit.html"
-                    class="px-4 py-2 text-sm font-semibold bg-revelti-blue text-white rounded-md hover:bg-blue-800 transition duration-300">Live
-                    Edit Page</a>
-            </div>
-        </header>
+        <div class="main-wrapper">
+            <main class="page-content">
 
-        <div class="bg-white rounded-lg shadow-md">
-            <!-- Tab Navigation -->
-            <nav class="border-b border-gray-200">
-                <div class="flex justify-around -mb-px">
-                    <button class="tab-button active flex-1 py-4 px-1 text-center" data-tab="sales-overview">Sales
-                        Overview</button>
-                    <button class="tab-button flex-1 py-4 px-1 text-center" data-tab="promoter-performance">Promoter
-                        Performance</button>
-                    <button class="tab-button flex-1 py-4 px-1 text-center" data-tab="pricing-discounts">Pricing &
-                        Discounts</button>
-                    <button class="tab-button flex-1 py-4 px-1 text-center" data-tab="comparative-kpis">Comparative
-                        KPIs</button>
-                    <button class="tab-button flex-1 py-4 px-1 text-center" data-tab="detailed-breakdown">Detailed
-                        Breakdown</button>
-                </div>
-            </nav>
+                <!-- Main container -->
+                <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-            <main class="p-6 md:p-8">
-                <!-- Sales Overview Tab -->
-                <div id="sales-overview" class="tab-content">
-                    <div id="sales-kpis" class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8"></div>
-                    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
-                        <div class="lg:col-span-3 bg-gray-50 p-4 rounded-lg">
-                            <h4 class="text-md font-bold text-gray-700 text-center mb-2">Ticket Sales Over Time</h4>
-                            <canvas id="salesTrendChart"></canvas>
-                        </div>
-                        <div class="lg:col-span-2 bg-gray-50 p-4 rounded-lg">
-                            <h4 class="text-md font-bold text-gray-700 text-center mb-2">Tickets by Type</h4>
-                            <canvas id="ticketsByTypeChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Promoter Performance Tab -->
-                <div id="promoter-performance" class="tab-content hidden">
-                    <div id="promoter-kpis" class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8"></div>
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                        <div class="bg-gray-50 p-4 rounded-lg h-96">
-                            <div class="flex items-center justify-center mb-2">
-                                <h4 class="text-md font-bold text-gray-700">Promoter Effectiveness</h4>
-                                <button class="info-btn ml-2" data-modal="promoterEffectivenessInfoModal">
-                                    <svg class="w-5 h-5 text-gray-400 hover:text-revelti-blue" fill="currentColor"
-                                        viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
-                                            clip-rule="evenodd"></path>
-                                    </svg>
-                                </button>
+                    <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+                        <div>
+                            <div class="flex items-center">
+                                <h1 class="text-3xl font-extrabold revelti-blue">Bachata Geneva Festival 2026 - The
+                                    Festival of
+                                    Nations</h1>
+                                <span
+                                    class="ml-4 text-sm font-bold bg-green-100 text-green-800 px-3 py-1 rounded-full whitespace-nowrap">On
+                                    Sale</span>
                             </div>
-                            <canvas id="promoterEffectivenessChart"></canvas>
+                            <p class="text-gray-600 mt-1">Insights from ticket sales, promoters, and discounts</p>
                         </div>
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <h4 class="text-md font-bold text-gray-700 text-center mb-2">Top Promoters by Tickets</h4>
-                            <canvas id="topPromotersChart"></canvas>
+                        <div class="flex space-x-2 mt-4 md:mt-0">
+                            <a href="eventDetailOrganizerView.html"
+                                class="px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition duration-300">View
+                                Public Page</a>
+                            <a href="eventLiveEdit.html"
+                                class="px-4 py-2 text-sm font-semibold bg-revelti-blue text-white rounded-md hover:bg-blue-800 transition duration-300">Live
+                                Edit Page</a>
                         </div>
-                    </div>
-                </div>
+                    </header>
 
-                <!-- Pricing & Discounts Tab -->
-                <div id="pricing-discounts" class="tab-content hidden">
-                    <div id="pricing-kpis" class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8"></div>
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <h4 class="text-md font-bold text-gray-700 text-center mb-2">Sales by Price Tier</h4>
-                            <canvas id="salesByPriceTierChart"></canvas>
-                        </div>
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <h4 class="text-md font-bold text-gray-700 text-center mb-2">Discount Code Usage</h4>
-                            <canvas id="discountCodeUsageChart"></canvas>
-                        </div>
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <h4 class="text-md font-bold text-gray-700 text-center mb-2">Revenue With vs. Without
-                                Discounts</h4>
-                            <canvas id="revenueWithVsWithoutDiscountsChart"></canvas>
-                        </div>
-                    </div>
-                </div>
+                    <div class="bg-white rounded-lg shadow-md">
+                        <!-- Tab Navigation -->
+                        <nav class="border-b border-gray-200">
+                            <div class="flex justify-around -mb-px">
+                                <button class="tab-button active flex-1 py-4 px-1 text-center"
+                                    data-tab="sales-overview">Sales
+                                    Overview</button>
+                                <button class="tab-button flex-1 py-4 px-1 text-center"
+                                    data-tab="promoter-performance">Promoter
+                                    Performance</button>
+                                <button class="tab-button flex-1 py-4 px-1 text-center"
+                                    data-tab="pricing-discounts">Pricing &
+                                    Discounts</button>
+                                <button class="tab-button flex-1 py-4 px-1 text-center"
+                                    data-tab="comparative-kpis">Comparative
+                                    KPIs</button>
+                                <button class="tab-button flex-1 py-4 px-1 text-center"
+                                    data-tab="detailed-breakdown">Detailed
+                                    Breakdown</button>
+                            </div>
+                        </nav>
 
-                <!-- Comparative KPIs Tab -->
-                <div id="comparative-kpis" class="tab-content hidden">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <h4 class="text-md font-bold text-gray-700 text-center mb-2">Tickets Sold per Event</h4>
-                            <canvas id="ticketsSoldComparisonChart"></canvas>
-                        </div>
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <h4 class="text-md font-bold text-gray-700 text-center mb-2">Revenue per Event</h4>
-                            <canvas id="revenueComparisonChart"></canvas>
-                        </div>
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <h4 class="text-md font-bold text-gray-700 text-center mb-2">Revenue Snapshot</h4>
-                            <canvas id="revenueSnapshotChart"></canvas>
-                        </div>
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <h4 class="text-md font-bold text-gray-700 text-center mb-2">Ticket Volume Snapshot</h4>
-                            <canvas id="ticketVolumeSnapshotChart"></canvas>
-                        </div>
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <h4 class="text-md font-bold text-gray-700 text-center mb-2">Average Ticket Price Comparison
-                            </h4>
-                            <canvas id="avgTicketPriceChart"></canvas>
-                        </div>
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <h4 class="text-md font-bold text-gray-700 text-center mb-2">Average Transaction Value (ATV)
-                            </h4>
-                            <canvas id="avgTransactionValueChart"></canvas>
-                        </div>
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <h4 class="text-md font-bold text-gray-700 text-center mb-2">Promoter Contribution Analysis
-                            </h4>
-                            <canvas id="promoterContributionChart"></canvas>
-                        </div>
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <h4 class="text-md font-bold text-gray-700 text-center mb-2">Discount Strategy Benchmark
-                            </h4>
-                            <canvas id="discountStrategyChart"></canvas>
-                        </div>
-                    </div>
-                </div>
+                        <main class="p-6 md:p-8">
+                            <!-- Sales Overview Tab -->
+                            <div id="sales-overview" class="tab-content">
+                                <div id="sales-kpis" class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8"></div>
+                                <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+                                    <div class="lg:col-span-3 bg-gray-50 p-4 rounded-lg">
+                                        <h4 class="text-md font-bold text-gray-700 text-center mb-2">Ticket Sales Over
+                                            Time</h4>
+                                        <canvas id="salesTrendChart"></canvas>
+                                    </div>
+                                    <div class="lg:col-span-2 bg-gray-50 p-4 rounded-lg">
+                                        <h4 class="text-md font-bold text-gray-700 text-center mb-2">Tickets by Type
+                                        </h4>
+                                        <canvas id="ticketsByTypeChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
 
-                <!-- Detailed Breakdown Tab -->
-                <div id="detailed-breakdown" class="tab-content hidden">
-                    <table id="masterTable" class="display" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>Event</th>
-                                <th>Ticket Type</th>
-                                <th>Ticket Price</th>
-                                <th>Qty Sold</th>
-                                <th>Disc. %</th>
-                                <th>Disc. €</th>
-                                <th>Disc. Code</th>
-                                <th>Promoter</th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td colspan="9" class="text-center p-4">Loading data...</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                            <!-- Promoter Performance Tab -->
+                            <div id="promoter-performance" class="tab-content hidden">
+                                <div id="promoter-kpis" class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8"></div>
+                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                    <div class="bg-gray-50 p-4 rounded-lg h-96">
+                                        <div class="flex items-center justify-center mb-2">
+                                            <h4 class="text-md font-bold text-gray-700">Promoter Effectiveness</h4>
+                                            <button class="info-btn ml-2" data-modal="promoterEffectivenessInfoModal">
+                                                <svg class="w-5 h-5 text-gray-400 hover:text-revelti-blue"
+                                                    fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd"
+                                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                                                        clip-rule="evenodd"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <canvas id="promoterEffectivenessChart"></canvas>
+                                    </div>
+                                    <div class="bg-gray-50 p-4 rounded-lg">
+                                        <h4 class="text-md font-bold text-gray-700 text-center mb-2">Top Promoters by
+                                            Tickets</h4>
+                                        <canvas id="topPromotersChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pricing & Discounts Tab -->
+                            <div id="pricing-discounts" class="tab-content hidden">
+                                <div id="pricing-kpis" class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8"></div>
+                                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                                    <div class="bg-gray-50 p-4 rounded-lg">
+                                        <h4 class="text-md font-bold text-gray-700 text-center mb-2">Sales by Price Tier
+                                        </h4>
+                                        <canvas id="salesByPriceTierChart"></canvas>
+                                    </div>
+                                    <div class="bg-gray-50 p-4 rounded-lg">
+                                        <h4 class="text-md font-bold text-gray-700 text-center mb-2">Discount Code Usage
+                                        </h4>
+                                        <canvas id="discountCodeUsageChart"></canvas>
+                                    </div>
+                                    <div class="bg-gray-50 p-4 rounded-lg">
+                                        <h4 class="text-md font-bold text-gray-700 text-center mb-2">Revenue With vs.
+                                            Without
+                                            Discounts</h4>
+                                        <canvas id="revenueWithVsWithoutDiscountsChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Comparative KPIs Tab -->
+                            <div id="comparative-kpis" class="tab-content hidden">
+                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                    <div class="bg-gray-50 p-4 rounded-lg">
+                                        <h4 class="text-md font-bold text-gray-700 text-center mb-2">Tickets Sold per
+                                            Event</h4>
+                                        <canvas id="ticketsSoldComparisonChart"></canvas>
+                                    </div>
+                                    <div class="bg-gray-50 p-4 rounded-lg">
+                                        <h4 class="text-md font-bold text-gray-700 text-center mb-2">Revenue per Event
+                                        </h4>
+                                        <canvas id="revenueComparisonChart"></canvas>
+                                    </div>
+                                    <div class="bg-gray-50 p-4 rounded-lg">
+                                        <h4 class="text-md font-bold text-gray-700 text-center mb-2">Revenue Snapshot
+                                        </h4>
+                                        <canvas id="revenueSnapshotChart"></canvas>
+                                    </div>
+                                    <div class="bg-gray-50 p-4 rounded-lg">
+                                        <h4 class="text-md font-bold text-gray-700 text-center mb-2">Ticket Volume
+                                            Snapshot</h4>
+                                        <canvas id="ticketVolumeSnapshotChart"></canvas>
+                                    </div>
+                                    <div class="bg-gray-50 p-4 rounded-lg">
+                                        <h4 class="text-md font-bold text-gray-700 text-center mb-2">Average Ticket
+                                            Price Comparison
+                                        </h4>
+                                        <canvas id="avgTicketPriceChart"></canvas>
+                                    </div>
+                                    <div class="bg-gray-50 p-4 rounded-lg">
+                                        <h4 class="text-md font-bold text-gray-700 text-center mb-2">Average Transaction
+                                            Value (ATV)
+                                        </h4>
+                                        <canvas id="avgTransactionValueChart"></canvas>
+                                    </div>
+                                    <div class="bg-gray-50 p-4 rounded-lg">
+                                        <h4 class="text-md font-bold text-gray-700 text-center mb-2">Promoter
+                                            Contribution Analysis
+                                        </h4>
+                                        <canvas id="promoterContributionChart"></canvas>
+                                    </div>
+                                    <div class="bg-gray-50 p-4 rounded-lg">
+                                        <h4 class="text-md font-bold text-gray-700 text-center mb-2">Discount Strategy
+                                            Benchmark
+                                        </h4>
+                                        <canvas id="discountStrategyChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Detailed Breakdown Tab -->
+                            <div id="detailed-breakdown" class="tab-content hidden">
+                                <table id="masterTable" class="display" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Event</th>
+                                            <th>Ticket Type</th>
+                                            <th>Ticket Price</th>
+                                            <th>Qty Sold</th>
+                                            <th>Disc. %</th>
+                                            <th>Disc. €</th>
+                                            <th>Disc. Code</th>
+                                            <th>Promoter</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="9" class="text-center p-4">Loading data...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </main>
+                    </div>
             </main>
         </div>
     </div>
@@ -239,7 +267,8 @@
                 <br><br><b>How far right a bubble is:</b> Shows how many tickets they sold. <br><b>How high up a bubble
                     is:</b> Shows the average price of the tickets they sold. <br><b>The size of the bubble:</b> Shows
                 the total revenue they generated. <br><br>Ideal promoters are high up, far to the right, and have a
-                large bubble.</p>
+                large bubble.
+            </p>
         </div>
     </div>
 
@@ -793,7 +822,9 @@
             loadAndProcessData();
         });
     </script>
+    <script src="layout-injector.js" defer></script>
     <script src="organizer.js" defer></script>
+    <div id="footer-placeholder"></div>
 </body>
 
 </html>

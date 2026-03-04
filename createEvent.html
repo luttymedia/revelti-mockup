@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Revelti - Create New Event</title>
-    
+
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -24,7 +25,7 @@
         }
     </script>
 
-    
+
     <!-- Google Fonts: Nunito -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,168 +34,263 @@
     <!-- Your Custom Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-100 antialiased text-gray-800 pt-8">
-    <!-- Organizer-specific Navbar -->
+
+<body class="dashboard-layout bg-gray-100 antialiased text-gray-800" data-role="organizer">
+    <!-- Navbar Placeholder -->
     <div id="organizer-navbar-placeholder"></div>
 
-    <!-- Main container -->
-    <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="dashboard-main-area">
+        <aside id="sidebar-placeholder" class="sidebar-container bg-white z-20"></aside>
 
-                <header class="flex flex-col md:flex-row justify-between items-center mb-8">
-            <div>
-                <h1 class="text-3xl font-extrabold revelti-blue">Create a New Event</h1>
-                <p class="text-gray-500">Follow the steps to get your event ready for the public.</p>
-            </div>
-            <a href="organizerDashboard.html" class="px-4 py-2 bg-revelti-blue text-white rounded-lg hover:bg-blue-800 transition duration-300 flex items-center justify-center">
-                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-                Organizer Dashboard
-            </a>
-        </header>
+        <div class="main-wrapper">
+            <main class="page-content">
+                <!-- Main container -->
+                <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-
-        <div class="bg-white rounded-lg shadow-md overflow-hidden">
-            <!-- Progress Bar -->
-            <div class="p-6 border-b border-gray-200">
-                <div class="flex justify-between items-center">
-                    <div id="step-1-indicator" onclick="jumpToStep(1)" class="step-indicator active text-center cursor-pointer">
-                        <div class="w-8 h-8 mx-auto rounded-full bg-revelti-blue text-white flex items-center justify-center font-bold">1</div>
-                        <p class="text-xs mt-1 font-semibold revelti-blue">Core Details</p>
-                    </div>
-                    <div class="flex-1 h-px bg-gray-300 mx-4"></div>
-                    <div id="step-2-indicator" onclick="jumpToStep(2)" class="step-indicator text-center">
-                        <div class="w-8 h-8 mx-auto rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-bold">2</div>
-                        <p class="text-xs mt-1 font-semibold text-gray-500">Description</p>
-                    </div>
-                    <div class="flex-1 h-px bg-gray-300 mx-4"></div>
-                    <div id="step-3-indicator" onclick="jumpToStep(3)" class="step-indicator text-center">
-                        <div class="w-8 h-8 mx-auto rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-bold">3</div>
-                        <p class="text-xs mt-1 font-semibold text-gray-500">Ticketing</p>
-                    </div>
-                    <div class="flex-1 h-px bg-gray-300 mx-4"></div>
-                    <div id="step-4-indicator" onclick="jumpToStep(4)" class="step-indicator text-center">
-                        <div class="w-8 h-8 mx-auto rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-bold">4</div>
-                        <p class="text-xs mt-1 font-semibold text-gray-500">Collaborators</p>
-                    </div>
-                </div>
-            </div>
-            
-            <main class="p-6 md:p-8">
-                <!-- Step Content Wrapper for consistent width -->
-                <div class="max-w-3xl mx-auto">
-                    <!-- Step 1: Core Details -->
-                    <div id="step-1" class="step-content space-y-4">
-                        <div><label class="font-semibold text-gray-700">Event Title*</label><input type="text" placeholder="e.g., Barcelona Summer Festival" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div><label class="font-semibold text-gray-700">Event Type*</label><select class="w-full p-2 border border-gray-300 rounded-md mt-1"><option>Congress</option><option>Festival</option><option>Social</option><option>Workshop</option></select></div>
-                            <div><label class="font-semibold text-gray-700">Primary Language*</label><select class="w-full p-2 border border-gray-300 rounded-md mt-1"><option>English</option><option>Spanish</option></select></div>
+                    <header class="flex flex-col md:flex-row justify-between items-center mb-8">
+                        <div>
+                            <h1 class="text-3xl font-extrabold revelti-blue">Create a New Event</h1>
+                            <p class="text-gray-500">Follow the steps to get your event ready for the public.</p>
                         </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div><label class="font-semibold text-gray-700">Start Date*</label><input type="date" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
-                            <div><label class="font-semibold text-gray-700">End Date*</label><input type="date" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
-                        </div>
-                        <div><label class="font-semibold text-gray-700">Venue Name*</label><input type="text" placeholder="e.g., Hotel Evenia Olympic" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
-                        <div><label class="font-semibold text-gray-700">Location*</label><input type="text" placeholder="e.g., Barcelona, Spain" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
-                    </div>
+                        <a href="organizerDashboard.html"
+                            class="px-4 py-2 bg-revelti-blue text-white rounded-lg hover:bg-blue-800 transition duration-300 flex items-center justify-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                            </svg>
+                            Organizer Dashboard
+                        </a>
+                    </header>
 
-                    <!-- Step 2: Description & Media -->
-                    <div id="step-2" class="step-content hidden space-y-6">
-                        <div><label class="font-semibold text-gray-700">Promotional Media</label><p class="text-sm text-gray-500">Upload assets that will be shown on the public event page.</p><div class="mt-2 p-6 border-2 border-dashed border-gray-300 rounded-lg text-center"><p>Drag & drop files here or <button class="font-semibold revelti-blue">browse files</button></p></div></div>
-                        <div><label class="font-semibold text-gray-700">Event Description</label><textarea class="w-full p-2 border border-gray-300 rounded-md mt-1" rows="6" placeholder="Tell attendees all about your event..."></textarea></div>
-                        <div><label class="font-semibold text-gray-700">Artists & Instructors</label><input type="text" placeholder="e.g., Korke & Judith, Alonso & Noelia (comma separated)" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
-                        <div><label class="font-semibold text-gray-700">Tags</label><input type="text" placeholder="e.g., Bachata, Salsa, Zouk (comma separated)" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
-                    </div>
 
-                    <!-- Step 3: Ticketing (NEW) -->
-                    <div id="step-3" class="step-content hidden space-y-6">
-                        <!-- Container for created ticket summaries -->
-                        <div id="ticket-summary-container" class="space-y-2"></div>
-                        
-                        <!-- Ticket Creation Form -->
-                        <div id="ticket-creation-form" class="p-4 border rounded-lg bg-gray-50 space-y-4">
-                            <h3 id="ticket-form-title" class="font-bold text-lg revelti-blue">Add New Ticket Type</h3>
-                            <input type="hidden" id="editing-ticket-id">
-                            <div><label class="font-semibold text-gray-700">Ticket Name</label><input id="ticket-name" type="text" placeholder="e.g., Weekend Pass" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div><label class="font-semibold text-gray-700">Quantity Available</label><input id="ticket-qty" type="number" placeholder="e.g., 200" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
-                                <div>
-                                    <label class="font-semibold text-gray-700">Status</label>
-                                    <select id="ticket-status" class="w-full p-2 border border-gray-300 rounded-md mt-1" onchange="toggleScheduledDate(this.value)">
-                                        <option value="On Sale">On Sale</option>
-                                        <option value="Draft">Draft</option>
-                                        <option value="Scheduled">Scheduled</option>
-                                    </select>
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <!-- Progress Bar -->
+                        <div class="p-6 border-b border-gray-200">
+                            <div class="flex justify-between items-center">
+                                <div id="step-1-indicator" onclick="jumpToStep(1)"
+                                    class="step-indicator active text-center cursor-pointer">
+                                    <div
+                                        class="w-8 h-8 mx-auto rounded-full bg-revelti-blue text-white flex items-center justify-center font-bold">
+                                        1</div>
+                                    <p class="text-xs mt-1 font-semibold revelti-blue">Core Details</p>
+                                </div>
+                                <div class="flex-1 h-px bg-gray-300 mx-4"></div>
+                                <div id="step-2-indicator" onclick="jumpToStep(2)" class="step-indicator text-center">
+                                    <div
+                                        class="w-8 h-8 mx-auto rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-bold">
+                                        2</div>
+                                    <p class="text-xs mt-1 font-semibold text-gray-500">Description</p>
+                                </div>
+                                <div class="flex-1 h-px bg-gray-300 mx-4"></div>
+                                <div id="step-3-indicator" onclick="jumpToStep(3)" class="step-indicator text-center">
+                                    <div
+                                        class="w-8 h-8 mx-auto rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-bold">
+                                        3</div>
+                                    <p class="text-xs mt-1 font-semibold text-gray-500">Ticketing</p>
+                                </div>
+                                <div class="flex-1 h-px bg-gray-300 mx-4"></div>
+                                <div id="step-4-indicator" onclick="jumpToStep(4)" class="step-indicator text-center">
+                                    <div
+                                        class="w-8 h-8 mx-auto rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-bold">
+                                        4</div>
+                                    <p class="text-xs mt-1 font-semibold text-gray-500">Collaborators</p>
                                 </div>
                             </div>
-                            <div id="scheduled-date-container" class="hidden">
-                                <label class="font-semibold text-gray-700">Sale Start Date</label>
-                                <input id="scheduled-date" type="date" class="w-full p-2 border border-gray-300 rounded-md mt-1">
-                            </div>
+                        </div>
 
-                            <div class="pt-4 border-t">
-                                <label class="font-semibold text-gray-700">Pricing Strategy</label>
-                                <div class="flex space-x-4 mt-2">
-                                    <label class="flex items-center"><input type="radio" name="pricing-strategy" value="simple" class="mr-2" onchange="togglePricingStrategy(this.value)" checked> Simple Price</label>
-                                    <label class="flex items-center"><input type="radio" name="pricing-strategy" value="dynamic" class="mr-2" onchange="togglePricingStrategy(this.value)"> Dynamic Pricing</label>
+                        <main class="p-6 md:p-8">
+                            <!-- Step Content Wrapper for consistent width -->
+                            <div class="max-w-3xl mx-auto">
+                                <!-- Step 1: Core Details -->
+                                <div id="step-1" class="step-content space-y-4">
+                                    <div><label class="font-semibold text-gray-700">Event Title*</label><input
+                                            type="text" placeholder="e.g., Barcelona Summer Festival"
+                                            class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div><label class="font-semibold text-gray-700">Event Type*</label><select
+                                                class="w-full p-2 border border-gray-300 rounded-md mt-1">
+                                                <option>Congress</option>
+                                                <option>Festival</option>
+                                                <option>Social</option>
+                                                <option>Workshop</option>
+                                            </select></div>
+                                        <div><label class="font-semibold text-gray-700">Primary Language*</label><select
+                                                class="w-full p-2 border border-gray-300 rounded-md mt-1">
+                                                <option>English</option>
+                                                <option>Spanish</option>
+                                            </select></div>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div><label class="font-semibold text-gray-700">Start Date*</label><input
+                                                type="date" class="w-full p-2 border border-gray-300 rounded-md mt-1">
+                                        </div>
+                                        <div><label class="font-semibold text-gray-700">End Date*</label><input
+                                                type="date" class="w-full p-2 border border-gray-300 rounded-md mt-1">
+                                        </div>
+                                    </div>
+                                    <div><label class="font-semibold text-gray-700">Venue Name*</label><input
+                                            type="text" placeholder="e.g., Hotel Evenia Olympic"
+                                            class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                                    <div><label class="font-semibold text-gray-700">Location*</label><input type="text"
+                                            placeholder="e.g., Barcelona, Spain"
+                                            class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
                                 </div>
-                            </div>
 
-                            <div id="simple-price-view">
-                                <div><label class="font-semibold text-gray-700">Price (€)</label><input id="simple-price" type="number" placeholder="e.g., 190.00" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
-                            </div>
+                                <!-- Step 2: Description & Media -->
+                                <div id="step-2" class="step-content hidden space-y-6">
+                                    <div><label class="font-semibold text-gray-700">Promotional Media</label>
+                                        <p class="text-sm text-gray-500">Upload assets that will be shown on the public
+                                            event page.</p>
+                                        <div
+                                            class="mt-2 p-6 border-2 border-dashed border-gray-300 rounded-lg text-center">
+                                            <p>Drag & drop files here or <button
+                                                    class="font-semibold revelti-blue">browse files</button></p>
+                                        </div>
+                                    </div>
+                                    <div><label class="font-semibold text-gray-700">Event Description</label><textarea
+                                            class="w-full p-2 border border-gray-300 rounded-md mt-1" rows="6"
+                                            placeholder="Tell attendees all about your event..."></textarea></div>
+                                    <div><label class="font-semibold text-gray-700">Artists & Instructors</label><input
+                                            type="text"
+                                            placeholder="e.g., Korke & Judith, Alonso & Noelia (comma separated)"
+                                            class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                                    <div><label class="font-semibold text-gray-700">Tags</label><input type="text"
+                                            placeholder="e.g., Bachata, Salsa, Zouk (comma separated)"
+                                            class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                                </div>
 
-                            <div id="dynamic-price-view" class="hidden space-y-4">
-                                <div><label class="font-semibold text-gray-700">Base Price (€)</label><input id="base-price" type="number" placeholder="The first price tier" class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
-                                <div id="pricing-rules-container" class="space-y-2"></div>
-                                <button type="button" onclick="addPricingRule()" class="text-sm font-semibold revelti-blue hover:underline">+ Add Pricing Rule</button>
-                                
-                                <div class="pt-4 border-t">
-                                    <label class="flex items-center text-sm">
-                                        <input type="checkbox" id="final-price-override-check" class="mr-2" onchange="toggleFinalPriceOverride()">
-                                        Manually set a different "final price" for display (strikethrough price)
-                                    </label>
-                                    <div id="final-price-override-container" class="hidden mt-2">
-                                        <label class="font-semibold text-gray-700">Display Final Price (€)</label>
-                                        <input id="final-price-override-value" type="number" placeholder="e.g., 250.00" class="w-full p-2 border border-gray-300 rounded-md mt-1">
+                                <!-- Step 3: Ticketing (NEW) -->
+                                <div id="step-3" class="step-content hidden space-y-6">
+                                    <!-- Container for created ticket summaries -->
+                                    <div id="ticket-summary-container" class="space-y-2"></div>
+
+                                    <!-- Ticket Creation Form -->
+                                    <div id="ticket-creation-form" class="p-4 border rounded-lg bg-gray-50 space-y-4">
+                                        <h3 id="ticket-form-title" class="font-bold text-lg revelti-blue">Add New Ticket
+                                            Type</h3>
+                                        <input type="hidden" id="editing-ticket-id">
+                                        <div><label class="font-semibold text-gray-700">Ticket Name</label><input
+                                                id="ticket-name" type="text" placeholder="e.g., Weekend Pass"
+                                                class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div><label class="font-semibold text-gray-700">Quantity
+                                                    Available</label><input id="ticket-qty" type="number"
+                                                    placeholder="e.g., 200"
+                                                    class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                                            <div>
+                                                <label class="font-semibold text-gray-700">Status</label>
+                                                <select id="ticket-status"
+                                                    class="w-full p-2 border border-gray-300 rounded-md mt-1"
+                                                    onchange="toggleScheduledDate(this.value)">
+                                                    <option value="On Sale">On Sale</option>
+                                                    <option value="Draft">Draft</option>
+                                                    <option value="Scheduled">Scheduled</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div id="scheduled-date-container" class="hidden">
+                                            <label class="font-semibold text-gray-700">Sale Start Date</label>
+                                            <input id="scheduled-date" type="date"
+                                                class="w-full p-2 border border-gray-300 rounded-md mt-1">
+                                        </div>
+
+                                        <div class="pt-4 border-t">
+                                            <label class="font-semibold text-gray-700">Pricing Strategy</label>
+                                            <div class="flex space-x-4 mt-2">
+                                                <label class="flex items-center"><input type="radio"
+                                                        name="pricing-strategy" value="simple" class="mr-2"
+                                                        onchange="togglePricingStrategy(this.value)" checked> Simple
+                                                    Price</label>
+                                                <label class="flex items-center"><input type="radio"
+                                                        name="pricing-strategy" value="dynamic" class="mr-2"
+                                                        onchange="togglePricingStrategy(this.value)"> Dynamic
+                                                    Pricing</label>
+                                            </div>
+                                        </div>
+
+                                        <div id="simple-price-view">
+                                            <div><label class="font-semibold text-gray-700">Price (€)</label><input
+                                                    id="simple-price" type="number" placeholder="e.g., 190.00"
+                                                    class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                                        </div>
+
+                                        <div id="dynamic-price-view" class="hidden space-y-4">
+                                            <div><label class="font-semibold text-gray-700">Base Price (€)</label><input
+                                                    id="base-price" type="number" placeholder="The first price tier"
+                                                    class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                                            <div id="pricing-rules-container" class="space-y-2"></div>
+                                            <button type="button" onclick="addPricingRule()"
+                                                class="text-sm font-semibold revelti-blue hover:underline">+ Add Pricing
+                                                Rule</button>
+
+                                            <div class="pt-4 border-t">
+                                                <label class="flex items-center text-sm">
+                                                    <input type="checkbox" id="final-price-override-check" class="mr-2"
+                                                        onchange="toggleFinalPriceOverride()">
+                                                    Manually set a different "final price" for display (strikethrough
+                                                    price)
+                                                </label>
+                                                <div id="final-price-override-container" class="hidden mt-2">
+                                                    <label class="font-semibold text-gray-700">Display Final Price
+                                                        (€)</label>
+                                                    <input id="final-price-override-value" type="number"
+                                                        placeholder="e.g., 250.00"
+                                                        class="w-full p-2 border border-gray-300 rounded-md mt-1">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex justify-end space-x-2 pt-4">
+                                            <button id="cancel-edit-btn" onclick="resetTicketForm()"
+                                                class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg hidden">Cancel
+                                                Edit</button>
+                                            <button onclick="saveTicket()"
+                                                class="px-4 py-2 font-bold bg-revelti-blue text-white rounded-lg">Save
+                                                Ticket</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!-- Step 4: Collaborators -->
+                                <div id="step-4" class="step-content hidden space-y-4">
+                                    <h3 class="font-bold text-lg revelti-blue">Invite Collaborators</h3>
+                                    <p class="text-sm text-gray-600">Invite Media Creators and Promoters to your event.
+                                    </p>
+                                    <div class="relative">
+                                        <label class="font-semibold text-gray-700">Search by Username or Email</label>
+                                        <input type="text" id="collaborator-search" onkeyup="handleSearch(event)"
+                                            placeholder="e.g., AMedia or John Doe"
+                                            class="w-full p-2 border border-gray-300 rounded-md mt-1">
+                                        <!-- Search Suggestions -->
+                                        <div id="search-suggestions"
+                                            class="absolute w-full bg-white border border-gray-300 rounded-md mt-1 shadow-md z-10 hidden">
+                                            <!-- Suggestions will be injected here by JS -->
+                                        </div>
+                                    </div>
+                                    <!-- Invited Collaborators List -->
+                                    <div id="invited-list-container" class="hidden">
+                                        <h4 class="font-semibold text-gray-700 mt-4">Invited Collaborators</h4>
+                                        <div id="invited-list" class="mt-2 flex flex-wrap gap-2">
+                                            <!-- Invited collaborators will be added here by JS -->
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                             <div class="flex justify-end space-x-2 pt-4">
-                                <button id="cancel-edit-btn" onclick="resetTicketForm()" class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg hidden">Cancel Edit</button>
-                                <button onclick="saveTicket()" class="px-4 py-2 font-bold bg-revelti-blue text-white rounded-lg">Save Ticket</button>
-                            </div>
-                        </div>
-                    </div>
+                        </main>
 
-
-                    <!-- Step 4: Collaborators -->
-                    <div id="step-4" class="step-content hidden space-y-4">
-                        <h3 class="font-bold text-lg revelti-blue">Invite Collaborators</h3>
-                        <p class="text-sm text-gray-600">Invite Media Creators and Promoters to your event.</p>
-                        <div class="relative">
-                            <label class="font-semibold text-gray-700">Search by Username or Email</label>
-                            <input type="text" id="collaborator-search" onkeyup="handleSearch(event)" placeholder="e.g., AMedia or John Doe" class="w-full p-2 border border-gray-300 rounded-md mt-1">
-                            <!-- Search Suggestions -->
-                            <div id="search-suggestions" class="absolute w-full bg-white border border-gray-300 rounded-md mt-1 shadow-md z-10 hidden">
-                                <!-- Suggestions will be injected here by JS -->
-                            </div>
-                        </div>
-                        <!-- Invited Collaborators List -->
-                        <div id="invited-list-container" class="hidden">
-                            <h4 class="font-semibold text-gray-700 mt-4">Invited Collaborators</h4>
-                            <div id="invited-list" class="mt-2 flex flex-wrap gap-2">
-                                <!-- Invited collaborators will be added here by JS -->
-                            </div>
-                        </div>
+                        <!-- Navigation Buttons -->
+                        <footer class="p-6 border-t border-gray-200 flex justify-between items-center">
+                            <button id="prev-btn" onclick="navigateStep(-1)"
+                                class="px-6 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg hidden">Previous</button>
+                            <button id="draft-btn"
+                                class="px-6 py-2 font-semibold text-revelti-blue rounded-lg hover:bg-gray-100">Save as
+                                Draft</button>
+                            <button id="next-btn" onclick="navigateStep(1)"
+                                class="px-6 py-2 font-bold bg-revelti-blue text-white rounded-lg">Next Step</button>
+                        </footer>
                     </div>
                 </div>
             </main>
-
-            <!-- Navigation Buttons -->
-            <footer class="p-6 border-t border-gray-200 flex justify-between items-center">
-                <button id="prev-btn" onclick="navigateStep(-1)" class="px-6 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg hidden">Previous</button>
-                <button id="draft-btn" class="px-6 py-2 font-semibold text-revelti-blue rounded-lg hover:bg-gray-100">Save as Draft</button>
-                <button id="next-btn" onclick="navigateStep(1)" class="px-6 py-2 font-bold bg-revelti-blue text-white rounded-lg">Next Step</button>
-            </footer>
         </div>
     </div>
 
@@ -261,11 +357,11 @@
             document.getElementById('simple-price-view').classList.toggle('hidden', strategy !== 'simple');
             document.getElementById('dynamic-price-view').classList.toggle('hidden', strategy !== 'dynamic');
         }
-        
+
         function toggleScheduledDate(status) {
             document.getElementById('scheduled-date-container').classList.toggle('hidden', status !== 'Scheduled');
         }
-        
+
         function toggleFinalPriceOverride() {
             const isChecked = document.getElementById('final-price-override-check').checked;
             document.getElementById('final-price-override-container').classList.toggle('hidden', !isChecked);
@@ -275,7 +371,7 @@
             const container = document.getElementById('pricing-rules-container');
             const ruleDiv = document.createElement('div');
             ruleDiv.className = 'flex items-center space-x-2';
-            
+
             ruleDiv.innerHTML = `
                 <span>Increase to</span>
                 <input type="number" placeholder="220.00" class="rule-price p-2 border border-gray-300 rounded-md w-24" value="${rule?.newPrice || ''}">
@@ -289,18 +385,18 @@
             `;
             container.appendChild(ruleDiv);
         }
-        
+
         function updateRuleInputType(selectElement) {
             const valueInput = selectElement.nextElementSibling;
             valueInput.type = selectElement.value === 'date' ? 'date' : 'number';
             valueInput.value = '';
         }
-        
+
         function saveTicket() {
             const ticketId = document.getElementById('editing-ticket-id').value;
             const strategy = document.querySelector('input[name="pricing-strategy"]:checked').value;
             const status = document.getElementById('ticket-status').value;
-            
+
             let pricingData = {};
             if (strategy === 'simple') {
                 pricingData = { strategy: 'simple', simplePrice: parseFloat(document.getElementById('simple-price').value) || 0 };
@@ -363,7 +459,7 @@
             const container = document.getElementById('ticket-summary-container');
             container.innerHTML = '';
             if (eventTickets.length > 0 && container.querySelector('h3') === null) {
-                 container.innerHTML = '<h3 class="font-bold text-lg revelti-blue">Created Tickets</h3>';
+                container.innerHTML = '<h3 class="font-bold text-lg revelti-blue">Created Tickets</h3>';
             }
             eventTickets.forEach(ticket => {
                 const summaryDiv = document.createElement('div');
@@ -379,14 +475,14 @@
                 container.appendChild(summaryDiv);
             });
         }
-        
+
         function editTicket(ticketId) {
             const ticket = eventTickets.find(t => t.id === ticketId);
             if (!ticket) return;
 
             document.getElementById('ticket-form-title').textContent = `Editing: ${ticket.name}`;
             document.getElementById('editing-ticket-id').value = ticket.id;
-            
+
             document.getElementById('ticket-name').value = ticket.name;
             document.getElementById('ticket-qty').value = ticket.quantity;
             document.getElementById('ticket-status').value = ticket.status;
@@ -394,7 +490,7 @@
             if (ticket.status === 'Scheduled') {
                 document.getElementById('scheduled-date').value = ticket.scheduledDate;
             }
-            
+
             const strategy = ticket.pricing.strategy;
             document.querySelector(`input[name="pricing-strategy"][value="${strategy}"]`).checked = true;
             togglePricingStrategy(strategy);
@@ -422,7 +518,7 @@
             { name: 'John Doe', type: 'Promoter' },
             { name: 'Lutty Moreira', type: 'Media Creator' }
         ];
-        
+
         const searchInput = document.getElementById('collaborator-search');
         const suggestionsContainer = document.getElementById('search-suggestions');
         const invitedListContainer = document.getElementById('invited-list-container');
@@ -438,7 +534,7 @@
             }
 
             const filtered = mockCollaborators.filter(c => c.name.toLowerCase().includes(query));
-            
+
             if (filtered.length > 0) {
                 filtered.forEach(collab => {
                     const item = document.createElement('div');
@@ -455,10 +551,10 @@
                 suggestionsContainer.classList.add('hidden');
             }
         }
-        
+
         function addCollaborator(collaborator) {
             invitedListContainer.classList.remove('hidden');
-            
+
             const tag = document.createElement('div');
             tag.className = 'inline-flex items-center bg-gray-100 rounded-full px-3 py-1 text-sm font-semibold text-gray-800 border';
             tag.innerHTML = `
@@ -466,9 +562,9 @@
                 <span class="text-xs font-bold ml-2 ${collaborator.type === 'Media Creator' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800'} px-2 py-1 rounded-full">${collaborator.type}</span>
                 <button onclick="removeCollaborator(this)" class="ml-2 text-red-500 hover:text-red-700 font-bold">&times;</button>
             `;
-            
+
             invitedList.appendChild(tag);
-            
+
             searchInput.value = '';
             suggestionsContainer.classList.add('hidden');
         }
@@ -484,6 +580,8 @@
             showStep(currentStep);
         });
     </script>
+    <script src="layout-injector.js" defer></script>
     <script src="organizer.js" defer></script>
 </body>
+
 </html>

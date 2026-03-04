@@ -35,328 +35,354 @@
     </style>
 </head>
 
-<body class="antialiased text-gray-800 bg-gray-100 pt-8">
+<body class="dashboard-layout bg-gray-100 antialiased text-gray-800" data-role="creative">
     <!-- Creative Navigation Bar -->
     <div id="creative-navbar-placeholder"></div>
 
-    <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="dashboard-main-area">
+        <aside id="sidebar-placeholder" class="sidebar-container bg-white z-20"></aside>
 
-        <!-- Header Section -->
-        <header class="flex flex-col md:flex-row justify-between md:items-center mb-6">
-            <div>
-                <div class="flex items-center">
-                    <h1 class="text-3xl font-extrabold text-revelti-blue">Bachata Geneva Festival 2026 - The Festival
-                        of Nations</h1>
-                    <span
-                        class="ml-4 text-sm font-bold bg-green-100 text-green-800 px-3 py-1 rounded-full whitespace-nowrap shadow-sm">Active
-                        Contract</span>
-                </div>
-                <p class="text-gray-600 mt-1">My Events > Assigned Event View</p>
-            </div>
-            <div class="flex space-x-2 mt-4 md:mt-0">
-                <a href="creativeEventMediaManagement.html"
-                    class="px-4 py-2 bg-revelti-blue text-white rounded-lg hover:bg-blue-800 transition duration-300 shadow-md">
-                    Manage Event Media
-                </a>
-            </div>
-        </header>
+        <div class="main-wrapper">
+            <main class="page-content">
+                <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <!-- Left Column: Event Snapshot -->
-            <div class="lg:col-span-1 space-y-6">
-                <!-- Event Poster -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <img src="images/eventPoster.png" alt="Event Poster" class="w-full h-auto"
-                        onerror="this.onerror=null;this.src='https://placehold.co/1280x400/6b21a8/ffffff?text=Event+Poster';">
-                </div>
-
-                <!-- Event Details Block -->
-                <div class="bg-white p-6 rounded-lg shadow-md space-y-4">
-                    <div>
-                        <p class="text-sm font-semibold text-revelti-orange uppercase tracking-wider">Dance Festival</p>
-                        <div class="mt-3 text-gray-600 space-y-2">
-                            <p class="flex items-center">
-                                <svg class="w-5 h-5 mr-2 text-gray-500" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                    </path>
-                                </svg>
-                                Oct 08-12, 2026
-                            </p>
-                            <p class="flex items-center">
-                                <svg class="w-5 h-5 mr-2 text-gray-500" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
-                                    </path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                </svg>
-                                Geneva, Switzerland
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Organizer Info -->
-                    <div class="pt-4 border-t flex items-center p-2 -ml-2 rounded-lg">
-                        <img src="images/organizerAvatar.png" alt="Organizer Avatar"
-                            class="w-10 h-10 rounded-full object-cover shadow-md"
-                            onerror="this.onerror=null;this.src='https://placehold.co/80x80/213c63/ffffff?text=ORG';">
-                        <div class="ml-3">
-                            <p class="text-sm text-gray-500">Organized by</p>
-                            <p class="font-bold text-revelti-blue">Bachata Geneva</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Snapshot Stats for Creative -->
-                <div class="bg-revelti-blue text-white p-6 rounded-lg shadow-md border-t-4 border-revelti-orange">
-                    <h3 class="font-bold text-lg mb-4 text-white/90">Your Contribution</h3>
-                    <div class="space-y-3">
-                        <div class="flex justify-between">
-                            <span class="text-white/80">Uploaded Assets</span>
-                            <span class="font-bold">1,342</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-white/80">Published Galleries</span>
-                            <span class="font-bold">5</span>
-                        </div>
-                        <div class="flex justify-between items-center pt-3 border-t border-white/20">
-                            <span class="text-white/80">Estimated Revenue</span>
-                            <span class="font-bold text-xl text-green-300">€3,160.50</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Column -->
-            <div class="lg:col-span-2 bg-white rounded-lg shadow-md overflow-hidden">
-                <!-- Tab Navigation -->
-                <nav class="border-b border-gray-200">
-                    <div class="flex justify-around space-x-2 px-2">
-                        <button onclick="switchTab('agreement')"
-                            class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:text-revelti-blue transition duration-300 creative-tab-active">Contract</button>
-                        <button onclick="switchTab('linked-media')"
-                            class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:text-revelti-blue transition duration-300">Media</button>
-                        <button onclick="switchTab('stats')"
-                            class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:text-revelti-blue transition duration-300">Stats</button>
-                        <button onclick="switchTab('collaborators')"
-                            class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:text-revelti-blue transition duration-300">Collaborators</button>
-                        <button onclick="switchTab('pricing')"
-                            class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:text-revelti-blue transition duration-300">Pricing</button>
-                    </div>
-                </nav>
-
-                <!-- Content Sections -->
-                <main class="p-6 md:p-8">
-                    <!-- Agreement & Splits Section -->
-                    <div id="agreement" class="tab-content">
-                        <h2 class="text-2xl font-bold text-gray-800 mb-6">Financial Agreement</h2>
-
-                        <!-- Commission Visualization -->
-                        <div
-                            class="bg-gray-50 border border-gray-200 rounded-lg p-6 mb-8 hover:shadow-md transition-shadow">
-                            <h3 class="font-bold text-lg text-gray-800 mb-6">Revenue Split Visualization</h3>
-                            <div class="flex items-center justify-between">
-                                <div class="w-1/3 text-center">
-                                    <p class="text-4xl font-extrabold text-revelti-blue">70%</p>
-                                    <p class="text-sm font-semibold text-gray-500 mt-1 uppercase tracking-wide">Creative
-                                        (You)</p>
-                                </div>
-                                <div class="w-1/3 text-center border-l border-r border-gray-200">
-                                    <p class="text-2xl font-bold text-revelti-blue">20%</p>
-                                    <p class="text-sm font-semibold text-gray-500 mt-1 uppercase tracking-wide">
-                                        Organizer</p>
-                                </div>
-                                <div class="w-1/3 text-center">
-                                    <p class="text-2xl font-bold text-gray-400">10%</p>
-                                    <p class="text-sm font-semibold text-gray-500 mt-1 uppercase tracking-wide">Platform
-                                    </p>
-                                </div>
+                    <!-- Header Section -->
+                    <header class="flex flex-col md:flex-row justify-between md:items-center mb-6">
+                        <div>
+                            <div class="flex items-center">
+                                <h1 class="text-3xl font-extrabold text-revelti-blue">Bachata Geneva Festival 2026 - The
+                                    Festival
+                                    of Nations</h1>
+                                <span
+                                    class="ml-4 text-sm font-bold bg-green-100 text-green-800 px-3 py-1 rounded-full whitespace-nowrap shadow-sm">Active
+                                    Contract</span>
                             </div>
-                            <!-- Bar Chart -->
-                            <div class="w-full bg-gray-200 rounded-full h-6 mt-8 flex overflow-hidden shadow-inner">
-                                <div class="bg-revelti-blue h-6 flex items-center justify-center text-xs text-white font-bold"
-                                    style="width: 70%" title="Creative: 70%">70%</div>
-                                <div class="bg-revelti-blue h-6 flex items-center justify-center text-xs text-white font-bold"
-                                    style="width: 20%" title="Organizer: 20%">20%</div>
-                                <div class="bg-gray-400 h-6 flex items-center justify-center text-xs text-white font-bold"
-                                    style="width: 10%" title="Platform: 10%">10%</div>
-                            </div>
-                            <p class="text-xs text-center text-gray-400 mt-4">This structure applies to all premium
-                                media sales associated with this specific event.</p>
+                            <p class="text-gray-600 mt-1">My Events > Assigned Event View</p>
                         </div>
-
-                        <!-- Agreement Details -->
-                        <div class="space-y-4 text-gray-700">
-                            <h3 class="font-bold text-lg text-gray-800 border-b pb-2">Contract Details</h3>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div>
-                                    <p class="text-sm text-gray-500 font-semibold">Scope of Work</p>
-                                    <p class="font-medium">Official Photography & Videography</p>
-                                </div>
-                                <div>
-                                    <p class="text-sm text-gray-500 font-semibold">Status</p>
-                                    <span
-                                        class="inline-block bg-green-100 text-green-800 text-xs font-bold px-2 py-1 rounded">Signed
-                                        / Active</span>
-                                </div>
-                                <div class="sm:col-span-2">
-                                    <p class="text-sm text-gray-500 font-semibold">Deliverables Clause</p>
-                                    <p class="text-sm mt-1 bg-gray-50 p-3 rounded border border-gray-100">"Creative
-                                        agrees to deliver high-quality edited galleries and a final aftermovie within 14
-                                        days of event conclusion. Minimum 1,000 photos..."</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Linked Media Section -->
-                    <div id="linked-media" class="tab-content hidden">
-                        <div class="flex justify-between items-center mb-6">
-                            <h2 class="text-2xl font-bold text-gray-800">Galleries Linked to Event</h2>
+                        <div class="flex space-x-2 mt-4 md:mt-0">
                             <a href="creativeEventMediaManagement.html"
-                                class="text-sm font-bold text-revelti-blue hover:underline">Upload to Event</a>
+                                class="px-4 py-2 bg-revelti-blue text-white rounded-lg hover:bg-blue-800 transition duration-300 shadow-md">
+                                Manage Event Media
+                            </a>
                         </div>
+                    </header>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- Gallery Card Mock -->
-                            <div class="border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition">
-                                <div
-                                    class="h-32 bg-gray-200 rounded mb-3 flex items-center justify-center overflow-hidden relative">
-                                    <img src="https://placehold.co/600x400/6b21a8/ffffff?text=Friday+Socials"
-                                        class="w-full h-full object-cover">
-                                    <div
-                                        class="absolute top-2 right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded">
-                                        Published</div>
-                                </div>
-                                <h4 class="font-bold text-lg text-gray-800">Friday Socials & Shows</h4>
-                                <p class="text-sm text-gray-500">450 Photos • 5 Videos</p>
-                                <div class="mt-3 flex space-x-2">
-                                    <span class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded font-semibold">Free
-                                        & Premium</span>
-                                </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <!-- Left Column: Event Snapshot -->
+                        <div class="lg:col-span-1 space-y-6">
+                            <!-- Event Poster -->
+                            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                                <img src="images/eventPoster.png" alt="Event Poster" class="w-full h-auto"
+                                    onerror="this.onerror=null;this.src='https://placehold.co/1280x400/6b21a8/ffffff?text=Event+Poster';">
                             </div>
 
-                            <!-- Gallery Card Mock -->
-                            <div class="border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition">
-                                <div
-                                    class="h-32 bg-gray-200 rounded mb-3 flex items-center justify-center overflow-hidden relative">
-                                    <img src="https://placehold.co/600x400/6b21a8/ffffff?text=Saturday+Workshops"
-                                        class="w-full h-full object-cover">
-                                    <div
-                                        class="absolute top-2 right-2 bg-pink-500 text-white text-xs font-bold px-2 py-1 rounded">
-                                        Scheduled</div>
-                                </div>
-                                <h4 class="font-bold text-lg text-gray-800">Saturday Workshops</h4>
-                                <p class="text-sm text-gray-500">320 Photos • 1 Video</p>
-                                <div class="mt-3 flex space-x-2">
-                                    <span class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded font-semibold">Free
-                                        Only</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Stats Section -->
-                    <div id="stats" class="tab-content hidden">
-                        <h2 class="text-2xl font-bold text-gray-800 mb-6">Engagement & Performance</h2>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 shadow-sm">
-                                <p class="text-sm text-gray-500 font-semibold uppercase">Gallery Views</p>
-                                <p class="text-3xl font-extrabold text-revelti-blue">12.4K</p>
-                            </div>
-                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 shadow-sm">
-                                <p class="text-sm text-gray-500 font-semibold uppercase">Media Downloads</p>
-                                <p class="text-3xl font-extrabold text-revelti-blue">856</p>
-                            </div>
-                        </div>
-                        <div
-                            class="bg-white p-8 border border-gray-100 rounded-lg shadow-inner flex flex-col items-center justify-center text-center">
-                            <svg class="w-16 h-16 text-gray-300 mb-4" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z">
-                                </path>
-                            </svg>
-                            <p class="text-gray-400 italic">Engagement chart and detailed analytics are available here.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Collaborators Section -->
-                    <div id="collaborators" class="tab-content hidden">
-                        <h2 class="text-2xl font-bold text-gray-800 mb-6">Event Collaborators</h2>
-                        <div class="space-y-4">
-                            <div
-                                class="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-100 shadow-sm">
-                                <div class="flex items-center">
-                                    <img src="https://placehold.co/80x80/213c63/ffffff?text=JC"
-                                        class="w-10 h-10 rounded-full object-cover shadow-md">
-                                    <div class="ml-3">
-                                        <p class="font-bold text-revelti-blue">Judith Cordero</p>
-                                        <p class="text-xs text-gray-500">Videographer</p>
+                            <!-- Event Details Block -->
+                            <div class="bg-white p-6 rounded-lg shadow-md space-y-4">
+                                <div>
+                                    <p class="text-sm font-semibold text-revelti-orange uppercase tracking-wider">Dance
+                                        Festival</p>
+                                    <div class="mt-3 text-gray-600 space-y-2">
+                                        <p class="flex items-center">
+                                            <svg class="w-5 h-5 mr-2 text-gray-500" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                                </path>
+                                            </svg>
+                                            Oct 08-12, 2026
+                                        </p>
+                                        <p class="flex items-center">
+                                            <svg class="w-5 h-5 mr-2 text-gray-500" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                                </path>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                            </svg>
+                                            Geneva, Switzerland
+                                        </p>
                                     </div>
                                 </div>
-                                <span
-                                    class="text-xs font-semibold bg-blue-100 text-blue-800 px-2 py-1 rounded">Primary</span>
-                            </div>
-                            <div
-                                class="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-100 shadow-sm">
-                                <div class="flex items-center">
-                                    <img src="images/creatorLogo.png"
-                                        class="w-10 h-10 rounded-full object-cover shadow-sm"
-                                        onerror="this.onerror=null;this.src='https://placehold.co/80x80/213c63/ffffff?text=AM';">
+
+                                <!-- Organizer Info -->
+                                <div class="pt-4 border-t flex items-center p-2 -ml-2 rounded-lg">
+                                    <img src="images/organizerAvatar.png" alt="Organizer Avatar"
+                                        class="w-10 h-10 rounded-full object-cover shadow-md"
+                                        onerror="this.onerror=null;this.src='https://placehold.co/80x80/213c63/ffffff?text=ORG';">
                                     <div class="ml-3">
-                                        <p class="font-bold text-revelti-blue">AMedia</p>
-                                        <p class="text-xs text-gray-500">Editor</p>
+                                        <p class="text-sm text-gray-500">Organized by</p>
+                                        <p class="font-bold text-revelti-blue">Bachata Geneva</p>
                                     </div>
                                 </div>
-                                <span
-                                    class="text-xs font-semibold bg-gray-200 text-gray-600 px-2 py-1 rounded">External</span>
+                            </div>
+
+                            <!-- Snapshot Stats for Creative -->
+                            <div
+                                class="bg-revelti-blue text-white p-6 rounded-lg shadow-md border-t-4 border-revelti-orange">
+                                <h3 class="font-bold text-lg mb-4 text-white/90">Your Contribution</h3>
+                                <div class="space-y-3">
+                                    <div class="flex justify-between">
+                                        <span class="text-white/80">Uploaded Assets</span>
+                                        <span class="font-bold">1,342</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-white/80">Published Galleries</span>
+                                        <span class="font-bold">5</span>
+                                    </div>
+                                    <div class="flex justify-between items-center pt-3 border-t border-white/20">
+                                        <span class="text-white/80">Estimated Revenue</span>
+                                        <span class="font-bold text-xl text-green-300">€3,160.50</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Pricing & Conditions Section -->
-                    <div id="pricing" class="tab-content hidden">
-                        <h2 class="text-2xl font-bold text-gray-800 mb-6">Pricing & Conditions</h2>
-                        <div class="space-y-6">
-                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 shadow-sm">
-                                <h3 class="font-bold text-gray-800 mb-3">Service Fees</h3>
-                                <div class="flex justify-between text-sm py-2 border-b">
-                                    <span>Base Rate (Per Event)</span>
-                                    <span class="font-bold">€1,500.00</span>
+                        <!-- Right Column -->
+                        <div class="lg:col-span-2 bg-white rounded-lg shadow-md overflow-hidden">
+                            <!-- Tab Navigation -->
+                            <nav class="border-b border-gray-200">
+                                <div class="flex justify-around space-x-2 px-2">
+                                    <button onclick="switchTab('agreement')"
+                                        class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:text-revelti-blue transition duration-300 creative-tab-active">Contract</button>
+                                    <button onclick="switchTab('linked-media')"
+                                        class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:text-revelti-blue transition duration-300">Media</button>
+                                    <button onclick="switchTab('stats')"
+                                        class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:text-revelti-blue transition duration-300">Stats</button>
+                                    <button onclick="switchTab('collaborators')"
+                                        class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:text-revelti-blue transition duration-300">Collaborators</button>
+                                    <button onclick="switchTab('pricing')"
+                                        class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:text-revelti-blue transition duration-300">Pricing</button>
                                 </div>
-                                <div class="flex justify-between text-sm py-2 border-b">
-                                    <span>Equipment Rental (Drones/Lighting)</span>
-                                    <span class="font-bold">€250.00</span>
+                            </nav>
+
+                            <!-- Content Sections -->
+                            <main class="p-6 md:p-8">
+                                <!-- Agreement & Splits Section -->
+                                <div id="agreement" class="tab-content">
+                                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Financial Agreement</h2>
+
+                                    <!-- Commission Visualization -->
+                                    <div
+                                        class="bg-gray-50 border border-gray-200 rounded-lg p-6 mb-8 hover:shadow-md transition-shadow">
+                                        <h3 class="font-bold text-lg text-gray-800 mb-6">Revenue Split Visualization
+                                        </h3>
+                                        <div class="flex items-center justify-between">
+                                            <div class="w-1/3 text-center">
+                                                <p class="text-4xl font-extrabold text-revelti-blue">70%</p>
+                                                <p
+                                                    class="text-sm font-semibold text-gray-500 mt-1 uppercase tracking-wide">
+                                                    Creative
+                                                    (You)</p>
+                                            </div>
+                                            <div class="w-1/3 text-center border-l border-r border-gray-200">
+                                                <p class="text-2xl font-bold text-revelti-blue">20%</p>
+                                                <p
+                                                    class="text-sm font-semibold text-gray-500 mt-1 uppercase tracking-wide">
+                                                    Organizer</p>
+                                            </div>
+                                            <div class="w-1/3 text-center">
+                                                <p class="text-2xl font-bold text-gray-400">10%</p>
+                                                <p
+                                                    class="text-sm font-semibold text-gray-500 mt-1 uppercase tracking-wide">
+                                                    Platform
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <!-- Bar Chart -->
+                                        <div
+                                            class="w-full bg-gray-200 rounded-full h-6 mt-8 flex overflow-hidden shadow-inner">
+                                            <div class="bg-revelti-blue h-6 flex items-center justify-center text-xs text-white font-bold"
+                                                style="width: 70%" title="Creative: 70%">70%</div>
+                                            <div class="bg-revelti-blue h-6 flex items-center justify-center text-xs text-white font-bold"
+                                                style="width: 20%" title="Organizer: 20%">20%</div>
+                                            <div class="bg-gray-400 h-6 flex items-center justify-center text-xs text-white font-bold"
+                                                style="width: 10%" title="Platform: 10%">10%</div>
+                                        </div>
+                                        <p class="text-xs text-center text-gray-400 mt-4">This structure applies to all
+                                            premium
+                                            media sales associated with this specific event.</p>
+                                    </div>
+
+                                    <!-- Agreement Details -->
+                                    <div class="space-y-4 text-gray-700">
+                                        <h3 class="font-bold text-lg text-gray-800 border-b pb-2">Contract Details</h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                            <div>
+                                                <p class="text-sm text-gray-500 font-semibold">Scope of Work</p>
+                                                <p class="font-medium">Official Photography & Videography</p>
+                                            </div>
+                                            <div>
+                                                <p class="text-sm text-gray-500 font-semibold">Status</p>
+                                                <span
+                                                    class="inline-block bg-green-100 text-green-800 text-xs font-bold px-2 py-1 rounded">Signed
+                                                    / Active</span>
+                                            </div>
+                                            <div class="sm:col-span-2">
+                                                <p class="text-sm text-gray-500 font-semibold">Deliverables Clause</p>
+                                                <p class="text-sm mt-1 bg-gray-50 p-3 rounded border border-gray-100">
+                                                    "Creative
+                                                    agrees to deliver high-quality edited galleries and a final
+                                                    aftermovie within 14
+                                                    days of event conclusion. Minimum 1,000 photos..."</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="flex justify-between text-sm py-2">
-                                    <span>Total Fixed Fee</span>
-                                    <span class="font-bold text-revelti-blue">€1,750.00</span>
+
+                                <!-- Linked Media Section -->
+                                <div id="linked-media" class="tab-content hidden">
+                                    <div class="flex justify-between items-center mb-6">
+                                        <h2 class="text-2xl font-bold text-gray-800">Galleries Linked to Event</h2>
+                                        <a href="creativeEventMediaManagement.html"
+                                            class="text-sm font-bold text-revelti-blue hover:underline">Upload to
+                                            Event</a>
+                                    </div>
+
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <!-- Gallery Card Mock -->
+                                        <div
+                                            class="border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition">
+                                            <div
+                                                class="h-32 bg-gray-200 rounded mb-3 flex items-center justify-center overflow-hidden relative">
+                                                <img src="https://placehold.co/600x400/6b21a8/ffffff?text=Friday+Socials"
+                                                    class="w-full h-full object-cover">
+                                                <div
+                                                    class="absolute top-2 right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded">
+                                                    Published</div>
+                                            </div>
+                                            <h4 class="font-bold text-lg text-gray-800">Friday Socials & Shows</h4>
+                                            <p class="text-sm text-gray-500">450 Photos • 5 Videos</p>
+                                            <div class="mt-3 flex space-x-2">
+                                                <span
+                                                    class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded font-semibold">Free
+                                                    & Premium</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Gallery Card Mock -->
+                                        <div
+                                            class="border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition">
+                                            <div
+                                                class="h-32 bg-gray-200 rounded mb-3 flex items-center justify-center overflow-hidden relative">
+                                                <img src="https://placehold.co/600x400/6b21a8/ffffff?text=Saturday+Workshops"
+                                                    class="w-full h-full object-cover">
+                                                <div
+                                                    class="absolute top-2 right-2 bg-pink-500 text-white text-xs font-bold px-2 py-1 rounded">
+                                                    Scheduled</div>
+                                            </div>
+                                            <h4 class="font-bold text-lg text-gray-800">Saturday Workshops</h4>
+                                            <p class="text-sm text-gray-500">320 Photos • 1 Video</p>
+                                            <div class="mt-3 flex space-x-2">
+                                                <span
+                                                    class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded font-semibold">Free
+                                                    Only</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="bg-white p-4 rounded-lg border border-gray-100 shadow-sm">
-                                <h3 class="font-bold text-gray-800 mb-2">Terms & Conditions</h3>
-                                <ul class="text-sm text-gray-600 list-disc list-inside space-y-2">
-                                    <li>Advance payment of 30% required upon contract signing.</li>
-                                    <li>Final media delivery within 14 business days.</li>
-                                    <li>Standard license for event promotional use.</li>
-                                </ul>
-                            </div>
+
+                                <!-- Stats Section -->
+                                <div id="stats" class="tab-content hidden">
+                                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Engagement & Performance</h2>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                                        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 shadow-sm">
+                                            <p class="text-sm text-gray-500 font-semibold uppercase">Gallery Views</p>
+                                            <p class="text-3xl font-extrabold text-revelti-blue">12.4K</p>
+                                        </div>
+                                        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 shadow-sm">
+                                            <p class="text-sm text-gray-500 font-semibold uppercase">Media Downloads</p>
+                                            <p class="text-3xl font-extrabold text-revelti-blue">856</p>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="bg-white p-8 border border-gray-100 rounded-lg shadow-inner flex flex-col items-center justify-center text-center">
+                                        <svg class="w-16 h-16 text-gray-300 mb-4" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z">
+                                            </path>
+                                        </svg>
+                                        <p class="text-gray-400 italic">Engagement chart and detailed analytics are
+                                            available here.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Collaborators Section -->
+                                <div id="collaborators" class="tab-content hidden">
+                                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Event Collaborators</h2>
+                                    <div class="space-y-4">
+                                        <div
+                                            class="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-100 shadow-sm">
+                                            <div class="flex items-center">
+                                                <img src="https://placehold.co/80x80/213c63/ffffff?text=JC"
+                                                    class="w-10 h-10 rounded-full object-cover shadow-md">
+                                                <div class="ml-3">
+                                                    <p class="font-bold text-revelti-blue">Judith Cordero</p>
+                                                    <p class="text-xs text-gray-500">Videographer</p>
+                                                </div>
+                                            </div>
+                                            <span
+                                                class="text-xs font-semibold bg-blue-100 text-blue-800 px-2 py-1 rounded">Primary</span>
+                                        </div>
+                                        <div
+                                            class="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-100 shadow-sm">
+                                            <div class="flex items-center">
+                                                <img src="images/creatorLogo.png"
+                                                    class="w-10 h-10 rounded-full object-contain bg-black shadow-sm p-1"
+                                                    onerror="this.onerror=null;this.src='https://placehold.co/80x80/213c63/ffffff?text=AM';">
+                                                <div class="ml-3">
+                                                    <p class="font-bold text-revelti-blue">AMedia</p>
+                                                    <p class="text-xs text-gray-500">Editor</p>
+                                                </div>
+                                            </div>
+                                            <span
+                                                class="text-xs font-semibold bg-gray-200 text-gray-600 px-2 py-1 rounded">External</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Pricing & Conditions Section -->
+                                <div id="pricing" class="tab-content hidden">
+                                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Pricing & Conditions</h2>
+                                    <div class="space-y-6">
+                                        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 shadow-sm">
+                                            <h3 class="font-bold text-gray-800 mb-3">Service Fees</h3>
+                                            <div class="flex justify-between text-sm py-2 border-b">
+                                                <span>Base Rate (Per Event)</span>
+                                                <span class="font-bold">€1,500.00</span>
+                                            </div>
+                                            <div class="flex justify-between text-sm py-2 border-b">
+                                                <span>Equipment Rental (Drones/Lighting)</span>
+                                                <span class="font-bold">€250.00</span>
+                                            </div>
+                                            <div class="flex justify-between text-sm py-2">
+                                                <span>Total Fixed Fee</span>
+                                                <span class="font-bold text-revelti-blue">€1,750.00</span>
+                                            </div>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg border border-gray-100 shadow-sm">
+                                            <h3 class="font-bold text-gray-800 mb-2">Terms & Conditions</h3>
+                                            <ul class="text-sm text-gray-600 list-disc list-inside space-y-2">
+                                                <li>Advance payment of 30% required upon contract signing.</li>
+                                                <li>Final media delivery within 14 business days.</li>
+                                                <li>Standard license for event promotional use.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </main>
+
                         </div>
-                    </div>
-                </main>
-
-            </div>
+            </main>
         </div>
     </div>
 
     <!-- Loading Footer -->
     <div id="footer-placeholder"></div>
 
+    <script src="layout-injector.js" defer></script>
     <script src="creative.js" defer></script>
     <script>
         // Tab Switching Logic for Event View

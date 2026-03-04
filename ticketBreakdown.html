@@ -52,188 +52,198 @@
 
 </head>
 
-<body class="bg-gray-100 antialiased text-gray-800 pt-8">
-    <!-- Organizer-specific Navbar -->
+<body class="dashboard-layout bg-gray-100 antialiased text-gray-800" data-role="organizer">
+    <!-- Navbar Placeholder -->
     <div id="organizer-navbar-placeholder"></div>
 
-    <!-- Main container -->
-    <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="dashboard-main-area">
+        <aside id="sidebar-placeholder" class="sidebar-container bg-white z-20"></aside>
 
-        <header class="flex flex-col md:flex-row justify-between items-center mb-8">
-            <div>
-                <h1 class="text-3xl font-extrabold revelti-blue">Ticket Breakdown</h1>
-                <p class="text-gray-500">Deep dive into your ticket sales performance.</p>
-            </div>
-            <a href="organizerDashboard.html"
-                class="mt-4 md:mt-0 px-4 py-2 text-sm font-semibold bg-revelti-blue text-white rounded-md hover:bg-blue-800 transition duration-300 flex items-center justify-center">
-                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                </svg>
-                Organizer Dashboard
-            </a>
-        </header>
+        <div class="main-wrapper">
+            <main class="page-content">
+                <!-- Main container -->
+                <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-        <!-- KPI Cards -->
-        <div id="kpi-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-            <!-- KPIs will be loaded here -->
-            <div class="bg-white p-4 rounded-lg border animate-pulse">
-                <div class="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
-                <div class="h-8 bg-gray-300 rounded w-1/2"></div>
-            </div>
-            <div class="bg-white p-4 rounded-lg border animate-pulse">
-                <div class="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
-                <div class="h-8 bg-gray-300 rounded w-1/2"></div>
-            </div>
-            <div class="bg-white p-4 rounded-lg border animate-pulse">
-                <div class="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
-                <div class="h-8 bg-gray-300 rounded w-1/2"></div>
-            </div>
-            <div class="bg-white p-4 rounded-lg border animate-pulse">
-                <div class="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
-                <div class="h-8 bg-gray-300 rounded w-1/2"></div>
-            </div>
-        </div>
-
-        <!-- Filters Section -->
-        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <button data-modal="eventFilterModal"
-                    class="filter-btn w-full px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition">Filter
-                    Events</button>
-                <button data-modal="ticketTypeFilterModal"
-                    class="filter-btn w-full px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition">Filter
-                    Ticket Types</button>
-                <button data-modal="promoterFilterModal"
-                    class="filter-btn w-full px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition">Filter
-                    Promoters</button>
-                <button id="resetTopFilters"
-                    class="w-full px-4 py-2 text-sm font-semibold bg-revelti-orange text-white rounded-md hover:bg-orange-600 transition">Reset
-                    Filters</button>
-            </div>
-        </div>
-
-        <!-- Tabs for navigation -->
-        <div class="flex border-b border-gray-200 mb-8">
-            <a href="organizerDashboard.html"
-                class="tab-button bg-gray-200 text-gray-700 font-semibold px-1 py-4 text-center rounded-t-lg hover:bg-gray-300 transition duration-300">
-                Event Dashboard
-            </a>
-            <a href="eventBreakdown.html"
-                class="tab-button bg-gray-200 text-gray-700 font-semibold px-1 py-4 text-center rounded-t-lg hover:bg-gray-300 transition duration-300">
-                Sales Breakdown
-            </a>
-            <button
-                class="tab-button active bg-white text-revelti-blue font-bold px-1 py-4 text-center rounded-t-lg border-t border-l border-r border-gray-200">
-                Ticket Breakdown
-            </button>
-        </div>
-
-        <!-- Charts Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-            <div class="bg-white rounded-lg shadow-md p-6">
-                <h4 class="text-md font-bold text-gray-700 text-center mb-2">Promoter Performance</h4>
-                <canvas id="promoterChart"></canvas>
-            </div>
-            <div class="bg-white rounded-lg shadow-md p-6">
-                <h4 class="text-md font-bold text-gray-700 text-center mb-2">Sales by Ticket Type</h4>
-                <canvas id="ticketTypeChart"></canvas>
-            </div>
-            <div class="bg-white rounded-lg shadow-md p-6">
-                <h4 class="text-md font-bold text-gray-700 text-center mb-2">Best-Selling Events</h4>
-                <canvas id="eventSalesChart"></canvas>
-            </div>
-            <div class="bg-white rounded-lg shadow-md p-6">
-                <h4 class="text-md font-bold text-gray-700 text-center mb-2">Sales by Price Tier</h4>
-                <canvas id="priceTierChart"></canvas>
-            </div>
-        </div>
-
-        <!-- More Stats Section -->
-        <div class="bg-white rounded-lg shadow-md mb-8">
-            <details>
-                <summary
-                    class="flex justify-between items-center cursor-pointer font-semibold text-lg revelti-blue p-4">
-                    More Stats
-                    <svg class="w-5 h-5 accordion-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </summary>
-                <div class="p-6 border-t border-gray-200">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <header class="flex flex-col md:flex-row justify-between items-center mb-8">
                         <div>
-                            <div class="flex items-center justify-center mb-2">
-                                <h4 class="text-md font-bold text-gray-700">Discount Impact</h4>
-                                <button class="info-btn ml-2" data-modal="discountImpactInfoModal">
-                                    <svg class="w-5 h-5 text-gray-400 hover:text-revelti-blue" fill="currentColor"
-                                        viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
-                                            clip-rule="evenodd"></path>
-                                    </svg>
-                                </button>
-                            </div>
-                            <div class="h-80"><canvas id="discountImpactChart"></canvas></div>
+                            <h1 class="text-3xl font-extrabold revelti-blue">Ticket Breakdown</h1>
+                            <p class="text-gray-500">Deep dive into your ticket sales performance.</p>
                         </div>
-                        <div>
-                            <div class="flex items-center justify-center mb-2">
-                                <h4 class="text-md font-bold text-gray-700">Revenue by Ticket Type</h4>
-                                <button class="info-btn ml-2" data-modal="revenueByTypeInfoModal">
-                                    <svg class="w-5 h-5 text-gray-400 hover:text-revelti-blue" fill="currentColor"
-                                        viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
-                                            clip-rule="evenodd"></path>
-                                    </svg>
-                                </button>
-                            </div>
-                            <div class="h-80"><canvas id="revenueByTypeChart"></canvas></div>
+                        <a href="organizerDashboard.html"
+                            class="mt-4 md:mt-0 px-4 py-2 text-sm font-semibold bg-revelti-blue text-white rounded-md hover:bg-blue-800 transition duration-300 flex items-center justify-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                            </svg>
+                            Organizer Dashboard
+                        </a>
+                    </header>
+
+                    <!-- KPI Cards -->
+                    <div id="kpi-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                        <!-- KPIs will be loaded here -->
+                        <div class="bg-white p-4 rounded-lg border animate-pulse">
+                            <div class="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+                            <div class="h-8 bg-gray-300 rounded w-1/2"></div>
                         </div>
-                        <div class="lg:col-span-2">
-                            <div class="flex items-center justify-center mb-2">
-                                <h4 class="text-md font-bold text-gray-700">Promoter Effectiveness</h4>
-                                <button class="info-btn ml-2" data-modal="promoterEffectivenessInfoModal">
-                                    <svg class="w-5 h-5 text-gray-400 hover:text-revelti-blue" fill="currentColor"
-                                        viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
-                                            clip-rule="evenodd"></path>
-                                    </svg>
-                                </button>
-                            </div>
-                            <div class="flex justify-center h-96">
-                                <div class="w-full lg:w-4/5 relative">
-                                    <canvas id="promoterEffectivenessChart"></canvas>
-                                </div>
-                            </div>
+                        <div class="bg-white p-4 rounded-lg border animate-pulse">
+                            <div class="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+                            <div class="h-8 bg-gray-300 rounded w-1/2"></div>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border animate-pulse">
+                            <div class="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+                            <div class="h-8 bg-gray-300 rounded w-1/2"></div>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border animate-pulse">
+                            <div class="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+                            <div class="h-8 bg-gray-300 rounded w-1/2"></div>
                         </div>
                     </div>
-                </div>
-            </details>
-        </div>
 
-        <!-- Data Table Section -->
-        <div class="bg-white rounded-lg shadow-md p-6">
-            <table id="ticketTable" class="display" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>Event</th>
-                        <th>Ticket Type</th>
-                        <th>Price</th>
-                        <th>Qty Sold</th>
-                        <th>Disc. %</th>
-                        <th>Disc. €</th>
-                        <th>Disc. Code</th>
-                        <th>Promoter</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td colspan="9" class="text-center p-4">Loading data...</td>
-                    </tr>
-                </tbody>
-            </table>
+                    <!-- Filters Section -->
+                    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <button data-modal="eventFilterModal"
+                                class="filter-btn w-full px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition">Filter
+                                Events</button>
+                            <button data-modal="ticketTypeFilterModal"
+                                class="filter-btn w-full px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition">Filter
+                                Ticket Types</button>
+                            <button data-modal="promoterFilterModal"
+                                class="filter-btn w-full px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition">Filter
+                                Promoters</button>
+                            <button id="resetTopFilters"
+                                class="w-full px-4 py-2 text-sm font-semibold bg-revelti-orange text-white rounded-md hover:bg-orange-600 transition">Reset
+                                Filters</button>
+                        </div>
+                    </div>
+
+                    <!-- Tabs for navigation -->
+                    <div class="flex border-b border-gray-200 mb-8">
+                        <a href="organizerDashboard.html"
+                            class="tab-button bg-gray-200 text-gray-700 font-semibold px-1 py-4 text-center rounded-t-lg hover:bg-gray-300 transition duration-300">
+                            Event Dashboard
+                        </a>
+                        <a href="eventBreakdown.html"
+                            class="tab-button bg-gray-200 text-gray-700 font-semibold px-1 py-4 text-center rounded-t-lg hover:bg-gray-300 transition duration-300">
+                            Sales Breakdown
+                        </a>
+                        <button
+                            class="tab-button active bg-white text-revelti-blue font-bold px-1 py-4 text-center rounded-t-lg border-t border-l border-r border-gray-200">
+                            Ticket Breakdown
+                        </button>
+                    </div>
+
+                    <!-- Charts Grid -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                        <div class="bg-white rounded-lg shadow-md p-6">
+                            <h4 class="text-md font-bold text-gray-700 text-center mb-2">Promoter Performance</h4>
+                            <canvas id="promoterChart"></canvas>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-md p-6">
+                            <h4 class="text-md font-bold text-gray-700 text-center mb-2">Sales by Ticket Type</h4>
+                            <canvas id="ticketTypeChart"></canvas>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-md p-6">
+                            <h4 class="text-md font-bold text-gray-700 text-center mb-2">Best-Selling Events</h4>
+                            <canvas id="eventSalesChart"></canvas>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-md p-6">
+                            <h4 class="text-md font-bold text-gray-700 text-center mb-2">Sales by Price Tier</h4>
+                            <canvas id="priceTierChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- More Stats Section -->
+                    <div class="bg-white rounded-lg shadow-md mb-8">
+                        <details>
+                            <summary
+                                class="flex justify-between items-center cursor-pointer font-semibold text-lg revelti-blue p-4">
+                                More Stats
+                                <svg class="w-5 h-5 accordion-arrow" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </summary>
+                            <div class="p-6 border-t border-gray-200">
+                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                    <div>
+                                        <div class="flex items-center justify-center mb-2">
+                                            <h4 class="text-md font-bold text-gray-700">Discount Impact</h4>
+                                            <button class="info-btn ml-2" data-modal="discountImpactInfoModal">
+                                                <svg class="w-5 h-5 text-gray-400 hover:text-revelti-blue"
+                                                    fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd"
+                                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                                                        clip-rule="evenodd"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="h-80"><canvas id="discountImpactChart"></canvas></div>
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center justify-center mb-2">
+                                            <h4 class="text-md font-bold text-gray-700">Revenue by Ticket Type</h4>
+                                            <button class="info-btn ml-2" data-modal="revenueByTypeInfoModal">
+                                                <svg class="w-5 h-5 text-gray-400 hover:text-revelti-blue"
+                                                    fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd"
+                                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                                                        clip-rule="evenodd"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="h-80"><canvas id="revenueByTypeChart"></canvas></div>
+                                    </div>
+                                    <div class="lg:col-span-2">
+                                        <div class="flex items-center justify-center mb-2">
+                                            <h4 class="text-md font-bold text-gray-700">Promoter Effectiveness</h4>
+                                            <button class="info-btn ml-2" data-modal="promoterEffectivenessInfoModal">
+                                                <svg class="w-5 h-5 text-gray-400 hover:text-revelti-blue"
+                                                    fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd"
+                                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                                                        clip-rule="evenodd"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="flex justify-center h-96">
+                                            <div class="w-full lg:w-4/5 relative">
+                                                <canvas id="promoterEffectivenessChart"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+
+                    <!-- Data Table Section -->
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <table id="ticketTable" class="display" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Event</th>
+                                    <th>Ticket Type</th>
+                                    <th>Price</th>
+                                    <th>Qty Sold</th>
+                                    <th>Disc. %</th>
+                                    <th>Disc. €</th>
+                                    <th>Disc. Code</th>
+                                    <th>Promoter</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="9" class="text-center p-4">Loading data...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
         </div>
     </div>
 
@@ -684,6 +694,7 @@
             loadAndProcessData();
         });
     </script>
+    <script src="layout-injector.js" defer></script>
     <script src="organizer.js" defer></script>
 </body>
 
