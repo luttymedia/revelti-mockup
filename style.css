@@ -599,7 +599,7 @@ div.dt-button-background {
     display: block;
 }
 
-/* Active State Colors — color-only, no background */
+/* Active State Color for Organizer View - Color change only for general links */
 .active-link-organizer {
     color: #213c63 !important;
     /* revelti-blue */
@@ -611,9 +611,14 @@ div.dt-button-background {
     stroke: #213c63 !important;
 }
 
+/* Background Highlight for Sidebar Links in Organizer View */
+.sidebar-container .active-link-organizer {
+    background-color: #eff6ff !important;
+    /* blue-50 */
+}
+
+/* Active State Color for Creative View - Color change and font weight */
 .active-link-creative {
-    background-color: #faf5ff !important;
-    /* purple-50 */
     color: #6b21a8 !important;
     /* revelti-purple */
     font-weight: 700;
@@ -621,6 +626,12 @@ div.dt-button-background {
 
 .active-link-creative svg {
     color: #6b21a8 !important;
+}
+
+/* Background Highlight for Sidebar Links in Creative View */
+.sidebar-container .active-link-creative {
+    background-color: #faf5ff !important;
+    /* purple-50 */
 }
 
 /* --- Sidebar Group (details/summary) Styles --- */

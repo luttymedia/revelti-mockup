@@ -85,17 +85,25 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         // Active Link Logic Update
-        const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-        const fileMatch = currentPath.split('?')[0].split('#')[0];
+        const getBaseName = (path) => {
+            const parts = path.split('/');
+            const lastPart = parts.pop() || 'index.html';
+            return lastPart.split('?')[0].split('#')[0].replace(/\.html$/, '') || 'index';
+        };
+
+        const currentBase = getBaseName(window.location.pathname);
         const activeClass = `active-link-${role}`;
 
         // Find links in both sidebar and navbar to set active state
         const allLinks = document.querySelectorAll('a');
         allLinks.forEach(link => {
-            const linkHrefFull = link.getAttribute('href') || '';
-            const linkFile = linkHrefFull.split('?')[0].split('#')[0];
+            if (link.hasAttribute('data-no-active-link')) return;
+            const linkHref = link.getAttribute('href') || '';
+            if (linkHref === '' || linkHref === '#') return;
 
-            if (linkFile === fileMatch && linkFile !== '' && linkFile !== '#') {
+            const linkBase = getBaseName(linkHref);
+
+            if (linkBase === currentBase) {
                 link.classList.add(activeClass);
             }
         });
