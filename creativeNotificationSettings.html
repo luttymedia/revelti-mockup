@@ -46,7 +46,7 @@
         <div class="main-wrapper">
             <main class="page-content">
                 <div
-                    class="max-w-4xl mx-auto bg-white shadow-md flex flex-col h-full full-height-modal border-x border-gray-200">
+                    class="max-w-full mx-auto bg-white shadow-md flex flex-col h-full full-height-modal border-x border-gray-200">
 
                     <!-- Header Section -->
                     <header class="p-6 flex items-center">
@@ -285,7 +285,7 @@
             });
         }
         document.addEventListener('DOMContentLoaded', () => {
-            const pageHost = document.querySelector('.max-w-2xl.mx-auto.bg-white');
+            const pageHost = document.querySelector('.max-w-full.mx-auto.bg-white');
             if (pageHost) {
                 initializeSettingsComponent(pageHost);
             }

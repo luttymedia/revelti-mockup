@@ -45,7 +45,7 @@
 
         <div class="main-wrapper">
             <main class="page-content">
-                <div class="max-w-4xl mx-auto bg-white shadow-md flex flex-col h-full full-height-modal">
+                <div class="max-w-full mx-auto bg-white shadow-md flex flex-col h-full full-height-modal">
 
                     <!-- Header Section -->
                     <header class="p-6 flex items-center justify-between">
@@ -142,16 +142,35 @@
             function createNotificationItem(notification) {
                 const unreadIndicator = notification.read ? '' : '<div class="absolute -left-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-revelti-orange rounded-full"></div>';
                 const avatarSrc = notification.avatar || 'https://placehold.co/40x40/cccccc/ffffff?text=N';
+                const isLink = notification.link;
+                const sanitizedMessage = isLink ? notification.message.replace(/<[^>]*>/g, '').replace(/"/g, '&quot;') : '';
+                const linkOverlay = isLink ? `<a href="${notification.link}" class="absolute inset-0 z-10" aria-label="${sanitizedMessage}"></a>` : '';
+                const hoverClasses = isLink ? 'group hover:bg-gray-50 transition' : '';
                 return `
-                <div class="flex items-start p-3 bg-white rounded-lg shadow-sm relative notification-item" data-id="${notification.id}">
+                <div class="flex items-start p-3 bg-white rounded-lg shadow-sm relative notification-item ${hoverClasses}" data-id="${notification.id}">
+                    ${linkOverlay}
                     ${unreadIndicator}
                     <img src="${avatarSrc}" onerror="this.onerror=null;this.src='https://placehold.co/40x40/cccccc/ffffff?text=N';" alt="Icon" class="w-10 h-10 rounded-full object-cover shadow-md mr-3">
                     <div class="flex-1">
-                        <p class="text-sm leading-snug">${notification.message}</p>
+                        <p class="text-sm leading-snug ${isLink ? 'group-hover:text-revelti-blue' : ''}">${notification.message}</p>
                         <p class="text-xs text-gray-500 mt-1">${notification.timestamp}</p>
+                    </div>
+                    <div class="relative z-20">
+                        <button class="p-1 rounded-full hover:bg-gray-100 text-gray-400 ml-2 context-menu-button" title="More options">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path></svg>
+                        </button>
+                        <div class="absolute top-0 right-8 w-48 bg-white border border-gray-100 shadow-sm rounded-lg shadow-md p-2 z-50 hidden context-menu">
+                            <button data-mark-one="${notification.id}" class="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100">Mark read</button>
+                            <button class="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100">Mute notifications</button>
+                            <button class="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100">Hide this</button>
+                            <button class="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100">Report</button>
+                        </div>
                     </div>
                 </div>`;
             }
+
+            function markOneAsRead(id) { const notification = notificationsData.find(n => n.id === id); if (notification) { notification.read = true; renderNotifications(); } }
+            function markAllAsRead(category = 'all') { notificationsData.forEach(n => { if (category === 'all' || n.type === category) n.read = true; }); renderNotifications(); }
 
             let notificationsData = [
                 { id: 1, type: 'media', message: 'Your <strong>Bachata Geneva 2026</strong> gallery just reached 1,000 views.', timestamp: '2h ago', avatar: 'https://placehold.co/40x40/213c63/ffffff?text=V', read: false },
@@ -179,13 +198,32 @@
             }
 
             tabButtons.forEach(button => button.addEventListener('click', () => switchTab(button.dataset.tabTarget)));
+            notificationHost.querySelectorAll('[data-mark-all]').forEach(button => button.addEventListener('click', () => markAllAsRead(button.dataset.markAll)));
+            notificationHost.addEventListener('click', (event) => {
+                const contextButton = event.target.closest('.context-menu-button');
+                if (contextButton) {
+                    event.stopPropagation();
+                    const menu = contextButton.closest('.relative').querySelector('.context-menu');
+                    notificationHost.querySelectorAll('.context-menu').forEach(m => { if (m !== menu) m.classList.add('hidden'); });
+                    menu.classList.toggle('hidden');
+                    return;
+                }
+                const markOneButton = event.target.closest('[data-mark-one]');
+                if (markOneButton) {
+                    markOneAsRead(parseInt(markOneButton.dataset.markOne, 10));
+                    return;
+                }
+                if (!event.target.closest('.context-menu')) {
+                    notificationHost.querySelectorAll('.context-menu').forEach(m => m.classList.add('hidden'));
+                }
+            });
 
             switchTab('all');
             renderNotifications();
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            const pageHost = document.querySelector('.max-w-2xl.mx-auto.bg-white');
+            const pageHost = document.querySelector('.max-w-full.mx-auto.bg-white');
             if (pageHost) {
                 initializeNotificationComponent(pageHost);
             }

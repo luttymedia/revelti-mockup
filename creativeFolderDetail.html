@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revelti - Folder Detail</title>
+
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        revelti: {
+                            blue: '#213c63',
+                            orange: '#f58220',
+                            purple: '#6b21a8',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+
+    <!-- Google Fonts: Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Your Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="dashboard-layout bg-gray-100 antialiased text-gray-800" data-role="creative">
+    <!-- Navbar Placeholder -->
+    <div id="creative-navbar-placeholder"></div>
+
+    <div class="dashboard-main-area">
+        <aside id="sidebar-placeholder" class="sidebar-container bg-white z-20"></aside>
+
+        <div class="main-wrapper">
+            <main class="page-content">
+                <!-- Main container -->
+                <div class="max-w-full mx-auto px-4 sm:px-4 lg:px-6 py-4">
+                    <header class="flex flex-col md:flex-row justify-between items-center mb-6">
+                        <div class="flex items-center mb-4 md:mb-0">
+                            <div>
+                                <h1 class="text-3xl font-extrabold text-revelti-blue">Folder Detail</h1>
+                                <p class="text-gray-500">Core operational page for folders</p>
+                            </div>
+                        </div>
+                    </header>
+
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden p-6 md:p-8">
+                        <p class="text-gray-500 text-center">Placeholder for Folder Detail content.</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="layout-injector.js" defer></script>
+    <script src="creative.js" defer></script>
+</body>
+
+</html>
