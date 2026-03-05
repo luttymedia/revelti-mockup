@@ -458,15 +458,41 @@
             alert(`Simulating ${action} on folder: ${folderName}`);
         }
 
+        function getPublishStateBadge(node) {
+            let stateName = 'Draft';
+            let badgeClasses = 'bg-gray-200 text-gray-800';
+            let tooltip = 'Draft';
+            let dateHtml = '';
+
+            if (node.status === 'Public') {
+                stateName = 'Published';
+                badgeClasses = 'bg-green-100 text-green-800';
+                tooltip = 'Published';
+            } else if (node.status === 'Scheduled') {
+                stateName = 'Scheduled';
+                badgeClasses = 'bg-yellow-100 text-yellow-800';
+                tooltip = 'Scheduled';
+                if (node.schedule) {
+                    tooltip += ` \u2022 ${node.schedule}`;
+                    dateHtml = `<span class="ml-1 pl-1 border-l border-yellow-300 font-normal opacity-80">${node.schedule}</span>`;
+                }
+            }
+
+            return `<span title="${tooltip}" class="inline-flex items-center text-[10px] font-bold px-2 py-0.5 mt-1.5 rounded-full ${badgeClasses} cursor-help whitespace-nowrap">
+                ${stateName}${dateHtml}
+            </span>`;
+        }
+
         function createFolderCard(node, fullPath) {
             const hasChildren = node.children && node.children.length > 0;
+            const badgeHtml = getPublishStateBadge(node);
             return `
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition">
                     <div onclick="${node.clickable === false ? `folderActionAlert('Simulation', '${node.name.replace(/'/g, "\\'")}', event)` : `navigateToPath(${JSON.stringify(fullPath).replace(/"/g, '&quot;')})`}" class="p-4 flex items-start ${node.clickable === false ? 'cursor-not-allowed opacity-75' : 'cursor-pointer'}">
                         <svg class="w-10 h-10 text-revelti-blue mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path></svg>
                         <div class="flex-1 min-w-0">
                             <h3 class="font-bold text-gray-800 truncate">${node.name}</h3>
-                            <p class="text-xs text-gray-500">${node.type === 'gallery' ? 'Gallery' : 'Folder'}</p>
+                            ${badgeHtml}
                         </div>
                         <div class="relative group ml-2">
                              <button class="text-gray-400 hover:text-gray-600 p-1" onclick="folderActionAlert('Options', '${node.name}', event)">
