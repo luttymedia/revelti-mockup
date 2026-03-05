@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revelti - All Folders</title>
+
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        revelti: {
+                            blue: '#213c63',
+                            orange: '#f58220',
+                            purple: '#6b21a8'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+
+    <!-- Google Fonts: Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Your Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body class="dashboard-layout bg-gray-100 antialiased text-gray-800" data-role="creative">
+    <!-- Creative-specific Navbar -->
+    <div id="creative-navbar-placeholder"></div>
+
+    <div class="dashboard-main-area">
+        <aside id="sidebar-placeholder" class="sidebar-container bg-white z-20"></aside>
+
+        <div class="main-wrapper">
+            <main class="page-content">
+                <div class="max-w-full mx-auto px-4 sm:px-4 lg:px-6 py-4">
+
+                    <!-- Header Section -->
+                    <header class="mb-8">
+                        <h1 class="text-3xl font-extrabold text-revelti-blue mb-2">All Folders</h1>
+                        <p class="text-gray-600">A global view of all your media folders across every event and
+                            collaboration.</p>
+                    </header>
+
+                    <!-- Filter Bar -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4 mb-6">
+                        <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
+
+                            <!-- Search -->
+                            <div class="w-full md:w-auto flex-1 max-w-md relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                    </svg>
+                                </div>
+                                <input type="text" id="search-input" placeholder="Search folders..."
+                                    class="w-full pl-10 px-4 py-2 border border-gray-300 rounded-lg focus:ring-revelti-blue focus:border-revelti-blue outline-none transition">
+                            </div>
+
+                            <!-- Filters container -->
+                            <div class="w-full md:w-auto flex flex-wrap gap-3">
+                                <!-- Status Filter -->
+                                <select id="status-filter"
+                                    class="px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-700 outline-none focus:ring-revelti-blue focus:border-revelti-blue cursor-pointer shadow-sm">
+                                    <option value="">Status: All</option>
+                                    <option value="published">Published</option>
+                                    <option value="draft">Draft</option>
+                                    <option value="scheduled">Scheduled</option>
+                                </select>
+
+                                <!-- Event Filter (Removed, incorporated into Search) -->
+
+                                <!-- Sort Filter -->
+                                <select id="sort-filter"
+                                    class="px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-700 outline-none focus:ring-revelti-blue focus:border-revelti-blue cursor-pointer shadow-sm">
+                                    <option value="updated_desc">Sort: Last Modified</option>
+                                    <option value="created_desc">Sort: Recently Created</option>
+                                    <option value="name_asc">Sort: A-Z</option>
+                                </select>
+
+                                <!-- Clear Filters Button (hidden by default) -->
+                                <button id="clear-filters-btn"
+                                    class="hidden px-4 py-2 text-gray-500 hover:text-gray-800 font-medium transition flex items-center">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                    Clear
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Folders Table Section -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 relative">
+                        <!-- Loading Overlay -->
+                        <div id="loading-overlay"
+                            class="absolute inset-0 bg-white/80 z-10 flex items-center justify-center hidden">
+                            <svg class="animate-spin h-8 w-8 text-revelti-blue" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                    stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor"
+                                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                                </path>
+                            </svg>
+                        </div>
+
+                        <!-- Main Table -->
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-gray-50 border-b border-gray-200">
+                                        <th class="py-4 px-6 font-bold text-gray-600 uppercase text-xs tracking-wider">
+                                            Folder Name</th>
+                                        <th class="py-4 px-6 font-bold text-gray-600 uppercase text-xs tracking-wider">
+                                            Event</th>
+                                        <th class="py-4 px-6 font-bold text-gray-600 uppercase text-xs tracking-wider">
+                                            Status</th>
+                                        <th class="py-4 px-6 font-bold text-gray-600 uppercase text-xs tracking-wider">
+                                            Last Modified</th>
+                                        <th class="py-4 px-6 font-bold text-gray-600 uppercase text-xs tracking-wider">
+                                            Created</th>
+                                        <th
+                                            class="py-4 px-6 font-bold text-gray-600 uppercase text-xs tracking-wider text-right">
+                                            Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="folders-table-body" class="divide-y divide-gray-100">
+                                    <!-- Rows will be injected here via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Empty States -->
+                        <div id="empty-state-no-folders" class="hidden py-16 px-6 text-center">
+                            <div
+                                class="w-16 h-16 bg-blue-50 text-revelti-blue rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">No folders yet</h3>
+                            <p class="text-gray-500 max-w-sm mx-auto mb-6">Create your first gallery inside an event
+                                workspace to start managing media.</p>
+                            <a href="creativeMediaManagement.html"
+                                class="inline-block bg-revelti-blue text-white font-bold py-2.5 px-6 rounded-lg hover:bg-blue-800 transition shadow-sm">
+                                Go to Events
+                            </a>
+                        </div>
+
+                        <div id="empty-state-no-results" class="hidden py-16 px-6 text-center">
+                            <div
+                                class="w-16 h-16 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center mx-auto mb-4 border border-gray-100">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-600 mb-2">No folders match your filters</h3>
+                            <p class="text-gray-400 max-w-sm mx-auto mb-6">Try adjusting your search terms or clearing
+                                current filters to see more results.</p>
+                            <button id="clear-filters-action-btn"
+                                class="inline-block bg-gray-100 text-gray-700 font-bold py-2.5 px-6 rounded-lg hover:bg-gray-200 transition">
+                                Clear filters
+                            </button>
+                        </div>
+
+                        <!-- Pagination (Visual Placeholder) -->
+                        <div id="pagination-container"
+                            class="border-t border-gray-100 px-6 py-4 flex items-center justify-between">
+                            <span class="text-sm text-gray-500" id="pagination-info">Showing <span
+                                    class="font-medium text-gray-700">1</span> to <span
+                                    class="font-medium text-gray-700">10</span> of <span
+                                    class="font-medium text-gray-700">20</span> results</span>
+                            <div class="flex space-x-1">
+                                <button
+                                    class="px-3 py-1 border border-gray-200 rounded text-gray-500 hover:bg-gray-50 bg-gray-50 cursor-not-allowed"
+                                    disabled>Prev</button>
+                                <button
+                                    class="px-3 py-1 border border-revelti-blue rounded bg-revelti-blue text-white">1</button>
+                                <button
+                                    class="px-3 py-1 border border-gray-200 rounded text-gray-700 hover:bg-gray-50">2</button>
+                                <button
+                                    class="px-3 py-1 border border-gray-200 rounded text-gray-700 hover:bg-gray-50">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Script Block for Logic -->
+    <script>
+        // Mock Data
+        const foldersData = [
+            {
+                id: 'f_001',
+                name: 'Jack & Jill Finals',
+                eventId: 'bgf',
+                eventName: 'Bachata Geneva Festival 2026',
+                status: 'published',
+                ownerId: 'currentUserId',
+                updatedAt: '2026-03-05T10:42:00',
+                createdAt: '2026-03-01T09:00:00',
+                path: ['bgf', 'sat', 'jandj']
+            },
+            {
+                id: 'f_002',
+                name: 'Main Stage Sunday',
+                eventId: 'bgf',
+                eventName: 'Bachata Geneva Festival 2026',
+                status: 'draft',
+                ownerId: 'currentUserId',
+                updatedAt: '2026-03-05T08:30:00',
+                createdAt: '2026-03-04T14:15:00',
+                path: ['bgf', 'sun']
+            },
+            {
+                id: 'f_003',
+                name: 'Friday Social Photos',
+                eventId: 'pkc',
+                eventName: 'Paris Kizomba Congress',
+                status: 'published',
+                ownerId: 'currentUserId',
+                updatedAt: '2026-03-04T16:15:00',
+                createdAt: '2026-02-28T11:20:00',
+                path: ['pkc', 'fri_social']
+            },
+            {
+                id: 'f_004',
+                name: 'Workshops Day 1',
+                eventId: 'pkc',
+                eventName: 'Paris Kizomba Congress',
+                status: 'draft',
+                ownerId: 'currentUserId',
+                updatedAt: '2026-03-04T09:00:00',
+                createdAt: '2026-03-03T10:00:00',
+                path: ['pkc', 'workshops_1']
+            },
+            {
+                id: 'f_005',
+                name: 'Saturday Social',
+                eventId: 'bgf',
+                eventName: 'Bachata Geneva Festival 2026',
+                status: 'scheduled',
+                ownerId: 'currentUserId',
+                updatedAt: '2026-03-01T15:00:00',
+                createdAt: '2026-03-01T14:00:00',
+                path: ['bgf', 'sat', 'Social']
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const tableBody = document.getElementById('folders-table-body');
+            const searchInput = document.getElementById('search-input');
+            const statusFilter = document.getElementById('status-filter');
+            const sortFilter = document.getElementById('sort-filter');
+            const emptyNoFolders = document.getElementById('empty-state-no-folders');
+            const emptyNoResults = document.getElementById('empty-state-no-results');
+            const loadingOverlay = document.getElementById('loading-overlay');
+            const paginationContainer = document.getElementById('pagination-container');
+            const clearBtns = [
+                document.getElementById('clear-filters-btn'),
+                document.getElementById('clear-filters-action-btn')
+            ];
+
+            function formatRelativeDate(dateString) {
+                const date = new Date(dateString);
+                const now = new Date('2026-03-05T12:00:00');
+                const diffTime = Math.abs(now - date);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                if (diffDays <= 1) return 'Today, ' + date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                if (diffDays === 2) return 'Yesterday, ' + date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+            }
+
+            function getStatusBadge(status) {
+                switch (status.toLowerCase()) {
+                    case 'published': return '<span class="bg-green-100 text-green-800 text-xs font-bold px-2.5 py-1 rounded-full uppercase">Published</span>';
+                    case 'draft': return '<span class="bg-orange-100 text-orange-800 text-xs font-bold px-2.5 py-1 rounded-full uppercase">Draft</span>';
+                    case 'scheduled': return '<span class="bg-blue-100 text-blue-800 text-xs font-bold px-2.5 py-1 rounded-full uppercase">Scheduled</span>';
+                    default: return '<span class="bg-gray-100 text-gray-800 text-xs font-bold px-2.5 py-1 rounded-full uppercase">' + status + '</span>';
+                }
+            }
+
+            // Read active filters straight from the URL — single source of truth
+            function getFiltersFromURL() {
+                var p = new URLSearchParams(window.location.search);
+                return {
+                    term: (p.get('search') || '').toLowerCase().trim(),
+                    status: (p.get('status') || '').toLowerCase().trim(),
+                    sort: p.get('sort') || 'updated_desc'
+                };
+            }
+
+            // Sync the select/input UI to match what's in the URL
+            function syncUIToURL() {
+                var f = getFiltersFromURL();
+                searchInput.value = f.term;
+                statusFilter.value = f.status;
+                sortFilter.value = f.sort;
+                // belt-and-suspenders: explicitly mark the right <option> selected
+                Array.from(statusFilter.options).forEach(function (o) { o.selected = (o.value === f.status); });
+                Array.from(sortFilter.options).forEach(function (o) { o.selected = (o.value === f.sort); });
+            }
+
+            // Push current UI state into the URL (called after user interaction)
+            function pushUIToURL() {
+                var url = new URL(window.location);
+                if (searchInput.value.trim()) url.searchParams.set('search', searchInput.value.trim());
+                else url.searchParams.delete('search');
+                if (statusFilter.value) url.searchParams.set('status', statusFilter.value);
+                else url.searchParams.delete('status');
+                if (sortFilter.value !== 'updated_desc') url.searchParams.set('sort', sortFilter.value);
+                else url.searchParams.delete('sort');
+                url.searchParams.delete('source');
+                window.history.replaceState({}, '', url);
+            }
+
+            function renderTable(data) {
+                emptyNoFolders.classList.add('hidden');
+                emptyNoResults.classList.add('hidden');
+                tableBody.innerHTML = '';
+
+                if (foldersData.length === 0) {
+                    emptyNoFolders.classList.remove('hidden');
+                    tableBody.parentElement.classList.add('hidden');
+                    paginationContainer.classList.add('hidden');
+                    return;
+                }
+                if (data.length === 0) {
+                    emptyNoResults.classList.remove('hidden');
+                    tableBody.parentElement.classList.add('hidden');
+                    paginationContainer.classList.add('hidden');
+                    return;
+                }
+
+                tableBody.parentElement.classList.remove('hidden');
+                paginationContainer.classList.remove('hidden');
+
+                data.forEach(function (folder) {
+                    var qs = new URLSearchParams(window.location.search);
+                    qs.set('source', 'folders');
+                    qs.set('folder_path', folder.path.join(','));
+                    var detailUrl = 'creativeFolderDetail?' + qs.toString();
+
+                    var row = document.createElement('tr');
+                    row.className = 'hover:bg-blue-50/50 transition duration-150 group';
+                    row.innerHTML =
+                        '<td class="py-4 px-6 border-b border-gray-100">' +
+                        '<a href="' + detailUrl + '" class="flex items-center">' +
+                        '<svg class="w-6 h-6 text-revelti-blue mr-3 opacity-70 group-hover:opacity-100 transition" fill="currentColor" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path></svg>' +
+                        '<span class="font-bold text-gray-800 group-hover:text-revelti-blue transition">' + folder.name + '</span>' +
+                        '</a>' +
+                        '</td>' +
+                        '<td class="py-4 px-6 border-b border-gray-100 whitespace-nowrap">' +
+                        '<a href="creativeMediaManagement.html" class="inline-flex items-center text-sm text-gray-600 hover:text-revelti-blue bg-gray-50 border border-gray-200 rounded px-2.5 py-1 hover:bg-blue-50 transition" title="Go to Event Workspace">' +
+                        '<span>' + folder.eventName + '</span>' +
+                        '</a>' +
+                        '</td>' +
+                        '<td class="py-4 px-6 border-b border-gray-100 whitespace-nowrap">' + getStatusBadge(folder.status) + '</td>' +
+                        '<td class="py-4 px-6 border-b border-gray-100 text-sm text-gray-500 whitespace-nowrap">' + formatRelativeDate(folder.updatedAt) + '</td>' +
+                        '<td class="py-4 px-6 border-b border-gray-100 text-sm text-gray-500 whitespace-nowrap">' + formatRelativeDate(folder.createdAt) + '</td>' +
+                        '<td class="py-4 px-6 border-b border-gray-100 text-right whitespace-nowrap">' +
+                        '<div class="relative inline-block text-left">' +
+                        '<button class="text-gray-400 hover:text-gray-600 p-2 rounded-full hover:bg-gray-100 transition focus:outline-none" onclick="event.stopPropagation(); alert(\'Folder Options\')">' +
+                        '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path></svg>' +
+                        '</button>' +
+                        '</div>' +
+                        '</td>';
+                    tableBody.appendChild(row);
+                });
+
+                document.getElementById('pagination-info').innerHTML =
+                    'Showing <span class="font-medium text-gray-700">1</span> to ' +
+                    '<span class="font-medium text-gray-700">' + data.length + '</span> of ' +
+                    '<span class="font-medium text-gray-700">' + data.length + '</span> results';
+            }
+
+            function applyFiltersAndRender() {
+                loadingOverlay.classList.remove('hidden');
+                // Read straight from URL — immune to any DOM timing issues
+                var f = getFiltersFromURL();
+
+                setTimeout(function () {
+                    var filtered = foldersData.slice();
+
+                    if (f.term) {
+                        filtered = filtered.filter(function (folder) {
+                            return folder.name.toLowerCase().indexOf(f.term) !== -1 ||
+                                folder.eventName.toLowerCase().indexOf(f.term) !== -1 ||
+                                (folder.eventId && folder.eventId.toLowerCase().indexOf(f.term) !== -1);
+                        });
+                    }
+                    if (f.status) {
+                        filtered = filtered.filter(function (folder) {
+                            return folder.status && folder.status.toLowerCase() === f.status;
+                        });
+                    }
+
+                    filtered.sort(function (a, b) {
+                        if (f.sort === 'created_desc') return new Date(b.createdAt) - new Date(a.createdAt);
+                        if (f.sort === 'name_asc') return a.name.localeCompare(b.name);
+                        return new Date(b.updatedAt) - new Date(a.updatedAt);
+                    });
+
+                    renderTable(filtered);
+
+                    if (f.term || f.status) {
+                        clearBtns[0].classList.remove('hidden');
+                    } else {
+                        clearBtns[0].classList.add('hidden');
+                    }
+
+                    loadingOverlay.classList.add('hidden');
+                }, 150);
+            }
+
+            function clearFilters() {
+                var url = new URL(window.location);
+                url.searchParams.delete('search');
+                url.searchParams.delete('status');
+                url.searchParams.delete('sort');
+                url.searchParams.delete('source');
+                window.history.replaceState({}, '', url);
+                syncUIToURL();
+                applyFiltersAndRender();
+            }
+
+            // User-interaction listeners: push UI → URL, then re-render from URL
+            searchInput.addEventListener('input', function () { pushUIToURL(); applyFiltersAndRender(); });
+            statusFilter.addEventListener('change', function () { pushUIToURL(); applyFiltersAndRender(); });
+            sortFilter.addEventListener('change', function () { pushUIToURL(); applyFiltersAndRender(); });
+            clearBtns.forEach(function (btn) { if (btn) btn.addEventListener('click', clearFilters); });
+
+            // Init: sync dropdowns to whatever is in the URL, then render
+            syncUIToURL();
+            applyFiltersAndRender();
+        });
+    </script>
+
+    <script src="layout-injector.js" defer></script>
+    <script src="creative.js" defer></script>
+</body>

@@ -245,48 +245,158 @@
 
                             <!-- Workspace Tab -->
                             <div id="workspace" class="tab-content">
-                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-start">
                                     <!-- Resume Drafts -->
                                     <div
-                                        class="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                                        class="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow lg:col-span-2">
                                         <div class="flex items-center justify-between mb-4">
                                             <h3 class="text-lg font-bold text-revelti-blue">Resume Drafts</h3>
-                                            <svg class="w-6 h-6 text-orange-500" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
-                                                </path>
-                                            </svg>
+                                            <a href="creativeFolders?status=draft&source=dashboard"
+                                                class="flex items-center justify-center p-2 rounded-full hover:bg-orange-50 transition"
+                                                title="View All Drafts">
+                                                <svg class="w-6 h-6 text-orange-500" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                                                    </path>
+                                                </svg>
+                                            </a>
                                         </div>
                                         <p class="text-sm text-gray-500 mb-4">Continue working on your saved draft
-                                            events and media.</p>
-                                        <button
-                                            class="w-full px-4 py-2 text-sm font-bold bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">View
-                                            Drafts</button>
+                                            folders and media.</p>
+
+                                        <div class="space-y-3 mb-4">
+                                            <!-- Draft 1 -->
+                                            <div
+                                                class="flex items-center justify-between p-3 bg-gray-50 rounded border border-gray-100">
+                                                <div>
+                                                    <div class="flex items-center space-x-2">
+                                                        <span class="font-semibold text-revelti-blue text-sm">Main Stage
+                                                            Sunday</span>
+                                                        <span
+                                                            class="text-[10px] font-bold px-2 py-0.5 bg-orange-100 text-orange-800 rounded uppercase">Draft</span>
+                                                    </div>
+                                                    <div class="text-xs text-gray-500 mt-1">Bachata Geneva Festival 2026
+                                                        • Edited 2h ago</div>
+                                                </div>
+                                                <a href="creativeFolderDetail?source=folders&folder_path=bgf,sun"
+                                                    class="text-sm font-semibold text-revelti-blue hover:text-blue-800 transition">Continue</a>
+                                            </div>
+
+                                            <!-- Draft 2 -->
+                                            <div
+                                                class="flex items-center justify-between p-3 bg-gray-50 rounded border border-gray-100 opacity-75">
+                                                <div>
+                                                    <div class="flex items-center space-x-2">
+                                                        <span class="font-semibold text-gray-600 text-sm">Workshops Day
+                                                            1</span>
+                                                        <span
+                                                            class="text-[10px] font-bold px-2 py-0.5 bg-orange-100 text-orange-800 rounded uppercase">Draft</span>
+                                                    </div>
+                                                    <div class="text-xs text-gray-500 mt-1">Paris Kizomba Congress 2026
+                                                        • Edited yesterday</div>
+                                                </div>
+                                                <a href="creativeFolderDetail?source=folders&folder_path=pkc,workshops_1"
+                                                    class="text-sm font-semibold text-revelti-blue hover:text-blue-800 transition">Continue</a>
+                                            </div>
+
+                                            <a href="creativeFolders?status=draft&source=dashboard"
+                                                class="block text-center text-sm font-semibold text-revelti-blue hover:text-blue-800 transition py-4 border-2 border-dashed border-gray-200 rounded-lg hover:border-revelti-blue hover:bg-blue-50">
+                                                View all Draft Folders
+                                            </a>
+                                        </div>
                                     </div>
 
                                     <!-- Recent Folders -->
                                     <div
-                                        class="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                                        class="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow lg:col-span-2">
                                         <div class="flex items-center justify-between mb-4">
                                             <h3 class="text-lg font-bold text-revelti-blue">Recent Folders</h3>
-                                            <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z">
-                                                </path>
-                                            </svg>
+                                            <a href="creativeFolders.html?sort=updated_desc&source=dashboard"
+                                                class="flex items-center justify-center p-2 rounded-full hover:bg-blue-50 transition"
+                                                title="View All Folders">
+                                                <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z">
+                                                    </path>
+                                                </svg>
+                                            </a>
                                         </div>
                                         <p class="text-sm text-gray-500 mb-4">Quickly access recently modified media
-                                            folders.</p>
-                                        <button
-                                            class="w-full px-4 py-2 text-sm font-bold bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">Open
-                                            Folders</button>
+                                            folders from any event.</p>
+
+                                        <div class="space-y-3">
+                                            <!-- BGF Folder (Working) -->
+                                            <a href="creativeFolderDetail.html"
+                                                class="flex items-center justify-between p-3 bg-gray-50 rounded border border-gray-100 hover:bg-gray-100 transition group cursor-pointer block">
+                                                <div class="flex items-center">
+                                                    <svg class="w-5 h-5 text-revelti-blue mr-3 opacity-70 group-hover:opacity-100"
+                                                        fill="currentColor" viewBox="0 0 20 20">
+                                                        <path
+                                                            d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z">
+                                                        </path>
+                                                    </svg>
+                                                    <div>
+                                                        <div
+                                                            class="font-semibold text-gray-700 text-sm group-hover:text-revelti-blue transition">
+                                                            Jack & Jill Finals</div>
+                                                        <div class="text-xs text-gray-500 font-medium">Bachata Geneva
+                                                            Festival 2026</div>
+                                                    </div>
+                                                </div>
+                                                <div class="text-xs text-gray-400 whitespace-nowrap">Today, 10:42 AM
+                                                </div>
+                                            </a>
+
+                                            <!-- BSF Folder (Archived) -->
+                                            <div
+                                                class="flex items-center justify-between p-3 bg-gray-50 rounded border border-gray-100 opacity-60">
+                                                <div class="flex items-center">
+                                                    <svg class="w-5 h-5 text-gray-400 mr-3" fill="currentColor"
+                                                        viewBox="0 0 20 20">
+                                                        <path
+                                                            d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z">
+                                                        </path>
+                                                    </svg>
+                                                    <div>
+                                                        <div class="font-semibold text-gray-500 text-sm">Pool Party
+                                                            Media</div>
+                                                        <div class="text-xs text-gray-400 font-medium">Barcelona Summer
+                                                            Fest</div>
+                                                    </div>
+                                                </div>
+                                                <div class="text-xs text-gray-400 whitespace-nowrap">Aug 02, 2026</div>
+                                            </div>
+
+                                            <!-- PKC Folder (Active) -->
+                                            <div
+                                                class="flex items-center justify-between p-3 bg-gray-50 rounded border border-gray-100 opacity-80">
+                                                <div class="flex items-center">
+                                                    <svg class="w-5 h-5 text-gray-400 mr-3" fill="currentColor"
+                                                        viewBox="0 0 20 20">
+                                                        <path
+                                                            d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z">
+                                                        </path>
+                                                    </svg>
+                                                    <div>
+                                                        <div class="font-semibold text-gray-600 text-sm">Friday Social
+                                                            Photos</div>
+                                                        <div class="text-xs text-gray-500 font-medium">Paris Kizomba
+                                                            Congress</div>
+                                                    </div>
+                                                </div>
+                                                <div class="text-xs text-gray-400 whitespace-nowrap">Yesterday, 4:15 PM
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <!-- Create New Folder -->
                                     <div
-                                        class="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                                        class="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow lg:col-span-2">
                                         <div class="flex items-center justify-between mb-4">
                                             <h3 class="text-lg font-bold text-revelti-blue">Create New Folder</h3>
                                             <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor"
@@ -296,16 +406,18 @@
                                                 </path>
                                             </svg>
                                         </div>
-                                        <p class="text-sm text-gray-500 mb-4">Organize your upcoming event media
-                                            clearly.</p>
+                                        <p class="text-sm font-semibold text-gray-600 mb-1">Organize media inside an
+                                            existing event.</p>
+                                        <p class="text-sm text-gray-500 mb-4">Choose an active collaboration to add
+                                            subfolders to.</p>
                                         <button
-                                            class="w-full px-4 py-2 text-sm font-bold bg-revelti-blue text-white rounded-lg hover:bg-blue-800 transition-colors">Create
-                                            Folder</button>
+                                            class="w-full px-4 py-2 text-sm font-bold bg-revelti-blue text-white rounded-lg hover:bg-blue-800 transition-colors shadow-sm">Create
+                                            New Folder</button>
                                     </div>
 
                                     <!-- Quick Access -->
                                     <div
-                                        class="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                                        class="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow lg:col-span-2">
                                         <div class="flex items-center justify-between mb-4">
                                             <h3 class="text-lg font-bold text-revelti-blue">Quick Access</h3>
                                             <svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor"
@@ -315,10 +427,10 @@
                                                 </path>
                                             </svg>
                                         </div>
-                                        <p class="text-sm text-gray-500 mb-4">Upload Manager shortcut for fast media
-                                            processing.</p>
-                                        <a href="creativeMediaManagement.html"
-                                            class="block text-center w-full px-4 py-2 text-sm font-bold bg-revelti-blue text-white rounded-lg hover:bg-blue-800 transition-colors">Upload
+                                        <p class="text-sm text-gray-500 mb-4">Jump straight into the media uploader and
+                                            select an event to deposit files into.</p>
+                                        <a href="uploadManager.html"
+                                            class="block text-center w-full px-4 py-2 text-sm font-bold bg-revelti-blue text-white rounded-lg hover:bg-blue-800 transition-colors shadow-sm mt-5">Upload
                                             Media</a>
                                     </div>
                                 </div>

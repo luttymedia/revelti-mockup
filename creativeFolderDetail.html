@@ -410,7 +410,7 @@
             ]
         };
 
-        let currentPath = ['bgf', 'sat']; // Default starting path
+        let currentPath = []; // Default starting path
 
         function findNodeByPath(path) {
             let currentNode = mockGalleryData;
@@ -504,14 +504,35 @@
             });
         }
 
+        // Store initial source context to persist across simulated internal navigation
+        const initialSourceUrlParams = new URLSearchParams(window.location.search);
+        const isFromFoldersIndex = initialSourceUrlParams.get('source') === 'folders';
+
         function navigateBack() {
-            if (currentPath.length > 0) {
+            if (isFromFoldersIndex) {
+                // If opened from the global folders index, return there, preserving filters
+                // Remove 'source' and 'folder_path' from params before returning
+                const urlParams = new URLSearchParams(window.location.search);
+                urlParams.delete('source');
+                urlParams.delete('folder_path');
+                const queryString = urlParams.toString();
+                window.location.href = `creativeFolders.html${queryString ? '?' + queryString : ''}`;
+            } else if (currentPath.length > 0) {
+                // Standard hierarchical navigation
                 currentPath.pop();
                 navigateToPath([...currentPath]);
             }
         }
 
         function navigateToPath(pathArr) {
+            // Update URL to reflect current path without reloading
+            const urlParams = new URLSearchParams(window.location.search);
+            if (isFromFoldersIndex) {
+                // Ensure source context is preserved in URL during internal navigation if needed
+                urlParams.set('source', 'folders');
+                window.history.replaceState({}, '', `creativeFolderDetail.html?${urlParams.toString()}`);
+            }
+
             currentPath = pathArr;
             renderDynamicContent();
         }
@@ -610,10 +631,14 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const folderPathStr = urlParams.get('folder_path');
+            if (folderPathStr) {
+                const newPath = folderPathStr.split(',');
+                // Simulate setting context base for breadcrumb (simplified for mock)
+                currentPath = newPath;
+            }
             renderDynamicContent();
-            // Handle context query params for demonstration if needed:
-            // const urlParams = new URLSearchParams(window.location.search);
-            // if (urlParams.get('folder')) { navigateToPath(['bgf', urlParams.get('folder')]); }
         });
 
     </script>
