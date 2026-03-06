@@ -348,7 +348,6 @@
             });
         });
 
-        // Mock Data specifically for this page (based on organizerMediaManagement structure)
         const mockGalleryData = {
             id: 'root',
             name: 'Studio',
@@ -356,10 +355,11 @@
                 {
                     id: 'bgf_main',
                     name: 'Bachata Geneva Festival',
-                    status: 'Public',
+                    status: 'Published',
                     owner: 'AMedia',
                     type: 'folder',
                     clickable: true,
+                    isGalleryRoot: true,
                     children: [
                         {
                             id: '2026',
@@ -430,15 +430,17 @@
                         { id: '2024', name: '2024', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, children: [] }
                     ]
                 },
-                { id: 'fake1', name: 'Zouk Festival Zurich', status: 'Private', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
-                { id: 'fake2', name: 'Bailando Sensual', status: 'Private', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
-                { id: 'fake3', name: 'Salsa Congress', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
-                { id: 'fake4', name: 'Paris Kizomba Congress', status: 'Scheduled', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
-                { id: 'fake5', name: 'Oman Salsa Festival', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
-                { id: 'fake6', name: 'Geneva Zouk', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
-                { id: 'fake7', name: 'Croatia Summer Festival', status: 'Private', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
-                { id: 'fake8', name: 'Miami Afro', status: 'Scheduled', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
-                { id: 'fake9', name: 'Berlin Salsa Congress', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, children: [] }
+                { id: 'zouk_zurich', name: 'Zouk Festival Zurich', status: 'Draft', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
+                { id: 'bailando_sensual', name: 'Bailando Sensual', status: 'Draft', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
+                { id: 'salsa_congress', name: 'Salsa Congress', status: 'Published', owner: 'AMedia', type: 'folder', clickable: false, isGalleryRoot: true, children: [] },
+                { id: 'paris_kizomba', name: 'Paris Kizomba Congress', status: 'Scheduled', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
+                { id: 'oman_salsa', name: 'Oman Salsa Festival', status: 'Published', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
+                { id: 'geneva_zouk', name: 'Geneva Zouk', status: 'Published', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
+                { id: 'croatia_summer', name: 'Croatia Summer Festival', status: 'Draft', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
+                { id: 'miami_afro', name: 'Miami Afro', status: 'Scheduled', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
+                { id: 'berlin_salsa', name: 'Berlin Salsa Congress', status: 'Published', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
+                { id: 'temporary_uploads', name: 'Temporary Uploads', status: 'Private', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
+                { id: 'archived_work', name: 'Archived Work', status: 'Private', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
             ]
         };
 
@@ -455,7 +457,7 @@
 
         function folderActionAlert(action, folderName, e) {
             e.stopPropagation();
-            alert(`Simulating ${action} on folder: ${folderName}`);
+            // Action intentionally left unresponsive to avoid native browser popups
         }
 
         function getPublishStateBadge(node) {
@@ -486,16 +488,30 @@
         function createFolderCard(node, fullPath) {
             const hasChildren = node.children && node.children.length > 0;
             const badgeHtml = getPublishStateBadge(node);
+
+            let galleryBadgeHtml = '';
+            if (node.isGalleryRoot) {
+                galleryBadgeHtml = `<span title="Gallery Root" class="ml-2 inline-flex items-center text-[10px] font-bold px-2 py-0.5 mt-1.5 rounded-full bg-purple-100 text-purple-800 cursor-help whitespace-nowrap">
+                    <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    Gallery
+                </span>`;
+            }
+
             return `
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition">
-                    <div onclick="${node.clickable === false ? `folderActionAlert('Simulation', '${node.name.replace(/'/g, "\\'")}', event)` : `navigateToPath(${JSON.stringify(fullPath).replace(/"/g, '&quot;')})`}" class="p-4 flex items-start ${node.clickable === false ? 'cursor-not-allowed opacity-75' : 'cursor-pointer'}">
-                        <svg class="w-10 h-10 text-revelti-blue mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path></svg>
-                        <div class="flex-1 min-w-0">
-                            <h3 class="font-bold text-gray-800 truncate">${node.name}</h3>
-                            ${badgeHtml}
+                    <div class="p-4 flex items-start">
+                        <div onclick="${node.clickable === false ? `folderActionAlert('Simulation', '${node.name.replace(/'/g, "\\'")}', event)` : `navigateToPath(${JSON.stringify(fullPath).replace(/"/g, '&quot;')})`}" class="flex-1 min-w-0 flex items-start ${node.clickable === false ? 'cursor-not-allowed opacity-75' : 'cursor-pointer'}">
+                            <svg class="w-10 h-10 text-revelti-blue mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path></svg>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="font-bold text-gray-800 truncate">${node.name}</h3>
+                                <div class="flex items-center flex-wrap">
+                                    ${badgeHtml}
+                                    ${galleryBadgeHtml}
+                                </div>
+                            </div>
                         </div>
-                        <div class="relative group ml-2">
-                             <button class="text-gray-400 hover:text-gray-600 p-1" onclick="folderActionAlert('Options', '${node.name}', event)">
+                        <div class="relative group ml-2 shrink-0">
+                             <button type="button" class="text-gray-400 hover:text-gray-600 p-1 rounded hover:bg-gray-100" onclick="toggleContextMenu(event, '${node.id}', ${JSON.stringify(fullPath).replace(/"/g, '&quot;')})">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path></svg>
                              </button>
                         </div>
@@ -621,7 +637,17 @@
             const subfoldersGrid = document.getElementById('subfolders-grid');
             const mediaGrid = document.getElementById('media-grid');
 
-            activeFolderName.textContent = currentNode.name;
+            activeFolderName.innerHTML = currentNode.name;
+            if (currentPath[0] === 'bgf_main' && currentPath.length === 1) {
+                activeFolderName.innerHTML += `
+                    <span class="ml-3 inline-flex items-center text-xs font-bold px-2 py-0.5 mt-1.5 rounded-full bg-green-100 text-green-800 align-text-bottom">Published</span>
+                    <span class="ml-2 inline-flex items-center text-xs font-bold px-2 py-0.5 mt-1.5 rounded-full bg-purple-100 text-purple-800 cursor-help align-text-bottom">
+                        <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        Gallery
+                    </span>
+                `;
+            }
+
             if (currentPath.length > 0) {
                 backButton.classList.remove('hidden');
             } else {
@@ -709,7 +735,465 @@
             renderDynamicContent();
         });
 
+        // Setup Toast Notification system
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `px-4 py-3 rounded shadow-lg text-sm font-semibold text-white transition-opacity duration-300 flex items-center transform translate-y-2 opacity-0
+                ${type === 'success' ? 'bg-green-600' : 'bg-gray-800'}`;
+            // icon
+            let iconHtml = '';
+            if (type === 'success') {
+                iconHtml = `<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
+            }
+            toast.innerHTML = `${iconHtml}${message}`;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        let activeContextMenu = null;
+
+        function closeContextMenu() {
+            if (activeContextMenu) {
+                activeContextMenu.remove();
+                activeContextMenu = null;
+            }
+        }
+
+        document.addEventListener('click', closeContextMenu);
+
+        function toggleContextMenu(event, nodeId, fullPath) {
+            event.preventDefault();
+            event.stopPropagation();
+            closeContextMenu();
+
+            const node = findNodeByPath(fullPath);
+            if (!node) return;
+
+            const isGalleryRoot = node.isGalleryRoot;
+            let galleryOptionsHtml = '';
+
+            if (isGalleryRoot) {
+                galleryOptionsHtml = `
+                    <button onclick="folderActionAlert('View Gallery', '${node.name.replace(/'/g, "\\'")}', event); closeContextMenu()" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                        View Gallery
+                    </button>
+                    <button onclick="handleEditGalleryClick(${JSON.stringify(fullPath).replace(/"/g, '&quot;')}, event)" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        Edit Gallery Settings
+                    </button>
+                `;
+            } else {
+                galleryOptionsHtml = `
+                    <button onclick="handleCreateGalleryClick('${node.id}', ${JSON.stringify(fullPath).replace(/"/g, '&quot;')}, event)" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        Create Gallery
+                    </button>
+                `;
+            }
+
+            const menuHtml = `
+                <div id="context-menu-dropdown" class="absolute z-50 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none" style="left: ${event.pageX}px; top: ${event.pageY}px;">
+                    <div class="py-1">
+                        <button onclick="${node.clickable === false ? `folderActionAlert('Open', '${node.name.replace(/'/g, "\\'")}', event)` : `navigateToPath(${JSON.stringify(fullPath).replace(/"/g, '&quot;')}); closeContextMenu()`}" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            Open
+                        </button>
+                        <button onclick="openGenericModal('Rename Folder', 'Enter new name for <b>${node.name.replace(/'/g, "\\'")}</b>', 'Rename'); closeContextMenu(); event.stopPropagation();" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            Rename
+                        </button>
+                        <button onclick="openGenericModal('Move Folder', 'Select destination for <b>${node.name.replace(/'/g, "\\'")}</b><br><br><select class=\\'w-full border border-gray-300 p-2 rounded-lg bg-white outline-none focus:border-revelti-blue\\'><option>Studio</option><option>Bachata Geneva Festival</option><option>Client Work</option></select>', 'Move'); closeContextMenu(); event.stopPropagation();" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            Move
+                        </button>
+                        <button onclick="showToast('Copied ${node.name.replace(/'/g, "\\'")}', 'success'); closeContextMenu(); event.stopPropagation();" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            Copy
+                        </button>
+                        <button onclick="showToast('Downloading ${node.name.replace(/'/g, "\\'")}...', 'info'); closeContextMenu(); event.stopPropagation();" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            Download
+                        </button>
+                        <button onclick="showToast('Deleted ${node.name.replace(/'/g, "\\'")}', 'error'); closeContextMenu(); event.stopPropagation();" class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center">
+                            Delete
+                        </button>
+                    </div>
+                    <div class="py-1">
+                        <button onclick="folderActionAlert('Share', '${node.name.replace(/'/g, "\\'")}', event); closeContextMenu()" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            Share
+                        </button>
+                        <button onclick="showToast('Link copied to clipboard', 'success'); closeContextMenu(); event.stopPropagation();" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            Copy link
+                        </button>
+                    </div>
+                    <div class="py-1">
+                        ${galleryOptionsHtml}
+                        <button onclick="openAttachEventModal('${node.name.replace(/'/g, "\\'")}'); closeContextMenu(); event.stopPropagation();" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            Attach to Event
+                        </button>
+                    </div>
+                    <div class="py-1">
+                        <button onclick="folderActionAlert('View Details', '${node.name.replace(/'/g, "\\'")}', event); closeContextMenu()" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            const menuContainer = document.createElement('div');
+            menuContainer.innerHTML = menuHtml;
+            activeContextMenu = menuContainer.firstElementChild;
+
+            // Prevent clicks inside context menu from closing it immediately before action triggers
+            activeContextMenu.addEventListener('click', (e) => e.stopPropagation());
+
+            document.body.appendChild(activeContextMenu);
+
+            const rect = activeContextMenu.getBoundingClientRect();
+            let left = event.pageX;
+            let top = event.pageY;
+
+            if (event.clientX + rect.width > window.innerWidth) {
+                left = window.innerWidth - rect.width - 16 + window.scrollX;
+            }
+            if (event.clientY + rect.height > window.innerHeight) {
+                // nudge up just enough to fit on screen
+                const overflowY = (event.clientY + rect.height) - window.innerHeight;
+                top -= (overflowY + 16);
+            }
+            if (top < window.scrollY + 16) {
+                // prevent it from going off top of the screen
+                top = window.scrollY + 16;
+            }
+
+            activeContextMenu.style.left = `${left}px`;
+            activeContextMenu.style.top = `${top}px`;
+        }
+
+        function generateGalleryTreeHtml(currentNode, targetId, depth = 0) {
+            if (!currentNode || !currentNode.children) return '';
+
+            let html = '';
+            const padding = depth * 16 + 12;
+
+            currentNode.children.forEach(child => {
+                const isSelected = child.id === targetId;
+                const textColor = isSelected ? 'text-revelti-blue font-semibold bg-blue-50' : 'text-gray-700';
+                const hasChildren = child.children && child.children.length > 0;
+
+                let chevronHtml = `<svg class="w-4 h-4 flex-shrink-0 mr-1 text-gray-400 opacity-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"></svg>`;
+                if (hasChildren) {
+                    chevronHtml = `<svg class="w-4 h-4 flex-shrink-0 mr-1 text-gray-400 cursor-pointer hover:text-gray-700 transition" onclick="toggleTreeNode(event, '${child.id}')" id="chevron-${child.id}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>`;
+                }
+
+                html += `<div class="flex items-center ${textColor} py-1 px-2 rounded" style="padding-left: ${padding}px">
+                    ${chevronHtml}
+                    <svg class="w-4 h-4 flex-shrink-0 mr-1 text-revelti-blue" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path>
+                    </svg><span class="truncate" ${isSelected ? 'id="cg-tree-target"' : ''}>${child.name}</span>
+                </div>`;
+
+                if (hasChildren) {
+                    html += `<div id="tree-children-${child.id}" class="hidden">`;
+                    html += generateGalleryTreeHtml(child, targetId, depth + 1);
+                    html += `</div>`;
+                }
+            });
+            return html;
+        }
+
+        function toggleTreeNode(e, id) {
+            e.stopPropagation();
+            const childrenContainer = document.getElementById(`tree-children-${id}`);
+            const chevron = document.getElementById(`chevron-${id}`);
+            if (childrenContainer) {
+                if (childrenContainer.classList.contains('hidden')) {
+                    childrenContainer.classList.remove('hidden');
+                    chevron.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />`;
+                } else {
+                    childrenContainer.classList.add('hidden');
+                    chevron.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />`;
+                }
+            }
+        }
+
+        function handleEditGalleryClick(fullPath, event) {
+            event.stopPropagation();
+            closeContextMenu();
+            const targetNode = findNodeByPath(fullPath);
+            openCreateGalleryModal(targetNode.name, targetNode.id, "Edit Gallery Settings");
+        }
+
+        // Modals Simulation Logic
+        function closeModals() {
+            document.getElementById('modal-backdrop').classList.add('hidden');
+            document.querySelectorAll('#modal-backdrop > div').forEach(el => el.classList.add('hidden'));
+        }
+
+        function handleCreateGalleryClick(nodeId, fullPath, event) {
+            event.stopPropagation();
+            closeContextMenu();
+
+            let parentGallery = null;
+            let currentCheckPath = [];
+            for (let id of fullPath) {
+                currentCheckPath.push(id);
+                if (id === nodeId) continue;
+                let checkNode = findNodeByPath(currentCheckPath);
+                if (checkNode && checkNode.isGalleryRoot) {
+                    parentGallery = checkNode;
+                    break;
+                }
+            }
+
+            const targetNode = findNodeByPath(fullPath);
+
+            if (parentGallery) {
+                openWarningModal(parentGallery.name, targetNode.name);
+            } else {
+                openCreateGalleryModal(targetNode.name, targetNode.id, "Create Gallery");
+            }
+        }
+
+        function openCreateGalleryModal(folderName, targetId = null, title = "Create Gallery") {
+            document.getElementById('modal-backdrop').classList.remove('hidden');
+            document.getElementById('modal-create-gallery').classList.remove('hidden');
+            document.getElementById('modal-create-gallery-title').innerText = title;
+            document.getElementById('cg-selected-folder').innerText = folderName;
+
+            const treeContainer = document.getElementById('cg-tree-target-container');
+            if (treeContainer) {
+                treeContainer.innerHTML = generateGalleryTreeHtml(mockGalleryData, targetId, 0);
+            }
+
+            document.getElementById('cg-url-preview').innerText = folderName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+        }
+
+        function openWarningModal(parentGalleryName, targetFolderName) {
+            document.getElementById('modal-backdrop').classList.remove('hidden');
+            document.getElementById('modal-warning-gallery').classList.remove('hidden');
+            document.getElementById('warn-parent-gallery').innerText = parentGalleryName;
+            // Store names for the move confirmation
+            window._pendingMoveParent = parentGalleryName;
+            window._pendingMoveTarget = targetFolderName;
+        }
+
+        function openMoveGalleryRootModal() {
+            document.getElementById('modal-backdrop').classList.remove('hidden');
+            // Hide the warning modal immediately if it's there
+            document.getElementById('modal-warning-gallery').classList.add('hidden');
+            document.getElementById('modal-move-root').classList.remove('hidden');
+            document.getElementById('move-from').innerText = window._pendingMoveParent || 'Parent Gallery';
+            document.getElementById('move-to').innerText = window._pendingMoveTarget || 'Target Folder';
+        }
+
+        function openAttachEventModal(folderName) {
+            document.getElementById('modal-backdrop').classList.remove('hidden');
+            document.getElementById('modal-attach-event').classList.remove('hidden');
+            document.getElementById('attach-folder-name').innerText = folderName;
+        }
+
+        function openGenericModal(title, contentHtml, btnText) {
+            const modalHtml = `
+                <div id="dynamic-generic-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 z-50 flex items-center justify-center">
+                    <div class="bg-white rounded-xl shadow-xl w-full max-w-sm overflow-hidden transform transition-all">
+                        <div class="px-6 py-4 border-b border-gray-100">
+                            <h3 class="font-bold text-gray-800 text-lg">${title}</h3>
+                        </div>
+                        <div class="p-6 text-sm text-gray-700">
+                            ${contentHtml}
+                            ${title === 'Rename Folder' ? '<input type="text" class="w-full mt-4 border border-gray-300 p-2 rounded-lg outline-none focus:border-revelti-blue bg-white" value="New Name">' : ''}
+                        </div>
+                        <div class="px-6 py-4 bg-gray-50 flex justify-end space-x-3">
+                            <button onclick="document.getElementById('dynamic-generic-modal').remove()" class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50 transition">Cancel</button>
+                            <button onclick="showToast('${btnText} successful', 'success'); document.getElementById('dynamic-generic-modal').remove()" class="px-4 py-2 bg-revelti-blue text-white rounded-lg text-sm font-bold hover:bg-blue-800 transition">${btnText}</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+        }
     </script>
+
+    <!-- Modals Simulation Sandbox -->
+    <div id="modal-backdrop"
+        class="fixed inset-0 bg-gray-900 bg-opacity-50 z-[100] hidden flex items-center justify-center">
+        <!-- Create Gallery Modal -->
+        <div id="modal-create-gallery"
+            class="bg-white rounded-xl shadow-xl w-full max-w-lg overflow-hidden hidden transform transition-all max-h-[90vh] flex flex-col">
+            <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center shrink-0">
+                <h3 class="font-bold text-gray-800 text-lg" id="modal-create-gallery-title">Create Gallery</h3>
+                <button onclick="closeModals()" class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+            <div class="p-6 space-y-6 overflow-y-auto">
+                <p class="text-sm text-gray-600">Turn a folder into a Revelti gallery. All files and subfolders inside
+                    will become sections of the gallery.</p>
+                <div>
+                    <h4 class="font-bold text-gray-700 text-sm mb-2">Selected Folder</h4>
+                    <div class="bg-gray-50 border border-gray-200 rounded p-3 mb-2 flex items-center">
+                        <svg class="w-5 h-5 text-revelti-blue mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path>
+                        </svg>
+                        <span id="cg-selected-folder" class="font-semibold text-gray-800 text-sm">Folder Name</span>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gray-700 text-sm mb-2">Gallery Root Location</h4>
+                    <div class="border border-gray-200 rounded p-3 h-40 overflow-y-auto bg-white text-sm">
+                        <!-- Simulated Tree View -->
+                        <div id="cg-tree-target-container"></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gray-700 text-sm mb-2">Gallery Link Preview</h4>
+                    <div class="px-3 py-2 bg-gray-50 border border-gray-200 rounded text-sm text-gray-500 font-mono">
+                        revelti.com/g/<span id="cg-url-preview" class="text-gray-800">folder-name</span>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <h4 class="font-bold text-gray-700 text-sm mb-2">Visibility</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="cg-visibility"
+                                    class="text-revelti-blue focus:ring-revelti-blue h-4 w-4">
+                                <span class="text-sm text-gray-700">Private</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="cg-visibility" checked
+                                    class="text-revelti-blue focus:ring-revelti-blue h-4 w-4">
+                                <span class="text-sm text-gray-700">Link Only</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="cg-visibility"
+                                    class="text-revelti-blue focus:ring-revelti-blue h-4 w-4">
+                                <span class="text-sm text-gray-700">Public</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-700 text-sm mb-2">Download Permissions</h4>
+                        <label class="flex items-center space-x-2 cursor-pointer">
+                            <input type="checkbox" checked
+                                class="rounded text-revelti-blue focus:ring-revelti-blue h-4 w-4">
+                            <span class="text-sm text-gray-700">Allow downloads</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="px-6 py-4 bg-gray-50 flex justify-end space-x-3 shrink-0">
+                <button onclick="closeModals()"
+                    class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50 transition">Cancel</button>
+                <button onclick="showToast('Gallery created successfully', 'success'); closeModals()"
+                    class="px-4 py-2 bg-revelti-blue text-white rounded-lg text-sm font-bold hover:bg-blue-800 transition">Create
+                    Gallery</button>
+            </div>
+        </div>
+
+        <!-- Warning Scenario Simulation -->
+        <div id="modal-warning-gallery"
+            class="bg-white rounded-xl shadow-xl w-full max-w-md overflow-hidden hidden transform transition-all">
+            <div class="p-6">
+                <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                        </path>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold text-center text-gray-900 mb-2">Gallery already exists</h3>
+                <p class="text-sm text-center text-gray-600 mb-6">This folder is already part of an existing
+                    gallery:<br><span id="warn-parent-gallery" class="font-semibold text-gray-800">Gallery Name</span>
+                </p>
+
+                <div class="space-y-3">
+                    <button onclick="closeModals(); showToast('Gallery root was not moved', 'info');"
+                        class="w-full py-2.5 px-4 bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold rounded-lg text-sm transition">Use
+                        existing gallery</button>
+                    <button onclick="closeModals(); openMoveGalleryRootModal()"
+                        class="w-full py-2.5 px-4 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-semibold rounded-lg text-sm transition">Move
+                        gallery root here</button>
+                    <button onclick="closeModals()"
+                        class="w-full py-2.5 px-4 bg-white text-gray-500 hover:text-gray-700 font-semibold rounded-lg text-sm transition">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Move Gallery Root Simulation -->
+        <div id="modal-move-root"
+            class="bg-white rounded-xl shadow-xl w-full max-w-md overflow-hidden hidden transform transition-all">
+            <div class="p-6">
+                <h3 class="text-lg font-bold text-gray-900 mb-2">Move Gallery Root</h3>
+                <p class="text-sm text-gray-600 mb-4">You are about to move the gallery root from:</p>
+                <div class="p-3 bg-gray-50 rounded border border-gray-200 mb-2 text-center font-semibold text-gray-800"
+                    id="move-from">Parent Gallery</div>
+                <p class="text-sm text-gray-600 text-center mb-2">to</p>
+                <div class="p-3 bg-blue-50 focus:border-revelti-blue border border-blue-200 rounded text-center mx-auto font-bold text-revelti-blue mb-4"
+                    id="move-to">Target Folder</div>
+                <p class="text-sm text-gray-500 mb-6">This will change which folders define the gallery structure.</p>
+
+                <div class="flex space-x-3 justify-end">
+                    <button onclick="closeModals()"
+                        class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50 transition">Cancel</button>
+                    <button onclick="showToast('Gallery root moved successfully', 'success'); closeModals()"
+                        class="px-4 py-2 bg-revelti-blue text-white rounded-lg text-sm font-bold hover:bg-blue-800 transition">Confirm
+                        Move</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Attach to Event Modal -->
+        <div id="modal-attach-event"
+            class="bg-white rounded-xl shadow-xl w-full max-w-md overflow-hidden hidden transform transition-all">
+            <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center">
+                <h3 class="font-bold text-gray-800 text-lg">Attach Folder to Event</h3>
+                <button onclick="closeModals()" class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+            <div class="p-6 space-y-4">
+                <p class="text-sm text-gray-600">Attach <span id="attach-folder-name"
+                        class="font-semibold text-gray-800">folder</span> to an event so its media appears in the event
+                    gallery.</p>
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-2">Select Event</label>
+                    <select
+                        class="w-full border border-gray-300 rounded-lg p-2.5 bg-white text-sm outline-none focus:border-revelti-blue transition">
+                        <option>Bachata Geneva Festival 2026</option>
+                        <option>Geneva Summer Zouk</option>
+                        <option>Madrid Bachata Weekend</option>
+                        <option>Paris Sensual Festival</option>
+                        <option class="text-gray-400">--- Unassigned ---</option>
+                    </select>
+                </div>
+            </div>
+            <div class="px-6 py-4 bg-gray-50 flex justify-end space-x-3">
+                <button onclick="closeModals()"
+                    class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50 transition">Cancel</button>
+                <button onclick="showToast('Folder attached to event', 'success'); closeModals()"
+                    class="px-4 py-2 bg-revelti-blue text-white rounded-lg text-sm font-bold hover:bg-blue-800 transition">Attach</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed bottom-4 right-4 z-50 flex flex-col space-y-2 pointer-events-none"></div>
 
     <script src="layout-injector.js" defer></script>
     <script src="creative.js" defer></script>
