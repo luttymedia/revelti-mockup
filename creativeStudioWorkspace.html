@@ -57,73 +57,112 @@
                         </ol>
                     </nav>
 
-                    <header class="flex flex-col md:flex-row justify-between items-center mb-6">
-                        <div class="flex items-center mb-4 md:mb-0 w-full md:w-auto">
-                            <div class="flex-1">
-                                <h1 id="folder-title" class="text-3xl font-extrabold text-revelti-blue">Studio Workspace
-                                </h1>
-                                <p class="text-gray-500 text-sm mt-1 flex items-center">
-                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z">
-                                        </path>
-                                    </svg>
-                                    <span id="folder-path">/media/folder/{id}</span>
-                                </p>
-                            </div>
-                        </div>
+                    <!-- Header: Title Row + Search Bar -->
+                    <div class="flex items-center justify-between mb-3 gap-4">
+                        <!-- Left: Page Title -->
+                        <h1 id="folder-title" class="text-3xl font-extrabold text-revelti-blue whitespace-nowrap">Studio
+                            Workspace</h1>
 
-                        <!-- Quick Actions Placeholder -->
-                        <div class="flex flex-wrap gap-2 w-full md:w-auto justify-start md:justify-end">
-                            <button onclick="alert('Simulating File Upload Dialog')"
-                                class="bg-revelti-blue text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-800 transition shadow-sm text-sm flex items-center">
-                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <!-- Right: Search Bar -->
+                        <div class="relative flex-1 max-w-md ml-auto">
+                            <input type="text" id="studio-search-input" placeholder="Search in Studio" disabled
+                                class="w-full border border-gray-300 rounded-lg py-2 pl-4 pr-10 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-revelti-blue/30 focus:border-revelti-blue placeholder-gray-400 cursor-default">
+                            <!-- Advanced Search Icon (inside field, right side) -->
+                            <button type="button" title="Advanced Search"
+                                class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-400 hover:text-revelti-blue transition">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
-                                    </path>
+                                        d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
                                 </svg>
-                                Upload Files
                             </button>
-                            <button onclick="alert('Creating new subfolder')"
-                                class="bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded-lg hover:bg-gray-300 transition shadow-sm text-sm flex items-center">
-                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        </div>
+                    </div>
+
+                    <!-- Header: Toolbar Row -->
+                    <div class="flex items-center justify-between mb-4">
+                        <!-- Left: Compact Action Buttons -->
+                        <div class="flex items-center gap-2">
+                            <!-- Upload -->
+                            <button onclick="alert('Simulating File Upload Dialog')"
+                                class="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-600 bg-white border border-gray-300 rounded-md px-3 py-1.5 hover:bg-gray-50 hover:border-gray-400 transition shadow-sm">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 4v16m8-8H4"></path>
+                                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                                </svg>
+                                Upload
+                            </button>
+                            <!-- New Subfolder -->
+                            <button onclick="alert('Creating new subfolder')"
+                                class="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-600 bg-white border border-gray-300 rounded-md px-3 py-1.5 hover:bg-gray-50 hover:border-gray-400 transition shadow-sm">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
                                 </svg>
                                 New Subfolder
                             </button>
+                            <!-- Quick Share -->
                             <button onclick="alert('Opening Quick Share options')"
-                                class="bg-revelti-orange text-white font-bold py-2 px-4 rounded-lg hover:bg-orange-600 transition shadow-sm text-sm flex items-center">
-                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                class="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-600 bg-white border border-gray-300 rounded-md px-3 py-1.5 hover:bg-gray-50 hover:border-gray-400 transition shadow-sm">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z">
-                                    </path>
+                                        d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
                                 </svg>
                                 Quick Share
                             </button>
                         </div>
-                    </header>
+
+                        <!-- Right: View Toggle -->
+                        <div
+                            class="flex items-center gap-0 border border-gray-300 rounded-lg overflow-hidden bg-white shadow-sm">
+                            <!-- Large (default selected) -->
+                            <button type="button"
+                                class="inline-flex items-center justify-center px-2.5 py-1.5 bg-revelti-blue text-white border-r border-blue-800 transition"
+                                title="Large view">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <rect x="2" y="2" width="16" height="7" rx="1.5" />
+                                    <rect x="2" y="11" width="16" height="7" rx="1.5" />
+                                </svg>
+                            </button>
+                            <!-- Compact -->
+                            <button type="button"
+                                class="inline-flex items-center justify-center px-2.5 py-1.5 text-gray-500 hover:bg-gray-50 border-r border-gray-300 transition"
+                                title="Compact view">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <rect x="2" y="2" width="7" height="7" rx="1" />
+                                    <rect x="11" y="2" width="7" height="7" rx="1" />
+                                    <rect x="2" y="11" width="7" height="7" rx="1" />
+                                    <rect x="11" y="11" width="7" height="7" rx="1" />
+                                </svg>
+                            </button>
+                            <!-- List -->
+                            <button type="button"
+                                class="inline-flex items-center justify-center px-2.5 py-1.5 text-gray-500 hover:bg-gray-50 transition"
+                                title="List view">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 6h16M4 12h16M4 18h16" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Search Results Indicator (hidden by default) -->
+                    <div id="search-results-indicator"
+                        class="hidden mb-4 flex items-center justify-between bg-blue-50 border border-blue-200 rounded-lg px-4 py-2 text-sm text-blue-800">
+                        <span>Results for: <strong id="search-results-query">"example"</strong></span>
+                        <button type="button"
+                            class="inline-flex items-center gap-1 text-xs font-semibold text-blue-700 hover:text-blue-900 transition">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                            Clear
+                        </button>
+                    </div>
 
                     <!-- Tabs & Content Area -->
                     <div class="bg-white rounded-lg shadow-md overflow-hidden">
 
-                        <!-- Tabs Navigation -->
-                        <div class="border-b border-gray-200" id="tabs-navigation">
-                            <nav class="flex -mb-px overflow-x-auto">
-                                <button
-                                    class="whitespace-nowrap py-4 px-6 text-center font-bold text-revelti-blue border-b-2 border-revelti-orange focus:outline-none">
-                                    Content
-                                </button>
-                                <button
-                                    class="whitespace-nowrap py-4 px-6 text-center font-semibold text-gray-500 hover:text-gray-700 focus:outline-none transition border-b-2 border-transparent hover:border-gray-300">
-                                    Sharing
-                                </button>
-                                <button
-                                    class="whitespace-nowrap py-4 px-6 text-center font-semibold text-gray-500 hover:text-gray-700 focus:outline-none transition border-b-2 border-transparent hover:border-gray-300">
-                                    Gallery Settings
-                                </button>
-                            </nav>
-                        </div>
 
                         <!-- Tab Content Areas (Placeholders) -->
                         <div class="p-6">
@@ -172,147 +211,7 @@
                                 </div>
                             </div>
 
-                            <!-- 2. Sharing Tab (Hidden by default) -->
-                            <div id="tab-sharing" class="hidden">
-                                <div class="max-w-2xl space-y-6">
-                                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                                        <h4 class="font-bold text-gray-700 mb-2">Access Link</h4>
-                                        <div class="flex space-x-2">
-                                            <input type="text" readonly value="https://revelti.com/m/sat-01-nov"
-                                                id="access-link-input"
-                                                class="flex-1 border border-gray-300 rounded-lg p-2 bg-white text-sm outline-none focus:border-revelti-blue transition">
-                                            <button onclick="alert('Link copied!')"
-                                                class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg transition">Copy</button>
-                                        </div>
-                                    </div>
 
-                                    <div>
-                                        <h4 class="font-bold text-gray-700 mb-2">Visibility</h4>
-                                        <div class="flex flex-col sm:flex-row sm:space-x-4 space-y-2 sm:space-y-0">
-                                            <label class="flex items-center space-x-2 cursor-pointer">
-                                                <input type="radio" name="visibility"
-                                                    class="text-revelti-blue focus:ring-revelti-blue h-4 w-4">
-                                                <span class="text-sm font-semibold text-gray-700">Private <span
-                                                        class="text-gray-500 font-normal">(Only
-                                                        collaborators)</span></span>
-                                            </label>
-                                            <label class="flex items-center space-x-2 cursor-pointer">
-                                                <input type="radio" name="visibility" checked
-                                                    class="text-revelti-blue focus:ring-revelti-blue h-4 w-4">
-                                                <span class="text-sm font-semibold text-gray-700">Link-only</span>
-                                            </label>
-                                            <label class="flex items-center space-x-2 cursor-pointer">
-                                                <input type="radio" name="visibility"
-                                                    class="text-revelti-blue focus:ring-revelti-blue h-4 w-4">
-                                                <span class="text-sm font-semibold text-gray-700">Public</span>
-                                            </label>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <h4 class="font-bold text-gray-700 mb-2">Collaborators</h4>
-                                        <div id="collaborators-list" class="space-y-3">
-                                            <div
-                                                class="flex items-center justify-between pb-2 border-b border-gray-100">
-                                                <div class="flex items-center">
-                                                    <img src="https://placehold.co/40x40/f58220/ffffff?text=A"
-                                                        class="w-8 h-8 rounded-full border border-gray-200 mr-2"
-                                                        alt="Avatar">
-                                                    <div>
-                                                        <div class="text-sm font-bold text-gray-800">AMedia</div>
-                                                        <div class="text-xs text-gray-500">Owner</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div
-                                                class="flex items-center justify-between pb-2 border-b border-gray-100">
-                                                <div class="flex items-center">
-                                                    <img src="https://placehold.co/40x40/9ca3af/ffffff?text=LM"
-                                                        class="w-8 h-8 rounded-full border border-gray-200 mr-2"
-                                                        alt="Avatar">
-                                                    <div>
-                                                        <div class="text-sm font-bold text-gray-800">Lutty Moreira</div>
-                                                        <div class="text-xs text-gray-500">Collaborator</div>
-                                                    </div>
-                                                </div>
-                                                <button onclick="alert('Removing collaborator')"
-                                                    class="text-red-500 hover:text-red-700 text-sm font-bold transition">Remove</button>
-                                            </div>
-                                        </div>
-                                        <button onclick="alert('Open Add Collaborator Modal')"
-                                            class="mt-4 text-sm bg-gray-100 hover:bg-gray-200 py-2 px-4 rounded-lg text-gray-800 font-bold transition">+
-                                            Add Collaborator</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 3. Gallery Settings Tab (Hidden by default) -->
-                            <div id="tab-settings" class="hidden">
-                                <div class="max-w-2xl space-y-6">
-                                    <div>
-                                        <h4 class="font-bold text-gray-700 mb-2">Publish State</h4>
-                                        <select id="publish-state-select"
-                                            class="w-full sm:w-1/2 border border-gray-300 rounded-lg p-2 bg-white text-sm outline-none focus:border-revelti-blue transition">
-                                            <option value="Draft">Draft</option>
-                                            <option value="Published" selected>Published</option>
-                                            <option value="Scheduled">Scheduled</option>
-                                        </select>
-                                    </div>
-                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                        <div>
-                                            <h4 class="font-bold text-gray-700 mb-2">Publish Date</h4>
-                                            <input type="date" id="publish-date-input" value="2026-11-01"
-                                                class="w-full border border-gray-300 rounded-lg p-2 bg-white text-sm outline-none focus:border-revelti-blue transition">
-                                        </div>
-                                        <div>
-                                            <h4 class="font-bold text-gray-700 mb-2">Publish Time</h4>
-                                            <input type="time" id="publish-time-input" value="10:00"
-                                                class="w-full border border-gray-300 rounded-lg p-2 bg-white text-sm outline-none focus:border-revelti-blue transition">
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-bold text-gray-700 mb-2">Cover Image</h4>
-                                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center bg-gray-50 flex flex-col items-center justify-center cursor-pointer hover:bg-gray-100 transition"
-                                            onclick="alert('Upload Cover Image')">
-                                            <svg class="w-8 h-8 text-gray-400 mb-2" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12">
-                                                </path>
-                                            </svg>
-                                            <span class="text-sm text-gray-600 font-semibold">Click to upload cover
-                                                <span class="font-normal text-gray-500">or drag and drop</span></span>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-bold text-gray-700 mb-2">Layout Style</h4>
-                                        <select
-                                            class="w-full sm:w-1/2 border border-gray-300 rounded-lg p-2 bg-white text-sm outline-none focus:border-revelti-blue transition">
-                                            <option selected>Standard Grid</option>
-                                            <option>Masonry</option>
-                                            <option>Carousel</option>
-                                        </select>
-                                    </div>
-                                    <div
-                                        class="flex items-center justify-between bg-gray-50 p-4 rounded-lg border border-gray-200">
-                                        <div>
-                                            <h4 class="font-bold text-gray-700">Allow Downloads</h4>
-                                            <p class="text-xs text-gray-500">Let viewers download high-res images</p>
-                                        </div>
-                                        <label class="relative inline-flex items-center cursor-pointer">
-                                            <input type="checkbox" checked class="sr-only peer">
-                                            <div
-                                                class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-revelti-blue">
-                                            </div>
-                                        </label>
-                                    </div>
-                                    <div class="pt-2">
-                                        <button onclick="alert('Gallery settings saved!')"
-                                            class="bg-revelti-blue text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-800 transition shadow-sm">Save
-                                            Details</button>
-                                    </div>
-                                </div>
-                            </div>
 
                         </div>
                     </div>
@@ -323,31 +222,6 @@
 
     <!-- Tab Switching Logic -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const tabs = document.querySelectorAll('nav button');
-            const contents = [
-                document.getElementById('tab-content'),
-                document.getElementById('tab-sharing'),
-                document.getElementById('tab-settings')
-            ];
-
-            tabs.forEach((tab, index) => {
-                tab.addEventListener('click', () => {
-                    // Reset all tabs
-                    tabs.forEach(t => {
-                        t.className = 'whitespace-nowrap py-4 px-6 text-center font-semibold text-gray-500 hover:text-gray-700 focus:outline-none transition border-b-2 border-transparent hover:border-gray-300';
-                    });
-                    // Reset all contents
-                    contents.forEach(c => c.classList.add('hidden'));
-
-                    // Set active tab
-                    tab.className = 'whitespace-nowrap py-4 px-6 text-center font-bold text-revelti-blue border-b-2 border-revelti-orange focus:outline-none';
-                    // Show active content
-                    contents[index].classList.remove('hidden');
-                });
-            });
-        });
-
         const mockGalleryData = {
             id: 'root',
             name: 'Studio',
@@ -616,7 +490,7 @@
 
             // Render Headings
             document.getElementById('folder-title').textContent = currentPath.length === 0 ? 'Studio Workspace' : 'Bachata Geneva Festival';
-            document.getElementById('folder-path').innerHTML = `/media/${currentPath.join('/')}`;
+            // folder-path element removed from header (new layout)
 
             // Handle Content Sections
             const activeFolderName = document.getElementById('active-folder-name');
