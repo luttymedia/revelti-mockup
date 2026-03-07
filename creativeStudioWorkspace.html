@@ -65,10 +65,12 @@
 
                         <!-- Right: Search Bar -->
                         <div class="relative flex-1 max-w-md ml-auto">
-                            <input type="text" id="studio-search-input" placeholder="Search in Studio" disabled
-                                class="w-full border border-gray-300 rounded-lg py-2 pl-4 pr-10 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-revelti-blue/30 focus:border-revelti-blue placeholder-gray-400 cursor-default">
-                            <!-- Advanced Search Icon (inside field, right side) -->
-                            <button type="button" title="Advanced Search"
+                            <input type="text" id="studio-search-input" placeholder="Search in Studio"
+                                oninput="handleSearchInput(this.value)"
+                                class="w-full border border-gray-300 rounded-lg py-2 pl-4 pr-10 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-revelti-blue/30 focus:border-revelti-blue placeholder-gray-400">
+                            <!-- Advanced Filter Icon (inside field, right side) -->
+                            <button type="button" id="advanced-filter-btn" title="Advanced Filters"
+                                onclick="openAdvancedFiltersModal()"
                                 class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-400 hover:text-revelti-blue transition">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -149,8 +151,8 @@
                     <!-- Search Results Indicator (hidden by default) -->
                     <div id="search-results-indicator"
                         class="hidden mb-4 flex items-center justify-between bg-blue-50 border border-blue-200 rounded-lg px-4 py-2 text-sm text-blue-800">
-                        <span>Results for: <strong id="search-results-query">"example"</strong></span>
-                        <button type="button"
+                        <span>Results for: <strong id="search-results-query"></strong></span>
+                        <button type="button" onclick="clearSearchAndFilters()"
                             class="inline-flex items-center gap-1 text-xs font-semibold text-blue-700 hover:text-blue-900 transition">
                             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -895,6 +897,199 @@
             `;
             document.body.insertAdjacentHTML('beforeend', modalHtml);
         }
+
+        // ============================================================
+        // SEARCH & FILTER SYSTEM
+        // ============================================================
+
+        // Active filter state
+        let activeFilters = {
+            statuses: [],      // ['Draft','Scheduled','Published']
+            gallery: 'any',    // 'any' | 'yes' | 'no'
+            owner: '',         // string or empty for all
+            dateCreatedFrom: '',
+            dateCreatedTo: '',
+            dateModifiedFrom: '',
+            dateModifiedTo: ''
+        };
+
+        let currentSearchQuery = '';
+
+        // Normalise status from raw node data to UI label
+        function normaliseStatus(rawStatus) {
+            if (!rawStatus) return 'Draft';
+            if (rawStatus === 'Public' || rawStatus === 'Published') return 'Published';
+            if (rawStatus === 'Scheduled') return 'Scheduled';
+            return 'Draft';
+        }
+
+        function hasActiveFilters() {
+            return activeFilters.statuses.length > 0
+                || activeFilters.gallery !== 'any'
+                || activeFilters.owner !== ''
+                || activeFilters.dateCreatedFrom !== ''
+                || activeFilters.dateCreatedTo !== ''
+                || activeFilters.dateModifiedFrom !== ''
+                || activeFilters.dateModifiedTo !== '';
+        }
+
+        function applyFiltersAndSearch() {
+            // Only filter when at root level (currentPath is empty)
+            // If inside a subfolder, do not interfere with deep navigation
+            if (currentPath.length > 0) return;
+
+            const q = currentSearchQuery.trim().toLowerCase();
+            const folders = mockGalleryData.children;
+
+            const filtered = folders.filter(node => {
+                // 1. Text search
+                if (q && !node.name.toLowerCase().includes(q)) return false;
+
+                // 2. Status filter
+                if (activeFilters.statuses.length > 0) {
+                    const ns = normaliseStatus(node.status);
+                    if (!activeFilters.statuses.includes(ns)) return false;
+                }
+
+                // 3. Gallery filter
+                if (activeFilters.gallery === 'yes' && !node.isGalleryRoot) return false;
+                if (activeFilters.gallery === 'no' && node.isGalleryRoot) return false;
+
+                // 4. Owner filter
+                if (activeFilters.owner && node.owner !== activeFilters.owner) return false;
+
+                return true;
+            });
+
+            // Re-render grid
+            const grid = document.getElementById('subfolders-grid');
+            if (grid) {
+                if (filtered.length > 0) {
+                    grid.innerHTML = filtered.map(child =>
+                        createFolderCard(child, [child.id])
+                    ).join('');
+                    document.getElementById('subfolders-section').classList.remove('hidden');
+                    document.getElementById('empty-content').classList.add('hidden');
+                } else {
+                    grid.innerHTML = '';
+                    document.getElementById('subfolders-section').classList.remove('hidden');
+                    // Show empty state
+                    const emptyEl = document.getElementById('empty-content');
+                    emptyEl.classList.remove('hidden');
+                    emptyEl.querySelector('h3').textContent = 'No folders match your search';
+                    emptyEl.querySelector('p').textContent = 'Try a different name or adjust the filters.';
+                }
+            }
+
+            // Update indicator
+            const indicator = document.getElementById('search-results-indicator');
+            const queryEl = document.getElementById('search-results-query');
+            const filterBtn = document.getElementById('advanced-filter-btn');
+
+            const isActive = q !== '' || hasActiveFilters();
+            if (isActive) {
+                indicator.classList.remove('hidden');
+                // Build label
+                let parts = [];
+                if (q) parts.push(`"${currentSearchQuery.trim()}"`);
+                if (activeFilters.statuses.length > 0) parts.push(`Status: ${activeFilters.statuses.join(', ')}`);
+                if (activeFilters.gallery !== 'any') parts.push(`Gallery: ${activeFilters.gallery === 'yes' ? 'Yes' : 'No'}`);
+                if (activeFilters.owner) parts.push(`Owner: ${activeFilters.owner}`);
+                queryEl.textContent = parts.join(' • ');
+                // Highlight filter icon when filters are active
+                if (hasActiveFilters()) {
+                    filterBtn.classList.add('text-revelti-blue');
+                    filterBtn.classList.remove('text-gray-400');
+                } else {
+                    filterBtn.classList.remove('text-revelti-blue');
+                    filterBtn.classList.add('text-gray-400');
+                }
+            } else {
+                indicator.classList.add('hidden');
+                filterBtn.classList.remove('text-revelti-blue');
+                filterBtn.classList.add('text-gray-400');
+            }
+        }
+
+        function handleSearchInput(value) {
+            currentSearchQuery = value;
+            if (currentPath.length === 0) {
+                applyFiltersAndSearch();
+            }
+        }
+
+        function clearSearchAndFilters() {
+            currentSearchQuery = '';
+            document.getElementById('studio-search-input').value = '';
+            activeFilters = { statuses: [], gallery: 'any', owner: '', dateCreatedFrom: '', dateCreatedTo: '', dateModifiedFrom: '', dateModifiedTo: '' };
+            // Reset modal controls too
+            _syncFiltersToModal();
+            // Re-render folder grid and hide the indicator
+            renderDynamicContent();
+            applyFiltersAndSearch();
+        }
+
+        // ---- Advanced Filters Modal ----
+
+        function openAdvancedFiltersModal() {
+            document.getElementById('modal-backdrop').classList.remove('hidden');
+            document.getElementById('modal-advanced-filters').classList.remove('hidden');
+            _syncFiltersToModal();
+        }
+
+        function _syncFiltersToModal() {
+            // Status checkboxes
+            ['Draft', 'Scheduled', 'Published'].forEach(s => {
+                const el = document.getElementById(`filter-status-${s.toLowerCase()}`);
+                if (el) el.checked = activeFilters.statuses.includes(s);
+            });
+            // Gallery radio
+            const galEl = document.querySelector(`input[name="filter-gallery"][value="${activeFilters.gallery}"]`);
+            if (galEl) galEl.checked = true;
+            // Owner
+            const ownerEl = document.getElementById('filter-owner');
+            if (ownerEl) ownerEl.value = activeFilters.owner;
+            // Dates
+            ['filter-date-created-from', 'filter-date-created-to', 'filter-date-modified-from', 'filter-date-modified-to'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    const key = id.replace('filter-', '').replace(/-([a-z])/g, (_, c) => c.toUpperCase());
+                    el.value = activeFilters[key] || '';
+                }
+            });
+        }
+
+        function applyAdvancedFilters() {
+            // Read statuses
+            const statuses = [];
+            ['Draft', 'Scheduled', 'Published'].forEach(s => {
+                const el = document.getElementById(`filter-status-${s.toLowerCase()}`);
+                if (el && el.checked) statuses.push(s);
+            });
+            activeFilters.statuses = statuses;
+
+            // Gallery
+            const galEl = document.querySelector('input[name="filter-gallery"]:checked');
+            activeFilters.gallery = galEl ? galEl.value : 'any';
+
+            // Owner
+            activeFilters.owner = document.getElementById('filter-owner').value;
+
+            // Dates (stored but used only as UI; deep date filtering omitted since mock data has no date fields)
+            activeFilters.dateCreatedFrom = document.getElementById('filter-date-created-from').value;
+            activeFilters.dateCreatedTo = document.getElementById('filter-date-created-to').value;
+            activeFilters.dateModifiedFrom = document.getElementById('filter-date-modified-from').value;
+            activeFilters.dateModifiedTo = document.getElementById('filter-date-modified-to').value;
+
+            closeModals();
+            applyFiltersAndSearch();
+        }
+
+        function resetAdvancedFilters() {
+            activeFilters = { statuses: [], gallery: 'any', owner: '', dateCreatedFrom: '', dateCreatedTo: '', dateModifiedFrom: '', dateModifiedTo: '' };
+            _syncFiltersToModal();
+        }
+
     </script>
 
     <!-- Modals Simulation Sandbox -->
@@ -1062,6 +1257,119 @@
                     class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50 transition">Cancel</button>
                 <button onclick="showToast('Folder attached to event', 'success'); closeModals()"
                     class="px-4 py-2 bg-revelti-blue text-white rounded-lg text-sm font-bold hover:bg-blue-800 transition">Attach</button>
+            </div>
+        </div>
+        <!-- Advanced Filters Modal -->
+        <div id="modal-advanced-filters"
+            class="bg-white rounded-xl shadow-xl w-full max-w-lg overflow-hidden hidden transform transition-all max-h-[90vh] flex flex-col">
+            <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center shrink-0">
+                <h3 class="font-bold text-gray-800 text-lg">Advanced Filters</h3>
+                <button onclick="closeModals()" class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+            <div class="p-6 space-y-6 overflow-y-auto">
+
+                <!-- Status -->
+                <div>
+                    <h4 class="font-bold text-gray-700 text-sm mb-3">Status</h4>
+                    <div class="flex flex-wrap gap-3">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" id="filter-status-draft" value="Draft"
+                                class="rounded text-revelti-blue focus:ring-revelti-blue h-4 w-4">
+                            <span class="text-sm text-gray-700">Draft</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" id="filter-status-scheduled" value="Scheduled"
+                                class="rounded text-revelti-blue focus:ring-revelti-blue h-4 w-4">
+                            <span class="text-sm text-gray-700">Scheduled</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" id="filter-status-published" value="Published"
+                                class="rounded text-revelti-blue focus:ring-revelti-blue h-4 w-4">
+                            <span class="text-sm text-gray-700">Published</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Gallery -->
+                <div>
+                    <h4 class="font-bold text-gray-700 text-sm mb-3">Gallery</h4>
+                    <div class="flex gap-4">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="filter-gallery" id="filter-gallery-any" value="any" checked
+                                class="text-revelti-blue focus:ring-revelti-blue h-4 w-4">
+                            <span class="text-sm text-gray-700">Any</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="filter-gallery" id="filter-gallery-yes" value="yes"
+                                class="text-revelti-blue focus:ring-revelti-blue h-4 w-4">
+                            <span class="text-sm text-gray-700">Yes</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="filter-gallery" id="filter-gallery-no" value="no"
+                                class="text-revelti-blue focus:ring-revelti-blue h-4 w-4">
+                            <span class="text-sm text-gray-700">No</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Owner -->
+                <div>
+                    <h4 class="font-bold text-gray-700 text-sm mb-3">Owner</h4>
+                    <select id="filter-owner"
+                        class="w-full border border-gray-300 rounded-lg p-2.5 bg-white text-sm outline-none focus:border-revelti-blue transition">
+                        <option value="">All owners</option>
+                        <option value="AMedia">AMedia</option>
+                        <option value="Bachata Geneva">Bachata Geneva</option>
+                        <option value="Lutty Moreira">Lutty Moreira</option>
+                    </select>
+                </div>
+
+                <!-- Date Created -->
+                <div>
+                    <h4 class="font-bold text-gray-700 text-sm mb-3">Date Created</h4>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs text-gray-500 mb-1">From</label>
+                            <input type="date" id="filter-date-created-from"
+                                class="w-full border border-gray-300 rounded-lg p-2 bg-white text-sm outline-none focus:border-revelti-blue transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-500 mb-1">To</label>
+                            <input type="date" id="filter-date-created-to"
+                                class="w-full border border-gray-300 rounded-lg p-2 bg-white text-sm outline-none focus:border-revelti-blue transition">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Last Modified -->
+                <div>
+                    <h4 class="font-bold text-gray-700 text-sm mb-3">Last Modified</h4>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs text-gray-500 mb-1">From</label>
+                            <input type="date" id="filter-date-modified-from"
+                                class="w-full border border-gray-300 rounded-lg p-2 bg-white text-sm outline-none focus:border-revelti-blue transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-500 mb-1">To</label>
+                            <input type="date" id="filter-date-modified-to"
+                                class="w-full border border-gray-300 rounded-lg p-2 bg-white text-sm outline-none focus:border-revelti-blue transition">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Footer -->
+            <div class="px-6 py-4 bg-gray-50 flex items-center justify-between shrink-0 border-t border-gray-100">
+                <button type="button" onclick="resetAdvancedFilters()"
+                    class="text-sm font-semibold text-gray-500 hover:text-revelti-blue transition">Reset</button>
+                <button type="button" onclick="applyAdvancedFilters()"
+                    class="px-5 py-2 bg-revelti-blue text-white rounded-lg text-sm font-bold hover:bg-blue-800 transition">Apply</button>
             </div>
         </div>
     </div>
