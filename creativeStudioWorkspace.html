@@ -117,7 +117,7 @@
                         <div
                             class="flex items-center gap-0 border border-gray-300 rounded-lg overflow-hidden bg-white shadow-sm">
                             <!-- Large (default selected) -->
-                            <button type="button"
+                            <button type="button" id="view-large-btn" onclick="setViewMode('large')"
                                 class="inline-flex items-center justify-center px-2.5 py-1.5 bg-revelti-blue text-white border-r border-blue-800 transition"
                                 title="Large view">
                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -126,7 +126,7 @@
                                 </svg>
                             </button>
                             <!-- Compact -->
-                            <button type="button"
+                            <button type="button" id="view-compact-btn" onclick="setViewMode('compact')"
                                 class="inline-flex items-center justify-center px-2.5 py-1.5 text-gray-500 hover:bg-gray-50 border-r border-gray-300 transition"
                                 title="Compact view">
                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -137,7 +137,7 @@
                                 </svg>
                             </button>
                             <!-- List -->
-                            <button type="button"
+                            <button type="button" id="view-list-btn" onclick="setViewMode('list')"
                                 class="inline-flex items-center justify-center px-2.5 py-1.5 text-gray-500 hover:bg-gray-50 transition"
                                 title="List view">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -236,6 +236,8 @@
                     type: 'folder',
                     clickable: true,
                     isGalleryRoot: true,
+                    created: '2025-10-01T10:00:00Z',
+                    lastModified: '2025-11-05T14:30:00Z',
                     children: [
                         {
                             id: '2026',
@@ -244,6 +246,8 @@
                             owner: 'AMedia',
                             type: 'folder',
                             clickable: true,
+                            created: '2025-11-01T09:00:00Z',
+                            lastModified: '2025-11-05T12:00:00Z',
                             children: [
                                 {
                                     id: 'bgf',
@@ -251,6 +255,8 @@
                                     status: 'Public',
                                     owner: 'AMedia',
                                     creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }],
+                                    created: '2025-11-02T10:00:00Z',
+                                    lastModified: '2025-11-05T11:00:00Z',
                                     children: [
                                         {
                                             id: 'sat',
@@ -258,9 +264,11 @@
                                             status: 'Public',
                                             owner: 'AMedia',
                                             creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }],
+                                            created: '2025-11-03T08:00:00Z',
+                                            lastModified: '2025-11-05T10:00:00Z',
                                             children: [
-                                                { id: 'Social', name: 'Social', type: 'gallery', status: 'Public', owner: 'AMedia', creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }, { name: 'Lutty Moreira', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=LM' }], content: '125 Photos, 10 Videos' },
-                                                { id: 'jandj', name: 'Jack & Jill', type: 'gallery', status: 'Public', owner: 'AMedia', creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }], content: '50 Photos' },
+                                                { id: 'Social', name: 'Social', type: 'gallery', status: 'Public', owner: 'AMedia', creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }, { name: 'Lutty Moreira', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=LM' }], content: '125 Photos, 10 Videos', created: '2025-11-04T09:00:00Z', lastModified: '2025-11-05T09:30:00Z' },
+                                                { id: 'jandj', name: 'Jack & Jill', type: 'gallery', status: 'Public', owner: 'AMedia', creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }], content: '50 Photos', created: '2025-11-04T10:00:00Z', lastModified: '2025-11-05T09:00:00Z' },
                                             ]
                                         },
                                         {
@@ -270,10 +278,12 @@
                                             schedule: 'Nov 10, 2025 10:00 AM',
                                             owner: 'AMedia',
                                             creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }],
+                                            created: '2025-11-03T09:00:00Z',
+                                            lastModified: '2025-11-05T08:00:00Z',
                                             children: [
                                                 {
-                                                    id: 'sun-photos', name: 'Photos', status: 'Scheduled', schedule: 'Nov 10, 2025 10:00 AM', owner: 'AMedia', creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }], children: [
-                                                        { id: 'sun-social', name: 'Sunday Social', type: 'gallery', status: 'Scheduled', owner: 'AMedia', creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }], content: '180 Photos, 5 Videos', schedule: 'Nov 10, 2025 10:00 AM' },
+                                                    id: 'sun-photos', name: 'Photos', status: 'Scheduled', schedule: 'Nov 10, 2025 10:00 AM', owner: 'AMedia', creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }], created: '2025-11-04T08:00:00Z', lastModified: '2025-11-05T07:30:00Z', children: [
+                                                        { id: 'sun-social', name: 'Sunday Social', type: 'gallery', status: 'Scheduled', owner: 'AMedia', creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }], content: '180 Photos, 5 Videos', schedule: 'Nov 10, 2025 10:00 AM', created: '2025-11-04T11:00:00Z', lastModified: '2025-11-05T07:00:00Z' },
                                                     ]
                                                 }
                                             ]
@@ -288,6 +298,8 @@
                                     creators: [{ name: 'Bachata Geneva', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=B' }],
                                     type: 'gallery',
                                     content: '4 Photos',
+                                    created: '2025-11-02T11:00:00Z',
+                                    lastModified: '2025-11-05T06:00:00Z',
                                     children: []
                                 },
                                 {
@@ -298,29 +310,64 @@
                                     creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }],
                                     type: 'folder',
                                     content: '0 Photos',
+                                    created: '2025-11-02T12:00:00Z',
+                                    lastModified: '2025-11-05T05:00:00Z',
                                     children: []
                                 }
                             ]
                         },
-                        { id: '2025', name: '2025', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
-                        { id: '2024', name: '2024', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, children: [] }
+                        { id: '2025', name: '2025', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2024-11-01T09:00:00Z', lastModified: '2025-01-05T12:00:00Z', children: [] },
+                        { id: '2024', name: '2024', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2023-11-01T09:00:00Z', lastModified: '2024-01-05T12:00:00Z', children: [] }
                     ]
                 },
-                { id: 'zouk_zurich', name: 'Zouk Festival Zurich', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
-                { id: 'bailando_sensual', name: 'Bailando Sensual', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
-                { id: 'salsa_congress', name: 'Salsa Congress', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, isGalleryRoot: true, children: [] },
-                { id: 'paris_kizomba', name: 'Paris Kizomba Congress', status: 'Scheduled', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
-                { id: 'oman_salsa', name: 'Oman Salsa Festival', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
-                { id: 'geneva_zouk', name: 'Geneva Zouk', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
-                { id: 'croatia_summer', name: 'Croatia Summer Festival', status: 'Draft', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
-                { id: 'miami_afro', name: 'Miami Afro', status: 'Scheduled', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
-                { id: 'berlin_salsa', name: 'Berlin Salsa Congress', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
-                { id: 'temporary_uploads', name: 'Temporary Uploads', status: 'Private', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
-                { id: 'archived_work', name: 'Archived Work', status: 'Private', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
+                { id: 'zouk_zurich', name: 'Zouk Festival Zurich', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-10-02T10:00:00Z', lastModified: '2025-11-05T14:00:00Z', children: [] },
+                { id: 'bailando_sensual', name: 'Bailando Sensual', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-10-03T10:00:00Z', lastModified: '2025-11-05T13:30:00Z', children: [] },
+                { id: 'salsa_congress', name: 'Salsa Congress', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, isGalleryRoot: true, created: '2025-10-04T10:00:00Z', lastModified: '2025-11-05T13:00:00Z', children: [] },
+                { id: 'paris_kizomba', name: 'Paris Kizomba Congress', status: 'Scheduled', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-10-05T10:00:00Z', lastModified: '2025-11-05T12:30:00Z', children: [] },
+                { id: 'oman_salsa', name: 'Oman Salsa Festival', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-10-06T10:00:00Z', lastModified: '2025-11-05T12:00:00Z', children: [] },
+                { id: 'geneva_zouk', name: 'Geneva Zouk', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-10-07T10:00:00Z', lastModified: '2025-11-05T11:30:00Z', children: [] },
+                { id: 'croatia_summer', name: 'Croatia Summer Festival', status: 'Draft', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-10-08T10:00:00Z', lastModified: '2025-11-05T11:00:00Z', children: [] },
+                { id: 'miami_afro', name: 'Miami Afro', status: 'Scheduled', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-10-09T10:00:00Z', lastModified: '2025-11-05T10:30:00Z', children: [] },
+                { id: 'berlin_salsa', name: 'Berlin Salsa Congress', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-10-10T10:00:00Z', lastModified: '2025-11-05T10:00:00Z', children: [] },
+                { id: 'temporary_uploads', name: 'Temporary Uploads', status: 'Private', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-10-11T10:00:00Z', lastModified: '2025-11-05T09:30:00Z', children: [] },
+                { id: 'archived_work', name: 'Archived Work', status: 'Private', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-10-12T10:00:00Z', lastModified: '2025-11-05T09:00:00Z', children: [] },
             ]
         };
 
         let currentPath = []; // Default starting path
+        let currentViewMode = 'large';
+        let sortColumn = 'name';
+        let sortDirection = 'asc';
+
+        function setViewMode(mode) {
+            currentViewMode = mode;
+
+            // Update button styles
+            const btnIds = ['view-large-btn', 'view-compact-btn', 'view-list-btn'];
+            btnIds.forEach(id => {
+                const btn = document.getElementById(id);
+                if (id.includes(mode)) {
+                    btn.classList.add('bg-revelti-blue', 'text-white');
+                    btn.classList.remove('text-gray-500', 'hover:bg-gray-50');
+                    if (id !== 'view-list-btn') btn.classList.add('border-blue-800');
+                } else {
+                    btn.classList.remove('bg-revelti-blue', 'text-white', 'border-blue-800');
+                    btn.classList.add('text-gray-500', 'hover:bg-gray-50');
+                }
+            });
+
+            renderDynamicContent();
+        }
+
+        function handleSort(column) {
+            if (sortColumn === column) {
+                sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+            } else {
+                sortColumn = column;
+                sortDirection = 'asc';
+            }
+            renderDynamicContent();
+        }
 
         function findNodeByPath(path) {
             let currentNode = mockGalleryData;
@@ -392,6 +439,102 @@
                              </button>
                         </div>
                     </div>
+                </div>
+            `;
+        }
+
+        function createFolderCardCompact(node, fullPath) {
+            const isGallery = node.type === 'gallery' || node.isGalleryRoot;
+            const iconHtml = isGallery
+                ? `<svg class="w-6 h-6 text-purple-600 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>`
+                : `<svg class="w-6 h-6 text-revelti-blue mr-3 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path></svg>`;
+
+            return `
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition">
+                    <div class="p-3 flex items-center">
+                        <div onclick="${node.clickable === false ? `folderActionAlert('Simulation', '${node.name.replace(/'/g, "\\'")}', event)` : `navigateToPath(${JSON.stringify(fullPath).replace(/"/g, '&quot;')})`}" class="flex-1 min-w-0 flex items-center ${node.clickable === false ? 'cursor-not-allowed opacity-75' : 'cursor-pointer'}">
+                            ${iconHtml}
+                            <h3 class="font-bold text-gray-800 truncate text-sm">${node.name}</h3>
+                        </div>
+                        <div class="relative group ml-2 shrink-0">
+                             <button type="button" class="text-gray-400 hover:text-gray-600 p-1 rounded hover:bg-gray-100" onclick="toggleContextMenu(event, '${node.id}', ${JSON.stringify(fullPath).replace(/"/g, '&quot;')})">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path></svg>
+                             </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function createFolderRow(node, fullPath) {
+            const isGallery = node.type === 'gallery' || node.isGalleryRoot;
+            const iconHtml = isGallery
+                ? `<svg class="w-5 h-5 text-purple-600 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>`
+                : `<svg class="w-5 h-5 text-revelti-blue mr-3 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path></svg>`;
+
+            const lastModified = node.lastModified ? new Date(node.lastModified).toLocaleDateString() : '-';
+            const created = node.created ? new Date(node.created).toLocaleDateString() : '-';
+
+            return `
+                <tr class="hover:bg-gray-50 border-b border-gray-100 transition group">
+                    <td class="py-3 px-4">
+                        <div onclick="${node.clickable === false ? `folderActionAlert('Simulation', '${node.name.replace(/'/g, "\\'")}', event)` : `navigateToPath(${JSON.stringify(fullPath).replace(/"/g, '&quot;')})`}" class="flex items-center ${node.clickable === false ? 'cursor-not-allowed opacity-75' : 'cursor-pointer'}">
+                            ${iconHtml}
+                            <span class="font-semibold text-gray-800 text-sm group-hover:text-revelti-blue transition">${node.name}</span>
+                        </div>
+                    </td>
+                    <td class="py-3 px-4">
+                        <span class="text-xs font-medium px-2 py-0.5 rounded-full ${node.status === 'Public' || node.status === 'Published' ? 'bg-green-100 text-green-800' : (node.status === 'Scheduled' ? 'bg-yellow-100 text-yellow-800' : 'bg-gray-100 text-gray-800')}">
+                            ${node.status}
+                        </span>
+                    </td>
+                    <td class="py-3 px-4 text-xs text-gray-500">${lastModified}</td>
+                    <td class="py-3 px-4 text-xs text-gray-500">${created}</td>
+                    <td class="py-3 px-4 text-xs text-gray-500">${node.owner || '-'}</td>
+                    <td class="py-3 px-4 text-right">
+                         <button type="button" class="text-gray-400 hover:text-gray-600 p-1 rounded hover:bg-gray-100" onclick="toggleContextMenu(event, '${node.id}', ${JSON.stringify(fullPath).replace(/"/g, '&quot;')})">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path></svg>
+                         </button>
+                    </td>
+                </tr>
+            `;
+        }
+
+        function renderListView(nodes, currentPath) {
+            const getSortIcon = (column) => {
+                if (sortColumn !== column) return `<svg class="w-3 h-3 ml-1 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path></svg>`;
+                return sortDirection === 'asc'
+                    ? `<svg class="w-3 h-3 ml-1 text-revelti-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 15l7-7 7 7"></path></svg>`
+                    : `<svg class="w-3 h-3 ml-1 text-revelti-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>`;
+            };
+
+            return `
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-gray-50 text-gray-500 text-[10px] uppercase tracking-wider font-bold border-b border-gray-200">
+                                <th class="py-3 px-4 cursor-pointer hover:bg-gray-100 transition" onclick="handleSort('name')">
+                                    <div class="flex items-center">Folder Name ${getSortIcon('name')}</div>
+                                </th>
+                                <th class="py-3 px-4 cursor-pointer hover:bg-gray-100 transition" onclick="handleSort('status')">
+                                    <div class="flex items-center">Status ${getSortIcon('status')}</div>
+                                </th>
+                                <th class="py-3 px-4 cursor-pointer hover:bg-gray-100 transition" onclick="handleSort('lastModified')">
+                                    <div class="flex items-center">Last Modified ${getSortIcon('lastModified')}</div>
+                                </th>
+                                <th class="py-3 px-4 cursor-pointer hover:bg-gray-100 transition" onclick="handleSort('created')">
+                                    <div class="flex items-center">Created ${getSortIcon('created')}</div>
+                                </th>
+                                <th class="py-3 px-4 cursor-pointer hover:bg-gray-100 transition" onclick="handleSort('owner')">
+                                    <div class="flex items-center">Owner ${getSortIcon('owner')}</div>
+                                </th>
+                                <th class="py-3 px-4 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${nodes.map(node => createFolderRow(node, [...currentPath, node.id])).join('')}
+                        </tbody>
+                    </table>
                 </div>
             `;
         }
@@ -537,7 +680,46 @@
             if (currentNode.children && currentNode.children.length > 0) {
                 hasSubfolders = true;
                 subfoldersSection.classList.remove('hidden');
-                subfoldersGrid.innerHTML = currentNode.children.map(child => createFolderCard(child, [...currentPath, child.id])).join('');
+
+                // Get children to render (either normal or filtered)
+                let nodesToRender = [...currentNode.children];
+                if (currentPath.length === 0 && (currentSearchQuery.trim() !== '' || hasActiveFilters())) {
+                    nodesToRender = getFilteredNodes();
+                }
+
+                // Apply Sorting globally to whatever nodes we are rendering
+                nodesToRender.sort((a, b) => {
+                    let valA = a[sortColumn] || '';
+                    let valB = b[sortColumn] || '';
+                    if (typeof valA === 'string') valA = valA.toLowerCase();
+                    if (typeof valB === 'string') valB = valB.toLowerCase();
+                    if (valA < valB) return sortDirection === 'asc' ? -1 : 1;
+                    if (valA > valB) return sortDirection === 'asc' ? 1 : -1;
+                    return 0;
+                });
+
+                if (nodesToRender.length > 0) {
+                    if (currentViewMode === 'large') {
+                        subfoldersGrid.className = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4";
+                        subfoldersGrid.innerHTML = nodesToRender.map(child => createFolderCard(child, [...currentPath, child.id])).join('');
+                    } else if (currentViewMode === 'compact') {
+                        subfoldersGrid.className = "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3";
+                        subfoldersGrid.innerHTML = nodesToRender.map(child => createFolderCardCompact(child, [...currentPath, child.id])).join('');
+                    } else if (currentViewMode === 'list') {
+                        subfoldersGrid.className = "block bg-white border border-gray-200 rounded-lg overflow-hidden";
+                        subfoldersGrid.innerHTML = renderListView(nodesToRender, currentPath);
+                    }
+                    subfoldersSection.classList.remove('hidden');
+                    emptyContent.classList.add('hidden');
+                } else {
+                    subfoldersSection.classList.add('hidden');
+                    // If it was a search, show specific empty state
+                    if (currentPath.length === 0 && (currentSearchQuery.trim() !== '' || hasActiveFilters())) {
+                        emptyContent.classList.remove('hidden');
+                        emptyContent.querySelector('h3').textContent = 'No folders match your search';
+                        emptyContent.querySelector('p').textContent = 'Try a different name or adjust the filters.';
+                    }
+                }
             } else {
                 subfoldersSection.classList.add('hidden');
             }
@@ -1000,15 +1182,11 @@
                 || activeFilters.dateModifiedTo !== '';
         }
 
-        function applyFiltersAndSearch() {
-            // Only filter when at root level (currentPath is empty)
-            // If inside a subfolder, do not interfere with deep navigation
-            if (currentPath.length > 0) return;
-
+        function getFilteredNodes() {
             const q = currentSearchQuery.trim().toLowerCase();
             const folders = mockGalleryData.children;
 
-            const filtered = folders.filter(node => {
+            return folders.filter(node => {
                 // 1. Text search
                 if (q && !node.name.toLowerCase().includes(q)) return false;
 
@@ -1027,26 +1205,17 @@
 
                 return true;
             });
+        }
 
-            // Re-render grid
-            const grid = document.getElementById('subfolders-grid');
-            if (grid) {
-                if (filtered.length > 0) {
-                    grid.innerHTML = filtered.map(child =>
-                        createFolderCard(child, [child.id])
-                    ).join('');
-                    document.getElementById('subfolders-section').classList.remove('hidden');
-                    document.getElementById('empty-content').classList.add('hidden');
-                } else {
-                    grid.innerHTML = '';
-                    document.getElementById('subfolders-section').classList.remove('hidden');
-                    // Show empty state
-                    const emptyEl = document.getElementById('empty-content');
-                    emptyEl.classList.remove('hidden');
-                    emptyEl.querySelector('h3').textContent = 'No folders match your search';
-                    emptyEl.querySelector('p').textContent = 'Try a different name or adjust the filters.';
-                }
-            }
+        function applyFiltersAndSearch() {
+            // Only filter when at root level (currentPath is empty)
+            // If inside a subfolder, do not interfere with deep navigation
+            if (currentPath.length > 0) return;
+
+            const q = currentSearchQuery.trim().toLowerCase();
+
+            // Trigger Re-render via renderDynamicContent
+            renderDynamicContent();
 
             // Update indicator
             const indicator = document.getElementById('search-results-indicator');
