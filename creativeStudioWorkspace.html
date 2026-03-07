@@ -231,7 +231,7 @@
                 {
                     id: 'bgf_main',
                     name: 'Bachata Geneva Festival',
-                    status: 'Published',
+                    status: 'Public', // Published
                     owner: 'AMedia',
                     type: 'folder',
                     clickable: true,
@@ -306,15 +306,15 @@
                         { id: '2024', name: '2024', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, children: [] }
                     ]
                 },
-                { id: 'zouk_zurich', name: 'Zouk Festival Zurich', status: 'Draft', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
-                { id: 'bailando_sensual', name: 'Bailando Sensual', status: 'Draft', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
-                { id: 'salsa_congress', name: 'Salsa Congress', status: 'Published', owner: 'AMedia', type: 'folder', clickable: false, isGalleryRoot: true, children: [] },
+                { id: 'zouk_zurich', name: 'Zouk Festival Zurich', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
+                { id: 'bailando_sensual', name: 'Bailando Sensual', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
+                { id: 'salsa_congress', name: 'Salsa Congress', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, isGalleryRoot: true, children: [] },
                 { id: 'paris_kizomba', name: 'Paris Kizomba Congress', status: 'Scheduled', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
-                { id: 'oman_salsa', name: 'Oman Salsa Festival', status: 'Published', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
-                { id: 'geneva_zouk', name: 'Geneva Zouk', status: 'Published', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
+                { id: 'oman_salsa', name: 'Oman Salsa Festival', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
+                { id: 'geneva_zouk', name: 'Geneva Zouk', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
                 { id: 'croatia_summer', name: 'Croatia Summer Festival', status: 'Draft', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
                 { id: 'miami_afro', name: 'Miami Afro', status: 'Scheduled', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
-                { id: 'berlin_salsa', name: 'Berlin Salsa Congress', status: 'Published', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
+                { id: 'berlin_salsa', name: 'Berlin Salsa Congress', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
                 { id: 'temporary_uploads', name: 'Temporary Uploads', status: 'Private', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
                 { id: 'archived_work', name: 'Archived Work', status: 'Private', owner: 'AMedia', type: 'folder', clickable: false, children: [] },
             ]
@@ -342,7 +342,7 @@
             let tooltip = 'Draft';
             let dateHtml = '';
 
-            if (node.status === 'Public') {
+            if (node.status === 'Public' || node.status === 'Published') {
                 stateName = 'Published';
                 badgeClasses = 'bg-green-100 text-green-800';
                 tooltip = 'Published';
@@ -709,9 +709,9 @@
                     </div>
                     <div class="py-1">
                         ${galleryOptionsHtml}
-                        <button onclick="openAttachEventModal('${node.name.replace(/'/g, "\\'")}'); closeContextMenu(); event.stopPropagation();" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                            Attach to Event
+                        <button onclick="openFolderSettingsModal('${node.id}', ${JSON.stringify(fullPath).replace(/"/g, '&quot;')}); closeContextMenu(); event.stopPropagation();" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            Folder Settings
                         </button>
                     </div>
                     <div class="py-1">
@@ -871,10 +871,77 @@
             document.getElementById('move-to').innerText = window._pendingMoveTarget || 'Target Folder';
         }
 
-        function openAttachEventModal(folderName) {
+        function openFolderSettingsModal(nodeId, fullPath) {
+            const node = findNodeByPath(fullPath);
+            if (!node) return;
+
             document.getElementById('modal-backdrop').classList.remove('hidden');
-            document.getElementById('modal-attach-event').classList.remove('hidden');
-            document.getElementById('attach-folder-name').innerText = folderName;
+            document.getElementById('modal-folder-settings').classList.remove('hidden');
+
+            document.getElementById('fs-folder-name').innerText = node.name;
+            document.getElementById('fs-owner').innerText = node.owner || 'You';
+            document.getElementById('fs-resource-link').value = `revelti.com/studio/${node.id}`;
+
+            // Set Status
+            const status = node.status === 'Public' ? 'Published' : (node.status === 'Scheduled' ? 'Scheduled' : 'Draft');
+            const statusRadios = document.getElementsByName('fs-status');
+            statusRadios.forEach(radio => {
+                if (radio.value === status) radio.checked = true;
+                else radio.checked = false;
+            });
+
+            // Set Schedule if exists
+            if (node.schedule) {
+                const dateObj = new Date(node.schedule);
+                if (!isNaN(dateObj)) {
+                    document.getElementById('fs-publish-date').value = dateObj.toISOString().split('T')[0];
+                    document.getElementById('fs-publish-time').value = dateObj.toTimeString().substring(0, 5);
+                }
+            } else {
+                document.getElementById('fs-publish-date').value = '';
+                document.getElementById('fs-publish-time').value = '';
+            }
+
+            toggleFSScheduleFields();
+
+            // Collaborators
+            const collaboratorsContainer = document.getElementById('fs-collaborators');
+            if (node.creators && node.creators.length > 0) {
+                collaboratorsContainer.innerHTML = node.creators.map(c => `
+                    <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white" src="${c.avatar}" alt="${c.name}" title="${c.name}">
+                `).join('');
+            } else {
+                collaboratorsContainer.innerHTML = '<span class="text-xs text-gray-400">No collaborators</span>';
+            }
+        }
+
+        function toggleFSScheduleFields() {
+            const isScheduled = Array.from(document.getElementsByName('fs-status')).find(r => r.checked)?.value === 'Scheduled';
+            const container = document.getElementById('fs-schedule-container');
+            const dateInput = document.getElementById('fs-publish-date');
+            const timeInput = document.getElementById('fs-publish-time');
+
+            if (isScheduled) {
+                container.classList.remove('opacity-50', 'pointer-events-none');
+                dateInput.disabled = false;
+                timeInput.disabled = false;
+            } else {
+                container.classList.add('opacity-50', 'pointer-events-none');
+                dateInput.disabled = true;
+                timeInput.disabled = true;
+            }
+        }
+
+        function saveFolderSettings() {
+            showToast('Changes saved successfully', 'success');
+            closeModals();
+        }
+
+        function copyFolderSettingsLink() {
+            const linkInput = document.getElementById('fs-resource-link');
+            linkInput.select();
+            document.execCommand('copy');
+            showToast('Link copied to clipboard', 'success');
         }
 
         function openGenericModal(title, contentHtml, btnText) {
@@ -1224,11 +1291,11 @@
             </div>
         </div>
 
-        <!-- Attach to Event Modal -->
-        <div id="modal-attach-event"
-            class="bg-white rounded-xl shadow-xl w-full max-w-md overflow-hidden hidden transform transition-all">
-            <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center">
-                <h3 class="font-bold text-gray-800 text-lg">Attach Folder to Event</h3>
+        <!-- Folder Settings Modal -->
+        <div id="modal-folder-settings"
+            class="bg-white rounded-xl shadow-xl w-full max-w-xl overflow-hidden hidden transform transition-all max-h-[90vh] flex flex-col">
+            <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center shrink-0">
+                <h3 class="font-bold text-gray-800 text-lg">Folder Settings: <span id="fs-folder-name"></span></h3>
                 <button onclick="closeModals()" class="text-gray-400 hover:text-gray-600">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
@@ -1236,27 +1303,97 @@
                     </svg>
                 </button>
             </div>
-            <div class="p-6 space-y-4">
-                <p class="text-sm text-gray-600">Attach <span id="attach-folder-name"
-                        class="font-semibold text-gray-800">folder</span> to an event so its media appears in the event
-                    gallery.</p>
+            <div class="p-6 space-y-6 overflow-y-auto thin-scrollbar">
+                <!-- Attachment -->
                 <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-2">Select Event</label>
-                    <select
+                    <label class="block text-sm font-bold text-gray-700 mb-2">Attach to Event</label>
+                    <select id="fs-event-select"
                         class="w-full border border-gray-300 rounded-lg p-2.5 bg-white text-sm outline-none focus:border-revelti-blue transition">
-                        <option>Bachata Geneva Festival 2026</option>
-                        <option>Geneva Summer Zouk</option>
-                        <option>Madrid Bachata Weekend</option>
-                        <option>Paris Sensual Festival</option>
-                        <option class="text-gray-400">--- Unassigned ---</option>
+                        <option value="none">Not attached</option>
+                        <option value="bgf2026" selected>Bachata Geneva Festival 2026</option>
+                        <option value="gsz">Geneva Summer Zouk</option>
+                        <option value="mbw">Madrid Bachata Weekend</option>
+                        <option value="psf">Paris Sensual Festival</option>
                     </select>
                 </div>
+
+                <!-- Status & Scheduling -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Status</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="fs-status" value="Draft" onchange="toggleFSScheduleFields()"
+                                    class="text-revelti-blue focus:ring-revelti-blue h-4 w-4">
+                                <span class="text-sm text-gray-700">Draft</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="fs-status" value="Scheduled"
+                                    onchange="toggleFSScheduleFields()"
+                                    class="text-revelti-blue focus:ring-revelti-blue h-4 w-4">
+                                <span class="text-sm text-gray-700">Scheduled</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="fs-status" value="Published"
+                                    onchange="toggleFSScheduleFields()"
+                                    class="text-revelti-blue focus:ring-revelti-blue h-4 w-4">
+                                <span class="text-sm text-gray-700">Published</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div id="fs-schedule-container" class="opacity-50 pointer-events-none">
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Schedule Release</label>
+                        <div class="space-y-3">
+                            <input type="date" id="fs-publish-date"
+                                class="w-full border border-gray-300 rounded-lg p-2 bg-white text-sm outline-none focus:border-revelti-blue transition">
+                            <input type="time" id="fs-publish-time"
+                                class="w-full border border-gray-300 rounded-lg p-2 bg-white text-sm outline-none focus:border-revelti-blue transition">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sharing & Access -->
+                <div class="border-t border-gray-100 pt-6">
+                    <h4 class="font-bold text-gray-800 text-sm mb-4">Sharing & Access</h4>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-500">Owner</span>
+                            <span class="font-semibold text-gray-800" id="fs-owner">AMedia</span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-500">Collaborators</span>
+                            <div class="flex -space-x-2 overflow-hidden" id="fs-collaborators">
+                                <!-- Collaborator Avatars filled by JS -->
+                            </div>
+                        </div>
+                        <div>
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="checkbox" id="fs-allow-downloads" checked
+                                    class="rounded text-revelti-blue focus:ring-revelti-blue h-4 w-4">
+                                <span class="text-sm text-gray-700">Allow collaborators to download media</span>
+                            </label>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 mb-1 uppercase tracking-wider">Resource
+                                Link</label>
+                            <div class="flex gap-2">
+                                <input type="text" id="fs-resource-link" readonly
+                                    class="flex-1 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 font-mono outline-none">
+                                <button onclick="copyFolderSettingsLink()"
+                                    class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-bold text-revelti-blue hover:bg-gray-50 transition shrink-0">
+                                    Copy
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="px-6 py-4 bg-gray-50 flex justify-end space-x-3">
+            <div class="px-6 py-4 bg-gray-50 flex justify-end space-x-3 shrink-0">
                 <button onclick="closeModals()"
                     class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50 transition">Cancel</button>
-                <button onclick="showToast('Folder attached to event', 'success'); closeModals()"
-                    class="px-4 py-2 bg-revelti-blue text-white rounded-lg text-sm font-bold hover:bg-blue-800 transition">Attach</button>
+                <button onclick="saveFolderSettings()"
+                    class="px-4 py-2 bg-revelti-blue text-white rounded-lg text-sm font-bold hover:bg-blue-800 transition">Save
+                    Changes</button>
             </div>
         </div>
         <!-- Advanced Filters Modal -->
