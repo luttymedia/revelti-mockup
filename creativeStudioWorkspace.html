@@ -597,12 +597,16 @@
             });
         }
 
-        // Store initial source context to persist across simulated internal navigation
         const initialSourceUrlParams = new URLSearchParams(window.location.search);
-        const isFromFoldersIndex = initialSourceUrlParams.get('source') === 'folders';
+        const source = initialSourceUrlParams.get('source');
+        const isFromFoldersIndex = source === 'folders';
 
         function navigateBack() {
-            if (isFromFoldersIndex) {
+            if (source === 'media_management') {
+                window.location.href = 'creativeMediaManagement.html';
+            } else if (source === 'event_view') {
+                window.location.href = 'creativeEventView.html';
+            } else if (isFromFoldersIndex) {
                 // If opened from the global folders index, return there, preserving filters
                 // Remove 'source' and 'folder_path' from params before returning
                 const urlParams = new URLSearchParams(window.location.search);
@@ -1325,6 +1329,48 @@
             activeFilters = { statuses: [], gallery: 'any', owner: '', dateCreatedFrom: '', dateCreatedTo: '', dateModifiedFrom: '', dateModifiedTo: '' };
             _syncFiltersToModal();
         }
+
+        // Initialize from URL parameters
+        function initializeFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            const status = params.get('status');
+            const search = params.get('search');
+            const sort = params.get('sort');
+            const view = params.get('view');
+
+            if (status) {
+                const s = status.charAt(0).toUpperCase() + status.slice(1).toLowerCase();
+                if (['Draft', 'Scheduled', 'Published'].includes(s)) {
+                    activeFilters.statuses = [s];
+                }
+            }
+
+            if (search) {
+                currentSearchQuery = search;
+                document.getElementById('studio-search-input').value = search;
+            }
+
+            if (sort) {
+                if (sort === 'updated_desc') {
+                    sortColumn = 'lastModified';
+                    sortDirection = 'desc';
+                } else if (sort === 'name_asc') {
+                    sortColumn = 'name';
+                    sortDirection = 'asc';
+                }
+            }
+
+            if (view) {
+                setViewMode(view);
+            }
+
+            _syncFiltersToModal();
+            applyFiltersAndSearch();
+        }
+
+        // Execute initialization
+        resetAdvancedFilters();
+        initializeFromUrl();
 
     </script>
 

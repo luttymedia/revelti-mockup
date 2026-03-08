@@ -1,9 +1,9 @@
 ---
 description: Start the Local Development Server
 ---
-When starting the local development server for the Revelti Mockup app, ALWAYS use port 3000. 
+When starting the local development server for the Revelti Mockup app, ALWAYS use port 3001. 
 
 Run the following command:
 ```bash
-npx live-server --port=3000
+npx live-server --port=3001
 ```

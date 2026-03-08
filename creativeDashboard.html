@@ -245,13 +245,13 @@
 
                             <!-- Workspace Tab -->
                             <div id="workspace" class="tab-content">
-                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-start">
+                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                                     <!-- Resume Drafts -->
                                     <div
                                         class="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow lg:col-span-2">
                                         <div class="flex items-center justify-between mb-4">
                                             <h3 class="text-lg font-bold text-revelti-blue">Resume Drafts</h3>
-                                            <a href="creativeFolders?status=draft&source=dashboard"
+                                            <a href="creativeStudioWorkspace.html?status=draft&source=dashboard"
                                                 class="flex items-center justify-center p-2 rounded-full hover:bg-orange-50 transition"
                                                 title="View All Drafts">
                                                 <svg class="w-6 h-6 text-orange-500" fill="none" stroke="currentColor"
@@ -265,55 +265,63 @@
                                         </div>
                                         <p class="text-sm text-gray-500 mb-4">Continue working on your saved draft
                                             folders and media.</p>
-
                                         <div class="space-y-3 mb-4">
                                             <!-- Draft 1 -->
                                             <div
                                                 class="flex items-center justify-between p-3 bg-gray-50 rounded border border-gray-100">
                                                 <div>
                                                     <div class="flex items-center space-x-2">
-                                                        <span class="font-semibold text-revelti-blue text-sm">Main Stage
-                                                            Sunday</span>
+                                                        <span class="font-semibold text-revelti-blue text-sm">Archived
+                                                            Work</span>
                                                         <span
                                                             class="text-[10px] font-bold px-2 py-0.5 bg-orange-100 text-orange-800 rounded uppercase">Draft</span>
                                                     </div>
-                                                    <div class="text-xs text-gray-500 mt-1">Bachata Geneva Festival 2026
-                                                        • Edited 2h ago</div>
+                                                    <div class="text-xs text-gray-500 mt-1">Personal Collection • Edited
+                                                        2h ago</div>
                                                 </div>
-                                                <a href="creativeStudioWorkspace.html?source=folders&folder_path=bgf,sun"
+                                                <a href="creativeStudioWorkspace.html?search=Archived+Work"
                                                     class="text-sm font-semibold text-revelti-blue hover:text-blue-800 transition">Continue</a>
                                             </div>
-
                                             <!-- Draft 2 -->
                                             <div
-                                                class="flex items-center justify-between p-3 bg-gray-50 rounded border border-gray-100 opacity-75">
+                                                class="flex items-center justify-between p-3 bg-gray-50 rounded border border-gray-100">
                                                 <div>
                                                     <div class="flex items-center space-x-2">
-                                                        <span class="font-semibold text-gray-600 text-sm">Workshops Day
-                                                            1</span>
+                                                        <span class="font-semibold text-revelti-blue text-sm">Temporary
+                                                            Uploads</span>
                                                         <span
                                                             class="text-[10px] font-bold px-2 py-0.5 bg-orange-100 text-orange-800 rounded uppercase">Draft</span>
                                                     </div>
-                                                    <div class="text-xs text-gray-500 mt-1">Paris Kizomba Congress 2026
-                                                        • Edited yesterday</div>
+                                                    <div class="text-xs text-gray-500 mt-1">Quick Uploads • Edited 5h
+                                                        ago</div>
                                                 </div>
-                                                <a href="creativeStudioWorkspace.html?source=folders&folder_path=pkc,workshops_1"
+                                                <a href="creativeStudioWorkspace.html?search=Temporary+Uploads"
                                                     class="text-sm font-semibold text-revelti-blue hover:text-blue-800 transition">Continue</a>
                                             </div>
-
-                                            <a href="creativeFolders?status=draft&source=dashboard"
-                                                class="block text-center text-sm font-semibold text-revelti-blue hover:text-blue-800 transition py-4 border-2 border-dashed border-gray-200 rounded-lg hover:border-revelti-blue hover:bg-blue-50">
-                                                View all Draft Folders
-                                            </a>
+                                            <!-- Draft 3 -->
+                                            <div
+                                                class="flex items-center justify-between p-3 bg-gray-50 rounded border border-gray-100">
+                                                <div>
+                                                    <div class="flex items-center space-x-2">
+                                                        <span class="font-semibold text-revelti-blue text-sm">Croatia
+                                                            Summer Festival</span>
+                                                        <span
+                                                            class="text-[10px] font-bold px-2 py-0.5 bg-orange-100 text-orange-800 rounded uppercase">Draft</span>
+                                                    </div>
+                                                    <div class="text-xs text-gray-500 mt-1">Summer Events 2025 • Edited
+                                                        yesterday</div>
+                                                </div>
+                                                <a href="creativeStudioWorkspace.html?search=Croatia+Summer+Festival"
+                                                    class="text-sm font-semibold text-revelti-blue hover:text-blue-800 transition">Continue</a>
+                                            </div>
                                         </div>
                                     </div>
-
                                     <!-- Recent Folders -->
                                     <div
                                         class="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow lg:col-span-2">
                                         <div class="flex items-center justify-between mb-4">
                                             <h3 class="text-lg font-bold text-revelti-blue">Recent Folders</h3>
-                                            <a href="creativeFolders.html?sort=updated_desc&source=dashboard"
+                                            <a href="creativeStudioWorkspace.html?sort=updated_desc&view=list&source=dashboard"
                                                 class="flex items-center justify-center p-2 rounded-full hover:bg-blue-50 transition"
                                                 title="View All Folders">
                                                 <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor"
@@ -327,10 +335,9 @@
                                         </div>
                                         <p class="text-sm text-gray-500 mb-4">Quickly access recently modified media
                                             folders from any event.</p>
-
                                         <div class="space-y-3">
-                                            <!-- BGF Folder (Working) -->
-                                            <a href="creativeStudioWorkspace.html"
+                                            <!-- Recent 1 -->
+                                            <a href="creativeStudioWorkspace.html?search=Bachata+Geneva+Festival"
                                                 class="flex items-center justify-between p-3 bg-gray-50 rounded border border-gray-100 hover:bg-gray-100 transition group cursor-pointer block">
                                                 <div class="flex items-center">
                                                     <svg class="w-5 h-5 text-revelti-blue mr-3 opacity-70 group-hover:opacity-100"
@@ -342,58 +349,55 @@
                                                     <div>
                                                         <div
                                                             class="font-semibold text-gray-700 text-sm group-hover:text-revelti-blue transition">
-                                                            Jack & Jill Finals</div>
-                                                        <div class="text-xs text-gray-500 font-medium">Bachata Geneva
-                                                            Festival 2026</div>
+                                                            Bachata Geneva Festival</div>
+                                                        <div class="text-xs text-gray-500 font-medium">BGF 2026</div>
                                                     </div>
                                                 </div>
                                                 <div class="text-xs text-gray-400 whitespace-nowrap">Today, 10:42 AM
                                                 </div>
                                             </a>
-
-                                            <!-- BSF Folder (Archived) -->
-                                            <div
-                                                class="flex items-center justify-between p-3 bg-gray-50 rounded border border-gray-100 opacity-60">
+                                            <!-- Recent 2 -->
+                                            <a href="creativeStudioWorkspace.html?search=Zouk+Festival+Zurich"
+                                                class="flex items-center justify-between p-3 bg-gray-50 rounded border border-gray-100 hover:bg-gray-100 transition group cursor-pointer block">
                                                 <div class="flex items-center">
-                                                    <svg class="w-5 h-5 text-gray-400 mr-3" fill="currentColor"
-                                                        viewBox="0 0 20 20">
+                                                    <svg class="w-5 h-5 text-revelti-blue mr-3 opacity-70 group-hover:opacity-100"
+                                                        fill="currentColor" viewBox="0 0 20 20">
                                                         <path
                                                             d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z">
                                                         </path>
                                                     </svg>
                                                     <div>
-                                                        <div class="font-semibold text-gray-500 text-sm">Pool Party
-                                                            Media</div>
-                                                        <div class="text-xs text-gray-400 font-medium">Barcelona Summer
-                                                            Fest</div>
+                                                        <div
+                                                            class="font-semibold text-gray-700 text-sm group-hover:text-revelti-blue transition">
+                                                            Zouk Festival Zurich</div>
+                                                        <div class="text-xs text-gray-500 font-medium">ZFZ 2026</div>
                                                     </div>
                                                 </div>
-                                                <div class="text-xs text-gray-400 whitespace-nowrap">Aug 02, 2026</div>
-                                            </div>
-
-                                            <!-- PKC Folder (Active) -->
-                                            <div
-                                                class="flex items-center justify-between p-3 bg-gray-50 rounded border border-gray-100 opacity-80">
+                                                <div class="text-xs text-gray-400 whitespace-nowrap">Today, 09:15 AM
+                                                </div>
+                                            </a>
+                                            <!-- Recent 3 -->
+                                            <a href="creativeStudioWorkspace.html?search=Bailando+Sensual"
+                                                class="flex items-center justify-between p-3 bg-gray-50 rounded border border-gray-100 hover:bg-gray-100 transition group cursor-pointer block">
                                                 <div class="flex items-center">
-                                                    <svg class="w-5 h-5 text-gray-400 mr-3" fill="currentColor"
-                                                        viewBox="0 0 20 20">
+                                                    <svg class="w-5 h-5 text-revelti-blue mr-3 opacity-70 group-hover:opacity-100"
+                                                        fill="currentColor" viewBox="0 0 20 20">
                                                         <path
                                                             d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z">
                                                         </path>
                                                     </svg>
                                                     <div>
-                                                        <div class="font-semibold text-gray-600 text-sm">Friday Social
-                                                            Photos</div>
-                                                        <div class="text-xs text-gray-500 font-medium">Paris Kizomba
-                                                            Congress</div>
+                                                        <div
+                                                            class="font-semibold text-gray-700 text-sm group-hover:text-revelti-blue transition">
+                                                            Bailando Sensual</div>
+                                                        <div class="text-xs text-gray-500 font-medium">BS 2026</div>
                                                     </div>
                                                 </div>
-                                                <div class="text-xs text-gray-400 whitespace-nowrap">Yesterday, 4:15 PM
+                                                <div class="text-xs text-gray-400 whitespace-nowrap">Yesterday, 11:30 PM
                                                 </div>
-                                            </div>
+                                            </a>
                                         </div>
                                     </div>
-
                                     <!-- Create New Folder -->
                                     <div
                                         class="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow lg:col-span-2">
@@ -406,15 +410,12 @@
                                                 </path>
                                             </svg>
                                         </div>
-                                        <p class="text-sm font-semibold text-gray-600 mb-1">Organize media inside an
-                                            existing event.</p>
                                         <p class="text-sm text-gray-500 mb-4">Choose an active collaboration to add
                                             subfolders to.</p>
                                         <button
                                             class="w-full px-4 py-2 text-sm font-bold bg-revelti-blue text-white rounded-lg hover:bg-blue-800 transition-colors shadow-sm">Create
                                             New Folder</button>
                                     </div>
-
                                     <!-- Quick Access -->
                                     <div
                                         class="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow lg:col-span-2">
@@ -435,203 +436,197 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Activity Tab -->
-                            <div id="activity" class="tab-content hidden">
-                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                                    <!-- Draft -->
-                                    <div
-                                        class="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-center items-center text-center">
-                                        <div
-                                            class="w-12 h-12 rounded-full bg-orange-100 text-orange-500 flex items-center justify-center mb-4">
-                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
-                                                </path>
-                                            </svg>
-                                        </div>
-                                        <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Draft
-                                        </h3>
-                                        <p class="text-4xl font-extrabold text-orange-500 mt-2">2</p>
-                                        <p class="text-xs text-gray-400 mt-2">Events pending details</p>
-                                    </div>
-                                    <!-- Scheduled -->
-                                    <div
-                                        class="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-center items-center text-center">
-                                        <div
-                                            class="w-12 h-12 rounded-full bg-blue-100 text-blue-500 flex items-center justify-center mb-4">
-                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                                </path>
-                                            </svg>
-                                        </div>
-                                        <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">
-                                            Scheduled</h3>
-                                        <p class="text-4xl font-extrabold text-blue-500 mt-2">5</p>
-                                        <p class="text-xs text-gray-400 mt-2">Upcoming published events</p>
-                                    </div>
-                                    <!-- Private -->
-                                    <div
-                                        class="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-center items-center text-center">
-                                        <div
-                                            class="w-12 h-12 rounded-full bg-purple-100 text-purple-500 flex items-center justify-center mb-4">
-                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
-                                                </path>
-                                            </svg>
-                                        </div>
-                                        <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Private
-                                        </h3>
-                                        <p class="text-4xl font-extrabold text-purple-500 mt-2">1</p>
-                                        <p class="text-xs text-gray-400 mt-2">Invite-only events</p>
-                                    </div>
-                                    <!-- Public -->
-                                    <div
-                                        class="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-center items-center text-center">
-                                        <div
-                                            class="w-12 h-12 rounded-full bg-green-100 text-green-500 flex items-center justify-center mb-4">
-                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9">
-                                                </path>
-                                            </svg>
-                                        </div>
-                                        <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Public
-                                        </h3>
-                                        <p class="text-4xl font-extrabold text-green-500 mt-2">12</p>
-                                        <p class="text-xs text-gray-400 mt-2">Live and visible to all</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Overview Tab -->
-                            <div id="overview" class="tab-content hidden">
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <!-- Media Assets -->
-                                    <a href="creativeMediaAssets.html"
-                                        class="block bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md hover:border-revelti-blue transition-all group">
-                                        <div class="flex items-center space-x-3 mb-4 border-b pb-2">
-                                            <div
-                                                class="p-2 bg-blue-50 rounded-lg group-hover:bg-blue-100 transition-colors">
-                                                <svg class="w-6 h-6 text-revelti-blue" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                                    </path>
-                                                </svg>
-                                            </div>
-                                            <h3 class="text-lg font-bold text-revelti-blue">Media Assets</h3>
-                                        </div>
-                                        <div class="flex justify-between items-center px-2">
-                                            <div class="text-center">
-                                                <p class="text-sm text-gray-500 uppercase tracking-wide">Folders</p>
-                                                <p class="text-3xl font-extrabold text-gray-800 mt-1">24</p>
-                                            </div>
-                                            <div class="h-10 border-r border-gray-200"></div>
-                                            <div class="text-center">
-                                                <p class="text-sm text-gray-500 uppercase tracking-wide">Files</p>
-                                                <p class="text-3xl font-extrabold text-gray-800 mt-1">1,342</p>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                    <!-- Engagement -->
-                                    <a href="creativeAudienceEngagement.html"
-                                        class="block bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md hover:border-revelti-blue transition-all group">
-                                        <div class="flex items-center space-x-3 mb-4 border-b pb-2">
-                                            <div
-                                                class="p-2 bg-blue-50 rounded-lg group-hover:bg-blue-100 transition-colors">
-                                                <svg class="w-6 h-6 text-revelti-blue" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                                    </path>
-                                                </svg>
-                                            </div>
-                                            <h3 class="text-lg font-bold text-revelti-blue">Engagement</h3>
-                                        </div>
-                                        <div class="flex justify-between items-center px-2">
-                                            <div class="text-center">
-                                                <p class="text-sm text-gray-500 uppercase tracking-wide">Views</p>
-                                                <p class="text-3xl font-extrabold text-gray-800 mt-1">12.4k</p>
-                                            </div>
-                                            <div class="h-10 border-r border-gray-200"></div>
-                                            <div class="text-center">
-                                                <p class="text-sm text-gray-500 uppercase tracking-wide">Downloads</p>
-                                                <p class="text-3xl font-extrabold text-gray-800 mt-1">4,892</p>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                    <!-- Revenue -->
-                                    <a href="creativeRevenue.html"
-                                        class="block bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md hover:border-green-400 transition-all group">
-                                        <div class="flex items-center space-x-3 mb-4 border-b pb-2">
-                                            <div
-                                                class="p-2 bg-green-50 rounded-lg group-hover:bg-green-100 transition-colors">
-                                                <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
-                                                    </path>
-                                                </svg>
-                                            </div>
-                                            <h3 class="text-lg font-bold text-green-600">Revenue</h3>
-                                        </div>
-                                        <div class="flex justify-between items-center px-2">
-                                            <div class="text-center">
-                                                <p class="text-sm text-gray-500 uppercase tracking-wide">Gross Sales</p>
-                                                <p class="text-2xl font-extrabold text-gray-800 mt-1">€4,515</p>
-                                            </div>
-                                            <div class="h-10 border-r border-gray-200"></div>
-                                            <div class="text-center">
-                                                <p class="text-sm text-gray-500 uppercase tracking-wide">Net Earnings
-                                                </p>
-                                                <p class="text-2xl font-extrabold text-green-600 mt-1">€3,160</p>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                    <!-- Storage -->
-                                    <a href="creativeStorage.html"
-                                        class="block bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md hover:border-purple-400 transition-all group">
-                                        <div class="flex items-center space-x-3 mb-4 border-b pb-2">
-                                            <div
-                                                class="p-2 bg-purple-50 rounded-lg group-hover:bg-purple-100 transition-colors">
-                                                <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4">
-                                                    </path>
-                                                </svg>
-                                            </div>
-                                            <h3 class="text-lg font-bold text-purple-600">Storage Usage</h3>
-                                        </div>
-                                        <div class="px-2">
-                                            <p class="text-2xl font-extrabold text-gray-800 mb-2">42.5 GB <span
-                                                    class="text-sm font-normal text-gray-500">/ 100 GB</span></p>
-                                            <div class="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden">
-                                                <div class="bg-gradient-to-r from-purple-400 to-purple-600 h-2.5 rounded-full"
-                                                    style="width: 42.5%"></div>
-                                            </div>
-                                            <p class="text-xs text-gray-500 mt-2 text-right font-medium">42.5% Used</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </main>
                     </div>
-                </div>
+
+                    <!-- Activity Tab -->
+                    <div id="activity" class="tab-content hidden">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <!-- Draft -->
+                            <div
+                                class="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-center items-center text-center">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-orange-100 text-orange-500 flex items-center justify-center mb-4">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Draft
+                                </h3>
+                                <p class="text-4xl font-extrabold text-orange-500 mt-2">2</p>
+                                <p class="text-xs text-gray-400 mt-2">Events pending details</p>
+                            </div>
+                            <!-- Scheduled -->
+                            <div
+                                class="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-center items-center text-center">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-blue-100 text-blue-500 flex items-center justify-center mb-4">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">
+                                    Scheduled</h3>
+                                <p class="text-4xl font-extrabold text-blue-500 mt-2">5</p>
+                                <p class="text-xs text-gray-400 mt-2">Upcoming published events</p>
+                            </div>
+                            <!-- Private -->
+                            <div
+                                class="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-center items-center text-center">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-purple-100 text-purple-500 flex items-center justify-center mb-4">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Private
+                                </h3>
+                                <p class="text-4xl font-extrabold text-purple-500 mt-2">1</p>
+                                <p class="text-xs text-gray-400 mt-2">Invite-only events</p>
+                            </div>
+                            <!-- Public -->
+                            <div
+                                class="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-center items-center text-center">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-green-100 text-green-500 flex items-center justify-center mb-4">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Public
+                                </h3>
+                                <p class="text-4xl font-extrabold text-green-500 mt-2">12</p>
+                                <p class="text-xs text-gray-400 mt-2">Live and visible to all</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Overview Tab -->
+                    <div id="overview" class="tab-content hidden">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Media Assets -->
+                            <a href="creativeMediaAssets.html"
+                                class="block bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md hover:border-revelti-blue transition-all group">
+                                <div class="flex items-center space-x-3 mb-4 border-b pb-2">
+                                    <div class="p-2 bg-blue-50 rounded-lg group-hover:bg-blue-100 transition-colors">
+                                        <svg class="w-6 h-6 text-revelti-blue" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-revelti-blue">Media Assets</h3>
+                                </div>
+                                <div class="flex justify-between items-center px-2">
+                                    <div class="text-center">
+                                        <p class="text-sm text-gray-500 uppercase tracking-wide">Folders</p>
+                                        <p class="text-3xl font-extrabold text-gray-800 mt-1">24</p>
+                                    </div>
+                                    <div class="h-10 border-r border-gray-200"></div>
+                                    <div class="text-center">
+                                        <p class="text-sm text-gray-500 uppercase tracking-wide">Files</p>
+                                        <p class="text-3xl font-extrabold text-gray-800 mt-1">1,342</p>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <!-- Engagement -->
+                            <a href="creativeAudienceEngagement.html"
+                                class="block bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md hover:border-revelti-blue transition-all group">
+                                <div class="flex items-center space-x-3 mb-4 border-b pb-2">
+                                    <div class="p-2 bg-blue-50 rounded-lg group-hover:bg-blue-100 transition-colors">
+                                        <svg class="w-6 h-6 text-revelti-blue" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-revelti-blue">Engagement</h3>
+                                </div>
+                                <div class="flex justify-between items-center px-2">
+                                    <div class="text-center">
+                                        <p class="text-sm text-gray-500 uppercase tracking-wide">Views</p>
+                                        <p class="text-3xl font-extrabold text-gray-800 mt-1">12.4k</p>
+                                    </div>
+                                    <div class="h-10 border-r border-gray-200"></div>
+                                    <div class="text-center">
+                                        <p class="text-sm text-gray-500 uppercase tracking-wide">Downloads</p>
+                                        <p class="text-3xl font-extrabold text-gray-800 mt-1">4,892</p>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <!-- Revenue -->
+                            <a href="creativeRevenue.html"
+                                class="block bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md hover:border-green-400 transition-all group">
+                                <div class="flex items-center space-x-3 mb-4 border-b pb-2">
+                                    <div class="p-2 bg-green-50 rounded-lg group-hover:bg-green-100 transition-colors">
+                                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-green-600">Revenue</h3>
+                                </div>
+                                <div class="flex justify-between items-center px-2">
+                                    <div class="text-center">
+                                        <p class="text-sm text-gray-500 uppercase tracking-wide">Gross Sales</p>
+                                        <p class="text-2xl font-extrabold text-gray-800 mt-1">€4,515</p>
+                                    </div>
+                                    <div class="h-10 border-r border-gray-200"></div>
+                                    <div class="text-center">
+                                        <p class="text-sm text-gray-500 uppercase tracking-wide">Net Earnings
+                                        </p>
+                                        <p class="text-2xl font-extrabold text-green-600 mt-1">€3,160</p>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <!-- Storage -->
+                            <a href="creativeStorage.html"
+                                class="block bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md hover:border-purple-400 transition-all group">
+                                <div class="flex items-center space-x-3 mb-4 border-b pb-2">
+                                    <div
+                                        class="p-2 bg-purple-50 rounded-lg group-hover:bg-purple-100 transition-colors">
+                                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-purple-600">Storage Usage</h3>
+                                </div>
+                                <div class="px-2">
+                                    <p class="text-2xl font-extrabold text-gray-800 mb-2">42.5 GB <span
+                                            class="text-sm font-normal text-gray-500">/ 100 GB</span></p>
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden">
+                                        <div class="bg-gradient-to-r from-purple-400 to-purple-600 h-2.5 rounded-full"
+                                            style="width: 42.5%"></div>
+                                    </div>
+                                    <p class="text-xs text-gray-500 mt-2 text-right font-medium">42.5% Used</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
             </main>
         </div>
+    </div>
+    </main>
+    </div>
     </div>
     <!-- Footer placeholder (not used in dashboard, but kept for compatibility if needed elsewhere, though recommended to remove) -->
     <!-- <div id="footer-placeholder"></div> -->

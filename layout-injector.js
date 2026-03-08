@@ -26,12 +26,23 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (role === 'creative' || role === 'organizer') {
             const _v = Date.now();
             const [sidebarHtml, navbarHtml] = await Promise.all([
-                fetch(`${role}Sidebar.html?v=${_v}`).then(r => r.text()),
-                fetch(`${role}NavBar.html?v=${_v}`).then(r => r.text())
+                fetch(`${role}Sidebar.snippet?v=${_v}`).then(r => r.text()),
+                fetch(`${role}NavBar.snippet?v=${_v}`).then(r => r.text())
             ]);
 
+            // Surgical sanitization to remove live-server injection without clipping content
+            // This function is no longer needed as .snippet files are assumed to be clean
+            // const sanitizeSnippet = (html) => {
+            //     return html
+            //         .replace(/<!-- Code injected by live-server -->/gi, '')
+            //         .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+            // };
+
+            console.log(`[layout-injector] Fetched ${role}Sidebar.snippet, length: ${sidebarHtml.length}`);
             if (sidebar) sidebar.innerHTML = sidebarHtml;
+
             const navbar = document.getElementById(`${role}-navbar-placeholder`);
+            console.log(`[layout-injector] Fetched ${role}NavBar.snippet, length: ${navbarHtml.length}`);
             if (navbar) navbar.innerHTML = navbarHtml;
 
             // Bind hamburger icon in the navbar to toggle the mobile menu

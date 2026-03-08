@@ -506,6 +506,7 @@ div.dt-button-background {
     border-right: 1px solid #e5e7eb;
     /* gray-200 */
     transition: width 0.3s ease-in-out;
+    overflow-y: auto;
     overflow-x: hidden;
     white-space: nowrap;
     flex-shrink: 0;
