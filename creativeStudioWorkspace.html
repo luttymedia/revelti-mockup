@@ -233,6 +233,7 @@
                     name: 'Bachata Geneva Festival',
                     status: 'Public', // Published
                     owner: 'AMedia',
+                    creators: [{ name: 'Lutty Moreira', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=LM', type: 'Media Creator' }],
                     type: 'folder',
                     clickable: true,
                     isGalleryRoot: true,
@@ -1057,6 +1058,8 @@
             document.getElementById('move-to').innerText = window._pendingMoveTarget || 'Target Folder';
         }
 
+        let currentEditingNode = null;
+
         function openFolderSettingsModal(nodeId, fullPath) {
             const node = findNodeByPath(fullPath);
             if (!node) return;
@@ -1091,14 +1094,117 @@
             toggleFSScheduleFields();
 
             // Collaborators
-            const collaboratorsContainer = document.getElementById('fs-collaborators');
-            if (node.creators && node.creators.length > 0) {
-                collaboratorsContainer.innerHTML = node.creators.map(c => `
-                    <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white" src="${c.avatar}" alt="${c.name}" title="${c.name}">
-                `).join('');
+            currentEditingNode = node;
+            renderFSCollaborators();
+            document.getElementById('fs-collaborator-search').value = '';
+            document.getElementById('fs-search-suggestions').classList.add('hidden');
+        }
+
+        function renderFSCollaborators() {
+            const container = document.getElementById('fs-collaborators-list');
+            container.innerHTML = '';
+            if (currentEditingNode.creators && currentEditingNode.creators.length > 0) {
+                currentEditingNode.creators.forEach((c, index) => {
+                    const tag = document.createElement('div');
+                    tag.className = 'inline-flex items-center bg-gray-50 rounded-full pl-1 pr-3 py-1 text-sm font-semibold text-gray-800 border border-gray-200';
+                    let typeClass = 'bg-blue-100 text-blue-800';
+                    if (c.type === 'Media Creator') typeClass = 'bg-purple-100 text-purple-800';
+                    if (c.type === 'Pending Invite') typeClass = 'bg-gray-200 text-gray-800';
+
+                    tag.innerHTML = `
+                        <img class="h-6 w-6 rounded-full mr-2" src="${c.avatar}" alt="${c.name}">
+                        <span>${c.name}</span>
+                        ${c.type ? `<span class="text-[10px] font-bold ml-2 ${typeClass} px-2 py-0.5 rounded-full">${c.type}</span>` : ''}
+                        <button onclick="removeFSCollaborator(${index})" class="ml-2 text-gray-400 hover:text-red-500 font-bold transition">&times;</button>
+                    `;
+                    container.appendChild(tag);
+                });
             } else {
-                collaboratorsContainer.innerHTML = '<span class="text-xs text-gray-400">No collaborators</span>';
+                container.innerHTML = '<span class="text-xs text-gray-400">No collaborators yet. Search above to invite.</span>';
             }
+        }
+
+        const mockFSCollaborators = [
+            { name: 'AMedia', type: 'Media Creator', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' },
+            { name: 'John Doe', type: 'Promoter', avatar: 'https://placehold.co/80x80/6b21a8/ffffff?text=JD' },
+            { name: 'Lutty Moreira', type: 'Media Creator', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=LM' },
+            { name: 'Jane Smith', type: 'Media Creator', avatar: 'https://placehold.co/80x80/213c63/ffffff?text=JS' },
+            { name: 'Sha Iborra', type: 'Media Creator', avatar: 'https://placehold.co/80x80/10b981/ffffff?text=SI' },
+            { name: 'Pablo Ríos', type: 'Media Creator', avatar: 'https://placehold.co/80x80/3b82f6/ffffff?text=PR' }
+        ];
+
+        function handleFSSearch(event) {
+            const query = event.target.value.toLowerCase().trim();
+            const suggestionsContainer = document.getElementById('fs-search-suggestions');
+            suggestionsContainer.innerHTML = '';
+
+            if (query.length < 2) {
+                suggestionsContainer.classList.add('hidden');
+                return;
+            }
+
+            // Exclude already added
+            const existingNames = (currentEditingNode.creators || []).map(c => c.name.toLowerCase());
+            const filtered = mockFSCollaborators.filter(c => c.name.toLowerCase().includes(query) && !existingNames.includes(c.name.toLowerCase()));
+
+            const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(query);
+
+            if (filtered.length > 0 || (isEmail && !existingNames.includes(query))) {
+                filtered.forEach(collab => {
+                    const item = document.createElement('div');
+                    item.className = 'p-2 hover:bg-gray-50 cursor-pointer flex items-center transition border-b border-gray-100 last:border-0';
+                    item.innerHTML = `
+                        <img class="h-6 w-6 rounded-full mr-2" src="${collab.avatar}" alt="${collab.name}">
+                        <span class="text-sm font-semibold">${collab.name}</span>
+                        <span class="text-[10px] font-bold ml-auto ${collab.type === 'Media Creator' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800'} px-2 py-0.5 rounded-full">${collab.type}</span>
+                    `;
+                    item.onclick = () => addFSCollaborator(collab);
+                    suggestionsContainer.appendChild(item);
+                });
+
+                if (isEmail && !existingNames.includes(query)) {
+                    const emailCollab = {
+                        name: query, // Store email as name
+                        type: 'Pending Invite',
+                        avatar: `https://placehold.co/80x80/9ca3af/ffffff?text=${query.charAt(0).toUpperCase()}`
+                    };
+                    const item = document.createElement('div');
+                    item.className = 'p-2 hover:bg-gray-50 cursor-pointer flex items-center transition border-b border-gray-100 last:border-0';
+                    item.innerHTML = `
+                        <div class="h-6 w-6 rounded-full bg-gray-200 flex items-center justify-center mr-2 text-gray-500 font-bold text-xs shrink-0">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <span class="text-sm font-semibold truncate">${query}</span>
+                        <span class="text-[10px] font-bold ml-auto bg-gray-100 text-gray-800 px-2 py-0.5 rounded-full shrink-0">Invite via Email</span>
+                    `;
+                    item.onclick = () => addFSCollaborator(emailCollab);
+                    suggestionsContainer.appendChild(item);
+                }
+
+                suggestionsContainer.classList.remove('hidden');
+            } else {
+                const empty = document.createElement('div');
+                empty.className = 'p-3 text-sm text-gray-500 text-center';
+                empty.textContent = 'No matching users found.';
+                suggestionsContainer.appendChild(empty);
+                suggestionsContainer.classList.remove('hidden');
+            }
+        }
+
+        function addFSCollaborator(collab) {
+            if (!currentEditingNode.creators) {
+                currentEditingNode.creators = [];
+            }
+            currentEditingNode.creators.push(collab);
+            renderFSCollaborators();
+
+            document.getElementById('fs-collaborator-search').value = '';
+            document.getElementById('fs-search-suggestions').classList.add('hidden');
+        }
+
+        function removeFSCollaborator(index) {
+            currentEditingNode.creators.splice(index, 1);
+            renderFSCollaborators();
         }
 
         function toggleFSScheduleFields() {
@@ -1575,10 +1681,16 @@
                             <span class="text-gray-500">Owner</span>
                             <span class="font-semibold text-gray-800" id="fs-owner">AMedia</span>
                         </div>
-                        <div class="flex items-center justify-between text-sm">
-                            <span class="text-gray-500">Collaborators</span>
-                            <div class="flex -space-x-2 overflow-hidden" id="fs-collaborators">
-                                <!-- Collaborator Avatars filled by JS -->
+                        <div class="flex flex-col gap-2 relative">
+                            <span class="font-bold text-gray-700 text-sm mb-1">Collaborators</span>
+                            <input type="text" id="fs-collaborator-search" onkeyup="handleFSSearch(event)"
+                                placeholder="Search by Username or Email to invite..."
+                                class="w-full p-2 border border-gray-300 rounded-lg text-sm outline-none focus:border-revelti-blue transition mb-1">
+                            <div id="fs-search-suggestions"
+                                class="absolute top-[65px] w-full bg-white border border-gray-300 rounded-md shadow-md z-10 hidden max-h-40 overflow-y-auto">
+                            </div>
+                            <div id="fs-collaborators-list" class="flex flex-wrap gap-2 min-h-[30px] items-center">
+                                <!-- Tags with avatars will go here -->
                             </div>
                         </div>
                         <div>
