@@ -4,12 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revelti - Storage</title>
+    <title>Revelti - Storage Insights (Creative View)</title>
 
-    <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Tailwind Configuration -->
     <script>
         tailwind.config = {
             theme: {
@@ -25,19 +22,15 @@
             }
         }
     </script>
-
-
-    <!-- Google Fonts: Nunito -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- Your Custom Stylesheet -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Chart.js for Storage Charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body class="dashboard-layout bg-gray-100 antialiased text-gray-800" data-role="creative">
-    <!-- Navbar Placeholder -->
+    <!-- Creative Navigation Bar -->
     <div id="creative-navbar-placeholder"></div>
 
     <div class="dashboard-main-area">
@@ -45,27 +38,311 @@
 
         <div class="main-wrapper">
             <main class="page-content">
-                <!-- Main container -->
-                <div class="max-w-full mx-auto px-4 sm:px-4 lg:px-6 py-4">
-                    <header class="flex flex-col md:flex-row justify-between items-center mb-6">
-                        <div class="flex items-center mb-4 md:mb-0">
-                            <div>
-                                <h1 class="text-3xl font-extrabold text-revelti-blue">Storage</h1>
-                                <p class="text-gray-500">Storage analytics and insights</p>
-                            </div>
+                <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+                    <!-- Header Section -->
+                    <header class="flex flex-col md:flex-row justify-between md:items-center mb-6">
+                        <div>
+                            <h1 class="text-3xl font-extrabold text-revelti-blue">Storage Insights</h1>
+                            <p class="text-gray-600 mt-1">Monitor your storage usage and media footprint</p>
+                        </div>
+                        <div class="flex space-x-2 mt-4 md:mt-0">
+                            <a href="creativeDashboard.html"
+                                class="px-4 py-2 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 transition duration-300 flex items-center">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                                </svg>
+                                Back to Dashboard
+                            </a>
                         </div>
                     </header>
 
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden p-6 md:p-8">
-                        <p class="text-gray-500 text-center">Placeholder for Storage content.</p>
+                    <!-- KPI Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                        <div class="bg-white rounded-lg p-6 shadow-md border-t-4 border-revelti-blue">
+                            <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Total Storage Used
+                            </p>
+                            <p class="text-3xl font-extrabold text-gray-800 mt-2">142.5 <span
+                                    class="text-xl text-gray-500 font-bold">GB</span></p>
+                            <div class="mt-4 flex items-center text-sm">
+                                <span class="text-red-500 font-bold flex items-center">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                    </svg>
+                                    +12.4 GB
+                                </span>
+                                <span class="text-gray-500 ml-2">this month</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-6 shadow-md border-t-4 border-green-500">
+                            <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Available Storage</p>
+                            <p class="text-3xl font-extrabold text-gray-800 mt-2">357.5 <span
+                                    class="text-xl text-gray-500 font-bold">GB</span></p>
+                            <div class="mt-4 flex items-center text-sm text-gray-500">
+                                Pro Plan: 500 GB Total
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-6 shadow-md border-t-4 border-revelti-orange">
+                            <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Storage Used
+                            </h3>
+                            <p class="text-3xl font-extrabold text-revelti-orange mt-2">28.5%</p>
+                            <div class="mt-4 text-sm text-gray-500">
+                                You have plenty of space left!
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-6 shadow-md border-t-4 border-revelti-purple">
+                            <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Est. Monthly Growth
+                            </p>
+                            <p class="text-3xl font-extrabold text-revelti-purple mt-2">~15.0 <span
+                                    class="text-xl text-revelti-purple font-bold">GB</span></p>
+                            <div class="mt-4 text-sm text-gray-500">
+                                Based on last 3 months
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                        <!-- Main Chart Area -->
+                        <div class="lg:col-span-2 space-y-8">
+                            <div class="bg-white rounded-lg shadow-md p-6">
+                                <div class="flex justify-between items-center mb-6">
+                                    <h2 class="text-xl font-bold text-gray-800">Storage Usage Trends</h2>
+                                    <select
+                                        class="border-gray-300 rounded-md text-sm focus:ring-revelti-blue focus:border-revelti-blue pointer-events-none">
+                                        <option>Last 6 Months</option>
+                                        <option>Year to Date</option>
+                                        <option>All Time</option>
+                                    </select>
+                                </div>
+                                <div class="relative h-72 w-full">
+                                    <canvas id="storageChart"></canvas>
+                                </div>
+                            </div>
+
+                            <!-- Top storage consuming items -->
+                            <div class="bg-white rounded-lg shadow-md p-6">
+                                <h2 class="text-xl font-bold text-gray-800 mb-6">Largest Galleries by Storage</h2>
+                                <div class="overflow-x-auto">
+                                    <table class="w-full text-left border-collapse">
+                                        <thead>
+                                            <tr
+                                                class="text-sm font-semibold text-gray-500 bg-gray-50 border-b border-gray-200">
+                                                <th class="py-3 px-4">Gallery Name</th>
+                                                <th class="py-3 px-4">Associated Event</th>
+                                                <th class="py-3 px-4 text-center">Contains</th>
+                                                <th class="py-3 px-4 text-right">Size</th>
+                                                <th class="py-3 px-4 text-right">% of Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-sm text-gray-700 divide-y divide-gray-100">
+                                            <tr class="hover:bg-gray-50 transition">
+                                                <td class="py-3 px-4 flex items-center">
+                                                    <div
+                                                        class="w-10 h-10 bg-revelti-blue rounded object-cover mr-3 overflow-hidden flex items-center justify-center text-white font-bold">
+                                                        BGF
+                                                    </div>
+                                                    <span class="font-bold">Jack & Jill Friday Night</span>
+                                                </td>
+                                                <td class="py-3 px-4">Bachata Geneva 2026</td>
+                                                <td class="py-3 px-4 text-center text-xs text-gray-500">mostly videos
+                                                </td>
+                                                <td class="py-3 px-4 text-right font-bold text-gray-800">22.4 GB</td>
+                                                <td class="py-3 px-4 text-right font-bold text-revelti-orange">15.7%
+                                                </td>
+                                            </tr>
+                                            <tr class="hover:bg-gray-50 transition">
+                                                <td class="py-3 px-4 flex items-center">
+                                                    <div
+                                                        class="w-10 h-10 bg-revelti-blue rounded object-cover mr-3 overflow-hidden flex items-center justify-center text-white font-bold">
+                                                        PSF
+                                                    </div>
+                                                    <span class="font-bold">Social Dance RAW Files</span>
+                                                </td>
+                                                <td class="py-3 px-4">Paris Sensual Fest</td>
+                                                <td class="py-3 px-4 text-center text-xs text-gray-500">mostly photos
+                                                </td>
+                                                <td class="py-3 px-4 text-right font-bold text-gray-800">18.2 GB</td>
+                                                <td class="py-3 px-4 text-right font-bold text-revelti-orange">12.8%
+                                                </td>
+                                            </tr>
+                                            <tr class="hover:bg-gray-50 transition">
+                                                <td class="py-3 px-4 flex items-center">
+                                                    <div
+                                                        class="w-10 h-10 bg-revelti-blue rounded object-cover mr-3 overflow-hidden flex items-center justify-center text-white font-bold">
+                                                        BCN
+                                                    </div>
+                                                    <span class="font-bold">Artist Shoots Hi-Res</span>
+                                                </td>
+                                                <td class="py-3 px-4">BCN Congress 2025</td>
+                                                <td class="py-3 px-4 text-center text-xs text-gray-500">mixed</td>
+                                                <td class="py-3 px-4 text-right font-bold text-gray-800">15.6 GB</td>
+                                                <td class="py-3 px-4 text-right font-bold text-revelti-orange">10.9%
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Side Column -->
+                        <div class="lg:col-span-1 space-y-8">
+
+                            <!-- Storage Composition Doughnut Chart -->
+                            <div class="bg-white rounded-lg shadow-md p-6">
+                                <h2 class="text-xl font-bold text-gray-800 mb-6">Storage by Media Type</h2>
+                                <div class="relative h-48 w-full mb-4">
+                                    <canvas id="mediaTypeChart"></canvas>
+                                </div>
+                                <div class="space-y-3 mt-4">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <div class="w-3 h-3 rounded-full bg-revelti-orange mr-2"></div>
+                                            <span class="text-sm font-bold">Videos</span>
+                                        </div>
+                                        <span class="text-sm text-gray-600">92.6 GB (65%)</span>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <div class="w-3 h-3 rounded-full bg-revelti-blue mr-2"></div>
+                                            <span class="text-sm font-bold text-gray-600">Photos</span>
+                                        </div>
+                                        <span class="text-sm text-gray-600">49.9 GB (35%)</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Optimization Insights -->
+                            <div class="bg-gray-50 rounded-lg shadow-sm border border-gray-200 p-6">
+                                <h3 class="font-bold text-lg text-gray-800 mb-3">AI Storage Insights</h3>
+
+                                <div class="space-y-4">
+                                    <div class="p-3 bg-white rounded shadow-sm border-l-4 border-revelti-purple">
+                                        <p class="text-sm font-bold text-gray-800 mb-1">Heavy Video Footprint</p>
+                                        <p class="text-xs text-gray-600">Video files represent 65% of your storage usage
+                                            despite being only 15% of your total assets.</p>
+                                    </div>
+                                    <div class="p-3 bg-white rounded shadow-sm border-l-4 border-revelti-orange">
+                                        <p class="text-sm font-bold text-gray-800 mb-1">Concentrated Usage</p>
+                                        <p class="text-xs text-gray-600">Your top 3 galleries account for nearly 40% of
+                                            your total storage.</p>
+                                    </div>
+                                    <div class="p-3 bg-white rounded shadow-sm border-l-4 border-gray-400">
+                                        <p class="text-sm font-bold text-gray-800 mb-1">Dormant Files</p>
+                                        <p class="text-xs text-gray-600">You have 12.5 GB of media from 2024 that hasn't
+                                            received any interactions in over 6 months.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </main>
         </div>
     </div>
 
+    <!-- Loading Footer -->
+    <div id="footer-placeholder"></div>
+
     <script src="layout-injector.js" defer></script>
     <script src="creative.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Line chart for Storage Trends
+            const ctx1 = document.getElementById('storageChart').getContext('2d');
+            const dataStorage = [85.2, 98.4, 105.1, 118.9, 130.1, 142.5];
+            const labelsMonths = ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'];
+
+            new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: labelsMonths,
+                    datasets: [{
+                        label: 'Storage Used (GB)',
+                        data: dataStorage,
+                        borderColor: '#213c63',
+                        backgroundColor: 'rgba(33, 60, 99, 0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 4,
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return context.parsed.y + ' GB';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                borderDash: [2, 4],
+                                color: '#e5e7eb',
+                                drawBorder: false
+                            },
+                            ticks: {
+                                callback: function (value) {
+                                    return value + ' GB';
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false,
+                                drawBorder: false
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Doughnut chart for Media Types
+            const ctx2 = document.getElementById('mediaTypeChart').getContext('2d');
+            new Chart(ctx2, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Videos', 'Photos'],
+                    datasets: [{
+                        data: [65, 35],
+                        backgroundColor: ['#f58220', '#213c63'],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return context.label + ': ' + context.parsed + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
