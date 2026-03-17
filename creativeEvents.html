@@ -190,12 +190,20 @@
                 location: "Geneva, CH",
                 image: "images/eventPoster.png",
                 imageFallback: "https://placehold.co/600x400/213c63/ffffff?text=BGF+2026",
+                foldersCount: 12,
                 assetsCount: 1342,
                 galleriesCount: 24,
                 delivery: {
-                    published: 850,
-                    scheduled: 200,
-                    draft: 292
+                    assets: {
+                        published: 850,
+                        scheduled: 200,
+                        draft: 292
+                    },
+                    folders: {
+                        published: 8,
+                        scheduled: 2,
+                        draft: 2
+                    }
                 },
                 addedDate: "2026-03-01"
             },
@@ -209,12 +217,20 @@
                 dateRaw: "2026-11-20",
                 location: "Paris, FR",
                 image: "https://placehold.co/600x400/9333ea/ffffff?text=PKC+2026",
+                foldersCount: 5,
                 assetsCount: 450,
                 galleriesCount: 8,
                 delivery: {
-                    published: 100,
-                    scheduled: 50,
-                    draft: 300
+                    assets: {
+                        published: 100,
+                        scheduled: 50,
+                        draft: 300
+                    },
+                    folders: {
+                        published: 1,
+                        scheduled: 1,
+                        draft: 3
+                    }
                 },
                 addedDate: "2026-03-10"
             },
@@ -228,12 +244,20 @@
                 dateRaw: "2027-04-10",
                 location: "London, UK",
                 image: "https://placehold.co/600x400/f58220/ffffff?text=London+Salsa",
+                foldersCount: 0,
                 assetsCount: 0,
                 galleriesCount: 0,
                 delivery: {
-                    published: 0,
-                    scheduled: 0,
-                    draft: 0
+                    assets: {
+                        published: 0,
+                        scheduled: 0,
+                        draft: 0
+                    },
+                    folders: {
+                        published: 0,
+                        scheduled: 0,
+                        draft: 0
+                    }
                 },
                 addedDate: "2026-03-15"
             },
@@ -247,12 +271,20 @@
                 dateRaw: "2026-07-15",
                 location: "Barcelona, ES",
                 image: "https://placehold.co/600x400/64748b/ffffff?text=BCN+Fest",
+                foldersCount: 20,
                 assetsCount: 2100,
                 galleriesCount: 45,
                 delivery: {
-                    published: 2100,
-                    scheduled: 0,
-                    draft: 0
+                    assets: {
+                        published: 2100,
+                        scheduled: 0,
+                        draft: 0
+                    },
+                    folders: {
+                        published: 20,
+                        scheduled: 0,
+                        draft: 0
+                    }
                 },
                 addedDate: "2025-12-01"
             },
@@ -266,12 +298,20 @@
                 dateRaw: "2026-08-05",
                 location: "Madrid, ES",
                 image: "https://placehold.co/600x400/eab308/ffffff?text=Madrid+Week",
+                foldersCount: 0,
                 assetsCount: 0,
                 galleriesCount: 0,
                 delivery: {
-                    published: 0,
-                    scheduled: 0,
-                    draft: 0
+                    assets: {
+                        published: 0,
+                        scheduled: 0,
+                        draft: 0
+                    },
+                    folders: {
+                        published: 0,
+                        scheduled: 0,
+                        draft: 0
+                    }
                 },
                 addedDate: "2026-03-16"
             }
@@ -354,7 +394,11 @@
                             </div>
 
                             <!-- Contribution Summary -->
-                            <div class="bg-gray-50 rounded-lg p-3 border border-gray-100 mb-4 grid grid-cols-2 gap-2 text-center text-sm">
+                            <div class="bg-gray-50 rounded-lg p-3 border border-gray-100 mb-4 grid grid-cols-3 gap-2 text-center text-sm">
+                                <div>
+                                    <p class="text-xs text-gray-400 font-medium uppercase tracking-wider mb-0.5">Folders</p>
+                                    <p class="font-bold text-gray-800">${event.foldersCount.toLocaleString()}</p>
+                                </div>
                                 <div>
                                     <p class="text-xs text-gray-400 font-medium uppercase tracking-wider mb-0.5">Assets</p>
                                     <p class="font-bold text-gray-800">${event.assetsCount.toLocaleString()}</p>
@@ -379,11 +423,34 @@
                                         </div>
                                     </div>
                                 </div>
-                                <ul class="text-sm text-gray-600 space-y-1.5 font-medium">
-                                    <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-green-500 mr-2"></span> ${event.delivery.published.toLocaleString()} Published</li>
-                                    <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-blue-500 mr-2"></span> ${event.delivery.scheduled.toLocaleString()} Scheduled</li>
-                                    <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-gray-400 mr-2"></span> ${event.delivery.draft.toLocaleString()} Draft</li>
-                                </ul>
+                                <div class="text-xs">
+                                    <div class="flex items-center text-gray-400 font-medium border-b border-gray-100 pb-1.5 mb-2">
+                                        <div class="flex-1">Status</div>
+                                        <div class="w-16 text-right">Folders</div>
+                                        <div class="w-20 text-right">Assets</div>
+                                    </div>
+                                    <div class="flex items-center mb-2">
+                                        <div class="flex-1 flex items-center font-medium text-gray-600">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-green-500 mr-1.5 flex-shrink-0"></span> Published
+                                        </div>
+                                        <div class="w-16 text-right font-bold text-gray-800">${event.delivery.folders.published.toLocaleString()}</div>
+                                        <div class="w-20 text-right font-bold text-gray-800">${event.delivery.assets.published.toLocaleString()}</div>
+                                    </div>
+                                    <div class="flex items-center mb-2">
+                                        <div class="flex-1 flex items-center font-medium text-gray-600">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-blue-500 mr-1.5 flex-shrink-0"></span> Scheduled
+                                        </div>
+                                        <div class="w-16 text-right font-bold text-gray-800">${event.delivery.folders.scheduled.toLocaleString()}</div>
+                                        <div class="w-20 text-right font-bold text-gray-800">${event.delivery.assets.scheduled.toLocaleString()}</div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="flex-1 flex items-center font-medium text-gray-600">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-gray-400 mr-1.5 flex-shrink-0"></span> Draft
+                                        </div>
+                                        <div class="w-16 text-right font-bold text-gray-800">${event.delivery.folders.draft.toLocaleString()}</div>
+                                        <div class="w-20 text-right font-bold text-gray-800">${event.delivery.assets.draft.toLocaleString()}</div>
+                                    </div>
+                                </div>
                             </div>
 
                             <!-- Action Button -->
