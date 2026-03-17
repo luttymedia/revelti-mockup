@@ -6,10 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Revelti - Media Management</title>
 
-    <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Tailwind Configuration -->
     <script>
         tailwind.config = {
             theme: {
@@ -25,20 +22,11 @@
             }
         }
     </script>
-
-
-    <!-- Google Fonts: Nunito -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- Your Custom Stylesheet -->
     <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body class="dashboard-layout bg-gray-100 antialiased text-gray-800" data-role="creative">
-    <!-- Creative-specific Navbar -->
     <div id="creative-navbar-placeholder"></div>
 
     <div class="dashboard-main-area">
@@ -49,280 +37,506 @@
                 <div class="max-w-full mx-auto px-4 sm:px-4 lg:px-6 py-4">
 
                     <!-- Header Section -->
-                    <header class="mb-8">
-                        <h1 class="text-3xl font-extrabold revelti-blue">Media Management</h1>
-                        <p class="text-gray-600">Manage media across all your active, upcoming, and archived
-                            collaborations. Access folders, galleries, and sharing tools per event.</p>
+                    <header class="mb-6">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+                            <div>
+                                <h1 class="text-3xl font-extrabold text-revelti-blue">Media Management</h1>
+                                <p class="text-gray-600">Manage your galleries and delivered media</p>
+                            </div>
+                            <div>
+                                <a href="uploadManager.html"
+                                    class="px-4 py-2 bg-revelti-blue text-white rounded-lg hover:bg-blue-800 transition duration-300 flex items-center justify-center font-bold shadow-sm">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                    </svg>
+                                    Upload Media
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Controls Bar -->
+                        <div
+                            class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+
+                            <!-- Search -->
+                            <div class="relative flex-1 max-w-lg">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                    </svg>
+                                </div>
+                                <input type="text" id="gallery-search"
+                                    placeholder="Search galleries, events, location, dates..."
+                                    class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-revelti-blue focus:border-revelti-blue sm:text-sm transition duration-150 ease-in-out">
+                            </div>
+
+                            <div class="flex flex-col sm:flex-row gap-4 items-center">
+                                <!-- Filters -->
+                                <div class="flex bg-gray-100 p-1 rounded-lg">
+                                    <button
+                                        class="filter-btn active-filter px-4 py-1.5 rounded-md text-sm font-medium bg-white text-revelti-blue shadow-sm"
+                                        data-filter="all">All</button>
+                                    <button
+                                        class="filter-btn px-4 py-1.5 rounded-md text-sm font-medium text-gray-600 hover:text-gray-900"
+                                        data-filter="event">Event Galleries</button>
+                                    <button
+                                        class="filter-btn px-4 py-1.5 rounded-md text-sm font-medium text-gray-600 hover:text-gray-900"
+                                        data-filter="standalone">Standalone</button>
+                                </div>
+
+                                <!-- Sorting Button -->
+                                <button onclick="openSortModal()"
+                                    class="flex items-center gap-2 px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50 transition shadow-sm">
+                                    <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"></path>
+                                    </svg>
+                                    Sort
+                                </button>
+                                <!-- View Toggle -->
+                                <div class="flex bg-gray-100 p-1 rounded-lg border border-gray-200" id="view-toggle">
+                                    <button id="view-grid-btn"
+                                        class="p-1.5 rounded-md bg-white text-revelti-blue shadow-sm" title="Grid View">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                    <button id="view-list-btn"
+                                        class="p-1.5 rounded-md text-gray-500 hover:text-gray-900" title="List View">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4 6h16M4 12h16M4 18h16"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </header>
 
-                    <!-- Events List -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                    <!-- Gallery Container -->
+                    <div id="gallery-container">
+                        <!-- Views will be injected here by JS based on data -->
 
-                        <!-- Bachata Geneva Festival 2026 (Active & Functional) -->
-                        <div
-                            class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 border border-gray-100 flex flex-col">
-                            <div class="relative h-48">
-                                <img src="images/eventPoster.png" alt="Bachata Geneva Festival 2026"
-                                    class="w-full h-full object-cover"
-                                    onerror="this.onerror=null;this.src='https://placehold.co/600x400/213c63/ffffff?text=BGF+2026';">
-                                <div class="absolute top-4 right-4">
-                                    <span
-                                        class="bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-full uppercase shadow-sm">On
-                                        Sale</span>
-                                </div>
-                            </div>
-                            <div class="p-6 flex-1 flex flex-col">
-                                <h2 class="text-xl font-bold text-revelti-blue mb-1">Bachata Geneva Festival 2026</h2>
-                                <p class="text-gray-500 text-sm mb-4">Organizer: The Festival of Nations</p>
-
-                                <div class="flex items-center text-sm text-gray-600 mb-3">
-                                    <svg class="w-5 h-5 mr-3 text-revelti-orange" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                        </path>
-                                    </svg>
-                                    Oct 08 - 12, 2026
-                                </div>
-
-                                <div
-                                    class="flex items-center justify-between text-sm text-gray-600 mb-5 pb-5 border-b border-gray-100">
-                                    <div class="flex items-center">
-                                        <svg class="w-5 h-5 mr-3 text-revelti-orange" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
-                                            </path>
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                        </svg>
-                                        Geneva, Switzerland
-                                    </div>
-                                    <div
-                                        class="font-semibold text-gray-700 bg-gray-50 px-2 py-1 rounded border border-gray-100 shadow-sm">
-                                        24 Folders
-                                    </div>
-                                </div>
-
-                                <div class="mt-auto">
-                                    <div class="text-xs text-gray-400 text-center mb-4">
-                                        Last modified: Today, 10:42 AM
-                                    </div>
-
-                                    <a href="creativeStudioWorkspace.html?folder_path=bgf_main&source=media_management"
-                                        class="block w-full text-center bg-revelti-blue text-white font-bold py-3 rounded-lg hover:bg-blue-800 transition duration-300 shadow-sm">
-                                        Manage Media
-                                    </a>
-                                </div>
-                            </div>
+                        <!-- Grid View Template -->
+                        <div id="grid-view"
+                            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                         </div>
 
-                        <!-- Paris Kizomba Congress 2026 (Active Placeholder) -->
-                        <div
-                            class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 border border-gray-100 flex flex-col">
-                            <div class="relative h-48">
-                                <img src="https://placehold.co/600x400/9333ea/ffffff?text=PKC+2026"
-                                    alt="Paris Kizomba Congress 2026" class="w-full h-full object-cover">
-                                <div class="absolute top-4 right-4">
-                                    <span
-                                        class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full uppercase shadow-sm">Active</span>
-                                </div>
-                            </div>
-                            <div class="p-6 flex-1 flex flex-col">
-                                <h2 class="text-xl font-bold text-revelti-blue mb-1">Paris Kizomba Congress 2026</h2>
-                                <p class="text-gray-500 text-sm mb-4">Organizer: Kizomba France Team</p>
+                        <!-- List View Template (Hidden initially) -->
+                        <div id="list-view" class="hidden flex flex-col gap-3"></div>
 
-                                <div class="flex items-center text-sm text-gray-600 mb-3">
-                                    <svg class="w-5 h-5 mr-3 text-purple-600" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                        </path>
-                                    </svg>
-                                    Nov 20 - 24, 2026
-                                </div>
-
-                                <div
-                                    class="flex items-center justify-between text-sm text-gray-600 mb-5 pb-5 border-b border-gray-100">
-                                    <div class="flex items-center">
-                                        <svg class="w-5 h-5 mr-3 text-purple-600" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
-                                            </path>
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                        </svg>
-                                        Paris, France
-                                    </div>
-                                    <div
-                                        class="font-semibold text-gray-700 bg-gray-50 px-2 py-1 rounded border border-gray-100 shadow-sm">
-                                        8 Folders
-                                    </div>
-                                </div>
-
-                                <div class="mt-auto">
-                                    <div class="text-xs text-gray-400 text-center mb-4">
-                                        Last modified: Yesterday, 4:15 PM
-                                    </div>
-
-                                    <button disabled
-                                        class="block w-full text-center bg-gray-50 text-gray-400 font-bold py-3 rounded-lg cursor-not-allowed border border-gray-200">
-                                        Manage Media (Preview)
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- London Salsa Spring Break 2027 (Upcoming Placeholder) -->
-                        <div
-                            class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 border border-gray-100 flex flex-col">
-                            <div class="relative h-48">
-                                <img src="https://placehold.co/600x400/f58220/ffffff?text=LSSB+2027"
-                                    alt="London Salsa Spring Break 2027" class="w-full h-full object-cover">
-                                <div class="absolute top-4 right-4">
-                                    <span
-                                        class="bg-orange-100 text-orange-800 text-xs font-bold px-3 py-1 rounded-full uppercase shadow-sm">Upcoming</span>
-                                </div>
-                            </div>
-                            <div class="p-6 flex-1 flex flex-col">
-                                <h2 class="text-xl font-bold text-revelti-blue mb-1">London Salsa Spring Break</h2>
-                                <p class="text-gray-500 text-sm mb-4">Organizer: UK Dance Events</p>
-
-                                <div class="flex items-center text-sm text-gray-600 mb-3 font-semibold text-orange-600">
-                                    <svg class="w-5 h-5 mr-3 text-orange-500" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                        </path>
-                                    </svg>
-                                    Apr 10 - 14, 2027
-                                </div>
-
-                                <div
-                                    class="flex items-center justify-between text-sm text-gray-600 mb-5 pb-5 border-b border-gray-100">
-                                    <div class="flex items-center">
-                                        <svg class="w-5 h-5 mr-3 text-orange-500" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
-                                            </path>
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                        </svg>
-                                        London, UK
-                                    </div>
-                                    <div
-                                        class="font-semibold text-gray-700 bg-gray-50 px-2 py-1 rounded border border-gray-100 shadow-sm">
-                                        0 Folders
-                                    </div>
-                                </div>
-
-                                <div class="mt-auto">
-                                    <div class="text-xs text-gray-400 text-center mb-4">
-                                        Last modified: Mar 01, 2027
-                                    </div>
-
-                                    <button disabled
-                                        class="block w-full text-center bg-gray-50 text-gray-400 font-bold py-3 rounded-lg cursor-not-allowed border border-gray-200">
-                                        Manage Media (Preview)
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Barcelona Summer Fest 2026 (Archived Placeholder) -->
-                        <div
-                            class="bg-gray-50 rounded-xl overflow-hidden transition-shadow duration-300 border border-gray-200 opacity-80 flex flex-col">
-                            <div class="relative h-48 grayscale">
-                                <img src="https://placehold.co/600x400/4b5563/ffffff?text=BSF+2026"
-                                    alt="Barcelona Summer Fest" class="w-full h-full object-cover">
-                                <div class="absolute top-4 right-4">
-                                    <span
-                                        class="bg-gray-200 text-gray-600 text-xs font-bold px-3 py-1 rounded-full uppercase shadow-sm">Archived</span>
-                                </div>
-                            </div>
-                            <div class="p-6 flex-1 flex flex-col">
-                                <h2 class="text-xl font-bold text-gray-500 mb-1">Barcelona Summer Fest 2026</h2>
-                                <p class="text-gray-400 text-sm mb-4">Organizer: BCN Dance</p>
-
-                                <div class="flex items-center text-sm text-gray-400 mb-3">
-                                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                        </path>
-                                    </svg>
-                                    Jul 15 - 19, 2026
-                                </div>
-
-                                <div
-                                    class="flex items-center justify-between text-sm text-gray-400 mb-5 pb-5 border-b border-gray-200">
-                                    <div class="flex items-center">
-                                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
-                                            </path>
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                        </svg>
-                                        Barcelona, Spain
-                                    </div>
-                                    <div class="font-semibold px-2 py-1 rounded bg-gray-200 text-gray-500 shadow-sm">
-                                        45 Folders
-                                    </div>
-                                </div>
-
-                                <div class="mt-auto">
-                                    <div class="text-xs text-gray-400 text-center mb-4">
-                                        Last modified: Aug 02, 2026
-                                    </div>
-
-                                    <button disabled
-                                        class="block w-full text-center bg-gray-200 text-gray-400 font-bold py-3 rounded-lg cursor-not-allowed border border-gray-300">
-                                        Manage Media (Preview)
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!-- Collaboration Invitations Section -->
-                    <section class="mt-8 mb-4">
-                        <header class="mb-6 flex justify-between items-center">
-                            <h2 class="text-2xl font-bold text-revelti-blue flex items-center">
-                                <svg class="w-6 h-6 mr-3 text-revelti-orange" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
-                                    </path>
-                                </svg>
-                                Collaboration Invitations
-                            </h2>
-                        </header>
-
-                        <!-- No Invitations Placeholder -->
-                        <div class="bg-white rounded-xl border border-gray-200 p-8 text-center shadow-sm">
+                        <!-- Empty State -->
+                        <div id="empty-state"
+                            class="hidden bg-white rounded-xl border border-gray-200 p-12 text-center shadow-sm mt-8">
                             <div
                                 class="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-gray-100">
-                                <svg class="w-8 h-8 text-gray-300" fill="none" stroke="currentColor"
+                                <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2-2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4">
+                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
                                     </path>
                                 </svg>
                             </div>
-                            <h3 class="text-lg font-bold text-gray-600 mb-2">No pending invitations at this time.</h3>
-                            <p class="text-gray-400 text-sm max-w-md mx-auto">When event organizers invite you to
-                                collaborate as a creator, their requests will appear here for you to accept or decline.
-                            </p>
+                            <h3 class="text-xl font-bold text-gray-700 mb-2">No galleries found</h3>
+                            <p class="text-gray-500 max-w-md mx-auto mb-6">We couldn't find any galleries matching your
+                                current filters or search query.</p>
+                            <button
+                                class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-2 px-6 rounded-lg transition-colors"
+                                onclick="document.getElementById('gallery-search').value=''; renderGalleries();">Clear
+                                Search & Filters</button>
                         </div>
-                    </section>
+                    </div>
+
+                </div>
             </main>
         </div>
     </div>
+
+    <!-- Sorting Modal -->
+    <div id="modal-sorting"
+        class="fixed inset-0 bg-gray-900 bg-opacity-50 z-50 hidden flex items-center justify-center">
+        <div class="bg-white rounded-xl shadow-xl w-full max-w-sm overflow-hidden transform transition-all">
+            <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center">
+                <h3 class="font-bold text-gray-800 text-lg">Sort Galleries</h3>
+                <button onclick="closeSortModal()" class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+            <div class="p-6 space-y-4">
+                <label class="flex items-center space-x-3 cursor-pointer">
+                    <input type="radio" name="sort-option" value="name_asc"
+                        class="text-revelti-blue focus:ring-revelti-blue h-4 w-4">
+                    <span class="text-sm text-gray-700 font-medium">Name (A-Z)</span>
+                </label>
+                <label class="flex items-center space-x-3 cursor-pointer">
+                    <input type="radio" name="sort-option" value="name_desc"
+                        class="text-revelti-blue focus:ring-revelti-blue h-4 w-4">
+                    <span class="text-sm text-gray-700 font-medium">Name (Z-A)</span>
+                </label>
+                <label class="flex items-center space-x-3 cursor-pointer">
+                    <input type="radio" name="sort-option" value="event_asc"
+                        class="text-revelti-blue focus:ring-revelti-blue h-4 w-4">
+                    <span class="text-sm text-gray-700 font-medium">Event (A-Z)</span>
+                </label>
+                <label class="flex items-center space-x-3 cursor-pointer">
+                    <input type="radio" name="sort-option" value="status"
+                        class="text-revelti-blue focus:ring-revelti-blue h-4 w-4">
+                    <span class="text-sm text-gray-700 font-medium">Status</span>
+                </label>
+                <label class="flex items-center space-x-3 cursor-pointer">
+                    <input type="radio" name="sort-option" value="updated_desc"
+                        class="text-revelti-blue focus:ring-revelti-blue h-4 w-4">
+                    <span class="text-sm text-gray-700 font-medium">Last Updated</span>
+                </label>
+            </div>
+            <div class="px-6 py-4 bg-gray-50 flex justify-end">
+                <button onclick="applySort()"
+                    class="px-4 py-2 bg-revelti-blue text-white rounded-lg text-sm font-bold hover:bg-blue-800 transition">Apply
+                    Sort</button>
+            </div>
+        </div>
     </div>
 
+    <!-- Script for Mock Data and View/Filter Logic -->
+    <script>
+        const galleriesData = [
+            {
+                id: 1,
+                name: "Main Festival Coverage",
+                event: "Bachata Geneva Festival 2026",
+                type: "event",
+                status: "Published",
+                statusClass: "bg-green-100 text-green-800",
+                mediaCount: 450,
+                lastUpdated: "2 hours ago",
+                image: "images/eventPoster.png",
+                imageFallback: "https://placehold.co/600x400/213c63/ffffff?text=BGF+Main",
+                location: "Geneva, Switzerland",
+                dates: "Oct 08 - 12, 2026",
+                folderPath: "bgf_main"
+            },
+            {
+                id: 2,
+                name: "VIP Workshops & Socials",
+                event: "Bachata Geneva Festival 2026",
+                type: "event",
+                status: "Published",
+                statusClass: "bg-green-100 text-green-800",
+                mediaCount: 120,
+                lastUpdated: "Yesterday",
+                image: "https://placehold.co/600x400/213c63/ffffff?text=BGF+VIP",
+                location: "Geneva, Switzerland",
+                dates: "Oct 08 - 12, 2026"
+            },
+            {
+                id: 3,
+                name: "Saturday Night Gala",
+                event: "Paris Kizomba Congress 2026",
+                type: "event",
+                status: "Scheduled",
+                statusClass: "bg-blue-100 text-blue-800",
+                mediaCount: 340,
+                lastUpdated: "3 days ago",
+                image: "https://placehold.co/600x400/9333ea/ffffff?text=PKC+Gala",
+                location: "Paris, France",
+                dates: "Nov 20 - 24, 2026"
+            },
+            {
+                id: 4,
+                name: "Sunday Day Social",
+                event: "Paris Kizomba Congress 2026",
+                type: "event",
+                status: "Draft",
+                statusClass: "bg-gray-200 text-gray-700",
+                mediaCount: 85,
+                lastUpdated: "4 days ago",
+                image: "https://placehold.co/600x400/9333ea/ffffff?text=PKC+Social",
+                location: "Paris, France",
+                dates: "Nov 20 - 24, 2026"
+            },
+            {
+                id: 5,
+                name: "Promo Video Assets",
+                event: "London Salsa Spring Break",
+                type: "event",
+                status: "Draft",
+                statusClass: "bg-gray-200 text-gray-700",
+                mediaCount: 15,
+                lastUpdated: "Last week",
+                image: "https://placehold.co/600x400/f58220/ffffff?text=LSSB+Promo",
+                location: "London, UK",
+                dates: "Apr 10 - 14, 2027"
+            },
+            {
+                id: 6,
+                name: "Summer Dance Camp 2025",
+                event: "Standalone",
+                type: "standalone",
+                status: "Published",
+                statusClass: "bg-green-100 text-green-800",
+                mediaCount: 650,
+                lastUpdated: "1 month ago",
+                image: "https://placehold.co/600x400/10b981/ffffff?text=Dance+Camp",
+                location: "Croatia",
+                dates: "Aug 01 - 10, 2025"
+            },
+            {
+                id: 7,
+                name: "Instructor Profile Shoots",
+                event: "Standalone",
+                type: "standalone",
+                status: "Published",
+                statusClass: "bg-green-100 text-green-800",
+                mediaCount: 45,
+                lastUpdated: "2 months ago",
+                image: "https://placehold.co/600x400/ec4899/ffffff?text=Profiles",
+                location: "Studio",
+                dates: "Jan 2026"
+            },
+            {
+                id: 8,
+                name: "Brand Kit & Logos",
+                event: "Standalone",
+                type: "standalone",
+                status: "Draft",
+                statusClass: "bg-gray-200 text-gray-700",
+                mediaCount: 12,
+                lastUpdated: "Today",
+                image: "https://placehold.co/600x400/64748b/ffffff?text=Brand+Kit",
+                location: "Global",
+                dates: "Ongoing"
+            }
+        ];
+
+        let currentView = 'grid'; // 'grid' | 'list'
+        let currentFilter = 'all'; // 'all' | 'event' | 'standalone'
+        let currentSort = 'updated_desc'; // 'name_asc', 'name_desc', 'event_asc', 'status', 'updated_desc'
+
+        function openSortModal() {
+            document.getElementById('modal-sorting').classList.remove('hidden');
+            const radio = document.querySelector(`input[name="sort-option"][value="${currentSort}"]`);
+            if (radio) radio.checked = true;
+        }
+
+        function closeSortModal() {
+            document.getElementById('modal-sorting').classList.add('hidden');
+        }
+
+        function applySort() {
+            const selected = document.querySelector('input[name="sort-option"]:checked');
+            if (selected) {
+                currentSort = selected.value;
+                renderGalleries();
+            }
+            closeSortModal();
+        }
+
+        function sortData(data) {
+            return [...data].sort((a, b) => {
+                if (currentSort === 'name_asc') return a.name.localeCompare(b.name);
+                if (currentSort === 'name_desc') return b.name.localeCompare(a.name);
+                if (currentSort === 'event_asc') return a.event.localeCompare(b.event);
+                if (currentSort === 'status') return a.status.localeCompare(b.status);
+                // Simple string matching fallback for 'updated_desc' since dates are strings like '2 hours ago'
+                // Real implementation would parse genuine date strings. 
+                // We'll leave the array in roughly its original order for lastUpdated.
+                return 0; // fallback default map
+            });
+        }
+
+        function renderGalleries() {
+            const gridContainer = document.getElementById('grid-view');
+            const listContainer = document.getElementById('list-view');
+            const emptyState = document.getElementById('empty-state');
+            const searchInput = document.getElementById('gallery-search').value.toLowerCase();
+
+            gridContainer.innerHTML = '';
+            listContainer.innerHTML = '';
+
+            let hasVisible = false;
+
+            const sortedData = sortData(galleriesData);
+
+            sortedData.forEach(gallery => {
+                // Apply filters
+                const matchesFilter = currentFilter === 'all' || gallery.type === currentFilter;
+
+                // Enhanced Search: name, event, dates, location, status
+                const searchableText = `${gallery.name} ${gallery.event} ${gallery.location} ${gallery.dates} ${gallery.status}`.toLowerCase();
+                const matchesSearch = searchableText.includes(searchInput);
+
+                if (matchesFilter && matchesSearch) {
+                    hasVisible = true;
+
+                    // -- GRID ITEM --
+                    const gridItem = document.createElement('div');
+                    gridItem.className = 'bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 border border-gray-100 flex flex-col group';
+                    gridItem.innerHTML = `
+                        <div class="relative h-32 overflow-hidden rounded-t-xl">
+                            <img src="${gallery.image}" alt="${gallery.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null;this.src='${gallery.imageFallback}';">
+                            <div class="absolute top-2 right-2">
+                                <span class="${gallery.statusClass} text-xs font-bold px-2 py-0.5 rounded-full shadow-sm">${gallery.status}</span>
+                            </div>
+                        </div>
+                        <div class="p-4 flex-1 flex flex-col">
+                            <h2 class="text-base font-bold text-gray-800 mb-1 truncate" title="${gallery.name}">${gallery.name}</h2>
+                            <p class="text-xs text-gray-500 mb-3 truncate" title="${gallery.event}">${gallery.event}</p>
+                            
+                            <div class="flex items-center gap-4 text-xs text-gray-400 mb-4 mt-auto">
+                                <div class="flex items-center">
+                                    <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                    ${gallery.mediaCount}
+                                </div>
+                                <div class="flex items-center">
+                                    <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    ${gallery.lastUpdated}
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center gap-2 pt-3 border-t border-gray-50">
+                                <a href="creativeStudioWorkspace.html?folder_path=${gallery.folderPath || 'gallery_' + gallery.id}&source=media_management" class="flex-1 text-center bg-gray-50 hover:bg-gray-100 text-revelti-blue font-semibold text-sm py-1.5 rounded transition duration-200">
+                                    Manage
+                                </a>
+                                <button class="p-1.5 text-gray-400 hover:text-revelti-blue hover:bg-blue-50 rounded transition-colors" title="Open Public Gallery">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                                </button>
+                                <button class="p-1.5 text-gray-400 hover:text-revelti-orange hover:bg-orange-50 rounded transition-colors" title="Copy Link">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    gridContainer.appendChild(gridItem);
+
+                    // -- LIST ITEM --
+                    const listItem = document.createElement('div');
+                    listItem.className = 'bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 border border-gray-100 p-3 flex items-center gap-4';
+                    listItem.innerHTML = `
+                        <div class="h-12 w-16 rounded overflow-hidden flex-shrink-0">
+                            <img src="${gallery.image}" alt="${gallery.name}" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='${gallery.imageFallback}';">
+                        </div>
+                        <div class="flex-1 min-w-0 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
+                            <div class="flex-1 min-w-0">
+                                <h2 class="text-sm font-bold text-gray-800 truncate">${gallery.name}</h2>
+                                <p class="text-xs text-gray-500 truncate">${gallery.event}</p>
+                            </div>
+                            <div class="w-24 flex-shrink-0 hidden md:block">
+                                <span class="${gallery.statusClass} text-[10px] font-bold px-2 py-0.5 rounded-full inline-block">${gallery.status}</span>
+                            </div>
+                            <div class="w-24 text-xs text-gray-500 hidden lg:flex items-center gap-1 flex-shrink-0">
+                                <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                ${gallery.mediaCount} assets
+                            </div>
+                            <div class="w-24 text-xs text-gray-500 hidden xl:flex items-center gap-1 flex-shrink-0">
+                                <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                ${gallery.lastUpdated}
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <a href="creativeStudioWorkspace.html?folder_path=${gallery.folderPath || 'gallery_' + gallery.id}&source=media_management" class="bg-gray-50 hover:bg-gray-100 text-revelti-blue font-semibold text-xs py-1.5 px-3 rounded transition duration-200">
+                                Manage
+                            </a>
+                            <button class="p-1.5 text-gray-400 hover:text-revelti-blue hover:bg-blue-50 rounded transition-colors hidden sm:block" title="Open Public Gallery">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                            </button>
+                            <button class="p-1.5 text-gray-400 hover:text-revelti-orange hover:bg-orange-50 rounded transition-colors hidden sm:block" title="Copy Link">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+                            </button>
+                        </div>
+                    `;
+                    listContainer.appendChild(listItem);
+                }
+            });
+
+            if (!hasVisible) {
+                gridContainer.classList.add('hidden');
+                listContainer.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+            } else {
+                emptyState.classList.add('hidden');
+                updateViewVisibility();
+            }
+        }
+
+        function updateViewVisibility() {
+            const gridContainer = document.getElementById('grid-view');
+            const listContainer = document.getElementById('list-view');
+            const gridBtn = document.getElementById('view-grid-btn');
+            const listBtn = document.getElementById('view-list-btn');
+
+            if (currentView === 'grid') {
+                gridContainer.classList.remove('hidden');
+                listContainer.classList.add('hidden');
+
+                gridBtn.classList.add('bg-white', 'text-revelti-blue', 'shadow-sm');
+                gridBtn.classList.remove('text-gray-500', 'hover:text-gray-900');
+
+                listBtn.classList.remove('bg-white', 'text-revelti-blue', 'shadow-sm');
+                listBtn.classList.add('text-gray-500', 'hover:text-gray-900');
+            } else {
+                listContainer.classList.remove('hidden');
+                gridContainer.classList.add('hidden');
+
+                listBtn.classList.add('bg-white', 'text-revelti-blue', 'shadow-sm');
+                listBtn.classList.remove('text-gray-500', 'hover:text-gray-900');
+
+                gridBtn.classList.remove('bg-white', 'text-revelti-blue', 'shadow-sm');
+                gridBtn.classList.add('text-gray-500', 'hover:text-gray-900');
+            }
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            renderGalleries();
+
+            // Search
+            const searchInput = document.getElementById('gallery-search');
+            searchInput.addEventListener('input', () => {
+                renderGalleries();
+            });
+
+            // Filters
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    // Update active class
+                    filterBtns.forEach(b => {
+                        b.classList.remove('active-filter', 'bg-white', 'text-revelti-blue', 'shadow-sm');
+                        b.classList.add('text-gray-600', 'hover:text-gray-900');
+                    });
+
+                    e.target.classList.add('active-filter', 'bg-white', 'text-revelti-blue', 'shadow-sm');
+                    e.target.classList.remove('text-gray-600', 'hover:text-gray-900');
+
+                    currentFilter = e.target.getAttribute('data-filter');
+                    renderGalleries();
+                });
+            });
+
+            // Views
+            document.getElementById('view-grid-btn').addEventListener('click', () => {
+                currentView = 'grid';
+                renderGalleries();
+            });
+
+            document.getElementById('view-list-btn').addEventListener('click', () => {
+                currentView = 'list';
+                renderGalleries();
+            });
+        });
+
+        // Global function for the empty state "Clear" button
+        window.filterGalleries = renderGalleries;
+    </script>
     <script src="layout-injector.js" defer></script>
     <script src="creative.js" defer></script>
 </body>
