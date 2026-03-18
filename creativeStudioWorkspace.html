@@ -297,10 +297,21 @@
                                     status: 'Public',
                                     owner: 'Bachata Geneva',
                                     creators: [{ name: 'Bachata Geneva', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=B' }],
-                                    type: 'gallery',
-                                    content: '4 Photos',
+                                    type: 'folder',
                                     created: '2025-11-02T11:00:00Z',
                                     lastModified: '2025-11-05T06:00:00Z',
+                                    children: []
+                                },
+                                {
+                                    id: 'demos',
+                                    name: 'Demos',
+                                    status: 'Private',
+                                    owner: 'Bachata Geneva',
+                                    creators: [{ name: 'Bachata Geneva', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=B' }],
+                                    type: 'gallery',
+                                    content: '12 Photos',
+                                    created: '2026-03-10T09:00:00Z',
+                                    lastModified: '2026-03-18T14:30:00Z',
                                     children: []
                                 },
                                 {
@@ -384,16 +395,23 @@
             // Action intentionally left unresponsive to avoid native browser popups
         }
 
-        function getPublishStateBadge(node) {
+        function getPublishStateBadge(node, extraClasses = 'mt-1.5') {
+            const isGallery = node.type === 'gallery' || node.isGalleryRoot;
             let stateName = 'Draft';
             let badgeClasses = 'bg-gray-200 text-gray-800';
             let tooltip = 'Draft';
             let dateHtml = '';
+            let iconHtml = '';
 
             if (node.status === 'Public' || node.status === 'Published') {
-                stateName = 'Published';
+                stateName = 'Public';
                 badgeClasses = 'bg-green-100 text-green-800';
-                tooltip = 'Published';
+                tooltip = 'Public';
+            } else if (node.status === 'Private') {
+                stateName = 'Private';
+                badgeClasses = 'bg-red-100 text-red-800';
+                tooltip = 'Private';
+                iconHtml = `<svg class="w-2.5 h-2.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>`;
             } else if (node.status === 'Scheduled') {
                 stateName = 'Scheduled';
                 badgeClasses = 'bg-yellow-100 text-yellow-800';
@@ -404,22 +422,20 @@
                 }
             }
 
-            return `<span title="${tooltip}" class="inline-flex items-center text-[10px] font-bold px-2 py-0.5 mt-1.5 rounded-full ${badgeClasses} cursor-help whitespace-nowrap">
-                ${stateName}${dateHtml}
+            let displayText = stateName;
+            if (isGallery) {
+                displayText = `Gallery \u2013 ${stateName}`;
+                tooltip = `Gallery (${tooltip})`;
+            }
+
+            return `<span title="${tooltip}" class="inline-flex items-center text-[10px] font-bold px-2 py-0.5 rounded-full ${badgeClasses} ${extraClasses} cursor-help whitespace-nowrap">
+                ${iconHtml}${displayText}${dateHtml}
             </span>`;
         }
 
         function createFolderCard(node, fullPath) {
             const hasChildren = node.children && node.children.length > 0;
             const badgeHtml = getPublishStateBadge(node);
-
-            let galleryBadgeHtml = '';
-            if (node.isGalleryRoot) {
-                galleryBadgeHtml = `<span title="Gallery Root" class="ml-2 inline-flex items-center text-[10px] font-bold px-2 py-0.5 mt-1.5 rounded-full bg-purple-100 text-purple-800 cursor-help whitespace-nowrap">
-                    <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                    Gallery
-                </span>`;
-            }
 
             return `
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition">
@@ -430,7 +446,6 @@
                                 <h3 class="font-bold text-gray-800 truncate">${node.name}</h3>
                                 <div class="flex items-center flex-wrap">
                                     ${badgeHtml}
-                                    ${galleryBadgeHtml}
                                 </div>
                             </div>
                         </div>
@@ -485,9 +500,7 @@
                         </div>
                     </td>
                     <td class="py-3 px-4">
-                        <span class="text-xs font-medium px-2 py-0.5 rounded-full ${node.status === 'Public' || node.status === 'Published' ? 'bg-green-100 text-green-800' : (node.status === 'Scheduled' ? 'bg-yellow-100 text-yellow-800' : 'bg-gray-100 text-gray-800')}">
-                            ${node.status}
-                        </span>
+                        ${getPublishStateBadge(node, '')}
                     </td>
                     <td class="py-3 px-4 text-xs text-gray-500">${lastModified}</td>
                     <td class="py-3 px-4 text-xs text-gray-500">${created}</td>
@@ -551,6 +564,21 @@
             } else if (node.id === 'promotional') {
                 return [
                     "albums/promo/promo1.jpg", "albums/promo/promo2.jpg", "albums/promo/promo3.jpg", "albums/promo/promo4.jpg"
+                ];
+            } else if (node.id === 'demos') {
+                return [
+                    "https://placehold.co/600x400/213c63/ffffff?text=Demo+Media+1",
+                    "https://placehold.co/600x400/f58220/ffffff?text=Demo+Media+2",
+                    "https://placehold.co/600x400/6b21a8/ffffff?text=Demo+Media+3",
+                    "https://placehold.co/600x400/213c63/ffffff?text=Demo+Media+4",
+                    "https://placehold.co/600x400/f58220/ffffff?text=Demo+Media+5",
+                    "https://placehold.co/600x400/6b21a8/ffffff?text=Demo+Media+6",
+                    "https://placehold.co/600x400/213c63/ffffff?text=Demo+Media+7",
+                    "https://placehold.co/600x400/f58220/ffffff?text=Demo+Media+8",
+                    "https://placehold.co/600x400/6b21a8/ffffff?text=Demo+Media+9",
+                    "https://placehold.co/600x400/213c63/ffffff?text=Demo+Media+10",
+                    "https://placehold.co/600x400/f58220/ffffff?text=Demo+Media+11",
+                    "https://placehold.co/600x400/6b21a8/ffffff?text=Demo+Media+12"
                 ];
             }
             return Array(6).fill("https://placehold.co/600x400/cccccc/ffffff?text=Image");
@@ -662,14 +690,16 @@
             const mediaGrid = document.getElementById('media-grid');
 
             activeFolderName.innerHTML = currentNode.name;
-            if (currentPath[0] === 'bgf_main' && currentPath.length === 1) {
-                activeFolderName.innerHTML += `
-                    <span class="ml-3 inline-flex items-center text-xs font-bold px-2 py-0.5 mt-1.5 rounded-full bg-green-100 text-green-800 align-text-bottom">Published</span>
-                    <span class="ml-2 inline-flex items-center text-xs font-bold px-2 py-0.5 mt-1.5 rounded-full bg-purple-100 text-purple-800 cursor-help align-text-bottom">
-                        <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                        Gallery
-                    </span>
-                `;
+            if (currentPath.length > 0) {
+                activeFolderName.innerHTML += getPublishStateBadge(currentNode, 'ml-3 align-text-bottom text-xs mt-0');
+
+                // Add Context Hint
+                if (currentPath.length >= 2 && (currentNode.isGalleryRoot || currentNode.type === 'gallery')) {
+                    const rootNode = findNodeByPath([currentPath[0]]);
+                    if (rootNode && rootNode.id !== currentNode.id) {
+                        activeFolderName.innerHTML += `<div class="text-sm font-normal text-gray-500 mt-1 block w-full">This gallery is located inside <b>${rootNode.name}</b></div>`;
+                    }
+                }
             }
 
             if (currentPath.length > 0) {
@@ -841,10 +871,10 @@
             const node = findNodeByPath(fullPath);
             if (!node) return;
 
-            const isGalleryRoot = node.isGalleryRoot;
+            const isGallery = node.isGalleryRoot || node.type === 'gallery';
             let galleryOptionsHtml = '';
 
-            if (isGalleryRoot) {
+            if (isGallery) {
                 galleryOptionsHtml = `
                     <button onclick="folderActionAlert('View Gallery', '${node.name.replace(/'/g, "\\'")}', event); closeContextMenu()" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
@@ -1011,26 +1041,38 @@
                 currentCheckPath.push(id);
                 if (id === nodeId) continue;
                 let checkNode = findNodeByPath(currentCheckPath);
-                if (checkNode && checkNode.isGalleryRoot) {
+                if (checkNode && (checkNode.isGalleryRoot || checkNode.type === 'gallery')) {
                     parentGallery = checkNode;
                     break;
                 }
             }
 
             const targetNode = findNodeByPath(fullPath);
-
-            if (parentGallery) {
-                openWarningModal(parentGallery.name, targetNode.name);
-            } else {
-                openCreateGalleryModal(targetNode.name, targetNode.id, "Create Gallery");
-            }
+            openCreateGalleryModal(targetNode.name, targetNode.id, "Create Gallery", parentGallery);
         }
 
-        function openCreateGalleryModal(folderName, targetId = null, title = "Create Gallery") {
+        function openCreateGalleryModal(folderName, targetId = null, title = "Create Gallery", parentGallery = null) {
             document.getElementById('modal-backdrop').classList.remove('hidden');
             document.getElementById('modal-create-gallery').classList.remove('hidden');
             document.getElementById('modal-create-gallery-title').innerText = title;
             document.getElementById('cg-selected-folder').innerText = folderName;
+
+            // Handle independent gallery warning inject
+            const awarenessMsg = document.getElementById('cg-awareness-message');
+            if (parentGallery && title === "Create Gallery") {
+                if (!awarenessMsg) {
+                    const msgDiv = document.createElement('div');
+                    msgDiv.id = 'cg-awareness-message';
+                    msgDiv.className = 'mt-3 p-3 bg-blue-50 border border-blue-200 text-blue-700 text-sm rounded-lg flex items-start';
+                    msgDiv.innerHTML = `<svg class="w-5 h-5 mr-2 shrink-0 mt-0.5 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                        <div>This gallery will be independent from the parent gallery (visibility and sharing settings).</div>`;
+                    document.getElementById('cg-selected-folder').parentElement.after(msgDiv);
+                } else {
+                    awarenessMsg.classList.remove('hidden');
+                }
+            } else if (awarenessMsg) {
+                awarenessMsg.classList.add('hidden');
+            }
 
             const titleInput = document.getElementById('cg-gallery-title');
             if (titleInput) {
@@ -1562,57 +1604,7 @@
             </div>
         </div>
 
-        <!-- Warning Scenario Simulation -->
-        <div id="modal-warning-gallery"
-            class="bg-white rounded-xl shadow-xl w-full max-w-md overflow-hidden hidden transform transition-all">
-            <div class="p-6">
-                <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center mx-auto mb-4">
-                    <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
-                        </path>
-                    </svg>
-                </div>
-                <h3 class="text-lg font-bold text-center text-gray-900 mb-2">Gallery already exists</h3>
-                <p class="text-sm text-center text-gray-600 mb-6">This folder is already part of an existing
-                    gallery:<br><span id="warn-parent-gallery" class="font-semibold text-gray-800">Gallery Name</span>
-                </p>
 
-                <div class="space-y-3">
-                    <button onclick="closeModals(); showToast('Gallery root was not moved', 'info');"
-                        class="w-full py-2.5 px-4 bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold rounded-lg text-sm transition">Use
-                        existing gallery</button>
-                    <button onclick="closeModals(); openMoveGalleryRootModal()"
-                        class="w-full py-2.5 px-4 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-semibold rounded-lg text-sm transition">Move
-                        gallery root here</button>
-                    <button onclick="closeModals()"
-                        class="w-full py-2.5 px-4 bg-white text-gray-500 hover:text-gray-700 font-semibold rounded-lg text-sm transition">Cancel</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Move Gallery Root Simulation -->
-        <div id="modal-move-root"
-            class="bg-white rounded-xl shadow-xl w-full max-w-md overflow-hidden hidden transform transition-all">
-            <div class="p-6">
-                <h3 class="text-lg font-bold text-gray-900 mb-2">Move Gallery Root</h3>
-                <p class="text-sm text-gray-600 mb-4">You are about to move the gallery root from:</p>
-                <div class="p-3 bg-gray-50 rounded border border-gray-200 mb-2 text-center font-semibold text-gray-800"
-                    id="move-from">Parent Gallery</div>
-                <p class="text-sm text-gray-600 text-center mb-2">to</p>
-                <div class="p-3 bg-blue-50 focus:border-revelti-blue border border-blue-200 rounded text-center mx-auto font-bold text-revelti-blue mb-4"
-                    id="move-to">Target Folder</div>
-                <p class="text-sm text-gray-500 mb-6">This will change which folders define the gallery structure.</p>
-
-                <div class="flex space-x-3 justify-end">
-                    <button onclick="closeModals()"
-                        class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50 transition">Cancel</button>
-                    <button onclick="showToast('Gallery root moved successfully', 'success'); closeModals()"
-                        class="px-4 py-2 bg-revelti-blue text-white rounded-lg text-sm font-bold hover:bg-blue-800 transition">Confirm
-                        Move</button>
-                </div>
-            </div>
-        </div>
 
         <!-- Folder Settings Modal -->
         <div id="modal-folder-settings"
