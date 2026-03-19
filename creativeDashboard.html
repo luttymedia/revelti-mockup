@@ -398,35 +398,81 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <!-- Create New Folder -->
-                                    <div
+                                    <!-- Collaboration Invitations (Replaces Create New Folder) -->
+                                    <div id="invitations-card-dash"
                                         class="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow lg:col-span-2">
                                         <div class="flex items-center justify-between mb-4">
-                                            <h3 class="text-lg font-bold text-revelti-blue">Create New Folder</h3>
-                                            <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z">
-                                                </path>
-                                            </svg>
+                                            <h3 class="text-lg font-bold text-revelti-blue flex items-center gap-2">
+                                                Collaboration Invitations
+                                                <span id="invitation-count-dash"
+                                                    class="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">2</span>
+                                            </h3>
+                                            <a href="creativeEvents.html?filter=invitations"
+                                                class="flex items-center justify-center p-2 rounded-full hover:bg-green-50 transition"
+                                                title="View All Invitations">
+                                                <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14">
+                                                    </path>
+                                                </svg>
+                                            </a>
                                         </div>
-                                        <p class="text-sm text-gray-500 mb-4">Choose an active collaboration to add
-                                            subfolders to.</p>
-                                        <button
-                                            class="w-full px-4 py-2 text-sm font-bold bg-revelti-blue text-white rounded-lg hover:bg-blue-800 transition-colors shadow-sm">Create
-                                            New Folder</button>
+                                        <div id="invitations-list-dash" class="space-y-3">
+                                            <!-- Invite 1 -->
+                                            <div id="invite-101-dash"
+                                                class="flex flex-col sm:flex-row sm:items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-100 gap-3">
+                                                <div>
+                                                    <p class="font-bold text-revelti-blue text-sm">Lyon Salsa Congress
+                                                    </p>
+                                                    <p class="text-[11px] text-gray-500">Lyon Dance Events • Dec 15 - 18
+                                                    </p>
+                                                </div>
+                                                <div class="flex items-center gap-2">
+                                                    <button onclick="handleInviteDash(101, 'accept')"
+                                                        class="px-3 py-1.5 bg-revelti-blue text-white text-xs font-bold rounded shadow-sm hover:bg-blue-800 transition">Accept</button>
+                                                    <button onclick="handleInviteDash(101, 'decline')"
+                                                        class="px-3 py-1.5 bg-white text-gray-700 text-xs font-bold rounded border border-gray-200 hover:bg-gray-50 transition">Decline</button>
+                                                </div>
+                                            </div>
+                                            <!-- Invite 2 -->
+                                            <div id="invite-102-dash"
+                                                class="flex flex-col sm:flex-row sm:items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-100 gap-3">
+                                                <div>
+                                                    <p class="font-bold text-revelti-blue text-sm">Zurich Zouk Nights
+                                                    </p>
+                                                    <p class="text-[11px] text-gray-500">Zouk Switzerland • Jan 22 - 25
+                                                    </p>
+                                                </div>
+                                                <div class="flex items-center gap-2">
+                                                    <button onclick="handleInviteDash(102, 'accept')"
+                                                        class="px-3 py-1.5 bg-revelti-blue text-white text-xs font-bold rounded shadow-sm hover:bg-blue-800 transition">Accept</button>
+                                                    <button onclick="handleInviteDash(102, 'decline')"
+                                                        class="px-3 py-1.5 bg-white text-gray-700 text-xs font-bold rounded border border-gray-200 hover:bg-gray-50 transition">Decline</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="no-invitations-dash" class="hidden text-center py-6">
+                                            <p class="text-sm text-gray-400 italic">No pending invitations</p>
+                                        </div>
                                     </div>
                                     <!-- Quick Access -->
                                     <div
                                         class="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow lg:col-span-2">
                                         <div class="flex items-center justify-between mb-4">
                                             <h3 class="text-lg font-bold text-revelti-blue">Quick Access</h3>
-                                            <svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12">
-                                                </path>
-                                            </svg>
+                                            <a href="uploadManager.html"
+                                                class="flex items-center justify-center p-2 rounded-full hover:bg-purple-50 transition"
+                                                title="Upload Media">
+                                                <svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12">
+                                                    </path>
+                                                </svg>
+                                            </a>
                                         </div>
                                         <p class="text-sm text-gray-500 mb-4">Jump straight into the media uploader and
                                             select an event to deposit files into.</p>
@@ -633,8 +679,26 @@
             </main>
         </div>
     </div>
-    <!-- Footer placeholder (not used in dashboard, but kept for compatibility if needed elsewhere, though recommended to remove) -->
-    <!-- <div id="footer-placeholder"></div> -->
+
+    <!-- Confirmation Modal -->
+    <div id="confirmation-modal-dash"
+        class="hidden fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+        <div id="modal-container-dash"
+            class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl scale-95 transition-transform duration-200">
+            <div class="text-center mb-6">
+                <div id="modal-icon-dash" class="w-12 h-12 rounded-full mx-auto mb-4 flex items-center justify-center">
+                </div>
+                <h3 id="modal-title-dash" class="text-xl font-bold text-revelti-blue mb-2">Confirm Action</h3>
+                <p id="modal-body-dash" class="text-sm text-gray-600">Are you sure you want to proceed?</p>
+            </div>
+            <div class="flex gap-3">
+                <button id="modal-cancel-btn-dash"
+                    class="flex-1 py-2.5 rounded-xl font-bold text-gray-500 bg-gray-100 hover:bg-gray-200 transition">Cancel</button>
+                <button id="modal-confirm-btn-dash"
+                    class="flex-1 py-2.5 rounded-xl font-bold text-white transition">Confirm</button>
+            </div>
+        </div>
+    </div>
 
     <script>
         // Tab Switching Logic
@@ -649,8 +713,70 @@
             document.querySelector(`[onclick="switchTab('${targetId}')"]`)?.classList.add('creative-tab-active');
         }
 
+        let pendingInvitesCount = 2;
+
+        function handleInviteDash(id, action) {
+            const inviteEl = document.getElementById(`invite-${id}-dash`);
+            if (!inviteEl) return;
+
+            const eventName = inviteEl.querySelector('.font-bold').innerText;
+            const modal = document.getElementById('confirmation-modal-dash');
+            const title = document.getElementById('modal-title-dash');
+            const body = document.getElementById('modal-body-dash');
+            const confirmBtn = document.getElementById('modal-confirm-btn-dash');
+            const cancelBtn = document.getElementById('modal-cancel-btn-dash');
+            const icon = document.getElementById('modal-icon-dash');
+
+            if (action === 'accept') {
+                title.innerText = 'Accept Invitation?';
+                body.innerHTML = `You are about to accept the collaboration invite for <span class="font-bold text-revelti-blue">${eventName}</span>.`;
+                confirmBtn.innerText = 'Accept Invite';
+                confirmBtn.className = 'flex-1 py-2.5 rounded-xl font-bold text-white bg-revelti-blue hover:bg-blue-800 transition';
+                icon.className = 'w-12 h-12 rounded-full mx-auto mb-4 flex items-center justify-center bg-blue-100 text-revelti-blue';
+                icon.innerHTML = '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>';
+            } else {
+                title.innerText = 'Decline Invitation?';
+                body.innerHTML = `Are you sure you want to decline the invitation for <span class="font-bold text-revelti-blue">${eventName}</span>?`;
+                confirmBtn.innerText = 'Decline';
+                confirmBtn.className = 'flex-1 py-2.5 rounded-xl font-bold text-white bg-red-500 hover:bg-red-600 transition';
+                icon.className = 'w-12 h-12 rounded-full mx-auto mb-4 flex items-center justify-center bg-red-100 text-red-500';
+                icon.innerHTML = '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>';
+            }
+
+            modal.classList.remove('hidden');
+            setTimeout(() => document.getElementById('modal-container-dash').classList.remove('scale-95'), 10);
+
+            confirmBtn.onclick = () => {
+                inviteEl.classList.add('opacity-50', 'pointer-events-none');
+                closeModalDash();
+                setTimeout(() => {
+                    inviteEl.remove();
+                    pendingInvitesCount--;
+                    document.getElementById('invitation-count-dash').innerText = pendingInvitesCount;
+
+                    if (pendingInvitesCount === 0) {
+                        document.getElementById('no-invitations-dash').classList.remove('hidden');
+                    }
+                }, 500);
+            };
+
+            cancelBtn.onclick = closeModalDash;
+        }
+
+        function closeModalDash() {
+            const modal = document.getElementById('confirmation-modal-dash');
+            document.getElementById('modal-container-dash').classList.add('scale-95');
+            setTimeout(() => modal.classList.add('hidden'), 200);
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             switchTab('workspace');
+
+            // Modal Backdrop Closing
+            window.addEventListener('click', (e) => {
+                const modal = document.getElementById('confirmation-modal-dash');
+                if (e.target === modal) closeModalDash();
+            });
         });
     </script>
     <script src="layout-injector.js" defer></script>
