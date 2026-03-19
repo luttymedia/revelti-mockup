@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revelti - Media Workspace</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        revelti: {
+                            blue: '#213c63',
+                            orange: '#f58220',
+                            purple: '#6b21a8',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .context-menu {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            min-width: 180px;
+        }
+
+        .context-menu.visible {
+            display: block;
+        }
+
+        .drag-over {
+            border-color: #213c63 !important;
+            background-color: #eff6ff !important;
+        }
+    </style>
+</head>
+
+<body class="dashboard-layout bg-gray-100 antialiased text-gray-800" data-role="organizer">
+    <div id="organizer-navbar-placeholder"></div>
+
+    <div class="dashboard-main-area">
+        <aside id="sidebar-placeholder" class="sidebar-container bg-white z-20"></aside>
+
+        <div class="main-wrapper">
+            <main class="page-content">
+                <div class="max-w-full mx-auto px-4 sm:px-4 lg:px-6 py-4">
+
+                    <!-- Breadcrumb -->
+                    <nav class="flex mb-4 text-sm text-gray-500" aria-label="Breadcrumb">
+                        <ol id="breadcrumb-list" class="inline-flex items-center space-x-1 md:space-x-3">
+                            <li class="inline-flex items-center">
+                                <a href="#" onclick="navigateToRoot()"
+                                    class="hover:text-revelti-blue transition">Media</a>
+                            </li>
+                        </ol>
+                    </nav>
+
+                    <!-- Header Row -->
+                    <div class="flex items-center justify-between mb-3 gap-4 flex-wrap">
+                        <h1 id="page-title" class="text-3xl font-extrabold text-revelti-blue whitespace-nowrap">Media
+                            Overview</h1>
+
+                        <!-- Storage indicator -->
+                        <div class="flex items-center gap-3 ml-auto">
+                            <div class="text-right hidden sm:block">
+                                <div class="text-xs text-gray-500">Storage</div>
+                                <div class="text-sm font-bold text-gray-700">320 MB <span
+                                        class="font-normal text-gray-400">/ 1 GB</span></div>
+                                <div class="w-32 bg-gray-200 rounded-full h-1.5 mt-1">
+                                    <div class="bg-revelti-blue h-1.5 rounded-full" style="width: 32%"></div>
+                                </div>
+                            </div>
+                            <button onclick="alert('Upgrade storage plan')"
+                                class="text-xs font-semibold text-revelti-orange border border-revelti-orange rounded-md px-3 py-1.5 hover:bg-orange-50 transition whitespace-nowrap">
+                                Buy more storage
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Toolbar Row -->
+                    <div class="flex items-center justify-between mb-4 gap-3 flex-wrap">
+                        <!-- Left: Search + Filters + Sort -->
+                        <div class="flex items-center gap-2 flex-wrap flex-1">
+                            <!-- Search -->
+                            <div class="relative">
+                                <input type="text" id="search-input" placeholder="Search files &amp; folders…"
+                                    oninput="applyFiltersAndRender()"
+                                    class="border border-gray-300 rounded-lg py-1.5 pl-8 pr-3 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-revelti-blue/30 focus:border-revelti-blue placeholder-gray-400 w-52">
+                                <svg class="w-4 h-4 text-gray-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </div>
+
+                            <!-- Source filter -->
+                            <select id="source-filter" onchange="applyFiltersAndRender()"
+                                class="border border-gray-300 rounded-lg py-1.5 px-3 text-sm bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-revelti-blue/30 focus:border-revelti-blue">
+                                <option value="all">All Sources</option>
+                                <option value="mine">My Uploads</option>
+                                <option value="creative">From Creatives</option>
+                            </select>
+
+                            <!-- Event filter -->
+                            <select id="event-filter" onchange="applyFiltersAndRender()"
+                                class="border border-gray-300 rounded-lg py-1.5 px-3 text-sm bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-revelti-blue/30 focus:border-revelti-blue">
+                                <option value="all">All Events</option>
+                                <option value="bgf">Bachata Geneva Festival</option>
+                                <option value="zouk">BCN Zouk Congress</option>
+                                <option value="summer">Summer Fest 2024</option>
+                                <option value="salsa">Salsa Congress Geneva</option>
+                                <option value="kizomba">Paris Kizomba Congress</option>
+                            </select>
+
+                            <!-- Sort -->
+                            <select id="sort-select" onchange="applyFiltersAndRender()"
+                                class="border border-gray-300 rounded-lg py-1.5 px-3 text-sm bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-revelti-blue/30 focus:border-revelti-blue">
+                                <option value="name">Sort: Name</option>
+                                <option value="lastModified">Sort: Date Modified</option>
+                                <option value="size">Sort: Size</option>
+                            </select>
+                        </div>
+
+                        <!-- Right: Action buttons + view toggle -->
+                        <div class="flex items-center gap-2">
+                            <!-- Upload (only shown when in My Uploads context or root) -->
+                            <button id="upload-btn" onclick="handleUpload()"
+                                class="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-600 bg-white border border-gray-300 rounded-md px-3 py-1.5 hover:bg-gray-50 hover:border-gray-400 transition shadow-sm">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                                </svg>
+                                Upload
+                            </button>
+                            <!-- New Folder -->
+                            <button id="new-folder-btn" onclick="handleNewFolder()"
+                                class="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-600 bg-white border border-gray-300 rounded-md px-3 py-1.5 hover:bg-gray-50 hover:border-gray-400 transition shadow-sm">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                                </svg>
+                                New Folder
+                            </button>
+
+                            <!-- View toggle -->
+                            <div
+                                class="flex items-center gap-0 border border-gray-300 rounded-lg overflow-hidden bg-white shadow-sm">
+                                <button type="button" id="view-large-btn" onclick="setViewMode('large')"
+                                    class="inline-flex items-center justify-center px-2.5 py-1.5 bg-revelti-blue text-white border-r border-blue-800 transition"
+                                    title="Large view">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <rect x="2" y="2" width="16" height="7" rx="1.5" />
+                                        <rect x="2" y="11" width="16" height="7" rx="1.5" />
+                                    </svg>
+                                </button>
+                                <button type="button" id="view-compact-btn" onclick="setViewMode('compact')"
+                                    class="inline-flex items-center justify-center px-2.5 py-1.5 text-gray-500 hover:bg-gray-50 border-r border-gray-300 transition"
+                                    title="Compact view">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <rect x="2" y="2" width="7" height="7" rx="1" />
+                                        <rect x="11" y="2" width="7" height="7" rx="1" />
+                                        <rect x="2" y="11" width="7" height="7" rx="1" />
+                                        <rect x="11" y="11" width="7" height="7" rx="1" />
+                                    </svg>
+                                </button>
+                                <button type="button" id="view-list-btn" onclick="setViewMode('list')"
+                                    class="inline-flex items-center justify-center px-2.5 py-1.5 text-gray-500 hover:bg-gray-50 transition"
+                                    title="List view">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4 6h16M4 12h16M4 18h16" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Creative-folder upload warning banner (hidden by default) -->
+                    <div id="creative-warning-banner"
+                        class="hidden mb-4 flex items-center gap-3 bg-amber-50 border border-amber-200 rounded-lg px-4 py-2.5 text-sm text-amber-800">
+                        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+                        </svg>
+                        <span>This is a <strong>Creative folder</strong> — upload &amp; folder management are disabled.
+                            You can download and copy links.</span>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden" id="drop-zone"
+                        ondragover="event.preventDefault(); document.getElementById('drop-zone').classList.add('drag-over')"
+                        ondragleave="document.getElementById('drop-zone').classList.remove('drag-over')"
+                        ondrop="handleDrop(event)">
+                        <div class="p-6">
+                            <!-- Navigation Tool (Header) -->
+                            <div class="flex items-center mb-6" id="active-folder-header">
+                                <button id="back-button" onclick="navigateBack()"
+                                    class="mr-3 bg-gray-100 p-2 rounded-full text-gray-500 hover:bg-gray-200 hover:text-revelti-blue transition hidden"
+                                    title="Go back">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                                    </svg>
+                                </button>
+                                <h2 id="active-folder-name" class="font-bold text-gray-800 text-xl">Media Workspace</h2>
+                            </div>
+
+                            <!-- Content container -->
+                            <div id="content-container">
+                                <div id="folders-grid"></div>
+                                <div id="empty-state"
+                                    class="hidden border-2 border-dashed border-gray-200 rounded-lg p-12 flex flex-col items-center justify-center text-center bg-gray-50/50">
+                                    <svg class="w-12 h-12 text-gray-300 mb-4" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+                                    </svg>
+                                    <h3 class="font-bold text-gray-700 text-lg mb-1">No folders found</h3>
+                                    <p class="text-gray-500 text-sm max-w-md">Try adjusting your filters or create a new
+                                        folder.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Context Menu -->
+    <div id="context-menu" class="context-menu bg-white border border-gray-200 rounded-lg shadow-xl py-1 text-sm">
+        <div id="ctx-open" onclick="ctxAction('open')"
+            class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
+            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z" />
+            </svg>
+            Open
+        </div>
+        <div id="ctx-gallery" onclick="ctxAction('gallery')"
+            class="hidden px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2 text-purple-700">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            Open Gallery
+        </div>
+        <div id="ctx-download" onclick="ctxAction('download')"
+            class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
+            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            Download
+        </div>
+        <div id="ctx-copy-link" onclick="ctxAction('copy-link')"
+            class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
+            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
+            Copy Link
+        </div>
+        <hr class="my-1 border-gray-100" id="ctx-mine-divider">
+        <div id="ctx-rename" onclick="ctxAction('rename')"
+            class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
+            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+            </svg>
+            Rename
+        </div>
+        <div id="ctx-move" onclick="ctxAction('move')"
+            class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
+            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+            </svg>
+            Move
+        </div>
+        <div id="ctx-copy" onclick="ctxAction('copy')"
+            class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
+            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
+            Copy
+        </div>
+        <div id="ctx-share" onclick="ctxAction('share')"
+            class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
+            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+            </svg>
+            Share (Copy Link)
+        </div>
+        <div id="ctx-subfolder" onclick="ctxAction('subfolder')"
+            class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
+            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+            </svg>
+            Create Subfolder
+        </div>
+        <div id="ctx-upload-here" onclick="ctxAction('upload-here')"
+            class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
+            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+            </svg>
+            Upload Files Here
+        </div>
+        <hr class="my-1 border-gray-100" id="ctx-delete-divider">
+        <div id="ctx-delete" onclick="ctxAction('delete')"
+            class="px-4 py-2 hover:bg-red-50 cursor-pointer flex items-center gap-2 text-red-600">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+            Delete
+        </div>
+    </div>
+
+    <script>
+        // ===================== MOCK DATA =====================
+        const mockData = {
+            id: 'root',
+            name: 'Media',
+            children: [
+                // === FROM CREATIVES (Exact matches from creativeStudioWorkspace.html) ===
+                {
+                    id: 'bgf_main',
+                    name: 'Bachata Geneva Festival',
+                    source: 'creative',
+                    event: 'bgf',
+                    type: 'folder',
+                    hasGallery: true,
+                    creator: 'AMedia',
+                    creatorAvatar: 'https://placehold.co/80x80/f58220/ffffff?text=A',
+                    lastModified: '2025-11-05T14:30:00Z',
+                    children: [
+                        {
+                            id: '2026',
+                            name: '2026',
+                            source: 'creative',
+                            event: 'bgf',
+                            type: 'folder',
+                            hasGallery: false,
+                            lastModified: '2025-11-05T12:00:00Z',
+                            children: [
+                                {
+                                    id: 'bgf',
+                                    name: 'Official Media',
+                                    source: 'creative',
+                                    event: 'bgf',
+                                    type: 'folder',
+                                    hasGallery: false,
+                                    lastModified: '2025-11-05T11:00:00Z',
+                                    children: [
+                                        {
+                                            id: 'sat',
+                                            name: 'Saturday 01-Nov',
+                                            source: 'creative',
+                                            event: 'bgf',
+                                            type: 'folder',
+                                            hasGallery: true,
+                                            lastModified: '2025-11-05T10:00:00Z',
+                                            children: [
+                                                { id: 'Social', name: 'Social', source: 'creative', event: 'bgf', type: 'folder', hasGallery: true, lastModified: '2025-11-05T09:30:00Z', children: [] },
+                                                { id: 'jandj', name: 'Jack & Jill', source: 'creative', event: 'bgf', type: 'folder', hasGallery: true, lastModified: '2025-11-05T09:00:00Z', children: [] }
+                                            ]
+                                        },
+                                        {
+                                            id: 'sun',
+                                            name: 'Sunday 02-Nov',
+                                            source: 'creative',
+                                            event: 'bgf',
+                                            type: 'folder',
+                                            hasGallery: false,
+                                            lastModified: '2025-11-05T08:00:00Z',
+                                            children: [
+                                                {
+                                                    id: 'sun-photos',
+                                                    name: 'Photos',
+                                                    source: 'creative',
+                                                    event: 'bgf',
+                                                    type: 'folder',
+                                                    hasGallery: false,
+                                                    lastModified: '2025-11-05T07:30:00Z',
+                                                    children: [
+                                                        { id: 'sun-social', name: 'Sunday Social', source: 'creative', event: 'bgf', type: 'folder', hasGallery: true, lastModified: '2025-11-05T07:00:00Z', children: [] }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    id: 'promotional',
+                                    name: 'Promotional Material',
+                                    source: 'creative',
+                                    event: 'bgf',
+                                    type: 'folder',
+                                    hasGallery: false,
+                                    lastModified: '2025-11-05T06:00:00Z',
+                                    children: []
+                                },
+                                {
+                                    id: 'demos',
+                                    name: 'Demos',
+                                    source: 'creative',
+                                    event: 'bgf',
+                                    type: 'folder',
+                                    hasGallery: true,
+                                    lastModified: '2026-03-18T14:30:00Z',
+                                    children: []
+                                },
+                                {
+                                    id: 'empty_test',
+                                    name: 'Empty Folder',
+                                    source: 'creative',
+                                    event: 'bgf',
+                                    type: 'folder',
+                                    hasGallery: false,
+                                    lastModified: '2025-11-05T05:00:00Z',
+                                    children: []
+                                }
+                            ]
+                        },
+                        { id: '2025', name: '2025', source: 'creative', event: 'bgf', type: 'folder', hasGallery: false, lastModified: '2025-01-05T12:00:00Z', children: [] },
+                        { id: '2024', name: '2024', source: 'creative', event: 'bgf', type: 'folder', hasGallery: false, lastModified: '2024-01-05T12:00:00Z', children: [] }
+                    ]
+                },
+                {
+                    id: 'summer_creative',
+                    name: 'Summer Fest — AMedia',
+                    source: 'creative',
+                    event: 'summer',
+                    type: 'folder',
+                    hasGallery: true,
+                    creator: 'AMedia',
+                    creatorAvatar: 'https://placehold.co/80x80/f58220/ffffff?text=A',
+                    fileCount: 450,
+                    size: '11 GB',
+                    lastModified: '2024-07-20T09:00:00Z',
+                    children: []
+                },
+
+                // === MY UPLOADS (Kept as requested, hasGallery: false) ===
+                {
+                    id: 'bgf_organizer',
+                    name: 'BGF — Internal Docs',
+                    source: 'mine',
+                    event: 'bgf',
+                    type: 'folder',
+                    hasGallery: false,
+                    fileCount: 12,
+                    size: '84 MB',
+                    lastModified: '2026-03-15T10:00:00Z',
+                    children: [
+                        {
+                            id: 'bgf_promo',
+                            name: 'Promotional Material',
+                            source: 'mine',
+                            event: 'bgf',
+                            type: 'folder',
+                            hasGallery: false,
+                            fileCount: 24,
+                            size: '120 MB',
+                            lastModified: '2026-03-10T14:00:00Z',
+                            children: []
+                        },
+                        {
+                            id: 'bgf_contracts',
+                            name: 'Contracts & Documents',
+                            source: 'mine',
+                            event: 'bgf',
+                            type: 'folder',
+                            hasGallery: false,
+                            fileCount: 8,
+                            size: '5 MB',
+                            lastModified: '2026-02-20T09:00:00Z',
+                            children: []
+                        }
+                    ]
+                },
+                {
+                    id: 'zouk_organizer',
+                    name: 'BCN Zouk Congress',
+                    source: 'mine',
+                    event: 'zouk',
+                    type: 'folder',
+                    hasGallery: false,
+                    fileCount: 5,
+                    size: '22 MB',
+                    lastModified: '2026-01-18T08:30:00Z',
+                    children: []
+                },
+                {
+                    id: 'kizomba_organizer',
+                    name: 'Paris Kizomba Congress',
+                    source: 'mine',
+                    event: 'kizomba',
+                    type: 'folder',
+                    hasGallery: false,
+                    fileCount: 3,
+                    size: '14 MB',
+                    lastModified: '2025-12-01T11:00:00Z',
+                    children: []
+                }
+            ]
+        };
+
+        // ===================== STATE =====================
+        let currentPath = [];
+        let currentViewMode = 'large';
+        let activeContextNodeId = null;
+        let activeContextIsCreative = false;
+        let sortColumn = 'name';
+
+        // ===================== NAVIGATION =====================
+        function findNodeByPath(path) {
+            let node = mockData;
+            for (const id of path) {
+                if (!node.children) return null;
+                node = node.children.find(c => c.id === id);
+                if (!node) return null;
+            }
+            return node;
+        }
+
+        function getCurrentNode() {
+            return findNodeByPath(currentPath);
+        }
+
+        function navigateToPath(pathArr) {
+            currentPath = pathArr;
+            render();
+        }
+
+        function navigateToRoot() {
+            currentPath = [];
+            render();
+        }
+
+        function navigateBack() {
+            if (currentPath.length > 0) {
+                currentPath.pop();
+                render();
+            }
+        }
+
+        // ===================== FILTERS =====================
+        function isCreativeFolder(node) {
+            // A node is creative if it or any ancestor has source='creative'
+            return node.source === 'creative';
+        }
+
+        function applyFiltersAndRender() {
+            render();
+        }
+
+        function getFilteredChildren(node) {
+            const search = (document.getElementById('search-input').value || '').toLowerCase().trim();
+            const sourceFilter = document.getElementById('source-filter').value;
+            const eventFilter = document.getElementById('event-filter').value;
+            const sortBy = document.getElementById('sort-select').value;
+
+            let children = node.children ? [...node.children] : [];
+
+            if (search) children = children.filter(c => c.name.toLowerCase().includes(search));
+            if (sourceFilter !== 'all') children = children.filter(c => c.source === sourceFilter);
+            if (eventFilter !== 'all') children = children.filter(c => c.event === eventFilter);
+
+            children.sort((a, b) => {
+                if (sortBy === 'name') return a.name.localeCompare(b.name);
+                if (sortBy === 'lastModified') return new Date(b.lastModified) - new Date(a.lastModified);
+                if (sortBy === 'size') {
+                    const parseSize = s => parseFloat(s) * (s.includes('GB') ? 1024 : 1);
+                    return parseSize(b.size || '0') - parseSize(a.size || '0');
+                }
+                return 0;
+            });
+
+            return children;
+        }
+
+        // ===================== VIEW MODE =====================
+        function setViewMode(mode) {
+            currentViewMode = mode;
+            const btns = { large: 'view-large-btn', compact: 'view-compact-btn', list: 'view-list-btn' };
+            Object.entries(btns).forEach(([m, id]) => {
+                const btn = document.getElementById(id);
+                if (m === mode) {
+                    btn.classList.add('bg-revelti-blue', 'text-white');
+                    btn.classList.remove('text-gray-500', 'hover:bg-gray-50');
+                } else {
+                    btn.classList.remove('bg-revelti-blue', 'text-white');
+                    btn.classList.add('text-gray-500', 'hover:bg-gray-50');
+                }
+            });
+            render();
+        }
+
+        // ===================== BADGES =====================
+        function sourceBadge(node) {
+            const isCompact = currentViewMode === 'compact';
+            if (node.source === 'mine') {
+                return `<span title="My Uploads" class="inline-flex items-center gap-1 text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-blue-100 text-blue-800">
+                    <svg class="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"/></svg>
+                    ${isCompact ? '' : 'My Uploads'}
+                </span>`;
+            }
+            return `<span title="From Creative" class="inline-flex items-center gap-1 text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-purple-100 text-purple-800">
+                    <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    ${isCompact ? '' : 'From Creative'}
+                </span>`;
+        }
+
+        function galleryBadge(node) {
+            if (!node.hasGallery) return '';
+            const isCompact = currentViewMode === 'compact';
+            return `<span title="Gallery" class="inline-flex items-center gap-1 text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-purple-600 text-white ml-1">
+                <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                ${isCompact ? '' : 'Gallery'}
+            </span>`;
+        }
+
+        function folderIcon(node) {
+            const color = node.source === 'creative' ? 'text-purple-500' : 'text-revelti-blue';
+            return `<svg class="w-10 h-10 ${color} mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"/></svg>`;
+        }
+
+        function folderIconSm(node) {
+            const color = node.source === 'creative' ? 'text-purple-500' : 'text-revelti-blue';
+            return `<svg class="w-6 h-6 ${color} mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"/></svg>`;
+        }
+
+        function creatorChip(node) {
+            if (!node.creator) return '';
+            return `<div class="flex items-center gap-1 mt-1">
+                <img src="${node.creatorAvatar}" class="w-4 h-4 rounded-full" alt="${node.creator}">
+                <span class="text-[10px] text-gray-500 truncate">${node.creator}</span>
+            </div>`;
+        }
+
+        // ===================== CARD RENDERERS =====================
+        function renderLargeCard(node, path) {
+            const galleryBtn = node.hasGallery
+                ? `<button onclick="event.stopPropagation(); alert('Opening gallery for: ${node.name.replace(/'/g, "\\'")}');"
+                    class="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-purple-700 hover:text-purple-900 transition">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    Open Gallery
+                </button>` : '';
+
+            const borderColor = node.source === 'creative' ? 'border-purple-100' : 'border-gray-200';
+
+            return `<div class="bg-white rounded-lg shadow-sm border ${borderColor} hover:shadow-md transition">
+                <div class="p-4 flex items-start">
+                    <div onclick='navigateToPath(${JSON.stringify(path)})'
+                        class="flex-1 min-w-0 flex items-start cursor-pointer">
+                        ${folderIcon(node)}
+                        <div class="flex-1 min-w-0">
+                            <h3 class="font-bold text-gray-800 truncate text-sm">${node.name}</h3>
+                            <div class="flex items-center flex-wrap gap-1 mt-1">
+                                ${sourceBadge(node)}${galleryBadge(node)}
+                            </div>
+                            ${creatorChip(node)}
+                            <div class="text-[10px] text-gray-400 mt-1">${node.fileCount || 0} files &bull; ${node.size || '—'} &bull; ${new Date(node.lastModified).toLocaleDateString()}</div>
+                            ${galleryBtn}
+                        </div>
+                    </div>
+                    <button type="button" onclick='openContextMenu(event, "${node.id}", ${JSON.stringify(path)})'
+                        class="text-gray-400 hover:text-gray-600 p-1 rounded hover:bg-gray-100 ml-2 shrink-0">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/></svg>
+                    </button>
+                </div>
+            </div>`;
+        }
+
+        function renderCompactCard(node, path) {
+            const borderColor = node.source === 'creative' ? 'border-purple-100' : 'border-gray-200';
+            return `<div class="bg-white rounded-lg shadow-sm border ${borderColor} hover:shadow-md transition">
+                <div class="p-3 flex items-center">
+                    <div onclick='navigateToPath(${JSON.stringify(path)})' class="flex-1 min-w-0 flex items-center cursor-pointer">
+                        ${folderIconSm(node)}
+                        <div class="flex-1 min-w-0">
+                            <h3 class="font-bold text-gray-800 truncate text-xs">${node.name}</h3>
+                            <div class="flex items-center gap-1 mt-0.5">${sourceBadge(node)}${galleryBadge(node)}</div>
+                        </div>
+                    </div>
+                    <button type="button" onclick='openContextMenu(event, "${node.id}", ${JSON.stringify(path)})'
+                        class="text-gray-400 hover:text-gray-600 p-1 rounded hover:bg-gray-100 ml-1 shrink-0">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/></svg>
+                    </button>
+                </div>
+            </div>`;
+        }
+
+        function renderListView(nodes, path) {
+            const rows = nodes.map(node => {
+                const childPath = [...path, node.id];
+                return `<tr class="hover:bg-gray-50 border-b border-gray-100 transition group">
+                    <td class="py-3 px-4">
+                        <div onclick='navigateToPath(${JSON.stringify(childPath)})' class="flex items-center cursor-pointer gap-2">
+                            ${folderIconSm(node)}
+                            <span class="font-semibold text-gray-800 text-sm group-hover:text-revelti-blue transition truncate">${node.name}</span>
+                        </div>
+                    </td>
+                    <td class="py-3 px-4">
+                        <div class="flex items-center gap-1">${sourceBadge(node)}${galleryBadge(node)}</div>
+                    </td>
+                    <td class="py-3 px-4 text-xs text-gray-500">${node.creator || '—'}</td>
+                    <td class="py-3 px-4 text-xs text-gray-500">${node.fileCount || 0} files</td>
+                    <td class="py-3 px-4 text-xs text-gray-500">${node.size || '—'}</td>
+                    <td class="py-3 px-4 text-xs text-gray-500">${new Date(node.lastModified).toLocaleDateString()}</td>
+                    <td class="py-3 px-4 text-right">
+                        <button type="button" onclick='openContextMenu(event, "${node.id}", ${JSON.stringify(childPath)})'
+                            class="text-gray-400 hover:text-gray-600 p-1 rounded hover:bg-gray-100">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/></svg>
+                        </button>
+                    </td>
+                </tr>`;
+            }).join('');
+
+            return `<div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-50 text-gray-500 text-[10px] uppercase tracking-wider font-bold border-b border-gray-200">
+                            <th class="py-3 px-4">Name</th>
+                            <th class="py-3 px-4">Source</th>
+                            <th class="py-3 px-4">Creator</th>
+                            <th class="py-3 px-4">Files</th>
+                            <th class="py-3 px-4">Size</th>
+                            <th class="py-3 px-4">Last Modified</th>
+                            <th class="py-3 px-4 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>${rows}</tbody>
+                </table>
+            </div>`;
+        }
+
+        // ===================== BREADCRUMB =====================
+        function renderBreadcrumb() {
+            const list = document.getElementById('breadcrumb-list');
+            let html = `<li class="inline-flex items-center">
+                <a href="#" onclick="navigateToRoot()" class="hover:text-revelti-blue transition">Media</a>
+            </li>`;
+
+            let tempPath = [];
+            currentPath.forEach((id, idx) => {
+                tempPath.push(id);
+                const node = findNodeByPath([...tempPath]);
+                const isLast = idx === currentPath.length - 1;
+                const pathSnap = [...tempPath];
+                html += `<li class="inline-flex items-center">
+                    <svg class="w-4 h-4 text-gray-400 mx-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    ${isLast
+                        ? `<span class="ml-1 text-gray-700 font-bold">${node ? node.name : id}</span>`
+                        : `<a href="#" onclick='navigateToPath(${JSON.stringify(pathSnap)})' class="ml-1 hover:text-revelti-blue transition">${node ? node.name : id}</a>`}
+                </li>`;
+            });
+
+            list.innerHTML = html;
+        }
+
+        // ===================== MAIN RENDER =====================
+        function render() {
+            const currentNode = getCurrentNode();
+            const children = getFilteredChildren(currentNode);
+            const grid = document.getElementById('folders-grid');
+            const empty = document.getElementById('empty-state');
+            const isCreativeCtx = currentPath.length > 0 && currentNode && currentNode.source === 'creative';
+
+            // Update title
+            document.getElementById('page-title').textContent = currentPath.length === 0 ? 'Media Workspace' : (currentNode ? currentNode.name : 'Media');
+
+            // Update breadcrumb
+            renderBreadcrumb();
+
+            // Update header tool
+            const backBtn = document.getElementById('back-button');
+            const activeFolderName = document.getElementById('active-folder-name');
+            const uploadBtn = document.getElementById('upload-btn');
+            const newFolderBtn = document.getElementById('new-folder-btn');
+            const creativeBanner = document.getElementById('creative-warning-banner');
+
+            if (currentPath.length > 0) {
+                backBtn.classList.remove('hidden');
+                activeFolderName.textContent = currentNode ? currentNode.name : 'Unknown Folder';
+            } else {
+                backBtn.classList.add('hidden');
+                activeFolderName.textContent = 'Media Workspace';
+            }
+
+            if (isCreativeCtx) {
+                uploadBtn.classList.add('opacity-40', 'cursor-not-allowed');
+                newFolderBtn.classList.add('opacity-40', 'cursor-not-allowed');
+                creativeBanner.classList.remove('hidden');
+            } else {
+                uploadBtn.classList.remove('opacity-40', 'cursor-not-allowed');
+                newFolderBtn.classList.remove('opacity-40', 'cursor-not-allowed');
+                creativeBanner.classList.add('hidden');
+            }
+
+            if (children.length === 0) {
+                grid.innerHTML = '';
+                empty.classList.remove('hidden');
+                return;
+            }
+            empty.classList.add('hidden');
+
+            const childPaths = children.map(c => [...currentPath, c.id]);
+
+            if (currentViewMode === 'large') {
+                grid.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4';
+                grid.innerHTML = children.map((c, i) => renderLargeCard(c, childPaths[i])).join('');
+            } else if (currentViewMode === 'compact') {
+                grid.className = 'grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3';
+                grid.innerHTML = children.map((c, i) => renderCompactCard(c, childPaths[i])).join('');
+            } else {
+                grid.className = 'block bg-white border border-gray-200 rounded-lg overflow-hidden';
+                grid.innerHTML = renderListView(children, currentPath);
+            }
+        }
+
+        // ===================== CONTEXT MENU =====================
+        function openContextMenu(event, nodeId, path) {
+            event.stopPropagation();
+            activeContextNodeId = nodeId;
+
+            // Find node
+            const node = findNodeByPath(path);
+            const isCreative = node && node.source === 'creative';
+            activeContextIsCreative = isCreative;
+
+            const menu = document.getElementById('context-menu');
+
+            // Show/hide items based on permissions
+            const mineItems = ['ctx-rename', 'ctx-move', 'ctx-copy', 'ctx-share', 'ctx-subfolder', 'ctx-upload-here', 'ctx-delete', 'ctx-mine-divider', 'ctx-delete-divider'];
+            mineItems.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.toggle('hidden', isCreative);
+            });
+
+            // Gallery button
+            document.getElementById('ctx-gallery').classList.toggle('hidden', !(node && node.hasGallery));
+
+            // Position
+            const x = Math.min(event.clientX, window.innerWidth - 200);
+            const y = Math.min(event.clientY, window.innerHeight - 300);
+            menu.style.left = x + 'px';
+            menu.style.top = y + 'px';
+            menu.classList.add('visible');
+
+            // Store path for actions
+            menu._activePath = path;
+        }
+
+        function closeContextMenu() {
+            document.getElementById('context-menu').classList.remove('visible');
+        }
+
+        document.addEventListener('click', closeContextMenu);
+
+        function ctxAction(action) {
+            const menu = document.getElementById('context-menu');
+            const path = menu._activePath || [];
+            const node = findNodeByPath(path);
+            const name = node ? node.name : 'this folder';
+            closeContextMenu();
+
+            if (action === 'open') { navigateToPath(path); }
+            else if (action === 'gallery') { alert(`Opening gallery for: ${name}`); }
+            else if (action === 'download') { alert(`Simulating download of: ${name}`); }
+            else if (action === 'copy-link') { alert(`Link copied for: ${name}\nhttps://revelti.com/shared/${activeContextNodeId}`); }
+            else if (action === 'rename') { alert(`Rename: ${name}`); }
+            else if (action === 'move') { alert(`Move: ${name}`); }
+            else if (action === 'copy') { alert(`Copy: ${name}`); }
+            else if (action === 'share') { alert(`Share link copied for: ${name}`); }
+            else if (action === 'subfolder') { alert(`Creating subfolder inside: ${name}`); }
+            else if (action === 'upload-here') { alert(`Simulating file upload dialog inside: ${name}`); }
+            else if (action === 'delete') {
+                if (confirm(`Delete "${name}"? This cannot be undone.`)) {
+                    alert(`Folder "${name}" deleted (simulated).`);
+                }
+            }
+        }
+
+        // ===================== UPLOAD / NEW FOLDER =====================
+        function handleUpload() {
+            const currentNode = getCurrentNode();
+            const isCreativeCtx = currentPath.length > 0 && currentNode && currentNode.source === 'creative';
+            if (isCreativeCtx) {
+                alert('You cannot upload to this folder.\n\nThis is a Creative folder and is read-only.');
+                return;
+            }
+            alert('Simulating File Upload Dialog');
+        }
+
+        function handleNewFolder() {
+            const currentNode = getCurrentNode();
+            const isCreativeCtx = currentPath.length > 0 && currentNode && currentNode.source === 'creative';
+            if (isCreativeCtx) {
+                alert('You cannot create folders here.\n\nThis is a Creative folder and is read-only.');
+                return;
+            }
+            alert('Creating new folder (simulated)');
+        }
+
+        function handleDrop(event) {
+            event.preventDefault();
+            document.getElementById('drop-zone').classList.remove('drag-over');
+            const currentNode = getCurrentNode();
+            const isCreativeCtx = currentPath.length > 0 && currentNode && currentNode.source === 'creative';
+            if (isCreativeCtx) {
+                alert('You cannot upload to this folder.\n\nThis is a Creative folder and is read-only.');
+                return;
+            }
+            alert('Simulating Drag & Drop File Upload');
+        }
+
+        // ===================== INIT =====================
+        document.addEventListener('DOMContentLoaded', () => {
+            render();
+        });
+    </script>
+
+    <script src="layout-injector.js" defer></script>
+    <script src="organizer.js" defer></script>
+</body>
+
+</html>
