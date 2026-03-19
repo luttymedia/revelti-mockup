@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revelti - Creative Settings</title>
+    <title>Revelti - Organizer Settings</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -15,7 +15,6 @@
                         revelti: {
                             blue: '#213c63',
                             orange: '#f58220',
-                            purple: '#6b21a8',
                         }
                     }
                 }
@@ -206,23 +205,6 @@
             border: 2px solid #e5e7eb;
         }
 
-        /* Logo upload area */
-        .logo-upload-area {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .logo-thumb {
-            width: 80px;
-            height: 40px;
-            border-radius: 8px;
-            object-fit: contain;
-            border: 1px solid #e5e7eb;
-            padding: 4px;
-            background: white;
-        }
-
         /* Plan badge */
         .plan-badge {
             display: inline-flex;
@@ -268,32 +250,6 @@
             transform: scale(1);
         }
 
-        /* Upload drop zone */
-        .upload-drop {
-            border: 2px dashed #d1d5db;
-            border-radius: .75rem;
-            padding: 1.5rem;
-            text-align: center;
-            color: #9ca3af;
-            cursor: pointer;
-            transition: border-color .15s;
-        }
-
-        .upload-drop:hover {
-            border-color: #213c63;
-        }
-
-        /* Payout card */
-        .payout-card {
-            border: 1px solid #e5e7eb;
-            border-radius: .75rem;
-            padding: .875rem 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-        }
-
         /* Plan option card */
         .plan-option {
             border: 1.5px solid #e5e7eb;
@@ -315,8 +271,8 @@
     </style>
 </head>
 
-<body class="dashboard-layout bg-gray-100 antialiased text-gray-800" data-role="creative">
-    <div id="creative-navbar-placeholder"></div>
+<body class="dashboard-layout bg-gray-100 antialiased text-gray-800" data-role="organizer">
+    <div id="organizer-navbar-placeholder"></div>
 
     <div class="dashboard-main-area">
         <aside id="sidebar-placeholder" class="sidebar-container bg-white z-20"></aside>
@@ -328,7 +284,7 @@
                     <header class="flex flex-col md:flex-row justify-between items-start mb-6">
                         <div>
                             <h1 class="text-3xl font-extrabold text-revelti-blue">Settings</h1>
-                            <p class="text-gray-500 mt-0.5">Manage your account, defaults, and preferences</p>
+                            <p class="text-gray-500 mt-0.5">Manage your account, organization &amp; preferences</p>
                         </div>
                     </header>
 
@@ -361,8 +317,8 @@
                                 <div>
                                     <p class="text-sm font-semibold text-gray-600 mb-2">Profile Picture</p>
                                     <div class="avatar-upload">
-                                        <img src="https://placehold.co/72x72/213c63/ffffff?text=LM" alt="Profile"
-                                            class="avatar-thumb">
+                                        <img src="images/organizerAvatar.png" alt="Profile" class="avatar-thumb"
+                                            onerror="this.src='https://placehold.co/72x72/213c63/ffffff?text=BG'">
                                         <div>
                                             <button
                                                 class="px-3 py-1.5 text-sm font-semibold bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition">Upload
@@ -374,32 +330,26 @@
                                 <hr class="border-gray-100">
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <div class="form-row mb-0">
-                                        <label>Full Name</label>
-                                        <input type="text" value="Lutty Moreira">
+                                        <label>Organizer Name</label>
+                                        <input type="text" value="Bachata Geneva">
                                     </div>
                                     <div class="form-row mb-0">
                                         <label>Email</label>
-                                        <input type="email" value="luttyphoto@gmail.com">
+                                        <input type="email" value="info@bgf.com">
                                     </div>
                                 </div>
                                 <!-- Plan Info -->
                                 <div
-                                    class="bg-blue-50 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                                    class="bg-gray-50 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border border-gray-200">
                                     <div>
-                                        <p class="text-sm font-semibold text-revelti-blue mb-1">Current Plan</p>
-                                        <span class="plan-badge bg-revelti-blue text-white">
-                                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                                                <path
-                                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.958a1 1 0 00.95.69h4.168c.969 0 1.371 1.24.588 1.81l-3.374 2.45a1 1 0 00-.364 1.118l1.286 3.959c.3.921-.755 1.688-1.54 1.118l-3.374-2.451a1 1 0 00-1.175 0l-3.374 2.451c-.784.57-1.838-.197-1.539-1.118l1.286-3.959a1 1 0 00-.364-1.118L2.756 9.385c-.783-.57-.38-1.81.588-1.81h4.168a1 1 0 00.95-.69l1.287-3.958z" />
-                                            </svg>
-                                            Pro — 1 TB
-                                        </span>
-                                        <p class="text-xs text-blue-600 mt-1.5">Storage included: <strong>1 TB</strong>
+                                        <p class="text-sm font-semibold text-gray-700 mb-1">Current Plan</p>
+                                        <span class="plan-badge bg-gray-200 text-gray-600">Free — 1 GB</span>
+                                        <p class="text-xs text-gray-500 mt-1.5">Storage included: <strong>1 GB</strong>
                                         </p>
                                     </div>
-                                    <button onclick="openPlanModal()"
-                                        class="px-4 py-2 bg-revelti-blue text-white text-sm font-bold rounded-lg hover:bg-blue-800 transition whitespace-nowrap">
-                                        Manage Plan
+                                    <button onclick="openUpgradeModal()"
+                                        class="px-4 py-2 bg-revelti-orange text-white text-sm font-bold rounded-lg hover:opacity-90 transition whitespace-nowrap">
+                                        Upgrade Plan
                                     </button>
                                 </div>
                                 <div class="flex justify-end">
@@ -450,7 +400,7 @@
                                             class="slider"></span></label>
                                 </div>
                                 <div class="mt-4">
-                                    <a href="creativeNotificationSettings.html"
+                                    <a href="organizerNotificationSettings.html"
                                         class="inline-flex items-center gap-1.5 text-sm font-semibold text-revelti-blue hover:underline">
                                         Open full notification settings
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -504,134 +454,7 @@
                             </div>
                         </details>
 
-                        <!-- ── 4. DEFAULT UPLOAD SETTINGS ─────────────── -->
-                        <details class="settings-section">
-                            <summary>
-                                <div class="section-left">
-                                    <div class="section-icon bg-orange-50">
-                                        <svg class="w-5 h-5 text-revelti-orange" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <p class="font-bold text-revelti-blue">Default Upload Settings</p>
-                                        <p class="text-xs text-gray-400">Visibility, watermark &amp; gallery defaults
-                                        </p>
-                                    </div>
-                                </div>
-                                <svg class="w-5 h-5 text-gray-400 accordion-chevron" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M19 9l-7 7-7-7" />
-                                </svg>
-                            </summary>
-                            <div class="section-body space-y-1">
-                                <div class="toggle-row">
-                                    <div>
-                                        <p class="toggle-label">Default Visibility</p>
-                                        <p class="toggle-desc">On = Public &nbsp;|&nbsp; Off = Private</p>
-                                    </div>
-                                    <label class="toggle-switch"><input type="checkbox"><span
-                                            class="slider"></span></label>
-                                </div>
-                                <div class="toggle-row">
-                                    <div>
-                                        <p class="toggle-label">Allow Downloads by Default</p>
-                                        <p class="toggle-desc">Clients can download uploaded media</p>
-                                    </div>
-                                    <label class="toggle-switch"><input type="checkbox" checked><span
-                                            class="slider"></span></label>
-                                </div>
-                                <div class="toggle-row">
-                                    <div>
-                                        <p class="toggle-label">Apply Watermark by Default</p>
-                                        <p class="toggle-desc">Watermark overlaid on uploaded assets</p>
-                                    </div>
-                                    <label class="toggle-switch"><input type="checkbox" checked><span
-                                            class="slider"></span></label>
-                                </div>
-                                <div class="toggle-row">
-                                    <div>
-                                        <p class="toggle-label">Auto-Create Gallery on Upload</p>
-                                        <p class="toggle-desc">Automatically bundle uploads into a gallery</p>
-                                    </div>
-                                    <label class="toggle-switch"><input type="checkbox"><span
-                                            class="slider"></span></label>
-                                </div>
-                                <div class="flex justify-end pt-3">
-                                    <button
-                                        class="px-5 py-2 bg-revelti-blue text-white text-sm font-bold rounded-lg hover:bg-blue-800 transition">Save
-                                        Defaults</button>
-                                </div>
-                            </div>
-                        </details>
-
-                        <!-- ── 5. DEFAULT GALLERY SETTINGS ────────────── -->
-                        <details class="settings-section">
-                            <summary>
-                                <div class="section-left">
-                                    <div class="section-icon bg-purple-50">
-                                        <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <p class="font-bold text-revelti-blue">Default Gallery Settings</p>
-                                        <p class="text-xs text-gray-400">Sharing, layout &amp; permissions</p>
-                                    </div>
-                                </div>
-                                <svg class="w-5 h-5 text-gray-400 accordion-chevron" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M19 9l-7 7-7-7" />
-                                </svg>
-                            </summary>
-                            <div class="section-body space-y-4">
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <div class="form-row mb-0">
-                                        <label>Gallery Visibility</label>
-                                        <select>
-                                            <option>Private link only</option>
-                                            <option>Public</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-row mb-0">
-                                        <label>Default Layout</label>
-                                        <select>
-                                            <option>Grid</option>
-                                            <option>Masonry</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="toggle-row">
-                                    <div>
-                                        <p class="toggle-label">Allow Downloads</p>
-                                        <p class="toggle-desc">Viewers can download from gallery</p>
-                                    </div>
-                                    <label class="toggle-switch"><input type="checkbox" checked><span
-                                            class="slider"></span></label>
-                                </div>
-                                <div class="toggle-row">
-                                    <div>
-                                        <p class="toggle-label">Apply Watermark</p>
-                                        <p class="toggle-desc">Watermark visible in gallery previews</p>
-                                    </div>
-                                    <label class="toggle-switch"><input type="checkbox" checked><span
-                                            class="slider"></span></label>
-                                </div>
-                                <div class="flex justify-end">
-                                    <button
-                                        class="px-5 py-2 bg-revelti-blue text-white text-sm font-bold rounded-lg hover:bg-blue-800 transition">Save
-                                        Defaults</button>
-                                </div>
-                            </div>
-                        </details>
-
-                        <!-- ── 6. ORGANIZATION PROFILE ─────────────────── -->
+                        <!-- ── 4. ORGANIZATION PROFILE ─────────────────── -->
                         <details class="settings-section">
                             <summary>
                                 <div class="section-left">
@@ -644,7 +467,7 @@
                                     </div>
                                     <div>
                                         <p class="font-bold text-revelti-blue">Organization Profile</p>
-                                        <p class="text-xs text-gray-400">Brand name, logo &amp; contact</p>
+                                        <p class="text-xs text-gray-400">Name, logo &amp; contact details</p>
                                     </div>
                                 </div>
                                 <svg class="w-5 h-5 text-gray-400 accordion-chevron" fill="none" stroke="currentColor"
@@ -654,12 +477,13 @@
                                 </svg>
                             </summary>
                             <div class="section-body space-y-4">
-                                <!-- Logo -->
+                                <!-- Logo upload -->
                                 <div>
-                                    <p class="text-sm font-semibold text-gray-700 mb-2">Organization Logo / Avatar</p>
-                                    <div class="logo-upload-area">
-                                        <img src="images/creativeAvatar.png" alt="AMedia Logo" class="logo-thumb"
-                                            onerror="this.src='https://placehold.co/80x40/213c63/ffffff?text=AM'">
+                                    <p class="text-sm font-semibold text-gray-700 mb-2">Organization Logo</p>
+                                    <div class="flex items-center gap-4">
+                                        <img src="images/organizerLogo.png" alt="Org Logo"
+                                            style="width:80px;height:40px;object-fit:contain;border:1px solid #e5e7eb;border-radius:8px;padding:4px;background:white;"
+                                            onerror="this.src='https://placehold.co/80x40/213c63/ffffff?text=BG'">
                                         <div>
                                             <button
                                                 class="px-3 py-1.5 text-sm font-semibold bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition">Upload
@@ -671,21 +495,21 @@
                                 <hr class="border-gray-100">
                                 <div class="form-row mb-0">
                                     <label>Organization Name</label>
-                                    <input type="text" value="AMedia">
+                                    <input type="text" value="Bachata Geneva Festival">
                                 </div>
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <div class="form-row mb-0">
                                         <label>Contact Email</label>
-                                        <input type="email" value="info@amedia.com">
+                                        <input type="email" value="info@bgf.com">
                                     </div>
                                     <div class="form-row mb-0">
                                         <label>Contact Phone</label>
-                                        <input type="text" placeholder="—">
+                                        <input type="text" value="+41 22 000 0000">
                                     </div>
                                 </div>
                                 <div class="form-row mb-0">
                                     <label>Website</label>
-                                    <input type="url" value="https://amediastory.com">
+                                    <input type="url" value="https://bachatageva.com">
                                 </div>
                                 <div class="flex justify-end">
                                     <button
@@ -695,64 +519,7 @@
                             </div>
                         </details>
 
-                        <!-- ── 7. BRANDING ────────────────────────────── -->
-                        <details class="settings-section">
-                            <summary>
-                                <div class="section-left">
-                                    <div class="section-icon bg-pink-50">
-                                        <svg class="w-5 h-5 text-pink-500" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <p class="font-bold text-revelti-blue">Branding</p>
-                                        <p class="text-xs text-gray-400">Watermark &amp; logo assets</p>
-                                    </div>
-                                </div>
-                                <svg class="w-5 h-5 text-gray-400 accordion-chevron" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M19 9l-7 7-7-7" />
-                                </svg>
-                            </summary>
-                            <div class="section-body space-y-4">
-                                <div>
-                                    <p class="text-sm font-semibold text-gray-700 mb-2">Watermark Image</p>
-                                    <div class="upload-drop">
-                                        <svg class="w-8 h-8 mx-auto mb-2 opacity-40" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                                        </svg>
-                                        <p class="text-sm">Drag &amp; drop or <span
-                                                class="text-revelti-blue font-semibold">browse</span></p>
-                                        <p class="text-xs mt-1">PNG with transparency recommended · Max 2 MB</p>
-                                    </div>
-                                </div>
-                                <div>
-                                    <p class="text-sm font-semibold text-gray-700 mb-2">Logo / Brand Mark</p>
-                                    <div class="flex items-center gap-3 mb-2">
-                                        <img src="images/creatorLogo.png" alt="Current Logo"
-                                            style="height:36px;object-fit:contain;" onerror="this.style.display='none'">
-                                        <span class="text-xs text-gray-400">Current logo</span>
-                                    </div>
-                                    <div class="upload-drop">
-                                        <svg class="w-8 h-8 mx-auto mb-2 opacity-40" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                                        </svg>
-                                        <p class="text-sm">Drag &amp; drop or <span
-                                                class="text-revelti-blue font-semibold">browse</span></p>
-                                        <p class="text-xs mt-1">SVG or PNG recommended · Max 2 MB</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </details>
-
-                        <!-- ── 8. STORAGE & QUOTA ──────────────────────── -->
+                        <!-- ── 5. STORAGE & QUOTA ──────────────────────── -->
                         <details class="settings-section">
                             <summary>
                                 <div class="section-left">
@@ -777,49 +544,54 @@
                             <div class="section-body">
                                 <div class="flex justify-between items-end mb-2">
                                     <div>
-                                        <p class="text-2xl font-extrabold text-revelti-blue">320 GB <span
-                                                class="text-base font-semibold text-gray-400">/ 1 TB used</span></p>
-                                        <p class="text-xs text-gray-400 mt-0.5">680 GB remaining</p>
+                                        <p class="text-2xl font-extrabold text-revelti-blue">320 MB <span
+                                                class="text-base font-semibold text-gray-400">/ 1 GB used</span></p>
+                                        <p class="text-xs text-gray-400 mt-0.5">680 MB remaining</p>
                                     </div>
-                                    <span class="text-sm font-bold text-revelti-blue">32%</span>
+                                    <span class="text-sm font-bold text-revelti-blue">31%</span>
                                 </div>
                                 <div class="storage-bar mb-4">
-                                    <div class="storage-bar-fill" style="width:32%"></div>
+                                    <div class="storage-bar-fill" style="width:31%"></div>
                                 </div>
                                 <div class="grid grid-cols-3 gap-3 text-center mb-4">
                                     <div class="bg-white rounded-lg p-3 border border-gray-100">
-                                        <p class="text-xs text-gray-400">Photos</p>
-                                        <p class="font-bold text-revelti-blue text-sm">180 GB</p>
+                                        <p class="text-xs text-gray-400">My Uploads</p>
+                                        <p class="font-bold text-revelti-blue text-sm">200 MB</p>
                                     </div>
                                     <div class="bg-white rounded-lg p-3 border border-gray-100">
-                                        <p class="text-xs text-gray-400">Videos</p>
-                                        <p class="font-bold text-revelti-blue text-sm">125 GB</p>
+                                        <p class="text-xs text-gray-400">From Creatives</p>
+                                        <p class="font-bold text-revelti-blue text-sm">100 MB</p>
                                     </div>
                                     <div class="bg-white rounded-lg p-3 border border-gray-100">
                                         <p class="text-xs text-gray-400">Other</p>
-                                        <p class="font-bold text-revelti-blue text-sm">15 GB</p>
+                                        <p class="font-bold text-revelti-blue text-sm">20 MB</p>
                                     </div>
                                 </div>
-                                <button
-                                    class="px-5 py-2 bg-revelti-orange text-white text-sm font-bold rounded-lg hover:opacity-90 transition">Buy
-                                    More Storage</button>
+                                <div class="flex flex-col sm:flex-row gap-3">
+                                    <button
+                                        class="px-5 py-2 bg-revelti-orange text-white text-sm font-bold rounded-lg hover:opacity-90 transition">Buy
+                                        More Storage</button>
+                                    <button onclick="openUpgradeModal()"
+                                        class="px-5 py-2 border border-revelti-blue text-revelti-blue text-sm font-bold rounded-lg hover:bg-blue-50 transition">Upgrade
+                                        Plan for More Space</button>
+                                </div>
                             </div>
                         </details>
 
-                        <!-- ── 9. PAYOUT METHODS ──────────────────────── -->
+                        <!-- ── 6. EVENT DEFAULTS (LIGHT) ─────────────── -->
                         <details class="settings-section">
                             <summary>
                                 <div class="section-left">
-                                    <div class="section-icon bg-teal-50">
-                                        <svg class="w-5 h-5 text-teal-600" fill="none" stroke="currentColor"
+                                    <div class="section-icon bg-orange-50">
+                                        <svg class="w-5 h-5 text-revelti-orange" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                         </svg>
                                     </div>
                                     <div>
-                                        <p class="font-bold text-revelti-blue">Payout Methods</p>
-                                        <p class="text-xs text-gray-400">Bank accounts &amp; payment details</p>
+                                        <p class="font-bold text-revelti-blue">Event Defaults</p>
+                                        <p class="text-xs text-gray-400">Default settings for new events</p>
                                     </div>
                                 </div>
                                 <svg class="w-5 h-5 text-gray-400 accordion-chevron" fill="none" stroke="currentColor"
@@ -828,37 +600,26 @@
                                         d="M19 9l-7 7-7-7" />
                                 </svg>
                             </summary>
-                            <div class="section-body space-y-3">
-                                <div class="payout-card">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
-                                            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                                            </svg>
-                                        </div>
-                                        <div>
-                                            <p class="text-sm font-semibold text-gray-700">Bank Transfer — IBAN ending
-                                                ••• 4821</p>
-                                            <p class="text-xs text-gray-400">Verified · Added Jan 2025</p>
-                                        </div>
+                            <div class="section-body space-y-1">
+                                <div class="toggle-row">
+                                    <div>
+                                        <p class="toggle-label">Default Event Visibility</p>
+                                        <p class="toggle-desc">On = Public &nbsp;|&nbsp; Off = Private (unlisted)</p>
                                     </div>
-                                    <div class="flex gap-2">
-                                        <button
-                                            class="text-xs font-semibold text-revelti-blue hover:underline">Edit</button>
-                                        <button
-                                            class="text-xs font-semibold text-red-500 hover:underline">Remove</button>
-                                    </div>
+                                    <label class="toggle-switch"><input type="checkbox" checked><span
+                                            class="slider"></span></label>
                                 </div>
-                                <button
-                                    class="flex items-center gap-2 text-sm font-semibold text-revelti-blue hover:underline">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                    </svg>
-                                    Add Payment Method
-                                </button>
+                                <div
+                                    class="mt-3 bg-gray-100/70 rounded-lg p-4 border border-dashed border-gray-200 text-center">
+                                    <p class="text-sm text-gray-400 font-medium">More event defaults coming soon</p>
+                                    <p class="text-xs text-gray-300 mt-0.5">Ticket settings, media permissions &amp;
+                                        more</p>
+                                </div>
+                                <div class="flex justify-end pt-3">
+                                    <button
+                                        class="px-5 py-2 bg-revelti-blue text-white text-sm font-bold rounded-lg hover:bg-blue-800 transition">Save
+                                        Defaults</button>
+                                </div>
                             </div>
                         </details>
 
@@ -869,16 +630,16 @@
     </div>
 
     <!-- ═══════════════════════════════════════════════
-         MODAL: Manage Plan (Creative — Pro user)
+         MODAL: Upgrade Plan (Organizer — Free user)
      ════════════════════════════════════════════════ -->
-    <dialog id="modal-manage-plan"
+    <dialog id="modal-upgrade-plan"
         style="border:none;border-radius:1rem;padding:1.75rem;width:100%;max-width:480px;box-shadow:0 20px 60px rgba(0,0,0,.18);font-family:inherit;">
         <div class="flex justify-between items-start mb-4">
             <div>
-                <h2 class="text-xl font-extrabold text-revelti-blue">Manage Plan</h2>
-                <p class="text-sm text-gray-400 mt-0.5">Review or change your subscription</p>
+                <h2 class="text-xl font-extrabold text-revelti-blue">Upgrade Plan</h2>
+                <p class="text-sm text-gray-400 mt-0.5">Choose a plan that fits your needs</p>
             </div>
-            <button onclick="closePlanModal()"
+            <button onclick="closeUpgradeModal()"
                 style="background:none;border:none;cursor:pointer;color:#9ca3af;margin-left:1rem;">
                 <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -888,131 +649,119 @@
         <!-- Current plan badge -->
         <div class="flex items-center gap-2 mb-4 p-3 bg-gray-50 rounded-xl border border-gray-200">
             <span class="text-xs text-gray-400 font-semibold uppercase tracking-wide">Current:</span>
-            <span class="text-sm font-bold text-gray-600">Pro — 1 TB &nbsp;·&nbsp; <span
-                    class="text-revelti-blue font-extrabold">24€<span
-                        class="font-normal text-gray-400 text-xs">/mo</span></span></span>
+            <span class="text-sm font-bold text-gray-600">Standard — 1 GB</span>
         </div>
-        <!-- Options -->
-        <p class="text-xs text-gray-500 uppercase tracking-wider font-bold mb-3">Options</p>
+        <!-- Plan options -->
+        <p class="text-xs text-gray-500 uppercase tracking-wider font-bold mb-3">Upgrade to</p>
         <div class="space-y-2 mb-4">
-            <!-- Downgrade — disabled -->
-            <div
-                style="border:1.5px solid #e5e7eb;border-radius:.75rem;padding:1rem;background:#f9fafb;display:flex;justify-content:space-between;align-items:center;opacity:.55;cursor:not-allowed;">
-                <div>
-                    <p style="font-size:.875rem;font-weight:700;color:#9ca3af;">Downgrade</p>
-                    <p style="font-size:.75rem;color:#9ca3af;margin-top:.2rem;">No lower plan available</p>
-                </div>
-                <span
-                    style="font-size:.7rem;background:#e5e7eb;color:#9ca3af;padding:.15rem .6rem;border-radius:9999px;font-weight:700;">Not
-                    available</span>
-            </div>
-            <!-- Business upgrade -->
-            <div class="plan-option" onclick="selectCreativePlan(this)">
+            <div class="plan-option" onclick="selectPlan(this)">
                 <div class="flex justify-between items-center">
                     <div>
-                        <p class="text-sm font-bold text-revelti-blue">Business — 5 TB</p>
-                        <p class="text-xs text-gray-400 mt-0.5">For agencies &amp; professional studios</p>
+                        <p class="text-sm font-bold text-revelti-blue">Plus — 10 GB</p>
+                        <p class="text-xs text-gray-400 mt-0.5">Best for growing events</p>
                     </div>
-                    <span class="text-sm font-extrabold text-revelti-blue">49€<span
-                            class="text-xs font-normal text-gray-400">/mo</span></span>
+                    <span class="text-sm font-extrabold text-revelti-blue">120€<span
+                            class="text-xs font-normal text-gray-400">/year</span></span>
+                </div>
+            </div>
+            <div class="plan-option" onclick="selectPlan(this)">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <p class="text-sm font-bold text-revelti-blue">Premium — 100 GB</p>
+                        <p class="text-xs text-gray-400 mt-0.5">Full creative library access</p>
+                    </div>
+                    <span class="text-sm font-extrabold text-revelti-blue">290€<span
+                            class="text-xs font-normal text-gray-400">/year</span></span>
                 </div>
             </div>
         </div>
         <!-- What you get -->
         <div class="bg-blue-50 rounded-xl p-4 mb-5">
             <p class="text-xs text-revelti-blue font-bold uppercase tracking-wider mb-3">What you get</p>
-            <!-- Pro (current) -->
-            <p class="text-xs font-bold text-gray-400 uppercase tracking-wide mb-1.5">Pro (current)</p>
+            <!-- Plus features -->
+            <p class="text-xs font-bold text-gray-400 uppercase tracking-wide mb-1.5">Plus</p>
             <ul class="space-y-1.5 mb-3">
                 <li class="text-sm text-gray-600 flex items-center gap-2">
                     <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                     </svg>
-                    1 TB storage
+                    10 GB storage for event assets
                 </li>
                 <li class="text-sm text-gray-600 flex items-center gap-2">
                     <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                     </svg>
-                    Unlimited galleries &amp; folders
+                    Up to 3 active events
                 </li>
                 <li class="text-sm text-gray-600 flex items-center gap-2">
                     <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                     </svg>
-                    Watermark &amp; branding tools
-                </li>
-                <li class="text-sm text-gray-600 flex items-center gap-2">
-                    <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                    </svg>
-                    Event collaboration &amp; delivery
+                    Invite media creatives
                 </li>
             </ul>
-            <!-- Business (upgrade) -->
-            <p class="text-xs font-bold text-revelti-blue uppercase tracking-wide mb-1.5">+ Business adds</p>
+            <!-- Premium adds -->
+            <p class="text-xs font-bold text-revelti-blue uppercase tracking-wide mb-1.5">+ Premium adds</p>
             <ul class="space-y-1.5">
                 <li class="text-sm text-gray-600 flex items-center gap-2">
                     <svg class="w-4 h-4 text-revelti-orange flex-shrink-0" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                     </svg>
-                    5 TB storage
+                    100 GB storage
                 </li>
                 <li class="text-sm text-gray-600 flex items-center gap-2">
                     <svg class="w-4 h-4 text-revelti-orange flex-shrink-0" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                     </svg>
-                    Team member seats (up to 5)
+                    Unlimited active events
                 </li>
                 <li class="text-sm text-gray-600 flex items-center gap-2">
                     <svg class="w-4 h-4 text-revelti-orange flex-shrink-0" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                     </svg>
-                    Priority support &amp; SLA
+                    Priority creative deliveries
                 </li>
                 <li class="text-sm text-gray-600 flex items-center gap-2">
                     <svg class="w-4 h-4 text-revelti-orange flex-shrink-0" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                     </svg>
-                    Advanced analytics &amp; reporting
+                    Advanced event analytics
                 </li>
             </ul>
         </div>
-        <button id="btn-upgrade-business"
+        <button id="btn-upgrade-plan"
             style="width:100%;padding:.625rem;background:#f58220;color:white;font-size:.875rem;font-weight:700;border:none;border-radius:.75rem;cursor:pointer;margin-bottom:.5rem;opacity:.4;pointer-events:none;">Upgrade
-            to Business</button>
-        <button onclick="closePlanModal()"
+            Plan</button>
+        <button onclick="closeUpgradeModal()"
             style="width:100%;padding:.5rem;font-size:.875rem;font-weight:700;color:#6b7280;border:1px solid #e5e7eb;border-radius:.75rem;background:white;cursor:pointer;">Close</button>
     </dialog>
 
     <script src="layout-injector.js" defer></script>
-    <script src="creative.js" defer></script>
+    <script src="organizer.js" defer></script>
     <script>
-        function openPlanModal() {
-            var m = document.getElementById('modal-manage-plan');
+        function selectPlan(el) {
+            document.querySelectorAll('#modal-upgrade-plan .plan-option').forEach(function (opt) { opt.classList.remove('selected'); });
+            el.classList.add('selected');
+            var btn = document.getElementById('btn-upgrade-plan');
+            if (btn) { btn.style.opacity = '1'; btn.style.pointerEvents = 'auto'; }
+        }
+        function openUpgradeModal() {
+            var m = document.getElementById('modal-upgrade-plan');
             if (m) m.showModal();
         }
-        function closePlanModal() {
-            var m = document.getElementById('modal-manage-plan');
+        function closeUpgradeModal() {
+            var m = document.getElementById('modal-upgrade-plan');
             if (m) m.close();
-            // Reset selection
-            document.querySelectorAll('#modal-manage-plan .plan-option').forEach(function (o) { o.classList.remove('selected'); });
-            var btn = document.getElementById('btn-upgrade-business');
+            document.querySelectorAll('#modal-upgrade-plan .plan-option').forEach(function (opt) { opt.classList.remove('selected'); });
+            var btn = document.getElementById('btn-upgrade-plan');
             if (btn) { btn.style.opacity = '.4'; btn.style.pointerEvents = 'none'; }
-        }
-        function selectCreativePlan(el) {
-            document.querySelectorAll('#modal-manage-plan .plan-option').forEach(function (o) { o.classList.remove('selected'); });
-            el.classList.add('selected');
-            var btn = document.getElementById('btn-upgrade-business');
-            if (btn) { btn.style.opacity = '1'; btn.style.pointerEvents = 'auto'; }
         }
     </script>
 </body>
