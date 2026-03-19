@@ -433,7 +433,79 @@
                                                 onchange="handleImageUpload(event)">
                                             <div id="image-preview" class="mt-2 w-1/2"></div>
                                         </div>
-                                        <div class="text-right mt-2" id="update-button-container">
+
+                                        <!-- Add to Highlights Option -->
+                                        <div class="mt-4 border-t pt-4">
+                                            <div class="flex items-center">
+                                                <input type="checkbox" id="add-to-highlights-check"
+                                                    class="w-4 h-4 text-revelti-blue border-gray-300 rounded focus:ring-revelti-blue"
+                                                    onchange="toggleHighlightOptions()">
+                                                <label for="add-to-highlights-check"
+                                                    class="ml-2 text-sm font-semibold text-gray-700">Add to
+                                                    Highlights</label>
+                                            </div>
+
+                                            <div id="highlight-options"
+                                                class="mt-3 hidden space-y-3 pl-6 border-l-2 border-gray-100">
+                                                <div>
+                                                    <label
+                                                        class="block text-xs font-bold text-gray-500 uppercase mb-1">Select
+                                                        Existing Highlights</label>
+                                                    <div class="flex flex-wrap gap-2">
+                                                        <label
+                                                            class="flex items-center px-3 py-1 bg-white border border-gray-200 rounded-full text-sm cursor-pointer hover:bg-gray-50">
+                                                            <input type="checkbox" class="mr-2 highlight-selector"
+                                                                value="program"> Program
+                                                        </label>
+                                                        <label
+                                                            class="flex items-center px-3 py-1 bg-white border border-gray-200 rounded-full text-sm cursor-pointer hover:bg-gray-50">
+                                                            <input type="checkbox" class="mr-2 highlight-selector"
+                                                                value="accommodation"> Accommodation
+                                                        </label>
+                                                        <label
+                                                            class="flex items-center px-3 py-1 bg-white border border-gray-200 rounded-full text-sm cursor-pointer hover:bg-gray-50">
+                                                            <input type="checkbox" class="mr-2 highlight-selector"
+                                                                value="safety"> Safety
+                                                        </label>
+                                                        <label
+                                                            class="flex items-center px-3 py-1 bg-white border border-gray-200 rounded-full text-sm cursor-pointer hover:bg-gray-50">
+                                                            <input type="checkbox" class="mr-2 highlight-selector"
+                                                                value="workshops"> Workshops
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="flex items-center text-revelti-blue text-sm font-bold cursor-pointer hover:revelti-orange"
+                                                    onclick="toggleNewHighlightForm()">
+                                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor"
+                                                        viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                                    </svg>
+                                                    Create New Highlight
+                                                </div>
+
+                                                <div id="new-highlight-form"
+                                                    class="hidden space-y-2 bg-gray-100 p-3 rounded-md">
+                                                    <input type="text" id="new-highlight-name"
+                                                        placeholder="Highlight Name (e.g. Schedule)"
+                                                        class="w-full p-2 text-sm border rounded-md">
+                                                    <div class="flex items-center space-x-2">
+                                                        <button
+                                                            onclick="document.getElementById('highlight-cover-upload').click()"
+                                                            class="px-3 py-1 bg-white text-xs font-bold text-gray-700 border rounded shadow-sm hover:bg-gray-50">Upload
+                                                            Cover Image</button>
+                                                        <span id="highlight-cover-name"
+                                                            class="text-xs text-gray-500 italic truncate">No file
+                                                            selected</span>
+                                                        <input type="file" id="highlight-cover-upload" class="hidden"
+                                                            onchange="document.getElementById('highlight-cover-name').textContent = this.files[0].name">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="text-right mt-4" id="update-button-container">
                                             <button onclick="postUpdate()"
                                                 class="px-4 py-2 font-bold bg-revelti-blue text-white rounded-lg">Post
                                                 Update</button>
@@ -442,6 +514,7 @@
                                     <div id="updates-content" class="space-y-4">
                                         <!-- New announcement with image and editor buttons -->
                                         <div class="border-l-4 border-revelti-orange pl-4 relative" data-update-id="3"
+                                            data-highlights="program,workshops"
                                             data-update-title="Next year, something big is coming..." data-update-text="4 ways to qualify:
 - European Qualifiers - The top 20 competitions across Europe
 - Intercontinental Qualifiers - Events held in Asia, North America, South America, Africa, and Oceania
@@ -466,6 +539,12 @@
                                                             d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
                                                     </svg></button>
                                             </div>
+                                            <div class="flex space-x-1 mb-1">
+                                                <span
+                                                    class="px-2 py-0.5 bg-revelti-blue/10 text-revelti-blue text-[10px] font-bold rounded uppercase">Program</span>
+                                                <span
+                                                    class="px-2 py-0.5 bg-revelti-blue/10 text-revelti-blue text-[10px] font-bold rounded uppercase">Workshops</span>
+                                            </div>
                                             <h3 class="font-bold text-lg revelti-blue">Next year, something big is
                                                 coming...</h3>
                                             <p class="text-sm text-gray-500 mb-1">Posted on: Aug 26, 2025</p>
@@ -487,7 +566,8 @@
                                             </p>
                                         </div>
                                         <!-- Existing updates follow -->
-                                        <div class="border-l-4 border-revelti-orange pl-4 relative" data-update-id="1">
+                                        <div class="border-l-4 border-revelti-orange pl-4 relative" data-update-id="1"
+                                            data-highlights="workshops">
                                             <div class="absolute top-0 right-0 flex space-x-1">
                                                 <button id="edit-update-1-icon" onclick="editUpdate(1)"
                                                     class="p-1 bg-white rounded-full hover:bg-gray-100"><svg
@@ -506,6 +586,10 @@
                                                             d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
                                                     </svg></button>
                                             </div>
+                                            <div class="flex space-x-1 mb-1">
+                                                <span
+                                                    class="px-2 py-0.5 bg-revelti-blue/10 text-revelti-blue text-[10px] font-bold rounded uppercase">Workshops</span>
+                                            </div>
                                             <h3 class="font-bold text-lg revelti-blue">Schedule Update: New Workshop
                                                 Added!</h3>
                                             <p class="text-sm text-gray-500 mb-1">Posted on: Oct 15, 2025</p>
@@ -514,7 +598,8 @@
                                                 Sebas
                                                 Garreta on Sunday at 11:00 AM. Check the updated schedule!</p>
                                         </div>
-                                        <div class="border-l-4 border-revelti-orange pl-4 relative" data-update-id="2">
+                                        <div class="border-l-4 border-revelti-orange pl-4 relative" data-update-id="2"
+                                            data-highlights="safety">
                                             <div class="absolute top-0 right-0 flex space-x-1">
                                                 <button id="edit-update-2-icon" onclick="editUpdate(2)"
                                                     class="p-1 bg-white rounded-full hover:bg-gray-100"><svg
@@ -532,6 +617,10 @@
                                                         <path stroke-linecap="round" stroke-linejoin="round"
                                                             d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
                                                     </svg></button>
+                                            </div>
+                                            <div class="flex space-x-1 mb-1">
+                                                <span
+                                                    class="px-2 py-0.5 bg-revelti-blue/10 text-revelti-blue text-[10px] font-bold rounded uppercase">Safety</span>
                                             </div>
                                             <h3 class="font-bold text-lg revelti-blue">COVID-19 Safety Protocols</h3>
                                             <p class="text-sm text-gray-500 mb-1">Posted on: Oct 12, 2025</p>
@@ -1033,6 +1122,23 @@
                 contentDiv.appendChild(newEl);
             });
             closeAllModals();
+        }
+
+        // Highlight Management
+        function toggleHighlightOptions() {
+            const check = document.getElementById('add-to-highlights-check');
+            const options = document.getElementById('highlight-options');
+            if (check.checked) {
+                options.classList.remove('hidden');
+            } else {
+                options.classList.add('hidden');
+                document.getElementById('new-highlight-form').classList.add('hidden');
+            }
+        }
+
+        function toggleNewHighlightForm() {
+            const form = document.getElementById('new-highlight-form');
+            form.classList.toggle('hidden');
         }
 
         // Review Management

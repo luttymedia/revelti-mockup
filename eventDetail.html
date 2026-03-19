@@ -32,6 +32,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
+    <style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
 </head>
 
 <body class="antialiased text-gray-800 lg:bg-gray-50">
@@ -500,10 +510,100 @@
 
                     <!-- Announcements Section -->
                     <div id="announcements" class="tab-content hidden">
+                        <!-- Highlight Bubbles Container -->
+                        <div class="mb-6 -mx-4 overflow-x-auto no-scrollbar py-2">
+                            <div class="flex space-x-4 px-4 min-w-max">
+                                <!-- All Updates -->
+                                <button onclick="filterUpdates('all')"
+                                    class="flex flex-col items-center space-y-1 focus:outline-none">
+                                    <div
+                                        class="w-16 h-16 rounded-full p-0.5 border-2 border-revelti-orange bg-white flex items-center justify-center overflow-hidden shadow-sm">
+                                        <div
+                                            class="w-full h-full rounded-full bg-revelti-blue flex items-center justify-center text-white text-xs font-bold uppercase">
+                                            All</div>
+                                    </div>
+                                    <span class="text-[10px] font-bold text-revelti-blue uppercase">All</span>
+                                </button>
+
+                                <!-- Program Highlight -->
+                                <button onclick="filterUpdates('program')"
+                                    class="flex flex-col items-center space-y-1 focus:outline-none group">
+                                    <div
+                                        class="w-16 h-16 rounded-full p-0.5 border-2 border-transparent group-hover:border-revelti-orange transition-all duration-300 bg-white shadow-sm overflow-hidden">
+                                        <img src="images/eventPoster.png"
+                                            class="w-full h-full rounded-full object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all"
+                                            alt="Program">
+                                    </div>
+                                    <span
+                                        class="text-[10px] font-bold text-gray-500 group-hover:text-revelti-blue uppercase">Program</span>
+                                </button>
+
+                                <!-- J&J Highlight -->
+                                <button onclick="filterUpdates('jnj')"
+                                    class="flex flex-col items-center space-y-1 focus:outline-none group">
+                                    <div
+                                        class="w-16 h-16 rounded-full p-0.5 border-2 border-transparent group-hover:border-revelti-orange transition-all duration-300 bg-white shadow-sm overflow-hidden">
+                                        <img src="https://placehold.co/100x100/213c63/ffffff?text=J&J"
+                                            class="w-full h-full rounded-full object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all"
+                                            alt="J&J">
+                                    </div>
+                                    <span
+                                        class="text-[10px] font-bold text-gray-500 group-hover:text-revelti-blue uppercase">J&J</span>
+                                </button>
+
+                                <!-- Safety Highlight -->
+                                <button onclick="filterUpdates('safety')"
+                                    class="flex flex-col items-center space-y-1 focus:outline-none group">
+                                    <div
+                                        class="w-16 h-16 rounded-full p-0.5 border-2 border-transparent group-hover:border-revelti-orange transition-all duration-300 bg-white shadow-sm overflow-hidden">
+                                        <img src="https://placehold.co/100x100/213c63/ffffff?text=Safety"
+                                            class="w-full h-full rounded-full object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all"
+                                            alt="Safety">
+                                    </div>
+                                    <span
+                                        class="text-[10px] font-bold text-gray-500 group-hover:text-revelti-blue uppercase">Safety</span>
+                                </button>
+
+                                <!-- Accommodation Highlight -->
+                                <button onclick="filterUpdates('accommodation')"
+                                    class="flex flex-col items-center space-y-1 focus:outline-none group">
+                                    <div
+                                        class="w-16 h-16 rounded-full p-0.5 border-2 border-transparent group-hover:border-revelti-orange transition-all duration-300 bg-white shadow-sm overflow-hidden">
+                                        <img src="https://placehold.co/100x100/213c63/ffffff?text=Stay"
+                                            class="w-full h-full rounded-full object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all"
+                                            alt="Stay">
+                                    </div>
+                                    <span
+                                        class="text-[10px] font-bold text-gray-500 group-hover:text-revelti-blue uppercase">Accommodation</span>
+                                </button>
+
+                                <!-- Workshops Highlight -->
+                                <button onclick="filterUpdates('workshops')"
+                                    class="flex flex-col items-center space-y-1 focus:outline-none group">
+                                    <div
+                                        class="w-16 h-16 rounded-full p-0.5 border-2 border-transparent group-hover:border-revelti-orange transition-all duration-300 bg-white shadow-sm overflow-hidden">
+                                        <img src="https://placehold.co/100x100/213c63/ffffff?text=Classes"
+                                            class="w-full h-full rounded-full object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all"
+                                            alt="Classes">
+                                    </div>
+                                    <span
+                                        class="text-[10px] font-bold text-gray-500 group-hover:text-revelti-blue uppercase">Workshops</span>
+                                </button>
+                            </div>
+                        </div>
+
                         <h2 class="font-bold text-xl revelti-blue mb-4">Latest Updates</h2>
-                        <div class="space-y-5">
-                            <div class="border-l-4 border-revelti-orange pl-4">
+                        <div id="updates-list" class="space-y-5">
+                            <div class="update-item border-l-4 border-revelti-orange pl-4"
+                                data-highlights="program,workshops">
+                                <div class="flex space-x-1 mb-1">
+                                    <span
+                                        class="px-2 py-0.5 bg-revelti-blue/10 text-revelti-blue text-[10px] font-bold rounded uppercase">Program</span>
+                                    <span
+                                        class="px-2 py-0.5 bg-revelti-blue/10 text-revelti-blue text-[10px] font-bold rounded uppercase">Workshops</span>
+                                </div>
                                 <h3 class="font-bold text-lg revelti-blue">Next year, something big is coming...</h3>
+
                                 <p class="text-sm text-gray-500 mb-1">Posted on: Aug 26, 2025</p>
                                 <img src="images/eventUpdate.png" alt="Update image"
                                     class="w-full h-auto rounded-lg my-2 lg:w-1/3"
@@ -519,17 +619,50 @@
                                     form
                                 </p>
                             </div>
-                            <div class="border-l-4 border-revelti-orange pl-4">
+                            <div class="update-item border-l-4 border-revelti-orange pl-4" data-highlights="workshops">
+                                <div class="flex space-x-1 mb-1">
+                                    <span
+                                        class="px-2 py-0.5 bg-revelti-blue/10 text-revelti-blue text-[10px] font-bold rounded uppercase">Workshops</span>
+                                </div>
                                 <h3 class="font-bold text-lg revelti-blue">Schedule Update: New Workshop Added!</h3>
                                 <p class="text-sm text-gray-500 mb-1">Posted on: Oct 15, 2025</p>
-                                <p class="text-gray-700">We're excited to announce a new 'Musicality Masterclass' with
-                                    Sebas Garreta on Sunday at 11:00 AM. Check the updated schedule!</p>
+                                <p class="text-gray-700">We've added a special Bachata Sensual workshop with Judith
+                                    Cordero & Sebas
+                                    Garreta on Sunday at 11:00 AM. Check the updated schedule!</p>
                             </div>
-                            <div class="border-l-4 border-revelti-orange pl-4">
+                            <div class="update-item border-l-4 border-revelti-orange pl-4" data-highlights="safety">
+                                <div class="flex space-x-1 mb-1">
+                                    <span
+                                        class="px-2 py-0.5 bg-revelti-blue/10 text-revelti-blue text-[10px] font-bold rounded uppercase">Safety</span>
+                                </div>
                                 <h3 class="font-bold text-lg revelti-blue">COVID-19 Safety Protocols</h3>
                                 <p class="text-sm text-gray-500 mb-1">Posted on: Oct 12, 2025</p>
                                 <p class="text-gray-700">The safety of our attendees is our top priority. Please review
-                                    our updated health and safety guidelines on the FAQ page.</p>
+                                    our
+                                    updated COVID-19 safety protocols before attending the festival.</p>
+                            </div>
+                            <!-- Mock J&J Update -->
+                            <div class="update-item border-l-4 border-revelti-orange pl-4" data-highlights="jnj">
+                                <div class="flex space-x-1 mb-1">
+                                    <span
+                                        class="px-2 py-0.5 bg-revelti-blue/10 text-revelti-blue text-[10px] font-bold rounded uppercase">J&J</span>
+                                </div>
+                                <h3 class="font-bold text-lg revelti-blue">Jack & Jill Registration Closing Soon!</h3>
+                                <p class="text-sm text-gray-500 mb-1">Posted on: Oct 10, 2025</p>
+                                <p class="text-gray-700">Don't miss your chance to compete! Registration for the Jack &
+                                    Jill social competition closes this Friday at midnight.</p>
+                            </div>
+                            <!-- Mock Accommodation Update -->
+                            <div class="update-item border-l-4 border-revelti-orange pl-4"
+                                data-highlights="accommodation">
+                                <div class="flex space-x-1 mb-1">
+                                    <span
+                                        class="px-2 py-0.5 bg-revelti-blue/10 text-revelti-blue text-[10px] font-bold rounded uppercase">Accommodation</span>
+                                </div>
+                                <h3 class="font-bold text-lg revelti-blue">Hotel Room Block 90% Full</h3>
+                                <p class="text-sm text-gray-500 mb-1">Posted on: Oct 05, 2025</p>
+                                <p class="text-gray-700">If you haven't booked your stay yet, act fast! Our official
+                                    hotel room block is almost sold out. Use code GVA2025 for a special rate.</p>
                             </div>
                         </div>
                     </div>
@@ -677,6 +810,47 @@
             if (targetButton) {
                 targetButton.classList.add('tab-active');
             }
+        }
+
+        /**
+         * Filters the updates list by highlight category.
+         * @param {string} highlightId The ID of the highlight to filter by, or 'all'.
+         */
+        function filterUpdates(highlightId) {
+            const updates = document.querySelectorAll('.update-item');
+            const buttons = document.querySelectorAll('#announcements button');
+
+            // Update active state of highlight bubbles
+            buttons.forEach(btn => {
+                const bubble = btn.querySelector('.w-16.h-16');
+                const text = btn.querySelector('span');
+
+                if (btn.getAttribute('onclick').includes(`'${highlightId}'`)) {
+                    if (bubble) bubble.classList.add('border-revelti-orange');
+                    if (bubble) bubble.classList.remove('border-transparent');
+                    if (text) text.classList.add('text-revelti-blue');
+                    if (text) text.classList.remove('text-gray-500');
+                } else if (!btn.getAttribute('onclick').includes('switchTab')) {
+                    if (bubble) bubble.classList.remove('border-revelti-orange');
+                    if (bubble) bubble.classList.add('border-transparent');
+                    if (text) text.classList.remove('text-revelti-blue');
+                    if (text) text.classList.add('text-gray-500');
+                }
+            });
+
+            // Show/hide updates
+            updates.forEach(update => {
+                if (highlightId === 'all') {
+                    update.classList.remove('hidden');
+                } else {
+                    const highlights = update.getAttribute('data-highlights') || '';
+                    if (highlights.split(',').includes(highlightId)) {
+                        update.classList.remove('hidden');
+                    } else {
+                        update.classList.add('hidden');
+                    }
+                }
+            });
         }
 
         // --- Star Rating Interaction ---
