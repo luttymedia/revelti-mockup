@@ -1,3 +1,24 @@
+// --- ROLE REDIRECT LOGIC ---
+(function () {
+    const pathname = window.location.pathname;
+    const urlParams = new URLSearchParams(window.location.search);
+    const isHomePage = pathname.endsWith('homePage.html') || pathname === '/' || pathname.endsWith('/reveltiMockup/');
+    const isLoggedIn = localStorage.getItem('revelti_logged_in') === 'true';
+    const activeRole = localStorage.getItem('revelti_active_role');
+
+    if (isHomePage && isLoggedIn && activeRole && urlParams.get('logout') !== 'true') {
+        const roleHomeMap = {
+            'attendee': 'attendeeDashboard.html',
+            'organizer': 'organizerDashboard.html',
+            'creative': 'creativeDashboard.html'
+        };
+        const dest = roleHomeMap[activeRole];
+        if (dest) {
+            window.location.replace(dest);
+        }
+    }
+})();
+
 // --- MODAL & GLOBAL FUNCTIONS ---
 
 // Reusable function to close any modal.
@@ -312,6 +333,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (urlParams.get('logout') === 'true') {
         localStorage.setItem('revelti_logged_in', 'false');
+        localStorage.removeItem('revelti_active_role');
         // Clean up URL without page reload
         window.history.replaceState({}, document.title, pathname);
     }
@@ -322,6 +344,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (isLoginPage) {
         localStorage.setItem('revelti_logged_in', 'true');
+        if (pathname.endsWith('attendeeDashboard.html')) localStorage.setItem('revelti_active_role', 'attendee');
+        else if (pathname.endsWith('organizerDashboard.html')) localStorage.setItem('revelti_active_role', 'organizer');
+        else if (pathname.endsWith('creativeDashboard.html')) localStorage.setItem('revelti_active_role', 'creative');
+    }
+
+    const currentRole = document.body.getAttribute('data-role');
+    if (currentRole) {
+        localStorage.setItem('revelti_active_role', currentRole);
     }
 
     const isLoggedIn = localStorage.getItem('revelti_logged_in') === 'true';

@@ -1,5 +1,23 @@
 document.addEventListener("DOMContentLoaded", async () => {
     const role = document.body.getAttribute('data-role');
+
+    // --- AUTH STATE TRACKING ---
+    const pathname = window.location.pathname;
+    const isLoginPage = pathname.endsWith('attendeeDashboard.html') ||
+        pathname.endsWith('organizerDashboard.html') ||
+        pathname.endsWith('creativeDashboard.html');
+
+    if (isLoginPage) {
+        localStorage.setItem('revelti_logged_in', 'true');
+        if (pathname.endsWith('attendeeDashboard.html')) localStorage.setItem('revelti_active_role', 'attendee');
+        else if (pathname.endsWith('organizerDashboard.html')) localStorage.setItem('revelti_active_role', 'organizer');
+        else if (pathname.endsWith('creativeDashboard.html')) localStorage.setItem('revelti_active_role', 'creative');
+    }
+
+    if (role) {
+        localStorage.setItem('revelti_active_role', role);
+    }
+
     if (!role) return;
 
     // Mobile vs Desktop Initial State
