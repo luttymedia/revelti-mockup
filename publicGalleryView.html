@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bachata Geneva Festival | Revelti Gallery</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        revelti: {
+                            blue: '#213c63',
+                            orange: '#f58220',
+                        },
+                        gray: {
+                            850: '#1f2937',
+                            950: '#030712'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Nunito', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Masonry & ImagesLoaded -->
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+
+    <style>
+        body {
+            background-color: #0d1117;
+            color: #e5e7eb;
+            font-family: 'Nunito', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- Header / Banner --- */
+        .brand-header {
+            padding: 0;
+            text-align: center;
+            background: #0d1117;
+            position: relative;
+        }
+
+        .event-banner-container {
+            width: 100%;
+            max-height: 400px;
+            overflow: hidden;
+            position: relative;
+            background: #111827;
+        }
+
+        .event-banner {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            min-height: 200px;
+        }
+
+        .banner-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 40px 20px 20px;
+            background: linear-gradient(to top, #0d1117, transparent);
+        }
+
+        .client-menu-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .client-action-btn {
+            background: rgba(31, 41, 55, 0.6);
+            backdrop-filter: blur(4px);
+            border: 1px solid #374151;
+            color: #e5e7eb;
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+
+        .client-action-btn:hover {
+            border-color: #f58220;
+            color: #f58220;
+            background: rgba(245, 130, 32, 0.1);
+        }
+
+        /* --- STICKY Filters UI --- */
+        .filters-wrapper {
+            position: sticky;
+            top: 0;
+            z-index: 900;
+            background-color: rgba(13, 17, 23, 0.98);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid #1f2937;
+            padding: 12px 0;
+            transition: all 0.3s ease;
+        }
+
+        .filter-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 0 15px;
+        }
+
+        @media (min-width: 1024px) {
+            .filter-container {
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                gap: 40px;
+            }
+        }
+
+        .filter-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            transition: opacity 0.2s;
+        }
+
+        .compact-only-row {
+            display: none !important;
+        }
+
+        @media (max-width: 1023px) {
+            .filters-wrapper.is-compact:not(.is-forced-expanded) {
+                padding: 8px 0;
+            }
+
+            .filters-wrapper.is-compact:not(.is-forced-expanded) .filter-row:not(.compact-only-row) {
+                display: none;
+            }
+
+            .filters-wrapper.is-compact:not(.is-forced-expanded) .compact-only-row {
+                display: flex !important;
+            }
+
+            .filters-wrapper.is-compact:not(.is-forced-expanded) .filter-container {
+                gap: 0;
+            }
+
+            .filters-wrapper.is-forced-expanded {
+                padding-bottom: 20px;
+                border-bottom: 2px solid #f58220;
+            }
+        }
+
+        /* Custom Dropdown for Day */
+        .dropdown-wrapper {
+            position: relative;
+            display: inline-block;
+            min-width: 140px;
+        }
+
+        .dropdown-trigger {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #374151;
+            color: #9ca3af;
+            padding: 4px 10px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            cursor: pointer;
+            text-transform: uppercase;
+            width: 100%;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        .dropdown-trigger:hover {
+            color: #f58220;
+            border-bottom-color: #f58220;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 5px);
+            left: 0;
+            width: 100%;
+            background: #111827;
+            border: 1px solid #374151;
+            border-radius: 6px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+        .dropdown-item {
+            padding: 10px 15px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #9ca3af;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.2s;
+        }
+
+        .dropdown-item:hover {
+            background: #1f2937;
+            color: #f58220;
+        }
+
+        .dropdown-item.active {
+            color: #f58220;
+            background: rgba(245, 130, 32, 0.05);
+        }
+
+        /* Mini pills for year and media */
+        .mini-pill {
+            background: transparent;
+            border: 1px solid #1f2937;
+            color: #4b5563;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .mini-pill:hover {
+            border-color: #4b5563;
+            color: #9ca3af;
+        }
+
+        .mini-pill.active {
+            background: #1f2937;
+            color: #f58220;
+            border-color: #f58220;
+        }
+
+        .category-submenu {
+            display: flex;
+            gap: 15px;
+        }
+
+        .submenu-btn {
+            background: transparent;
+            border: none;
+            color: #6b7280;
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 5px 0;
+            cursor: pointer;
+            transition: 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+
+        .submenu-btn:hover {
+            color: #e5e7eb;
+        }
+
+        .submenu-btn.active {
+            color: #f58220;
+            border-bottom-color: #f58220;
+        }
+
+        .team-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #1f2937;
+            border: 1px solid #374151;
+            color: #9ca3af;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .team-btn:hover {
+            border-color: #f58220;
+            color: #e5e7eb;
+            background: #262f3f;
+        }
+
+        .team-btn .count-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #f58220;
+            opacity: 0;
+        }
+
+        .team-btn.active .count-dot {
+            opacity: 1;
+        }
+
+        /* --- Grid --- */
+        .grid {
+            margin: 10px auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .grid-sizer {
+            width: 50%;
+        }
+
+        .grid-item {
+            box-sizing: border-box;
+            padding: 4px;
+            float: left;
+            width: 50%;
+        }
+
+        @media (min-width: 601px) {
+
+            .grid-sizer,
+            .grid-item {
+                width: 25%;
+            }
+        }
+
+        @media (min-width: 1101px) {
+
+            .grid-sizer,
+            .grid-item {
+                width: 20%;
+            }
+        }
+
+        @media (min-width: 1501px) {
+
+            .grid-sizer,
+            .grid-item {
+                width: 16.666%;
+            }
+        }
+
+        .grid-item.hidden {
+            display: none !important;
+        }
+
+        .grid-item-content {
+            width: 100%;
+            background-color: #1a1f2e;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid #1f2937;
+            position: relative;
+            transition: transform 0.3s, border-color 0.3s;
+            cursor: pointer;
+        }
+
+        .grid-item-content:hover {
+            transform: translateY(-4px);
+            border-color: #f58220;
+            z-index: 5;
+        }
+
+        .grid-item img.thumb {
+            display: block;
+            width: 100%;
+            opacity: 0.85;
+            transition: 0.3s;
+            object-fit: cover;
+        }
+
+        /* Thumbnail Play Button (Large + Centered) */
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 44px;
+            height: 44px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(2px);
+            border-radius: 50%;
+            border: 2.5px solid #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            transition: 0.3s;
+        }
+
+        .play-overlay svg {
+            fill: #fff;
+            width: 18px;
+            height: 18px;
+            margin-left: 2px;
+        }
+
+        .badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #9ca3af;
+            font-size: 0.55rem;
+            font-weight: 900;
+            padding: 2px 6px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            border: 1px solid #1f2937;
+        }
+
+        #btn-back-to-top {
+            display: none;
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1000;
+            background-color: #f58220;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- Team Modal --- */
+        #modal-team {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: rgba(3, 7, 18, 0.9);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .team-card {
+            background: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 400px;
+            padding: 30px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+        }
+
+        .team-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .team-member {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 10px;
+            transition: 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .team-member:hover {
+            background: #1f2937;
+            border-color: #374151;
+        }
+
+        .team-member.active {
+            border-color: #f58220;
+            background: rgba(245, 130, 32, 0.05);
+        }
+
+        .team-avatar {
+            flex-shrink: 0;
+            width: 60px;
+            height: 60px;
+            min-width: 60px;
+            min-height: 60px;
+            border-radius: 50%;
+            border: 2px solid #374151;
+            transition: 0.3s;
+            object-fit: cover;
+        }
+
+        .team-member:hover .team-avatar {
+            border-color: #f58220;
+        }
+
+        .team-name {
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #9ca3af;
+            text-align: center;
+        }
+
+        /* --- Lightbox --- */
+        #popup {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background-color: rgba(3, 7, 18, 0.99);
+            backdrop-filter: blur(12px);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10010;
+        }
+
+        .creator-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .creator-avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 1px solid #374151;
+        }
+
+        .creator-name {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #e5e7eb;
+            text-transform: uppercase;
+        }
+
+        .popup-actions {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .action-btn {
+            background: transparent;
+            color: #9ca3af;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .action-btn:hover {
+            color: #f58220;
+            transform: scale(1.1);
+        }
+
+        .action-btn.close {
+            color: #f58220;
+            font-size: 2.2rem;
+            transform: rotate(0);
+            line-height: 1;
+            z-index: 10011;
+        }
+
+        #popup-content-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            padding: 80px 40px;
+        }
+
+        #popup img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            background: #f58220;
+            border-radius: 50%;
+            color: white;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(31, 41, 55, 0.5);
+            color: #fff;
+            padding: 12px;
+            cursor: pointer;
+            z-index: 10002;
+            border-radius: 50%;
+            transition: 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: #f58220;
+        }
+
+        .prev-btn {
+            left: 20px;
+        }
+
+        .next-btn {
+            right: 20px;
+        }
+
+        #loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #f58220;
+            min-height: 300px;
+        }
+
+        #loading-text {
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header / Banner -->
+    <header class="brand-header">
+        <div class="event-banner-container">
+            <img src="images/organizerLogo.png" alt="Bachata Geneva Banner" class="event-banner"
+                onerror="this.src='https://images.unsplash.com/photo-1545620958-3f8d38075308?w=1600&h=600&fit=crop'">
+            <div class="banner-overlay">
+                <h2 class="text-3xl font-extrabold text-white mb-1 shadow-sm">Bachata Geneva 2026</h2>
+                <div class="client-menu-bar">
+                    <a href="#" class="client-action-btn">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                        Instagram
+                    </a>
+                    <a href="#" class="client-action-btn">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5">
+                            <path
+                                d="M19.5 10c-1.1 0-2 .9-2 2s.9 2 2 2v4c0 1.1-.9 2-2 2H4.5c-1.1 0-2-.9-2-2v-4c1.1 0 2-.9 2-2s-.9-2-2-2V6c0-1.1.9-2 2-2h13c1.1 0 2 .9 2 2v4z">
+                            </path>
+                        </svg>
+                        Tickets
+                    </a>
+                    <button class="client-action-btn">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="12"></line>
+                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                        </svg>
+                        Info
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- STICKY Filter Bar -->
+    <div class="filters-wrapper" id="filters-wrapper">
+        <div class="filter-container">
+            <div class="filter-row compact-only-row">
+                <button
+                    class="flex items-center gap-2 bg-revelti-orange px-4 py-2 rounded-full text-white text-xs font-black uppercase tracking-wider shadow-lg"
+                    onclick="handleRefineClick()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                        <line x1="4" y1="21" x2="4" y2="14"></line>
+                        <line x1="4" y1="10" x2="4" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12" y2="3"></line>
+                        <line x1="20" y1="21" x2="20" y2="16"></line>
+                        <line x1="20" y1="12" x2="20" y2="3"></line>
+                        <line x1="1" y1="14" x2="7" y2="14"></line>
+                        <line x1="9" y1="8" x2="15" y2="8"></line>
+                        <line x1="17" y1="16" x2="23" y2="16"></line>
+                    </svg>
+                    Refine Filters
+                </button>
+            </div>
+
+            <div class="filter-row">
+                <div id="filter-years" class="flex gap-2">
+                    <button class="mini-pill" data-filter="2024">2024</button>
+                    <button class="mini-pill" data-filter="2025">2025</button>
+                    <button class="mini-pill active" data-filter="2026">2026</button>
+                </div>
+                <div class="dropdown-wrapper">
+                    <button class="dropdown-trigger" id="day-trigger">
+                        <span id="day-label">All Days</span>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="dropdown-menu" id="day-menu">
+                        <div class="dropdown-item active" data-filter="all-days">All Days</div>
+                        <div class="dropdown-item" data-filter="friday">Friday</div>
+                        <div class="dropdown-item" data-filter="saturday">Saturday</div>
+                        <div class="dropdown-item" data-filter="sunday">Sunday</div>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-row">
+                <div class="category-submenu" id="filter-cats">
+                    <button class="submenu-btn active" data-filter="all-cats">All</button>
+                    <button class="submenu-btn" data-filter="social">Social</button>
+                    <button class="submenu-btn" data-filter="workshops">Workshops</button>
+                    <button class="submenu-btn" data-filter="shows">Shows</button>
+                    <button class="submenu-btn" data-filter="jnj">J&J</button>
+                </div>
+            </div>
+            <div class="filter-row">
+                <div id="filter-media" class="flex gap-2">
+                    <button class="mini-pill active" data-filter="all-media">All Media</button>
+                    <button class="mini-pill" data-filter="photos">Photos</button>
+                    <button class="mini-pill" data-filter="videos">Videos</button>
+                </div>
+                <button class="team-btn" id="btn-team-modal">
+                    <span class="count-dot"></span>
+                    Creators
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grid Container -->
+    <div id="loading">
+        <div class="spinner"></div>
+        <p id="loading-text" class="mt-6 opacity-60">Syncing Memories...</p>
+    </div>
+    <div class="grid" id="gallery-grid" style="opacity: 0;">
+        <div class="grid-sizer"></div>
+    </div>
+
+    <button id="btn-back-to-top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <!-- Team Filter Modal -->
+    <div id="modal-team">
+        <div class="team-card">
+            <h3 class="text-xs font-black uppercase tracking-widest text-revelti-orange mb-6 text-center">Filter by Team
+            </h3>
+            <div class="team-list">
+                <div class="team-member active" data-filter="all-creatives">
+                    <div class="team-avatar flex items-center justify-center bg-gray-800 text-xs font-black">ALL</div>
+                    <span class="team-name">Everyone</span>
+                </div>
+                <div class="team-member" data-filter="amedia">
+                    <img src="images/creatorLogo.png" class="team-avatar object-contain bg-black p-1"
+                        style="object-fit: contain;"
+                        onerror="this.src='https://placehold.co/80x80/213c63/ffffff?text=AM'">
+                    <span class="team-name">AMedia</span>
+                </div>
+                <div class="team-member" data-filter="lutty">
+                    <img src="https://placehold.co/80x80/f58220/ffffff?text=LM" class="team-avatar">
+                    <span class="team-name">Lutty</span>
+                </div>
+                <div class="team-member" data-filter="sha">
+                    <img src="https://placehold.co/80x80/6b7280/ffffff?text=SI" class="team-avatar">
+                    <span class="team-name">Sha</span>
+                </div>
+            </div>
+            <div class="mt-8 flex justify-center">
+                <button class="mini-pill border-gray-700 text-gray-400"
+                    onclick="document.getElementById('modal-team').style.display='none'">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="popup" onclick="closeLightboxOnClick(event)">
+        <div class="popup-header">
+            <div class="creator-info">
+                <img src="" id="pop-creator-avatar" class="creator-avatar"
+                    onerror="this.src='https://placehold.co/80x80/213c63/ffffff?text=C'">
+                <span class="creator-name" id="pop-creator-name">AMedia</span>
+            </div>
+            <div class="popup-actions">
+                <button class="action-btn" title="Like">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                        </path>
+                    </svg>
+                </button>
+                <button class="action-btn" title="Share">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="18" cy="5" r="3"></circle>
+                        <circle cx="6" cy="12" r="3"></circle>
+                        <circle cx="18" cy="19" r="3"></circle>
+                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                    </svg>
+                </button>
+                <button class="action-btn" title="Download">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                </button>
+                <button class="action-btn close" id="popup-close" onclick="closeLightbox(event)">&times;</button>
+            </div>
+        </div>
+        <div class="nav-btn prev-btn" id="btn-prev"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg></div>
+        <div class="nav-btn next-btn" id="btn-next"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg></div>
+        <div id="popup-content-wrapper">
+            <img id="popup-img" src="" onclick="event.stopPropagation()">
+            <button class="lightbox-play-btn" id="pop-play"><svg width="30" height="30" viewBox="0 0 24 24"
+                    fill="currentColor">
+                    <path d="M8 5v14l11-7z"></path>
+                </svg></button>
+        </div>
+    </div>
+
+    <!-- Logic -->
+    <script>
+        const STUB_IMAGES = ["albums/event/gallery1.jpg", "albums/event/gallery2.jpg", "albums/event/gallery3.jpg", "albums/event/gallery4.jpg", "albums/event/gallery5.jpg", "albums/event/gallery6.jpg", "albums/event/gallery7.jpg", "albums/event/gallery8.jpg", "albums/event/gallery9.jpg", "albums/event/gallery10.jpg"];
+        const FALLBACKS = ["https://images.unsplash.com/photo-1545620958-3f8d38075308?w=800", "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800", "https://images.unsplash.com/photo-1546594271-299f0b12bcac?w=800", "https://images.unsplash.com/photo-1504609774026-b9211c4714db?w=800"];
+        const creatives = ['amedia', 'lutty', 'sha'];
+        const creatorMetadata = { 'amedia': { name: 'AMedia', avatar: 'images/creatorLogo.png' }, 'lutty': { name: 'Lutty Moreira', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=LM' }, 'sha': { name: 'Sha Iborra', avatar: 'https://placehold.co/80x80/6b7280/ffffff?text=SI' } };
+
+        const itemsData = [];
+        for (let i = 0; i < 180; i++) {
+            const year = "2026";
+            const day = ['friday', 'saturday', 'sunday'][Math.floor(Math.random() * 3)];
+            const cat = ['social', 'jnj', 'shows', 'workshops'][Math.floor(Math.random() * 4)];
+            const type = Math.random() > 0.82 ? 'videos' : 'photos';
+            const creator = creatives[Math.floor(Math.random() * creatives.length)];
+            itemsData.push({ id: i, year, day, cat, type, creator, src: STUB_IMAGES[Math.floor(Math.random() * STUB_IMAGES.length)], fallback: FALLBACKS[Math.floor(Math.random() * FALLBACKS.length)] });
+        }
+
+        const gridEl = document.getElementById('gallery-grid');
+        let msnry;
+        const state = { year: '2026', day: 'all-days', cat: 'all-cats', media: 'all-media', creator: 'all-creatives' };
+
+        itemsData.forEach(item => {
+            const div = document.createElement('div');
+            div.className = `grid-item filter-${item.year} filter-${item.day} filter-${item.cat} filter-${item.type} filter-${item.creator}`;
+            div.dataset.id = item.id;
+            const overlay = item.type === 'videos' ? `<div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg></div>` : '';
+            const code = item.creator === 'amedia' ? 'AM' : (item.creator === 'lutty' ? 'LM' : 'SI');
+            div.innerHTML = `<div class="grid-item-content" onclick="openLightbox(${item.id})"><img class="thumb" src="${item.src}" onerror="this.onerror=null;this.src='${item.fallback}';">${overlay}<div class="badge">${code}</div></div>`;
+            gridEl.appendChild(div);
+        });
+
+        imagesLoaded(gridEl, () => { document.getElementById('loading').style.display = 'none'; gridEl.style.opacity = '1'; msnry = new Masonry(gridEl, { itemSelector: '.grid-item:not(.hidden)', columnWidth: '.grid-sizer', percentPosition: true, transitionDuration: '0.3s' }); });
+
+        function applyFilters() {
+            currentVisibleItems = [];
+            document.querySelectorAll('.grid-item').forEach(el => {
+                let show = true;
+                if (state.year !== 'all-years' && !el.classList.contains(`filter-${state.year}`)) show = false;
+                if (state.day !== 'all-days' && !el.classList.contains(`filter-${state.day}`)) show = false;
+                if (state.cat !== 'all-cats' && !el.classList.contains(`filter-${state.cat}`)) show = false;
+                if (state.media !== 'all-media' && !el.classList.contains(`filter-${state.media}`)) show = false;
+                if (state.creator !== 'all-creatives' && !el.classList.contains(`filter-${state.creator}`)) show = false;
+                if (show) { el.classList.remove('hidden'); currentVisibleItems.push(itemsData.find(i => i.id == el.dataset.id)); }
+                else { el.classList.add('hidden'); }
+            });
+            if (msnry) { msnry.reloadItems(); msnry.layout(); }
+            const teamBtn = document.getElementById('btn-team-modal');
+            if (state.creator !== 'all-creatives') teamBtn.classList.add('active');
+            else teamBtn.classList.remove('active');
+            if (window.scrollY > 300) { filtersWrapper.classList.remove('is-forced-expanded'); window.scrollTo({ top: 380, behavior: 'smooth' }); }
+        }
+
+        const filtersWrapper = document.getElementById('filters-wrapper');
+        window.addEventListener('scroll', () => {
+            if (window.innerWidth < 1024) {
+                if (window.scrollY > 350) { filtersWrapper.classList.add('is-compact'); }
+                else { filtersWrapper.classList.remove('is-compact'); filtersWrapper.classList.remove('is-forced-expanded'); }
+            } else { filtersWrapper.classList.remove('is-compact'); filtersWrapper.classList.remove('is-forced-expanded'); }
+        });
+
+        function handleRefineClick() { filtersWrapper.classList.toggle('is-forced-expanded'); }
+
+        const dayTrigger = document.getElementById('day-trigger');
+        const dayMenu = document.getElementById('day-menu');
+        dayTrigger.addEventListener('click', (e) => { e.stopPropagation(); dayMenu.style.display = dayMenu.style.display === 'flex' ? 'none' : 'flex'; });
+        document.querySelectorAll('.dropdown-item').forEach(item => { item.addEventListener('click', (e) => { document.querySelectorAll('.dropdown-item').forEach(i => i.classList.remove('active')); item.classList.add('active'); state.day = item.dataset.filter; document.getElementById('day-label').textContent = item.textContent; dayMenu.style.display = 'none'; applyFilters(); }); });
+
+        function bindFilters(selector, field) { document.querySelectorAll(selector).forEach(btn => { btn.addEventListener('click', (e) => { const group = e.target.parentElement; group.querySelectorAll(selector).forEach(b => b.classList.remove('active')); e.target.classList.add('active'); state[field] = e.target.dataset.filter; applyFilters(); }); }); }
+        bindFilters('#filter-years .mini-pill', 'year');
+        bindFilters('#filter-cats .submenu-btn', 'cat');
+        bindFilters('#filter-media .mini-pill', 'media');
+
+        const teamModal = document.getElementById('modal-team');
+        document.getElementById('btn-team-modal').onclick = () => teamModal.style.display = 'flex';
+        document.querySelectorAll('#modal-team .team-member').forEach(member => {
+            member.addEventListener('click', () => {
+                document.querySelectorAll('#modal-team .team-member').forEach(m => m.classList.remove('active'));
+                member.classList.add('active');
+                state.creator = member.dataset.filter;
+                teamModal.style.display = 'none';
+                applyFilters();
+            });
+        });
+
+        const popup = document.getElementById('popup');
+        const popupImg = document.getElementById('popup-img');
+        const popCreatorName = document.getElementById('pop-creator-name');
+        const popCreatorAvatar = document.getElementById('pop-creator-avatar');
+        const popPlay = document.getElementById('pop-play');
+        let currentIndex = 0;
+        let currentVisibleItems = [...itemsData];
+
+        function openLightbox(id) {
+            const index = currentVisibleItems.findIndex(i => i.id == id);
+            if (index > -1) { currentIndex = index; updateLightbox(); popup.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+        }
+        function updateLightbox() {
+            const item = currentVisibleItems[currentIndex];
+            const triggerImg = document.querySelector(`.grid-item[data-id="${item.id}"] img`);
+            if (!triggerImg) return;
+            popupImg.src = triggerImg.src;
+            const meta = creatorMetadata[item.creator];
+            popCreatorName.textContent = meta.name;
+            popCreatorAvatar.src = meta.avatar;
+            popPlay.style.display = item.type === 'videos' ? 'flex' : 'none';
+        }
+        function closeLightbox(e) { if (e) e.stopPropagation(); popup.style.display = 'none'; document.body.style.overflow = 'auto'; }
+        function closeLightboxOnClick(e) { if (e.target === popup || e.target.id === 'popup-content-wrapper') closeLightbox(); }
+
+        document.getElementById('btn-prev').onclick = (e) => { e.stopPropagation(); currentIndex = (currentIndex - 1 + currentVisibleItems.length) % currentVisibleItems.length; updateLightbox(); };
+        document.getElementById('btn-next').onclick = (e) => { e.stopPropagation(); currentIndex = (currentIndex + 1) % currentVisibleItems.length; updateLightbox(); };
+
+        window.onclick = (e) => {
+            if (e.target == teamModal) teamModal.style.display = 'none';
+            if (!e.target.closest('.dropdown-wrapper')) dayMenu.style.display = 'none';
+        };
+
+        const topBtn = document.getElementById('btn-back-to-top');
+        window.onscroll = () => { topBtn.style.display = (window.scrollY > 400) ? 'flex' : 'none'; };
+        topBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+    </script>
+</body>
+
+</html>

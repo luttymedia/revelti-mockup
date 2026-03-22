@@ -1,0 +1,290 @@
+<!DOCTYPE html><html lang="es"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BSWC 2026 | AMediaSocial.TV</title>
+
+    <link rel="stylesheet" href="../../socialtvcore/style.css">
+
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+
+    <script>
+        const CONFIG = {
+            // --- 1. DATOS BÁSICOS ---
+            LANG: "ENG", 
+            PAGE_TITLE: "BSWC 2026 | AMediaSocial.TV",
+            URL_CLIENTE: "https://www.instagram.com/bswcongress/", 
+            URL_TEAM: "../index.html", // Si quieres ir a la home general
+            URL_ABOUT: "about.html", // Ruta corregida
+			HEADER_CONFIG_FOLDER_ID: "",
+            PATH_CORE_ASSETS: "../../socialtvcore/", 
+            EVENT_TYPE: "CONGRESS", // Activa la ordenación por fechas y operador
+            CLIENT_MENU: {
+        		ENABLED: true, // ¿Mostrar la barra?
+        		INSTAGRAM_URL: "https://www.instagram.com/bswcongress/", // Si vacío, se oculta
+        		TICKETS_URL: "https://www.goandance.com/en/event/9157/bachata-sensual-world-congress-2027-bswc?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGnmkoDLfRrCtfxDKBAe2SxhaTnXgz3z4DHdp6SOGCqIomW1Xfn5WgQKEfqXHs_aem_n6nO6cWdaXND1pT2ny9YEA", // Si vacío, se oculta el botón
+        		INFO_TEXT: "#BSWC27 #BSWC<br>🗓️ 13-18th January 📍 Punta Umbría, Huelva 🏆 Jack & Jill: @bswc_jackjill<br>"
+    		},
+
+			YEARS_NAV: [
+        		{label: "2026", path: "#", active: true},
+				{label: "2025", path: "../2025", active: false},
+				{label: "2024", path: "../2024", active: false},
+				{label: "2023", path: "../2023", active: false},
+    		],
+            
+            // --- MODO ARTISTA ---
+            ARTIST_MODE: {
+                ENABLED: false,
+                SECRET_PASS_B64: "ZDRsM3MzbnN1NGwyNg==",
+                FOLDER_ID_B64: "MXY4S1psV2NYbWpZeVEyOUlJb1hDWFo1dnh4ckMybWo0",
+                NAME_CATEGORY: "DEMOS"
+            },
+                
+            CLIENT_LOGO_WIDTH_DESKTOP: "25%", 
+            CLIENT_LOGO_WIDTH_MOBILE: "40%",  
+
+            // --- 2. CONEXIÓN GOOGLE DRIVE ---
+            SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbzWsvz2P4rOFJDM6R9eZX9aTZtJ4Ek0dwZiYn1lGOLPXOnE1miFpneuCQ5WL8nG3wGBDg/exec',
+            
+            // ID de la carpeta raíz de BSWC (Asegúrate que sea correcta)
+            DEFAULT_FOLDER_ID: '1fd-KcB1m-Qy-q1tzX1FU3xgyZXsNX9on', 
+            
+            // --- 3. VIDEO HEADER ---
+            YOUTUBE_IDS: [],
+
+            // --- 4. CONFIGURACIÓN DE CATEGORÍAS (CRUCIAL PARA SESIONES) ---
+            // En modo SESSION, las carpetas suelen tener el año (ej: 18-01-2026).
+            // Usamos "20" como palabra clave para que coincida con 2025, 2026, etc.
+            // Y le decimos que cargue ["MIX"] para que NO busque subcarpetas y muestre todo.
+			DAYS_CONFIG: {
+				"THURSDAY": ["SOCIAL", "WORKSHOPS", "MIX"],
+                "FRIDAY":   ["SOCIAL", "J&J", "WORKSHOPS", "SHOWS", "MIX"],
+                "SATURDAY": ["SOCIAL", "J&J", "WORKSHOPS", "DANI J", "MIX"],
+                "SUNDAY":   ["SOCIAL", "WORKSHOPS", "SHOWS", "MIX"],
+            },
+
+            // --- 5. OPERADORES ---
+            ENABLE_OPERATOR_FILTER: true, 
+            
+            OPERATORS: [
+                { 
+                    tag: "FREENCYS", 
+                    name: "FRENCYS PHOTO", 
+                    instagram: "https://www.instagram.com/frencysphoto/", 
+                    img: "img/FRENCYS PHOTO.jpg"
+                },
+                { 
+                    tag: "ANGELOVE", 
+                    name: "ANGELOVE", 
+                    instagram: "https://www.instagram.com/angelovephotography/", 
+                    img: "img/ANGELOVE.png"
+                },
+                { 
+                    tag: "PABLO RIOS", 
+                    name: "PABLO RIOS", 
+                    instagram: "https://www.instagram.com/pabloriosphotography/", 
+                    img: "img/PABLO RIOS.png"
+                },
+                { 
+                    tag: "SHA.IBORRA", 
+                    name: "SHA.IBORRA", 
+                    instagram: "https://www.instagram.com/sha.iborra/", 
+                    img: "img/SHA.IBORRA.png" // Ruta relativa a la carpeta del evento
+                },
+                { 
+                    tag: "ALBA MENDEZ", 
+                    name: "ALBA MENDEZ", 
+                    instagram: "https://www.instagram.com/a.mendez.d/", 
+                    img: "img/ALBA MENDEZ.png"
+                },
+                { 
+                    tag: "LUTTY MOREIRA", 
+                    name: "LUTTY MOREIRA", 
+                    instagram: "https://www.instagram.com/luttymoreira/", 
+                    img: "img/LUTTY MOREIRA.png"
+                },
+
+                { 
+                    tag: "SILVIO 32 BEATS", 
+                    name: "SILVIO 32 BEATS", 
+                    instagram: "https://www.instagram.com/32_beats_production/", 
+                    img: "img/SILVIO 32 BEATS.png"
+                },
+                {
+                    tag: "AZURA", 
+                    name: "AZU.rec",
+                    instagram: "https://www.instagram.com/azuravvv/", 
+                    img: "img/AZURA.jpg"
+                },
+            ],
+
+            // --- 6. FRASES DE CARGA ---
+            LOADING_MESSAGES: {
+                "SOCIAL": [
+					"If you look blurry... it's Art",
+					"I don't need a therapist, I need a 4-min bachata with you",
+					"Catch the spark ✨",
+					"Closer is better 😉",
+					"Syncing waves",
+					"What happens in BSWC... stays in Drive",
+					"Looking for cute people",
+					"Loading smiles (:",
+                	"Searching your best angles",
+					"Calibrating the body rolls",
+					"Close enough to feel the heartbeat",
+					"If we vibe, we vibe",
+				],
+                "WORKSHOPS": [
+					"Syncing master moves",
+					"Sweat now, shine later",
+					"Stealing moves from the best",
+					"Stealing the flow",
+					"5, 6, 7, 8... GO! 🚀",
+					"Calibrating the body rolls",
+				],
+                "SHOWS": [
+					"Lights. Camera. Dance",
+					"The most spectacular shows ✨",
+					"Remember the magic of shows?",
+				],
+                "DANI J": [
+					"Goosebumps with Dani J ✨",
+					"Beyond the music with Dani J",
+					"Feel the shiver ❄️❤️",
+				],
+                "J&J": [
+					"Just us and the music 🎶",
+					"Pure adrenaline",
+					"Mom! it's me at the BSWC J&J 🤩",
+				],
+                "DEFAULT": ["Loading BSWC magic..."]
+            },
+
+            // --- 7. AJUSTES TÉCNICOS ---
+            BATCH_SIZE: 20,            
+            SHOW_DRIVE_FALLBACK: true 
+        };
+    </script>
+</head>
+<body>
+        <style>
+            html { scroll-behavior: smooth; }
+            #albums-link-block { scroll-margin-top: 120px; }
+            #img-client-el { width: 25%; max-width: 100%; height: auto; display: block; margin: 50px auto 0 auto; transition: width 0.5s; }
+            @media (max-width: 1000px) { #img-client-el { width: 40%; } }
+            
+            .years-nav-container { display: flex; justify-content: center; gap: 10px; margin-top: 15px; margin-bottom: 5px; flex-wrap: wrap; }
+            .year-link { color: #888; text-decoration: none; font-size: 0.85rem; font-weight: 700; border: 1px solid #444; padding: 4px 14px; border-radius: 20px; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+            .year-link:hover { border-color: #fff; color: #fff; }
+            .year-link.active { background-color: #FFD700; border-color: #FFD700; color: #000; pointer-events: none; }
+            
+            .client-menu-bar { display: flex; align-items: center; justify-content: center; gap: 15px; margin-top: 25px; margin-bottom: 20px; flex-wrap: wrap; }
+            .client-action-btn { background: transparent; border: 1px solid #444; color: #aaa; padding: 4px 11px; border-radius: 18px; cursor: pointer; font-size: 0.7rem; display: flex; align-items: center; gap: 6px; transition: all 0.3s; text-decoration: none; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; }
+            .client-action-btn:hover { border-color: #FFD700; color: #FFD700; }
+            .client-action-btn svg { width: 13px; height: 13px; fill: currentColor; stroke: currentColor; } 
+            #client-desc-dropdown { display: none; width: 90%; max-width: 600px; text-align: center; background-color: #1a1a1a; padding: 20px; border-radius: 12px; border: 1px solid #333; font-size: 0.95rem; color: #ddd; line-height: 1.6; margin: 0 auto 20px auto; animation: fadeIn 0.3s ease; }
+            
+            @keyframes itemAppear { 0% { opacity: 0; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1); } }
+            .grid-item-content { opacity: 0; transform: scale(0.8); animation: itemAppear 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; background-color: #111; }
+            
+            #popup-caption-container { position: absolute; bottom: 20px; left: 0; width: 100%; display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 15px; pointer-events: none; padding: 0 15px; box-sizing: border-box; z-index: 10002; }
+            
+            #custom-visual-toast {
+                position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8);
+                background-color: rgba(0, 0, 0, 0.9); border: 1px solid #FFD700; color: #FFD700;
+                padding: 8px 18px; border-radius: 50px; font-weight: 700; font-size: 0.75rem; 
+                z-index: 2147483647; pointer-events: none; text-transform: uppercase; letter-spacing: 1px;
+                opacity: 0; transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                box-shadow: 0 8px 25px rgba(0,0,0,0.8); display: flex; align-items: center; gap: 8px; white-space: nowrap; 
+            }
+            #custom-visual-toast.visible { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            
+            .no-content-msg { width: 100%; text-align: center; color: #FFD700; font-size: 1.1rem; margin-top: 60px; padding-bottom: 20vh; font-weight: 300; letter-spacing: 1px; animation: fadeIn 0.5s ease; display: block; }
+            .grid { min-height: 100vh; transition: height 0.3s; }
+            
+            #popup-content-wrapper { width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; overflow: hidden; touch-action: none; }
+            #popup img { max-width: 100%; max-height: 100%; object-fit: contain; transform-origin: center center; will-change: transform; transition: transform 0.1s linear; cursor: grab; }
+            #popup img:active { cursor: grabbing; }
+
+            .spinner-small { display: inline-block; width: 12px; height: 12px; border: 2px solid rgba(255, 255, 255, 0.3); border-top-color: #fff; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 5px; }
+            .loading-sub { display: block; font-size: 0.65rem; color: #777; margin-top: 5px; font-weight: 400; letter-spacing: 0.5px; }
+            
+            .circle-btn { display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.6); border: 1px solid #FFD700; color: #FFD700; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; transition: all 0.3s; padding: 0; flex-shrink: 0; }
+            .circle-btn:hover { background: #FFD700; color: #000; transform: scale(1.1); }
+        </style>
+        
+        <div id="custom-visual-toast"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>LINK COPIED!</div>
+
+        <nav class="top-navbar">
+            <a href="./" target="_self"><img src="../../socialtvcore/amedia_tv.png" class="amedia-logo"></a>
+            <div class="nav-links"><a href="about.html" class="nav-item" target="_blank">ABOUT US</a></div>
+        </nav>
+
+        <header class="brand-header">
+            <a href="./" class="header-link"><img src="cliente-logo.png" class="img-client" id="img-client-el"></a>
+            <div class="client-menu-bar"><a href="https://www.instagram.com/bswcongress/" target="_blank" class="client-action-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="fill:none !important;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>Instagram</a><a href="https://www.goandance.com/en/event/9157/bachata-sensual-world-congress-2027-bswc?utm_source=ig&amp;utm_medium=social&amp;utm_content=link_in_bio&amp;fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGnmkoDLfRrCtfxDKBAe2SxhaTnXgz3z4DHdp6SOGCqIomW1Xfn5WgQKEfqXHs_aem_n6nO6cWdaXND1pT2ny9YEA" target="_blank" class="client-action-btn"><svg viewBox="0 0 24 24"><path d="M19.5 10c-1.1 0-2 .9-2 2s.9 2 2 2v4c0 1.1-.9 2-2 2H4.5c-1.1 0-2-.9-2-2v-4c1.1 0 2-.9 2-2s-.9-2-2-2V6c0-1.1.9-2 2-2h13c1.1 0 2 .9 2 2v4z"></path></svg>Tickets</a><button id="btn-info-toggle" class="client-action-btn"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"></circle><line x1="12" y1="16" x2="12" y2="12" stroke="currentColor" stroke-width="2"></line><line x1="12" y1="8" x2="12.01" y2="8" stroke="currentColor" stroke-width="2"></line></svg>Info</button></div>
+            <div id="client-desc-dropdown">#BSWC27 #BSWC<br>🗓️ 13-18th January 📍 Punta Umbría, Huelva 🏆 Jack &amp; Jill: @bswc_jackjill<br></div>
+            <div id="dynamic-header-container" style="display: block;">
+                    <div class="width-video-horiz">
+                        <div class="video-responsive-wrapper ratio-16-9">
+                            <iframe src="https://www.youtube.com/embed/O7qb4hDy2Kg?autoplay=1&amp;mute=1&amp;controls=1&amp;playsinline=1&amp;rel=0&amp;modestbranding=1" title="YouTube video player" allowfullscreen=""></iframe>
+                        </div>
+                    </div></div>
+            <div class="years-nav-container"><a href="#" class="year-link active">2026</a><a href="../2025" class="year-link ">2025</a><a href="../2024" class="year-link ">2024</a><a href="../2023" class="year-link ">2023</a></div>
+            <div class="promo-tool-container">
+                <a href="https://amediastory.com/cutter/eng/" target="_blank" class="promo-tool-btn"><span class="sticker-new">NEW!</span>TRIM YOUR FAVORITE SOCIAL VIDEO PARTS IN SECONDS WITH THIS TOOL</a>
+            </div>
+        </header>
+        
+        <div class="albums-block-wrapper" id="albums-link-block" style="display: block;">
+            <div class="session-selector-container">
+                <div class="session-wrapper">
+                    <select id="session-select" class="session-select"><option value="1x_11WsR0n0WM4YfrYJatR1QLhn7edX7o" data-realname="THURSDAY">THURSDAY</option><option value="13m8GSzzI69L-TTu7CAG3OZbaXP8SEGiH" data-realname="FRIDAY">FRIDAY</option><option value="1UdAD1XVE5J3MjgbNR9Lx07TLaF1xuxrQ" data-realname="SATURDAY">SATURDAY</option><option value="1LrGt2zp2wrGno-jtNFvzbx6i_WWDE23-" data-realname="SUNDAY">SUNDAY</option><option value="1fd-KcB1m-Qy-q1tzX1FU3xgyZXsNX9on" data-realname="ALL DAYS">ALL DAYS</option></select>
+                    <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="#FFD700" stroke-width="1.5"></path></svg>
+                </div>
+            </div>
+            <div id="category-submenu" class="category-submenu"><button class="submenu-btn active">SOCIAL</button><button class="submenu-btn">WORKSHOPS</button><button class="submenu-btn">MIX</button></div>
+            <div class="media-type-container">
+                <button class="media-btn active" data-type="ALL">ALL</button>
+                <button class="media-btn" data-type="PHOTO">PHOTOS</button>
+                <button class="media-btn" data-type="VIDEO">VIDEOS</button>
+            </div>
+            <div id="upload-status-container" class="status-bar-container" style="display: flex;">
+                <div class="status-bar-bg"><div id="status-bar-fill" class="status-bar-fill" style="width: 100%;"></div></div>
+                <div id="status-text" class="status-text" style="color: rgb(255, 215, 0);">100% UPLOADED THURSDAY &gt; SOCIAL</div>
+            </div>
+            <div id="drive-fallback-alert" class="drive-fallback-alert" style="display:none;">
+                <span class="fallback-icon">⚠️</span>
+                <div class="fallback-content">
+                    <span class="fallback-text">High traffic: Some photos might not load.</span>
+                    <a id="drive-direct-link" href="https://drive.google.com/drive/folders/1fd-KcB1m-Qy-q1tzX1FU3xgyZXsNX9on" target="_blank" class="drive-fallback-link">Open in Google Drive →</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="active-filter-bar" style="display: none;"></div>
+        <div id="loading" style="display: none;"><div class="spinner"></div><span>Looking for cute people</span><span class="loading-sub">Loading gallery</span></div>
+        <div class="grid" id="gallery-grid" style="min-height: 100vh; position: relative; height: 1331.48px;"><div class="grid-sizer"></div><div class="grid-item" style="position: absolute; left: 0%; top: 0px;"><div class="grid-item-content"><img class="thumb" loading="lazy" src="https://drive.google.com/thumbnail?id=1meTIFkKgbCAoptTuWqpns10QYTWlQTO6&amp;sz=w1000"></div></div><div class="grid-item" style="position: absolute; left: 16.665%; top: 0px;"><div class="grid-item-content"><img class="thumb" loading="lazy" src="https://drive.google.com/thumbnail?id=1L-7h4Tf2AIjkcIVGFlMXypf3IV4dW8KV&amp;sz=w1000"></div></div><div class="grid-item" style="position: absolute; left: 33.33%; top: 0px;"><div class="grid-item-content"><img class="thumb" loading="lazy" src="https://drive.google.com/thumbnail?id=18YwZanTTPc-Pl47O08mE1XFs8EBwGV9p&amp;sz=w1000"></div></div><div class="grid-item" style="position: absolute; left: 49.995%; top: 0px;"><div class="grid-item-content"><img class="thumb" loading="lazy" src="https://drive.google.com/thumbnail?id=1BTHxV7SRsqqkSI6S8RNH_YO6HJz7IdEy&amp;sz=w1000"></div></div><div class="grid-item" style="position: absolute; left: 66.66%; top: 0px;"><div class="grid-item-content"><img class="thumb" loading="lazy" src="https://drive.google.com/thumbnail?id=1DXTSOET-RjmJ7P2ZEK3ThNpTL-iMYI6S&amp;sz=w1000"></div></div><div class="grid-item" style="position: absolute; left: 83.325%; top: 0px;"><div class="grid-item-content"><img class="thumb" loading="lazy" src="https://drive.google.com/thumbnail?id=1TaZnEN0iofc6Uu6nM8WeWCrTXQXezyan&amp;sz=w1000"></div></div><div class="grid-item" style="position: absolute; left: 0%; top: 318.969px;"><div class="grid-item-content"><img class="thumb" loading="lazy" src="https://drive.google.com/thumbnail?id=1S2kHtFBnnhRH67kMvnr4frXGH7Ien2G8&amp;sz=w1000"></div></div><div class="grid-item" style="position: absolute; left: 16.665%; top: 318.969px;"><div class="grid-item-content"><img class="thumb" loading="lazy" src="https://drive.google.com/thumbnail?id=1OsMFciBAUi6nc45mEf72lSNTQdnBZBq-&amp;sz=w1000"></div></div><div class="grid-item grid-item--big-mobile" style="position: absolute; left: 33.33%; top: 318.969px;"><div class="grid-item-content"><img class="thumb" loading="lazy" src="https://drive.google.com/thumbnail?id=1Ww1wlXgIPf3iWaNAmt1o34HJ3BztCsgn&amp;sz=w1000"><div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg></div></div></div><div class="grid-item grid-item--big-mobile" style="position: absolute; left: 49.995%; top: 318.969px;"><div class="grid-item-content"><img class="thumb" loading="lazy" src="https://drive.google.com/thumbnail?id=1rTK4agA5_wSlKSHyrUQbiz-m_B65J45E&amp;sz=w1000"></div></div><div class="grid-item" style="position: absolute; left: 66.66%; top: 318.969px;"><div class="grid-item-content"><img class="thumb" loading="lazy" src="https://drive.google.com/thumbnail?id=1yeoUZQFuyzx1yCJhIic3LwjOY-DiO3FE&amp;sz=w1000"><div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg></div></div></div><div class="grid-item" style="position: absolute; left: 83.325%; top: 318.969px;"><div class="grid-item-content banner-collab"><img src="../../socialtvcore/collab.png" class="thumb" style="object-fit: cover; width: 100%; height: 100%;"></div></div><div class="grid-item" style="position: absolute; left: 0%; top: 465.235px;"><div class="grid-item-content"><img class="thumb" loading="lazy" src="https://drive.google.com/thumbnail?id=1WeIVqj669YJ8zQTZslDCRH6s4a-gICMb&amp;sz=w1000"></div></div><div class="grid-item" style="position: absolute; left: 83.325%; top: 635.922px;"><div class="grid-item-content"><img class="thumb" loading="lazy" src="https://drive.google.com/thumbnail?id=1amnpFELxn8beAVSp8dDCCpOQVqygwGMN&amp;sz=w1000"></div></div><div class="grid-item" style="position: absolute; left: 16.665%; top: 637.938px;"><div class="grid-item-content"><img class="thumb" loading="lazy" src="https://drive.google.com/thumbnail?id=1pFaxYMD81PrEmlgIu73di_emlYxdu-aQ&amp;sz=w1000"></div></div><div class="grid-item" style="position: absolute; left: 49.995%; top: 637.938px;"><div class="grid-item-content"><img class="thumb" loading="lazy" src="https://drive.google.com/thumbnail?id=12KmdLiOiLaX7KPb5DajyvQvySHwvR2Oa&amp;sz=w1000"><div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg></div></div></div><div class="grid-item" style="position: absolute; left: 33.33%; top: 695.563px;"><div class="grid-item-content"><img class="thumb" loading="lazy" src="https://drive.google.com/thumbnail?id=1UPbKX9tBV_Xx4PEhoKbiTXjZmOH2tUHh&amp;sz=w1000"></div></div><div class="grid-item" style="position: absolute; left: 66.66%; top: 695.563px;"><div class="grid-item-content"><img class="thumb" loading="lazy" src="https://drive.google.com/thumbnail?id=153BotzTF33pdVoiT0cMb8I-YxJB_5oXT&amp;sz=w1000"><div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg></div></div></div><div class="grid-item" style="position: absolute; left: 0%; top: 784.204px;"><div class="grid-item-content"><img class="thumb" loading="lazy" src="https://drive.google.com/thumbnail?id=1DqF2W9Dhw_htkwOPgoD5WojeAFl7yRIL&amp;sz=w1000"><div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg></div></div></div><div class="grid-item grid-item--big-mobile" style="position: absolute; left: 83.325%; top: 954.891px;"><div class="grid-item-content"><img class="thumb" loading="lazy" src="https://drive.google.com/thumbnail?id=1Hiw-ClswiJFIcpiqgxdNGY5X4U_ulexd&amp;sz=w1000"><div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg></div></div></div><div class="grid-item" style="position: absolute; left: 16.665%; top: 956.907px;"><div class="grid-item-content"><img class="thumb" loading="lazy" src="https://drive.google.com/thumbnail?id=1EbTbbW6-TrZWXOfeTxxpUpkBQa_hI6gl&amp;sz=w1000"></div></div></div>
+        <div id="scroll-loading" style="display: none;"><div class="spinner"></div>Loading content...</div>
+        <button id="btn-back-to-top" title="Go to top" style="display: flex;">⬆</button>
+
+        <div id="popup">
+            <span id="popup-close">×</span>
+            <div class="nav-btn prev-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+            <div class="nav-btn next-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+            <div id="popup-content-wrapper">
+                <img id="popup-img" src="" style="display:none;">
+                <iframe id="popup-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen="" style="display:none;"></iframe>
+            </div>
+            <div id="popup-caption-container">
+                <a href="#" id="popup-caption-text" target="_blank" title="View in Drive" style="pointer-events: auto;"></a>
+                <a href="#" id="popup-external-link" target="_blank" title="Direct Download" class="circle-btn" style="pointer-events: auto;">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                </a>
+                <button id="btn-share-photo" class="circle-btn" title="Copy Link" style="pointer-events: auto;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                </button>
+            </div>
+        </div>
+    </body></html>
