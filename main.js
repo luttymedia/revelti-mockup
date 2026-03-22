@@ -423,17 +423,19 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .catch(error => console.error('Error fetching navbar:', error));
 
-    // Load Footer
-    fetch('footer.html')
-        .then(response => response.text())
-        .then(html => {
-            const placeholder = document.getElementById('footer-placeholder');
-            if (placeholder) {
-                placeholder.innerHTML = html;
-                initializeFooter();
-            }
-        })
-        .catch(error => console.error('Error fetching footer:', error));
+    // Load Footer only if logged in
+    if (isLoggedIn) {
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(html => {
+                const placeholder = document.getElementById('footer-placeholder');
+                if (placeholder) {
+                    placeholder.innerHTML = html;
+                    initializeFooter();
+                }
+            })
+            .catch(error => console.error('Error fetching footer:', error));
+    }
 
     // --- CENTRALIZED GALLERY LISTENERS ---
     // Listen for clicks on any element that should open the media modal.
