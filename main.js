@@ -6,7 +6,7 @@
     const isLoggedIn = localStorage.getItem('revelti_logged_in') === 'true';
     const activeRole = localStorage.getItem('revelti_active_role');
 
-    if (isHomePage && isLoggedIn && activeRole && urlParams.get('logout') !== 'true') {
+    if (isHomePage && isLoggedIn && activeRole && urlParams.get('logout') !== 'true' && urlParams.get('noredirect') !== 'true') {
         const roleHomeMap = {
             'attendee': 'attendeeDashboard.html',
             'organizer': 'organizerDashboard.html',
@@ -374,7 +374,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 const searchIcon = document.getElementById('search-icon');
                 const searchBar = document.getElementById('search-bar');
                 const searchContainer = document.getElementById('search-container');
-                const logo = document.querySelector('a[href="homePage.html"]');
+                const logo = document.querySelector('a[href^="homePage.html"]');
                 const notificationIconButton = document.getElementById('notification-icon-button');
 
                 if (langEn && langEs) {
