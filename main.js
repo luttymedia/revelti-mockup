@@ -28,7 +28,7 @@ function openMediaModal(element) {
     const modalCreatorName = document.getElementById('modal-creator-name');
     const modalHeaderIcons = mediaModal.querySelector('.flex.items-center.space-x-2');
     const modalNav = document.getElementById('modal-nav');
-    
+
     // Find the parent gallery container of the clicked element.
     const galleryContainer = element.closest('.gallery-level') || element.closest('#favorites-grid');
     if (!galleryContainer) {
@@ -41,7 +41,7 @@ function openMediaModal(element) {
     let currentIndex = galleryItems.indexOf(element);
 
     if (currentIndex === -1) return;
-    
+
     // Update content and show the modal
     modalImage.src = element.querySelector('img').src;
     modalEventName.textContent = element.getAttribute('data-event');
@@ -52,11 +52,11 @@ function openMediaModal(element) {
     const closeBtn = document.getElementById('close-media-modal');
     const nextBtn = document.getElementById('next-media');
     const prevBtn = document.getElementById('prev-media');
-    
+
     // Use an IIFE (Immediately Invoked Function Expression) to create a closure
     // for the current gallery items and index. This prevents issues with
     // multiple galleries trying to use the same global variables.
-    (function(currentItems, startingIndex) {
+    (function (currentItems, startingIndex) {
         let currentImageIndex = startingIndex;
 
         // Function to update the modal content
@@ -68,17 +68,17 @@ function openMediaModal(element) {
                 modalCreatorName.textContent = `by ${currentItem.getAttribute('data-creator')}`;
             }
         }
-        
+
         function showNextMedia() {
             currentImageIndex = (currentImageIndex + 1) % currentItems.length;
             updateModalContent();
         }
-    
+
         function showPrevMedia() {
             currentImageIndex = (currentImageIndex - 1 + currentItems.length) % currentItems.length;
             updateModalContent();
         }
-        
+
         // Remove previous listeners to prevent duplicates
         if (nextBtn) nextBtn.onclick = null;
         if (prevBtn) prevBtn.onclick = null;
@@ -105,7 +105,7 @@ function openMediaModal(element) {
             mediaModal.touchEndX = e.changedTouches[0].screenX;
             handleSwipe(mediaModal.touchStartX, mediaModal.touchEndX);
         };
-        
+
         // Add keyboard listeners
         document.onkeydown = e => {
             if (!mediaModal.classList.contains('hidden')) {
@@ -152,11 +152,11 @@ function openStylesModal() {
     const closeStylesModalBtn = document.getElementById('close-styles-modal');
     const confirmStylesBtn = document.getElementById('confirm-styles-btn');
     const stylesModalContent = document.getElementById('styles-modal-content');
-    
+
     if (closeStylesModalBtn) {
         closeStylesModalBtn.onclick = closeStylesModal;
     }
-    
+
     if (confirmStylesBtn) {
         confirmStylesBtn.onclick = () => {
             const newSelected = [];
@@ -170,7 +170,7 @@ function openStylesModal() {
             closeStylesModal();
         };
     }
-    
+
     if (stylesModal && stylesModalContent) {
         stylesModal.onclick = (event) => {
             if (!stylesModalContent.contains(event.target)) {
@@ -190,13 +190,13 @@ function closeStylesModal() {
 function renderStylesInModal() {
     const stylesModalContent = document.getElementById('styles-modal-content');
     if (!stylesModalContent) return;
-    
+
     const container = stylesModalContent.querySelector('.space-y-2');
     if (!container) return;
 
     const allStyles = ['Bachata Sensual', 'Salsa On1', 'Kizomba', 'Zouk', 'Bachata Fusion', 'Salsa On2'];
     // [Unverified] Fetch selected styles from a global variable or storage
-    const selectedStyles = window.reveltiSelectedStyles || ['Bachata Sensual', 'Kizomba']; 
+    const selectedStyles = window.reveltiSelectedStyles || ['Bachata Sensual', 'Kizomba'];
 
     container.innerHTML = '';
     allStyles.forEach(style => {
@@ -224,61 +224,61 @@ function updateSelectedStylesDisplay(newStyles) {
         stylesDisplay.appendChild(span);
     });
 }
-    
-    // Function to attach listeners for the Media tab.
-    function initializeMediaTabListeners() {
-        const stylesModal = document.getElementById('styles-modal');
-        const editStylesBtn = document.getElementById('edit-styles-btn');
-        const closeStylesModalBtn = document.getElementById('close-styles-modal');
-        const confirmStylesBtn = document.getElementById('confirm-styles-btn');
-        const stylesModalContent = document.getElementById('styles-modal-content');
-        const settingsLink = document.getElementById('notification-settings-link');
-        
-        if (editStylesBtn) {
-            editStylesBtn.addEventListener('click', openStylesModal);
-        }
-        
-        if (closeStylesModalBtn) {
-            closeStylesModalBtn.addEventListener('click', closeStylesModal);
-        }
-        
-        if (confirmStylesBtn) {
-            confirmStylesBtn.onclick = () => {
-                // Get selected styles and update display
-                const newSelected = [];
-                if (stylesModalContent) {
-                    stylesModalContent.querySelectorAll('input[type="checkbox"]:checked').forEach(input => {
-                        newSelected.push(input.value);
-                    });
-                }
-                // In a real app, you would save this to a server
-                // For now, we'll just update the display
-                updateSelectedStylesDisplay(newSelected);
-                closeStylesModal();
-            };
-        }
-        
-        if (stylesModal && stylesModalContent) {
-            stylesModal.addEventListener('click', (event) => {
-                if (!stylesModalContent.contains(event.target)) {
-                    closeStylesModal();
-                }
-            });
-        }
-        
-        if (settingsLink) {
-            // Fallback for standalone pages
-            window.location.href = 'notificationSettings.html';
-        }
 
-        // Initialize styles display
-        updateSelectedStylesDisplay();
-        
-        // Render styles in modal if needed
-        if (stylesModalContent) {
-            renderStylesInModal();
-        }
+// Function to attach listeners for the Media tab.
+function initializeMediaTabListeners() {
+    const stylesModal = document.getElementById('styles-modal');
+    const editStylesBtn = document.getElementById('edit-styles-btn');
+    const closeStylesModalBtn = document.getElementById('close-styles-modal');
+    const confirmStylesBtn = document.getElementById('confirm-styles-btn');
+    const stylesModalContent = document.getElementById('styles-modal-content');
+    const settingsLink = document.getElementById('notification-settings-link');
+
+    if (editStylesBtn) {
+        editStylesBtn.addEventListener('click', openStylesModal);
     }
+
+    if (closeStylesModalBtn) {
+        closeStylesModalBtn.addEventListener('click', closeStylesModal);
+    }
+
+    if (confirmStylesBtn) {
+        confirmStylesBtn.onclick = () => {
+            // Get selected styles and update display
+            const newSelected = [];
+            if (stylesModalContent) {
+                stylesModalContent.querySelectorAll('input[type="checkbox"]:checked').forEach(input => {
+                    newSelected.push(input.value);
+                });
+            }
+            // In a real app, you would save this to a server
+            // For now, we'll just update the display
+            updateSelectedStylesDisplay(newSelected);
+            closeStylesModal();
+        };
+    }
+
+    if (stylesModal && stylesModalContent) {
+        stylesModal.addEventListener('click', (event) => {
+            if (!stylesModalContent.contains(event.target)) {
+                closeStylesModal();
+            }
+        });
+    }
+
+    if (settingsLink) {
+        // Fallback for standalone pages
+        window.location.href = 'notificationSettings.html';
+    }
+
+    // Initialize styles display
+    updateSelectedStylesDisplay();
+
+    // Render styles in modal if needed
+    if (stylesModalContent) {
+        renderStylesInModal();
+    }
+}
 
 function initializeFooter() {
     const footerLinks = document.querySelectorAll('footer a');
@@ -295,7 +295,7 @@ function initializeFooter() {
     // We check if the current path ends with the link's href for a robust match.
     footerLinks.forEach(link => {
         const linkHref = link.getAttribute('href');
-        
+
         if (currentPath.endsWith(linkHref)) {
             link.classList.add('footer-link-active');
             link.classList.remove('text-gray-400');
@@ -305,9 +305,32 @@ function initializeFooter() {
 }
 
 // --- NAVBAR & FOOTER INITIALIZATION ---
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
+    // Track auth state via localStorage based on specific pages visited
+    const pathname = window.location.pathname;
+    const urlParams = new URLSearchParams(window.location.search);
+
+    if (urlParams.get('logout') === 'true') {
+        localStorage.setItem('revelti_logged_in', 'false');
+        // Clean up URL without page reload
+        window.history.replaceState({}, document.title, pathname);
+    }
+
+    const isLoginPage = pathname.endsWith('attendeeDashboard.html') ||
+        pathname.endsWith('organizerDashboard.html') ||
+        pathname.endsWith('creativeDashboard.html');
+
+    if (isLoginPage) {
+        localStorage.setItem('revelti_logged_in', 'true');
+    }
+
+    const isLoggedIn = localStorage.getItem('revelti_logged_in') === 'true';
+
+    // Use publicNavBar ONLY if the user is not logged in.
+    const navBarFile = (!isLoggedIn) ? 'publicNavBar.html' : 'navBar.html';
+
     // Load Navbar
-    fetch('navBar.html')
+    fetch(navBarFile)
         .then(response => response.text())
         .then(html => {
             const placeholder = document.getElementById('navbar-placeholder');
@@ -338,14 +361,14 @@ document.addEventListener("DOMContentLoaded", function() {
                         langEn.classList.remove('text-orange-500');
                     });
                 }
-                
+
                 if (hamburgerIcon && mobileMenu) {
-                     hamburgerIcon.addEventListener('click', (event) => {
+                    hamburgerIcon.addEventListener('click', (event) => {
                         event.stopPropagation();
                         mobileMenu.classList.toggle('hidden');
                     });
                 }
-               
+
                 if (searchIcon && searchBar && logo && searchContainer) {
                     searchIcon.addEventListener('click', (event) => {
                         event.stopPropagation();
@@ -389,7 +412,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     }
 
                     if (mobileMenu && hamburgerIcon) {
-                         const isClickInsideMenu = mobileMenu.contains(event.target);
+                        const isClickInsideMenu = mobileMenu.contains(event.target);
                         const isClickOnHamburgerIcon = hamburgerIcon.contains(event.target);
                         if (!isClickInsideMenu && !isClickOnHamburgerIcon && !mobileMenu.classList.contains('hidden')) {
                             mobileMenu.classList.add('hidden');
@@ -411,7 +434,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         })
         .catch(error => console.error('Error fetching footer:', error));
-        
+
     // --- CENTRALIZED GALLERY LISTENERS ---
     // Listen for clicks on any element that should open the media modal.
     document.addEventListener('click', (event) => {

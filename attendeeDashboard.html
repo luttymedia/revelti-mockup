@@ -51,6 +51,68 @@
             </div>
         </header>
 
+        <!-- Recent Activity Section -->
+        <div class="px-6 pb-6">
+            <h2 class="text-lg font-bold text-revelti-blue mb-4">Recent Activity</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                <!-- Card 1: Gallery -->
+                <div class="flex items-center gap-3 p-3 bg-purple-50 rounded-xl border border-purple-100 cursor-pointer hover:bg-purple-100 transition"
+                    onclick="window.openGalleryOverlay()">
+                    <div
+                        class="w-10 h-10 rounded-lg bg-white flex items-center justify-center flex-shrink-0 shadow-sm text-lg">
+                        📸
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-gray-800 leading-tight">New gallery from <b>Bachata Geneva
+                                Festival</b></p>
+                    </div>
+                </div>
+
+                <!-- Card 2: Ticket -->
+                <a href="purchaseDetails.html"
+                    class="flex items-center gap-3 p-3 bg-green-50 rounded-xl border border-green-100 hover:bg-green-100 transition">
+                    <div
+                        class="w-10 h-10 rounded-lg bg-white flex items-center justify-center flex-shrink-0 shadow-sm text-lg">
+                        🎟️
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-gray-800 leading-tight">Ticket confirmed for <b>Bachata
+                                Geneva
+                                Festival</b></p>
+                    </div>
+                </a>
+
+                <!-- Card 3: Upload -->
+                <div class="flex items-center gap-3 p-3 bg-orange-50 rounded-xl border border-orange-100 cursor-pointer hover:bg-orange-100 transition"
+                    onclick="window.openGalleryOverlay()">
+                    <div
+                        class="w-10 h-10 rounded-lg bg-white flex items-center justify-center flex-shrink-0 shadow-sm text-lg">
+                        👤
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-gray-800 leading-tight"><b>AMedia</b> uploaded new content
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 4: Trending -->
+                <div class="flex items-center gap-3 p-3 bg-blue-50 rounded-xl border border-blue-100 cursor-pointer hover:bg-blue-100 transition"
+                    onclick="window.openGalleryOverlay()">
+                    <div
+                        class="w-10 h-10 rounded-lg bg-white flex items-center justify-center flex-shrink-0 shadow-sm text-lg">
+                        🔥
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-gray-800 leading-tight"><b>Bachata Geneva Festival</b>
+                            gallery is
+                            trending</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
         <!-- Tab Navigation -->
         <nav class="border-t border-b border-gray-200">
             <div class="flex justify-around overflow-x-auto whitespace-nowrap scrollbar-hide">
