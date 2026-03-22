@@ -150,23 +150,25 @@
                     <h2 class="text-2xl font-bold text-gray-800">
                       Galleries Linked to Event
                     </h2>
-                    <a href="creativeEventMediaManagement.html"
+                    <a href="creativeStudioWorkspace.html?folder_path=bgf_main"
                       class="text-sm font-bold text-revelti-blue hover:underline">Upload to Event</a>
                   </div>
 
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Gallery Card Mock -->
-                    <div class="border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition">
+                    <div
+                      class="border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition cursor-pointer"
+                      onclick="openGalleryOverlay()">
                       <div
                         class="h-32 bg-gray-200 rounded mb-3 flex items-center justify-center overflow-hidden relative">
-                        <img src="https://placehold.co/600x400/6b21a8/ffffff?text=Friday+Socials"
+                        <img src="https://placehold.co/600x400/6b21a8/ffffff?text=Main+Festival+Coverage"
                           class="w-full h-full object-cover" />
                         <div class="absolute top-2 right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded">
                           Published
                         </div>
                       </div>
-                      <h4 class="font-bold text-lg text-gray-800">
-                        Friday Socials & Shows
+                      <h4 class="font-bold text-lg text-gray-800 hover:text-revelti-blue transition">
+                        Main Festival Coverage
                       </h4>
                       <p class="text-sm text-gray-500">
                         450 Photos • 5 Videos
@@ -181,14 +183,14 @@
                     <div class="border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition">
                       <div
                         class="h-32 bg-gray-200 rounded mb-3 flex items-center justify-center overflow-hidden relative">
-                        <img src="https://placehold.co/600x400/6b21a8/ffffff?text=Saturday+Workshops"
+                        <img src="https://placehold.co/600x400/6b21a8/ffffff?text=Social+Dance"
                           class="w-full h-full object-cover" />
                         <div class="absolute top-2 right-2 bg-pink-500 text-white text-xs font-bold px-2 py-1 rounded">
                           Scheduled
                         </div>
                       </div>
                       <h4 class="font-bold text-lg text-gray-800">
-                        Saturday Workshops
+                        Social Dance
                       </h4>
                       <p class="text-sm text-gray-500">
                         320 Photos • 1 Video
@@ -375,6 +377,7 @@
   <div id="footer-placeholder"></div>
 
   <script src="layout-injector.js" defer></script>
+  <script src="js/galleryOverlay.js"></script>
   <script src="creative.js" defer></script>
   <script>
     // Tab Switching Logic for Event View

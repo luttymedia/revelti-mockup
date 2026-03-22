@@ -958,7 +958,10 @@
             } else { filtersWrapper.classList.remove('is-compact'); filtersWrapper.classList.remove('is-forced-expanded'); }
         });
 
-        function handleRefineClick() { filtersWrapper.classList.toggle('is-forced-expanded'); }
+        function handleRefineClick() {
+            filtersWrapper.classList.toggle('is-forced-expanded');
+            if (typeof updateOverlayCloseBtnPos === 'function') updateOverlayCloseBtnPos();
+        }
 
         const dayTrigger = document.getElementById('day-trigger');
         const dayMenu = document.getElementById('day-menu');
@@ -1018,6 +1021,48 @@
         const topBtn = document.getElementById('btn-back-to-top');
         window.onscroll = () => { topBtn.style.display = (window.scrollY > 400) ? 'flex' : 'none'; };
         topBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+    </script>
+    <!-- Overlay Close Button (Only visible when in iframe) -->
+    <button id="close-gallery-overlay"
+        class="fixed z-[9990] bg-gray-900/80 text-white p-2 rounded-full hover:bg-revelti-orange transition-colors hidden shadow-lg border border-gray-700"
+        style="top: 16px; right: 16px;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+    </button>
+
+    <script>
+        if (window.self !== window.top) {
+            const closeBtn = document.getElementById('close-gallery-overlay');
+            closeBtn.classList.remove('hidden');
+
+            closeBtn.addEventListener('click', () => {
+                window.parent.postMessage('closeGalleryOverlay', '*');
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    window.parent.postMessage('closeGalleryOverlay', '*');
+                }
+            });
+
+            window.updateOverlayCloseBtnPos = function () {
+                const filtersWrapper = document.getElementById('filters-wrapper');
+                if (window.innerWidth < 1024 && filtersWrapper.classList.contains('is-compact') && filtersWrapper.classList.contains('is-forced-expanded')) {
+                    const rect = filtersWrapper.getBoundingClientRect();
+                    closeBtn.style.top = (rect.bottom - 20) + 'px';
+                    closeBtn.style.right = '16px';
+                } else {
+                    closeBtn.style.top = '16px';
+                    closeBtn.style.right = '16px';
+                }
+            };
+
+            window.addEventListener('scroll', updateOverlayCloseBtnPos);
+            window.addEventListener('resize', updateOverlayCloseBtnPos);
+        }
     </script>
 </body>
 

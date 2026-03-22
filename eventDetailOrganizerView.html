@@ -346,20 +346,13 @@
                                                     d="M19 9l-7 7-7-7"></path>
                                             </svg></summary>
                                         <div class="flex space-x-4 overflow-x-auto pb-4 mt-3 horizontal-scroll">
+
                                             <div class="flex-shrink-0 w-2/3 sm:w-1/2 md:w-1/3">
-                                                <div class="relative rounded-lg overflow-hidden shadow-md"><img
-                                                        src="https://placehold.co/600x400/213c63/ffffff?text=Previous+Editions"
-                                                        alt="Album cover" class="w-full h-40 object-cover">
-                                                    <div
-                                                        class="absolute inset-0 bg-black bg-opacity-40 flex items-end p-4">
-                                                        <h3 class="text-white text-xl font-bold">Previous Editions</h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="flex-shrink-0 w-2/3 sm:w-1/2 md:w-1/3">
-                                                <div class="relative rounded-lg overflow-hidden shadow-md"><img
+                                                <a href="javascript:openGalleryOverlay()"
+                                                    class="block relative rounded-lg overflow-hidden shadow-md group"><img
                                                         src="https://placehold.co/600x400/213c63/ffffff?text=Official+Media"
-                                                        alt="Album cover" class="w-full h-40 object-cover">
+                                                        alt="Album cover"
+                                                        class="w-full h-40 object-cover transition-transform duration-300 group-hover:scale-105">
                                                     <div
                                                         class="absolute inset-0 bg-black bg-opacity-40 flex items-end p-4">
                                                         <div>
@@ -367,7 +360,7 @@
                                                             <p class="text-white text-sm">by AMedia</p>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </a>
                                             </div>
                                             <div class="flex-shrink-0 w-2/3 sm:w-1/2 md:w-1/3">
                                                 <div class="relative rounded-lg overflow-hidden shadow-md"><img
@@ -841,6 +834,7 @@
     <!-- Swapped main.js for organizer.js to load the correct navbar -->
     <script src="layout-injector.js" defer></script>
     <script src="organizer.js" defer></script>
+    <script src="js/galleryOverlay.js"></script>
     <div id="footer-placeholder"></div>
 </body>
 

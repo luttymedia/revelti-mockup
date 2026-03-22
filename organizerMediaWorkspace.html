@@ -658,7 +658,7 @@
         // ===================== CARD RENDERERS =====================
         function renderLargeCard(node, path) {
             const galleryBtn = node.hasGallery
-                ? `<button onclick="event.stopPropagation(); alert('Opening gallery for: ${node.name.replace(/'/g, "\\'")}');"
+                ? `<button onclick="event.stopPropagation(); openGalleryOverlay();"
                     class="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-purple-700 hover:text-purple-900 transition">
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                     Open Gallery
@@ -885,7 +885,7 @@
             closeContextMenu();
 
             if (action === 'open') { navigateToPath(path); }
-            else if (action === 'gallery') { alert(`Opening gallery for: ${name}`); }
+            else if (action === 'gallery') { openGalleryOverlay(); }
             else if (action === 'download') { alert(`Simulating download of: ${name}`); }
             else if (action === 'copy-link') { alert(`Link copied for: ${name}\nhttps://revelti.com/shared/${activeContextNodeId}`); }
             else if (action === 'rename') { alert(`Rename: ${name}`); }
@@ -942,6 +942,7 @@
 
     <script src="layout-injector.js" defer></script>
     <script src="organizer.js" defer></script>
+    <script src="js/galleryOverlay.js"></script>
 </body>
 
 </html>

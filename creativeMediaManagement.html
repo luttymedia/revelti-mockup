@@ -406,7 +406,7 @@
                                 <a href="creativeStudioWorkspace.html?folder_path=${gallery.folderPath || 'gallery_' + gallery.id}&source=media_management" class="flex-1 text-center bg-gray-50 hover:bg-gray-100 text-revelti-blue font-semibold text-sm py-1.5 rounded transition duration-200">
                                     Manage
                                 </a>
-                                <button class="p-1.5 text-gray-400 hover:text-revelti-blue hover:bg-blue-50 rounded transition-colors" title="Open Public Gallery">
+                                <button onclick="openGalleryOverlay()" class="p-1.5 text-gray-400 hover:text-revelti-blue hover:bg-blue-50 rounded transition-colors" title="Open Public Gallery">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                                 </button>
                                 <button class="p-1.5 text-gray-400 hover:text-revelti-orange hover:bg-orange-50 rounded transition-colors" title="Copy Link">
@@ -445,7 +445,7 @@
                             <a href="creativeStudioWorkspace.html?folder_path=${gallery.folderPath || 'gallery_' + gallery.id}&source=media_management" class="bg-gray-50 hover:bg-gray-100 text-revelti-blue font-semibold text-xs py-1.5 px-3 rounded transition duration-200">
                                 Manage
                             </a>
-                            <button class="p-1.5 text-gray-400 hover:text-revelti-blue hover:bg-blue-50 rounded transition-colors hidden sm:block" title="Open Public Gallery">
+                            <button onclick="openGalleryOverlay()" class="p-1.5 text-gray-400 hover:text-revelti-blue hover:bg-blue-50 rounded transition-colors hidden sm:block" title="Open Public Gallery">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                             </button>
                             <button class="p-1.5 text-gray-400 hover:text-revelti-orange hover:bg-orange-50 rounded transition-colors hidden sm:block" title="Copy Link">
@@ -538,6 +538,7 @@
         window.filterGalleries = renderGalleries;
     </script>
     <script src="layout-injector.js" defer></script>
+    <script src="js/galleryOverlay.js"></script>
     <script src="creative.js" defer></script>
 </body>
 
