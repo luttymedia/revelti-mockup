@@ -453,14 +453,16 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .catch(error => console.error('Error fetching navbar:', error));
 
-    // Load Footer only if logged in
-    if (isLoggedIn) {
+    // Load Footer only if logged in and the role is attendee
+    const activeRole = localStorage.getItem('revelti_active_role');
+    if (isLoggedIn && activeRole === 'attendee') {
         fetch('footer.html')
             .then(response => response.text())
             .then(html => {
                 const placeholder = document.getElementById('footer-placeholder');
                 if (placeholder) {
                     placeholder.innerHTML = html;
+                    document.body.classList.add('has-mobile-footer');
                     initializeFooter();
                 }
             })

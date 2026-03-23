@@ -17,7 +17,7 @@ body {
   This padding is removed on large screens where the footer is hidden.
 */
 @media (max-width: 1023px) {
-    body {
+    body.has-mobile-footer {
         padding-bottom: 3.5rem;
         /* Space for the new mobile footer */
     }
@@ -546,11 +546,14 @@ div.dt-button-background {
 
 /* Mobile overrides for sidebar */
 @media (max-width: 768px) {
-    .sidebar-collapsed {
+
+    /* Hide sidebar on mobile for everyone EXCEPT Creatives and Organizers */
+    body:not([data-role="creative"]):not([data-role="organizer"]) .sidebar-collapsed {
         width: 0;
         border-right: none;
     }
 }
+
 
 /* Base Topbar & Main Wrapper */
 .main-wrapper {
