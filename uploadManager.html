@@ -108,6 +108,32 @@
                         </div>
                     </div>
 
+                    <!-- Info Banner -->
+                    <div
+                        class="relative bg-blue-50 border border-blue-100 rounded-xl p-4 mb-6 flex items-start gap-3 shadow-sm mx-4 sm:mx-0">
+                        <div class="mt-0.5 text-blue-500">
+                            <!-- Tip Icon (Lightbulb) -->
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0012 18.75c-1.03 0-1.9.4-2.593 1.02l-.547-.547z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="flex-1 text-center">
+                            <h3 class="text-sm font-bold text-revelti-blue leading-tight">Organize once, filter
+                                automatically</h3>
+                            <p class="text-xs text-gray-600 mt-1">Use up to 3 folder levels to create gallery
+                                filters.<br>Example: Year → Day → Category</p>
+                        </div>
+                        <button onclick="this.parentElement.style.display='none'"
+                            class="text-blue-400 hover:text-blue-600 transition">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+
                     <div class="bg-white rounded-xl shadow-md overflow-hidden relative min-h-[500px] flex flex-col">
 
                         <!-- Step 1: Upload Assets -->
@@ -242,7 +268,9 @@
                                 <div
                                     class="absolute left-0 top-full mt-2 hidden group-hover:block w-72 p-3 bg-gray-800 text-xs text-white rounded-md shadow-lg z-50">
                                     Folders are where your media is stored. You can later organize them, attach them to
-                                    events, or turn them into galleries.
+                                    events, or turn them into galleries. Their structure can also define how galleries
+                                    are organized. The first 3 levels can be used as filters (e.g. Year → Day →
+                                    Category).
                                     <div
                                         class="absolute left-4 bottom-full w-2 h-2 bg-gray-800 transform rotate-45 mb-[-4px]">
                                     </div>
