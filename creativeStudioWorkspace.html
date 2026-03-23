@@ -335,11 +335,11 @@
                 { id: 'zouk_zurich', name: 'Zouk Festival Zurich', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-10-02T10:00:00Z', lastModified: '2025-11-05T14:00:00Z', children: [] },
                 { id: 'bailando_sensual', name: 'Bailando Sensual', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-10-03T10:00:00Z', lastModified: '2025-11-05T13:30:00Z', children: [] },
                 { id: 'salsa_congress', name: 'Salsa Congress', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, isGalleryRoot: true, created: '2025-10-04T10:00:00Z', lastModified: '2025-11-05T13:00:00Z', children: [] },
-                { id: 'paris_kizomba', name: 'Paris Kizomba Congress', status: 'Scheduled', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-10-05T10:00:00Z', lastModified: '2025-11-05T12:30:00Z', children: [] },
+                { id: 'paris_kizomba', name: 'Paris Kizomba Congress', status: 'Scheduled', schedule: 'Nov 12, 2025 11:00 AM', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-10-05T10:00:00Z', lastModified: '2025-11-05T12:30:00Z', children: [] },
                 { id: 'oman_salsa', name: 'Oman Salsa Festival', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-10-06T10:00:00Z', lastModified: '2025-11-05T12:00:00Z', children: [] },
                 { id: 'geneva_zouk', name: 'Geneva Zouk', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-10-07T10:00:00Z', lastModified: '2025-11-05T11:30:00Z', children: [] },
                 { id: 'croatia_summer', name: 'Croatia Summer Festival', status: 'Draft', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-10-08T10:00:00Z', lastModified: '2025-11-05T11:00:00Z', children: [] },
-                { id: 'miami_afro', name: 'Miami Afro', status: 'Scheduled', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-10-09T10:00:00Z', lastModified: '2025-11-05T10:30:00Z', children: [] },
+                { id: 'miami_afro', name: 'Miami Afro', status: 'Scheduled', schedule: 'Nov 15, 2025 09:00 AM', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-10-09T10:00:00Z', lastModified: '2025-11-05T10:30:00Z', children: [] },
                 { id: 'berlin_salsa', name: 'Berlin Salsa Congress', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-10-10T10:00:00Z', lastModified: '2025-11-05T10:00:00Z', children: [] },
                 { id: 'temporary_uploads', name: 'Temporary Uploads', status: 'Private', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-10-11T10:00:00Z', lastModified: '2025-11-05T09:30:00Z', children: [] },
                 { id: 'archived_work', name: 'Archived Work', status: 'Private', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-10-12T10:00:00Z', lastModified: '2025-11-05T09:00:00Z', children: [] },
@@ -397,39 +397,41 @@
 
         function getPublishStateBadge(node, extraClasses = 'mt-1.5') {
             const isGallery = node.type === 'gallery' || node.isGalleryRoot;
-            let stateName = 'Draft';
-            let badgeClasses = 'bg-gray-200 text-gray-800';
-            let tooltip = 'Draft';
+            let stateName = '';
+            let badgeClasses = '';
+            let tooltip = '';
             let dateHtml = '';
             let iconHtml = '';
 
             if (node.status === 'Public' || node.status === 'Published') {
-                stateName = 'Public';
+                stateName = isGallery ? 'Public Gallery' : 'Published';
                 badgeClasses = 'bg-green-100 text-green-800';
-                tooltip = 'Public';
-            } else if (node.status === 'Private') {
-                stateName = 'Private';
-                badgeClasses = 'bg-red-100 text-red-800';
-                tooltip = 'Private';
-                iconHtml = `<svg class="w-2.5 h-2.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>`;
+                tooltip = stateName;
+                if (isGallery) {
+                    iconHtml = `<svg class="w-2.5 h-2.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>`;
+                }
             } else if (node.status === 'Scheduled') {
-                stateName = 'Scheduled';
+                stateName = isGallery ? 'Scheduled Gallery' : 'Scheduled';
                 badgeClasses = 'bg-yellow-100 text-yellow-800';
-                tooltip = 'Scheduled';
+                tooltip = stateName;
                 if (node.schedule) {
                     tooltip += ` \u2022 ${node.schedule}`;
                     dateHtml = `<span class="ml-1 pl-1 border-l border-yellow-300 font-normal opacity-80">${node.schedule}</span>`;
                 }
-            }
-
-            let displayText = stateName;
-            if (isGallery) {
-                displayText = `Gallery \u2013 ${stateName}`;
-                tooltip = `Gallery (${tooltip})`;
+            } else {
+                stateName = isGallery ? 'Private Gallery' : 'Draft';
+                if (isGallery) {
+                    badgeClasses = 'bg-red-100 text-red-800';
+                    tooltip = 'Private Gallery';
+                    iconHtml = `<svg class="w-2.5 h-2.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>`;
+                } else {
+                    badgeClasses = 'bg-gray-200 text-gray-800';
+                    tooltip = 'Draft';
+                }
             }
 
             return `<span title="${tooltip}" class="inline-flex items-center text-[10px] font-bold px-2 py-0.5 rounded-full ${badgeClasses} ${extraClasses} cursor-help whitespace-nowrap">
-                ${iconHtml}${displayText}${dateHtml}
+                ${iconHtml}${stateName}${dateHtml}
             </span>`;
         }
 
@@ -1569,14 +1571,9 @@
                         <h4 class="font-bold text-gray-700 text-sm mb-2">Visibility</h4>
                         <div class="space-y-2">
                             <label class="flex items-center space-x-2 cursor-pointer">
-                                <input type="radio" name="cg-visibility"
-                                    class="text-revelti-blue focus:ring-revelti-blue h-4 w-4">
-                                <span class="text-sm text-gray-700">Private</span>
-                            </label>
-                            <label class="flex items-center space-x-2 cursor-pointer">
                                 <input type="radio" name="cg-visibility" checked
                                     class="text-revelti-blue focus:ring-revelti-blue h-4 w-4">
-                                <span class="text-sm text-gray-700">Link Only</span>
+                                <span class="text-sm text-gray-700">Private</span>
                             </label>
                             <label class="flex items-center space-x-2 cursor-pointer">
                                 <input type="radio" name="cg-visibility"

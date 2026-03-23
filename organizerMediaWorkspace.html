@@ -44,6 +44,25 @@
             border-color: #213c63 !important;
             background-color: #eff6ff !important;
         }
+
+        /* Plan option card */
+        .plan-option {
+            border: 1.5px solid #e5e7eb;
+            border-radius: .75rem;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all .15s;
+        }
+
+        .plan-option:hover {
+            border-color: #213c63;
+            background: #f0f4fa;
+        }
+
+        .plan-option.selected {
+            border-color: #213c63;
+            background: #eef2f9;
+        }
     </style>
 </head>
 
@@ -82,7 +101,7 @@
                                     <div class="bg-revelti-blue h-1.5 rounded-full" style="width: 32%"></div>
                                 </div>
                             </div>
-                            <button onclick="alert('Upgrade storage plan')"
+                            <button onclick="openUpgradeModal()"
                                 class="text-xs font-semibold text-revelti-orange border border-revelti-orange rounded-md px-3 py-1.5 hover:bg-orange-50 transition whitespace-nowrap">
                                 Buy more storage
                             </button>
@@ -938,6 +957,140 @@
         document.addEventListener('DOMContentLoaded', () => {
             render();
         });
+    </script>
+
+    <!-- ═══════════════════════════════════════════════
+         MODAL: Upgrade Plan (Organizer — Free user)
+     ════════════════════════════════════════════════ -->
+    <dialog id="modal-upgrade-plan"
+        style="border:none;border-radius:1rem;padding:1.75rem;width:100%;max-width:480px;box-shadow:0 20px 60px rgba(0,0,0,.18);font-family:inherit;">
+        <div class="flex justify-between items-start mb-4">
+            <div>
+                <h2 class="text-xl font-extrabold text-revelti-blue">Upgrade Plan</h2>
+                <p class="text-sm text-gray-400 mt-0.5">Choose a plan that fits your needs</p>
+            </div>
+            <button onclick="closeUpgradeModal()"
+                style="background:none;border:none;cursor:pointer;color:#9ca3af;margin-left:1rem;">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <!-- Current plan badge -->
+        <div class="flex items-center gap-2 mb-4 p-3 bg-gray-50 rounded-xl border border-gray-200">
+            <span class="text-xs text-gray-400 font-semibold uppercase tracking-wide">Current:</span>
+            <span class="text-sm font-bold text-gray-600">Standard — 1 GB</span>
+        </div>
+        <!-- Plan options -->
+        <p class="text-xs text-gray-500 uppercase tracking-wider font-bold mb-3">Upgrade to</p>
+        <div class="space-y-2 mb-4">
+            <div class="plan-option" onclick="selectPlan(this)">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <p class="text-sm font-bold text-revelti-blue">Plus — 10 GB</p>
+                        <p class="text-xs text-gray-400 mt-0.5">Best for growing events</p>
+                    </div>
+                    <span class="text-sm font-extrabold text-revelti-blue">120€<span
+                            class="text-xs font-normal text-gray-400">/year</span></span>
+                </div>
+            </div>
+            <div class="plan-option" onclick="selectPlan(this)">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <p class="text-sm font-bold text-revelti-blue">Premium — 100 GB</p>
+                        <p class="text-xs text-gray-400 mt-0.5">Full creative library access</p>
+                    </div>
+                    <span class="text-sm font-extrabold text-revelti-blue">290€<span
+                            class="text-xs font-normal text-gray-400">/year</span></span>
+                </div>
+            </div>
+        </div>
+        <!-- What you get -->
+        <div class="bg-blue-50 rounded-xl p-4 mb-5">
+            <p class="text-xs text-revelti-blue font-bold uppercase tracking-wider mb-3">What you get</p>
+            <!-- Plus features -->
+            <p class="text-xs font-bold text-gray-400 uppercase tracking-wide mb-1.5">Plus</p>
+            <ul class="space-y-1.5 mb-3">
+                <li class="text-sm text-gray-600 flex items-center gap-2">
+                    <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    10 GB storage for event assets
+                </li>
+                <li class="text-sm text-gray-600 flex items-center gap-2">
+                    <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Up to 3 active events
+                </li>
+                <li class="text-sm text-gray-600 flex items-center gap-2">
+                    <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Invite media creatives
+                </li>
+            </ul>
+            <!-- Premium adds -->
+            <p class="text-xs font-bold text-revelti-blue uppercase tracking-wide mb-1.5">+ Premium adds</p>
+            <ul class="space-y-1.5">
+                <li class="text-sm text-gray-600 flex items-center gap-2">
+                    <svg class="w-4 h-4 text-revelti-orange flex-shrink-0" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    100 GB storage
+                </li>
+                <li class="text-sm text-gray-600 flex items-center gap-2">
+                    <svg class="w-4 h-4 text-revelti-orange flex-shrink-0" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Unlimited active events
+                </li>
+                <li class="text-sm text-gray-600 flex items-center gap-2">
+                    <svg class="w-4 h-4 text-revelti-orange flex-shrink-0" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Priority creative deliveries
+                </li>
+                <li class="text-sm text-gray-600 flex items-center gap-2">
+                    <svg class="w-4 h-4 text-revelti-orange flex-shrink-0" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Advanced event analytics
+                </li>
+            </ul>
+        </div>
+        <button id="btn-upgrade-plan"
+            style="width:100%;padding:.625rem;background:#f58220;color:white;font-size:.875rem;font-weight:700;border:none;border-radius:.75rem;cursor:pointer;margin-bottom:.5rem;opacity:.4;pointer-events:none;">Upgrade
+            Plan</button>
+        <button onclick="closeUpgradeModal()"
+            style="width:100%;padding:.5rem;font-size:.875rem;font-weight:700;color:#6b7280;border:1px solid #e5e7eb;border-radius:.75rem;background:white;cursor:pointer;">Close</button>
+    </dialog>
+
+    <script>
+        function selectPlan(el) {
+            document.querySelectorAll('#modal-upgrade-plan .plan-option').forEach(function (opt) { opt.classList.remove('selected'); });
+            el.classList.add('selected');
+            var btn = document.getElementById('btn-upgrade-plan');
+            if (btn) { btn.style.opacity = '1'; btn.style.pointerEvents = 'auto'; }
+        }
+        function openUpgradeModal() {
+            var m = document.getElementById('modal-upgrade-plan');
+            if (m) m.showModal();
+        }
+        function closeUpgradeModal() {
+            var m = document.getElementById('modal-upgrade-plan');
+            if (m) m.close();
+            document.querySelectorAll('#modal-upgrade-plan .plan-option').forEach(function (opt) { opt.classList.remove('selected'); });
+            var btn = document.getElementById('btn-upgrade-plan');
+            if (btn) { btn.style.opacity = '.4'; btn.style.pointerEvents = 'none'; }
+        }
     </script>
 
     <script src="layout-injector.js" defer></script>
