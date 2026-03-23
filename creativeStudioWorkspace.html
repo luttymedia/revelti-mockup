@@ -34,6 +34,19 @@
 
     <!-- Your Custom Stylesheet -->
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        .context-menu {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            min-width: 180px;
+        }
+
+        .context-menu.visible {
+            display: block;
+        }
+    </style>
 </head>
 
 <body class="dashboard-layout bg-gray-100 antialiased text-gray-800" data-role="creative">
@@ -191,7 +204,6 @@
                                         </div>
                                     </div>
                                     <div id="media-section" class="hidden">
-                                        <h3 class="font-bold text-gray-700 text-lg mb-4">Media Items</h3>
                                         <div id="media-grid"
                                             class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
                                             <!-- Media items go here -->
@@ -228,110 +240,209 @@
             id: 'root',
             name: 'Studio',
             children: [
+                // ===================== BACHATA GENEVA FESTIVAL =====================
                 {
                     id: 'bgf_main',
                     name: 'Bachata Geneva Festival',
-                    status: 'Public', // Published
+                    status: 'Public',
                     owner: 'AMedia',
                     creators: [{ name: 'Lutty Moreira', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=LM', type: 'Media Creator' }],
                     type: 'folder',
                     clickable: true,
-                    isGalleryRoot: true,
                     created: '2025-10-01T10:00:00Z',
                     lastModified: '2025-11-05T14:30:00Z',
                     children: [
+                        // --- BGF - Main Coverage (Public Gallery Root) ---
                         {
-                            id: '2026',
-                            name: '2026',
+                            id: 'bgf_main_coverage',
+                            name: 'BGF - Main Coverage',
                             status: 'Public',
                             owner: 'AMedia',
                             type: 'folder',
+                            isGalleryRoot: true,
                             clickable: true,
-                            created: '2025-11-01T09:00:00Z',
-                            lastModified: '2025-11-05T12:00:00Z',
+                            created: '2025-10-01T10:00:00Z',
+                            lastModified: '2025-11-05T14:30:00Z',
                             children: [
                                 {
-                                    id: 'bgf',
-                                    name: 'Official Media',
+                                    id: 'bgf_2026',
+                                    name: '2026',
                                     status: 'Public',
                                     owner: 'AMedia',
-                                    creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }],
-                                    created: '2025-11-02T10:00:00Z',
-                                    lastModified: '2025-11-05T11:00:00Z',
+                                    type: 'folder',
+                                    clickable: true,
+                                    created: '2025-11-01T09:00:00Z',
+                                    lastModified: '2025-11-05T12:00:00Z',
                                     children: [
+                                        // Friday (Published, clickable)
                                         {
-                                            id: 'sat',
-                                            name: 'Saturday 01-Nov',
+                                            id: 'bgf_friday',
+                                            name: 'Friday',
                                             status: 'Public',
                                             owner: 'AMedia',
-                                            creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }],
-                                            created: '2025-11-03T08:00:00Z',
-                                            lastModified: '2025-11-05T10:00:00Z',
+                                            type: 'folder',
+                                            clickable: true,
+                                            created: '2025-11-01T09:00:00Z',
+                                            lastModified: '2025-11-05T12:00:00Z',
                                             children: [
-                                                { id: 'Social', name: 'Social', type: 'gallery', status: 'Public', owner: 'AMedia', creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }, { name: 'Lutty Moreira', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=LM' }], content: '125 Photos, 10 Videos', created: '2025-11-04T09:00:00Z', lastModified: '2025-11-05T09:30:00Z' },
-                                                { id: 'jandj', name: 'Jack & Jill', type: 'gallery', status: 'Public', owner: 'AMedia', creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }], content: '50 Photos', created: '2025-11-04T10:00:00Z', lastModified: '2025-11-05T09:00:00Z' },
+                                                { id: 'bgf_fri_workshops', name: 'Workshops', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-11-01T08:00:00Z', lastModified: '2025-11-05T12:00:00Z', children: [] },
+                                                // Social (clickable)
+                                                {
+                                                    id: 'bgf_fri_social',
+                                                    name: 'Social',
+                                                    status: 'Public',
+                                                    owner: 'AMedia',
+                                                    type: 'folder',
+                                                    clickable: true,
+                                                    created: '2025-11-01T09:00:00Z',
+                                                    lastModified: '2025-11-05T12:00:00Z',
+                                                    children: [
+                                                        // AMedia subfolder (clickable)
+                                                        {
+                                                            id: 'bgf_fri_soc_amedia',
+                                                            name: 'AMedia',
+                                                            status: 'Public',
+                                                            owner: 'AMedia',
+                                                            type: 'folder',
+                                                            clickable: true,
+                                                            created: '2025-11-01T09:00:00Z',
+                                                            lastModified: '2025-11-05T12:00:00Z',
+                                                            children: [
+                                                                { id: 'bgf_fri_soc_amedia_photos', name: 'Photos', status: 'Public', owner: 'AMedia', type: 'folder', clickable: true, content: '125 Photos', created: '2025-11-01T09:00:00Z', lastModified: '2025-11-05T12:00:00Z', children: [] },
+                                                                { id: 'bgf_fri_soc_amedia_videos', name: 'Videos', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-11-01T09:00:00Z', lastModified: '2025-11-05T12:00:00Z', children: [] }
+                                                            ]
+                                                        },
+                                                        // Lutty Moreira subfolder
+                                                        {
+                                                            id: 'bgf_fri_soc_lutty',
+                                                            name: 'Lutty Moreira',
+                                                            status: 'Public',
+                                                            owner: 'AMedia',
+                                                            type: 'folder',
+                                                            clickable: false,
+                                                            created: '2025-11-01T09:00:00Z',
+                                                            lastModified: '2025-11-05T12:00:00Z',
+                                                            children: [
+                                                                { id: 'bgf_fri_soc_lutty_photos', name: 'Photos', status: 'Public', owner: 'AMedia', type: 'folder', clickable: true, created: '2025-11-01T09:00:00Z', lastModified: '2025-11-05T12:00:00Z', children: [] },
+                                                                { id: 'bgf_fri_soc_lutty_videos', name: 'Videos', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-11-01T09:00:00Z', lastModified: '2025-11-05T12:00:00Z', children: [] }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                { id: 'bgf_fri_shows', name: 'Shows', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-11-01T09:00:00Z', lastModified: '2025-11-05T12:00:00Z', children: [] }
                                             ]
                                         },
+                                        // Saturday (Published, not clickable)
                                         {
-                                            id: 'sun',
-                                            name: 'Sunday 02-Nov',
-                                            status: 'Scheduled',
-                                            schedule: 'Nov 10, 2025 10:00 AM',
+                                            id: 'bgf_saturday',
+                                            name: 'Saturday',
+                                            status: 'Public',
                                             owner: 'AMedia',
-                                            creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }],
-                                            created: '2025-11-03T09:00:00Z',
-                                            lastModified: '2025-11-05T08:00:00Z',
+                                            type: 'folder',
+                                            clickable: false,
+                                            created: '2025-11-02T09:00:00Z',
+                                            lastModified: '2025-11-05T12:00:00Z',
                                             children: [
-                                                {
-                                                    id: 'sun-photos', name: 'Photos', status: 'Scheduled', schedule: 'Nov 10, 2025 10:00 AM', owner: 'AMedia', creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }], created: '2025-11-04T08:00:00Z', lastModified: '2025-11-05T07:30:00Z', children: [
-                                                        { id: 'sun-social', name: 'Sunday Social', type: 'gallery', status: 'Scheduled', owner: 'AMedia', creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }], content: '180 Photos, 5 Videos', schedule: 'Nov 10, 2025 10:00 AM', created: '2025-11-04T11:00:00Z', lastModified: '2025-11-05T07:00:00Z' },
-                                                    ]
-                                                }
+                                                { id: 'bgf_sat_workshops', name: 'Workshops', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-11-02T09:00:00Z', lastModified: '2025-11-05T12:00:00Z', children: [] },
+                                                { id: 'bgf_sat_jj', name: 'J&J', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-11-02T09:00:00Z', lastModified: '2025-11-05T12:00:00Z', children: [] },
+                                                { id: 'bgf_sat_social', name: 'Social', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-11-02T09:00:00Z', lastModified: '2025-11-05T12:00:00Z', children: [] }
+                                            ]
+                                        },
+                                        // Sunday (Scheduled, not clickable)
+                                        {
+                                            id: 'bgf_sunday',
+                                            name: 'Sunday',
+                                            status: 'Scheduled',
+                                            schedule: 'Nov 10, 2026 10:00 AM',
+                                            owner: 'AMedia',
+                                            type: 'folder',
+                                            clickable: false,
+                                            created: '2025-11-03T09:00:00Z',
+                                            lastModified: '2025-11-05T12:00:00Z',
+                                            children: [
+                                                { id: 'bgf_sun_workshops', name: 'Workshops', status: 'Scheduled', schedule: 'Nov 10, 2026 10:00 AM', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-11-03T09:00:00Z', lastModified: '2025-11-05T12:00:00Z', children: [] },
+                                                { id: 'bgf_sun_daysocial', name: 'Day Social', status: 'Scheduled', schedule: 'Nov 10, 2026 10:00 AM', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-11-03T09:00:00Z', lastModified: '2025-11-05T12:00:00Z', children: [] },
+                                                { id: 'bgf_sun_social', name: 'Social', status: 'Scheduled', schedule: 'Nov 10, 2026 10:00 AM', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-11-03T09:00:00Z', lastModified: '2025-11-05T12:00:00Z', children: [] },
+                                                { id: 'bgf_sun_jj', name: 'J&J', status: 'Scheduled', schedule: 'Nov 10, 2026 10:00 AM', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-11-03T09:00:00Z', lastModified: '2025-11-05T12:00:00Z', children: [] }
                                             ]
                                         }
                                     ]
                                 },
-                                {
-                                    id: 'promotional',
-                                    name: 'Promotional Material',
-                                    status: 'Public',
-                                    owner: 'Bachata Geneva',
-                                    creators: [{ name: 'Bachata Geneva', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=B' }],
-                                    type: 'folder',
-                                    created: '2025-11-02T11:00:00Z',
-                                    lastModified: '2025-11-05T06:00:00Z',
-                                    children: []
-                                },
-                                {
-                                    id: 'demos',
-                                    name: 'Demos',
-                                    status: 'Private',
-                                    owner: 'Bachata Geneva',
-                                    creators: [{ name: 'Bachata Geneva', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=B' }],
-                                    type: 'gallery',
-                                    content: '12 Photos',
-                                    created: '2026-03-10T09:00:00Z',
-                                    lastModified: '2026-03-18T14:30:00Z',
-                                    children: []
-                                },
-                                {
-                                    id: 'empty_test',
-                                    name: 'Empty Folder',
-                                    status: 'Private',
-                                    owner: 'AMedia',
-                                    creators: [{ name: 'AMedia', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=A' }],
-                                    type: 'folder',
-                                    content: '0 Photos',
-                                    created: '2025-11-02T12:00:00Z',
-                                    lastModified: '2025-11-05T05:00:00Z',
-                                    children: []
-                                }
+                                { id: 'bgf_2025', name: '2025', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2024-11-01T09:00:00Z', lastModified: '2025-01-05T12:00:00Z', children: [] },
+                                { id: 'bgf_2024', name: '2024', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2023-11-01T09:00:00Z', lastModified: '2024-01-05T12:00:00Z', children: [] }
                             ]
                         },
-                        { id: '2025', name: '2025', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2024-11-01T09:00:00Z', lastModified: '2025-01-05T12:00:00Z', children: [] },
-                        { id: '2024', name: '2024', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2023-11-01T09:00:00Z', lastModified: '2024-01-05T12:00:00Z', children: [] }
+                        // --- BGF - Demos (Private Gallery) ---
+                        {
+                            id: 'bgf_demos',
+                            name: 'BGF - Demos',
+                            status: 'Private',
+                            owner: 'AMedia',
+                            type: 'gallery',
+                            clickable: true,
+                            content: '12 Photos',
+                            created: '2026-03-10T09:00:00Z',
+                            lastModified: '2026-03-18T14:30:00Z',
+                            children: []
+                        },
+                        // --- BGF - Promotional Material (Draft) ---
+                        {
+                            id: 'bgf_promo_material',
+                            name: 'BGF - Promotional Material',
+                            status: 'Draft',
+                            owner: 'AMedia',
+                            type: 'folder',
+                            clickable: false,
+                            created: '2025-11-02T11:00:00Z',
+                            lastModified: '2025-11-05T06:00:00Z',
+                            children: []
+                        }
                     ]
                 },
+                // ===================== ZOUKATHON BCN =====================
+                {
+                    id: 'zoukathon_bcn',
+                    name: 'Zoukathon BCN',
+                    status: 'Public',
+                    owner: 'AMedia',
+                    type: 'folder',
+                    clickable: true,
+                    created: '2026-01-01T10:00:00Z',
+                    lastModified: '2026-03-20T14:30:00Z',
+                    children: [
+                        {
+                            id: 'zouk_main_coverage',
+                            name: 'Zoukathon - Main Coverage',
+                            status: 'Public',
+                            owner: 'AMedia',
+                            type: 'folder',
+                            isGalleryRoot: true,
+                            clickable: true,
+                            created: '2026-01-01T10:00:00Z',
+                            lastModified: '2026-03-20T14:30:00Z',
+                            children: [
+                                {
+                                    id: 'zouk_2026',
+                                    name: '2026',
+                                    status: 'Public',
+                                    owner: 'AMedia',
+                                    type: 'folder',
+                                    clickable: true,
+                                    created: '2026-01-01T10:00:00Z',
+                                    lastModified: '2026-03-20T14:30:00Z',
+                                    children: [
+                                        { id: 'zouk_2026_04_17', name: '2026-04-17', status: 'Scheduled', schedule: 'Apr 17, 2026 10:00 AM', owner: 'AMedia', type: 'folder', clickable: false, created: '2026-04-01T10:00:00Z', lastModified: '2026-04-01T10:00:00Z', children: [] },
+                                        { id: 'zouk_2026_03_20', name: '2026-03-20', status: 'Public', owner: 'AMedia', type: 'folder', clickable: true, content: '85 Photos, 5 Videos', created: '2026-03-20T10:00:00Z', lastModified: '2026-03-20T14:30:00Z', children: [] },
+                                        { id: 'zouk_2026_02_21', name: '2026-02-21', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2026-02-21T10:00:00Z', lastModified: '2026-02-21T14:30:00Z', children: [] },
+                                        { id: 'zouk_2026_01_19', name: '2026-01-19', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2026-01-19T10:00:00Z', lastModified: '2026-01-19T14:30:00Z', children: [] }
+                                    ]
+                                },
+                                { id: 'zouk_2025', name: '2025', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-01-01T10:00:00Z', lastModified: '2025-12-31T14:30:00Z', children: [] }
+                            ]
+                        }
+                    ]
+                },
+                // ===================== OTHER EXISTING EVENTS (preserved) =====================
                 { id: 'zouk_zurich', name: 'Zouk Festival Zurich', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-10-02T10:00:00Z', lastModified: '2025-11-05T14:00:00Z', children: [] },
                 { id: 'bailando_sensual', name: 'Bailando Sensual', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-10-03T10:00:00Z', lastModified: '2025-11-05T13:30:00Z', children: [] },
                 { id: 'salsa_congress', name: 'Salsa Congress', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, isGalleryRoot: true, created: '2025-10-04T10:00:00Z', lastModified: '2025-11-05T13:00:00Z', children: [] },
@@ -556,43 +667,28 @@
         }
 
         function getGalleryMediaPaths(node) {
-            if (node.id === 'Social') {
+            if (node.id === 'bgf_fri_soc_amedia_photos' || node.id === 'bgf_fri_soc_lutty_photos') {
                 return [
                     "albums/event/gallery1.jpg", "albums/event/gallery2.jpg", "albums/event/gallery3.jpg",
                     "albums/event/gallery4.jpg", "albums/event/gallery5.jpg", "albums/event/gallery6.jpg",
                     "albums/event/gallery7.jpg", "albums/event/gallery8.jpg", "albums/event/gallery9.jpg",
-                    "albums/event/gallery10.jpg"
-                ];
-            } else if (node.id === 'promotional') {
-                return [
-                    "albums/promo/promo1.jpg", "albums/promo/promo2.jpg", "albums/promo/promo3.jpg", "albums/promo/promo4.jpg"
-                ];
-            } else if (node.id === 'demos') {
-                return [
-                    "https://placehold.co/600x400/213c63/ffffff?text=Demo+Media+1",
-                    "https://placehold.co/600x400/f58220/ffffff?text=Demo+Media+2",
-                    "https://placehold.co/600x400/6b21a8/ffffff?text=Demo+Media+3",
-                    "https://placehold.co/600x400/213c63/ffffff?text=Demo+Media+4",
-                    "https://placehold.co/600x400/f58220/ffffff?text=Demo+Media+5",
-                    "https://placehold.co/600x400/6b21a8/ffffff?text=Demo+Media+6",
-                    "https://placehold.co/600x400/213c63/ffffff?text=Demo+Media+7",
-                    "https://placehold.co/600x400/f58220/ffffff?text=Demo+Media+8",
-                    "https://placehold.co/600x400/6b21a8/ffffff?text=Demo+Media+9",
-                    "https://placehold.co/600x400/213c63/ffffff?text=Demo+Media+10",
-                    "https://placehold.co/600x400/f58220/ffffff?text=Demo+Media+11",
-                    "https://placehold.co/600x400/6b21a8/ffffff?text=Demo+Media+12"
+                    "albums/event/gallery10.jpg", "albums/event/gallery11.jpg", "albums/event/gallery12.jpg",
+                    "albums/event/gallery13.jpg"
                 ];
             }
-            return Array(6).fill("https://placehold.co/600x400/cccccc/ffffff?text=Image");
+            return [];
         }
 
         function renderMediaGrid(imagePaths) {
             return imagePaths.map((path, index) => `
-                <div class="aspect-square bg-gray-200 rounded-lg overflow-hidden relative group cursor-pointer" onclick="alert('Viewing Media ID: ${index}')">
+                <div class="aspect-square bg-gray-200 rounded-lg overflow-hidden relative group cursor-pointer" 
+                     oncontextmenu="toggleMediaContextMenu(event, '${path}')"
+                     onclick="alert('Viewing Media ID: ${index}')">
                     <img src="${path}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                     <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition flex items-start justify-end p-2">
-                        <button class="bg-white rounded p-1 opacity-0 group-hover:opacity-100 shadow text-gray-700 hover:text-revelti-blue transition transform scale-90" onclick="folderActionAlert('Download', 'Media Item', event)">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        <button class="bg-white rounded p-1 opacity-0 group-hover:opacity-100 shadow text-gray-700 hover:text-revelti-blue transition transform scale-90" 
+                                onclick="toggleMediaContextMenu(event, '${path}')">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path></svg>
                         </button>
                     </div>
                 </div>
@@ -761,11 +857,12 @@
                 subfoldersSection.classList.add('hidden');
             }
 
-            // Render Media (simulated logic: if type is gallery, show images)
-            if (currentNode.type === 'gallery') {
+            // Render Media (simulated logic: if type is gallery OR it has media assets, show images)
+            const mediaPathsForNode = getGalleryMediaPaths(currentNode);
+            if (currentNode.type === 'gallery' || (mediaPathsForNode && mediaPathsForNode.length > 0)) {
                 hasMedia = true;
                 mediaSection.classList.remove('hidden');
-                mediaGrid.innerHTML = renderMediaGrid(getGalleryMediaPaths(currentNode));
+                mediaGrid.innerHTML = renderMediaGrid(mediaPathsForNode);
             } else {
                 mediaSection.classList.add('hidden');
             }
@@ -869,6 +966,7 @@
             event.preventDefault();
             event.stopPropagation();
             closeContextMenu();
+            closeMediaContextMenu();
 
             const node = findNodeByPath(fullPath);
             if (!node) return;
@@ -1829,8 +1927,135 @@
         </div>
     </div>
 
+    <!-- Context Menu For Assets -->
+    <div id="media-context-menu"
+        class="context-menu bg-white border border-gray-200 rounded-lg shadow-xl py-1 text-sm absolute z-[1000] w-56 divide-y divide-gray-100">
+        <div class="py-1">
+            <div onclick="showToast('Opening preview...', 'info'); closeMediaContextMenu();"
+                class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
+                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                    </path>
+                </svg>
+                Preview
+            </div>
+        </div>
+        <div class="py-1">
+            <div onclick="showToast('Link copied to clipboard', 'success'); closeMediaContextMenu();"
+                class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
+                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1">
+                    </path>
+                </svg>
+                Get link
+            </div>
+            <div onclick="showToast('Added to starred', 'success'); closeMediaContextMenu();"
+                class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
+                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.518 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.921-.755 1.688-1.54 1.118l-3.976-2.888a1 1 0 00-1.175 0l-3.976 2.888c-.784.57-1.838-.197-1.539-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z">
+                    </path>
+                </svg>
+                Add to starred
+            </div>
+        </div>
+        <div class="py-1">
+            <div onclick="openGenericModal('Rename File', 'Enter new name for the file', 'Rename'); closeMediaContextMenu();"
+                class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
+                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
+                    </path>
+                </svg>
+                Rename
+            </div>
+            <div onclick="openGenericModal('Make a copy', 'Copying file...', 'Copy'); closeMediaContextMenu();"
+                class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
+                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2">
+                    </path>
+                </svg>
+                Make a copy
+            </div>
+            <div onclick="openGenericModal('Move File', 'Select destination...', 'Move'); closeMediaContextMenu();"
+                class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
+                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+                </svg>
+                Move
+            </div>
+        </div>
+        <div class="py-1">
+            <div onclick="showToast('Downloading file...', 'info'); closeMediaContextMenu();"
+                class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
+                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                </svg>
+                Download
+            </div>
+        </div>
+        <div class="py-1">
+            <div onclick="showToast('File removed', 'info'); closeMediaContextMenu();"
+                class="px-4 py-2 hover:bg-red-50 cursor-pointer flex items-center gap-2 text-red-600">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                    </path>
+                </svg>
+                Remove
+            </div>
+        </div>
+    </div>
+
     <!-- Toast Container -->
     <div id="toast-container" class="fixed bottom-4 right-4 z-50 flex flex-col space-y-2 pointer-events-none"></div>
+
+    <script>
+        let assetContextMenu = null;
+
+        function closeMediaContextMenu() {
+            const menu = document.getElementById('media-context-menu');
+            if (menu) {
+                menu.classList.remove('visible');
+            }
+        }
+
+        // Add to existing document click listener
+        document.addEventListener('click', () => {
+            closeMediaContextMenu();
+        });
+
+        function toggleMediaContextMenu(event, path) {
+            event.preventDefault();
+            event.stopPropagation();
+            closeContextMenu(); // Close folder context menu if open
+
+            const menu = document.getElementById('media-context-menu');
+            menu.classList.add('visible');
+
+            // Positioning logic
+            let left = event.pageX;
+            let top = event.pageY;
+
+            const rect = menu.getBoundingClientRect();
+            if (event.clientX + rect.width > window.innerWidth) {
+                left = window.innerWidth - rect.width - 16 + window.scrollX;
+            }
+            if (event.clientY + rect.height > window.innerHeight) {
+                top = window.innerHeight - rect.height - 16 + window.scrollY;
+            }
+
+            menu.style.left = `${left}px`;
+            menu.style.top = `${top}px`;
+        }
+    </script>
 
     <script src="layout-injector.js" defer></script>
     <script src="js/galleryOverlay.js"></script>

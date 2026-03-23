@@ -239,6 +239,14 @@
                             <!-- Content container -->
                             <div id="content-container">
                                 <div id="folders-grid"></div>
+
+                                <!-- Media Section -->
+                                <div id="media-section" class="hidden mt-8">
+                                    <div id="media-grid"
+                                        class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+                                    </div>
+                                </div>
+
                                 <div id="empty-state"
                                     class="hidden border-2 border-dashed border-gray-200 rounded-lg p-12 flex flex-col items-center justify-center text-center bg-gray-50/50">
                                     <svg class="w-12 h-12 text-gray-300 mb-4" fill="none" stroke="currentColor"
@@ -358,112 +366,183 @@
             id: 'root',
             name: 'Media',
             children: [
-                // === FROM CREATIVES (Exact matches from creativeStudioWorkspace.html) ===
+                // === FROM CREATIVES — Bachata Geneva Festival ===
                 {
                     id: 'bgf_main',
                     name: 'Bachata Geneva Festival',
                     source: 'creative',
                     event: 'bgf',
                     type: 'folder',
-                    hasGallery: true,
+                    hasGallery: false,
                     creator: 'AMedia',
                     creatorAvatar: 'https://placehold.co/80x80/f58220/ffffff?text=A',
-                    fileCount: 450,
-                    size: '1 GB',
-                    lastModified: '2025-11-05T14:30:00Z',
+                    fileCount: 1387,
+                    size: '5.98 GB',
+                    lastModified: '2026-03-21T18:00:00Z',
                     children: [
+                        // --- BGF - Main Coverage (Public Gallery) ---
                         {
-                            id: '2026',
-                            name: '2026',
+                            id: 'bgf_main_coverage',
+                            name: 'BGF - Main Coverage',
                             source: 'creative',
                             event: 'bgf',
                             type: 'folder',
-                            hasGallery: false,
-                            lastModified: '2025-11-05T12:00:00Z',
+                            hasGallery: true,
+                            fileCount: 1375,
+                            size: '5.94 GB',
+                            lastModified: '2026-03-21T18:00:00Z',
                             children: [
                                 {
-                                    id: 'bgf',
-                                    name: 'Official Media',
+                                    id: 'bgf_2026',
+                                    name: '2026',
                                     source: 'creative',
                                     event: 'bgf',
                                     type: 'folder',
                                     hasGallery: false,
-                                    lastModified: '2025-11-05T11:00:00Z',
+                                    fileCount: 575,
+                                    size: '2.64 GB',
+                                    lastModified: '2026-03-21T18:00:00Z',
                                     children: [
+                                        // Friday
                                         {
-                                            id: 'sat',
-                                            name: 'Saturday 01-Nov',
-                                            source: 'creative',
-                                            event: 'bgf',
-                                            type: 'folder',
-                                            hasGallery: true,
-                                            lastModified: '2025-11-05T10:00:00Z',
-                                            children: [
-                                                { id: 'Social', name: 'Social', source: 'creative', event: 'bgf', type: 'folder', hasGallery: true, lastModified: '2025-11-05T09:30:00Z', children: [] },
-                                                { id: 'jandj', name: 'Jack & Jill', source: 'creative', event: 'bgf', type: 'folder', hasGallery: true, lastModified: '2025-11-05T09:00:00Z', children: [] }
-                                            ]
-                                        },
-                                        {
-                                            id: 'sun',
-                                            name: 'Sunday 02-Nov',
+                                            id: 'bgf_friday',
+                                            name: 'Friday',
                                             source: 'creative',
                                             event: 'bgf',
                                             type: 'folder',
                                             hasGallery: false,
-                                            lastModified: '2025-11-05T08:00:00Z',
+                                            fileCount: 305,
+                                            size: '1.595 GB',
+                                            lastModified: '2026-03-20T22:00:00Z',
                                             children: [
+                                                { id: 'bgf_fri_workshops', name: 'Workshops', source: 'creative', event: 'bgf', type: 'folder', hasGallery: false, fileCount: 45, size: '65 MB', lastModified: '2026-03-20T12:00:00Z', children: [] },
                                                 {
-                                                    id: 'sun-photos',
-                                                    name: 'Photos',
+                                                    id: 'bgf_fri_social',
+                                                    name: 'Social',
                                                     source: 'creative',
                                                     event: 'bgf',
                                                     type: 'folder',
                                                     hasGallery: false,
-                                                    lastModified: '2025-11-05T07:30:00Z',
+                                                    fileCount: 230,
+                                                    size: '1.03 GB',
+                                                    lastModified: '2026-03-20T22:00:00Z',
                                                     children: [
-                                                        { id: 'sun-social', name: 'Sunday Social', source: 'creative', event: 'bgf', type: 'folder', hasGallery: true, lastModified: '2025-11-05T07:00:00Z', children: [] }
+                                                        {
+                                                            id: 'bgf_fri_soc_amedia',
+                                                            name: 'AMedia',
+                                                            source: 'creative',
+                                                            event: 'bgf',
+                                                            type: 'folder',
+                                                            hasGallery: false,
+                                                            fileCount: 135,
+                                                            size: '600 MB',
+                                                            lastModified: '2026-03-20T22:00:00Z',
+                                                            children: [
+                                                                { id: 'bgf_fri_soc_amedia_photos', name: 'Photos', source: 'creative', event: 'bgf', type: 'folder', hasGallery: false, fileCount: 120, size: '150 MB', lastModified: '2026-03-20T20:00:00Z', children: [] },
+                                                                { id: 'bgf_fri_soc_amedia_videos', name: 'Videos', source: 'creative', event: 'bgf', type: 'folder', hasGallery: false, fileCount: 15, size: '450 MB', lastModified: '2026-03-20T22:00:00Z', children: [] }
+                                                            ]
+                                                        },
+                                                        {
+                                                            id: 'bgf_fri_soc_lutty',
+                                                            name: 'Lutty Moreira',
+                                                            source: 'creative',
+                                                            event: 'bgf',
+                                                            type: 'folder',
+                                                            hasGallery: false,
+                                                            fileCount: 95,
+                                                            size: '430 MB',
+                                                            lastModified: '2026-03-20T21:00:00Z',
+                                                            children: [
+                                                                { id: 'bgf_fri_soc_lutty_photos', name: 'Photos', source: 'creative', event: 'bgf', type: 'folder', hasGallery: false, fileCount: 85, size: '110 MB', lastModified: '2026-03-20T19:00:00Z', children: [] },
+                                                                { id: 'bgf_fri_soc_lutty_videos', name: 'Videos', source: 'creative', event: 'bgf', type: 'folder', hasGallery: false, fileCount: 10, size: '320 MB', lastModified: '2026-03-20T21:00:00Z', children: [] }
+                                                            ]
+                                                        }
                                                     ]
-                                                }
+                                                },
+                                                { id: 'bgf_fri_shows', name: 'Shows', source: 'creative', event: 'bgf', type: 'folder', hasGallery: false, fileCount: 30, size: '500 MB', lastModified: '2026-03-20T23:30:00Z', children: [] }
+                                            ]
+                                        },
+                                        // Saturday
+                                        {
+                                            id: 'bgf_saturday',
+                                            name: 'Saturday',
+                                            source: 'creative',
+                                            event: 'bgf',
+                                            type: 'folder',
+                                            hasGallery: false,
+                                            fileCount: 270,
+                                            size: '1.045 GB',
+                                            lastModified: '2026-03-21T18:00:00Z',
+                                            children: [
+                                                { id: 'bgf_sat_workshops', name: 'Workshops', source: 'creative', event: 'bgf', type: 'folder', hasGallery: false, fileCount: 50, size: '75 MB', lastModified: '2026-03-21T12:00:00Z', children: [] },
+                                                { id: 'bgf_sat_jj', name: 'J&J', source: 'creative', event: 'bgf', type: 'folder', hasGallery: false, fileCount: 40, size: '120 MB', lastModified: '2026-03-21T16:00:00Z', children: [] },
+                                                { id: 'bgf_sat_social', name: 'Social', source: 'creative', event: 'bgf', type: 'folder', hasGallery: false, fileCount: 180, size: '850 MB', lastModified: '2026-03-21T18:00:00Z', children: [] }
                                             ]
                                         }
                                     ]
                                 },
-                                {
-                                    id: 'promotional',
-                                    name: 'Promotional Material',
-                                    source: 'creative',
-                                    event: 'bgf',
-                                    type: 'folder',
-                                    hasGallery: false,
-                                    lastModified: '2025-11-05T06:00:00Z',
-                                    children: []
-                                },
-                                {
-                                    id: 'demos',
-                                    name: 'Demos',
-                                    source: 'creative',
-                                    event: 'bgf',
-                                    type: 'folder',
-                                    hasGallery: true,
-                                    lastModified: '2026-03-18T14:30:00Z',
-                                    children: []
-                                },
-                                {
-                                    id: 'empty_test',
-                                    name: 'Empty Folder',
-                                    source: 'creative',
-                                    event: 'bgf',
-                                    type: 'folder',
-                                    hasGallery: false,
-                                    lastModified: '2025-11-05T05:00:00Z',
-                                    children: []
-                                }
+                                { id: 'bgf_2025', name: '2025', source: 'creative', event: 'bgf', type: 'folder', hasGallery: false, fileCount: 420, size: '1.8 GB', lastModified: '2025-01-05T12:00:00Z', children: [] },
+                                { id: 'bgf_2024', name: '2024', source: 'creative', event: 'bgf', type: 'folder', hasGallery: false, fileCount: 380, size: '1.5 GB', lastModified: '2024-01-05T12:00:00Z', children: [] }
                             ]
                         },
-                        { id: '2025', name: '2025', source: 'creative', event: 'bgf', type: 'folder', hasGallery: false, lastModified: '2025-01-05T12:00:00Z', children: [] },
-                        { id: '2024', name: '2024', source: 'creative', event: 'bgf', type: 'folder', hasGallery: false, lastModified: '2024-01-05T12:00:00Z', children: [] }
+                        // --- BGF - Demos (Private Gallery) ---
+                        {
+                            id: 'bgf_demos',
+                            name: 'BGF - Demos',
+                            source: 'creative',
+                            event: 'bgf',
+                            type: 'folder',
+                            hasGallery: false,
+                            fileCount: 12,
+                            size: '45 MB',
+                            lastModified: '2026-03-18T14:30:00Z',
+                            children: []
+                        }
                     ]
                 },
+                // === FROM CREATIVES — Zoukathon BCN ===
+                {
+                    id: 'zoukathon_bcn',
+                    name: 'Zoukathon BCN',
+                    source: 'creative',
+                    event: 'zoukathon',
+                    type: 'folder',
+                    hasGallery: false,
+                    creator: 'AMedia',
+                    creatorAvatar: 'https://placehold.co/80x80/f58220/ffffff?text=A',
+                    fileCount: 120,
+                    size: '450 MB',
+                    lastModified: '2026-03-20T14:30:00Z',
+                    children: [
+                        {
+                            id: 'zouk_main_coverage',
+                            name: 'Zoukathon - Main Coverage',
+                            source: 'creative',
+                            event: 'zoukathon',
+                            type: 'folder',
+                            hasGallery: true,
+                            lastModified: '2026-03-20T14:30:00Z',
+                            children: [
+                                {
+                                    id: 'zouk_2026',
+                                    name: '2026',
+                                    source: 'creative',
+                                    event: 'zoukathon',
+                                    type: 'folder',
+                                    hasGallery: false,
+                                    lastModified: '2026-03-20T14:30:00Z',
+                                    children: [
+                                        { id: 'zouk_2026_03_20', name: '2026-03-20', source: 'creative', event: 'zoukathon', type: 'folder', hasGallery: false, lastModified: '2026-03-20T14:30:00Z', children: [] },
+                                        { id: 'zouk_2026_02_21', name: '2026-02-21', source: 'creative', event: 'zoukathon', type: 'folder', hasGallery: false, lastModified: '2026-02-21T14:30:00Z', children: [] },
+                                        { id: 'zouk_2026_01_19', name: '2026-01-19', source: 'creative', event: 'zoukathon', type: 'folder', hasGallery: false, lastModified: '2026-01-19T14:30:00Z', children: [] }
+                                    ]
+                                },
+                                { id: 'zouk_2025', name: '2025', source: 'creative', event: 'zoukathon', type: 'folder', hasGallery: false, lastModified: '2025-12-31T14:30:00Z', children: [] }
+                            ]
+                        }
+                    ]
+                },
+                // === FROM CREATIVES — Summer Fest (preserved) ===
                 {
                     id: 'summer_creative',
                     name: 'Summer Fest — AMedia',
@@ -486,8 +565,8 @@
                     event: 'bgf',
                     type: 'folder',
                     hasGallery: false,
-                    fileCount: 12,
-                    size: '84 MB',
+                    fileCount: 32,
+                    size: '125 MB',
                     lastModified: '2026-03-15T10:00:00Z',
                     children: [
                         {
@@ -891,7 +970,8 @@
             const isCreativeCtx = currentPath.length > 0 && currentNode && currentNode.source === 'creative';
 
             // Update title
-            document.getElementById('page-title').textContent = currentPath.length === 0 ? 'Media Workspace' : (currentNode ? currentNode.name : 'Media');
+            const titleEl = document.getElementById('page-title');
+            titleEl.textContent = currentPath.length === 0 ? 'Media Workspace' : (currentNode ? currentNode.name : 'Media');
 
             // Update breadcrumb
             renderBreadcrumb();
@@ -923,28 +1003,73 @@
 
             if (children.length === 0) {
                 grid.innerHTML = '';
-                empty.classList.remove('hidden');
-                return;
-            }
-            empty.classList.add('hidden');
-
-            const childPaths = children.map(c => [...currentPath, c.id]);
-
-            if (currentViewMode === 'large') {
-                grid.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4';
-                grid.innerHTML = children.map((c, i) => renderLargeCard(c, childPaths[i])).join('');
-            } else if (currentViewMode === 'compact') {
-                grid.className = 'grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3';
-                grid.innerHTML = children.map((c, i) => renderCompactCard(c, childPaths[i])).join('');
             } else {
-                grid.className = 'block bg-white border border-gray-200 rounded-lg overflow-hidden';
-                grid.innerHTML = renderListView(children, currentPath);
+                empty.classList.add('hidden');
+
+                const childPaths = children.map(c => [...currentPath, c.id]);
+
+                if (currentViewMode === 'large') {
+                    grid.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4';
+                    grid.innerHTML = children.map((c, i) => renderLargeCard(c, childPaths[i])).join('');
+                } else if (currentViewMode === 'compact') {
+                    grid.className = 'grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3';
+                    grid.innerHTML = children.map((c, i) => renderCompactCard(c, childPaths[i])).join('');
+                } else {
+                    grid.className = 'block bg-white border border-gray-200 rounded-lg overflow-hidden';
+                    grid.innerHTML = renderListView(children, currentPath);
+                }
             }
+
+            // Render Media Section if applicable
+            const mediaSection = document.getElementById('media-section');
+            const mediaGrid = document.getElementById('media-grid');
+            const mediaPaths = getGalleryMediaPaths(currentNode ? currentNode.id : null);
+
+            if (mediaPaths.length > 0) {
+                mediaSection.classList.remove('hidden');
+                mediaGrid.innerHTML = renderMediaGrid(mediaPaths, isCreativeCtx);
+                empty.classList.add('hidden');
+            } else {
+                mediaSection.classList.add('hidden');
+                if (children.length === 0) {
+                    empty.classList.remove('hidden');
+                }
+            }
+        }
+
+        function getGalleryMediaPaths(nodeId) {
+            if (nodeId === 'bgf_fri_soc_amedia_photos' || nodeId === 'bgf_fri_soc_lutty_photos') {
+                return [
+                    "albums/event/gallery1.jpg", "albums/event/gallery2.jpg", "albums/event/gallery3.jpg",
+                    "albums/event/gallery4.jpg", "albums/event/gallery5.jpg", "albums/event/gallery6.jpg",
+                    "albums/event/gallery7.jpg", "albums/event/gallery8.jpg", "albums/event/gallery9.jpg",
+                    "albums/event/gallery10.jpg", "albums/event/gallery11.jpg", "albums/event/gallery12.jpg",
+                    "albums/event/gallery13.jpg"
+                ];
+            }
+            return [];
+        }
+
+        function renderMediaGrid(imagePaths, isCreative) {
+            return imagePaths.map((path, index) => `
+                <div class="aspect-square bg-gray-200 rounded-lg overflow-hidden relative group cursor-pointer" 
+                     oncontextmenu="toggleMediaContextMenu(event, '${path}', ${isCreative})"
+                     onclick="alert('Viewing Media ID: ${index}')">
+                    <img src="${path}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition flex items-start justify-end p-2">
+                        <button class="bg-white rounded p-1 opacity-0 group-hover:opacity-100 shadow text-gray-700 hover:text-revelti-blue transition transform scale-90" 
+                                onclick="toggleMediaContextMenu(event, '${path}', ${isCreative})">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path></svg>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
         }
 
         // ===================== CONTEXT MENU =====================
         function openContextMenu(event, nodeId, path) {
             event.stopPropagation();
+            closeMediaContextMenu();
             activeContextNodeId = nodeId;
 
             // Find node
@@ -1282,6 +1407,120 @@
             document.querySelectorAll('#modal-upgrade-plan .plan-option').forEach(function (opt) { opt.classList.remove('selected'); });
             var btn = document.getElementById('btn-upgrade-plan');
             if (btn) { btn.style.opacity = '.4'; btn.style.pointerEvents = 'none'; }
+        }
+    </script>
+
+    <!-- Media Context Menu -->
+    <div id="media-context-menu"
+        class="context-menu bg-white border border-gray-200 rounded-lg shadow-xl py-1 text-sm absolute z-[1000] w-56 divide-y divide-gray-100">
+        <div class="py-1">
+            <div onclick="alert('Opening preview...'); closeMediaContextMenu();"
+                class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
+                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                    </path>
+                </svg>
+                Preview
+            </div>
+        </div>
+        <div class="py-1">
+            <div onclick="alert('Link copied to clipboard'); closeMediaContextMenu();"
+                class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
+                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1">
+                    </path>
+                </svg>
+                Get link
+            </div>
+        </div>
+        <div class="py-1 restricted-action">
+            <div onclick="alert('Rename File'); closeMediaContextMenu();"
+                class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
+                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
+                    </path>
+                </svg>
+                Rename
+            </div>
+            <div onclick="alert('Move File'); closeMediaContextMenu();"
+                class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
+                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+                </svg>
+                Move
+            </div>
+        </div>
+        <div class="py-1">
+            <div onclick="alert('Downloading file...'); closeMediaContextMenu();"
+                class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
+                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                </svg>
+                Download
+            </div>
+        </div>
+        <div class="py-1 restricted-action">
+            <div onclick="alert('File removed'); closeMediaContextMenu();"
+                class="px-4 py-2 hover:bg-red-50 cursor-pointer flex items-center gap-2 text-red-600">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                    </path>
+                </svg>
+                Remove
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function closeMediaContextMenu() {
+            const menu = document.getElementById('media-context-menu');
+            if (menu) {
+                menu.classList.remove('visible');
+            }
+        }
+
+        // Add to existing document click listener
+        document.addEventListener('click', () => {
+            closeMediaContextMenu();
+        });
+
+        function toggleMediaContextMenu(event, path, isCreative) {
+            event.preventDefault();
+            event.stopPropagation();
+            closeContextMenu(); // Close folder context menu if open
+
+            const menu = document.getElementById('media-context-menu');
+
+            // Handle restrictions
+            const restrictedItems = menu.querySelectorAll('.restricted-action');
+            restrictedItems.forEach(item => {
+                item.classList.toggle('hidden', isCreative);
+            });
+
+            menu.classList.add('visible');
+
+            // Positioning logic
+            let left = event.pageX;
+            let top = event.pageY;
+
+            const rect = menu.getBoundingClientRect();
+            if (event.clientX + rect.width > window.innerWidth) {
+                left = window.innerWidth - rect.width - 16 + window.scrollX;
+            }
+            if (event.clientY + rect.height > window.innerHeight) {
+                top = window.innerHeight - rect.height - 16 + window.scrollY;
+            }
+
+            menu.style.left = `${left}px`;
+            menu.style.top = `${top}px`;
         }
     </script>
 
