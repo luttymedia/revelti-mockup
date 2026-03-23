@@ -86,73 +86,51 @@
                         </ol>
                     </nav>
 
-                    <!-- Header Row -->
-                    <div class="flex items-center justify-between mb-3 gap-4 flex-wrap">
+                    <!-- Header: Title Row + Search Bar -->
+                    <div class="flex items-center justify-between mb-3 gap-4">
+                        <!-- Left: Page Title -->
                         <h1 id="page-title" class="text-3xl font-extrabold text-revelti-blue whitespace-nowrap">Media
                             Overview</h1>
 
-                        <!-- Storage indicator -->
-                        <div class="flex items-center gap-3 ml-auto">
-                            <div class="text-right hidden sm:block">
-                                <div class="text-xs text-gray-500">Storage</div>
-                                <div class="text-sm font-bold text-gray-700">320 MB <span
-                                        class="font-normal text-gray-400">/ 1 GB</span></div>
-                                <div class="w-32 bg-gray-200 rounded-full h-1.5 mt-1">
-                                    <div class="bg-revelti-blue h-1.5 rounded-full" style="width: 32%"></div>
-                                </div>
+                        <!-- Right: Search Bar and Storage -->
+                        <div class="flex flex-1 items-center justify-end gap-6 ml-auto">
+                            <!-- Right: Search Bar -->
+                            <div class="relative flex-1 max-w-md">
+                                <input type="text" id="search-input" placeholder="Search files &amp; folders"
+                                    oninput="applyFiltersAndRender()"
+                                    class="w-full border border-gray-300 rounded-lg py-2 pl-4 pr-10 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-revelti-blue/30 focus:border-revelti-blue placeholder-gray-400">
+                                <!-- Advanced Filter Icon (inside field, right side) -->
+                                <button type="button" id="advanced-filter-btn" title="Advanced Filters"
+                                    onclick="openAdvancedFiltersModal()"
+                                    class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-400 hover:text-revelti-blue transition">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
+                                    </svg>
+                                </button>
                             </div>
-                            <button onclick="openUpgradeModal()"
-                                class="text-xs font-semibold text-revelti-orange border border-revelti-orange rounded-md px-3 py-1.5 hover:bg-orange-50 transition whitespace-nowrap">
-                                Buy more storage
-                            </button>
+
+                            <!-- Storage indicator -->
+                            <div class="flex items-center gap-3">
+                                <div class="text-right hidden sm:block">
+                                    <div class="text-xs text-gray-500">Storage</div>
+                                    <div class="text-sm font-bold text-gray-700">320 MB <span
+                                            class="font-normal text-gray-400">/ 1 GB</span></div>
+                                    <div class="w-32 bg-gray-200 rounded-full h-1.5 mt-1">
+                                        <div class="bg-revelti-blue h-1.5 rounded-full" style="width: 32%"></div>
+                                    </div>
+                                </div>
+                                <button onclick="openUpgradeModal()"
+                                    class="text-xs font-semibold text-revelti-orange border border-revelti-orange rounded-md px-3 py-1.5 hover:bg-orange-50 transition whitespace-nowrap">
+                                    Buy more storage
+                                </button>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Toolbar Row -->
-                    <div class="flex items-center justify-between mb-4 gap-3 flex-wrap">
-                        <!-- Left: Search + Filters + Sort -->
-                        <div class="flex items-center gap-2 flex-wrap flex-1">
-                            <!-- Search -->
-                            <div class="relative">
-                                <input type="text" id="search-input" placeholder="Search files &amp; folders…"
-                                    oninput="applyFiltersAndRender()"
-                                    class="border border-gray-300 rounded-lg py-1.5 pl-8 pr-3 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-revelti-blue/30 focus:border-revelti-blue placeholder-gray-400 w-52">
-                                <svg class="w-4 h-4 text-gray-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none"
-                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                </svg>
-                            </div>
-
-                            <!-- Source filter -->
-                            <select id="source-filter" onchange="applyFiltersAndRender()"
-                                class="border border-gray-300 rounded-lg py-1.5 px-3 text-sm bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-revelti-blue/30 focus:border-revelti-blue">
-                                <option value="all">All Sources</option>
-                                <option value="mine">My Uploads</option>
-                                <option value="creative">From Creatives</option>
-                            </select>
-
-                            <!-- Event filter -->
-                            <select id="event-filter" onchange="applyFiltersAndRender()"
-                                class="border border-gray-300 rounded-lg py-1.5 px-3 text-sm bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-revelti-blue/30 focus:border-revelti-blue">
-                                <option value="all">All Events</option>
-                                <option value="bgf">Bachata Geneva Festival</option>
-                                <option value="zouk">BCN Zouk Congress</option>
-                                <option value="summer">Summer Fest 2024</option>
-                                <option value="salsa">Salsa Congress Geneva</option>
-                                <option value="kizomba">Paris Kizomba Congress</option>
-                            </select>
-
-                            <!-- Sort -->
-                            <select id="sort-select" onchange="applyFiltersAndRender()"
-                                class="border border-gray-300 rounded-lg py-1.5 px-3 text-sm bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-revelti-blue/30 focus:border-revelti-blue">
-                                <option value="name">Sort: Name</option>
-                                <option value="lastModified">Sort: Date Modified</option>
-                                <option value="size">Sort: Size</option>
-                            </select>
-                        </div>
-
-                        <!-- Right: Action buttons + view toggle -->
+                    <!-- Header: Toolbar Row -->
+                    <div class="flex items-center justify-between mb-4">
+                        <!-- Left: Compact Action Buttons -->
                         <div class="flex items-center gap-2">
                             <!-- Upload (only shown when in My Uploads context or root) -->
                             <button id="upload-btn" onclick="handleUpload()"
@@ -172,8 +150,31 @@
                                 </svg>
                                 New Folder
                             </button>
+                            <!-- Quick Share -->
+                            <button onclick="alert('Opening Quick Share options')"
+                                class="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-600 bg-white border border-gray-300 rounded-md px-3 py-1.5 hover:bg-gray-50 hover:border-gray-400 transition shadow-sm">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                                </svg>
+                                Quick Share
+                            </button>
+                        </div>
 
-                            <!-- View toggle -->
+                        <!-- Right: View Toggle -->
+                        <div class="flex items-center gap-4">
+                            <!-- Filter Toggle -->
+                            <div class="flex items-center bg-gray-100 p-0.5 rounded-lg border border-gray-200">
+                                <button type="button" onclick="setSourceFilter('all')" id="filter-all-btn"
+                                    class="px-3 py-1 text-xs font-medium rounded-md bg-white shadow-sm text-gray-800 transition">All</button>
+                                <button type="button" onclick="setSourceFilter('mine')" id="filter-mine-btn"
+                                    class="px-3 py-1 text-xs font-medium rounded-md text-gray-500 hover:text-gray-700 transition">My
+                                    Uploads</button>
+                                <button type="button" onclick="setSourceFilter('creative')" id="filter-creative-btn"
+                                    class="px-3 py-1 text-xs font-medium rounded-md text-gray-500 hover:text-gray-700 transition">From
+                                    Creatives</button>
+                            </div>
+
                             <div
                                 class="flex items-center gap-0 border border-gray-300 rounded-lg overflow-hidden bg-white shadow-sm">
                                 <button type="button" id="view-large-btn" onclick="setViewMode('large')"
@@ -367,6 +368,8 @@
                     hasGallery: true,
                     creator: 'AMedia',
                     creatorAvatar: 'https://placehold.co/80x80/f58220/ffffff?text=A',
+                    fileCount: 450,
+                    size: '1 GB',
                     lastModified: '2025-11-05T14:30:00Z',
                     children: [
                         {
@@ -470,8 +473,7 @@
                     hasGallery: true,
                     creator: 'AMedia',
                     creatorAvatar: 'https://placehold.co/80x80/f58220/ffffff?text=A',
-                    fileCount: 450,
-                    size: '11 GB',
+                    fileCount: 0,
                     lastModified: '2024-07-20T09:00:00Z',
                     children: []
                 },
@@ -581,6 +583,88 @@
         }
 
         // ===================== FILTERS =====================
+        let currentSourceFilter = 'all';
+
+        function setSourceFilter(source, shouldRender = true) {
+            currentSourceFilter = source;
+            const btns = { all: 'filter-all-btn', mine: 'filter-mine-btn', creative: 'filter-creative-btn' };
+            Object.entries(btns).forEach(([s, id]) => {
+                const btn = document.getElementById(id);
+                if (btn) {
+                    if (s === source) {
+                        btn.className = "px-3 py-1 text-xs font-medium rounded-md bg-white shadow-sm text-gray-800 transition";
+                    } else {
+                        btn.className = "px-3 py-1 text-xs font-medium rounded-md text-gray-500 hover:text-gray-700 transition";
+                    }
+                }
+            });
+            if (shouldRender) applyFiltersAndRender();
+        }
+
+        // ---- Advanced Filters Modal ----
+        let activeFilters = { source: 'all', gallery: 'any', dateCreatedFrom: '', dateCreatedTo: '', dateModifiedFrom: '', dateModifiedTo: '' };
+
+        function openAdvancedFiltersModal() {
+            // Re-sync standard UI toggle state into modal's activeFilters form if needed
+            activeFilters.source = currentSourceFilter;
+
+            document.getElementById('modal-backdrop').classList.remove('hidden');
+            document.getElementById('modal-advanced-filters').classList.remove('hidden');
+            _syncFiltersToModal();
+        }
+
+        function closeModals() {
+            document.getElementById('modal-backdrop').classList.add('hidden');
+            document.getElementById('modal-advanced-filters').classList.add('hidden');
+        }
+
+        function _syncFiltersToModal() {
+            // Source radio
+            const sourceEl = document.querySelector(`input[name="filter-source"][value="${activeFilters.source}"]`);
+            if (sourceEl) sourceEl.checked = true;
+
+            // Gallery radio
+            const galEl = document.querySelector(`input[name="filter-gallery"][value="${activeFilters.gallery}"]`);
+            if (galEl) galEl.checked = true;
+
+            // Dates
+            ['filter-date-created-from', 'filter-date-created-to', 'filter-date-modified-from', 'filter-date-modified-to'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    const key = id.replace('filter-', '').replace(/-([a-z])/g, (_, c) => c.toUpperCase());
+                    el.value = activeFilters[key] || '';
+                }
+            });
+        }
+
+        function applyAdvancedFilters() {
+            // Source
+            const sourceEl = document.querySelector('input[name="filter-source"]:checked');
+            if (sourceEl) {
+                activeFilters.source = sourceEl.value;
+                // Sync back to the main UI toggle
+                setSourceFilter(activeFilters.source, false);
+            }
+
+            // Gallery
+            const galEl = document.querySelector('input[name="filter-gallery"]:checked');
+            activeFilters.gallery = galEl ? galEl.value : 'any';
+
+            // Dates
+            activeFilters.dateCreatedFrom = document.getElementById('filter-date-created-from').value;
+            activeFilters.dateCreatedTo = document.getElementById('filter-date-created-to').value;
+            activeFilters.dateModifiedFrom = document.getElementById('filter-date-modified-from').value;
+            activeFilters.dateModifiedTo = document.getElementById('filter-date-modified-to').value;
+
+            closeModals();
+            applyFiltersAndRender();
+        }
+
+        function resetAdvancedFilters() {
+            activeFilters = { source: 'all', gallery: 'any', dateCreatedFrom: '', dateCreatedTo: '', dateModifiedFrom: '', dateModifiedTo: '' };
+            _syncFiltersToModal();
+        }
+
         function isCreativeFolder(node) {
             // A node is creative if it or any ancestor has source='creative'
             return node.source === 'creative';
@@ -592,20 +676,21 @@
 
         function getFilteredChildren(node) {
             const search = (document.getElementById('search-input').value || '').toLowerCase().trim();
-            const sourceFilter = document.getElementById('source-filter').value;
-            const eventFilter = document.getElementById('event-filter').value;
-            const sortBy = document.getElementById('sort-select').value;
+            const sourceFilter = currentSourceFilter;
 
             let children = node.children ? [...node.children] : [];
 
             if (search) children = children.filter(c => c.name.toLowerCase().includes(search));
             if (sourceFilter !== 'all') children = children.filter(c => c.source === sourceFilter);
-            if (eventFilter !== 'all') children = children.filter(c => c.event === eventFilter);
+
+            // Apply advanced filters
+            if (activeFilters.gallery === 'yes') children = children.filter(c => c.hasGallery);
+            if (activeFilters.gallery === 'no') children = children.filter(c => !c.hasGallery);
 
             children.sort((a, b) => {
-                if (sortBy === 'name') return a.name.localeCompare(b.name);
-                if (sortBy === 'lastModified') return new Date(b.lastModified) - new Date(a.lastModified);
-                if (sortBy === 'size') {
+                if (sortColumn === 'name') return a.name.localeCompare(b.name);
+                if (sortColumn === 'lastModified') return new Date(b.lastModified) - new Date(a.lastModified);
+                if (sortColumn === 'size') {
                     const parseSize = s => parseFloat(s) * (s.includes('GB') ? 1024 : 1);
                     return parseSize(b.size || '0') - parseSize(a.size || '0');
                 }
@@ -958,6 +1043,113 @@
             render();
         });
     </script>
+
+    <!-- Modals Simulation Sandbox -->
+    <div id="modal-backdrop"
+        class="fixed inset-0 bg-gray-900 bg-opacity-50 z-[100] hidden flex items-center justify-center">
+
+        <!-- Advanced Filters Modal -->
+        <div id="modal-advanced-filters"
+            class="bg-white rounded-xl shadow-xl w-full max-w-lg overflow-hidden hidden transform transition-all max-h-[90vh] flex flex-col">
+            <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center shrink-0">
+                <h3 class="font-bold text-gray-800 text-lg">Advanced Filters</h3>
+                <button onclick="closeModals()" class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+            <div class="p-6 space-y-6 overflow-y-auto">
+
+                <!-- Source focus -->
+                <div>
+                    <h4 class="font-bold text-gray-700 text-sm mb-3">Source</h4>
+                    <div class="flex gap-4">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="filter-source" id="filter-source-all" value="all" checked
+                                class="text-revelti-blue focus:ring-revelti-blue h-4 w-4">
+                            <span class="text-sm text-gray-700">All Sources</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="filter-source" id="filter-source-mine" value="mine"
+                                class="text-revelti-blue focus:ring-revelti-blue h-4 w-4">
+                            <span class="text-sm text-gray-700">My Uploads</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="filter-source" id="filter-source-creative" value="creative"
+                                class="text-revelti-blue focus:ring-revelti-blue h-4 w-4">
+                            <span class="text-sm text-gray-700">From Creatives</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Gallery -->
+                <div>
+                    <h4 class="font-bold text-gray-700 text-sm mb-3">Gallery</h4>
+                    <div class="flex gap-4">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="filter-gallery" id="filter-gallery-any" value="any" checked
+                                class="text-revelti-blue focus:ring-revelti-blue h-4 w-4">
+                            <span class="text-sm text-gray-700">Any</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="filter-gallery" id="filter-gallery-yes" value="yes"
+                                class="text-revelti-blue focus:ring-revelti-blue h-4 w-4">
+                            <span class="text-sm text-gray-700">Yes</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="filter-gallery" id="filter-gallery-no" value="no"
+                                class="text-revelti-blue focus:ring-revelti-blue h-4 w-4">
+                            <span class="text-sm text-gray-700">No</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Date Created -->
+                <div>
+                    <h4 class="font-bold text-gray-700 text-sm mb-3">Date Created</h4>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs text-gray-500 mb-1">From</label>
+                            <input type="date" id="filter-date-created-from"
+                                class="w-full border border-gray-300 rounded-lg p-2 bg-white text-sm outline-none focus:border-revelti-blue transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-500 mb-1">To</label>
+                            <input type="date" id="filter-date-created-to"
+                                class="w-full border border-gray-300 rounded-lg p-2 bg-white text-sm outline-none focus:border-revelti-blue transition">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Last Modified -->
+                <div>
+                    <h4 class="font-bold text-gray-700 text-sm mb-3">Last Modified</h4>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs text-gray-500 mb-1">From</label>
+                            <input type="date" id="filter-date-modified-from"
+                                class="w-full border border-gray-300 rounded-lg p-2 bg-white text-sm outline-none focus:border-revelti-blue transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-500 mb-1">To</label>
+                            <input type="date" id="filter-date-modified-to"
+                                class="w-full border border-gray-300 rounded-lg p-2 bg-white text-sm outline-none focus:border-revelti-blue transition">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Footer -->
+            <div class="px-6 py-4 bg-gray-50 flex items-center justify-between shrink-0 border-t border-gray-100">
+                <button type="button" onclick="resetAdvancedFilters()"
+                    class="text-sm font-semibold text-gray-500 hover:text-revelti-blue transition">Reset</button>
+                <button type="button" onclick="applyAdvancedFilters()"
+                    class="px-5 py-2 bg-revelti-blue text-white rounded-lg text-sm font-bold hover:bg-blue-800 transition">Apply</button>
+            </div>
+        </div>
+    </div>
 
     <!-- ═══════════════════════════════════════════════
          MODAL: Upgrade Plan (Organizer — Free user)
