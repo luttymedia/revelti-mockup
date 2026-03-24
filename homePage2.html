@@ -142,10 +142,6 @@
             }
         }
 
-        .tab-active {
-            background-color: #213c63 !important;
-            color: white !important;
-        }
     </style>
 </head>
 
@@ -172,21 +168,21 @@
             </div>
         </header>
 
-        <nav class="border-t border-b border-gray-100">
-            <div class="flex overflow-x-auto">
+        <nav class="border-t border-b border-gray-200">
+            <div class="flex justify-around">
                 <button onclick="switchTab('events')"
-                    class="tab-button flex-1 px-4 py-3 text-center text-sm font-semibold transition duration-300 whitespace-nowrap tab-active">Events</button>
+                    class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:revelti-blue transition duration-300 tab-active">Events</button>
                 <button onclick="switchTab('organizers')"
-                    class="tab-button flex-1 px-4 py-3 text-center text-sm font-semibold text-gray-500 hover:text-revelti-blue transition duration-300 whitespace-nowrap">Organizers</button>
+                    class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:revelti-blue transition duration-300">Organizers</button>
                 <button onclick="switchTab('creators')"
-                    class="tab-button flex-1 px-4 py-3 text-center text-sm font-semibold text-gray-500 hover:text-revelti-blue transition duration-300 whitespace-nowrap">Creatives</button>
+                    class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:revelti-blue transition duration-300">Creatives</button>
             </div>
         </nav>
 
         <main class="p-4 lg:p-6 bg-gray-50">
             <div id="events" class="tab-content space-y-6">
-                <div>
-                    <div class="flex justify-between items-center mb-4">
+                <details open>
+                    <summary class="flex justify-between items-center cursor-pointer list-none">
                         <h2 class="text-xl lg:text-2xl font-bold revelti-blue">Featured Events</h2>
                         <a href="eventListings.html" class="p-1 rounded-full hover:bg-gray-200">
                             <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -194,9 +190,8 @@
                                     d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                             </svg>
                         </a>
-                    </div>
-
-                    <div class="swiper mySwiper">
+                    </summary>
+                    <div class="swiper mySwiper mt-4">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
                                 <a href="eventDetail.html" class="block content-card">
@@ -420,7 +415,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </details>
 
                 <details open>
                     <summary class="flex justify-between items-center cursor-pointer">
