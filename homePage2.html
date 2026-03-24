@@ -56,6 +56,18 @@
             }
         }
 
+        .text-overlay {
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 50%, transparent 100%);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding-top: 12px;
+            padding-bottom: 12px;
+            padding-left: 12px;
+            padding-right: 12px;
+            width: 100%;
+            margin-top: auto;
+        }
+
         .swiper {
             width: 100%;
             padding-bottom: 20px;
@@ -85,6 +97,9 @@
             width: 100%;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
         }
 
         @media (min-width: 1024px) {
@@ -141,7 +156,6 @@
                 transform: scale(0.75) translateX(12%) !important;
             }
         }
-
     </style>
 </head>
 
@@ -198,7 +212,6 @@
                                     <div class="poster-container">
                                         <img src="images/eventPoster.png" alt="Bachata Geneva Festival"
                                             class="w-full h-full object-cover">
-                                        <div class="gaussian-blur"></div>
                                         <div class="absolute top-3 right-3 flex space-x-2">
                                             <button onclick="event.stopPropagation(); openFollowModal(); return false;"
                                                 class="p-2 bg-white/90 rounded-full text-gray-700 hover:text-revelti-orange shadow-md">
@@ -221,7 +234,7 @@
                                                 </svg>
                                             </button>
                                         </div>
-                                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white">
+                                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white text-overlay">
                                             <div class="flex items-end justify-between">
                                                 <div>
                                                     <h3 class="text-sm md:text-xl lg:text-2xl tracking-wider">
@@ -240,9 +253,8 @@
                             <div class="swiper-slide">
                                 <div class="block content-card">
                                     <div class="poster-container">
-                                        <img src="https://placehold.co/400x500/213c63/ffffff?text=BARCELONA%0AZOUK%0AWEEKENDER%0A%0ANov+15-17%2C+2026&font=montserrat&textsize=18"
-                                            alt="Barcelona Brazilian Zouk Weekender" class="w-full h-full object-cover">
-                                        <div class="gaussian-blur"></div>
+                                        <img src="images/eventPoster2.png" alt="Zouk World Barcelona"
+                                            class="w-full h-full object-cover">
                                         <div class="absolute top-3 right-3 flex space-x-2">
                                             <button onclick="event.stopPropagation(); openFollowModal(); return false;"
                                                 class="p-2 bg-white/90 rounded-full text-gray-700 hover:text-revelti-orange shadow-md">
@@ -265,13 +277,13 @@
                                                 </svg>
                                             </button>
                                         </div>
-                                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white">
+                                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white text-overlay">
                                             <div class="flex items-end justify-between">
                                                 <div>
                                                     <h3 class="text-sm md:text-xl lg:text-2xl tracking-wider">
-                                                        BARCELONA ZOUK WEEKENDER</h3>
+                                                        ZOUK WORLD BARCELONA</h3>
                                                     <p class="text-[10px] md:text-sm opacity-80 font-medium mt-0.5">
-                                                        NOV 15-17, 2026 | BARCELONA</p>
+                                                        APR 23-27, 2026 | SANTA SUSANA, BARCELONA</p>
                                                 </div>
                                                 <span
                                                     class="border-2 border-white text-white font-bold px-3 md:px-4 py-2 md:py-2 rounded-full text-xs md:text-sm whitespace-nowrap cursor-default opacity-50">GET
@@ -284,9 +296,8 @@
                             <div class="swiper-slide">
                                 <div class="block content-card">
                                     <div class="poster-container">
-                                        <img src="https://placehold.co/400x500/f58220/ffffff?text=WARSAW%0ABACHATA%0AMARATHON%0A%0ADec+4-6%2C+2026&font=montserrat&textsize=18"
-                                            alt="Warsaw Bachata Marathon" class="w-full h-full object-cover">
-                                        <div class="gaussian-blur"></div>
+                                        <img src="images/eventPoster3.png" alt="Bachata Sensual World Congress"
+                                            class="w-full h-full object-cover">
                                         <div class="absolute top-3 right-3 flex space-x-2">
                                             <button onclick="event.stopPropagation(); openFollowModal(); return false;"
                                                 class="p-2 bg-white/90 rounded-full text-gray-700 hover:text-revelti-orange shadow-md">
@@ -309,13 +320,13 @@
                                                 </svg>
                                             </button>
                                         </div>
-                                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white">
+                                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white text-overlay">
                                             <div class="flex items-end justify-between">
                                                 <div>
                                                     <h3 class="text-sm md:text-xl lg:text-2xl tracking-wider">
-                                                        WARSAW BACHATA MARATHON</h3>
+                                                        BACHATA SENSUAL WORLD CONGRESS</h3>
                                                     <p class="text-[10px] md:text-sm opacity-80 font-medium mt-0.5">
-                                                        DEC 4-6, 2026 | WARSAW</p>
+                                                        JAN 13-18, 2027 | PUNTA UMBRÍA, HUELVA</p>
                                                 </div>
                                                 <span
                                                     class="border-2 border-white text-white font-bold px-3 md:px-4 py-2 md:py-2 rounded-full text-xs md:text-sm whitespace-nowrap cursor-default opacity-50">GET
@@ -328,9 +339,8 @@
                             <div class="swiper-slide">
                                 <div class="block content-card">
                                     <div class="poster-container">
-                                        <img src="https://placehold.co/400x500/1e3a5f/ffffff?text=ATHENS%0ALATIN+DANCE%0AGETAWAY%0A%0AJan+10-14%2C+2027&font=montserrat&textsize=18"
-                                            alt="Athens Latin Dance Getaway" class="w-full h-full object-cover">
-                                        <div class="gaussian-blur"></div>
+                                        <img src="images/eventPoster4.png" alt="Sensuality & Essentiality"
+                                            class="w-full h-full object-cover">
                                         <div class="absolute top-3 right-3 flex space-x-2">
                                             <button onclick="event.stopPropagation(); openFollowModal(); return false;"
                                                 class="p-2 bg-white/90 rounded-full text-gray-700 hover:text-revelti-orange shadow-md">
@@ -353,13 +363,13 @@
                                                 </svg>
                                             </button>
                                         </div>
-                                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white">
+                                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white text-overlay">
                                             <div class="flex items-end justify-between">
                                                 <div>
                                                     <h3 class="text-sm md:text-xl lg:text-2xl tracking-wider">
-                                                        ATHENS LATIN DANCE</h3>
+                                                        SENSUALITY & ESSENTIALITY</h3>
                                                     <p class="text-[10px] md:text-sm opacity-80 font-medium mt-0.5">
-                                                        JAN 10-14, 2027 | ATHENS</p>
+                                                        NOV 1-2, 2025 | BARCELONA</p>
                                                 </div>
                                                 <span
                                                     class="border-2 border-white text-white font-bold px-3 md:px-4 py-2 md:py-2 rounded-full text-xs md:text-sm whitespace-nowrap cursor-default opacity-50">GET
@@ -372,9 +382,8 @@
                             <div class="swiper-slide">
                                 <div class="block content-card">
                                     <div class="poster-container">
-                                        <img src="https://placehold.co/400x500/4a1c40/ffffff?text=MADRID%0AURBAN%0ABACHATA%0A%0AFeb+20-22%2C+2027&font=montserrat&textsize=18"
-                                            alt="Madrid Urban Bachata Fest" class="w-full h-full object-cover">
-                                        <div class="gaussian-blur"></div>
+                                        <img src="images/eventPoster5.png" alt="Tallinn Bachata Experience"
+                                            class="w-full h-full object-cover">
                                         <div class="absolute top-3 right-3 flex space-x-2">
                                             <button onclick="event.stopPropagation(); openFollowModal(); return false;"
                                                 class="p-2 bg-white/90 rounded-full text-gray-700 hover:text-revelti-orange shadow-md">
@@ -397,13 +406,13 @@
                                                 </svg>
                                             </button>
                                         </div>
-                                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white">
+                                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white text-overlay">
                                             <div class="flex items-end justify-between">
                                                 <div>
                                                     <h3 class="text-sm md:text-xl lg:text-2xl tracking-wider">
-                                                        MADRID URBAN BACHATA</h3>
+                                                        TALLINN BACHATA EXPERIENCE</h3>
                                                     <p class="text-[10px] md:text-sm opacity-80 font-medium mt-0.5">
-                                                        FEB 20-22, 2027 | MADRID</p>
+                                                        NOV 19-23, 2026 | TALLINN</p>
                                                 </div>
                                                 <span
                                                     class="border-2 border-white text-white font-bold px-3 md:px-4 py-2 md:py-2 rounded-full text-xs md:text-sm whitespace-nowrap cursor-default opacity-50">GET
