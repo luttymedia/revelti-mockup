@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revelti - Home</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        revelti: {
+                            blue: '#213c63',
+                            orange: '#f58220',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#000000">
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+    <style>
+        .gradient-overlay {
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.5) 40%, transparent 100%);
+        }
+
+        .gaussian-blur {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 21%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.1) 80%, transparent 100%);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        @media (min-width: 1024px) {
+            .gaussian-blur {
+                height: 15%;
+            }
+        }
+
+        .swiper {
+            width: 100%;
+            padding-bottom: 20px;
+        }
+
+        .swiper-slide {
+            background-position: center;
+            background-size: cover;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media (max-width: 1023px) {
+            .swiper-slide img {
+                aspect-ratio: 4 / 5;
+            }
+        }
+
+        .poster-container {
+            aspect-ratio: 4 / 5;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (min-width: 1024px) {
+            .poster-container[style*="height"] {
+                aspect-ratio: auto;
+            }
+        }
+
+        .swiper-slide-next,
+        .swiper-slide-prev {
+            opacity: 0.5;
+            transform: scale(0.82) !important;
+            z-index: 1;
+        }
+
+        .swiper-slide-next {
+            transform: scale(0.82) translateX(-25%) !important;
+        }
+
+        .swiper-slide-prev {
+            transform: scale(0.82) translateX(25%) !important;
+        }
+
+        .swiper-slide-active {
+            opacity: 1;
+            transform: scale(1) !important;
+            z-index: 2;
+        }
+
+        .content-card {
+            overflow: hidden;
+        }
+
+        .swiper-pagination-bullet {
+            background: white;
+            opacity: 0.5;
+            width: 10px;
+            height: 10px;
+        }
+
+        .swiper-pagination-bullet-active {
+            opacity: 1;
+            background: #f58220;
+            width: 24px;
+            border-radius: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .swiper-slide-next {
+                transform: scale(0.75) translateX(-12%) !important;
+            }
+
+            .swiper-slide-prev {
+                transform: scale(0.75) translateX(12%) !important;
+            }
+        }
+
+        .tab-active {
+            background-color: #213c63 !important;
+            color: white !important;
+        }
+    </style>
+</head>
+
+<body class="antialiased text-gray-800">
+    <div id="navbar-placeholder"></div>
+
+    <div class="relative hidden lg:block max-w-2xl md:max-w-full lg:max-w-full mx-auto overflow-hidden">
+        <img src="images/banner1200x400.png" alt="Revelti Banner: Find your dance. Find your people."
+            class="w-full h-auto object-cover">
+    </div>
+
+    <div class="max-w-2xl md:max-w-full lg:max-w-full mx-auto bg-white shadow-md overflow-hidden">
+
+        <header class="p-4">
+            <div class="relative">
+                <input type="text" placeholder="Search events, organizers, creators..."
+                    class="w-full py-2.5 pl-10 pr-4 border border-gray-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-revelti-blue focus:border-transparent bg-white shadow-sm">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
+            </div>
+        </header>
+
+        <nav class="border-t border-b border-gray-100">
+            <div class="flex overflow-x-auto">
+                <button onclick="switchTab('events')"
+                    class="tab-button flex-1 px-4 py-3 text-center text-sm font-semibold transition duration-300 whitespace-nowrap tab-active">Events</button>
+                <button onclick="switchTab('organizers')"
+                    class="tab-button flex-1 px-4 py-3 text-center text-sm font-semibold text-gray-500 hover:text-revelti-blue transition duration-300 whitespace-nowrap">Organizers</button>
+                <button onclick="switchTab('creators')"
+                    class="tab-button flex-1 px-4 py-3 text-center text-sm font-semibold text-gray-500 hover:text-revelti-blue transition duration-300 whitespace-nowrap">Creatives</button>
+            </div>
+        </nav>
+
+        <main class="p-4 lg:p-6 bg-gray-50">
+            <div id="events" class="tab-content space-y-6">
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl lg:text-2xl font-bold revelti-blue">Featured Events</h2>
+                        <a href="eventListings.html" class="p-1 rounded-full hover:bg-gray-200">
+                            <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <div class="swiper mySwiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <a href="eventDetail.html" class="block content-card">
+                                    <div class="poster-container">
+                                        <img src="images/eventPoster.png" alt="Bachata Geneva Festival"
+                                            class="w-full h-full object-cover">
+                                        <div class="gaussian-blur"></div>
+                                        <div class="absolute top-3 right-3 flex space-x-2">
+                                            <button onclick="event.stopPropagation(); openFollowModal(); return false;"
+                                                class="p-2 bg-white/90 rounded-full text-gray-700 hover:text-revelti-orange shadow-md">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
+                                                    </path>
+                                                </svg>
+                                            </button>
+                                            <button onclick="event.stopPropagation(); openShareModal(); return false;"
+                                                class="p-2 bg-white/90 rounded-full text-gray-700 hover:text-revelti-orange shadow-md">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z">
+                                                    </path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white">
+                                            <div class="flex items-end justify-between">
+                                                <div>
+                                                    <h3 class="text-sm md:text-xl lg:text-2xl tracking-wider">
+                                                        BACHATA GENEVA FESTIVAL</h3>
+                                                    <p class="text-[10px] md:text-sm opacity-80 font-medium mt-0.5">
+                                                        OCT 8-12, 2026 | GENEVA</p>
+                                                </div>
+                                                <a href="ticketPurchase.html"
+                                                    class="border-2 border-white text-white font-bold px-3 md:px-4 py-2 md:py-2 rounded-full text-xs md:text-sm whitespace-nowrap hover:bg-white hover:text-black transition cursor-pointer">GET
+                                                    TICKETS</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="block content-card">
+                                    <div class="poster-container">
+                                        <img src="https://placehold.co/400x500/213c63/ffffff?text=BARCELONA%0AZOUK%0AWEEKENDER%0A%0ANov+15-17%2C+2026&font=montserrat&textsize=18"
+                                            alt="Barcelona Brazilian Zouk Weekender" class="w-full h-full object-cover">
+                                        <div class="gaussian-blur"></div>
+                                        <div class="absolute top-3 right-3 flex space-x-2">
+                                            <button onclick="event.stopPropagation(); openFollowModal(); return false;"
+                                                class="p-2 bg-white/90 rounded-full text-gray-700 hover:text-revelti-orange shadow-md">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
+                                                    </path>
+                                                </svg>
+                                            </button>
+                                            <button onclick="event.stopPropagation(); openShareModal(); return false;"
+                                                class="p-2 bg-white/90 rounded-full text-gray-700 hover:text-revelti-orange shadow-md">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z">
+                                                    </path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white">
+                                            <div class="flex items-end justify-between">
+                                                <div>
+                                                    <h3 class="text-sm md:text-xl lg:text-2xl tracking-wider">
+                                                        BARCELONA ZOUK WEEKENDER</h3>
+                                                    <p class="text-[10px] md:text-sm opacity-80 font-medium mt-0.5">
+                                                        NOV 15-17, 2026 | BARCELONA</p>
+                                                </div>
+                                                <span
+                                                    class="border-2 border-white text-white font-bold px-3 md:px-4 py-2 md:py-2 rounded-full text-xs md:text-sm whitespace-nowrap cursor-default opacity-50">GET
+                                                    TICKETS</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="block content-card">
+                                    <div class="poster-container">
+                                        <img src="https://placehold.co/400x500/f58220/ffffff?text=WARSAW%0ABACHATA%0AMARATHON%0A%0ADec+4-6%2C+2026&font=montserrat&textsize=18"
+                                            alt="Warsaw Bachata Marathon" class="w-full h-full object-cover">
+                                        <div class="gaussian-blur"></div>
+                                        <div class="absolute top-3 right-3 flex space-x-2">
+                                            <button onclick="event.stopPropagation(); openFollowModal(); return false;"
+                                                class="p-2 bg-white/90 rounded-full text-gray-700 hover:text-revelti-orange shadow-md">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
+                                                    </path>
+                                                </svg>
+                                            </button>
+                                            <button onclick="event.stopPropagation(); openShareModal(); return false;"
+                                                class="p-2 bg-white/90 rounded-full text-gray-700 hover:text-revelti-orange shadow-md">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z">
+                                                    </path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white">
+                                            <div class="flex items-end justify-between">
+                                                <div>
+                                                    <h3 class="text-sm md:text-xl lg:text-2xl tracking-wider">
+                                                        WARSAW BACHATA MARATHON</h3>
+                                                    <p class="text-[10px] md:text-sm opacity-80 font-medium mt-0.5">
+                                                        DEC 4-6, 2026 | WARSAW</p>
+                                                </div>
+                                                <span
+                                                    class="border-2 border-white text-white font-bold px-3 md:px-4 py-2 md:py-2 rounded-full text-xs md:text-sm whitespace-nowrap cursor-default opacity-50">GET
+                                                    TICKETS</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="block content-card">
+                                    <div class="poster-container">
+                                        <img src="https://placehold.co/400x500/1e3a5f/ffffff?text=ATHENS%0ALATIN+DANCE%0AGETAWAY%0A%0AJan+10-14%2C+2027&font=montserrat&textsize=18"
+                                            alt="Athens Latin Dance Getaway" class="w-full h-full object-cover">
+                                        <div class="gaussian-blur"></div>
+                                        <div class="absolute top-3 right-3 flex space-x-2">
+                                            <button onclick="event.stopPropagation(); openFollowModal(); return false;"
+                                                class="p-2 bg-white/90 rounded-full text-gray-700 hover:text-revelti-orange shadow-md">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
+                                                    </path>
+                                                </svg>
+                                            </button>
+                                            <button onclick="event.stopPropagation(); openShareModal(); return false;"
+                                                class="p-2 bg-white/90 rounded-full text-gray-700 hover:text-revelti-orange shadow-md">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z">
+                                                    </path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white">
+                                            <div class="flex items-end justify-between">
+                                                <div>
+                                                    <h3 class="text-sm md:text-xl lg:text-2xl tracking-wider">
+                                                        ATHENS LATIN DANCE</h3>
+                                                    <p class="text-[10px] md:text-sm opacity-80 font-medium mt-0.5">
+                                                        JAN 10-14, 2027 | ATHENS</p>
+                                                </div>
+                                                <span
+                                                    class="border-2 border-white text-white font-bold px-3 md:px-4 py-2 md:py-2 rounded-full text-xs md:text-sm whitespace-nowrap cursor-default opacity-50">GET
+                                                    TICKETS</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="block content-card">
+                                    <div class="poster-container">
+                                        <img src="https://placehold.co/400x500/4a1c40/ffffff?text=MADRID%0AURBAN%0ABACHATA%0A%0AFeb+20-22%2C+2027&font=montserrat&textsize=18"
+                                            alt="Madrid Urban Bachata Fest" class="w-full h-full object-cover">
+                                        <div class="gaussian-blur"></div>
+                                        <div class="absolute top-3 right-3 flex space-x-2">
+                                            <button onclick="event.stopPropagation(); openFollowModal(); return false;"
+                                                class="p-2 bg-white/90 rounded-full text-gray-700 hover:text-revelti-orange shadow-md">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
+                                                    </path>
+                                                </svg>
+                                            </button>
+                                            <button onclick="event.stopPropagation(); openShareModal(); return false;"
+                                                class="p-2 bg-white/90 rounded-full text-gray-700 hover:text-revelti-orange shadow-md">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z">
+                                                    </path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white">
+                                            <div class="flex items-end justify-between">
+                                                <div>
+                                                    <h3 class="text-sm md:text-xl lg:text-2xl tracking-wider">
+                                                        MADRID URBAN BACHATA</h3>
+                                                    <p class="text-[10px] md:text-sm opacity-80 font-medium mt-0.5">
+                                                        FEB 20-22, 2027 | MADRID</p>
+                                                </div>
+                                                <span
+                                                    class="border-2 border-white text-white font-bold px-3 md:px-4 py-2 md:py-2 rounded-full text-xs md:text-sm whitespace-nowrap cursor-default opacity-50">GET
+                                                    TICKETS</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <details open>
+                    <summary class="flex justify-between items-center cursor-pointer">
+                        <h2 class="text-xl lg:text-2xl font-bold revelti-blue">Trending Events</h2>
+                        <a href="eventListings.html" class="p-1 rounded-full hover:bg-gray-200">
+                            <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                            </svg>
+                        </a>
+                    </summary>
+                    <div
+                        class="flex space-x-4 overflow-x-auto pb-4 mt-3 horizontal-scroll lg:grid lg:grid-cols-3 lg:gap-8 lg:overflow-visible">
+                        <div class="flex-shrink-0 w-2/3 sm:w-1/2 lg:w-full">
+                            <a href="eventDetail.html" class="h-full">
+                                <div
+                                    class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 shadow-sm h-full flex flex-col">
+                                    <div class="relative">
+                                        <img src="https://placehold.co/600x400/213c63/ffffff?text=Trending"
+                                            alt="Event Poster" class="w-full h-40 lg:h-48 object-cover">
+                                        <div class="absolute top-2 right-2 flex space-x-1">
+                                            <button
+                                                class="p-1.5 bg-green-600 rounded-full text-white hover:text-revelti-orange"><svg
+                                                    class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
+                                                    </path>
+                                                </svg></button>
+                                            <button
+                                                class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
+                                                    class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z">
+                                                    </path>
+                                                </svg></button>
+                                        </div>
+                                    </div>
+                                    <div class="p-3 lg:p-4 flex-grow flex flex-col">
+                                        <h4 class="font-bold text-sm lg:text-lg revelti-blue truncate">BCN Bachata
+                                            Congress</h4>
+                                        <p class="text-xs lg:text-sm text-gray-500">Oct 10-12, 2025 | Barcelona</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="flex-shrink-0 w-2/3 sm:w-1/2 lg:w-full">
+                            <a href="eventDetail.html" class="h-full">
+                                <div
+                                    class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 shadow-sm h-full flex flex-col">
+                                    <div class="relative">
+                                        <img src="https://placehold.co/600x400/213c63/ffffff?text=Trending"
+                                            alt="Event Poster" class="w-full h-40 lg:h-48 object-cover">
+                                        <div class="absolute top-2 right-2 flex space-x-1">
+                                            <button
+                                                class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
+                                                    class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
+                                                    </path>
+                                                </svg></button>
+                                            <button
+                                                class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
+                                                    class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z">
+                                                    </path>
+                                                </svg></button>
+                                        </div>
+                                    </div>
+                                    <div class="p-3 lg:p-4 flex-grow flex flex-col">
+                                        <h4 class="font-bold text-sm lg:text-lg revelti-blue truncate">Seville Kizomba
+                                            Immersion</h4>
+                                        <p class="text-xs lg:text-sm text-gray-500">Nov 20-22, 2025 | Seville</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="flex-shrink-0 w-2/3 sm:w-1/2 lg:w-full">
+                            <a href="eventDetail.html" class="h-full">
+                                <div
+                                    class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 shadow-sm h-full flex flex-col">
+                                    <div class="relative">
+                                        <img src="https://placehold.co/600x400/213c63/ffffff?text=Trending"
+                                            alt="Event Poster" class="w-full h-40 lg:h-48 object-cover">
+                                        <div class="absolute top-2 right-2 flex space-x-1">
+                                            <button
+                                                class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
+                                                    class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
+                                                    </path>
+                                                </svg></button>
+                                            <button
+                                                class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
+                                                    class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z">
+                                                    </path>
+                                                </svg></button>
+                                        </div>
+                                    </div>
+                                    <div class="p-3 lg:p-4 flex-grow flex flex-col">
+                                        <h4 class="font-bold text-sm lg:text-lg revelti-blue truncate">Zaragoza Dance
+                                            Fest</h4>
+                                        <p class="text-xs lg:text-sm text-gray-500">Sep 28-30, 2025 | Zaragoza</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </details>
+
+                <details open>
+                    <summary class="flex justify-between items-center cursor-pointer">
+                        <h2 class="text-xl lg:text-2xl font-bold revelti-blue">New Events</h2>
+                        <a href="eventListings.html" class="p-1 rounded-full hover:bg-gray-200">
+                            <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                            </svg>
+                        </a>
+                    </summary>
+                    <div
+                        class="flex space-x-4 overflow-x-auto pb-4 mt-3 horizontal-scroll lg:grid lg:grid-cols-3 lg:gap-8 lg:overflow-visible">
+                        <div class="flex-shrink-0 w-2/3 sm:w-1/2 lg:w-full">
+                            <a href="eventDetail.html" class="h-full">
+                                <div
+                                    class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 shadow-sm h-full flex flex-col">
+                                    <div class="relative">
+                                        <img src="https://placehold.co/600x400/cccccc/ffffff?text=New"
+                                            alt="Event Poster" class="w-full h-40 lg:h-48 object-cover">
+                                        <div class="absolute top-2 right-2 flex space-x-1">
+                                            <button
+                                                class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
+                                                    class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
+                                                    </path>
+                                                </svg></button>
+                                            <button
+                                                class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
+                                                    class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z">
+                                                    </path>
+                                                </svg></button>
+                                        </div>
+                                    </div>
+                                    <div class="p-3 lg:p-4 flex-grow flex flex-col">
+                                        <h4 class="font-bold text-sm lg:text-lg revelti-blue truncate">Bilbao Dance
+                                            Weekend</h4>
+                                        <p class="text-xs lg:text-sm text-gray-500">Dec 5-7, 2025 | Bilbao</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="flex-shrink-0 w-2/3 sm:w-1/2 lg:w-full">
+                            <a href="eventDetail.html" class="h-full">
+                                <div
+                                    class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 shadow-sm h-full flex flex-col">
+                                    <div class="relative">
+                                        <img src="https://placehold.co/600x400/cccccc/ffffff?text=New"
+                                            alt="Event Poster" class="w-full h-40 lg:h-48 object-cover">
+                                        <div class="absolute top-2 right-2 flex space-x-1">
+                                            <button
+                                                class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
+                                                    class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
+                                                    </path>
+                                                </svg></button>
+                                            <button
+                                                class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
+                                                    class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z">
+                                                    </path>
+                                                </svg></button>
+                                        </div>
+                                    </div>
+                                    <div class="p-3 lg:p-4 flex-grow flex flex-col">
+                                        <h4 class="font-bold text-sm lg:text-lg revelti-blue truncate">Mallorca Beach
+                                            Festival</h4>
+                                        <p class="text-xs lg:text-sm text-gray-500">Jun 12-14, 2026 | Mallorca</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="flex-shrink-0 w-2/3 sm:w-1/2 lg:w-full">
+                            <a href="eventDetail.html" class="h-full">
+                                <div
+                                    class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 shadow-sm h-full flex flex-col">
+                                    <div class="relative">
+                                        <img src="https://placehold.co/600x400/cccccc/ffffff?text=New"
+                                            alt="Event Poster" class="w-full h-40 lg:h-48 object-cover">
+                                        <div class="absolute top-2 right-2 flex space-x-1">
+                                            <button
+                                                class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
+                                                    class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
+                                                    </path>
+                                                </svg></button>
+                                            <button
+                                                class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
+                                                    class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z">
+                                                    </path>
+                                                </svg></button>
+                                        </div>
+                                    </div>
+                                    <div class="p-3 lg:p-4 flex-grow flex flex-col">
+                                        <h4 class="font-bold text-sm lg:text-lg revelti-blue truncate">Urban Kiz
+                                            Experience</h4>
+                                        <p class="text-xs lg:text-sm text-gray-500">Feb 6-8, 2026 | Barcelona</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </details>
+
+                <div class="bg-revelti-orange rounded-lg p-6 lg:p-8 text-center mt-6">
+                    <h3 class="text-white text-2xl lg:text-3xl font-bold">Are you an Organizer or Visual Creative?</h3>
+                    <p class="text-white mt-1 lg:text-lg">Join Revelti and connect with a passionate community.</p>
+                    <button
+                        class="mt-4 bg-white text-revelti-orange font-bold py-2 px-6 rounded-full shadow-md hover:bg-gray-100 transition-colors">Learn
+                        More</button>
+                </div>
+            </div>
+
+            <div id="organizers" class="tab-content hidden">
+                <h2 class="text-xl font-bold revelti-blue mb-4">Featured Organizers</h2>
+                <div class="flex space-x-4 overflow-x-auto pb-4">
+                    <a href="organizerPortfolio.html" class="flex-shrink-0 text-center w-24">
+                        <img src="images/organizerAvatar.png" alt="Organizer Avatar"
+                            class="w-24 h-24 rounded-full object-cover shadow-md mx-auto">
+                        <p class="mt-2 text-sm font-semibold revelti-blue break-words">Bachata Geneva</p>
+                    </a>
+                    <a href="#" class="flex-shrink-0 text-center w-24">
+                        <img src="https://placehold.co/80x80/213c63/ffffff?text=E" alt="Avatar for Esencia"
+                            class="w-24 h-24 rounded-full object-cover shadow-md mx-auto">
+                        <p class="mt-2 text-sm font-semibold revelti-blue break-words">Esencia</p>
+                    </a>
+                    <a href="#" class="flex-shrink-0 text-center w-24">
+                        <img src="https://placehold.co/80x80/213c63/ffffff?text=M" alt="Avatar for Manisero"
+                            class="w-24 h-24 rounded-full object-cover shadow-md mx-auto">
+                        <p class="mt-2 text-sm font-semibold revelti-blue break-words">Manisero</p>
+                    </a>
+                </div>
+            </div>
+
+            <div id="creators" class="tab-content hidden">
+                <h2 class="text-xl font-bold revelti-blue mb-4">Featured Visual Creatives</h2>
+                <div class="grid grid-cols-3 gap-4 lg:flex lg:space-x-4 lg:overflow-x-auto lg:pb-4">
+                    <a href="creatorPortfolio.html" class="text-center lg:flex-shrink-0 lg:w-24">
+                        <img src="https://placehold.co/80x80/f58220/ffffff?text=A" alt="Avatar for AMedia"
+                            class="w-24 h-24 rounded-full object-cover shadow-md mx-auto">
+                        <p class="mt-2 text-sm font-semibold revelti-blue break-words">AMedia</p>
+                    </a>
+                    <a href="#" class="text-center lg:flex-shrink-0 lg:w-24">
+                        <img src="https://placehold.co/80x80/f58220/ffffff?text=SI" alt="Avatar for Sha Iborra"
+                            class="w-24 h-24 rounded-full object-cover shadow-md mx-auto">
+                        <p class="mt-2 text-sm font-semibold revelti-blue break-words">Sha Iborra</p>
+                    </a>
+                    <a href="#" class="text-center lg:flex-shrink-0 lg:w-24">
+                        <img src="https://placehold.co/80x80/f58220/ffffff?text=LM" alt="Avatar for Lutty Moreira"
+                            class="w-24 h-24 rounded-full object-cover shadow-md mx-auto">
+                        <p class="mt-2 text-sm font-semibold revelti-blue break-words">Lutty Moreira</p>
+                    </a>
+                    <a href="#" class="text-center lg:flex-shrink-0 lg:w-24">
+                        <img src="https://placehold.co/80x80/f58220/ffffff?text=PR" alt="Avatar for Pablo Ríos"
+                            class="w-24 h-24 rounded-full object-cover shadow-md mx-auto">
+                        <p class="mt-2 text-sm font-semibold revelti-blue break-words">Pablo Ríos</p>
+                    </a>
+                    <a href="#" class="text-center lg:flex-shrink-0 lg:w-24">
+                        <img src="https://placehold.co/80x80/f58220/ffffff?text=V" alt="Avatar for Visuals Pro"
+                            class="w-24 h-24 rounded-full object-cover shadow-md mx-auto">
+                        <p class="mt-2 text-sm font-semibold revelti-blue break-words">Visuals Pro</p>
+                    </a>
+                    <a href="#" class="text-center lg:flex-shrink-0 lg:w-24">
+                        <img src="https://placehold.co/80x80/f58220/ffffff?text=D" alt="Avatar for Dance Vids"
+                            class="w-24 h-24 rounded-full object-cover shadow-md mx-auto">
+                        <p class="mt-2 text-sm font-semibold revelti-blue break-words">Dance Vids</p>
+                    </a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        function switchTab(targetId) {
+            tabContents.forEach(content => {
+                content.classList.add('hidden');
+            });
+
+            tabButtons.forEach(button => {
+                button.classList.remove('tab-active');
+                button.classList.add('text-gray-500');
+            });
+
+            const targetContent = document.getElementById(targetId);
+            if (targetContent) {
+                targetContent.classList.remove('hidden');
+            }
+
+            const targetButton = document.querySelector(`[onclick="switchTab('${targetId}')"]`);
+            if (targetButton) {
+                targetButton.classList.add('tab-active');
+                targetButton.classList.remove('text-gray-500');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            switchTab('events');
+        });
+
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 1.2,
+            centeredSlides: true,
+            spaceBetween: -30,
+            loop: true,
+            speed: 500,
+            threshold: 20,
+            longSwipesRatio: 0.1,
+            followFinger: true,
+            allowTouchMove: true,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            breakpoints: {
+                1024: {
+                    slidesPerView: 2.4,
+                    spaceBetween: -150,
+                }
+            },
+            on: {
+                init: function () {
+                    updateSlideClasses(this);
+                },
+                slideChange: function () {
+                    updateSlideClasses(this);
+                },
+                transitionEnd: function () {
+                    updateSlideClasses(this);
+                }
+            }
+        });
+
+        function updateSlideClasses(swiper) {
+            const slides = swiper.slides;
+            const activeIndex = swiper.activeIndex;
+
+            slides.forEach((slide, index) => {
+                slide.classList.remove('swiper-slide-active', 'swiper-slide-next', 'swiper-slide-prev');
+            });
+
+            const realIndex = swiper.realIndex;
+            const nextSlide = slides[swiper.activeIndex + 1] || slides[0];
+            const prevSlide = slides[swiper.activeIndex - 1] || slides[slides.length - 1];
+
+            slides[swiper.activeIndex].classList.add('swiper-slide-active');
+            nextSlide.classList.add('swiper-slide-next');
+            prevSlide.classList.add('swiper-slide-prev');
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') swiper.slidePrev();
+            if (e.key === 'ArrowRight') swiper.slideNext();
+        });
+
+        function syncPosterHeight() {
+            const banner = document.querySelector('.hidden.lg\\:block img');
+            const posters = document.querySelectorAll('.poster-container');
+
+            if (window.innerWidth >= 1024 && banner) {
+                const bannerHeight = banner.offsetHeight;
+                const posterWidth = bannerHeight * 1.25;
+                posters.forEach(poster => {
+                    poster.style.height = bannerHeight + 'px';
+                    poster.style.width = posterWidth + 'px';
+                });
+            } else {
+                posters.forEach(poster => {
+                    poster.style.height = '';
+                    poster.style.width = '';
+                    poster.style.aspectRatio = '4 / 5';
+                });
+            }
+        }
+
+        syncPosterHeight();
+        window.addEventListener('resize', syncPosterHeight);
+    </script>
+
+    <!-- Follow Event Modal -->
+    <div id="follow-modal"
+        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-sm">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold revelti-blue">Follow Event Updates</h3>
+                <button onclick="closeFollowModal()"
+                    class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+            </div>
+            <div class="space-y-4">
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-700">Media galleries updates</span>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" value="" class="sr-only peer" checked>
+                        <div
+                            class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-revelti-orange">
+                        </div>
+                    </label>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-700">Event announcements</span>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" value="" class="sr-only peer" checked>
+                        <div
+                            class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-revelti-orange">
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <button onclick="closeFollowModal()"
+                class="mt-6 w-full bg-revelti-orange text-white font-bold py-2 px-4 rounded-lg">Confirm</button>
+        </div>
+    </div>
+
+    <!-- Share Modal -->
+    <div id="share-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-sm">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold revelti-blue">Share Event</h3>
+                <button onclick="closeShareModal()"
+                    class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+            </div>
+            <div class="space-y-4">
+                <p class="text-gray-700">Copy the link to share this event:</p>
+                <div class="flex items-center space-x-2">
+                    <input type="text" id="share-link-input" readonly
+                        class="flex-1 p-2 border border-gray-300 rounded-md bg-gray-50 text-sm"
+                        value="https://revelti.com/event/bachata-geneva">
+                    <button onclick="copyShareLink()"
+                        class="bg-revelti-blue text-white font-semibold py-2 px-4 rounded-lg hover:bg-revelti-orange transition">Copy</button>
+                </div>
+                <p id="copy-success-msg" class="text-green-600 text-sm hidden">Link copied to clipboard!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openFollowModal() {
+            document.getElementById('follow-modal').classList.remove('hidden');
+        }
+
+        function closeFollowModal() {
+            document.getElementById('follow-modal').classList.add('hidden');
+        }
+
+        function openShareModal() {
+            document.getElementById('share-modal').classList.remove('hidden');
+        }
+
+        function closeShareModal() {
+            document.getElementById('share-modal').classList.add('hidden');
+        }
+
+        function copyShareLink() {
+            const input = document.getElementById('share-link-input');
+            input.select();
+            document.execCommand('copy');
+            const msg = document.getElementById('copy-success-msg');
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 2000);
+        }
+
+        document.getElementById('follow-modal').addEventListener('click', function (e) {
+            if (e.target === this) closeFollowModal();
+        });
+
+        document.getElementById('share-modal').addEventListener('click', function (e) {
+            if (e.target === this) closeShareModal();
+        });
+    </script>
+
+    <script src="main.js" defer></script>
+    <div id="footer-placeholder"></div>
+
+    <button id="installButton" class="hidden">Install App</button>
+
+    <script>
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("/service-worker.js");
+        }
+    </script>
+
+    <script>
+        let deferredPrompt;
+        const installButton = document.getElementById('installButton');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installButton.classList.remove('hidden');
+        });
+
+        installButton.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                installButton.classList.add('hidden');
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`User response to the install prompt: ${outcome}`);
+                deferredPrompt = null;
+            }
+        });
+
+        window.addEventListener('appinstalled', () => {
+            installButton.classList.add('hidden');
+            console.log('PWA was installed.');
+        });
+    </script>
+</body>
+
+</html>
