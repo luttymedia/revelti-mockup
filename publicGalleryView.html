@@ -557,6 +557,7 @@
             justify-content: space-between;
             align-items: center;
             z-index: 10010;
+            transition: opacity 0.3s ease;
         }
 
         .creator-info {
@@ -621,6 +622,7 @@
             object-fit: contain;
             box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
             transition: none;
+            cursor: pointer;
         }
 
         .lightbox-play-btn {
@@ -650,7 +652,12 @@
             cursor: pointer;
             z-index: 10002;
             border-radius: 50%;
-            transition: 0.2s;
+            transition: background 0.2s, opacity 0.3s ease;
+        }
+
+        .lightbox-ui-hidden {
+            opacity: 0;
+            pointer-events: none;
         }
 
         .nav-btn:hover {
@@ -891,7 +898,7 @@
                 <polyline points="9 18 15 12 9 6"></polyline>
             </svg></div>
         <div id="popup-content-wrapper">
-            <img id="popup-img" src="" onclick="event.stopPropagation()">
+            <img id="popup-img" src="" onclick="toggleLightboxOverlays(event)">
             <button class="lightbox-play-btn" id="pop-play"><svg width="30" height="30" viewBox="0 0 24 24"
                     fill="currentColor">
                     <path d="M8 5v14l11-7z"></path>
@@ -1013,6 +1020,7 @@
                 const incomingImg = document.createElement('img');
                 incomingImg.id = 'popup-img';
                 incomingImg.style.cssText = 'position:absolute;max-width:100%;max-height:100%;object-fit:contain;box-shadow:0 0 50px rgba(0,0,0,0.5);transform:translateX(' + (direction > 0 ? '100%' : '-100%') + ');opacity:0;transition:transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.35s ease;';
+                incomingImg.onclick = (e) => toggleLightboxOverlays(e);
                 incomingImg.onload = () => {
                     requestAnimationFrame(() => {
                         incomingImg.style.transform = 'translateX(0)';
@@ -1038,6 +1046,7 @@
                 popupImg.src = nextSrc;
                 popupImg.style.transform = 'translateX(0)';
                 popupImg.style.opacity = '1';
+                popupImg.onclick = (e) => toggleLightboxOverlays(e);
             }
             
             const meta = creatorMetadata[item.creator];
@@ -1055,7 +1064,30 @@
             updateLightbox(direction);
         }
         function closeLightbox(e) { if (e) e.stopPropagation(); popup.style.display = 'none'; document.body.style.overflow = 'auto'; }
-        function closeLightboxOnClick(e) { if (e.target === popup || e.target.id === 'popup-content-wrapper') closeLightbox(); }
+        function closeLightboxOnClick(e) { 
+            const wrapper = document.getElementById('popup-content-wrapper');
+            if (e.target === popup || e.target === wrapper) {
+                closeLightbox(); 
+            }
+        }
+
+        // Toggle overlay visibility on image click
+        function toggleLightboxOverlays(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const header = document.querySelector('.popup-header');
+            const navBtns = document.querySelectorAll('.nav-btn');
+            
+            const isHidden = header.classList.contains('lightbox-ui-hidden');
+            
+            if (isHidden) {
+                header.classList.remove('lightbox-ui-hidden');
+                navBtns.forEach(btn => btn.classList.remove('lightbox-ui-hidden'));
+            } else {
+                header.classList.add('lightbox-ui-hidden');
+                navBtns.forEach(btn => btn.classList.add('lightbox-ui-hidden'));
+            }
+        }
 
         document.getElementById('btn-prev').onclick = (e) => { e.stopPropagation(); navigateLightbox(-1); };
         document.getElementById('btn-next').onclick = (e) => { e.stopPropagation(); navigateLightbox(1); };
