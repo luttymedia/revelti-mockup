@@ -159,7 +159,7 @@
     </style>
 </head>
 
-<body class="antialiased text-gray-800">
+<body class="antialiased text-gray-800 bg-white">
     <div id="navbar-placeholder"></div>
 
     <div class="relative hidden lg:block max-w-2xl md:max-w-full lg:max-w-full mx-auto overflow-hidden">
@@ -167,12 +167,12 @@
             class="w-full h-auto object-cover">
     </div>
 
-    <div class="max-w-2xl md:max-w-full lg:max-w-full mx-auto bg-white shadow-md overflow-hidden">
+    <div class="max-w-2xl md:max-w-full lg:max-w-full mx-auto bg-white overflow-hidden">
 
-        <header class="p-4">
-            <div class="relative">
+        <header class="lg:hidden py-2 px-1 md:px-0">
+            <div class="relative md:max-w-[400px] md:mx-auto">
                 <input type="text" placeholder="Search events, organizers, creators..."
-                    class="w-full py-2.5 pl-10 pr-4 border border-gray-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-revelti-blue focus:border-transparent bg-white shadow-sm">
+                    class="w-full py-2 pl-10 pr-4 border border-gray-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-revelti-blue focus:border-transparent bg-white">
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -182,18 +182,19 @@
             </div>
         </header>
 
-        <nav class="border-t border-b border-gray-200">
-            <div class="flex justify-around">
+        <nav class="px-1 md:px-0 lg:py-2">
+            <div
+                class="flex justify-around md:mx-auto md:max-w-[400px] bg-white rounded-full p-1 border border-gray-200 overflow-x-auto">
                 <button onclick="switchTab('events')"
-                    class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:revelti-blue transition duration-300 tab-active">Events</button>
+                    class="tab-button flex-1 px-4 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium tab-active">Events</button>
                 <button onclick="switchTab('organizers')"
-                    class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:revelti-blue transition duration-300">Organizers</button>
+                    class="tab-button flex-1 px-4 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">Organizers</button>
                 <button onclick="switchTab('creators')"
-                    class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:revelti-blue transition duration-300">Creatives</button>
+                    class="tab-button flex-1 px-4 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">Creatives</button>
             </div>
         </nav>
 
-        <main class="p-4 lg:p-6 bg-gray-50">
+        <main class="p-4 lg:p-6 bg-white">
             <div id="events" class="tab-content space-y-6">
                 <details open>
                     <summary class="flex justify-between items-center cursor-pointer list-none">
@@ -945,7 +946,7 @@
     <script src="main.js" defer></script>
     <div id="footer-placeholder"></div>
 
-    <button id="installButton" class="hidden">Install App</button>
+    <button id="installButton" class="hidden" style="display: none;">Install App</button>
 
     <script>
         if ("serviceWorker" in navigator) {
