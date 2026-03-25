@@ -399,6 +399,21 @@ document.addEventListener("DOMContentLoaded", function () {
                     });
                 }
 
+                // Smart hide on scroll
+                const mainNav = document.getElementById('main-nav');
+                if (mainNav) {
+                    let lastScrollY = 0;
+                    window.addEventListener('scroll', () => {
+                        const currentScrollY = window.scrollY;
+                        if (currentScrollY > lastScrollY && currentScrollY > 50) {
+                            mainNav.style.transform = 'translateY(-100%)';
+                        } else {
+                            mainNav.style.transform = 'translateY(0)';
+                        }
+                        lastScrollY = currentScrollY;
+                    });
+                }
+
                 if (searchIcon && searchBar && logo && searchContainer) {
                     searchIcon.addEventListener('click', (event) => {
                         event.stopPropagation();
