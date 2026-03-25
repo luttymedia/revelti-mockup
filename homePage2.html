@@ -779,6 +779,11 @@
             spaceBetween: -30,
             loop: true,
             speed: 500,
+            autoplay: {
+                delay: 5000,
+                pauseOnMouseEnter: true,
+                disableOnInteraction: false,
+            },
             threshold: 20,
             longSwipesRatio: 0.1,
             followFinger: true,
@@ -910,19 +915,23 @@
 
     <script>
         function openFollowModal() {
+            swiper.autoplay.pause();
             document.getElementById('follow-modal').classList.remove('hidden');
         }
 
         function closeFollowModal() {
             document.getElementById('follow-modal').classList.add('hidden');
+            swiper.autoplay.resume();
         }
 
         function openShareModal() {
+            swiper.autoplay.pause();
             document.getElementById('share-modal').classList.remove('hidden');
         }
 
         function closeShareModal() {
             document.getElementById('share-modal').classList.add('hidden');
+            swiper.autoplay.resume();
         }
 
         function copyShareLink() {
