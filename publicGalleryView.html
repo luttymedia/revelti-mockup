@@ -440,7 +440,25 @@
         }
 
         #btn-back-to-top {
-            display: none;
+            position: fixed;
+            bottom: 80px;
+            right: 25px;
+            z-index: 1000;
+            background-color: #f58220;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #btn-shuffle {
             position: fixed;
             bottom: 25px;
             right: 25px;
@@ -457,6 +475,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        #btn-shuffle:hover {
+            transform: scale(1.1);
+        }
+
+        #btn-shuffle.inactive {
+            background-color: #374151;
         }
 
         /* --- Team Modal --- */
@@ -819,6 +845,17 @@
         </svg>
     </button>
 
+    <button id="btn-shuffle" title="Shuffle">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 3 21 3 21 8"></polyline>
+            <line x1="4" y1="20" x2="21" y2="3"></line>
+            <polyline points="21 16 21 21 16 21"></polyline>
+            <line x1="15" y1="15" x2="21" y2="21"></line>
+            <line x1="4" y1="4" x2="9" y2="9"></line>
+        </svg>
+    </button>
+
     <!-- Team Filter Modal -->
     <div id="modal-team">
         <div class="team-card">
@@ -1117,6 +1154,31 @@
         const topBtn = document.getElementById('btn-back-to-top');
         window.onscroll = () => { topBtn.style.display = (window.scrollY > 400) ? 'flex' : 'none'; };
         topBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        const shuffleBtn = document.getElementById('btn-shuffle');
+        let isShuffled = true;
+
+        function updateShuffleButton() {
+            if (isShuffled) {
+                shuffleBtn.classList.remove('inactive');
+                shuffleBtn.title = 'Shuffle (active)';
+            } else {
+                shuffleBtn.classList.add('inactive');
+                shuffleBtn.title = 'Unshuffle (order by date)';
+            }
+        }
+
+        shuffleBtn.addEventListener('click', () => {
+            isShuffled = !isShuffled;
+            if (isShuffled) {
+                sessionStorage.removeItem('galleryShuffle');
+            } else {
+                sessionStorage.setItem('galleryShuffle', 'unshuffled');
+            }
+            updateShuffleButton();
+        });
+
+        updateShuffleButton();
     </script>
     <!-- Overlay Close Button (Only visible when in iframe) -->
     <button id="close-gallery-overlay"
