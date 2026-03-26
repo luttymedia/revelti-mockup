@@ -35,14 +35,14 @@
   for example: <div id="creative-navbar-placeholder"></div> 
 -->
 
-    <nav class="fixed top-0 left-0 right-0 bg-revelti-purple shadow-md z-50" style="font-family: 'Nunito', sans-serif;">
+    <nav id="creative-main-nav" class="fixed top-0 left-0 right-0 bg-revelti-purple shadow-md z-50 transition-transform duration-300" style="font-family: 'Nunito', sans-serif;">
         <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-12">
                 <!-- Logo -->
                 <div class="flex-shrink-0">
                     <a href="creativeDashboard.html">
                         <!-- Using the white text version of the logo -->
-                        <img class="h-6" src="images/reveltiLogoWhite.png" alt="Revelti Logo"
+                        <img class="h-5" src="images/reveltiLogoWhite.png" alt="Revelti Logo"
                             onerror="this.onerror=null;this.src='https://placehold.co/120x32/ffffff/6b21a8?text=revelti';">
                     </a>
                 </div>
@@ -56,17 +56,17 @@
                 <div class="flex items-center space-x-0">
                     <!-- Notification Icon -->
                     <a href="creativeNotifications.html" class="p-1.5 rounded-full hover:bg-white/20"
-                        title="Creative Notifications">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        title="Creative Notifications" data-no-active-link>
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                 d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
                             </path>
                         </svg>
                     </a>
                     <!-- Hamburger Icon -->
                     <button id="creative-hamburger-icon" class="p-1.5 rounded-full hover:bg-white/20">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                 d="M4 6h16M4 12h16M4 18h16"></path>
                         </svg>
                     </button>
