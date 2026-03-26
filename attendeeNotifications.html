@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="antialiased text-gray-800">
+<body class="antialiased text-gray-800 bg-white">
     <div id="navbar-placeholder"></div>
 
     <!-- Main container. This container is a flex column that manages the layout,
@@ -42,10 +42,10 @@
          The `h-screen` class ensures it fills the viewport on mobile and a fixed
          height on larger screens for modal-like appearance. -->
     <div
-        class="max-w-2xl md:max-w-full lg:max-w-full mx-auto bg-white shadow-md flex flex-col h-full full-height-modal">
+        class="max-w-2xl md:max-w-full lg:max-w-full mx-auto bg-white overflow-hidden flex flex-col h-full full-height-modal">
 
         <!-- Header Section -->
-        <header class="p-6 flex items-center justify-between">
+        <header class="sticky top-0 bg-white z-10 px-4 py-1 md:static md:px-6 md:py-6 flex items-center justify-between">
             <h1 class="text-xl font-bold revelti-blue">Notifications</h1>
             <div class="flex items-center space-x-0 flex-shrink-0">
                 <!-- Settings Access Button -->
@@ -64,7 +64,7 @@
         </header>
 
         <!-- Tab Navigation. The `flex-shrink-0` class prevents it from shrinking. -->
-        <nav class="sticky top-0 flex-shrink-0 bg-white z-40 py-2">
+        <nav class="sticky top-0 bg-white z-10 px-4 py-1 md:static md:px-6 md:py-2 flex-shrink-0 md:z-40">
             <div class="attendee-tab-container-wide">
                 <button data-tab-target="all" class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">All</button>
                 <button data-tab-target="socialMedia" class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">Social</button>
@@ -75,7 +75,7 @@
 
         <!-- Main Content Sections (Tabs). The `flex-1` class allows this section to grow and
              take up all available vertical space, while `overflow-y-auto` makes it scrollable. -->
-        <main class="p-4 bg-gray-50 flex-1 overflow-y-auto" style="height: calc(100vh - 5rem);">
+        <main class="px-4 py-4 bg-white flex-1 overflow-y-auto" style="height: calc(100vh - 5rem);">
             <!-- All Tab -->
             <div id="all" class="tab-content active" style="min-height: calc(100vh - 5rem);">
                 <div class="text-right mb-4">
