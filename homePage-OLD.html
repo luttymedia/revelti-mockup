@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Revelti - Home</title>
 
+    <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- Tailwind Configuration -->
     <script>
         tailwind.config = {
             theme: {
@@ -23,157 +25,57 @@
         }
     </script>
 
+
+    <!-- Google Fonts: Nunito -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 
+    <!-- Manifest to suppoert full screen PWA -->
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#000000">
 
     <link rel="stylesheet" href="style.css">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-
-    <style>
-        .gradient-overlay {
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.5) 40%, transparent 100%);
-        }
-
-        .gaussian-blur {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 21%;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.1) 80%, transparent 100%);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-
-        @media (min-width: 1024px) {
-            .gaussian-blur {
-                height: 15%;
-            }
-        }
-
-        .text-overlay {
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 50%, transparent 100%);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            padding-top: 12px;
-            padding-bottom: 12px;
-            padding-left: 12px;
-            padding-right: 12px;
-            width: 100%;
-            margin-top: auto;
-        }
-
-        .swiper {
-            width: 100%;
-            padding-bottom: 20px;
-        }
-
-        .swiper-slide {
-            background-position: center;
-            background-size: cover;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .swiper-slide img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        @media (max-width: 1023px) {
-            .swiper-slide img {
-                aspect-ratio: 4 / 5;
-            }
-        }
-
-        .poster-container {
-            aspect-ratio: 4 / 5;
-            width: 100%;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-        }
-
-        @media (min-width: 1024px) {
-            .poster-container[style*="height"] {
-                aspect-ratio: auto;
-            }
-        }
-
-        .swiper-slide-next,
-        .swiper-slide-prev {
-            opacity: 0.5;
-            transform: scale(0.82) !important;
-            z-index: 1;
-        }
-
-        .swiper-slide-next {
-            transform: scale(0.82) translateX(-25%) !important;
-        }
-
-        .swiper-slide-prev {
-            transform: scale(0.82) translateX(25%) !important;
-        }
-
-        .swiper-slide-active {
-            opacity: 1;
-            transform: scale(1) !important;
-            z-index: 2;
-        }
-
-        .content-card {
-            overflow: hidden;
-        }
-
-        .swiper-pagination-bullet {
-            background: white;
-            opacity: 0.5;
-            width: 10px;
-            height: 10px;
-        }
-
-        .swiper-pagination-bullet-active {
-            opacity: 1;
-            background: #f58220;
-            width: 24px;
-            border-radius: 10px;
-        }
-
-        @media (max-width: 768px) {
-            .swiper-slide-next {
-                transform: scale(0.75) translateX(-12%) !important;
-            }
-
-            .swiper-slide-prev {
-                transform: scale(0.75) translateX(12%) !important;
-            }
-        }
-    </style>
 </head>
 
-<body class="antialiased text-gray-800 bg-white">
+<body class="antialiased text-gray-800">
     <div id="navbar-placeholder"></div>
 
+    <!-- 
+        Full-width Main Banner 
+        This banner is now a layered component, using a background image,
+        a logo, and text. It is hidden by default on small screens
+        and becomes visible on large screens using the Tailwind 'lg:block' class.
+    -->
     <div class="relative hidden lg:block max-w-2xl md:max-w-full lg:max-w-full mx-auto overflow-hidden">
+        <!-- Banner Image (hidden on small screens) -->
         <img src="images/banner1200x400.png" alt="Revelti Banner: Find your dance. Find your people."
             class="w-full h-auto object-cover">
     </div>
 
-    <div class="max-w-2xl md:max-w-full lg:max-w-full mx-auto bg-white overflow-hidden">
+    <!-- Main container with a max-width for larger screens -->
+    <div class="max-w-2xl md:max-w-full lg:max-w-full mx-auto bg-white shadow-md overflow-hidden">
 
+        <!-- Header Section -->
+        <header class="p-4">
+            <!-- Search Bar -->
+            <div class="relative">
+                <input type="text" placeholder="Search for events, organizers, creators..."
+                    class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-revelti-orange">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
+            </div>
+        </header>
+
+        <!-- Tab Navigation -->
         <nav class="px-1 md:px-0 lg:py-2 py-1">
-            <div
-                class="flex justify-around md:mx-auto md:max-w-[400px] bg-white rounded-full p-1 border border-gray-200 overflow-x-auto">
+            <div class="attendee-tab-container">
                 <button onclick="switchTab('events')"
-                    class="tab-button flex-1 px-4 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium tab-active">Events</button>
+                    class="tab-button flex-1 px-4 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium attendee-tab-active">Events</button>
                 <button onclick="switchTab('organizers')"
                     class="tab-button flex-1 px-4 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">Organizers</button>
                 <button onclick="switchTab('creators')"
@@ -181,10 +83,18 @@
             </div>
         </nav>
 
-        <main class="p-4 lg:p-6 bg-white">
+        <!-- Main Content Sections (Tabs) -->
+        <main class="p-6 bg-gray-50">
+            <!-- Events Tab -->
             <div id="events" class="tab-content space-y-6">
+                <!-- 
+                    Section: Featured Events 
+                    - On mobile, this is a horizontally scrolling container.
+                    - On desktop (lg:), it transforms into a 3-column grid, removing the scroll behavior.
+                -->
                 <details open>
-                    <summary class="flex justify-between items-center cursor-pointer list-none">
+                    <summary class="flex justify-between items-center cursor-pointer">
+                        <!-- Title scales up on larger screens for better hierarchy -->
                         <h2 class="text-xl lg:text-2xl font-bold revelti-blue">Featured Events</h2>
                         <a href="eventListings.html" class="p-1 rounded-full hover:bg-gray-200">
                             <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -193,227 +103,130 @@
                             </svg>
                         </a>
                     </summary>
-                    <div class="swiper mySwiper mt-4">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <a href="eventDetail.html" class="block content-card">
-                                    <div class="poster-container">
-                                        <img src="images/eventPoster.png" alt="Bachata Geneva Festival"
-                                            class="w-full h-full object-cover">
-                                        <div class="absolute top-3 right-3 flex space-x-2">
-                                            <button onclick="event.stopPropagation(); openFollowModal(); return false;"
-                                                class="p-2 bg-white/90 rounded-full text-gray-700 hover:text-revelti-orange shadow-md">
-                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                    <!-- CHANGE: Added lg: grid classes to convert from a flex-row scroll to a grid on large screens. -->
+                    <div
+                        class="flex space-x-4 overflow-x-auto pb-4 mt-3 horizontal-scroll lg:grid lg:grid-cols-3 lg:gap-8 lg:overflow-visible">
+                        <!-- 
+                            Card 1:
+                            - Width is responsive: starts at 2/3, moves to 1/2 on sm, and fills the grid column on lg.
+                            - Padding, image height, and text sizes increase on lg screens.
+                        -->
+                        <div class="flex-shrink-0 w-2/3 sm:w-1/2 lg:w-full">
+                            <a href="eventDetail.html">
+                                <div
+                                    class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 shadow-sm h-full flex flex-col">
+                                    <div class="relative">
+                                        <!-- CHANGE: Image height increases on large screens -->
+                                        <img src="images/eventPoster.png" alt="Event Poster"
+                                            class="w-full h-40 lg:h-48 object-cover">
+                                        <div class="absolute top-2 right-2 flex space-x-1">
+                                            <button
+                                                class="p-1.5 bg-green-600 rounded-full text-white hover:text-revelti-orange"><svg
+                                                    class="w-5 h-5" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         stroke-width="2"
                                                         d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
                                                     </path>
-                                                </svg>
-                                            </button>
-                                            <button onclick="event.stopPropagation(); openShareModal(); return false;"
-                                                class="p-2 bg-white/90 rounded-full text-gray-700 hover:text-revelti-orange shadow-md">
-                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                </svg></button>
+                                            <button
+                                                class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
+                                                    class="w-5 h-5" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         stroke-width="2"
                                                         d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z">
                                                     </path>
-                                                </svg>
-                                            </button>
-                                        </div>
-                                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white text-overlay">
-                                            <div class="flex items-end justify-between">
-                                                <div>
-                                                    <h3 class="text-sm md:text-xl lg:text-2xl tracking-wider">
-                                                        BACHATA GENEVA FESTIVAL</h3>
-                                                    <p class="text-[10px] md:text-sm opacity-80 font-medium mt-0.5">
-                                                        OCT 8-12, 2026 | GENEVA</p>
-                                                </div>
-                                                <a href="ticketPurchase.html"
-                                                    class="border-2 border-white text-white font-bold px-3 md:px-4 py-2 md:py-2 rounded-full text-xs md:text-sm whitespace-nowrap hover:bg-white hover:text-black transition cursor-pointer">GET
-                                                    TICKETS</a>
-                                            </div>
+                                                </svg></button>
                                         </div>
                                     </div>
-                                </a>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="block content-card">
-                                    <div class="poster-container">
-                                        <img src="images/eventPoster2.png" alt="Zouk World Barcelona"
-                                            class="w-full h-full object-cover">
-                                        <div class="absolute top-3 right-3 flex space-x-2">
-                                            <button onclick="event.stopPropagation(); openFollowModal(); return false;"
-                                                class="p-2 bg-white/90 rounded-full text-gray-700 hover:text-revelti-orange shadow-md">
-                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
-                                                    </path>
-                                                </svg>
-                                            </button>
-                                            <button onclick="event.stopPropagation(); openShareModal(); return false;"
-                                                class="p-2 bg-white/90 rounded-full text-gray-700 hover:text-revelti-orange shadow-md">
-                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z">
-                                                    </path>
-                                                </svg>
-                                            </button>
-                                        </div>
-                                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white text-overlay">
-                                            <div class="flex items-end justify-between">
-                                                <div>
-                                                    <h3 class="text-sm md:text-xl lg:text-2xl tracking-wider">
-                                                        ZOUK WORLD BARCELONA</h3>
-                                                    <p class="text-[10px] md:text-sm opacity-80 font-medium mt-0.5">
-                                                        APR 23-27, 2026 | SANTA SUSANA, BARCELONA</p>
-                                                </div>
-                                                <span
-                                                    class="border-2 border-white text-white font-bold px-3 md:px-4 py-2 md:py-2 rounded-full text-xs md:text-sm whitespace-nowrap cursor-default opacity-50">GET
-                                                    TICKETS</span>
-                                            </div>
-                                        </div>
+                                    <!-- CHANGE: Padding and text sizes increase on large screens for better readability -->
+                                    <div class="p-3 lg:p-4 flex-grow flex flex-col">
+                                        <h4 class="font-bold text-sm lg:text-lg revelti-blue truncate">Bachata Geneva
+                                            Festival 2026 - The Festival of Nations</h4>
+                                        <p class="text-xs lg:text-sm text-gray-500">Oct 08-12, 2026 | Geneva</p>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="block content-card">
-                                    <div class="poster-container">
-                                        <img src="images/eventPoster3.png" alt="Bachata Sensual World Congress"
-                                            class="w-full h-full object-cover">
-                                        <div class="absolute top-3 right-3 flex space-x-2">
-                                            <button onclick="event.stopPropagation(); openFollowModal(); return false;"
-                                                class="p-2 bg-white/90 rounded-full text-gray-700 hover:text-revelti-orange shadow-md">
-                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                            </a>
+                        </div>
+                        <!-- Card 2 -->
+                        <div class="flex-shrink-0 w-2/3 sm:w-1/2 lg:w-full">
+                            <a href="eventDetail.html" class="h-full">
+                                <div
+                                    class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 shadow-sm h-full flex flex-col">
+                                    <div class="relative">
+                                        <img src="https://placehold.co/600x400/f58220/ffffff?text=Featured"
+                                            alt="Event Poster" class="w-full h-40 lg:h-48 object-cover">
+                                        <div class="absolute top-2 right-2 flex space-x-1">
+                                            <button
+                                                class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
+                                                    class="w-5 h-5" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         stroke-width="2"
                                                         d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
                                                     </path>
-                                                </svg>
-                                            </button>
-                                            <button onclick="event.stopPropagation(); openShareModal(); return false;"
-                                                class="p-2 bg-white/90 rounded-full text-gray-700 hover:text-revelti-orange shadow-md">
-                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                </svg></button>
+                                            <button
+                                                class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
+                                                    class="w-5 h-5" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         stroke-width="2"
                                                         d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z">
                                                     </path>
-                                                </svg>
-                                            </button>
-                                        </div>
-                                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white text-overlay">
-                                            <div class="flex items-end justify-between">
-                                                <div>
-                                                    <h3 class="text-sm md:text-xl lg:text-2xl tracking-wider">
-                                                        BACHATA SENSUAL WORLD CONGRESS</h3>
-                                                    <p class="text-[10px] md:text-sm opacity-80 font-medium mt-0.5">
-                                                        JAN 13-18, 2027 | PUNTA UMBRÍA, HUELVA</p>
-                                                </div>
-                                                <span
-                                                    class="border-2 border-white text-white font-bold px-3 md:px-4 py-2 md:py-2 rounded-full text-xs md:text-sm whitespace-nowrap cursor-default opacity-50">GET
-                                                    TICKETS</span>
-                                            </div>
+                                                </svg></button>
                                         </div>
                                     </div>
+                                    <div class="p-3 lg:p-4 flex-grow flex flex-col">
+                                        <h4 class="font-bold text-sm lg:text-lg revelti-blue truncate">Madrid Bachata
+                                            Masters | Madrid</h4>
+                                        <p class="text-xs lg:text-sm text-gray-500">Oct 17-19, 2025</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="block content-card">
-                                    <div class="poster-container">
-                                        <img src="images/eventPoster4.png" alt="Sensuality & Essentiality"
-                                            class="w-full h-full object-cover">
-                                        <div class="absolute top-3 right-3 flex space-x-2">
-                                            <button onclick="event.stopPropagation(); openFollowModal(); return false;"
-                                                class="p-2 bg-white/90 rounded-full text-gray-700 hover:text-revelti-orange shadow-md">
-                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                            </a>
+                        </div>
+                        <!-- Card 3 -->
+                        <div class="flex-shrink-0 w-2/3 sm:w-1/2 lg:w-full">
+                            <a href="eventDetail.html" class="h-full">
+                                <div
+                                    class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 shadow-sm h-full flex flex-col">
+                                    <div class="relative">
+                                        <img src="https://placehold.co/600x400/f58220/ffffff?text=Featured"
+                                            alt="Event Poster" class="w-full h-40 lg:h-48 object-cover">
+                                        <div class="absolute top-2 right-2 flex space-x-1">
+                                            <button
+                                                class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
+                                                    class="w-5 h-5" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         stroke-width="2"
                                                         d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
                                                     </path>
-                                                </svg>
-                                            </button>
-                                            <button onclick="event.stopPropagation(); openShareModal(); return false;"
-                                                class="p-2 bg-white/90 rounded-full text-gray-700 hover:text-revelti-orange shadow-md">
-                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                </svg></button>
+                                            <button
+                                                class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
+                                                    class="w-5 h-5" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         stroke-width="2"
                                                         d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z">
                                                     </path>
-                                                </svg>
-                                            </button>
-                                        </div>
-                                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white text-overlay">
-                                            <div class="flex items-end justify-between">
-                                                <div>
-                                                    <h3 class="text-sm md:text-xl lg:text-2xl tracking-wider">
-                                                        SENSUALITY & ESSENTIALITY</h3>
-                                                    <p class="text-[10px] md:text-sm opacity-80 font-medium mt-0.5">
-                                                        NOV 1-2, 2025 | BARCELONA</p>
-                                                </div>
-                                                <span
-                                                    class="border-2 border-white text-white font-bold px-3 md:px-4 py-2 md:py-2 rounded-full text-xs md:text-sm whitespace-nowrap cursor-default opacity-50">GET
-                                                    TICKETS</span>
-                                            </div>
+                                                </svg></button>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="block content-card">
-                                    <div class="poster-container">
-                                        <img src="images/eventPoster5.png" alt="Tallinn Bachata Experience"
-                                            class="w-full h-full object-cover">
-                                        <div class="absolute top-3 right-3 flex space-x-2">
-                                            <button onclick="event.stopPropagation(); openFollowModal(); return false;"
-                                                class="p-2 bg-white/90 rounded-full text-gray-700 hover:text-revelti-orange shadow-md">
-                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
-                                                    </path>
-                                                </svg>
-                                            </button>
-                                            <button onclick="event.stopPropagation(); openShareModal(); return false;"
-                                                class="p-2 bg-white/90 rounded-full text-gray-700 hover:text-revelti-orange shadow-md">
-                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z">
-                                                    </path>
-                                                </svg>
-                                            </button>
-                                        </div>
-                                        <div class="absolute bottom-0 left-0 right-0 p-3 text-white text-overlay">
-                                            <div class="flex items-end justify-between">
-                                                <div>
-                                                    <h3 class="text-sm md:text-xl lg:text-2xl tracking-wider">
-                                                        TALLINN BACHATA EXPERIENCE</h3>
-                                                    <p class="text-[10px] md:text-sm opacity-80 font-medium mt-0.5">
-                                                        NOV 19-23, 2026 | TALLINN</p>
-                                                </div>
-                                                <span
-                                                    class="border-2 border-white text-white font-bold px-3 md:px-4 py-2 md:py-2 rounded-full text-xs md:text-sm whitespace-nowrap cursor-default opacity-50">GET
-                                                    TICKETS</span>
-                                            </div>
-                                        </div>
+                                    <div class="p-3 lg:p-4 flex-grow flex flex-col">
+                                        <h4 class="font-bold text-sm lg:text-lg revelti-blue truncate">Valencia Salsa
+                                            Summit</h4>
+                                        <p class="text-xs lg:text-sm text-gray-500">Jan 20-22, 2026 | Valencia</p>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     </div>
                 </details>
 
+                <!-- Trending Events Section -->
                 <details open>
                     <summary class="flex justify-between items-center cursor-pointer">
                         <h2 class="text-xl lg:text-2xl font-bold revelti-blue">Trending Events</h2>
@@ -424,8 +237,10 @@
                             </svg>
                         </a>
                     </summary>
+                    <!-- CHANGE: Added lg: grid classes to convert from a flex-row scroll to a grid on large screens. -->
                     <div
                         class="flex space-x-4 overflow-x-auto pb-4 mt-3 horizontal-scroll lg:grid lg:grid-cols-3 lg:gap-8 lg:overflow-visible">
+                        <!-- Card 1 -->
                         <div class="flex-shrink-0 w-2/3 sm:w-1/2 lg:w-full">
                             <a href="eventDetail.html" class="h-full">
                                 <div
@@ -462,6 +277,7 @@
                                 </div>
                             </a>
                         </div>
+                        <!-- Card 2 -->
                         <div class="flex-shrink-0 w-2/3 sm:w-1/2 lg:w-full">
                             <a href="eventDetail.html" class="h-full">
                                 <div
@@ -498,6 +314,7 @@
                                 </div>
                             </a>
                         </div>
+                        <!-- Card 3 -->
                         <div class="flex-shrink-0 w-2/3 sm:w-1/2 lg:w-full">
                             <a href="eventDetail.html" class="h-full">
                                 <div
@@ -537,6 +354,7 @@
                     </div>
                 </details>
 
+                <!-- New Events Section -->
                 <details open>
                     <summary class="flex justify-between items-center cursor-pointer">
                         <h2 class="text-xl lg:text-2xl font-bold revelti-blue">New Events</h2>
@@ -547,8 +365,10 @@
                             </svg>
                         </a>
                     </summary>
+                    <!-- CHANGE: Added lg: grid classes to convert from a flex-row scroll to a grid on large screens. -->
                     <div
                         class="flex space-x-4 overflow-x-auto pb-4 mt-3 horizontal-scroll lg:grid lg:grid-cols-3 lg:gap-8 lg:overflow-visible">
+                        <!-- Card 1 -->
                         <div class="flex-shrink-0 w-2/3 sm:w-1/2 lg:w-full">
                             <a href="eventDetail.html" class="h-full">
                                 <div
@@ -585,6 +405,7 @@
                                 </div>
                             </a>
                         </div>
+                        <!-- Card 2 -->
                         <div class="flex-shrink-0 w-2/3 sm:w-1/2 lg:w-full">
                             <a href="eventDetail.html" class="h-full">
                                 <div
@@ -621,6 +442,7 @@
                                 </div>
                             </a>
                         </div>
+                        <!-- Card 3 -->
                         <div class="flex-shrink-0 w-2/3 sm:w-1/2 lg:w-full">
                             <a href="eventDetail.html" class="h-full">
                                 <div
@@ -660,6 +482,8 @@
                     </div>
                 </details>
 
+                <!-- Revelti Promo Banner -->
+                <!-- CHANGE: Text size and padding are increased on larger screens for impact. -->
                 <div class="bg-revelti-orange rounded-lg p-6 lg:p-8 text-center mt-6">
                     <h3 class="text-white text-2xl lg:text-3xl font-bold">Are you an Organizer or Visual Creative?</h3>
                     <p class="text-white mt-1 lg:text-lg">Join Revelti and connect with a passionate community.</p>
@@ -669,6 +493,7 @@
                 </div>
             </div>
 
+            <!-- Organizers Tab -->
             <div id="organizers" class="tab-content hidden">
                 <h2 class="text-xl font-bold revelti-blue mb-4">Featured Organizers</h2>
                 <div class="flex space-x-4 overflow-x-auto pb-4">
@@ -690,6 +515,7 @@
                 </div>
             </div>
 
+            <!-- Creators Tab -->
             <div id="creators" class="tab-content hidden">
                 <h2 class="text-xl font-bold revelti-blue mb-4">Featured Visual Creatives</h2>
                 <div class="grid grid-cols-3 gap-4 lg:flex lg:space-x-4 lg:overflow-x-auto lg:pb-4">
@@ -728,222 +554,52 @@
         </main>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
     <script>
+        // Store references to tab buttons and content panels
         const tabButtons = document.querySelectorAll('.tab-button');
         const tabContents = document.querySelectorAll('.tab-content');
 
+        /**
+         * Switches the visible tab in the content area.
+         * @param {string} targetId The ID of the tab content to display.
+         */
         function switchTab(targetId) {
+            // Hide all content panels
             tabContents.forEach(content => {
                 content.classList.add('hidden');
             });
 
+            // Deactivate all tab buttons
             tabButtons.forEach(button => {
-                button.classList.remove('tab-active');
-                button.classList.add('text-gray-500');
+                button.classList.remove('attendee-tab-active');
             });
 
+            // Show the target content panel
             const targetContent = document.getElementById(targetId);
             if (targetContent) {
                 targetContent.classList.remove('hidden');
             }
 
+            // Activate the clicked tab button
+            // We find the button that controls the targetId
             const targetButton = document.querySelector(`[onclick="switchTab('${targetId}')"]`);
             if (targetButton) {
-                targetButton.classList.add('tab-active');
-                targetButton.classList.remove('text-gray-500');
+                targetButton.classList.add('attendee-tab-active');
             }
         }
 
+        // Initialize the page with the 'events' tab visible by default.
         document.addEventListener('DOMContentLoaded', () => {
             switchTab('events');
-        });
-
-        var swiper = new Swiper(".mySwiper", {
-            slidesPerView: 1.2,
-            centeredSlides: true,
-            spaceBetween: -30,
-            loop: true,
-            speed: 500,
-            autoplay: {
-                delay: 5000,
-                pauseOnMouseEnter: true,
-                disableOnInteraction: false,
-            },
-            threshold: 20,
-            longSwipesRatio: 0.1,
-            followFinger: true,
-            allowTouchMove: true,
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
-            breakpoints: {
-                1024: {
-                    slidesPerView: 2.4,
-                    spaceBetween: -150,
-                }
-            },
-            on: {
-                init: function () {
-                    updateSlideClasses(this);
-                },
-                slideChange: function () {
-                    updateSlideClasses(this);
-                },
-                transitionEnd: function () {
-                    updateSlideClasses(this);
-                }
-            }
-        });
-
-        function updateSlideClasses(swiper) {
-            const slides = swiper.slides;
-            const activeIndex = swiper.activeIndex;
-
-            slides.forEach((slide, index) => {
-                slide.classList.remove('swiper-slide-active', 'swiper-slide-next', 'swiper-slide-prev');
-            });
-
-            const realIndex = swiper.realIndex;
-            const nextSlide = slides[swiper.activeIndex + 1] || slides[0];
-            const prevSlide = slides[swiper.activeIndex - 1] || slides[slides.length - 1];
-
-            slides[swiper.activeIndex].classList.add('swiper-slide-active');
-            nextSlide.classList.add('swiper-slide-next');
-            prevSlide.classList.add('swiper-slide-prev');
-        }
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') swiper.slidePrev();
-            if (e.key === 'ArrowRight') swiper.slideNext();
-        });
-
-        function syncPosterHeight() {
-            const banner = document.querySelector('.hidden.lg\\:block img');
-            const posters = document.querySelectorAll('.poster-container');
-
-            if (window.innerWidth >= 1024 && banner) {
-                const bannerHeight = banner.offsetHeight;
-                const posterWidth = bannerHeight * 1.25;
-                posters.forEach(poster => {
-                    poster.style.height = bannerHeight + 'px';
-                    poster.style.width = posterWidth + 'px';
-                });
-            } else {
-                posters.forEach(poster => {
-                    poster.style.height = '';
-                    poster.style.width = '';
-                    poster.style.aspectRatio = '4 / 5';
-                });
-            }
-        }
-
-        syncPosterHeight();
-        window.addEventListener('resize', syncPosterHeight);
-    </script>
-
-    <!-- Follow Event Modal -->
-    <div id="follow-modal"
-        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
-        <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-sm">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold revelti-blue">Follow Event Updates</h3>
-                <button onclick="closeFollowModal()"
-                    class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
-            </div>
-            <div class="space-y-4">
-                <div class="flex justify-between items-center">
-                    <span class="text-gray-700">Media galleries updates</span>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        <input type="checkbox" value="" class="sr-only peer" checked>
-                        <div
-                            class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-revelti-orange">
-                        </div>
-                    </label>
-                </div>
-                <div class="flex justify-between items-center">
-                    <span class="text-gray-700">Event announcements</span>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        <input type="checkbox" value="" class="sr-only peer" checked>
-                        <div
-                            class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-revelti-orange">
-                        </div>
-                    </label>
-                </div>
-            </div>
-            <button onclick="closeFollowModal()"
-                class="mt-6 w-full bg-revelti-orange text-white font-bold py-2 px-4 rounded-lg">Confirm</button>
-        </div>
-    </div>
-
-    <!-- Share Modal -->
-    <div id="share-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
-        <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-sm">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold revelti-blue">Share Event</h3>
-                <button onclick="closeShareModal()"
-                    class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
-            </div>
-            <div class="space-y-4">
-                <p class="text-gray-700">Copy the link to share this event:</p>
-                <div class="flex items-center space-x-2">
-                    <input type="text" id="share-link-input" readonly
-                        class="flex-1 p-2 border border-gray-300 rounded-md bg-gray-50 text-sm"
-                        value="https://revelti.com/event/bachata-geneva">
-                    <button onclick="copyShareLink()"
-                        class="bg-revelti-blue text-white font-semibold py-2 px-4 rounded-lg hover:bg-revelti-orange transition">Copy</button>
-                </div>
-                <p id="copy-success-msg" class="text-green-600 text-sm hidden">Link copied to clipboard!</p>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function openFollowModal() {
-            swiper.autoplay.pause();
-            document.getElementById('follow-modal').classList.remove('hidden');
-        }
-
-        function closeFollowModal() {
-            document.getElementById('follow-modal').classList.add('hidden');
-            swiper.autoplay.resume();
-        }
-
-        function openShareModal() {
-            swiper.autoplay.pause();
-            document.getElementById('share-modal').classList.remove('hidden');
-        }
-
-        function closeShareModal() {
-            document.getElementById('share-modal').classList.add('hidden');
-            swiper.autoplay.resume();
-        }
-
-        function copyShareLink() {
-            const input = document.getElementById('share-link-input');
-            input.select();
-            document.execCommand('copy');
-            const msg = document.getElementById('copy-success-msg');
-            msg.classList.remove('hidden');
-            setTimeout(() => msg.classList.add('hidden'), 2000);
-        }
-
-        document.getElementById('follow-modal').addEventListener('click', function (e) {
-            if (e.target === this) closeFollowModal();
-        });
-
-        document.getElementById('share-modal').addEventListener('click', function (e) {
-            if (e.target === this) closeShareModal();
         });
     </script>
 
     <script src="main.js" defer></script>
     <div id="footer-placeholder"></div>
 
-    <button id="installButton" class="hidden" style="display: none;">Install App</button>
+    <button id="installButton" class="hidden">Install App</button>
 
+    <!-- Service worker for “Install App” banner -->
     <script>
         if ("serviceWorker" in navigator) {
             navigator.serviceWorker.register("/service-worker.js");
@@ -955,21 +611,30 @@
         const installButton = document.getElementById('installButton');
 
         window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevents the default browser prompt from appearing
             e.preventDefault();
+            // Stash the event so it can be triggered later.
             deferredPrompt = e;
+            // Show the install button
             installButton.classList.remove('hidden');
         });
 
         installButton.addEventListener('click', async () => {
             if (deferredPrompt) {
+                // Hide the button again
                 installButton.classList.add('hidden');
+                // Show the installation prompt
                 deferredPrompt.prompt();
+                // Wait for the user to respond to the prompt
                 const { outcome } = await deferredPrompt.userChoice;
+                // Log the outcome for debugging
                 console.log(`User response to the install prompt: ${outcome}`);
+                // We've used the prompt and can't use it again, throw it away
                 deferredPrompt = null;
             }
         });
 
+        // Optional: Hide the button if the app is already installed
         window.addEventListener('appinstalled', () => {
             installButton.classList.add('hidden');
             console.log('PWA was installed.');
