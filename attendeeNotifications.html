@@ -64,12 +64,12 @@
         </header>
 
         <!-- Tab Navigation. The `flex-shrink-0` class prevents it from shrinking. -->
-        <nav class="sticky top-0 flex-shrink-0 bg-white z-40 border-b border-gray-200">
-            <div class="flex justify-around">
-                <button data-tab-target="all" class="tab-button btn-mobile-tab">All</button>
-                <button data-tab-target="socialMedia" class="tab-button btn-mobile-tab">Social & Media</button>
-                <button data-tab-target="eventsReminders" class="tab-button btn-mobile-tab">Events & Reminders</button>
-                <button data-tab-target="systemAccount" class="tab-button btn-mobile-tab">System & Account</button>
+        <nav class="sticky top-0 flex-shrink-0 bg-white z-40 py-2">
+            <div class="attendee-tab-container-wide">
+                <button data-tab-target="all" class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">All</button>
+                <button data-tab-target="socialMedia" class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">Social</button>
+                <button data-tab-target="eventsReminders" class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">Events</button>
+                <button data-tab-target="systemAccount" class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">System</button>
             </div>
         </nav>
 
@@ -150,7 +150,7 @@
                     content.classList.add('hidden');
                     content.classList.remove('active');
                 });
-                tabButtons.forEach(button => button.classList.remove('tab-active'));
+                tabButtons.forEach(button => button.classList.remove('attendee-tab-active'));
                 const targetContent = notificationHost.querySelector(`#${targetId}`);
                 if (targetContent) {
                     targetContent.classList.remove('hidden');
@@ -166,7 +166,7 @@
                     }, 10);
                 }
                 const targetButton = notificationHost.querySelector(`[data-tab-target="${targetId}"]`);
-                if (targetButton) targetButton.classList.add('tab-active');
+                if (targetButton) targetButton.classList.add('attendee-tab-active');
             }
 
 

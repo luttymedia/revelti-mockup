@@ -67,19 +67,16 @@
                     </header>
 
                     <!-- Tab Navigation -->
-                    <nav class="sticky top-0 flex-shrink-0 bg-white z-40 border-b border-gray-200">
-                        <div class="flex justify-around">
+                    <nav class="sticky top-0 flex-shrink-0 bg-white z-40 py-2">
+                        <div class="organizer-tab-container-wide">
                             <button data-tab-target="all"
-                                class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:revelti-blue transition duration-300">All</button>
+                                class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">All</button>
                             <button data-tab-target="salesPromoters"
-                                class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:revelti-blue transition duration-300">Sales
-                                & Promoters</button>
+                                class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">Sales</button>
                             <button data-tab-target="eventMedia"
-                                class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:revelti-blue transition duration-300">Event
-                                & Media</button>
+                                class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">Event</button>
                             <button data-tab-target="systemAccount"
-                                class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:revelti-blue transition duration-300">System
-                                & Account</button>
+                                class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">System</button>
                         </div>
                     </nav>
 
@@ -159,11 +156,11 @@
 
             function switchTab(targetId) {
                 tabContents.forEach(content => content.classList.add('hidden'));
-                tabButtons.forEach(button => button.classList.remove('tab-active'));
+                tabButtons.forEach(button => button.classList.remove('organizer-tab-active'));
                 const targetContent = notificationHost.querySelector(`#${targetId}`);
                 if (targetContent) targetContent.classList.remove('hidden');
                 const targetButton = notificationHost.querySelector(`[data-tab-target="${targetId}"]`);
-                if (targetButton) targetButton.classList.add('tab-active');
+                if (targetButton) targetButton.classList.add('organizer-tab-active');
             }
 
             function createNotificationItem(notification) {

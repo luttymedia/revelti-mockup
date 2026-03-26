@@ -181,16 +181,16 @@
             <!-- The lg:col-span-2 class makes this section take up 2 columns on large screens -->
             <div class="lg:col-span-2">
                 <!-- Tab Navigation -->
-                <nav class="border-b border-gray-200">
-                    <div class="flex justify-around">
+                <nav class="py-2">
+                    <div class="attendee-tab-container-wide">
                         <button onclick="switchTab('events')"
-                            class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:revelti-blue transition duration-300 tab-active">Events</button>
+                            class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium attendee-tab-active">Events</button>
                         <button onclick="switchTab('collaborators')"
-                            class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:revelti-blue transition duration-300">Collaborators</button>
+                            class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">Collaborators</button>
                         <button onclick="switchTab('media')"
-                            class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:revelti-blue transition duration-300">Media</button>
+                            class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">Media</button>
                         <button onclick="switchTab('reviews')"
-                            class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:revelti-blue transition duration-300">Reviews</button>
+                            class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">Reviews</button>
                     </div>
                 </nav>
 
@@ -726,7 +726,7 @@
 
                 // Deactivate all tab buttons
                 tabButtons.forEach(button => {
-                    button.classList.remove('tab-active');
+                    button.classList.remove('attendee-tab-active');
                 });
 
                 // Show the target content panel
@@ -739,7 +739,7 @@
                 // We find the button that controls the targetId
                 const targetButton = document.querySelector(`[onclick="switchTab('${targetId}')"]`);
                 if (targetButton) {
-                    targetButton.classList.add('tab-active');
+                    targetButton.classList.add('attendee-tab-active');
                 }
             }
 

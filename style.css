@@ -36,11 +36,108 @@ body {
 /* --- Component Styles --- */
 
 
-/* Active Tab Indicator (Pill Style) */
+/* Active Tab Indicator (Pill Style for Attendee Pages) */
 .tab-active {
     background-color: #f58220 !important;
     color: white !important;
     font-weight: 600;
+    border-radius: 9999px;
+}
+
+/* Attendee pill tab container (2-3 tabs) */
+.attendee-tab-container {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    border-radius: 9999px;
+    padding: 4px;
+    border: 1px solid #e5e7eb;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* Attendee pill tab container (4+ tabs) - wider on desktop */
+.attendee-tab-container-wide {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    border-radius: 9999px;
+    padding: 4px;
+    border: 1px solid #e5e7eb;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Attendee tab active state (pill style) */
+.attendee-tab-active {
+    background-color: #f58220 !important;
+    color: white !important;
+    font-weight: 600;
+    border-radius: 9999px;
+}
+
+/* Organizer pill tab container (2-3 tabs) */
+.organizer-tab-container {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    border-radius: 9999px;
+    padding: 4px;
+    border: 1px solid #e5e7eb;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* Organizer pill tab container (4+ tabs) - wider on desktop */
+.organizer-tab-container-wide {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    border-radius: 9999px;
+    padding: 4px;
+    border: 1px solid #e5e7eb;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Organizer tab active state (pill style - blue) */
+.organizer-tab-active {
+    background-color: #213c63 !important;
+    color: white !important;
+    font-weight: 600;
+    border-radius: 9999px;
+}
+
+/* Creative pill tab container (2-3 tabs) */
+.creative-tab-container {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    border-radius: 9999px;
+    padding: 4px;
+    border: 1px solid #e5e7eb;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* Creative pill tab container (4+ tabs) - wider on desktop */
+.creative-tab-container-wide {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    border-radius: 9999px;
+    padding: 4px;
+    border: 1px solid #e5e7eb;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Creative tab active state (pill style - purple) */
+.creative-tab-active {
+    background-color: #6b21a8 !important;
+    color: white !important;
+    font-weight: 600;
+    border-radius: 9999px;
 }
 
 /* Accordion (Details/Summary) Arrow Rotation */
@@ -73,21 +170,6 @@ details>summary::-webkit-details-marker {
 /* }
 
 /* --- Custom Styles for Organizer Pages --- */
-.organizer-tab-active {
-    border-bottom: 3px solid #213c63;
-    /* Revelti Blue */
-    color: #213c63;
-    /* Revelti Blue */
-    font-weight: 700;
-}
-
-.creative-tab-active {
-    border-bottom: 3px solid #f58220;
-    /* Revelti Orange */
-    color: #213c63;
-    /* Revelti Blue */
-    font-weight: 700;
-}
 
 /* Simple transition for tree view expansion */
 .tree-content {

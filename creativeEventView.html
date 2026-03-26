@@ -25,14 +25,6 @@
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-
-  <style>
-    .creative-tab-active {
-      border-bottom: 3px solid #f58220;
-      color: #213c63;
-      font-weight: 700;
-    }
-  </style>
 </head>
 
 <body class="dashboard-layout bg-gray-100 antialiased text-gray-800" data-role="creative">
@@ -125,18 +117,18 @@
             <!-- Right Column -->
             <div class="lg:col-span-2 bg-white rounded-lg shadow-md overflow-hidden">
               <!-- Tab Navigation -->
-              <nav class="border-b border-gray-200">
-                <div class="flex justify-around space-x-2 px-2">
+              <nav class="py-2">
+                <div class="creative-tab-container-wide">
                   <button onclick="switchTab('linked-media')"
-                    class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:text-revelti-blue transition duration-300 creative-tab-active">
+                    class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium creative-tab-active">
                     Event Media
                   </button>
                   <button onclick="switchTab('collaborators')"
-                    class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:text-revelti-blue transition duration-300">
+                    class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">
                     Collaborators
                   </button>
                   <button onclick="switchTab('stats')"
-                    class="tab-button flex-1 px-1 py-4 text-center text-gray-500 hover:text-revelti-blue transition duration-300">
+                    class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">
                     Stats
                   </button>
                 </div>

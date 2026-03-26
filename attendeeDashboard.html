@@ -125,13 +125,12 @@
         </div>
 
         <!-- Tab Navigation (desktop only) -->
-        <nav class="hidden md:block border-t border-b border-gray-200">
-            <div class="flex justify-around overflow-x-auto whitespace-nowrap scrollbar-hide">
-                <button data-tab-id="following" class="tab-button btn-mobile-tab tab-active">Following</button>
-                <button data-tab-id="media" class="tab-button btn-mobile-tab">Media</button>
-                <button data-tab-id="tickets" class="tab-button btn-mobile-tab">My
-                    Tickets</button>
-                <button data-tab-id="profile" class="tab-button btn-mobile-tab">Profile</button>
+        <nav class="hidden md:block py-2">
+            <div class="attendee-tab-container-wide">
+                <button data-tab-id="following" class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium attendee-tab-active">Following</button>
+                <button data-tab-id="media" class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">Media</button>
+                <button data-tab-id="tickets" class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">My Tickets</button>
+                <button data-tab-id="profile" class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">Profile</button>
             </div>
         </nav>
 
@@ -235,7 +234,7 @@
 
             // Deactivate all tab navigation links.
             document.querySelectorAll('.tab-button').forEach(button => {
-                button.classList.remove('tab-active');
+                button.classList.remove('attendee-tab-active');
             });
 
             // Show the selected tab content.
@@ -244,7 +243,7 @@
 
             // Activate the selected tab navigation link.
             const selectedTabButton = document.querySelector(`[data-tab-id="${tabId}"]`);
-            if (selectedTabButton) selectedTabButton.classList.add('tab-active');
+            if (selectedTabButton) selectedTabButton.classList.add('attendee-tab-active');
 
             // Load the content for the selected tab.
             loadTabContent(tabId);
