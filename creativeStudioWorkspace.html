@@ -131,7 +131,7 @@
                             class="flex items-center gap-0 border border-gray-300 rounded-lg overflow-hidden bg-white shadow-sm">
                             <!-- Large (default selected) -->
                             <button type="button" id="view-large-btn" onclick="setViewMode('large')"
-                                class="inline-flex items-center justify-center px-2.5 py-1.5 bg-revelti-blue text-white border-r border-blue-800 transition"
+                                class="inline-flex items-center justify-center px-2.5 py-1.5 bg-revelti-purple text-white border-r border-purple-800 transition"
                                 title="Large view">
                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                                     <rect x="2" y="2" width="16" height="7" rx="1.5" />
@@ -470,11 +470,11 @@
             btnIds.forEach(id => {
                 const btn = document.getElementById(id);
                 if (id.includes(mode)) {
-                    btn.classList.add('bg-revelti-blue', 'text-white');
+                    btn.classList.add('bg-revelti-purple', 'text-white');
                     btn.classList.remove('text-gray-500', 'hover:bg-gray-50');
-                    if (id !== 'view-list-btn') btn.classList.add('border-blue-800');
+                    if (id !== 'view-list-btn') btn.classList.add('border-purple-800');
                 } else {
-                    btn.classList.remove('bg-revelti-blue', 'text-white', 'border-blue-800');
+                    btn.classList.remove('bg-revelti-purple', 'text-white', 'border-purple-800');
                     btn.classList.add('text-gray-500', 'hover:bg-gray-50');
                 }
             });
@@ -1395,7 +1395,7 @@
                         </div>
                         <div class="px-6 py-4 bg-gray-50 flex justify-end space-x-3">
                             <button onclick="document.getElementById('dynamic-generic-modal').remove()" class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50 transition">Cancel</button>
-                            <button onclick="showToast('${btnText} successful', 'success'); document.getElementById('dynamic-generic-modal').remove()" class="px-4 py-2 bg-revelti-blue text-white rounded-lg text-sm font-bold hover:bg-blue-800 transition">${btnText}</button>
+                            <button onclick="showToast('${btnText} successful', 'success'); document.getElementById('dynamic-generic-modal').remove()" class="px-4 py-2 bg-revelti-purple text-white rounded-lg text-sm font-bold hover:bg-purple-800 transition">${btnText}</button>
                         </div>
                     </div>
                 </div>
@@ -1694,7 +1694,7 @@
                 <button onclick="closeModals()"
                     class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50 transition">Cancel</button>
                 <button onclick="showToast('Gallery created successfully', 'success'); closeModals()"
-                    class="px-4 py-2 bg-revelti-blue text-white rounded-lg text-sm font-bold hover:bg-blue-800 transition">Create
+                    class="px-4 py-2 bg-revelti-purple text-white rounded-lg text-sm font-bold hover:bg-purple-800 transition">Create
                     Gallery</button>
             </div>
         </div>
@@ -1808,7 +1808,7 @@
                 <button onclick="closeModals()"
                     class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50 transition">Cancel</button>
                 <button onclick="saveFolderSettings()"
-                    class="px-4 py-2 bg-revelti-blue text-white rounded-lg text-sm font-bold hover:bg-blue-800 transition">Save
+                    class="px-4 py-2 bg-revelti-purple text-white rounded-lg text-sm font-bold hover:bg-purple-800 transition">Save
                     Changes</button>
             </div>
         </div>
@@ -1922,7 +1922,7 @@
                 <button type="button" onclick="resetAdvancedFilters()"
                     class="text-sm font-semibold text-gray-500 hover:text-revelti-blue transition">Reset</button>
                 <button type="button" onclick="applyAdvancedFilters()"
-                    class="px-5 py-2 bg-revelti-blue text-white rounded-lg text-sm font-bold hover:bg-blue-800 transition">Apply</button>
+                    class="px-5 py-2 bg-revelti-purple text-white rounded-lg text-sm font-bold hover:bg-purple-800 transition">Apply</button>
             </div>
         </div>
     </div>
