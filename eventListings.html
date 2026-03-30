@@ -237,9 +237,9 @@
 
                 // Bottom-right tag (featured / trending)
                 if (eventData.isFeatured) {
-                    card.querySelector('.tag-container').innerHTML = `<div class="bg-revelti-orange text-white text-xs font-bold px-2 py-1 rounded-md">FEATURED</div>`;
+                    card.querySelector('.tag-container').innerHTML = `<div class="bg-revelti-orange text-white text-xs font-bold px-2 py-1 rounded-full">FEATURED</div>`;
                 } else if (eventData.isTrending) {
-                    card.querySelector('.tag-container').innerHTML = `<div class="bg-revelti-blue text-white text-xs font-bold px-2 py-1 rounded-md">TRENDING</div>`;
+                    card.querySelector('.tag-container').innerHTML = `<div class="bg-revelti-blue text-white text-xs font-bold px-2 py-1 rounded-full">TRENDING</div>`;
                 }
 
                 // Set the follow button based on the isFollowed property

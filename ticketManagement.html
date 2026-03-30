@@ -54,7 +54,7 @@
                                 <h1 class="text-3xl font-extrabold revelti-blue">Bachata Geneva Festival 2026 - The
                                     Festival of Nations</h1>
                                 <span
-                                    class="ml-4 text-sm font-bold bg-green-100 text-green-800 px-3 py-1 rounded-full whitespace-nowrap">On
+                                    class="ml-4 text-sm font-bold bg-green-50 text-green-800 px-3 py-1 rounded-full whitespace-nowrap">On
                                     Sale</span>
                             </div>
                             <p class="text-gray-600">Ticket Management Dashboard</p>
@@ -473,20 +473,20 @@
 
         const getStatusBadge = (ticket) => {
             if (ticket.status === 'Scheduled') {
-                return `<span class="text-xs font-semibold bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Scheduled for ${formatDate(ticket.scheduledDate)}</span>`;
+                return `<span class="text-xs font-semibold bg-blue-50 text-blue-800 px-2 py-1 rounded-full">Scheduled for ${formatDate(ticket.scheduledDate)}</span>`;
             }
             switch (ticket.status) {
-                case 'On Sale': return `<span class="text-xs font-semibold bg-green-100 text-green-800 px-2 py-1 rounded-full">On Sale</span>`;
-                case 'Draft': return `<span class="text-xs font-semibold bg-gray-200 text-gray-800 px-2 py-1 rounded-full">Draft</span>`;
+                case 'On Sale': return `<span class="text-xs font-semibold bg-green-50 text-green-800 px-2 py-1 rounded-full">On Sale</span>`;
+                case 'Draft': return `<span class="text-xs font-semibold bg-gray-50 text-gray-800 px-2 py-1 rounded-full">Draft</span>`;
                 default: return '';
             }
         };
 
         const getCodeStatusBadge = (status) => {
             switch (status) {
-                case 'Active': return `<span class="text-xs font-semibold bg-green-100 text-green-800 px-2 py-1 rounded-full">Active</span>`;
-                case 'Draft': return `<span class="text-xs font-semibold bg-gray-200 text-gray-800 px-2 py-1 rounded-full">Draft</span>`;
-                case 'Inactive': return `<span class="text-xs font-semibold bg-red-100 text-red-800 px-2 py-1 rounded-full">Inactive</span>`;
+                case 'Active': return `<span class="text-xs font-semibold bg-green-50 text-green-800 px-2 py-1 rounded-full">Active</span>`;
+                case 'Draft': return `<span class="text-xs font-semibold bg-gray-50 text-gray-800 px-2 py-1 rounded-full">Draft</span>`;
+                case 'Inactive': return `<span class="text-xs font-semibold bg-red-50 text-red-800 px-2 py-1 rounded-full">Inactive</span>`;
                 default: return '';
             }
         };

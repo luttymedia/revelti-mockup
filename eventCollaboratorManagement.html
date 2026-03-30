@@ -302,12 +302,12 @@
         const allModals = document.querySelectorAll('.modal');
         const getStatusBadge = (status) => {
             switch (status) {
-                case 'Confirmed': return `<span class="text-xs font-semibold bg-green-100 text-green-800 px-2 py-1 rounded-full">${status}</span>`;
-                case 'Pending': return `<span class="text-xs font-semibold bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">${status}</span>`;
-                case 'Declined': return `<span class="text-xs font-semibold bg-red-100 text-red-800 px-2 py-1 rounded-full">${status}</span>`;
+                case 'Confirmed': return `<span class="text-xs font-semibold bg-green-50 text-green-800 px-2 py-1 rounded-full">${status}</span>`;
+                case 'Pending': return `<span class="text-xs font-semibold bg-yellow-50 text-yellow-800 px-2 py-1 rounded-full">${status}</span>`;
+                case 'Declined': return `<span class="text-xs font-semibold bg-red-50 text-red-800 px-2 py-1 rounded-full">${status}</span>`;
                 case 'Cancelled':
                 case 'Revoked':
-                    return `<span class="text-xs font-semibold bg-gray-200 text-gray-800 px-2 py-1 rounded-full">${status}</span>`;
+                    return `<span class="text-xs font-semibold bg-gray-50 text-gray-800 px-2 py-1 rounded-full">${status}</span>`;
                 default: return '';
             }
         };

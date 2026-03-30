@@ -387,10 +387,10 @@
 
         function getStatusHtml(status) {
             switch (status) {
-                case 'Approval Needed': return `<span class="text-xs font-bold bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full whitespace-nowrap">${status}</span>`;
-                case 'Public': return `<span class="text-xs font-bold bg-green-100 text-green-800 px-2 py-1 rounded-full whitespace-nowrap">${status}</span>`;
-                case 'Scheduled': return `<span class="text-xs font-bold bg-blue-100 text-blue-800 px-2 py-1 rounded-full whitespace-nowrap">${status}</span>`;
-                default: return `<span class="text-xs font-bold bg-gray-200 text-gray-800 px-2 py-1 rounded-full whitespace-nowrap">${status}</span>`;
+                case 'Approval Needed': return `<span class="text-xs font-bold bg-yellow-50 text-yellow-800 px-2 py-1 rounded-full whitespace-nowrap">${status}</span>`;
+                case 'Public': return `<span class="text-xs font-bold bg-green-50 text-green-800 px-2 py-1 rounded-full whitespace-nowrap">${status}</span>`;
+                case 'Scheduled': return `<span class="text-xs font-bold bg-blue-50 text-blue-800 px-2 py-1 rounded-full whitespace-nowrap">${status}</span>`;
+                default: return `<span class="text-xs font-bold bg-gray-50 text-gray-800 px-2 py-1 rounded-full whitespace-nowrap">${status}</span>`;
             }
         }
 
@@ -406,7 +406,7 @@
             const statusHtml = getStatusHtml(currentNode.status);
             // Owner badge is shown here
             const ownerHtml = currentNode.owner ? getOwnerHtml(currentNode.owner) : '';
-            const linkAccessHtml = currentNode.linkAccess ? `<span class="text-xs font-bold bg-purple-100 text-purple-800 px-2 py-1 rounded-full whitespace-nowrap">Anyone with the link</span>` : '';
+            const linkAccessHtml = currentNode.linkAccess ? `<span class="text-xs font-bold bg-purple-50 text-purple-800 px-2 py-1 rounded-full whitespace-nowrap">Anyone with the link</span>` : '';
 
 
             let creatorsHtml = '';
@@ -533,7 +533,7 @@
             const statusHtml = getStatusHtml(node.status);
             // Owner badge is hidden in subfolder cards, but shown for top-level
             const ownerHtml = path.length === 1 ? getOwnerHtml(node.owner) : '';
-            const linkAccessHtml = node.linkAccess ? `<span class="text-xs font-bold bg-purple-100 text-purple-800 px-2 py-1 rounded-full whitespace-nowrap">Anyone with the link</span>` : '';
+            const linkAccessHtml = node.linkAccess ? `<span class="text-xs font-bold bg-purple-50 text-purple-800 px-2 py-1 rounded-full whitespace-nowrap">Anyone with the link</span>` : '';
 
             let creatorsHtml = '';
             if (node.creators && node.creators.length > 0) {
@@ -568,7 +568,7 @@
             const statusHtml = getStatusHtml(gallery.status);
             // Owner badge is hidden in subfolder cards, but shown for top-level
             const ownerHtml = path.length === 1 ? getOwnerHtml(gallery.owner) : '';
-            const linkAccessHtml = gallery.linkAccess ? `<span class="text-xs font-bold bg-purple-100 text-purple-800 px-2 py-1 rounded-full whitespace-nowrap">Anyone with the link</span>` : '';
+            const linkAccessHtml = gallery.linkAccess ? `<span class="text-xs font-bold bg-purple-50 text-purple-800 px-2 py-1 rounded-full whitespace-nowrap">Anyone with the link</span>` : '';
 
             let creatorsHtml = '';
             if (gallery.creators && gallery.creators.length > 0) {
