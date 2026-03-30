@@ -56,13 +56,13 @@
 
                     <header class="flex flex-col md:flex-row justify-between items-center mb-8">
                         <div>
-                            <h1 class="text-3xl font-extrabold revelti-blue" id="page-title">Create a New Event</h1>
+                            <h1 class="text-3xl font-bold revelti-blue" id="page-title">Create a New Event</h1>
                             <p class="text-gray-500" id="page-subtitle">Follow the steps to get your event ready for the public.</p>
                         </div>
                         <a href="organizerDashboard.html"
                             class="px-4 py-2 bg-revelti-blue text-white rounded-lg hover:bg-blue-800 transition duration-300 flex items-center justify-center">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                     d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                             </svg>
                             Organizer Dashboard
@@ -70,7 +70,7 @@
                     </header>
 
 
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden">
                         <!-- Progress Bar -->
                         <div class="p-6 border-b border-gray-200">
                             <div class="flex justify-between items-center">
@@ -113,7 +113,7 @@
                                     <!-- Edition clone banner (hidden unless series is selected or ?edition=new) -->
                                     <div id="edition-clone-banner" class="hidden p-4 bg-blue-50 rounded-lg mb-2" style="border-left:4px solid #213c63">
                                         <div class="flex items-start gap-3">
-                                            <svg class="w-5 h-5 text-revelti-blue flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                            <svg class="w-5 h-5 text-revelti-blue flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                                             <div>
                                                 <p class="font-bold text-revelti-blue text-sm">Creating next edition</p>
                                                 <p class="text-sm text-gray-600">Pre-filled from <strong id="clone-source-name">last edition</strong>. Update the dates and adjust details as needed. Ticket inventory has been reset to zero.</p>
@@ -125,7 +125,7 @@
                                     <div class="p-4 border border-gray-200 bg-gray-50 rounded-lg" id="series-block">
                                         <div class="flex items-center justify-between">
                                             <div class="flex items-center">
-                                                <svg class="w-5 h-5 text-gray-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                                                <svg class="w-5 h-5 text-gray-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
                                                 <span class="font-semibold text-gray-700">Part of a recurring series</span>
                                             </div>
                                             <label class="relative inline-flex items-center cursor-pointer">
@@ -136,7 +136,7 @@
                                         <!-- Series dropdown (shown when toggle is on) -->
                                         <div id="series-selector" class="hidden mt-4 space-y-3">
                                             <label class="font-semibold text-gray-700 text-sm">Select series</label>
-                                            <select id="series-dropdown" class="w-full p-2 border border-gray-300 rounded-md text-sm" onchange="onSeriesDropdownChange(this.value)">
+                                            <select id="series-dropdown" class="w-full p-2 border border-gray-300 rounded-lg text-sm" onchange="onSeriesDropdownChange(this.value)">
                                                 <option value="">— Select an existing series or create new —</option>
                                                 <option value="bachata-geneva">🎉 Bachata Geneva Festival</option>
                                                 <option value="weekly-latin">🎵 Weekly Latin Sundays</option>
@@ -144,7 +144,7 @@
                                             </select>
                                             <!-- New series name (shown when __new__ selected) -->
                                             <div id="new-series-name-wrap" class="hidden">
-                                                <input type="text" id="new-series-name" placeholder="New series name…" class="w-full p-2 border border-gray-300 rounded-md text-sm">
+                                                <input type="text" id="new-series-name" placeholder="New series name…" class="w-full p-2 border border-gray-300 rounded-lg text-sm">
                                             </div>
                                             <div id="series-selection-label" class="hidden text-sm font-semibold text-revelti-blue"></div>
                                         </div>
@@ -152,35 +152,35 @@
 
                                     <div><label class="font-semibold text-gray-700">Event Title*</label><input
                                             id="field-title" type="text" placeholder="e.g., Barcelona Summer Festival"
-                                            class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                                            class="w-full p-2 border border-gray-300 rounded-lg mt-1"></div>
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div><label class="font-semibold text-gray-700">Event Type*</label><select
-                                                id="field-type" class="w-full p-2 border border-gray-300 rounded-md mt-1">
+                                                id="field-type" class="w-full p-2 border border-gray-300 rounded-lg mt-1">
                                                 <option>Congress</option>
                                                 <option>Festival</option>
                                                 <option>Social</option>
                                                 <option>Workshop</option>
                                             </select></div>
                                         <div><label class="font-semibold text-gray-700">Primary Language*</label><select
-                                                id="field-language" class="w-full p-2 border border-gray-300 rounded-md mt-1">
+                                                id="field-language" class="w-full p-2 border border-gray-300 rounded-lg mt-1">
                                                 <option>English</option>
                                                 <option>Spanish</option>
                                             </select></div>
                                     </div>
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div><label class="font-semibold text-gray-700">Start Date*</label><input
-                                                id="field-start-date" type="date" class="w-full p-2 border border-gray-300 rounded-md mt-1">
+                                                id="field-start-date" type="date" class="w-full p-2 border border-gray-300 rounded-lg mt-1">
                                         </div>
                                         <div><label class="font-semibold text-gray-700">End Date*</label><input
-                                                id="field-end-date" type="date" class="w-full p-2 border border-gray-300 rounded-md mt-1">
+                                                id="field-end-date" type="date" class="w-full p-2 border border-gray-300 rounded-lg mt-1">
                                         </div>
                                     </div>
                                     <div><label class="font-semibold text-gray-700">Venue Name*</label><input
                                             id="field-venue" type="text" placeholder="e.g., Hotel Evenia Olympic"
-                                            class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                                            class="w-full p-2 border border-gray-300 rounded-lg mt-1"></div>
                                     <div><label class="font-semibold text-gray-700">Location*</label><input
                                             id="field-location" type="text" placeholder="e.g., Barcelona, Spain"
-                                            class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                                            class="w-full p-2 border border-gray-300 rounded-lg mt-1"></div>
 
                                     <div class="flex items-center justify-between p-4 border border-orange-200 bg-orange-50 rounded-lg mt-4"
                                         id="featured-banner">
@@ -200,7 +200,7 @@
                                                 <svg class="w-5 h-5" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
+                                                        stroke-width="1.5"
                                                         d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
                                                     </path>
                                                 </svg>
@@ -229,18 +229,18 @@
                                     </div>
                                     <div><label class="font-semibold text-gray-700">Event Description</label><textarea
                                             id="field-description"
-                                            class="w-full p-2 border border-gray-300 rounded-md mt-1" rows="6"
+                                            class="w-full p-2 border border-gray-300 rounded-lg mt-1" rows="6"
                                             placeholder="Tell attendees all about your event..."></textarea></div>
                                     <div><label class="font-semibold text-gray-700">Artists &amp; Instructors</label><input
                                             id="field-artists"
                                             type="text"
                                             placeholder="e.g., Korke &amp; Judith, Alonso &amp; Noelia (comma separated)"
-                                            class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                                            class="w-full p-2 border border-gray-300 rounded-lg mt-1"></div>
                                     <div><label class="font-semibold text-gray-700">Tags</label><input
                                             id="field-tags"
                                             type="text"
                                             placeholder="e.g., Bachata, Salsa, Zouk (comma separated)"
-                                            class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                                            class="w-full p-2 border border-gray-300 rounded-lg mt-1"></div>
                                 </div>
 
                                 <!-- Step 3: Ticketing (NEW) -->
@@ -255,16 +255,16 @@
                                         <input type="hidden" id="editing-ticket-id">
                                         <div><label class="font-semibold text-gray-700">Ticket Name</label><input
                                                 id="ticket-name" type="text" placeholder="e.g., Weekend Pass"
-                                                class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                                                class="w-full p-2 border border-gray-300 rounded-lg mt-1"></div>
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div><label class="font-semibold text-gray-700">Quantity
                                                     Available</label><input id="ticket-qty" type="number"
                                                     placeholder="e.g., 200"
-                                                    class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                                                    class="w-full p-2 border border-gray-300 rounded-lg mt-1"></div>
                                             <div>
                                                 <label class="font-semibold text-gray-700">Status</label>
                                                 <select id="ticket-status"
-                                                    class="w-full p-2 border border-gray-300 rounded-md mt-1"
+                                                    class="w-full p-2 border border-gray-300 rounded-lg mt-1"
                                                     onchange="toggleScheduledDate(this.value)">
                                                     <option value="On Sale">On Sale</option>
                                                     <option value="Draft">Draft</option>
@@ -275,7 +275,7 @@
                                         <div id="scheduled-date-container" class="hidden">
                                             <label class="font-semibold text-gray-700">Sale Start Date</label>
                                             <input id="scheduled-date" type="date"
-                                                class="w-full p-2 border border-gray-300 rounded-md mt-1">
+                                                class="w-full p-2 border border-gray-300 rounded-lg mt-1">
                                         </div>
 
                                         <div class="pt-4 border-t">
@@ -295,13 +295,13 @@
                                         <div id="simple-price-view">
                                             <div><label class="font-semibold text-gray-700">Price (€)</label><input
                                                     id="simple-price" type="number" placeholder="e.g., 190.00"
-                                                    class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                                                    class="w-full p-2 border border-gray-300 rounded-lg mt-1"></div>
                                         </div>
 
                                         <div id="dynamic-price-view" class="hidden space-y-4">
                                             <div><label class="font-semibold text-gray-700">Base Price (€)</label><input
                                                     id="base-price" type="number" placeholder="The first price tier"
-                                                    class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
+                                                    class="w-full p-2 border border-gray-300 rounded-lg mt-1"></div>
                                             <div id="pricing-rules-container" class="space-y-2"></div>
                                             <button type="button" onclick="addPricingRule()"
                                                 class="text-sm font-semibold revelti-blue hover:underline">+ Add Pricing
@@ -319,7 +319,7 @@
                                                         (€)</label>
                                                     <input id="final-price-override-value" type="number"
                                                         placeholder="e.g., 250.00"
-                                                        class="w-full p-2 border border-gray-300 rounded-md mt-1">
+                                                        class="w-full p-2 border border-gray-300 rounded-lg mt-1">
                                                 </div>
                                             </div>
                                         </div>
@@ -344,10 +344,10 @@
                                         <label class="font-semibold text-gray-700">Search by Username or Email</label>
                                         <input type="text" id="collaborator-search" onkeyup="handleSearch(event)"
                                             placeholder="e.g., AMedia or John Doe"
-                                            class="w-full p-2 border border-gray-300 rounded-md mt-1">
+                                            class="w-full p-2 border border-gray-300 rounded-lg mt-1">
                                         <!-- Search Suggestions -->
                                         <div id="search-suggestions"
-                                            class="absolute w-full bg-white border border-gray-300 rounded-md mt-1 shadow-md z-10 hidden">
+                                            class="absolute w-full bg-white border border-gray-300 rounded-lg mt-1 shadow-md z-10 hidden">
                                             <!-- Suggestions will be injected here by JS -->
                                         </div>
                                     </div>
@@ -458,13 +458,13 @@
 
             ruleDiv.innerHTML = `
                 <span>Increase to</span>
-                <input type="number" placeholder="220.00" class="rule-price p-2 border border-gray-300 rounded-md w-24" value="${rule?.newPrice || ''}">
+                <input type="number" placeholder="220.00" class="rule-price p-2 border border-gray-300 rounded-lg w-24" value="${rule?.newPrice || ''}">
                 <span>when</span>
-                <select class="rule-type p-2 border border-gray-300 rounded-md" onchange="updateRuleInputType(this)">
+                <select class="rule-type p-2 border border-gray-300 rounded-lg" onchange="updateRuleInputType(this)">
                     <option value="date" ${rule?.type === 'date' ? 'selected' : ''}>Date is after</option>
                     <option value="sales" ${rule?.type === 'sales' ? 'selected' : ''}>Tickets Sold ></option>
                 </select>
-                <input type="${rule?.type === 'sales' ? 'number' : 'date'}" class="rule-value p-2 border border-gray-300 rounded-md flex-1" value="${rule?.value || ''}">
+                <input type="${rule?.type === 'sales' ? 'number' : 'date'}" class="rule-value p-2 border border-gray-300 rounded-lg flex-1" value="${rule?.value || ''}">
                 <button type="button" onclick="this.parentElement.remove()" class="text-red-500 hover:text-red-700 font-bold">&times;</button>
             `;
             container.appendChild(ruleDiv);
@@ -919,7 +919,7 @@ We put a lot of effort into bringing the best artists in the world. Teachers, DJ
         <div class="bg-white rounded-xl shadow-xl max-w-lg w-full p-6 relative">
             <button onclick="closeFeaturedModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12">
                     </path>
                 </svg>
             </button>
@@ -930,9 +930,9 @@ We put a lot of effort into bringing the best artists in the world. Teachers, DJ
                     <div
                         class="w-10 h-10 bg-revelti-orange rounded-full flex items-center justify-center flex-shrink-0">
                         <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                 d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
                             </path>
                         </svg>
@@ -947,7 +947,7 @@ We put a lot of effort into bringing the best artists in the world. Teachers, DJ
                 <div class="flex items-start gap-3">
                     <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
                         <svg class="w-5 h-5 text-revelti-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                 d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
                             </path>
                         </svg>

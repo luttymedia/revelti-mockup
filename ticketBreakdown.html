@@ -66,13 +66,13 @@
 
                     <header class="flex flex-col md:flex-row justify-between items-center mb-8">
                         <div>
-                            <h1 class="text-3xl font-extrabold revelti-blue">Ticket Breakdown</h1>
+                            <h1 class="text-3xl font-bold revelti-blue">Ticket Breakdown</h1>
                             <p class="text-gray-500">Deep dive into your ticket sales performance.</p>
                         </div>
                         <a href="organizerDashboard.html"
                             class="mt-4 md:mt-0 px-4 py-2 text-sm font-semibold bg-revelti-blue text-white rounded-md hover:bg-blue-800 transition duration-300 flex items-center justify-center">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                     d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                             </svg>
                             Organizer Dashboard
@@ -82,26 +82,26 @@
                     <!-- KPI Cards -->
                     <div id="kpi-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
                         <!-- KPIs will be loaded here -->
-                        <div class="bg-white p-4 rounded-lg border animate-pulse">
+                        <div class="bg-white p-4 rounded-xl border animate-pulse">
                             <div class="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
                             <div class="h-8 bg-gray-300 rounded w-1/2"></div>
                         </div>
-                        <div class="bg-white p-4 rounded-lg border animate-pulse">
+                        <div class="bg-white p-4 rounded-xl border animate-pulse">
                             <div class="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
                             <div class="h-8 bg-gray-300 rounded w-1/2"></div>
                         </div>
-                        <div class="bg-white p-4 rounded-lg border animate-pulse">
+                        <div class="bg-white p-4 rounded-xl border animate-pulse">
                             <div class="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
                             <div class="h-8 bg-gray-300 rounded w-1/2"></div>
                         </div>
-                        <div class="bg-white p-4 rounded-lg border animate-pulse">
+                        <div class="bg-white p-4 rounded-xl border animate-pulse">
                             <div class="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
                             <div class="h-8 bg-gray-300 rounded w-1/2"></div>
                         </div>
                     </div>
 
                     <!-- Filters Section -->
-                    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                    <div class="bg-white rounded-xl shadow-md p-6 mb-8">
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                             <button data-modal="eventFilterModal"
                                 class="filter-btn w-full px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition">Filter
@@ -136,33 +136,33 @@
 
                     <!-- Charts Grid -->
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-                        <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="bg-white rounded-xl shadow-md p-6">
                             <h4 class="text-md font-bold text-gray-700 text-center mb-2">Promoter Performance</h4>
                             <canvas id="promoterChart"></canvas>
                         </div>
-                        <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="bg-white rounded-xl shadow-md p-6">
                             <h4 class="text-md font-bold text-gray-700 text-center mb-2">Sales by Ticket Type</h4>
                             <canvas id="ticketTypeChart"></canvas>
                         </div>
-                        <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="bg-white rounded-xl shadow-md p-6">
                             <h4 class="text-md font-bold text-gray-700 text-center mb-2">Best-Selling Events</h4>
                             <canvas id="eventSalesChart"></canvas>
                         </div>
-                        <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="bg-white rounded-xl shadow-md p-6">
                             <h4 class="text-md font-bold text-gray-700 text-center mb-2">Sales by Price Tier</h4>
                             <canvas id="priceTierChart"></canvas>
                         </div>
                     </div>
 
                     <!-- More Stats Section -->
-                    <div class="bg-white rounded-lg shadow-md mb-8">
+                    <div class="bg-white rounded-xl shadow-md mb-8">
                         <details>
                             <summary
                                 class="flex justify-between items-center cursor-pointer font-semibold text-lg revelti-blue p-4">
                                 More Stats
                                 <svg class="w-5 h-5 accordion-arrow" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                         d="M19 9l-7 7-7-7"></path>
                                 </svg>
                             </summary>
@@ -220,7 +220,7 @@
                     </div>
 
                     <!-- Data Table Section -->
-                    <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="bg-white rounded-xl shadow-md p-6">
                         <table id="ticketTable" class="display" style="width:100%">
                             <thead>
                                 <tr>
@@ -423,7 +423,7 @@
                             var header = $(column.header());
                             var title = header.text();
                             header.css('font-size', '0.875rem');
-                            header.html(title + ' <span class="filter-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 inline-block"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Interface / Filter"> <path id="Vector" d="M20 5.6001C20 5.04005 19.9996 4.75981 19.8906 4.5459C19.7948 4.35774 19.6423 4.20487 19.4542 4.10899C19.2403 4 18.9597 4 18.3996 4H5.59961C5.03956 4 4.75981 4 4.5459 4.10899C4.35774 4.20487 4.20487 4.35774 4.10899 4.5459C4 4.75981 4 5.04005 4 5.6001V6.33736C4 6.58195 4 6.70433 4.02763 6.81942C4.05213 6.92146 4.09263 7.01893 4.14746 7.1084C4.20928 7.20928 4.29591 7.29591 4.46875 7.46875L9.53149 12.5315C9.70443 12.7044 9.79044 12.7904 9.85228 12.8914C9.90711 12.9808 9.94816 13.0786 9.97266 13.1807C10 13.2946 10 13.4155 10 13.6552V18.411C10 19.2682 10 19.6971 10.1805 19.9552C10.3382 20.1806 10.5814 20.331 10.8535 20.3712C11.1651 20.4172 11.5487 20.2257 12.3154 19.8424L13.1154 19.4424C13.4365 19.2819 13.5966 19.2013 13.7139 19.0815C13.8176 18.9756 13.897 18.8485 13.9453 18.7084C14 18.5499 14 18.37 14 18.011V13.6626C14 13.418 14 13.2958 14.0276 13.1807C14.0521 13.0786 14.0926 12.9808 14.1475 12.8914C14.2089 12.7911 14.2947 12.7053 14.4653 12.5347L14.4688 12.5315L19.5315 7.46875C19.7044 7.2958 19.7904 7.20932 19.8523 7.1084C19.9071 7.01893 19.9482 6.92146 19.9727 6.81942C20 6.70551 20 6.58444 20 6.3448V5.6001Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g> </g></svg></span>');
+                            header.html(title + ' <span class="filter-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 inline-block"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Interface / Filter"> <path id="Vector" d="M20 5.6001C20 5.04005 19.9996 4.75981 19.8906 4.5459C19.7948 4.35774 19.6423 4.20487 19.4542 4.10899C19.2403 4 18.9597 4 18.3996 4H5.59961C5.03956 4 4.75981 4 4.5459 4.10899C4.35774 4.20487 4.20487 4.35774 4.10899 4.5459C4 4.75981 4 5.04005 4 5.6001V6.33736C4 6.58195 4 6.70433 4.02763 6.81942C4.05213 6.92146 4.09263 7.01893 4.14746 7.1084C4.20928 7.20928 4.29591 7.29591 4.46875 7.46875L9.53149 12.5315C9.70443 12.7044 9.79044 12.7904 9.85228 12.8914C9.90711 12.9808 9.94816 13.0786 9.97266 13.1807C10 13.2946 10 13.4155 10 13.6552V18.411C10 19.2682 10 19.6971 10.1805 19.9552C10.3382 20.1806 10.5814 20.331 10.8535 20.3712C11.1651 20.4172 11.5487 20.2257 12.3154 19.8424L13.1154 19.4424C13.4365 19.2819 13.5966 19.2013 13.7139 19.0815C13.8176 18.9756 13.897 18.8485 13.9453 18.7084C14 18.5499 14 18.37 14 18.011V13.6626C14 13.418 14 13.2958 14.0276 13.1807C14.0521 13.0786 14.0926 12.9808 14.1475 12.8914C14.2089 12.7911 14.2947 12.7053 14.4653 12.5347L14.4688 12.5315L19.5315 7.46875C19.7044 7.2958 19.7904 7.20932 19.8523 7.1084C19.9071 7.01893 19.9482 6.92146 19.9727 6.81942C20 6.70551 20 6.58444 20 6.3448V5.6001Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g> </g></svg></span>');
 
                             header.find('.filter-icon').on('click', function (e) {
                                 e.stopPropagation();
@@ -496,10 +496,10 @@
                 const promoterSales = data.reduce((acc, item) => { if (item.promoter !== 'N/A') { acc[item.promoter] = (acc[item.promoter] || 0) + item.qtySold; } return acc; }, {});
                 const topPromoter = Object.keys(promoterSales).length > 0 ? Object.entries(promoterSales).sort((a, b) => b[1] - a[1])[0][0] : 'N/A';
                 $('#kpi-cards').html(`
-                <div class="bg-white p-4 rounded-lg border border-gray-100 shadow-sm"><h3 class="text-sm font-semibold text-gray-500">Total Tickets Sold</h3><p class="text-2xl font-bold revelti-blue mt-1">${totalTickets.toLocaleString()}</p></div>
-                <div class="bg-white p-4 rounded-lg border border-gray-100 shadow-sm"><h3 class="text-sm font-semibold text-gray-500">Total Income</h3><p class="text-2xl font-bold revelti-blue mt-1">€${totalIncome.toLocaleString('de-DE', { minimumFractionDigits: 2 })}</p></div>
-                <div class="bg-white p-4 rounded-lg border border-gray-100 shadow-sm"><h3 class="text-sm font-semibold text-gray-500">Avg. Ticket Price</h3><p class="text-2xl font-bold revelti-blue mt-1">€${avgPrice.toFixed(2)}</p></div>
-                <div class="bg-white p-4 rounded-lg border border-gray-100 shadow-sm"><h3 class="text-sm font-semibold text-gray-500">Top Promoter</h3><p class="text-2xl font-bold revelti-blue mt-1">${topPromoter}</p></div>
+                <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm"><h3 class="text-sm font-semibold text-gray-500">Total Tickets Sold</h3><p class="text-2xl font-bold revelti-blue mt-1">${totalTickets.toLocaleString()}</p></div>
+                <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm"><h3 class="text-sm font-semibold text-gray-500">Total Income</h3><p class="text-2xl font-bold revelti-blue mt-1">€${totalIncome.toLocaleString('de-DE', { minimumFractionDigits: 2 })}</p></div>
+                <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm"><h3 class="text-sm font-semibold text-gray-500">Avg. Ticket Price</h3><p class="text-2xl font-bold revelti-blue mt-1">€${avgPrice.toFixed(2)}</p></div>
+                <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm"><h3 class="text-sm font-semibold text-gray-500">Top Promoter</h3><p class="text-2xl font-bold revelti-blue mt-1">${topPromoter}</p></div>
             `);
             }
 

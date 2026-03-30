@@ -45,27 +45,27 @@
                 <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
                     </ol>
                     </nav>
-                    <h1 class="text-3xl font-extrabold revelti-blue">Galleries Overview</h1>
+                    <h1 class="text-3xl font-bold revelti-blue">Galleries Overview</h1>
                     </header>
 
                     <!-- Key Metric Cards -->
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-                        <div class="bg-white p-6 rounded-lg shadow-md border">
+                        <div class="bg-white p-6 rounded-xl shadow-md border">
                             <h3 class="text-base font-semibold text-gray-500 uppercase tracking-wider">Total Media Files
                             </h3>
                             <p id="total-media" class="text-5xl font-extrabold revelti-blue mt-2">0</p>
                         </div>
-                        <div class="bg-white p-6 rounded-lg shadow-md border">
+                        <div class="bg-white p-6 rounded-xl shadow-md border">
                             <h3 class="text-base font-semibold text-gray-500 uppercase tracking-wider">Pending Approval
                             </h3>
                             <p id="pending-approval" class="text-5xl font-extrabold revelti-orange mt-2">0</p>
                         </div>
-                        <div class="bg-white p-6 rounded-lg shadow-md border">
+                        <div class="bg-white p-6 rounded-xl shadow-md border">
                             <h3 class="text-base font-semibold text-gray-500 uppercase tracking-wider">Scheduled
                                 Galleries</h3>
                             <p id="scheduled-galleries" class="text-5xl font-extrabold revelti-blue mt-2">0</p>
                         </div>
-                        <div class="bg-white p-6 rounded-lg shadow-md border">
+                        <div class="bg-white p-6 rounded-xl shadow-md border">
                             <h3 class="text-base font-semibold text-gray-500 uppercase tracking-wider">Storage Used</h3>
                             <div class="w-full bg-gray-200 rounded-full h-4 mt-4">
                                 <div class="bg-revelti-blue h-4 rounded-full" style="width: 45%;"></div>
@@ -75,7 +75,7 @@
                     </div>
 
                     <!-- Main Content Area -->
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden">
                         <div class="p-6">
                             <!-- Controls & Filters -->
                             <div class="flex flex-col md:flex-row items-center justify-between mb-6">
@@ -85,7 +85,7 @@
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                         <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                         </svg>
                                     </div>
@@ -182,7 +182,7 @@
 
             filteredData.forEach(event => {
                 const card = document.createElement('div');
-                card.className = 'event-card bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 shadow-sm flex flex-col';
+                card.className = 'event-card bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 shadow-sm flex flex-col';
 
                 const totalPhotos = event.galleries.reduce((sum, g) => sum + g.photos, 0);
                 const totalVideos = event.galleries.reduce((sum, g) => sum + g.videos, 0);

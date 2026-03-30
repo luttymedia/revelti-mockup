@@ -44,7 +44,7 @@
 
             <!-- Header Section with Search and Filters -->
             <header class="sticky top-0 bg-white z-10 px-4 py-1 md:static md:px-6 md:py-6">
-                <h1 class="text-3xl font-extrabold revelti-blue mb-4">Find your next event</h1>
+                <h1 class="text-3xl font-bold revelti-blue mb-4">Find your next event</h1>
 
                 <!-- Search Bar -->
                 <div class="relative">
@@ -52,7 +52,7 @@
                         class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-revelti-orange">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
                     </div>
@@ -64,7 +64,7 @@
                         class="w-full flex items-center justify-center bg-gray-200 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300 transition duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                             class="w-5 h-5 mr-2">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                 d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
                         </svg>
                         Filters
@@ -78,7 +78,7 @@
                 <div class="flex justify-end items-center mb-4">
                     <label for="order-picker" class="text-sm font-semibold text-gray-600 mr-2">Order by:</label>
                     <select id="order-picker"
-                        class="border border-gray-300 rounded-md p-1 text-sm focus:outline-none focus:ring-1 focus:ring-revelti-orange">
+                        class="border border-gray-300 rounded-lg p-1 text-sm focus:outline-none focus:ring-1 focus:ring-revelti-orange">
                         <option value="relevance">Relevance</option>
                         <option value="date">Dates</option>
                         <option value="alphabetical">Alphabetical</option>
@@ -94,7 +94,7 @@
                 <!-- Event Card Template (hidden) -->
                 <template id="event-card-template">
                     <div
-                        class="event-card bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 shadow-sm">
+                        class="event-card bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 shadow-sm">
                         <div class="relative">
                             <img class="w-full h-40 lg:h-48 object-cover">
                             <!-- Series pill: top-left -->
@@ -104,14 +104,14 @@
                                 <button
                                     class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
                                         class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                             d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
                                         </path>
                                     </svg></button>
                                 <button
                                     class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
                                         class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                             d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z">
                                         </path>
                                     </svg></button>
@@ -131,7 +131,7 @@
                 <!-- Filter Modal -->
                 <div id="filter-modal"
                     class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
-                    <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-sm" id="filter-modal-content">
+                    <div class="bg-white rounded-xl shadow-xl p-6 w-full max-w-sm" id="filter-modal-content">
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="text-xl font-bold revelti-blue">Filter Events</h3>
                             <button id="close-filter-modal"
@@ -140,18 +140,18 @@
                         <div class="space-y-4">
                             <div>
                                 <h4 class="font-bold text-gray-700 mb-2">Location</h4><input type="text"
-                                    placeholder="Enter a city..." class="w-full p-2 border border-gray-300 rounded-md">
+                                    placeholder="Enter a city..." class="w-full p-2 border border-gray-300 rounded-lg">
                             </div>
                             <div>
                                 <h4 class="font-bold text-gray-700 mb-2">Style</h4><input type="text"
                                     placeholder="Enter a dance style..."
-                                    class="w-full p-2 border border-gray-300 rounded-md">
+                                    class="w-full p-2 border border-gray-300 rounded-lg">
                             </div>
                             <div>
                                 <h4 class="font-bold text-gray-700 mb-2">Dates</h4>
                                 <div class="space-y-2"><input type="date"
-                                        class="w-full p-2 border border-gray-300 rounded-md"><input type="date"
-                                        class="w-full p-2 border border-gray-300 rounded-md"></div>
+                                        class="w-full p-2 border border-gray-300 rounded-lg"><input type="date"
+                                        class="w-full p-2 border border-gray-300 rounded-lg"></div>
                             </div>
                         </div>
                         <button id="apply-filters-btn"
@@ -245,9 +245,9 @@
                 // Set the follow button based on the isFollowed property
                 const followButton = card.querySelector('.space-x-1 button:first-child');
                 if (eventData.isFollowed) {
-                    followButton.outerHTML = `<button class="p-1.5 bg-green-600 rounded-full text-white hover:text-revelti-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></button>`;
+                    followButton.outerHTML = `<button class="p-1.5 bg-green-600 rounded-full text-white hover:text-revelti-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></button>`;
                 } else {
-                    followButton.outerHTML = `<button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></button>`;
+                    followButton.outerHTML = `<button class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg></button>`;
                 }
 
 

@@ -89,7 +89,7 @@
                     <!-- Header: Title Row + Search Bar -->
                     <div class="flex items-center justify-between mb-3 gap-4">
                         <!-- Left: Page Title -->
-                        <h1 id="page-title" class="text-3xl font-extrabold text-revelti-blue whitespace-nowrap">Media
+                        <h1 id="page-title" class="text-3xl font-bold text-revelti-blue whitespace-nowrap">Media
                             Overview</h1>
 
                         <!-- Right: Search Bar and Storage -->
@@ -104,7 +104,7 @@
                                     onclick="openAdvancedFiltersModal()"
                                     class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-400 hover:text-revelti-blue transition">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                             d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
                                     </svg>
                                 </button>
@@ -134,27 +134,27 @@
                         <div class="flex items-center gap-2">
                             <!-- Upload (only shown when in My Uploads context or root) -->
                             <button id="upload-btn" onclick="handleUpload()"
-                                class="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-600 bg-white border border-gray-300 rounded-md px-3 py-1.5 hover:bg-gray-50 hover:border-gray-400 transition shadow-sm">
+                                class="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-600 bg-white border border-gray-300 rounded-lg px-3 py-1.5 hover:bg-gray-50 hover:border-gray-400 transition shadow-sm">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                         d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                                 </svg>
                                 Upload
                             </button>
                             <!-- New Folder -->
                             <button id="new-folder-btn" onclick="handleNewFolder()"
-                                class="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-600 bg-white border border-gray-300 rounded-md px-3 py-1.5 hover:bg-gray-50 hover:border-gray-400 transition shadow-sm">
+                                class="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-600 bg-white border border-gray-300 rounded-lg px-3 py-1.5 hover:bg-gray-50 hover:border-gray-400 transition shadow-sm">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                         d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
                                 </svg>
                                 New Folder
                             </button>
                             <!-- Quick Share -->
                             <button onclick="alert('Opening Quick Share options')"
-                                class="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-600 bg-white border border-gray-300 rounded-md px-3 py-1.5 hover:bg-gray-50 hover:border-gray-400 transition shadow-sm">
+                                class="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-600 bg-white border border-gray-300 rounded-lg px-3 py-1.5 hover:bg-gray-50 hover:border-gray-400 transition shadow-sm">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                         d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
                                 </svg>
                                 Quick Share
@@ -199,7 +199,7 @@
                                     class="inline-flex items-center justify-center px-2.5 py-1.5 text-gray-500 hover:bg-gray-50 transition"
                                     title="List view">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                             d="M4 6h16M4 12h16M4 18h16" />
                                     </svg>
                                 </button>
@@ -211,14 +211,14 @@
                     <div id="creative-warning-banner"
                         class="hidden mb-4 flex items-center gap-3 bg-amber-50 border border-amber-200 rounded-lg px-4 py-2.5 text-sm text-amber-800">
                         <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                 d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
                         </svg>
                         <span>This is a <strong>Creative folder</strong> — upload &amp; folder management are disabled.
                             You can download and copy links.</span>
                     </div>
 
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden" id="drop-zone"
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden" id="drop-zone"
                         ondragover="event.preventDefault(); document.getElementById('drop-zone').classList.add('drag-over')"
                         ondragleave="document.getElementById('drop-zone').classList.remove('drag-over')"
                         ondrop="handleDrop(event)">
@@ -229,7 +229,7 @@
                                     class="mr-3 bg-gray-100 p-2 rounded-full text-gray-500 hover:bg-gray-200 hover:text-revelti-blue transition hidden"
                                     title="Go back">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                             d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                                     </svg>
                                 </button>
@@ -251,7 +251,7 @@
                                     class="hidden border-2 border-dashed border-gray-200 rounded-lg p-12 flex flex-col items-center justify-center text-center bg-gray-50/50">
                                     <svg class="w-12 h-12 text-gray-300 mb-4" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                             d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
                                     </svg>
                                     <h3 class="font-bold text-gray-700 text-lg mb-1">No folders found</h3>
@@ -271,7 +271,7 @@
         <div id="ctx-open" onclick="ctxAction('open')"
             class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
             <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                     d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z" />
             </svg>
             Open
@@ -279,7 +279,7 @@
         <div id="ctx-gallery" onclick="ctxAction('gallery')"
             class="hidden px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2 text-purple-700">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                     d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
             Open Gallery
@@ -287,7 +287,7 @@
         <div id="ctx-download" onclick="ctxAction('download')"
             class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
             <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                     d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
             </svg>
             Download
@@ -295,7 +295,7 @@
         <div id="ctx-copy-link" onclick="ctxAction('copy-link')"
             class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
             <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                     d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
             </svg>
             Copy Link
@@ -304,7 +304,7 @@
         <div id="ctx-rename" onclick="ctxAction('rename')"
             class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
             <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                     d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
             </svg>
             Rename
@@ -312,7 +312,7 @@
         <div id="ctx-move" onclick="ctxAction('move')"
             class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
             <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                     d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
             </svg>
             Move
@@ -320,7 +320,7 @@
         <div id="ctx-copy" onclick="ctxAction('copy')"
             class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
             <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                     d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
             </svg>
             Copy
@@ -328,7 +328,7 @@
         <div id="ctx-share" onclick="ctxAction('share')"
             class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
             <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                     d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
             </svg>
             Share (Copy Link)
@@ -336,7 +336,7 @@
         <div id="ctx-subfolder" onclick="ctxAction('subfolder')"
             class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
             <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                     d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
             </svg>
             Create Subfolder
@@ -344,7 +344,7 @@
         <div id="ctx-upload-here" onclick="ctxAction('upload-here')"
             class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
             <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                     d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
             </svg>
             Upload Files Here
@@ -353,7 +353,7 @@
         <div id="ctx-delete" onclick="ctxAction('delete')"
             class="px-4 py-2 hover:bg-red-50 cursor-pointer flex items-center gap-2 text-red-600">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                     d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
             </svg>
             Delete
@@ -806,7 +806,7 @@
                 </span>`;
             }
             return `<span title="From Creative" class="inline-flex items-center gap-1 text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-purple-100 text-purple-800">
-                    <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                     ${isCompact ? '' : 'From Creative'}
                 </span>`;
         }
@@ -815,7 +815,7 @@
             if (!node.hasGallery) return '';
             const isCompact = currentViewMode === 'compact';
             return `<span title="Gallery" class="inline-flex items-center gap-1 text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-purple-600 text-white ml-1">
-                <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                 ${isCompact ? '' : 'Gallery'}
             </span>`;
         }
@@ -843,7 +843,7 @@
             const galleryBtn = node.hasGallery
                 ? `<button onclick="event.stopPropagation(); openGalleryOverlay();"
                     class="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-purple-700 hover:text-purple-900 transition">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                     Open Gallery
                 </button>` : '';
 
@@ -866,7 +866,7 @@
                     </div>
                     <button type="button" onclick='openContextMenu(event, "${node.id}", ${JSON.stringify(path)})'
                         class="text-gray-400 hover:text-gray-600 p-1 rounded hover:bg-gray-100 ml-2 shrink-0">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/></svg>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/></svg>
                     </button>
                 </div>
             </div>`;
@@ -885,7 +885,7 @@
                     </div>
                     <button type="button" onclick='openContextMenu(event, "${node.id}", ${JSON.stringify(path)})'
                         class="text-gray-400 hover:text-gray-600 p-1 rounded hover:bg-gray-100 ml-1 shrink-0">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/></svg>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/></svg>
                     </button>
                 </div>
             </div>`;
@@ -911,7 +911,7 @@
                     <td class="py-3 px-4 text-right">
                         <button type="button" onclick='openContextMenu(event, "${node.id}", ${JSON.stringify(childPath)})'
                             class="text-gray-400 hover:text-gray-600 p-1 rounded hover:bg-gray-100">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/></svg>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/></svg>
                         </button>
                     </td>
                 </tr>`;
@@ -1059,7 +1059,7 @@
                     <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition flex items-start justify-end p-2">
                         <button class="bg-white rounded p-1 opacity-0 group-hover:opacity-100 shadow text-gray-700 hover:text-revelti-blue transition transform scale-90" 
                                 onclick="toggleMediaContextMenu(event, '${path}', ${isCreative})">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path></svg>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path></svg>
                         </button>
                     </div>
                 </div>
@@ -1180,7 +1180,7 @@
                 <h3 class="font-bold text-gray-800 text-lg">Advanced Filters</h3>
                 <button onclick="closeModals()" class="text-gray-400 hover:text-gray-600">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12">
                         </path>
                     </svg>
                 </button>
@@ -1283,13 +1283,13 @@
         style="border:none;border-radius:1rem;padding:1.75rem;width:100%;max-width:480px;box-shadow:0 20px 60px rgba(0,0,0,.18);font-family:inherit;">
         <div class="flex justify-between items-start mb-4">
             <div>
-                <h2 class="text-xl font-extrabold text-revelti-blue">Upgrade Plan</h2>
+                <h2 class="text-xl font-bold text-revelti-blue">Upgrade Plan</h2>
                 <p class="text-sm text-gray-400 mt-0.5">Choose a plan that fits your needs</p>
             </div>
             <button onclick="closeUpgradeModal()"
                 style="background:none;border:none;cursor:pointer;color:#9ca3af;margin-left:1rem;">
                 <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
         </div>
@@ -1307,7 +1307,7 @@
                         <p class="text-sm font-bold text-revelti-blue">Plus — 10 GB</p>
                         <p class="text-xs text-gray-400 mt-0.5">Best for growing events</p>
                     </div>
-                    <span class="text-sm font-extrabold text-revelti-blue">120€<span
+                    <span class="text-sm font-bold text-revelti-blue">120€<span
                             class="text-xs font-normal text-gray-400">/year</span></span>
                 </div>
             </div>
@@ -1317,7 +1317,7 @@
                         <p class="text-sm font-bold text-revelti-blue">Premium — 100 GB</p>
                         <p class="text-xs text-gray-400 mt-0.5">Full creative library access</p>
                     </div>
-                    <span class="text-sm font-extrabold text-revelti-blue">290€<span
+                    <span class="text-sm font-bold text-revelti-blue">290€<span
                             class="text-xs font-normal text-gray-400">/year</span></span>
                 </div>
             </div>
@@ -1331,21 +1331,21 @@
                 <li class="text-sm text-gray-600 flex items-center gap-2">
                     <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7" />
                     </svg>
                     10 GB storage for event assets
                 </li>
                 <li class="text-sm text-gray-600 flex items-center gap-2">
                     <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7" />
                     </svg>
                     Up to 3 active events
                 </li>
                 <li class="text-sm text-gray-600 flex items-center gap-2">
                     <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7" />
                     </svg>
                     Invite media creatives
                 </li>
@@ -1356,28 +1356,28 @@
                 <li class="text-sm text-gray-600 flex items-center gap-2">
                     <svg class="w-4 h-4 text-revelti-orange flex-shrink-0" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7" />
                     </svg>
                     100 GB storage
                 </li>
                 <li class="text-sm text-gray-600 flex items-center gap-2">
                     <svg class="w-4 h-4 text-revelti-orange flex-shrink-0" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7" />
                     </svg>
                     Unlimited active events
                 </li>
                 <li class="text-sm text-gray-600 flex items-center gap-2">
                     <svg class="w-4 h-4 text-revelti-orange flex-shrink-0" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7" />
                     </svg>
                     Priority creative deliveries
                 </li>
                 <li class="text-sm text-gray-600 flex items-center gap-2">
                     <svg class="w-4 h-4 text-revelti-orange flex-shrink-0" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7" />
                     </svg>
                     Advanced event analytics
                 </li>
@@ -1417,9 +1417,9 @@
             <div onclick="alert('Opening preview...'); closeMediaContextMenu();"
                 class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
                 <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                         d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                         d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
                     </path>
                 </svg>
@@ -1430,7 +1430,7 @@
             <div onclick="alert('Link copied to clipboard'); closeMediaContextMenu();"
                 class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
                 <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                         d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1">
                     </path>
                 </svg>
@@ -1441,7 +1441,7 @@
             <div onclick="alert('Rename File'); closeMediaContextMenu();"
                 class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
                 <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                         d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
                     </path>
                 </svg>
@@ -1450,7 +1450,7 @@
             <div onclick="alert('Move File'); closeMediaContextMenu();"
                 class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
                 <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                         d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
                 </svg>
                 Move
@@ -1460,7 +1460,7 @@
             <div onclick="alert('Downloading file...'); closeMediaContextMenu();"
                 class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
                 <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                         d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                 </svg>
                 Download
@@ -1470,7 +1470,7 @@
             <div onclick="alert('File removed'); closeMediaContextMenu();"
                 class="px-4 py-2 hover:bg-red-50 cursor-pointer flex items-center gap-2 text-red-600">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                         d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
                     </path>
                 </svg>
