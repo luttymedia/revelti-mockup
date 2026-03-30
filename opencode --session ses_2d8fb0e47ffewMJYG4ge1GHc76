@@ -1,0 +1,21 @@
+Session ID                      Title                                                                                                 Updated
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ses_2d47c649effe2CfL31tGiVsZjs  Tailwind-styled event tickets site updates overview                                                   8:04 PM · 3/26/2026
+ses_2d4a5ed02ffedK47l8K75zKPDy  Home vs Attendee Dashboard: section/background styling comparison                                     7:53 PM · 3/26/2026
+ses_2d4b365e3ffe1rkkXxzZCj0wVy  UI/UX differences between homePage.html and homePage2.html                                            7:05 PM · 3/26/2026
+ses_2d4c4517effeOw6Q2458Q5ycIp  Purple primary buttons on creative pages: list pages with blue buttons first                          6:54 PM · 3/26/2026
+ses_2d4ed5818ffeGBb47JI57nNff4  UI tab navigation replacement across project per homePage2.html                                       6:37 PM · 3/26/2026
+ses_2d50c9c98ffeOB91Q3xkQ5zd5i  Apply updated public nav bar visuals to other nav bars                                                5:43 PM · 3/26/2026
+ses_2d557e576ffedEzEIqvFgbWIGT  Enable default active shuffle button in publicGalleryView.html                                        3:59 PM · 3/26/2026
+ses_2d56b205dffegJdyDiD32I0KZi  Add Shuffle FAB to publicGalleryView.html with session persistence                                    3:57 PM · 3/26/2026
+ses_2d57ee0e7ffe1onxHiQ7cL67us  Organizer journey for event creation: organizer + attendee impact                                     3:28 PM · 3/26/2026
+ses_2d8fb0e47ffewMJYG4ge1GHc76  Lightbox close on overlay click not working in publicGalleryView.html                                 11:03 PM · 3/25/2026
+ses_2d91efbd6ffexT1QDWkk4Ta7Im  Trailing dash bug on first load of attendeeDashboard.html                                             11:00 PM · 3/25/2026
+ses_2d9f2ebfaffek8S5Ne2cisYjB1  Comprehensive button taxonomy: names, text, hierarchy, shape, location                                6:33 PM · 3/25/2026
+ses_2da3fd70affe2Ktuxm3dXtsQ4z  NavBar vs body search text format in homePage2.html                                                   6:03 PM · 3/25/2026
+ses_2db42b07dffeL4c3vEb0iAqZTc  Auto-rotate featured events carousel every 5s in homePage2.html                                       12:30 PM · 3/25/2026
+ses_2dba890bfffe5Jkc6OTj24LdtU  Tailwind-based segmented pill tabs for homePage2.html navigation                                      11:34 AM · 3/25/2026
+ses_2de3c2074ffe02r1BPPfGH4n1l  Revelti Home: Featured Events UI tweaks (mobile)                                                      12:37 AM · 3/25/2026
+ses_2dedb8b39ffeiodegnlx91MRp3  Refactor homePage2.html: mobile-first redesigned search, tabs, and 5-card carousel with poster vi...  8:15 PM · 3/24/2026
+ses_2e398d4faffeH8V52bAF1HMusq  Feature toggle and rotation info in createEvent.html                                                  9:50 PM · 3/23/2026
+ses_2e3a2f21cffehEwxcU5r6t1ymt  Server run on port 3001                                                                               9:23 PM · 3/23/2026

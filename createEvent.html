@@ -5,6 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Revelti - Create New Event</title>
+    <style>
+        #series-selector { transition: all 0.25s ease; }
+        .series-chip { cursor: pointer; transition: background 0.15s; }
+        .series-chip:hover { background: #213c6318; }
+        .series-chip.selected { background: #213c63; color: white; }
+        #edition-clone-banner { border-left: 4px solid #213c63; }
+    </style>
 
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -49,8 +56,8 @@
 
                     <header class="flex flex-col md:flex-row justify-between items-center mb-8">
                         <div>
-                            <h1 class="text-3xl font-extrabold revelti-blue">Create a New Event</h1>
-                            <p class="text-gray-500">Follow the steps to get your event ready for the public.</p>
+                            <h1 class="text-3xl font-extrabold revelti-blue" id="page-title">Create a New Event</h1>
+                            <p class="text-gray-500" id="page-subtitle">Follow the steps to get your event ready for the public.</p>
                         </div>
                         <a href="organizerDashboard.html"
                             class="px-4 py-2 bg-revelti-blue text-white rounded-lg hover:bg-blue-800 transition duration-300 flex items-center justify-center">
@@ -103,36 +110,76 @@
                             <div class="max-w-3xl mx-auto">
                                 <!-- Step 1: Core Details -->
                                 <div id="step-1" class="step-content space-y-4">
+                                    <!-- Edition clone banner (hidden unless series is selected or ?edition=new) -->
+                                    <div id="edition-clone-banner" class="hidden p-4 bg-blue-50 rounded-lg mb-2" style="border-left:4px solid #213c63">
+                                        <div class="flex items-start gap-3">
+                                            <svg class="w-5 h-5 text-revelti-blue flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                            <div>
+                                                <p class="font-bold text-revelti-blue text-sm">Creating next edition</p>
+                                                <p class="text-sm text-gray-600">Pre-filled from <strong id="clone-source-name">last edition</strong>. Update the dates and adjust details as needed. Ticket inventory has been reset to zero.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Recurring Series Toggle — FIRST in step 1 -->
+                                    <div class="p-4 border border-gray-200 bg-gray-50 rounded-lg" id="series-block">
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center">
+                                                <svg class="w-5 h-5 text-gray-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                                                <span class="font-semibold text-gray-700">Part of a recurring series</span>
+                                            </div>
+                                            <label class="relative inline-flex items-center cursor-pointer">
+                                                <input type="checkbox" id="series-checkbox" class="sr-only peer" onchange="toggleSeriesBlock()">
+                                                <div class="w-11 h-6 bg-gray-300 peer-focus:ring-2 peer-focus:ring-revelti-blue rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-revelti-blue"></div>
+                                            </label>
+                                        </div>
+                                        <!-- Series dropdown (shown when toggle is on) -->
+                                        <div id="series-selector" class="hidden mt-4 space-y-3">
+                                            <label class="font-semibold text-gray-700 text-sm">Select series</label>
+                                            <select id="series-dropdown" class="w-full p-2 border border-gray-300 rounded-md text-sm" onchange="onSeriesDropdownChange(this.value)">
+                                                <option value="">— Select an existing series or create new —</option>
+                                                <option value="bachata-geneva">🎉 Bachata Geneva Festival</option>
+                                                <option value="weekly-latin">🎵 Weekly Latin Sundays</option>
+                                                <option value="__new__">+ Create a new series…</option>
+                                            </select>
+                                            <!-- New series name (shown when __new__ selected) -->
+                                            <div id="new-series-name-wrap" class="hidden">
+                                                <input type="text" id="new-series-name" placeholder="New series name…" class="w-full p-2 border border-gray-300 rounded-md text-sm">
+                                            </div>
+                                            <div id="series-selection-label" class="hidden text-sm font-semibold text-revelti-blue"></div>
+                                        </div>
+                                    </div>
+
                                     <div><label class="font-semibold text-gray-700">Event Title*</label><input
-                                            type="text" placeholder="e.g., Barcelona Summer Festival"
+                                            id="field-title" type="text" placeholder="e.g., Barcelona Summer Festival"
                                             class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div><label class="font-semibold text-gray-700">Event Type*</label><select
-                                                class="w-full p-2 border border-gray-300 rounded-md mt-1">
+                                                id="field-type" class="w-full p-2 border border-gray-300 rounded-md mt-1">
                                                 <option>Congress</option>
                                                 <option>Festival</option>
                                                 <option>Social</option>
                                                 <option>Workshop</option>
                                             </select></div>
                                         <div><label class="font-semibold text-gray-700">Primary Language*</label><select
-                                                class="w-full p-2 border border-gray-300 rounded-md mt-1">
+                                                id="field-language" class="w-full p-2 border border-gray-300 rounded-md mt-1">
                                                 <option>English</option>
                                                 <option>Spanish</option>
                                             </select></div>
                                     </div>
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div><label class="font-semibold text-gray-700">Start Date*</label><input
-                                                type="date" class="w-full p-2 border border-gray-300 rounded-md mt-1">
+                                                id="field-start-date" type="date" class="w-full p-2 border border-gray-300 rounded-md mt-1">
                                         </div>
                                         <div><label class="font-semibold text-gray-700">End Date*</label><input
-                                                type="date" class="w-full p-2 border border-gray-300 rounded-md mt-1">
+                                                id="field-end-date" type="date" class="w-full p-2 border border-gray-300 rounded-md mt-1">
                                         </div>
                                     </div>
                                     <div><label class="font-semibold text-gray-700">Venue Name*</label><input
-                                            type="text" placeholder="e.g., Hotel Evenia Olympic"
+                                            id="field-venue" type="text" placeholder="e.g., Hotel Evenia Olympic"
                                             class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
-                                    <div><label class="font-semibold text-gray-700">Location*</label><input type="text"
-                                            placeholder="e.g., Barcelona, Spain"
+                                    <div><label class="font-semibold text-gray-700">Location*</label><input
+                                            id="field-location" type="text" placeholder="e.g., Barcelona, Spain"
                                             class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
 
                                     <div class="flex items-center justify-between p-4 border border-orange-200 bg-orange-50 rounded-lg mt-4"
@@ -147,7 +194,7 @@
                                             <span class="font-semibold text-gray-700" id="featured-label">Feature this
                                                 event</span>
                                             <span id="featured-price"
-                                                class="ml-2 text-sm text-revelti-orange font-semibold">€10/week</span>
+                                                class="ml-2 text-sm text-revelti-orange font-semibold">&euro;10/week</span>
                                             <button onclick="openFeaturedModal()"
                                                 class="ml-2 text-gray-500 hover:text-revelti-blue">
                                                 <svg class="w-5 h-5" fill="none" stroke="currentColor"
@@ -176,18 +223,22 @@
                                             event page.</p>
                                         <div
                                             class="mt-2 p-6 border-2 border-dashed border-gray-300 rounded-lg text-center">
-                                            <p>Drag & drop files here or <button
+                                            <p>Drag &amp; drop files here or <button
                                                     class="font-semibold revelti-blue">browse files</button></p>
                                         </div>
                                     </div>
                                     <div><label class="font-semibold text-gray-700">Event Description</label><textarea
+                                            id="field-description"
                                             class="w-full p-2 border border-gray-300 rounded-md mt-1" rows="6"
                                             placeholder="Tell attendees all about your event..."></textarea></div>
-                                    <div><label class="font-semibold text-gray-700">Artists & Instructors</label><input
+                                    <div><label class="font-semibold text-gray-700">Artists &amp; Instructors</label><input
+                                            id="field-artists"
                                             type="text"
-                                            placeholder="e.g., Korke & Judith, Alonso & Noelia (comma separated)"
+                                            placeholder="e.g., Korke &amp; Judith, Alonso &amp; Noelia (comma separated)"
                                             class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
-                                    <div><label class="font-semibold text-gray-700">Tags</label><input type="text"
+                                    <div><label class="font-semibold text-gray-700">Tags</label><input
+                                            id="field-tags"
+                                            type="text"
                                             placeholder="e.g., Bachata, Salsa, Zouk (comma separated)"
                                             class="w-full p-2 border border-gray-300 rounded-md mt-1"></div>
                                 </div>
@@ -656,9 +707,208 @@
             }
         }
 
+        // --- Recurring Series Logic ---
+        let selectedSeriesId = null;
+        const seriesData = {
+            'bachata-geneva': {
+                name: 'Bachata Geneva Festival',
+                lastEdition: 'Bachata Geneva Festival 2025 – The Festival of Nations',
+                // Step 1 fields
+                titleTemplate: 'Bachata Geneva Festival 2026 - The Festival of Nations',
+                venue: 'Palexpo, Geneva',
+                location: 'Geneva, Switzerland',
+                type: 'Festival',
+                language: 'English',
+                // Step 2 fields — cloned from eventLiveEdit.html
+                description: `Get ready to experience an even more spectacular edition of the The Festival of Nations in October 2026! After the tremendous success of last year's event, we are thrilled to announce that we are taking things to a whole new level, as we proudly announce the participation of even 𝗠𝗢𝗥𝗘 nations this year!
+
+BGF is a festival created by passionate bachater@s for passionate bachater@s. And we care about you more than anything else. You will feel an ambiance you've never felt at a festival!
+
+We put a lot of effort into bringing the best artists in the world. Teachers, DJs, videographers, and photographers, the quality is assured!`,
+                artists: 'Klau & Ros, Melvin & Gatica, Marco & Sara, Masa & Polina, Ataca & La Alemana, Gero & Migle, And many more!',
+                tags: 'Everything in the same place, Possibility of cancellation until a certain date, Workshops, Masterclass, Several rooms, Weekend, Intensive',
+                // Step 3 — cloned from ticketManagement.html (all 5 ticket types, qty reset to 0)
+                tickets: [
+                    {
+                        name: 'Sensuality Pass',
+                        qty: 0,
+                        status: 'On Sale',
+                        strategy: 'dynamic',
+                        basePrice: 170.00,
+                        rules: [
+                            { type: 'date', value: '2026-08-01', newPrice: 180.00 },
+                            { type: 'date', value: '2026-09-01', newPrice: 190.00 },
+                            { type: 'date', value: '2026-10-01', newPrice: 220.00 }
+                        ],
+                        finalPriceOverride: null
+                    },
+                    {
+                        name: 'Essentiality Pass',
+                        qty: 0,
+                        status: 'On Sale',
+                        strategy: 'dynamic',
+                        basePrice: 170.00,
+                        rules: [
+                            { type: 'date', value: '2026-08-01', newPrice: 180.00 },
+                            { type: 'date', value: '2026-09-01', newPrice: 190.00 },
+                            { type: 'date', value: '2026-10-01', newPrice: 220.00 }
+                        ],
+                        finalPriceOverride: 250.00
+                    },
+                    {
+                        name: 'J&J Amateur',
+                        qty: 0,
+                        status: 'On Sale',
+                        strategy: 'dynamic',
+                        basePrice: 10.00,
+                        rules: [
+                            { type: 'sales', value: 20, newPrice: 15.00 },
+                            { type: 'sales', value: 30, newPrice: 20.00 }
+                        ],
+                        finalPriceOverride: null
+                    },
+                    {
+                        name: 'Training Tracks',
+                        qty: 0,
+                        status: 'Draft',
+                        strategy: 'simple',
+                        price: 100.00
+                    },
+                    {
+                        name: 'Party Pass',
+                        qty: 0,
+                        status: 'Scheduled',
+                        strategy: 'simple',
+                        price: 80.00
+                    }
+                ],
+                interval: 'Yearly'
+            },
+            'weekly-latin': {
+                name: 'Weekly Latin Sundays',
+                lastEdition: 'Weekly Latin Sundays – Mar 30, 2026',
+                titleTemplate: 'Weekly Latin Sundays – Apr 06, 2026',
+                venue: 'Club Salsadholic',
+                location: 'Geneva, Switzerland',
+                type: 'Social',
+                language: 'English',
+                description: 'The best Sunday Latin social in Geneva. Come dance Bachata, Salsa, and Kizomba in a friendly and welcoming atmosphere. All levels welcome!',
+                artists: 'DJ Latin Groove, DJ Salsa Fire',
+                tags: 'Bachata, Salsa, Kizomba, Social, Geneva',
+                tickets: [
+                    { name: 'Entry', qty: 0, status: 'On Sale', strategy: 'simple', price: 15 }
+                ],
+                interval: 'Weekly'
+            }
+        };
+
+        function toggleSeriesBlock() {
+            const checked = document.getElementById('series-checkbox').checked;
+            const selector = document.getElementById('series-selector');
+            selector.classList.toggle('hidden', !checked);
+            if (!checked) {
+                // Reset
+                document.getElementById('series-dropdown').value = '';
+                document.getElementById('new-series-name-wrap').classList.add('hidden');
+                document.getElementById('series-selection-label').classList.add('hidden');
+                document.getElementById('edition-clone-banner').classList.add('hidden');
+                document.getElementById('page-title').textContent = 'Create a New Event';
+                document.getElementById('page-subtitle').textContent = 'Follow the steps to get your event ready for the public.';
+                selectedSeriesId = null;
+            }
+        }
+
+        function onSeriesDropdownChange(val) {
+            const newWrap = document.getElementById('new-series-name-wrap');
+            const label  = document.getElementById('series-selection-label');
+            newWrap.classList.toggle('hidden', val !== '__new__');
+            if (val === '__new__' || val === '') {
+                label.classList.add('hidden');
+                document.getElementById('edition-clone-banner').classList.add('hidden');
+                document.getElementById('page-title').textContent = 'Create a New Event';
+                document.getElementById('page-subtitle').textContent = 'Follow the steps to get your event ready for the public.';
+                selectedSeriesId = null;
+                return;
+            }
+            selectedSeriesId = val;
+            preFillAllSteps(val);
+        }
+
+        function preFillAllSteps(seriesId) {
+            const series = seriesData[seriesId];
+            if (!series) return;
+
+            // Show clone banner
+            document.getElementById('edition-clone-banner').classList.remove('hidden');
+            document.getElementById('clone-source-name').textContent = series.lastEdition;
+
+            // Update page title
+            document.getElementById('page-title').textContent = 'Create Next Edition';
+            document.getElementById('page-subtitle').textContent = `Creating a new edition of ${series.name}. Pre-filled from last edition — update dates and adjust as needed.`;
+
+            // Show confirmation label in selector
+            const label = document.getElementById('series-selection-label');
+            label.textContent = `✓ Series: ${series.name}`;
+            label.classList.remove('hidden');
+
+            // --- Step 1 ---
+            document.getElementById('field-title').value    = series.titleTemplate;
+            document.getElementById('field-venue').value    = series.venue;
+            document.getElementById('field-location').value = series.location;
+            for (let opt of document.getElementById('field-type').options)      { if (opt.text === series.type)     { opt.selected = true; break; } }
+            for (let opt of document.getElementById('field-language').options)  { if (opt.text === series.language) { opt.selected = true; break; } }
+            // Dates intentionally left blank
+
+            // --- Step 2 ---
+            document.getElementById('field-description').value = series.description;
+            document.getElementById('field-artists').value     = series.artists;
+            document.getElementById('field-tags').value        = series.tags;
+
+            // --- Step 3: inject tickets, reset qty to 0 (fresh edition) ---
+            eventTickets = [];
+            series.tickets.forEach(t => {
+                let pricing;
+                if (t.strategy === 'simple') {
+                    pricing = { strategy: 'simple', simplePrice: t.price };
+                } else {
+                    pricing = {
+                        strategy: 'dynamic',
+                        basePrice: t.basePrice,
+                        rules: t.rules || [],
+                        finalPriceOverride: t.finalPriceOverride || null
+                    };
+                }
+                eventTickets.push({
+                    id: Date.now() + Math.random(),
+                    name: t.name,
+                    quantity: 0,
+                    status: t.status,
+                    pricing: pricing
+                });
+            });
+            renderTicketSummaries();
+        }
+
+        // --- Check for ?edition=new URL param (Create next edition mode from external links) ---
         document.addEventListener('DOMContentLoaded', () => {
             showStep(currentStep);
+
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('edition') === 'new') {
+                const seriesId = params.get('series') || 'bachata-geneva';
+
+                // Pre-check the series toggle
+                document.getElementById('series-checkbox').checked = true;
+                toggleSeriesBlock();
+
+                // Select the series in the dropdown
+                document.getElementById('series-dropdown').value = seriesId;
+
+                // Trigger pre-fill
+                preFillAllSteps(seriesId);
+            }
         });
+
     </script>
     <script src="layout-injector.js" defer></script>
     <script src="organizer.js" defer></script>

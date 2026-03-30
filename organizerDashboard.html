@@ -80,6 +80,8 @@
                             <div class="organizer-tab-container-wide">
                                 <button onclick="switchTab('events')"
                                     class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium organizer-tab-active">Events</button>
+                                <button onclick="switchTab('series')"
+                                    class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">Event Series</button>
                                 <button onclick="switchTab('stats')"
                                     class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">Quick Stats</button>
                                 <button onclick="switchTab('overview')"
@@ -193,7 +195,84 @@
                                 </div>
                             </div>
 
-                            <!-- Stats Tab -->
+                            <!-- Event Series Tab -->
+                            <div id="series" class="tab-content hidden">
+                                <div class="flex justify-between items-center mb-4">
+                                    <p class="text-sm text-gray-500">Your recurring event series. Each series groups all editions under a single brand.</p>
+                                    <a href="organizerSeriesView.html" class="text-sm font-semibold revelti-blue hover:underline">View all series &rarr;</a>
+                                </div>
+                                <!-- 3-column compact cards grid -->
+                                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+
+                                    <!-- Card 1: Bachata Geneva Festival -->
+                                    <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden flex flex-col" style="transition: box-shadow 0.2s, transform 0.2s;" onmouseover="this.style.boxShadow='0 6px 20px rgba(33,60,99,0.10)';this.style.transform='translateY(-2px)'" onmouseout="this.style.boxShadow='';this.style.transform=''">
+                                        <div class="h-1.5 bg-revelti-blue w-full"></div>
+                                        <div class="p-4 flex-1 flex flex-col">
+                                            <div class="flex items-center gap-1.5 mb-2">
+                                                <span class="text-xs font-bold bg-blue-100 text-revelti-blue px-2 py-0.5 rounded-full uppercase tracking-wider">Yearly</span>
+                                                <span class="text-xs font-bold bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">Festival</span>
+                                            </div>
+                                            <h3 class="font-extrabold text-base revelti-blue leading-tight">Bachata Geneva Festival</h3>
+                                            <p class="text-xs text-gray-500 mt-0.5 mb-3">Geneva, Switzerland &bull; Every October</p>
+                                            <div class="grid grid-cols-3 gap-2 text-center mb-3">
+                                                <div class="bg-gray-50 rounded-lg py-1.5">
+                                                    <p class="text-xs text-gray-400 leading-tight">Editions</p>
+                                                    <p class="text-sm font-extrabold revelti-blue">4</p>
+                                                </div>
+                                                <div class="bg-gray-50 rounded-lg py-1.5">
+                                                    <p class="text-xs text-gray-400 leading-tight">Rating</p>
+                                                    <p class="text-sm font-extrabold revelti-blue">4.7&#9733;</p>
+                                                </div>
+                                                <div class="bg-gray-50 rounded-lg py-1.5">
+                                                    <p class="text-xs text-gray-400 leading-tight">Followers</p>
+                                                    <p class="text-sm font-extrabold revelti-blue">1,280</p>
+                                                </div>
+                                            </div>
+                                            <div class="text-xs text-gray-500 mb-3">
+                                                <a href="eventLiveEdit.html" class="hover:underline">Next: <span class="font-bold text-green-700">Oct 08–12, 2026 &bull; On Sale</span></a>
+                                            </div>
+                                            <div class="mt-auto flex gap-2">
+                                                <a href="createEvent.html?edition=new&series=bachata-geneva" class="flex-1 text-center text-xs font-bold bg-revelti-blue text-white px-2 py-1.5 rounded-lg hover:bg-blue-800">+ Next edition</a>
+                                                <a href="organizerSeriesView.html#bachata-geneva" class="text-xs font-semibold bg-gray-100 text-gray-600 px-2 py-1.5 rounded-lg hover:bg-gray-200">View series</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Card 2: Weekly Latin Sundays -->
+                                    <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden flex flex-col" style="transition: box-shadow 0.2s, transform 0.2s;" onmouseover="this.style.boxShadow='0 6px 20px rgba(33,60,99,0.10)';this.style.transform='translateY(-2px)'" onmouseout="this.style.boxShadow='';this.style.transform=''">
+                                        <div class="h-1.5 bg-revelti-orange w-full"></div>
+                                        <div class="p-4 flex-1 flex flex-col">
+                                            <div class="flex items-center gap-1.5 mb-2">
+                                                <span class="text-xs font-bold bg-orange-100 text-revelti-orange px-2 py-0.5 rounded-full uppercase tracking-wider">Weekly</span>
+                                                <span class="text-xs font-bold bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">Social</span>
+                                            </div>
+                                            <h3 class="font-extrabold text-base revelti-blue leading-tight">Weekly Latin Sundays</h3>
+                                            <p class="text-xs text-gray-500 mt-0.5 mb-3">Club Salsadholic, Geneva &bull; Every Sunday</p>
+                                            <div class="grid grid-cols-3 gap-2 text-center mb-3">
+                                                <div class="bg-gray-50 rounded-lg py-1.5">
+                                                    <p class="text-xs text-gray-400 leading-tight">Editions</p>
+                                                    <p class="text-sm font-extrabold revelti-blue">18</p>
+                                                </div>
+                                                <div class="bg-gray-50 rounded-lg py-1.5">
+                                                    <p class="text-xs text-gray-400 leading-tight">Rating</p>
+                                                    <p class="text-sm font-extrabold revelti-blue">4.5&#9733;</p>
+                                                </div>
+                                                <div class="bg-gray-50 rounded-lg py-1.5">
+                                                    <p class="text-xs text-gray-400 leading-tight">Followers</p>
+                                                    <p class="text-sm font-extrabold revelti-blue">342</p>
+                                                </div>
+                                            </div>
+                                            <div class="text-xs text-gray-500 mb-3">Next: <span class="font-bold text-green-700">Apr 06, 2026 &bull; On Sale</span></div>
+                                            <div class="mt-auto flex gap-2">
+                                                <a href="createEvent.html?edition=new&series=weekly-latin" class="flex-1 text-center text-xs font-bold bg-revelti-orange text-white px-2 py-1.5 rounded-lg hover:bg-orange-600">+ Next edition</a>
+                                                <a href="organizerSeriesView.html#weekly-latin" class="text-xs font-semibold bg-gray-100 text-gray-600 px-2 py-1.5 rounded-lg hover:bg-gray-200">View series</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
                             <div id="stats" class="tab-content hidden">
                                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                                     <!-- Main Stat Card: Total Income -->
