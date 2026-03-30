@@ -97,6 +97,9 @@
                         class="event-card bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 shadow-sm">
                         <div class="relative">
                             <img class="w-full h-40 lg:h-48 object-cover">
+                            <!-- Series pill: top-left -->
+                            <div class="series-pill-container absolute top-2 left-2"></div>
+                            <!-- Follow + Share buttons: top-right -->
                             <div class="absolute top-2 right-2 flex space-x-1">
                                 <button
                                     class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
@@ -163,7 +166,8 @@
     <script>
         // --- Mock Data ---
         const eventsData = [
-            { id: 1, name: 'Bachata Geneva Festival 2026 - The Festival of Nations', date: '2025-11-01', location: 'Barcelona', rating: 4.8, isFeatured: true, isTrending: true, relevance: 1, poster: 'images/eventPoster.png', url: 'eventDetail.html', isFollowed: true },
+            { id: 1, name: 'Bachata Geneva Festival 2026 - The Festival of Nations', date: '2026-10-08', location: 'Geneva', rating: 4.8, isFeatured: true, isTrending: true, relevance: 1, poster: 'images/eventPoster.png', url: 'eventDetail.html', isFollowed: true, seriesName: 'Bachata Geneva Festival' },
+            { id: 9, name: 'Bachata Geneva Festival 2025 - The Festival of Nations', date: '2025-10-09', location: 'Geneva', rating: 4.8, isFeatured: false, isTrending: false, relevance: 3, poster: 'images/eventPoster.png', url: 'eventDetail.html', isFollowed: false, seriesName: 'Bachata Geneva Festival', isPastEdition: true },
             { id: 2, name: 'Madrid Bachata Masters', date: '2025-10-17', location: 'Madrid', rating: 4.9, isFeatured: true, isTrending: false, relevance: 1, poster: 'https://placehold.co/600x400/f58220/ffffff?text=Featured', isFollowed: false },
             { id: 3, name: 'Valencia Salsa Summit', date: '2026-01-20', location: 'Valencia', rating: 4.7, isFeatured: true, isTrending: false, relevance: 1, poster: 'https://placehold.co/600x400/f58220/ffffff?text=Featured', isFollowed: false },
             { id: 4, name: 'BCN Bachata Congress', date: '2025-10-10', location: 'Barcelona', rating: 4.6, isFeatured: false, isTrending: true, relevance: 2, poster: 'https://placehold.co/600x400/213c63/ffffff?text=Trending', isFollowed: true },
@@ -214,7 +218,10 @@
             const grid = document.createElement('div');
             grid.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4';
 
-            sortedEvents.forEach(eventData => {
+            // Filter out past editions of a series — only active/upcoming editions appear in discovery
+            const visibleEvents = sortedEvents.filter(e => !e.isPastEdition);
+
+            visibleEvents.forEach(eventData => {
                 const card = cardTemplate.content.cloneNode(true).querySelector('.event-card');
                 card.querySelector('img').src = eventData.poster;
                 card.querySelector('img').alt = `Poster for ${eventData.name}`;
@@ -222,6 +229,13 @@
                 card.querySelector('p').textContent = `${new Date(eventData.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}, ${new Date(eventData.date).getFullYear()} | ${eventData.location}`;
                 card.querySelector('.rating-container').innerHTML = createStarRating(eventData.rating);
 
+                // Series pill badge — top-left overlay
+                if (eventData.seriesName) {
+                    card.querySelector('.series-pill-container').innerHTML =
+                        `<a href="eventSeriesDetail.html" class="inline-flex items-center gap-1 bg-white/90 text-revelti-blue text-xs font-bold px-2.5 py-1 rounded-full shadow-sm border border-blue-200 hover:bg-blue-50 transition-colors">Series</a>`;
+                }
+
+                // Bottom-right tag (featured / trending)
                 if (eventData.isFeatured) {
                     card.querySelector('.tag-container').innerHTML = `<div class="bg-revelti-orange text-white text-xs font-bold px-2 py-1 rounded-md">FEATURED</div>`;
                 } else if (eventData.isTrending) {
