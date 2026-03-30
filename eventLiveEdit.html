@@ -63,8 +63,13 @@
                             <div class="flex items-center mt-1 gap-2">
                                 <p class="text-gray-600">Live Edit Dashboard</p>
                                 <span class="text-gray-300">&bull;</span>
-                                <a href="organizerSeriesView.html#bachata-geneva" class="flex items-center gap-1 text-sm font-semibold text-revelti-blue hover:underline">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                                <a href="organizerSeriesView.html#bachata-geneva"
+                                    class="flex items-center gap-1 text-sm font-semibold text-revelti-blue hover:underline">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                                        </path>
+                                    </svg>
                                     Part of Bachata Geneva Festival series
                                 </a>
                             </div>
@@ -72,12 +77,18 @@
                         <div id="header-buttons" class="flex flex-shrink-0 items-center space-x-2 mt-4 md:mt-0">
                             <a href="createEvent.html?edition=new&series=bachata-geneva"
                                 class="flex items-center px-3 py-1.5 font-semibold bg-revelti-blue text-white rounded-lg hover:bg-blue-800 transition duration-300 border border-revelti-blue whitespace-nowrap">
-                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                </svg>
                                 Create next edition
                             </a>
-                            <button onclick="openFeaturedModal()" class="flex items-center px-3 py-1.5 font-semibold bg-orange-50 text-revelti-orange rounded-lg hover:bg-orange-100 transition duration-300 border border-orange-200 whitespace-nowrap">
+                            <button onclick="openFeaturedModal()"
+                                class="flex items-center px-3 py-1.5 font-semibold bg-orange-50 text-revelti-orange rounded-lg hover:bg-orange-100 transition duration-300 border border-orange-200 whitespace-nowrap">
                                 <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z">
+                                    </path>
                                 </svg>
                                 Feature
                             </button>
@@ -1506,63 +1517,80 @@
     <script src="organizer.js" defer></script>
 
     <!-- Featured Event Modal -->
-    <div id="featured-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+    <div id="featured-modal"
+        class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
         <div class="bg-white rounded-xl shadow-xl max-w-lg w-full p-6 relative">
-            <button onclick="closeFeaturedModal()"
-                class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+            <button onclick="closeFeaturedModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12">
+                    </path>
                 </svg>
             </button>
             <h3 class="text-xl font-bold text-[#213c63] mb-4">Featured Events</h3>
-            
+
             <div class="space-y-4">
                 <div class="flex items-start gap-3">
                     <div class="w-10 h-10 bg-[#f58220] rounded-full flex items-center justify-center flex-shrink-0">
                         <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                            </path>
                         </svg>
                     </div>
                     <div>
-                        <p class="font-semibold text-gray-800">3 featured slots on homepage</p>
-                        <p class="text-sm text-gray-600">Only 3 events shown at a time. Standard: <span class="font-semibold text-[#f58220]">€10/week/spot</span></p>
+                        <p class="font-semibold text-gray-800">5 Featured Slots</p>
+                        <p class="text-sm text-gray-600">Shared visibility in the top 5 spots across the homepage and searches.</p>
                     </div>
                 </div>
 
                 <div class="flex items-start gap-3">
                     <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
                         <svg class="w-5 h-5 text-[#213c63]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                            </path>
                         </svg>
                     </div>
                     <div>
-                        <p class="font-semibold text-gray-800">Automatic rotation</p>
-                        <p class="text-sm text-gray-600">With 4-9 featured events, they rotate regularly. Your event gets guaranteed exposure!</p>
+                        <p class="font-semibold text-gray-800">Randomized Rotation</p>
+                        <p class="text-sm text-gray-600">Regular rotation in the display pool. Standard: <span class="font-semibold text-[#f58220]">10€/week</span></p>
                     </div>
                 </div>
 
                 <div class="p-4 border-2 border-yellow-400 bg-yellow-50 rounded-lg">
                     <div class="flex items-start gap-3">
-                        <svg class="w-6 h-6 text-yellow-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                        <svg class="w-6 h-6 text-yellow-500 flex-shrink-0 mt-0.5" fill="currentColor"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z">
+                            </path>
                         </svg>
                         <div class="flex-1">
-                            <p class="font-bold text-gray-800">Go Premium & Stand Out!</p>
-                            <p class="text-sm text-gray-600 mt-1">Your event stays <span class="font-semibold text-[#213c63]">always visible</span> — no rotation, no competition. Get 3× more visibility!</p>
-                            <p class="text-lg font-bold text-[#f58220] mt-2">€30/week <span class="text-sm font-normal text-gray-500">(3× standard)</span></p>
+                            <p class="font-bold text-gray-800">Go Premium & Dominate!</p>
+                            <ul class="text-sm text-gray-600 mt-1 list-disc list-inside space-y-1">
+                                <li><strong>100% Visibility:</strong> Your event is permanently pinned to the top 5 spots.</li>
+                                <li><strong>Zero Rotation:</strong> No waiting your turn in the display pool.</li>
+                                <li>Guaranteed 1 of the 5 slots</li>
+                            </ul>
+                            <p class="text-lg font-bold text-[#f58220] mt-2">35€/week</p>
+                            <p class="text-sm font-semibold text-gray-500 mt-1">Limited to 3 spots per week.</p>
                         </div>
                     </div>
                     <label class="flex items-center mt-3 cursor-pointer">
-                        <input type="checkbox" id="premium-checkbox" class="w-5 h-5 text-[#f58220] border-gray-300 rounded focus:ring-[#f58220]">
+                        <input type="checkbox" id="premium-checkbox"
+                            class="w-5 h-5 text-[#f58220] border-gray-300 rounded focus:ring-[#f58220]">
                         <span class="ml-2 font-semibold text-gray-700">Yes, reserve my Premium spot</span>
                     </label>
                 </div>
             </div>
 
             <div class="mt-6 pt-4 border-t border-gray-200 flex justify-end space-x-3">
-                <button onclick="closeFeaturedModal()" class="px-4 py-2 font-semibold text-gray-600 hover:text-gray-800">Cancel</button>
-                <button onclick="confirmFeatured()" class="px-4 py-2 font-bold bg-[#f58220] text-white rounded-lg hover:bg-orange-600">Confirm</button>
+                <button onclick="closeFeaturedModal()"
+                    class="px-4 py-2 font-semibold text-gray-600 hover:text-gray-800">Cancel</button>
+                <button onclick="confirmFeatured()"
+                    class="px-4 py-2 font-bold bg-[#f58220] text-white rounded-lg hover:bg-orange-600">Confirm</button>
             </div>
         </div>
     </div>

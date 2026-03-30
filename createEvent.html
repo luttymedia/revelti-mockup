@@ -6,11 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Revelti - Create New Event</title>
     <style>
-        #series-selector { transition: all 0.25s ease; }
-        .series-chip { cursor: pointer; transition: background 0.15s; }
-        .series-chip:hover { background: #213c6318; }
-        .series-chip.selected { background: #213c63; color: white; }
-        #edition-clone-banner { border-left: 4px solid #213c63; }
+        #series-selector {
+            transition: all 0.25s ease;
+        }
+
+        .series-chip {
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .series-chip:hover {
+            background: #213c6318;
+        }
+
+        .series-chip.selected {
+            background: #213c63;
+            color: white;
+        }
+
+        #edition-clone-banner {
+            border-left: 4px solid #213c63;
+        }
     </style>
 
     <!-- Tailwind CSS for styling -->
@@ -57,7 +73,8 @@
                     <header class="flex flex-col md:flex-row justify-between items-center mb-8">
                         <div>
                             <h1 class="text-3xl font-bold revelti-blue" id="page-title">Create a New Event</h1>
-                            <p class="text-gray-500" id="page-subtitle">Follow the steps to get your event ready for the public.</p>
+                            <p class="text-gray-500" id="page-subtitle">Follow the steps to get your event ready for the
+                                public.</p>
                         </div>
                         <a href="organizerDashboard.html"
                             class="px-4 py-2 bg-revelti-blue text-white rounded-lg hover:bg-blue-800 transition duration-300 flex items-center justify-center">
@@ -111,12 +128,21 @@
                                 <!-- Step 1: Core Details -->
                                 <div id="step-1" class="step-content space-y-4">
                                     <!-- Edition clone banner (hidden unless series is selected or ?edition=new) -->
-                                    <div id="edition-clone-banner" class="hidden p-4 bg-blue-50 rounded-lg mb-2" style="border-left:4px solid #213c63">
+                                    <div id="edition-clone-banner" class="hidden p-4 bg-blue-50 rounded-lg mb-2"
+                                        style="border-left:4px solid #213c63">
                                         <div class="flex items-start gap-3">
-                                            <svg class="w-5 h-5 text-revelti-blue flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                            <svg class="w-5 h-5 text-revelti-blue flex-shrink-0 mt-0.5" fill="none"
+                                                stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                    d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z">
+                                                </path>
+                                            </svg>
                                             <div>
                                                 <p class="font-bold text-revelti-blue text-sm">Creating next edition</p>
-                                                <p class="text-sm text-gray-600">Pre-filled from <strong id="clone-source-name">last edition</strong>. Update the dates and adjust details as needed. Ticket inventory has been reset to zero.</p>
+                                                <p class="text-sm text-gray-600">Pre-filled from <strong
+                                                        id="clone-source-name">last edition</strong>. Update the dates
+                                                    and adjust details as needed. Ticket inventory has been reset to
+                                                    zero.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -125,18 +151,30 @@
                                     <div class="p-4 border border-gray-200 bg-gray-50 rounded-lg" id="series-block">
                                         <div class="flex items-center justify-between">
                                             <div class="flex items-center">
-                                                <svg class="w-5 h-5 text-gray-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                                                <span class="font-semibold text-gray-700">Part of a recurring series</span>
+                                                <svg class="w-5 h-5 text-gray-500 mr-2" fill="none"
+                                                    stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
+                                                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                                                    </path>
+                                                </svg>
+                                                <span class="font-semibold text-gray-700">Part of a recurring
+                                                    series</span>
                                             </div>
                                             <label class="relative inline-flex items-center cursor-pointer">
-                                                <input type="checkbox" id="series-checkbox" class="sr-only peer" onchange="toggleSeriesBlock()">
-                                                <div class="w-11 h-6 bg-gray-300 peer-focus:ring-2 peer-focus:ring-revelti-blue rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-revelti-blue"></div>
+                                                <input type="checkbox" id="series-checkbox" class="sr-only peer"
+                                                    onchange="toggleSeriesBlock()">
+                                                <div
+                                                    class="w-11 h-6 bg-gray-300 peer-focus:ring-2 peer-focus:ring-revelti-blue rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-revelti-blue">
+                                                </div>
                                             </label>
                                         </div>
                                         <!-- Series dropdown (shown when toggle is on) -->
                                         <div id="series-selector" class="hidden mt-4 space-y-3">
                                             <label class="font-semibold text-gray-700 text-sm">Select series</label>
-                                            <select id="series-dropdown" class="w-full p-2 border border-gray-300 rounded-lg text-sm" onchange="onSeriesDropdownChange(this.value)">
+                                            <select id="series-dropdown"
+                                                class="w-full p-2 border border-gray-300 rounded-lg text-sm"
+                                                onchange="onSeriesDropdownChange(this.value)">
                                                 <option value="">— Select an existing series or create new —</option>
                                                 <option value="bachata-geneva">🎉 Bachata Geneva Festival</option>
                                                 <option value="weekly-latin">🎵 Weekly Latin Sundays</option>
@@ -144,9 +182,11 @@
                                             </select>
                                             <!-- New series name (shown when __new__ selected) -->
                                             <div id="new-series-name-wrap" class="hidden">
-                                                <input type="text" id="new-series-name" placeholder="New series name…" class="w-full p-2 border border-gray-300 rounded-lg text-sm">
+                                                <input type="text" id="new-series-name" placeholder="New series name…"
+                                                    class="w-full p-2 border border-gray-300 rounded-lg text-sm">
                                             </div>
-                                            <div id="series-selection-label" class="hidden text-sm font-semibold text-revelti-blue"></div>
+                                            <div id="series-selection-label"
+                                                class="hidden text-sm font-semibold text-revelti-blue"></div>
                                         </div>
                                     </div>
 
@@ -155,24 +195,28 @@
                                             class="w-full p-2 border border-gray-300 rounded-lg mt-1"></div>
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div><label class="font-semibold text-gray-700">Event Type*</label><select
-                                                id="field-type" class="w-full p-2 border border-gray-300 rounded-lg mt-1">
+                                                id="field-type"
+                                                class="w-full p-2 border border-gray-300 rounded-lg mt-1">
                                                 <option>Congress</option>
                                                 <option>Festival</option>
                                                 <option>Social</option>
                                                 <option>Workshop</option>
                                             </select></div>
                                         <div><label class="font-semibold text-gray-700">Primary Language*</label><select
-                                                id="field-language" class="w-full p-2 border border-gray-300 rounded-lg mt-1">
+                                                id="field-language"
+                                                class="w-full p-2 border border-gray-300 rounded-lg mt-1">
                                                 <option>English</option>
                                                 <option>Spanish</option>
                                             </select></div>
                                     </div>
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div><label class="font-semibold text-gray-700">Start Date*</label><input
-                                                id="field-start-date" type="date" class="w-full p-2 border border-gray-300 rounded-lg mt-1">
+                                                id="field-start-date" type="date"
+                                                class="w-full p-2 border border-gray-300 rounded-lg mt-1">
                                         </div>
                                         <div><label class="font-semibold text-gray-700">End Date*</label><input
-                                                id="field-end-date" type="date" class="w-full p-2 border border-gray-300 rounded-lg mt-1">
+                                                id="field-end-date" type="date"
+                                                class="w-full p-2 border border-gray-300 rounded-lg mt-1">
                                         </div>
                                     </div>
                                     <div><label class="font-semibold text-gray-700">Venue Name*</label><input
@@ -231,15 +275,12 @@
                                             id="field-description"
                                             class="w-full p-2 border border-gray-300 rounded-lg mt-1" rows="6"
                                             placeholder="Tell attendees all about your event..."></textarea></div>
-                                    <div><label class="font-semibold text-gray-700">Artists &amp; Instructors</label><input
-                                            id="field-artists"
-                                            type="text"
+                                    <div><label class="font-semibold text-gray-700">Artists &amp;
+                                            Instructors</label><input id="field-artists" type="text"
                                             placeholder="e.g., Korke &amp; Judith, Alonso &amp; Noelia (comma separated)"
                                             class="w-full p-2 border border-gray-300 rounded-lg mt-1"></div>
-                                    <div><label class="font-semibold text-gray-700">Tags</label><input
-                                            id="field-tags"
-                                            type="text"
-                                            placeholder="e.g., Bachata, Salsa, Zouk (comma separated)"
+                                    <div><label class="font-semibold text-gray-700">Tags</label><input id="field-tags"
+                                            type="text" placeholder="e.g., Bachata, Salsa, Zouk (comma separated)"
                                             class="w-full p-2 border border-gray-300 rounded-lg mt-1"></div>
                                 </div>
 
@@ -820,7 +861,7 @@ We put a lot of effort into bringing the best artists in the world. Teachers, DJ
 
         function onSeriesDropdownChange(val) {
             const newWrap = document.getElementById('new-series-name-wrap');
-            const label  = document.getElementById('series-selection-label');
+            const label = document.getElementById('series-selection-label');
             newWrap.classList.toggle('hidden', val !== '__new__');
             if (val === '__new__' || val === '') {
                 label.classList.add('hidden');
@@ -852,17 +893,17 @@ We put a lot of effort into bringing the best artists in the world. Teachers, DJ
             label.classList.remove('hidden');
 
             // --- Step 1 ---
-            document.getElementById('field-title').value    = series.titleTemplate;
-            document.getElementById('field-venue').value    = series.venue;
+            document.getElementById('field-title').value = series.titleTemplate;
+            document.getElementById('field-venue').value = series.venue;
             document.getElementById('field-location').value = series.location;
-            for (let opt of document.getElementById('field-type').options)      { if (opt.text === series.type)     { opt.selected = true; break; } }
-            for (let opt of document.getElementById('field-language').options)  { if (opt.text === series.language) { opt.selected = true; break; } }
+            for (let opt of document.getElementById('field-type').options) { if (opt.text === series.type) { opt.selected = true; break; } }
+            for (let opt of document.getElementById('field-language').options) { if (opt.text === series.language) { opt.selected = true; break; } }
             // Dates intentionally left blank
 
             // --- Step 2 ---
             document.getElementById('field-description').value = series.description;
-            document.getElementById('field-artists').value     = series.artists;
-            document.getElementById('field-tags').value        = series.tags;
+            document.getElementById('field-artists').value = series.artists;
+            document.getElementById('field-tags').value = series.tags;
 
             // --- Step 3: inject tickets, reset qty to 0 (fresh edition) ---
             eventTickets = [];
@@ -927,8 +968,7 @@ We put a lot of effort into bringing the best artists in the world. Teachers, DJ
 
             <div class="space-y-4">
                 <div class="flex items-start gap-3">
-                    <div
-                        class="w-10 h-10 bg-revelti-orange rounded-full flex items-center justify-center flex-shrink-0">
+                    <div class="w-10 h-10 bg-revelti-orange rounded-full flex items-center justify-center flex-shrink-0">
                         <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -938,9 +978,8 @@ We put a lot of effort into bringing the best artists in the world. Teachers, DJ
                         </svg>
                     </div>
                     <div>
-                        <p class="font-semibold text-gray-800">3 featured slots on homepage</p>
-                        <p class="text-sm text-gray-600">Only 3 events shown at a time. Standard: <span
-                                class="font-semibold text-revelti-orange">€10/week/spot</span></p>
+                        <p class="font-semibold text-gray-800">5 Featured Slots</p>
+                        <p class="text-sm text-gray-600">Shared visibility in the top 5 spots across the homepage and searches.</p>
                     </div>
                 </div>
 
@@ -953,9 +992,8 @@ We put a lot of effort into bringing the best artists in the world. Teachers, DJ
                         </svg>
                     </div>
                     <div>
-                        <p class="font-semibold text-gray-800">Automatic rotation</p>
-                        <p class="text-sm text-gray-600">With 4-9 featured events, they rotate regularly. Your event
-                            gets guaranteed exposure!</p>
+                        <p class="font-semibold text-gray-800">Randomized Rotation</p>
+                        <p class="text-sm text-gray-600">Regular rotation in the display pool. Standard: <span class="font-semibold text-revelti-orange">10€/week</span></p>
                     </div>
                 </div>
 
@@ -968,11 +1006,14 @@ We put a lot of effort into bringing the best artists in the world. Teachers, DJ
                             </path>
                         </svg>
                         <div class="flex-1">
-                            <p class="font-bold text-gray-800">Go Premium & Stand Out!</p>
-                            <p class="text-sm text-gray-600 mt-1">Your event stays <span
-                                    class="font-semibold text-revelti-blue">always visible</span> — no rotation, no
-                                competition. Get 3× more visibility!</p>
-                            <p class="text-lg font-bold text-revelti-orange mt-2">€30/week</p>
+                            <p class="font-bold text-gray-800">Go Premium & Dominate!</p>
+                            <ul class="text-sm text-gray-600 mt-1 list-disc list-inside space-y-1">
+                                <li><strong>100% Visibility:</strong> Your event is permanently pinned to the top 5 spots.</li>
+                                <li><strong>Zero Rotation:</strong> No waiting your turn in the display pool.</li>
+                                <li>Guaranteed 1 of the 5 slots</li>
+                            </ul>
+                            <p class="text-lg font-bold text-revelti-orange mt-2">35€/week</p>
+                            <p class="text-sm font-semibold text-gray-500 mt-1">Limited to 3 spots per week.</p>
                         </div>
                     </div>
                     <label class="flex items-center mt-3 cursor-pointer">
