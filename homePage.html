@@ -202,7 +202,11 @@
                                             class="w-full h-full object-cover">
                                         <!-- Series Tag -->
                                         <div class="absolute top-3 left-3">
-                                            <span class="bg-white/90 text-revelti-blue text-[10px] md:text-xs font-bold px-2 py-0.5 md:px-2.5 md:py-1 rounded-full border border-blue-200">Series</span>
+                                            <object class="pointer-events-none -mt-0.5">
+                                                <a href="eventSeriesDetail.html" onclick="event.stopPropagation();" class="pointer-events-auto inline-block hover:opacity-80 transition-opacity">
+                                                    <span class="bg-white/90 text-revelti-blue text-[10px] md:text-xs font-bold px-2 py-0.5 md:px-2.5 md:py-1 rounded-full border border-blue-200">Series</span>
+                                                </a>
+                                            </object>
                                         </div>
                                         <div class="absolute top-3 right-3 flex space-x-2">
                                             <button onclick="event.stopPropagation(); openFollowModal(); return false;"
