@@ -327,70 +327,177 @@
 
                             <!-- Activity Tab -->
                             <div id="activity" class="tab-content hidden">
-                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                                    <!-- Draft -->
-                                    <div
-                                        class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-center items-center text-center">
-                                        <div
-                                            class="w-12 h-12 rounded-full bg-orange-100 text-orange-500 flex items-center justify-center mb-4">
-                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
-                                                </path>
-                                            </svg>
-                                        </div>
-                                        <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Draft
-                                        </h3>
-                                        <p class="text-4xl font-extrabold text-orange-500 mt-2">2</p>
-                                        <p class="text-xs text-gray-400 mt-2">Events pending details</p>
+                                <!-- Digest Bar -->
+                                <div class="rounded-xl p-3 mb-4 text-sm text-gray-600 bg-gray-50 border border-gray-100">
+                                    <div class="flex flex-wrap items-center justify-center gap-3">
+                                        <span class="font-bold text-revelti-blue">This Week:</span>
+                                        <span class="flex items-center gap-1">
+                                            <svg class="w-3.5 h-3.5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                                            <span class="font-semibold">383 uploads</span>
+                                        </span>
+                                        <span class="text-gray-300">•</span>
+                                        <span class="flex items-center gap-1">
+                                            <svg class="w-3.5 h-3.5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                            <span class="font-semibold">4 new collaborators</span>
+                                        </span>
+                                        <span class="text-gray-300">•</span>
+                                        <span class="flex items-center gap-1">
+                                            <svg class="w-3.5 h-3.5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                            <span class="font-semibold">2 pending invites</span>
+                                        </span>
+                                        <span class="text-gray-300">•</span>
+                                        <span class="flex items-center gap-1">
+                                            <svg class="w-3.5 h-3.5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                                            <span class="font-semibold">3 folders shared with you</span>
+                                        </span>
                                     </div>
-                                    <!-- Scheduled -->
-                                    <div
-                                        class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-center items-center text-center">
-                                        <div
-                                            class="w-12 h-12 rounded-full bg-blue-100 text-blue-500 flex items-center justify-center mb-4">
-                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                                </path>
-                                            </svg>
+                                </div>
+
+                                <!-- Filter Buttons -->
+                                <div class="flex gap-2 mb-4 overflow-x-auto pb-2">
+                                    <button data-filter="all" class="activity-filter-btn active-filter px-3 py-1.5 text-xs font-semibold bg-revelti-blue text-white rounded-full transition">All</button>
+                                    <button data-filter="uploads" class="activity-filter-btn px-3 py-1.5 text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 rounded-full transition">Uploads</button>
+                                    <button data-filter="collaborators" class="activity-filter-btn px-3 py-1.5 text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 rounded-full transition">Collaborators</button>
+                                    <button data-filter="shared" class="activity-filter-btn px-3 py-1.5 text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 rounded-full transition">Shared</button>
+                                    <button data-filter="invites" class="activity-filter-btn px-3 py-1.5 text-xs font-semibold bg-orange-50 text-revelti-orange border border-orange-100 hover:bg-orange-100 rounded-full transition">Invites</button>
+                                </div>
+
+                                <!-- Activity Feed -->
+                                <div class="space-y-3" id="activity-feed">
+                                    <!-- Today -->
+                                    <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Today</p>
+                                    
+                                    <!-- Upload Item -->
+                                    <div class="activity-item flex items-center justify-between p-4 bg-white rounded-xl border border-gray-100 hover:border-revelti-blue hover:shadow-md transition-all group" data-type="uploads">
+                                        <div class="flex items-center gap-4">
+                                            <div class="w-10 h-10 rounded-full bg-purple-100 text-purple-500 flex items-center justify-center flex-shrink-0">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <p class="text-sm font-semibold text-gray-800">You uploaded <span class="text-revelti-blue font-bold">150 files</span> to</p>
+                                                <a href="creativeStudioWorkspace.html?search=Bachata+Geneva+Festival" class="text-sm font-bold text-revelti-blue hover:underline">Bachata Geneva Festival</a>
+                                            </div>
                                         </div>
-                                        <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">
-                                            Scheduled</h3>
-                                        <p class="text-4xl font-extrabold text-blue-500 mt-2">5</p>
-                                        <p class="text-xs text-gray-400 mt-2">Upcoming published events</p>
+                                        <span class="text-xs text-gray-400 whitespace-nowrap">2h ago</span>
                                     </div>
-                                    <!-- Private -->
-                                    <div
-                                        class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-center items-center text-center">
-                                        <div
-                                            class="w-12 h-12 rounded-full bg-purple-100 text-purple-500 flex items-center justify-center mb-4">
-                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
-                                                </path>
-                                            </svg>
+
+                                    <!-- New Collaborators -->
+                                    <div class="activity-item flex items-center justify-between p-4 bg-white rounded-xl border border-gray-100 hover:border-revelti-blue hover:shadow-md transition-all group" data-type="collaborators">
+                                        <div class="flex items-center gap-4">
+                                            <div class="w-10 h-10 rounded-full bg-green-100 text-green-500 flex items-center justify-center flex-shrink-0">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <p class="text-sm font-semibold text-gray-800"><span class="text-revelti-blue font-bold">3 new collaborators</span> joined</p>
+                                                <a href="creativeStudioWorkspace.html?search=Barcelona+Summer+Fest" class="text-sm font-bold text-revelti-blue hover:underline">Barcelona Summer Fest</a>
+                                            </div>
                                         </div>
-                                        <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Private
-                                        </h3>
-                                        <p class="text-4xl font-extrabold text-purple-500 mt-2">1</p>
-                                        <p class="text-xs text-gray-400 mt-2">Invite-only events</p>
+                                        <span class="text-xs text-gray-400 whitespace-nowrap">Yesterday</span>
                                     </div>
-                                    <!-- Public -->
-                                    <div
-                                        class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-center items-center text-center">
-                                        <div
-                                            class="w-12 h-12 rounded-full bg-green-100 text-green-500 flex items-center justify-center mb-4">
-                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                                    d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9">
-                                                </path>
-                                            </svg>
+
+                                    <!-- Folder Shared -->
+                                    <div class="activity-item flex items-center justify-between p-4 bg-white rounded-xl border border-gray-100 hover:border-revelti-blue hover:shadow-md transition-all group" data-type="shared">
+                                        <div class="flex items-center gap-4">
+                                            <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-500 flex items-center justify-center flex-shrink-0">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <p class="text-sm font-semibold text-gray-800"><span class="text-revelti-blue font-bold">Maria S.</span> shared <span class="text-revelti-blue font-bold">"Day 1 Photos"</span> folder</p>
+                                                <a href="creativeStudioWorkspace.html?search=Day+1+Photos" class="text-sm font-bold text-revelti-blue hover:underline">View folder</a>
+                                            </div>
                                         </div>
-                                        <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Public
-                                        </h3>
-                                        <p class="text-4xl font-extrabold text-green-500 mt-2">12</p>
-                                        <p class="text-xs text-gray-400 mt-2">Live and visible to all</p>
+                                        <span class="text-xs text-gray-400 whitespace-nowrap">Yesterday</span>
+                                    </div>
+
+                                    <!-- Pending Invite -->
+                                    <div class="activity-item flex items-center justify-between p-4 bg-orange-50 rounded-xl border border-orange-100 hover:shadow-md transition-all" data-type="invites">
+                                        <div class="flex items-center gap-4">
+                                            <div class="w-10 h-10 rounded-full bg-orange-100 text-orange-500 flex items-center justify-center flex-shrink-0">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <p class="text-sm font-semibold text-gray-800">Invite pending:</p>
+                                                <a href="creativeEvents.html?filter=invitations" class="text-sm font-bold text-revelti-blue hover:underline">Zurich Zouk Nights</a>
+                                                <span class="text-xs text-orange-600 ml-2">Respond</span>
+                                            </div>
+                                        </div>
+                                        <button onclick="handleInviteDash(102, 'accept')" class="px-3 py-1.5 bg-revelti-purple text-white text-xs font-bold rounded-lg hover:bg-purple-800 transition">Accept</button>
+                                    </div>
+
+                                    <!-- Earlier this week -->
+                                    <p class="activity-date-header text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 mt-4">Earlier this week</p>
+
+                                    <!-- Upload Item 2 -->
+                                    <div class="activity-item flex items-center justify-between p-4 bg-white rounded-xl border border-gray-100 hover:border-revelti-blue hover:shadow-md transition-all group" data-type="uploads">
+                                        <div class="flex items-center gap-4">
+                                            <div class="w-10 h-10 rounded-full bg-purple-100 text-purple-500 flex items-center justify-center flex-shrink-0">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <p class="text-sm font-semibold text-gray-800">You uploaded <span class="text-revelti-blue font-bold">227 files</span> to</p>
+                                                <a href="creativeStudioWorkspace.html?search=Croatia+Summer+Festival" class="text-sm font-bold text-revelti-blue hover:underline">Croatia Summer Festival</a>
+                                            </div>
+                                        </div>
+                                        <span class="text-xs text-gray-400 whitespace-nowrap">2 days ago</span>
+                                    </div>
+
+                                    <!-- Folder Shared 2 -->
+                                    <div class="activity-item flex items-center justify-between p-4 bg-white rounded-xl border border-gray-100 hover:border-revelti-blue hover:shadow-md transition-all group" data-type="shared">
+                                        <div class="flex items-center gap-4">
+                                            <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-500 flex items-center justify-center flex-shrink-0">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <p class="text-sm font-semibold text-gray-800"><span class="text-revelti-blue font-bold">Alex T.</span> shared <span class="text-revelti-blue font-bold">"Event Highlights"</span> folder</p>
+                                                <a href="creativeStudioWorkspace.html?search=Event+Highlights" class="text-sm font-bold text-revelti-blue hover:underline">View folder</a>
+                                            </div>
+                                        </div>
+                                        <span class="text-xs text-gray-400 whitespace-nowrap">3 days ago</span>
+                                    </div>
+
+                                    <!-- Pending Invite 2 -->
+                                    <div class="activity-item flex items-center justify-between p-4 bg-orange-50 rounded-xl border border-orange-100 hover:shadow-md transition-all" data-type="invites">
+                                        <div class="flex items-center gap-4">
+                                            <div class="w-10 h-10 rounded-full bg-orange-100 text-orange-500 flex items-center justify-center flex-shrink-0">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <p class="text-sm font-semibold text-gray-800">Invite pending:</p>
+                                                <a href="creativeEvents.html?filter=invitations" class="text-sm font-bold text-revelti-blue hover:underline">Lyon Salsa Congress</a>
+                                                <span class="text-xs text-orange-600 ml-2">Respond</span>
+                                            </div>
+                                        </div>
+                                        <button onclick="handleInviteDash(101, 'accept')" class="px-3 py-1.5 bg-revelti-purple text-white text-xs font-bold rounded-lg hover:bg-purple-800 transition">Accept</button>
+                                    </div>
+
+                                    <!-- Event Live -->
+                                    <div class="activity-item flex items-center justify-between p-4 bg-white rounded-xl border border-gray-100 hover:border-green-400 hover:shadow-md transition-all group" data-type="uploads">
+                                        <div class="flex items-center gap-4">
+                                            <div class="w-10 h-10 rounded-full bg-green-100 text-green-500 flex items-center justify-center flex-shrink-0">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <p class="text-sm font-semibold text-gray-800"><span class="text-revelti-blue font-bold">Zouk Festival Zurich</span> is now</p>
+                                                <span class="text-sm font-bold text-green-600">Live</span>
+                                            </div>
+                                        </div>
+                                        <span class="text-xs text-gray-400 whitespace-nowrap">4 days ago</span>
                                     </div>
                                 </div>
                             </div>
@@ -554,6 +661,38 @@
             document.getElementById(targetId)?.classList.remove('hidden');
             document.querySelector(`[onclick="switchTab('${targetId}')"]`)?.classList.add('creative-tab-active');
         }
+
+        // Activity Filter Logic
+        document.querySelectorAll('.activity-filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const filter = this.dataset.filter;
+                
+                // Update active button style
+                document.querySelectorAll('.activity-filter-btn').forEach(b => {
+                    b.classList.remove('bg-revelti-blue', 'text-white');
+                    b.classList.add('bg-gray-100', 'text-gray-600');
+                });
+                this.classList.remove('bg-gray-100', 'text-gray-600');
+                this.classList.add('bg-revelti-blue', 'text-white');
+                
+                // Filter items
+                document.querySelectorAll('.activity-item').forEach(item => {
+                    if (filter === 'all' || item.dataset.type === filter) {
+                        item.classList.remove('hidden');
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+                
+                // Show/hide date headers based on visible items
+                const visibleItems = document.querySelectorAll('.activity-item:not(.hidden)');
+                if (visibleItems.length === 0) {
+                    document.querySelectorAll('.activity-date-header').forEach(h => h.classList.add('hidden'));
+                } else {
+                    document.querySelectorAll('.activity-date-header').forEach(h => h.classList.remove('hidden'));
+                }
+            });
+        });
 
         let pendingInvitesCount = 2;
 
