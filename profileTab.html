@@ -51,10 +51,20 @@
             <div id="profile" class="tab-content space-y-4">
                 <details><summary class="flex justify-between items-center cursor-pointer font-semibold text-lg revelti-blue p-3 bg-white border rounded-lg">Personal Data <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path></svg></summary>
                     <div class="p-4 space-y-4 bg-white border-x border-b rounded-b-lg">
+                        <div class="flex items-center space-x-4 mb-2">
+                            <img src="images/attendeeAvatar.png" alt="Profile Picture" class="w-20 h-20 rounded-full object-cover shadow-md border border-gray-100">
+                            <div class="flex flex-col space-y-2">
+                                <label class="cursor-pointer bg-white border border-gray-300 text-gray-700 text-sm font-semibold py-1.5 px-3 rounded-lg hover:bg-gray-50 transition text-center shadow-sm">
+                                    Change Picture
+                                    <input type="file" class="hidden" accept="image/*">
+                                </label>
+                                <button class="text-red-500 text-sm font-semibold hover:text-red-700 transition text-left px-1">Remove Picture</button>
+                            </div>
+                        </div>
                         <div><label class="font-semibold text-gray-700">Name:</label><input type="text" value="Alex Johnson" class="w-full p-2 border border-gray-300 rounded-lg mt-1"></div>
                         <div><label class="font-semibold text-gray-700">Email:</label><input type="email" value="alex.j@email.com" class="w-full p-2 border border-gray-300 rounded-lg mt-1"></div>
                         <div><label class="font-semibold text-gray-700">Location:</label><input type="text" value="Barcelona, Spain" class="w-full p-2 border border-gray-300 rounded-lg mt-1"></div>
-                        <button class="w-full bg-revelti-blue text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-800 transition duration-300">Update Password</button>
+                        <button class="w-full bg-revelti-blue text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-800 transition duration-300 shadow-md">Save Changes</button>
                     </div>
                 </details>
                 <details><summary class="flex justify-between items-center cursor-pointer font-semibold text-lg revelti-blue p-3 bg-white border rounded-lg">Dancing/Music Styles <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path></svg></summary>
@@ -76,7 +86,7 @@
                                 </div>
                             </div>
                             <p class="text-gray-700 mt-1">"Absolutely incredible experience! The organization was flawless and the artists were top-notch. Can't wait for next year!"</p>
-                            <p class="text-sm italic text-gray-500 mt-2">For: Bachata Geneva Festival 2026 - The Festival of Nations</p>
+                            <p class="text-sm italic text-gray-500 mt-2">For: Dance Fest Spain 2026</p>
                         </div>
                     </div>
                 </details>

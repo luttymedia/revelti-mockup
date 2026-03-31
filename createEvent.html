@@ -176,7 +176,7 @@
                                                 class="w-full p-2 border border-gray-300 rounded-lg text-sm"
                                                 onchange="onSeriesDropdownChange(this.value)">
                                                 <option value="">— Select an existing series or create new —</option>
-                                                <option value="bachata-geneva">🎉 Bachata Geneva Festival</option>
+                                                <option value="lmp-events">🎉 Dance Fest Spain</option>
                                                 <option value="weekly-latin">🎵 Weekly Latin Sundays</option>
                                                 <option value="__new__">+ Create a new series…</option>
                                             </select>
@@ -751,19 +751,19 @@
         // --- Recurring Series Logic ---
         let selectedSeriesId = null;
         const seriesData = {
-            'bachata-geneva': {
-                name: 'Bachata Geneva Festival',
-                lastEdition: 'Bachata Geneva Festival 2025 – The Festival of Nations',
+            'lmp-events': {
+                name: 'Dance Fest Spain',
+                lastEdition: 'Dance Fest Spain 2025',
                 // Step 1 fields
-                titleTemplate: 'Bachata Geneva Festival 2026 - The Festival of Nations',
+                titleTemplate: 'Dance Fest Spain 2026',
                 venue: 'Palexpo, Geneva',
                 location: 'Geneva, Switzerland',
                 type: 'Festival',
                 language: 'English',
                 // Step 2 fields — cloned from eventLiveEdit.html
-                description: `Get ready to experience an even more spectacular edition of the The Festival of Nations in October 2026! After the tremendous success of last year's event, we are thrilled to announce that we are taking things to a whole new level, as we proudly announce the participation of even 𝗠𝗢𝗥𝗘 nations this year!
+                description: `Get ready to experience an even more spectacular edition of the Dance Fest Spain 2026 in October 2026! After the tremendous success of last year's event, we are thrilled to announce that we are taking things to a whole new level, as we proudly announce the participation of even 𝗠𝗢𝗥𝗘 nations this year!
 
-BGF is a festival created by passionate bachater@s for passionate bachater@s. And we care about you more than anything else. You will feel an ambiance you've never felt at a festival!
+Dance Fest Spain is a festival created by passionate bachater@s for passionate bachater@s. And we care about you more than anything else. You will feel an ambiance you've never felt at a festival!
 
 We put a lot of effort into bringing the best artists in the world. Teachers, DJs, videographers, and photographers, the quality is assured!`,
                 artists: 'Klau & Ros, Melvin & Gatica, Marco & Sara, Masa & Polina, Ataca & La Alemana, Gero & Migle, And many more!',
@@ -936,7 +936,7 @@ We put a lot of effort into bringing the best artists in the world. Teachers, DJ
 
             const params = new URLSearchParams(window.location.search);
             if (params.get('edition') === 'new') {
-                const seriesId = params.get('series') || 'bachata-geneva';
+                const seriesId = params.get('series') || 'lmp-events';
 
                 // Pre-check the series toggle
                 document.getElementById('series-checkbox').checked = true;
@@ -968,7 +968,8 @@ We put a lot of effort into bringing the best artists in the world. Teachers, DJ
 
             <div class="space-y-4">
                 <div class="flex items-start gap-3">
-                    <div class="w-10 h-10 bg-revelti-orange rounded-full flex items-center justify-center flex-shrink-0">
+                    <div
+                        class="w-10 h-10 bg-revelti-orange rounded-full flex items-center justify-center flex-shrink-0">
                         <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -979,7 +980,8 @@ We put a lot of effort into bringing the best artists in the world. Teachers, DJ
                     </div>
                     <div>
                         <p class="font-semibold text-gray-800">5 Featured Slots</p>
-                        <p class="text-sm text-gray-600">Shared visibility in the top 5 spots across the homepage and searches.</p>
+                        <p class="text-sm text-gray-600">Shared visibility in the top 5 spots across the homepage and
+                            searches.</p>
                     </div>
                 </div>
 
@@ -993,7 +995,8 @@ We put a lot of effort into bringing the best artists in the world. Teachers, DJ
                     </div>
                     <div>
                         <p class="font-semibold text-gray-800">Randomized Rotation</p>
-                        <p class="text-sm text-gray-600">Regular rotation in the display pool. Standard: <span class="font-semibold text-revelti-orange">10€/week</span></p>
+                        <p class="text-sm text-gray-600">Regular rotation in the display pool. Standard: <span
+                                class="font-semibold text-revelti-orange">10€/week</span></p>
                     </div>
                 </div>
 
@@ -1008,7 +1011,8 @@ We put a lot of effort into bringing the best artists in the world. Teachers, DJ
                         <div class="flex-1">
                             <p class="font-bold text-gray-800">Go Premium & Dominate!</p>
                             <ul class="text-sm text-gray-600 mt-1 list-disc list-inside space-y-1">
-                                <li><strong>100% Visibility:</strong> Your event is permanently pinned to the top 5 spots.</li>
+                                <li><strong>100% Visibility:</strong> Your event is permanently pinned to the top 5
+                                    spots.</li>
                                 <li><strong>Zero Rotation:</strong> No waiting your turn in the display pool.</li>
                                 <li>Guaranteed 1 of the 5 slots</li>
                             </ul>

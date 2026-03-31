@@ -52,9 +52,7 @@
                     <header class="flex flex-col md:flex-row justify-between items-center mb-6">
                         <div>
                             <div class="flex items-center">
-                                <h1 class="text-3xl font-bold revelti-blue">Bachata Geneva Festival 2026 - The
-                                    Festival of
-                                    Nations</h1>
+                                <h1 class="text-3xl font-bold revelti-blue">Dance Fest Spain 2026</h1>
                                 <span
                                     class="ml-4 text-sm font-bold bg-green-100 text-green-800 px-3 py-1 rounded-full whitespace-nowrap">On
                                     Sale</span>
@@ -214,7 +212,8 @@
                         <button id="privacy-toggle" onclick="toggleLightboxVisibility(this)"
                             class="text-white hover:text-gray-300 transition-colors" data-state="public"
                             title="Toggle Visibility">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                stroke-width="1.5">
                                 <path id="privacy-path" stroke-linecap="round" stroke-linejoin="round"
                                     d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -305,8 +304,8 @@
                     id: 'promotional',
                     name: 'Promotional Material',
                     status: 'Public',
-                    owner: 'Bachata Geneva',
-                    creators: [{ name: 'Bachata Geneva', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=B' }],
+                    owner: 'LMP Events',
+                    creators: [{ name: 'LMP Events', avatar: 'https://placehold.co/80x80/f58220/ffffff?text=B' }],
                     type: 'gallery',
                     content: '4 Photos',
                     children: [] // No child folders inside a gallery
@@ -485,10 +484,10 @@
             // Conditional check for promotional material gallery
             if (galleryNode.id === 'promotional') {
                 photoPaths = [
-                    "albums/promo/promo1.jpg",
-                    "albums/promo/promo2.jpg",
-                    "albums/promo/promo3.jpg",
-                    "albums/promo/promo4.jpg"
+                    "albums/promo/promo1.png",
+                    "albums/promo/promo2.png",
+                    "albums/promo/promo3.png",
+                    "albums/promo/promo4.png"
                 ];
             } else if (galleryNode.id === 'Social') {
                 // Re-added the original 10 images for the "Social" gallery
