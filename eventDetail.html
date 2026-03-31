@@ -919,6 +919,44 @@
         </div>
     </div>
 
+    <!-- Follow Edition Modal -->
+    <div id="follow-edition-modal"
+        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-xl shadow-xl p-6 w-full max-w-sm" id="edition-modal-content">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold revelti-blue">Follow Edition Updates</h3>
+                <button id="close-edition-modal-btn"
+                    class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+            </div>
+            <p class="text-sm text-gray-500 mb-3">You're following this edition of <strong>Dance Fest Spain</strong>. You'll
+                be notified about important updates and announcements for this event.</p>
+            <div class="space-y-4">
+                <!-- Option 1 -->
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-700">Media galleries updates</span>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" value="" class="sr-only peer" checked>
+                        <div
+                            class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-revelti-orange">
+                        </div>
+                    </label>
+                </div>
+                <!-- Option 2 -->
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-700">Event announcements</span>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" value="" class="sr-only peer" checked>
+                        <div
+                            class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-revelti-orange">
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <button id="confirm-follow-edition-btn"
+                class="mt-6 w-full bg-revelti-orange text-white font-bold py-2 px-4 rounded-lg">Confirm</button>
+        </div>
+    </div>
+
     <script>
         // Store references to tab buttons and content panels
         const tabButtons = document.querySelectorAll('.tab-button');
@@ -1017,11 +1055,15 @@
 
         // --- Follow Buttons Logic ---
         const followModal = document.getElementById('follow-modal');
+        const followEditionModal = document.getElementById('follow-edition-modal');
         const followSeriesBtn = document.getElementById('follow-series-btn');
         const followEventBtn = document.getElementById('follow-event-btn');
         const closeModalBtn = document.getElementById('close-modal-btn');
+        const closeEditionModalBtn = document.getElementById('close-edition-modal-btn');
         const confirmFollowBtn = document.getElementById('confirm-follow-btn');
+        const confirmFollowEditionBtn = document.getElementById('confirm-follow-edition-btn');
         const modalContent = document.getElementById('modal-content');
+        const editionModalContent = document.getElementById('edition-modal-content');
         const followHint = document.getElementById('follow-hint');
 
         let seriesFollowed = false;
@@ -1068,7 +1110,7 @@
 
         followEventBtn.addEventListener('click', () => {
             if (!eventFollowed) {
-                followModal.classList.remove('hidden');
+                followEditionModal.classList.remove('hidden');
             } else {
                 setFollowEventState(false);
             }
@@ -1077,23 +1119,32 @@
         const closeFollowModal = () => {
             followModal.classList.add('hidden');
         };
+        const closeFollowEditionModal = () => {
+            followEditionModal.classList.add('hidden');
+        };
 
         closeModalBtn.addEventListener('click', closeFollowModal);
+        closeEditionModalBtn.addEventListener('click', closeFollowEditionModal);
 
         confirmFollowBtn.addEventListener('click', () => {
-            // Determine which button triggered the modal
-            if (!seriesFollowed && !eventFollowed) {
-                // First interaction — default to series
-                setFollowSeriesState(true);
-            } else if (!eventFollowed) {
-                setFollowEventState(true);
-            }
+            setFollowSeriesState(true);
             closeFollowModal();
+        });
+
+        confirmFollowEditionBtn.addEventListener('click', () => {
+            setFollowEventState(true);
+            closeFollowEditionModal();
         });
 
         followModal.addEventListener('click', (event) => {
             if (!modalContent.contains(event.target)) {
                 closeFollowModal();
+            }
+        });
+
+        followEditionModal.addEventListener('click', (event) => {
+            if (!editionModalContent.contains(event.target)) {
+                closeFollowEditionModal();
             }
         });
 
