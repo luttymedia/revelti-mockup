@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revelti - Email Campaigns</title>
+    <meta name="description" content="Send and manage email campaigns to your event attendees from the Revelti Organizer dashboard.">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        revelti: {
+                            blue: '#213c63',
+                            orange: '#f58220',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Global Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* ── Email-tool-specific styles ── */
+
+        /* Builder layout */
+        #email-builder {
+            display: none;
+        }
+        #email-builder.active {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        /* Builder top bar */
+        .builder-topbar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            border-bottom: 1px solid #e5e7eb;
+            background: #fff;
+            flex-shrink: 0;
+        }
+
+        /* Three panel layout */
+        .builder-panels {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            gap: 0;
+        }
+        .builder-left {
+            width: 240px;
+            min-width: 220px;
+            flex-shrink: 0;
+            border-right: 1px solid #e5e7eb;
+            background: #fff;
+            overflow-y: auto;
+            padding: 16px;
+        }
+        .builder-center {
+            flex: 1;
+            overflow-y: auto;
+            background: #f9fafb;
+            padding: 20px;
+        }
+        .builder-right {
+            width: 320px;
+            min-width: 280px;
+            flex-shrink: 0;
+            border-left: 1px solid #e5e7eb;
+            background: #fff;
+            overflow-y: auto;
+            padding: 16px;
+        }
+
+        /* Config section headings */
+        .config-section-title {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: #9ca3af;
+            margin-bottom: 6px;
+            margin-top: 16px;
+        }
+        .config-section-title:first-child { margin-top: 0; }
+
+        /* Blocks */
+        .email-block {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 10px;
+            position: relative;
+            transition: box-shadow 0.15s;
+        }
+        .email-block:hover {
+            box-shadow: 0 2px 8px rgba(33,60,99,0.08);
+        }
+        .block-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            color: #9ca3af;
+            margin-bottom: 8px;
+        }
+        .block-actions {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 4px;
+        }
+        .block-action-btn {
+            padding: 3px 6px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: background 0.15s;
+        }
+        .block-delete-btn {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+        .block-delete-btn:hover { background: #fecaca; }
+
+        /* Preview area */
+        .preview-frame {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            min-height: 300px;
+            border: 1px solid #e5e7eb;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #1f2937;
+            transition: max-width 0.2s;
+        }
+        .preview-frame.mobile-preview {
+            max-width: 375px;
+            margin: 0 auto;
+        }
+
+        .preview-block-text { margin-bottom: 12px; }
+        .preview-block-image {
+            background: #f3f4f6;
+            border-radius: 6px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+        .preview-block-divider {
+            border: none;
+            border-top: 1px solid #e5e7eb;
+            margin: 14px 0;
+        }
+        .preview-block-button {
+            display: inline-block;
+            background: #213c63;
+            color: #fff;
+            padding: 9px 20px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 13px;
+            margin-bottom: 12px;
+            text-decoration: none;
+        }
+
+        /* Status pills */
+        .pill-draft {
+            background: #fef9c3;
+            color: #854d0e;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 99px;
+        }
+        .pill-sent {
+            background: #dcfce7;
+            color: #166534;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 99px;
+        }
+
+        /* Campaign rows */
+        .campaign-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 12px 16px;
+            border-bottom: 1px solid #f3f4f6;
+            cursor: pointer;
+            transition: background 0.12s;
+        }
+        .campaign-row:hover { background: #f9fafb; }
+        .campaign-row:last-child { border-bottom: none; }
+
+        /* Token chip */
+        .token-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 10px;
+            border-radius: 99px;
+            background: #eff6ff;
+            color: #1d4ed8;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            border: 1px solid #bfdbfe;
+            transition: background 0.12s;
+            user-select: none;
+        }
+        .token-chip:hover { background: #dbeafe; }
+
+        /* Add-block dropdown */
+        .add-block-menu {
+            display: none;
+            position: absolute;
+            left: 0;
+            bottom: calc(100% + 6px);
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+            z-index: 50;
+            min-width: 180px;
+            overflow: hidden;
+        }
+        .add-block-menu.open { display: block; }
+        .add-block-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+            cursor: pointer;
+            transition: background 0.12s;
+        }
+        .add-block-option:hover { background: #f3f4f6; }
+
+        /* Advanced filter chips */
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 0;
+            font-size: 12px;
+            color: #4b5563;
+            cursor: pointer;
+        }
+        .filter-option input[type="checkbox"] { accent-color: #213c63; }
+
+        /* Confirmation banner */
+        #send-banner {
+            display: none;
+            position: fixed;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #166534;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 14px;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            animation: slideDown 0.3s ease;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+            to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+
+        /* Template modal */
+        #template-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            background: rgba(0,0,0,0.4);
+            align-items: center;
+            justify-content: center;
+        }
+        #template-modal.open { display: flex; }
+        .template-card {
+            background: #fff;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 16px;
+            cursor: pointer;
+            transition: border-color 0.15s, box-shadow 0.15s;
+            text-align: left;
+        }
+        .template-card:hover {
+            border-color: #213c63;
+            box-shadow: 0 4px 14px rgba(33,60,99,0.12);
+        }
+
+        /* Responsive mobile stacking */
+        @media (max-width: 768px) {
+            .builder-panels { flex-direction: column; overflow: visible; }
+            .builder-left, .builder-right { width: 100%; min-width: unset; border: none; border-bottom: 1px solid #e5e7eb; }
+            .builder-right { border-bottom: none; border-top: 1px solid #e5e7eb; }
+            .builder-center { overflow: visible; }
+        }
+
+        /* Subject token picker positioning */
+        .token-area { position: relative; }
+        .token-dropdown {
+            display: none;
+            position: absolute;
+            top: calc(100% + 4px);
+            right: 0;
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+            z-index: 30;
+            min-width: 160px;
+            overflow: hidden;
+        }
+        .token-dropdown.open { display: block; }
+        .token-dropdown-item {
+            padding: 8px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #1d4ed8;
+            cursor: pointer;
+            transition: background 0.1s;
+        }
+        .token-dropdown-item:hover { background: #eff6ff; }
+
+        /* ── Text formatting toolbar ── */
+        .fmt-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 3px;
+            padding: 5px 6px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px 8px 0 0;
+            border-bottom: none;
+        }
+        .fmt-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 26px;
+            height: 24px;
+            padding: 0 5px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #374151;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: background 0.12s;
+            user-select: none;
+        }
+        .fmt-btn:hover { background: #e5e7eb; }
+        .fmt-btn.active { background: #dbeafe; color: #1d4ed8; }
+        .fmt-sep {
+            width: 1px;
+            height: 16px;
+            background: #d1d5db;
+            margin: 0 2px;
+            flex-shrink: 0;
+        }
+        .fmt-textarea {
+            border-radius: 0 0 8px 8px !important;
+            border-top: 1px solid #e5e7eb !important;
+        }
+        select.fmt-select {
+            font-size: 11px;
+            font-weight: 600;
+            border: 1px solid #e5e7eb;
+            border-radius: 5px;
+            padding: 2px 4px;
+            background: #fff;
+            color: #374151;
+            cursor: pointer;
+        }
+        .color-swatch {
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+            display: inline-block;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color 0.1s;
+        }
+        .color-swatch:hover { border-color: #6b7280; }
+        .color-swatch.selected { border-color: #213c63; }
+
+        /* ── Full-screen preview modal ── */
+        #preview-fullscreen-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            background: rgba(0,0,0,0.55);
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 40px;
+            overflow-y: auto;
+        }
+        #preview-fullscreen-modal.open { display: flex; }
+        .preview-fs-inner {
+            background: #f3f4f6;
+            border-radius: 16px;
+            padding: 24px 32px;
+            width: 100%;
+            max-width: calc(100vw - 48px);
+            margin: 0 24px 40px;
+            position: relative;
+        }
+        .preview-fs-frame {
+            background: #fff;
+            border-radius: 10px;
+            padding: 32px 48px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 15px;
+            line-height: 1.7;
+            color: #1f2937;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        .preview-fs-frame.mobile { max-width: 390px; }
+
+        /* contenteditable text block */
+        .block-content-editable {
+            min-height: 80px;
+            border-radius: 0 0 8px 8px;
+            border: 1px solid #e5e7eb;
+            border-top: 1px solid #e5e7eb;
+            padding: 8px 12px;
+            font-size: 15px;
+            line-height: 1.6;
+            color: #1f2937;
+            outline: none;
+            white-space: pre-wrap;
+            word-break: break-word;
+            background: #fff;
+        }
+        .block-content-editable:focus { box-shadow: 0 0 0 2px rgba(59,130,246,0.25); border-color: #93c5fd; }
+        .block-content-editable:empty::before { content: attr(data-placeholder); color: #9ca3af; font-style: italic; pointer-events: none; }
+    </style>
+</head>
+
+<body class="dashboard-layout bg-gray-100 antialiased text-gray-800" data-role="organizer">
+    <!-- Navbar -->
+    <div id="organizer-navbar-placeholder"></div>
+
+    <div class="dashboard-main-area">
+        <aside id="sidebar-placeholder" class="sidebar-container bg-white z-20"></aside>
+
+        <div class="main-wrapper">
+            <main class="page-content" style="display:flex; flex-direction:column; height:100%;">
+
+                <!-- ══════════════════════════════════════════════════
+                     LIST VIEW
+                ══════════════════════════════════════════════════ -->
+                <div id="email-list-view" class="flex flex-col h-full">
+                    <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full">
+
+                        <!-- Header -->
+                        <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+                            <div>
+                                <h1 class="text-3xl font-bold revelti-blue">Emails</h1>
+                                <p class="text-gray-500 mt-1">Send custom email campaigns to your attendees.</p>
+                            </div>
+                            <button id="create-email-btn"
+                                class="mt-4 md:mt-0 flex items-center gap-2 px-4 py-2 bg-revelti-blue text-white text-sm font-semibold rounded-md hover:bg-blue-800 transition duration-300">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                </svg>
+                                Create Email
+                            </button>
+                        </header>
+
+                        <!-- Campaign list -->
+                        <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+                            <!-- Table header -->
+                            <div class="grid grid-cols-12 gap-2 px-4 py-2.5 border-b border-gray-100 bg-gray-50">
+                                <span class="col-span-4 text-xs font-bold text-gray-400 uppercase tracking-wider">Campaign</span>
+                                <span class="col-span-2 text-xs font-bold text-gray-400 uppercase tracking-wider">Event</span>
+                                <span class="col-span-2 text-xs font-bold text-gray-400 uppercase tracking-wider">Audience</span>
+                                <span class="col-span-2 text-xs font-bold text-gray-400 uppercase tracking-wider">Status</span>
+                                <span class="col-span-2 text-xs font-bold text-gray-400 uppercase tracking-wider text-right">Last Edited</span>
+                            </div>
+
+                            <!-- Pre-filled sent campaign -->
+                            <div class="campaign-row grid grid-cols-12 gap-2 items-center"
+                                data-campaign-id="1" onclick="openCampaign(1)">
+                                <div class="col-span-4">
+                                    <p class="font-semibold text-gray-800 text-sm">🎉 Early Bird Tickets Now Live!</p>
+                                    <p class="text-xs text-gray-400 mt-0.5 truncate">Re-engage your past attendees and boost early sales</p>
+                                </div>
+                                <div class="col-span-2">
+                                    <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full font-medium">BGF 2026</span>
+                                </div>
+                                <div class="col-span-2">
+                                    <span class="text-xs text-gray-500">Past attendees</span>
+                                </div>
+                                <div class="col-span-2">
+                                    <span class="pill-sent">Sent</span>
+                                </div>
+                                <div class="col-span-2 text-right">
+                                    <span class="text-xs text-gray-400">Mar 15, 2026</span>
+                                </div>
+                            </div>
+
+                            <!-- Draft campaign -->
+                            <div class="campaign-row grid grid-cols-12 gap-2 items-center"
+                                data-campaign-id="2" onclick="openCampaign(2)">
+                                <div class="col-span-4">
+                                    <p class="font-semibold text-gray-800 text-sm">VIP Pass — Exclusive Offer</p>
+                                    <p class="text-xs text-gray-400 mt-0.5 truncate">Special discount for loyal ticket buyers</p>
+                                </div>
+                                <div class="col-span-2">
+                                    <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full font-medium">BGF 2026</span>
+                                </div>
+                                <div class="col-span-2">
+                                    <span class="text-xs text-gray-500">Ticket buyers</span>
+                                </div>
+                                <div class="col-span-2">
+                                    <span class="pill-draft">Draft</span>
+                                </div>
+                                <div class="col-span-2 text-right">
+                                    <span class="text-xs text-gray-400">Mar 28, 2026</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ══════════════════════════════════════════════════
+                     EMAIL BUILDER
+                ══════════════════════════════════════════════════ -->
+                <div id="email-builder">
+
+                    <!-- Top Bar -->
+                    <div class="builder-topbar">
+                        <button onclick="backToList()"
+                            class="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-800 transition-colors font-semibold mr-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                            </svg>
+                            Back
+                        </button>
+
+                        <div class="flex items-center gap-1 group" onclick="focusCampaignName()" style="cursor:text">
+                            <input id="campaign-name-input" type="text" value="Untitled Campaign"
+                                class="text-sm font-bold text-revelti-blue bg-transparent border-b border-transparent focus:border-blue-300 focus:outline-none flex-1 max-w-xs px-1 py-0.5"
+                                onclick="event.stopPropagation()"/>
+                            <button onclick="focusCampaignName(); event.stopPropagation()" title="Edit campaign name"
+                                class="opacity-40 group-hover:opacity-100 transition-opacity text-gray-400 hover:text-revelti-blue">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <span id="campaign-status-badge" class="pill-draft">Draft</span>
+
+                        <div class="ml-auto flex items-center gap-2">
+                            <button id="save-draft-btn" onclick="saveDraft()"
+                                class="px-4 py-1.5 text-sm font-semibold text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+                                Save Draft
+                            </button>
+                            <button id="send-btn" onclick="sendEmail()"
+                                class="flex items-center gap-2 px-4 py-1.5 text-sm font-bold text-white bg-revelti-blue rounded-lg hover:bg-blue-800 transition-colors">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                                </svg>
+                                <span id="send-btn-label">Send Email</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Three panels -->
+                    <div class="builder-panels">
+
+                        <!-- LEFT: Config -->
+                        <div class="builder-left">
+                            <p class="config-section-title">Event</p>
+                            <select id="event-select" onchange="updateReach()" class="w-full text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-200 text-gray-700">
+                                <option value="all">All events</option>
+                                <option value="bgf" selected>Bachata Geneva Festival 2026</option>
+                                <option value="latin">Weekly Latin Sundays</option>
+                            </select>
+
+                            <p class="config-section-title">Audience</p>
+                            <select id="audience-select" onchange="updateReach()" class="w-full text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-200 text-gray-700">
+                                <option value="all">All attendees</option>
+                                <option value="past" selected>Past attendees</option>
+                                <option value="buyers">Ticket buyers</option>
+                            </select>
+
+                            <!-- Advanced Filters -->
+                            <p class="config-section-title">Advanced Filters</p>
+                            <details class="w-full" id="adv-filters-details">
+                                <summary class="text-sm font-semibold text-revelti-blue cursor-pointer select-none hover:underline">
+                                    + Add filter
+                                </summary>
+                                <div class="mt-3 space-y-1">
+                                    <label class="filter-option">
+                                        <input type="checkbox" class="adv-filter" onchange="updateReach()"> Attended a previous event
+                                    </label>
+                                    <label class="filter-option">
+                                        <input type="checkbox" class="adv-filter" onchange="updateReach()"> Did NOT buy ticket for upcoming event
+                                    </label>
+                                    <label class="filter-option">
+                                        <input type="checkbox" class="adv-filter" onchange="updateReach()"> Bought full pass
+                                    </label>
+                                </div>
+                            </details>
+
+                            <div class="mt-5 p-3 bg-blue-50 border border-blue-100 rounded-lg">
+                                <p class="text-xs font-bold text-revelti-blue mb-0.5">Estimated reach</p>
+                                <p id="reach-number" class="text-lg font-extrabold revelti-blue">1,280</p>
+                                <p class="text-xs text-gray-400">recipients</p>
+                            </div>
+                        </div>
+
+                        <!-- CENTER: Editor -->
+                        <div class="builder-center">
+                            <!-- Subject + preheader -->
+                            <div class="bg-white rounded-xl border border-gray-200 p-4 mb-4">
+                                <div class="mb-3 token-area">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <label class="block-label" style="margin:0">Subject line</label>
+                                        <button onclick="toggleTokenDropdown('subject-tokens')"
+                                            class="token-chip text-xs">
+                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                                            </svg>
+                                            Insert token
+                                        </button>
+                                        <div id="subject-tokens" class="token-dropdown">
+                                            <div class="token-dropdown-item" onclick="insertToken('subject-input', '{First Name}')">&#123;First Name&#125;</div>
+                                            <div class="token-dropdown-item" onclick="insertToken('subject-input', '{Event Name}')">&#123;Event Name&#125;</div>
+                                        </div>
+                                    </div>
+                                    <input id="subject-input" type="text"
+                                        placeholder="e.g. {First Name}, early bird tickets for BGF 2026 are live! 🎟️"
+                                        class="w-full text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-200"/>
+                                </div>
+                                <div>
+                                    <label class="block-label">Preheader <span class="text-gray-400 font-normal normal-case">(optional)</span></label>
+                                    <input id="preheader-input" type="text"
+                                        placeholder="Short preview text shown in inbox…"
+                                        class="w-full text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-200"/>
+                                </div>
+                            </div>
+
+                            <!-- Block editor -->
+                            <div id="block-list"></div>
+
+                            <!-- Add block button -->
+                            <div class="relative mt-2">
+                                <button onclick="toggleAddBlockMenu()" id="add-block-btn"
+                                    class="w-full flex items-center justify-center gap-2 py-2.5 border-2 border-dashed border-gray-300 rounded-xl text-sm font-semibold text-gray-400 hover:border-blue-300 hover:text-blue-500 transition-colors">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                    </svg>
+                                    Add block
+                                </button>
+                                <div id="add-block-menu" class="add-block-menu">
+                                    <div class="add-block-option" onclick="addBlock('text')">
+                                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"/></svg>
+                                        Text
+                                    </div>
+                                    <div class="add-block-option" onclick="addBlock('image')">
+                                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                        Image
+                                    </div>
+                                    <div class="add-block-option" onclick="addBlock('button')">
+                                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/></svg>
+                                        Button
+                                    </div>
+                                    <div class="add-block-option" onclick="addBlock('divider')">
+                                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14"/></svg>
+                                        Divider
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- RIGHT: Preview -->
+                        <div class="builder-right">
+                            <div class="flex items-center justify-between mb-3">
+                                <p class="text-xs font-bold text-gray-500 uppercase tracking-wider">Preview</p>
+                                <div class="flex items-center gap-1.5">
+                                    <div class="flex gap-1 bg-gray-100 rounded-lg p-0.5">
+                                        <button id="preview-desktop-btn" onclick="setPreviewMode('desktop')"
+                                            class="text-xs font-semibold px-3 py-1 rounded-md bg-white shadow-sm text-gray-800 transition-all">Desktop</button>
+                                        <button id="preview-mobile-btn" onclick="setPreviewMode('mobile')"
+                                            class="text-xs font-semibold px-3 py-1 rounded-md text-gray-500 transition-all">Mobile</button>
+                                    </div>
+                                    <button onclick="openFullscreenPreview()" title="Open full preview"
+                                        class="flex items-center justify-center w-7 h-7 rounded-lg bg-gray-100 text-gray-500 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Preview subject -->
+                            <div class="mb-2 px-1">
+                                <p id="preview-subject" class="text-sm font-bold text-gray-800 truncate"></p>
+                                <p id="preview-preheader" class="text-xs text-gray-400 truncate"></p>
+                            </div>
+
+                            <div id="preview-frame" class="preview-frame">
+                                <!-- Rendered by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Send Banner -->
+    <div id="send-banner">
+        ✅ Email sent successfully to 1,280 recipients!
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         TEMPLATE PICKER MODAL
+    ══════════════════════════════════════════════════ -->
+    <div id="template-modal" role="dialog" aria-modal="true" aria-labelledby="template-modal-title">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-xl mx-4 p-6 relative">
+            <h2 id="template-modal-title" class="text-lg font-extrabold revelti-blue mb-1">Choose a template</h2>
+            <p class="text-sm text-gray-400 mb-5">Pick a starting point. You can customise everything.</p>
+            <button onclick="closeTemplateModal()" class="absolute top-5 right-5 text-gray-400 hover:text-gray-600">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+            <div class="grid grid-cols-2 gap-3">
+                <button class="template-card" onclick="applyTemplate('promo')">
+                    <div class="text-xl mb-1">🎟️</div>
+                    <p class="font-bold text-sm text-gray-800">Promotion / Discount</p>
+                    <p class="text-xs text-gray-400 mt-1">Announce a special offer or early bird deal to drive ticket sales.</p>
+                </button>
+                <button class="template-card" onclick="applyTemplate('next-event')">
+                    <div class="text-xl mb-1">📅</div>
+                    <p class="font-bold text-sm text-gray-800">Next Event Announcement</p>
+                    <p class="text-xs text-gray-400 mt-1">Let your community know about your upcoming event.</p>
+                </button>
+                <button class="template-card" onclick="applyTemplate('miss-you')">
+                    <div class="text-xl mb-1">💌</div>
+                    <p class="font-bold text-sm text-gray-800">"We Miss You"</p>
+                    <p class="text-xs text-gray-400 mt-1">Re-engage past attendees who haven't bought a ticket yet.</p>
+                </button>
+                <button class="template-card" onclick="applyTemplate('announcement')">
+                    <div class="text-xl mb-1">📣</div>
+                    <p class="font-bold text-sm text-gray-800">General Announcement</p>
+                    <p class="text-xs text-gray-400 mt-1">Share news, lineup updates, or general info with attendees.</p>
+                </button>
+            </div>
+            <button onclick="applyTemplate('blank')" class="w-full mt-3 py-2 text-sm font-semibold text-gray-500 hover:text-gray-800 transition-colors">
+                Start from scratch →
+            </button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="layout-injector.js" defer></script>
+    <script src="organizer.js" defer></script>
+
+    <!-- Full-screen preview modal -->
+    <div id="preview-fullscreen-modal" role="dialog" aria-modal="true" aria-label="Full preview">
+        <div class="preview-fs-inner">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <p id="fs-preview-subject" class="font-bold text-gray-800 text-base"></p>
+                    <p id="fs-preview-preheader" class="text-sm text-gray-400"></p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="flex gap-1 bg-white rounded-lg p-0.5 border border-gray-200">
+                        <button onclick="setFsPreviewMode('desktop')" id="fs-desktop-btn"
+                            class="text-xs font-semibold px-3 py-1 rounded-md bg-gray-100 text-gray-800 transition-all">Desktop</button>
+                        <button onclick="setFsPreviewMode('mobile')" id="fs-mobile-btn"
+                            class="text-xs font-semibold px-3 py-1 rounded-md text-gray-500 transition-all">Mobile</button>
+                    </div>
+                    <button onclick="closeFullscreenPreview()"
+                        class="flex items-center justify-center w-8 h-8 rounded-lg bg-white border border-gray-200 text-gray-500 hover:text-gray-800 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div id="fs-preview-frame" class="preview-fs-frame"></div>
+        </div>
+    </div>
+
+    <script>
+    function escapeHtml(unsafe) {
+        if (!unsafe) return '';
+        return unsafe.toString().replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+
+    const TEXT_SIZES = {
+        '1': '13px',
+        '3': '15px',
+        '5': '18px'
+    };
+
+    function getBlockFmt(blockId) {
+        const boldBtn = document.getElementById(`fmt-bold-${blockId}`);
+        if (!boldBtn) return { bold: false, italic: false, underline: false, align: 'left', size: '3', color: '#1f2937' };
+
+        const getActive = (cmd) => document.getElementById(`fmt-${cmd}-${blockId}`)?.classList.contains('active');
+        
+        let align = 'left';
+        if (getActive('align-center')) align = 'center';
+        else if (getActive('align-right')) align = 'right';
+
+        const sizeSelect = document.getElementById(`block-text-${blockId}`)?.previousElementSibling?.querySelector('.fmt-select');
+        const size = sizeSelect ? sizeSelect.value : '3';
+
+        const selSwatch = document.querySelector(`.color-swatch.selected[data-bid="${blockId}"]`);
+        const color = selSwatch ? selSwatch.dataset.color : '#1f2937';
+
+        return {
+            bold: getActive('bold'),
+            italic: getActive('italic'),
+            underline: getActive('underline'),
+            align, size, color
+        };
+    }
+
+    // ════════════════════════════════════════════════
+    //  State
+    // ════════════════════════════════════════════════
+    let blocks = [];
+    let blockIdCounter = 0;
+    let currentCampaignId = null;
+    let previewMode = 'desktop';
+    let campaignStatus = 'draft';
+
+    const CAMPAIGNS = {
+        1: {
+            name: '🎉 Early Bird Tickets Now Live!',
+            status: 'sent',
+            subject: '{First Name}, early bird tickets for BGF 2026 are live! 🎟️',
+            preheader: 'Limited spots – grab yours before they sell out',
+            audience: 'Past attendees',
+            blocks: [
+                { type: 'text', content: 'Hi {First Name},\n\nWe\'re thrilled to announce that Early Bird tickets for Bachata Geneva Festival 2026 — The Festival of Nations are now live! 🎉\n\nThis is your chance to secure your spot at the best bachata festival in Europe at the lowest price.' },
+                { type: 'image', caption: 'BGF 2026 Event Banner' },
+                { type: 'text', content: '🗓 October 8–12, 2026\n📍 Geneva, Switzerland\n\nEarly Bird pricing ends in 7 days. Don\'t miss out!' },
+                { type: 'button', label: 'Get Early Bird Tickets', url: '#' },
+                { type: 'divider' },
+                { type: 'text', content: 'See you on the dance floor,\nThe Bachata Geneva team' },
+            ]
+        },
+        2: {
+            name: 'VIP Pass — Exclusive Offer',
+            status: 'draft',
+            subject: 'An exclusive offer just for you, {First Name} 🌟',
+            preheader: 'A special deal for our most loyal attendees',
+            audience: 'Ticket buyers',
+            blocks: [
+                { type: 'text', content: 'Hi {First Name},\n\nAs a loyal Bachata Geneva attendee, we\'d like to offer you an exclusive 15% discount on our new Full Pass for BGF 2026.' },
+                { type: 'button', label: 'Claim Your VIP Discount', url: '#' },
+                { type: 'divider' },
+                { type: 'text', content: 'Questions? Reply to this email — we\'re happy to help.' }
+            ]
+        }
+    };
+
+    // ════════════════════════════════════════════════
+    //  View switching
+    // ════════════════════════════════════════════════
+    function showListView() {
+        document.getElementById('email-list-view').style.display = 'flex';
+        document.getElementById('email-builder').classList.remove('active');
+    }
+
+    function showBuilder() {
+        document.getElementById('email-list-view').style.display = 'none';
+        document.getElementById('email-builder').classList.add('active');
+    }
+
+    function backToList() {
+        showListView();
+        blocks = [];
+        currentCampaignId = null;
+        campaignStatus = 'draft';
+        renderBlockList();
+        updatePreview();
+    }
+
+    // ════════════════════════════════════════════════
+    //  Open campaign from list
+    // ════════════════════════════════════════════════
+    function openCampaign(id) {
+        const c = CAMPAIGNS[id];
+        if (!c) return;
+        currentCampaignId = id;
+        campaignStatus = c.status;
+
+        document.getElementById('campaign-name-input').value = c.name;
+        document.getElementById('subject-input').value = c.subject;
+        document.getElementById('preheader-input').value = c.preheader;
+        // Map audience label → select value
+        const audienceMap = { 'All attendees': 'all', 'Past attendees': 'past', 'Ticket buyers': 'buyers' };
+        document.getElementById('audience-select').value = audienceMap[c.audience] || c.audience;
+        updateReach();
+
+        updateStatusBadge(campaignStatus);
+
+        // Load blocks from campaign data
+        blocks = c.blocks.map(b => ({ ...b, id: ++blockIdCounter }));
+        renderBlockList();
+        updatePreview();
+        showBuilder();
+    }
+
+    // ════════════════════════════════════════════════
+    //  Create new campaign
+    // ════════════════════════════════════════════════
+    document.getElementById('create-email-btn').addEventListener('click', () => {
+        currentCampaignId = null;
+        campaignStatus = 'draft';
+        blocks = [];
+        blockIdCounter = 0;
+        document.getElementById('campaign-name-input').value = 'Untitled Campaign';
+        document.getElementById('subject-input').value = '';
+        document.getElementById('preheader-input').value = '';
+        updateStatusBadge('draft');
+        renderBlockList();
+        updatePreview();
+        openTemplateModal();
+    });
+
+    // ════════════════════════════════════════════════
+    //  Template modal
+    // ════════════════════════════════════════════════
+    function openTemplateModal() {
+        document.getElementById('template-modal').classList.add('open');
+    }
+    function closeTemplateModal() {
+        document.getElementById('template-modal').classList.remove('open');
+        showBuilder();
+    }
+
+    const TEMPLATES = {
+        promo: {
+            name: 'Promo Email',
+            subject: '🎟️ Exclusive deal for {First Name} — limited time offer!',
+            preheader: 'Don\'t miss out on this special discount',
+            blocks: [
+                { type: 'text', content: 'Hi {First Name},\n\nWe\'re offering an exclusive early bird discount for {Event Name}. Grab your tickets before the offer expires!' },
+                { type: 'image', caption: 'Promotional Banner' },
+                { type: 'button', label: '🎟️ Get Discounted Tickets', url: '#' },
+                { type: 'divider' },
+                { type: 'text', content: 'The Bachata Geneva team' }
+            ]
+        },
+        'next-event': {
+            name: 'Next Event Announcement',
+            subject: 'It\'s official: {Event Name} is coming! 📅',
+            preheader: 'Save the date and be the first to know',
+            blocks: [
+                { type: 'text', content: 'Hi {First Name},\n\nWe\'re excited to announce our next event: {Event Name}!\n\nMark your calendar and stay tuned for more details.' },
+                { type: 'image', caption: 'Event Announcement Banner' },
+                { type: 'button', label: 'Learn More', url: '#' },
+                { type: 'divider' },
+                { type: 'text', content: 'Can\'t wait to see you there 🎶\nThe Bachata Geneva team' }
+            ]
+        },
+        'miss-you': {
+            name: '"We Miss You"',
+            subject: 'We miss you, {First Name} 💌',
+            preheader: 'It\'s been a while — come back and join us!',
+            blocks: [
+                { type: 'text', content: 'Hi {First Name},\n\nIt\'s been a while and we miss having you on the dance floor! 💃🕺\n\nWe\'ve got something special coming up and we\'d love to see you back.' },
+                { type: 'button', label: 'See What\'s Coming Up', url: '#' },
+                { type: 'divider' },
+                { type: 'text', content: 'Hope to see you soon,\nThe Bachata Geneva team' }
+            ]
+        },
+        announcement: {
+            name: 'General Announcement',
+            subject: 'Important update about {Event Name}',
+            preheader: 'Here\'s what you need to know',
+            blocks: [
+                { type: 'text', content: 'Hi {First Name},\n\nWe have an important update we\'d like to share with you about {Event Name}.\n\n[Write your announcement here]' },
+                { type: 'divider' },
+                { type: 'text', content: 'Thank you,\nThe Bachata Geneva team' }
+            ]
+        },
+        blank: {
+            name: 'Untitled Campaign',
+            subject: '',
+            preheader: '',
+            blocks: [
+                { type: 'text', content: 'Write your message here…' }
+            ]
+        }
+    };
+
+    function applyTemplate(key) {
+        const t = TEMPLATES[key];
+        if (!t) return;
+        document.getElementById('campaign-name-input').value = t.name;
+        document.getElementById('subject-input').value = t.subject;
+        document.getElementById('preheader-input').value = t.preheader;
+        blocks = t.blocks.map(b => ({ ...b, id: ++blockIdCounter }));
+        renderBlockList();
+        updatePreview();
+        closeTemplateModal();
+    }
+
+    // ════════════════════════════════════════════════
+    //  Block management
+    // ════════════════════════════════════════════════
+    function addBlock(type) {
+        const defaults = {
+            text:    { content: 'Enter your text here…' },
+            image:   { caption: 'Image placeholder' },
+            button:  { label: 'Click here', url: '#' },
+            divider: {}
+        };
+        blocks.push({ id: ++blockIdCounter, type, ...defaults[type] });
+        renderBlockList();
+        updatePreview();
+        closeAddBlockMenu();
+    }
+
+    function deleteBlock(id) {
+        blocks = blocks.filter(b => b.id !== id);
+        renderBlockList();
+        updatePreview();
+    }
+
+    // ════════════════════════════════════════════════
+    //  Dynamic reach simulation
+    // ════════════════════════════════════════════════
+    const REACH_TABLE = {
+      all:   { all: 3840, past: 1820, buyers: 2210 },
+      bgf:   { all: 2140, past: 1280, buyers: 1560 },
+      latin: { all: 680,  past: 342,  buyers: 421  },
+    };
+    const FILTER_REDUCTION = [1.0, 0.72, 0.58, 0.44];
+
+    function updateReach() {
+        const event    = document.getElementById('event-select')?.value    || 'bgf';
+        const audience = document.getElementById('audience-select')?.value || 'past';
+        const activeFilters = document.querySelectorAll('.adv-filter:checked').length;
+        const base  = (REACH_TABLE[event] || REACH_TABLE['bgf'])[audience] || 1280;
+        const reduction = FILTER_REDUCTION[Math.min(activeFilters, 3)];
+        const final = Math.round(base * reduction);
+        const reachEl = document.getElementById('reach-number');
+        if (!reachEl) return;
+        reachEl.style.opacity = '0.3';
+        setTimeout(() => { reachEl.textContent = final.toLocaleString(); reachEl.style.opacity = '1'; }, 150);
+    }
+
+    // ════════════════════════════════════════════════
+    //  Text formatting — selection-based via execCommand
+    // ════════════════════════════════════════════════
+    const PALETTE = [
+        { hex: '#1f2937', label: 'Dark'   },
+        { hex: '#213c63', label: 'Blue'   },
+        { hex: '#166534', label: 'Green'  },
+        { hex: '#dc2626', label: 'Red'    },
+        { hex: '#9a3412', label: 'Orange' },
+        { hex: '#6b21a8', label: 'Purple' },
+        { hex: '#6b7280', label: 'Gray'   },
+    ];
+
+    let _lastFocusedEditorId = null;
+
+    function _editorEl(blockId) { return document.getElementById(`block-text-${blockId}`); }
+
+    function _refocus(blockId) {
+        const el = _editorEl(blockId);
+        if (el) el.focus();
+    }
+
+    function applyFmt(blockId, cmd) {
+        _refocus(blockId);
+        document.execCommand(cmd, false, null);
+        const btn = document.getElementById(`fmt-${cmd}-${blockId}`);
+        if (btn) btn.classList.toggle('active', document.queryCommandState(cmd));
+        syncBlockFromEditor(blockId);
+    }
+
+    function applyFmtAlign(blockId, dir) {
+        _refocus(blockId);
+        const cmdMap = { left: 'justifyLeft', center: 'justifyCenter', right: 'justifyRight' };
+        document.execCommand(cmdMap[dir], false, null);
+        ['left','center','right'].forEach(a => {
+            document.getElementById(`fmt-align-${a}-${blockId}`)?.classList.toggle('active', a === dir);
+        });
+        syncBlockFromEditor(blockId);
+    }
+
+    function applyFmtSize(blockId, val) {
+        _refocus(blockId);
+        document.execCommand('fontSize', false, val);
+        syncBlockFromEditor(blockId);
+    }
+
+    function applyFmtColor(blockId, hex) {
+        _refocus(blockId);
+        document.execCommand('foreColor', false, hex);
+        document.querySelectorAll(`.color-swatch[data-bid="${blockId}"]`).forEach(s =>
+            s.classList.toggle('selected', s.dataset.color === hex)
+        );
+        syncBlockFromEditor(blockId);
+    }
+
+    function syncBlockFromEditor(blockId) {
+        const el = _editorEl(blockId);
+        if (!el) return;
+        const b = blocks.find(b => b.id === blockId);
+        if (b) b.content = el.innerHTML;
+        updatePreview();
+    }
+
+    // ════════════════════════════════════════════════
+    //  renderBlockList (contenteditable + toolbar)
+    // ════════════════════════════════════════════════
+    function renderBlockList() {
+        const container = document.getElementById('block-list');
+        container.innerHTML = '';
+
+        blocks.forEach(block => {
+            const el = document.createElement('div');
+            el.className = 'email-block';
+            el.dataset.id = block.id;
+
+            let inner = '';
+            if (block.type === 'text') {
+                const colorSwatches = PALETTE.map(c =>
+                    `<span class="color-swatch" data-bid="${block.id}" data-color="${c.hex}"
+                        style="background:${c.hex}" title="${c.label}"
+                        onmousedown="event.preventDefault();applyFmtColor(${block.id},'${c.hex}')"></span>`
+                ).join('');
+
+                inner = `
+                    <div class="flex items-center justify-between mb-1">
+                        <p class="block-label" style="margin:0">Text block</p>
+                        <div class="token-area">
+                            <button onmousedown="event.preventDefault();insertRichToken(${block.id},'{First Name}')" class="token-chip" style="font-size:10px">+ token</button>
+                            <div id="block-tokens-${block.id}" class="token-dropdown">
+                                <div class="token-dropdown-item" onmousedown="event.preventDefault();insertRichToken(${block.id},'{First Name}')">&#123;First Name&#125;</div>
+                                <div class="token-dropdown-item" onmousedown="event.preventDefault();insertRichToken(${block.id},'{Event Name}')">&#123;Event Name&#125;</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fmt-toolbar">
+                        <button id="fmt-bold-${block.id}"      class="fmt-btn" onmousedown="event.preventDefault();applyFmt(${block.id},'bold')"      title="Bold"><b>B</b></button>
+                        <button id="fmt-italic-${block.id}"    class="fmt-btn" onmousedown="event.preventDefault();applyFmt(${block.id},'italic')"    title="Italic"><i>I</i></button>
+                        <button id="fmt-underline-${block.id}" class="fmt-btn" onmousedown="event.preventDefault();applyFmt(${block.id},'underline')" title="Underline"><u>U</u></button>
+                        <span class="fmt-sep"></span>
+                        <button id="fmt-align-left-${block.id}"   class="fmt-btn active" onmousedown="event.preventDefault();applyFmtAlign(${block.id},'left')"   title="Align left">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 10h10M4 14h16M4 18h10"/></svg>
+                        </button>
+                        <button id="fmt-align-center-${block.id}" class="fmt-btn" onmousedown="event.preventDefault();applyFmtAlign(${block.id},'center')" title="Center">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M4 6h16M7 10h10M4 14h16M7 18h10"/></svg>
+                        </button>
+                        <button id="fmt-align-right-${block.id}"  class="fmt-btn" onmousedown="event.preventDefault();applyFmtAlign(${block.id},'right')"  title="Align right">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M4 6h16M10 10h10M4 14h16M10 18h10"/></svg>
+                        </button>
+                        <span class="fmt-sep"></span>
+                        <select class="fmt-select" onchange="applyFmtSize(${block.id},this.value)" title="Text size">
+                            <option value="1">S</option>
+                            <option value="3" selected>M</option>
+                            <option value="5">L</option>
+                        </select>
+                        <span class="fmt-sep"></span>
+                        <div style="display:flex;align-items:center;gap:3px">${colorSwatches}</div>
+                    </div>
+                    <div id="block-text-${block.id}"
+                        class="block-content-editable"
+                        contenteditable="true"
+                        data-placeholder="Enter your text here…"
+                        oninput="syncBlockFromEditor(${block.id})"
+                        onfocus="_lastFocusedEditorId='block-text-${block.id}'"
+                    >${block.content}</div>`;
+            } else if (block.type === 'image') {
+                inner = `
+                    <p class="block-label">Image block</p>
+                    <input type="text" id="block-img-${block.id}" value="${escapeHtml(block.caption)}"
+                        oninput="updateBlockCaption(${block.id}, this.value)"
+                        placeholder="Image URL or caption…"
+                        class="w-full text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-200"/>
+                    <p class="text-xs text-gray-400 mt-1">Image URL support coming soon — caption displayed in preview.</p>`;
+            } else if (block.type === 'button') {
+                inner = `
+                    <p class="block-label">Button block</p>
+                    <div class="flex gap-2">
+                        <input type="text" id="block-btn-label-${block.id}" value="${escapeHtml(block.label)}"
+                            oninput="updateBlockLabel(${block.id}, this.value)"
+                            placeholder="Button label"
+                            class="flex-1 text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-200"/>
+                        <input type="text" id="block-btn-url-${block.id}" value="${escapeHtml(block.url)}"
+                            oninput="updateBlockUrl(${block.id}, this.value)"
+                            placeholder="URL"
+                            class="flex-1 text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-200"/>
+                    </div>`;
+            } else if (block.type === 'divider') {
+                inner = `
+                    <p class="block-label">Divider</p>
+                    <hr class="border-t border-gray-200"/>`;
+            }
+
+            el.innerHTML = `
+                ${inner}
+                <div class="block-actions">
+                    <button class="block-action-btn block-delete-btn" onclick="deleteBlock(${block.id})" title="Delete block">✕</button>
+                </div>`;
+            container.appendChild(el);
+        });
+    }
+
+    // ════════════════════════════════════════════════
+    //  Fullscreen preview
+    // ════════════════════════════════════════════════
+    let fsPreviewMode = 'desktop';
+
+    function buildPreviewHTML() {
+        const subj = document.getElementById('subject-input')?.value || '';
+        const pre  = document.getElementById('preheader-input')?.value || '';
+        let html = `<div style="background:#213c63;padding:14px 20px;border-radius:6px;margin-bottom:16px"><span style="color:#fff;font-weight:800;font-size:16px;font-family:Arial,sans-serif">Bachata Geneva</span></div>`;
+        blocks.forEach(b => {
+            if (b.type === 'text') {
+                const fmt = getBlockFmt(b.id);
+                const style = `text-align:${fmt.align};font-size:15px;color:#1f2937;white-space:pre-wrap;margin-bottom:12px`;
+                html += `<div style="${style}">${b.content}</div>`;
+            } else if (b.type === 'image') {
+                html += `<div style="background:#f3f4f6;border-radius:6px;height:140px;display:flex;align-items:center;justify-content:center;color:#9ca3af;font-size:13px;margin-bottom:12px">🖼 ${escapeHtml(b.caption||'Image')}</div>`;
+            } else if (b.type === 'button') {
+                html += `<div style="margin-bottom:12px"><span style="display:inline-block;background:#213c63;color:#fff;padding:10px 22px;border-radius:6px;font-weight:700;font-size:14px">${escapeHtml(b.label||'Click here')}</span></div>`;
+            } else if (b.type === 'divider') {
+                html += `<hr style="border:none;border-top:1px solid #e5e7eb;margin:14px 0"/>`;
+            }
+        });
+        html += `<div style="margin-top:20px;padding-top:12px;border-top:1px solid #e5e7eb;font-size:11px;color:#9ca3af;text-align:center">Bachata Geneva · Geneva, Switzerland<br><a href="#" style="color:#9ca3af">Unsubscribe</a></div>`;
+        return { subj, pre, html };
+    }
+
+    function openFullscreenPreview() {
+        const { subj, pre, html } = buildPreviewHTML();
+        document.getElementById('fs-preview-subject').textContent   = subj || '(No subject)';
+        document.getElementById('fs-preview-preheader').textContent = pre;
+        document.getElementById('fs-preview-frame').innerHTML       = html;
+        document.getElementById('preview-fullscreen-modal').classList.add('open');
+        setFsPreviewMode(fsPreviewMode);
+    }
+    function closeFullscreenPreview() {
+        document.getElementById('preview-fullscreen-modal').classList.remove('open');
+    }
+    function setFsPreviewMode(mode) {
+        fsPreviewMode = mode;
+        const frame = document.getElementById('fs-preview-frame');
+        const db = document.getElementById('fs-desktop-btn');
+        const mb = document.getElementById('fs-mobile-btn');
+        if (mode === 'mobile') {
+            frame.classList.add('mobile');
+            mb.classList.add('bg-gray-100','text-gray-800'); mb.classList.remove('text-gray-500');
+            db.classList.remove('bg-gray-100','text-gray-800'); db.classList.add('text-gray-500');
+        } else {
+            frame.classList.remove('mobile');
+            db.classList.add('bg-gray-100','text-gray-800'); db.classList.remove('text-gray-500');
+            mb.classList.remove('bg-gray-100','text-gray-800'); mb.classList.add('text-gray-500');
+        }
+    }
+    // Close FS modal on backdrop click
+    document.getElementById('preview-fullscreen-modal').addEventListener('click', function(e) {
+        if (e.target === this) closeFullscreenPreview();
+    });
+
+
+    function updateBlockContent(id, val) {
+        const b = blocks.find(b => b.id === id);
+        if (b) { b.content = val; updatePreview(); }
+    }
+    function updateBlockCaption(id, val) {
+        const b = blocks.find(b => b.id === id);
+        if (b) { b.caption = val; updatePreview(); }
+    }
+    function updateBlockLabel(id, val) {
+        const b = blocks.find(b => b.id === id);
+        if (b) { b.label = val; updatePreview(); }
+    }
+    function updateBlockUrl(id, val) {
+        const b = blocks.find(b => b.id === id);
+        if (b) { b.url = val; updatePreview(); }
+    }
+
+    // ════════════════════════════════════════════════
+    //  Add-block menu
+    // ════════════════════════════════════════════════
+    function toggleAddBlockMenu() {
+        document.getElementById('add-block-menu').classList.toggle('open');
+    }
+    function closeAddBlockMenu() {
+        document.getElementById('add-block-menu').classList.remove('open');
+    }
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('#add-block-btn') && !e.target.closest('#add-block-menu')) {
+            closeAddBlockMenu();
+        }
+    });
+
+    // ════════════════════════════════════════════════
+    //  Token dropdowns
+    // ════════════════════════════════════════════════
+    function toggleTokenDropdown(id) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const isOpen = el.classList.contains('open');
+        document.querySelectorAll('.token-dropdown').forEach(d => d.classList.remove('open'));
+        if (!isOpen) el.classList.add('open');
+    }
+
+    function insertToken(inputId, token) {
+        const el = document.getElementById(inputId);
+        if (!el) return;
+        const start = el.selectionStart ?? el.value.length;
+        const end = el.selectionEnd ?? el.value.length;
+        el.value = el.value.slice(0, start) + token + el.value.slice(end);
+        el.dispatchEvent(new Event('input'));
+        el.focus();
+        el.selectionStart = el.selectionEnd = start + token.length;
+        document.querySelectorAll('.token-dropdown').forEach(d => d.classList.remove('open'));
+    }
+
+    function insertRichToken(blockId, token) {
+        const el = _editorEl(blockId);
+        if (!el) return;
+        el.focus();
+        document.execCommand('insertHTML', false, `<strong contenteditable="false" style="color:#1d4ed8;background:#eff6ff;padding:1px 4px;border-radius:4px;font-weight:700;user-select:none;">${token}</strong>&nbsp;`);
+        syncBlockFromEditor(blockId);
+        document.querySelectorAll('.token-dropdown').forEach(d => d.classList.remove('open'));
+    }
+
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.token-area') && !e.target.closest('.token-chip')) {
+            document.querySelectorAll('.token-dropdown').forEach(d => d.classList.remove('open'));
+        }
+    });
+
+    // ════════════════════════════════════════════════
+    //  Campaign Title Helper
+    // ════════════════════════════════════════════════
+    function focusCampaignName() {
+        const input = document.getElementById('campaign-name-input');
+        input.focus();
+        input.select();
+    }
+
+    // ════════════════════════════════════════════════
+    //  Preview
+    // ════════════════════════════════════════════════
+    function setPreviewMode(mode) {
+        previewMode = mode;
+        const frame = document.getElementById('preview-frame');
+        const dBtn = document.getElementById('preview-desktop-btn');
+        const mBtn = document.getElementById('preview-mobile-btn');
+
+        if (mode === 'mobile') {
+            frame.classList.add('mobile-preview');
+            mBtn.classList.add('bg-white', 'shadow-sm', 'text-gray-800');
+            mBtn.classList.remove('text-gray-500');
+            dBtn.classList.remove('bg-white', 'shadow-sm', 'text-gray-800');
+            dBtn.classList.add('text-gray-500');
+        } else {
+            frame.classList.remove('mobile-preview');
+            dBtn.classList.add('bg-white', 'shadow-sm', 'text-gray-800');
+            dBtn.classList.remove('text-gray-500');
+            mBtn.classList.remove('bg-white', 'shadow-sm', 'text-gray-800');
+            mBtn.classList.add('text-gray-500');
+        }
+    }
+
+    function updatePreview() {
+        // Subject / preheader
+        const subj = document.getElementById('subject-input')?.value || '';
+        const pre  = document.getElementById('preheader-input')?.value || '';
+        document.getElementById('preview-subject').textContent = subj || '(No subject)';
+        document.getElementById('preview-preheader').textContent = pre;
+
+        // Blocks
+        const frame = document.getElementById('preview-frame');
+        frame.innerHTML = '';
+
+        // Header strip
+        const header = document.createElement('div');
+        header.style.cssText = 'background:#213c63;padding:14px 20px;border-radius:6px;margin-bottom:16px;';
+        header.innerHTML = '<span style="color:#fff;font-weight:800;font-size:16px;font-family:Arial,sans-serif">Bachata Geneva</span>';
+        frame.appendChild(header);
+
+        blocks.forEach(b => {
+            if (b.type === 'text') {
+                const el = document.createElement('div');
+                el.className = 'preview-block-text';
+                const fmt = getBlockFmt(b.id);
+                el.style.textAlign = fmt.align;
+                el.style.fontSize = '15px';
+                el.style.color = '#1f2937';
+                el.style.whiteSpace = 'pre-wrap';
+                el.innerHTML = b.content; // Render rich formatting correctly
+                frame.appendChild(el);
+            } else if (b.type === 'image') {
+                const el = document.createElement('div');
+                el.className = 'preview-block-image';
+                el.textContent = '🖼 ' + (b.caption || 'Image');
+                frame.appendChild(el);
+            } else if (b.type === 'button') {
+                const el = document.createElement('div');
+                el.style.marginBottom = '12px';
+                el.innerHTML = `<span class="preview-block-button">${escapeHtml(b.label || 'Click here')}</span>`;
+                frame.appendChild(el);
+            } else if (b.type === 'divider') {
+                const el = document.createElement('hr');
+                el.className = 'preview-block-divider';
+                frame.appendChild(el);
+            }
+        });
+
+        if (blocks.length === 0) {
+            frame.innerHTML += '<p style="color:#9ca3af;font-size:13px;text-align:center;padding:20px 0">Your email content will appear here</p>';
+        }
+
+        // Footer strip
+        const footer = document.createElement('div');
+        footer.style.cssText = 'margin-top:20px;padding-top:12px;border-top:1px solid #e5e7eb;font-size:11px;color:#9ca3af;text-align:center';
+        footer.innerHTML = 'Bachata Geneva · Geneva, Switzerland<br><a href="#" style="color:#9ca3af">Unsubscribe</a>';
+        frame.appendChild(footer);
+    }
+
+    // Live preview on subject/preheader change
+    document.addEventListener('input', (e) => {
+        if (e.target.id === 'subject-input' || e.target.id === 'preheader-input') {
+            updatePreview();
+        }
+    });
+
+    // ════════════════════════════════════════════════
+    //  Status badge
+    // ════════════════════════════════════════════════
+    function updateStatusBadge(status) {
+        const badge = document.getElementById('campaign-status-badge');
+        campaignStatus = status;
+        if (status === 'sent') {
+            badge.className = 'pill-sent';
+            badge.textContent = 'Sent';
+        } else {
+            badge.className = 'pill-draft';
+            badge.textContent = 'Draft';
+        }
+    }
+
+    // ════════════════════════════════════════════════
+    //  Save Draft
+    // ════════════════════════════════════════════════
+    function saveDraft() {
+        const btn = document.getElementById('save-draft-btn');
+        btn.textContent = 'Saved ✓';
+        btn.classList.add('text-green-700', 'bg-green-50');
+        setTimeout(() => {
+            btn.textContent = 'Save Draft';
+            btn.classList.remove('text-green-700', 'bg-green-50');
+        }, 2000);
+    }
+
+    // ════════════════════════════════════════════════
+    //  Send Email
+    // ════════════════════════════════════════════════
+    function sendEmail() {
+        const btn = document.getElementById('send-btn');
+        const label = document.getElementById('send-btn-label');
+
+        // Loading state
+        btn.disabled = true;
+        btn.classList.add('opacity-75', 'cursor-not-allowed');
+        label.textContent = 'Sending…';
+
+        setTimeout(() => {
+            // Success state
+            btn.disabled = false;
+            btn.classList.remove('opacity-75', 'cursor-not-allowed');
+            label.textContent = 'Send Email';
+            updateStatusBadge('sent');
+
+            // Update list row if editing existing
+            if (currentCampaignId) {
+                const row = document.querySelector(`.campaign-row[data-campaign-id="${currentCampaignId}"]`);
+                if (row) {
+                    const pillEl = row.querySelector('.pill-draft, .pill-sent');
+                    if (pillEl) { pillEl.className = 'pill-sent'; pillEl.textContent = 'Sent'; }
+                }
+            }
+
+            // Banner
+            const banner = document.getElementById('send-banner');
+            banner.style.display = 'block';
+            setTimeout(() => { banner.style.display = 'none'; }, 4000);
+        }, 1800);
+    }
+
+    // ════════════════════════════════════════════════
+    //  Helpers
+    // ════════════════════════════════════════════════
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    // Init
+    showListView();
+    </script>
+</body>
+
+</html>
