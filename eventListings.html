@@ -218,7 +218,7 @@
             const grid = document.createElement('div');
             grid.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4';
 
-            // Filter out past editions of a series — only active/upcoming editions appear in discovery
+            // Filter out past editions of a series - only active/upcoming editions appear in discovery
             const visibleEvents = sortedEvents.filter(e => !e.isPastEdition);
 
             visibleEvents.forEach(eventData => {
@@ -229,7 +229,7 @@
                 card.querySelector('p').textContent = `${new Date(eventData.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}, ${new Date(eventData.date).getFullYear()} | ${eventData.location}`;
                 card.querySelector('.rating-container').innerHTML = createStarRating(eventData.rating);
 
-                // Series pill badge — top-left overlay
+                // Series pill badge - top-left overlay
                 if (eventData.seriesName) {
                     card.querySelector('.series-pill-container').innerHTML =
                         `<a href="eventSeriesDetail.html" class="inline-flex items-center gap-1 bg-white/90 text-revelti-blue text-xs font-bold px-2.5 py-1 rounded-full shadow-sm border border-blue-200 hover:bg-blue-50 transition-colors">Series</a>`;

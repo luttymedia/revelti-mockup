@@ -147,7 +147,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- Recurring Series Toggle — FIRST in step 1 -->
+                                    <!-- Recurring Series Toggle - FIRST in step 1 -->
                                     <div class="p-4 border border-gray-200 bg-gray-50 rounded-lg" id="series-block">
                                         <div class="flex items-center justify-between">
                                             <div class="flex items-center">
@@ -175,7 +175,7 @@
                                             <select id="series-dropdown"
                                                 class="w-full p-2 border border-gray-300 rounded-lg text-sm"
                                                 onchange="onSeriesDropdownChange(this.value)">
-                                                <option value="">— Select an existing series or create new —</option>
+                                                <option value="">- Select an existing series or create new -</option>
                                                 <option value="lmp-events">🎉 Dance Fest Spain</option>
                                                 <option value="weekly-latin">🎵 Weekly Latin Sundays</option>
                                                 <option value="__new__">+ Create a new series…</option>
@@ -760,7 +760,7 @@
                 location: 'Madrid, Spain',
                 type: 'Festival',
                 language: 'English',
-                // Step 2 fields — cloned from eventLiveEdit.html
+                // Step 2 fields - cloned from eventLiveEdit.html
                 description: `Five days. One epic dance floor. That's Dance Fest Spain 2026.
 
 We created this festival for one reason: to dance. No stress, no complicated stuff: just you, great music, and people who love to move. You'll learn from the best, meet incredible dancers from around the world, and probably laugh way more than you expected.
@@ -770,7 +770,7 @@ Think of it as a vacation for your feet. We'll take care of everything else.
 Ready to join the party?`,
                 artists: 'Klau & Ros, Melvin & Gatica, Marco & Sara, Masa & Polina, Ataca & La Alemana, Gero & Migle, And many more!',
                 tags: 'Everything in the same place, Possibility of cancellation until a certain date, Workshops, Masterclass, Several rooms, Weekend, Intensive',
-                // Step 3 — cloned from ticketManagement.html (all 5 ticket types, qty reset to 0)
+                // Step 3 - cloned from ticketManagement.html (all 5 ticket types, qty reset to 0)
                 tickets: [
                     {
                         name: 'Sensuality Pass',
@@ -829,8 +829,8 @@ Ready to join the party?`,
             },
             'weekly-latin': {
                 name: 'Weekly Latin Sundays',
-                lastEdition: 'Weekly Latin Sundays – Mar 30, 2026',
-                titleTemplate: 'Weekly Latin Sundays – Apr 06, 2026',
+                lastEdition: 'Weekly Latin Sundays - Mar 30, 2026',
+                titleTemplate: 'Weekly Latin Sundays - Apr 06, 2026',
                 venue: 'Club Salsadholic',
                 location: 'Madrid, Spain',
                 type: 'Social',
@@ -887,7 +887,7 @@ Ready to join the party?`,
 
             // Update page title
             document.getElementById('page-title').textContent = 'Create Next Edition';
-            document.getElementById('page-subtitle').textContent = `Creating a new edition of ${series.name}. Pre-filled from last edition — update dates and adjust as needed.`;
+            document.getElementById('page-subtitle').textContent = `Creating a new edition of ${series.name}. Pre-filled from last edition - update dates and adjust as needed.`;
 
             // Show confirmation label in selector
             const label = document.getElementById('series-selection-label');

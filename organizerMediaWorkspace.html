@@ -214,7 +214,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                 d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
                         </svg>
-                        <span>This is a <strong>Creative folder</strong> — upload &amp; folder management are disabled.
+                        <span>This is a <strong>Creative folder</strong> - upload &amp; folder management are disabled.
                             You can download and copy links.</span>
                     </div>
 
@@ -366,7 +366,7 @@
             id: 'root',
             name: 'Media',
             children: [
-                // === FROM CREATIVES — Dance Fest Spain ===
+                // === FROM CREATIVES - Dance Fest Spain ===
                 {
                     id: 'dfs_main',
                     name: 'Dance Fest Spain',
@@ -500,7 +500,7 @@
                         }
                     ]
                 },
-                // === FROM CREATIVES — Zoukathon BCN ===
+                // === FROM CREATIVES - Zoukathon BCN ===
                 {
                     id: 'zoukathon_bcn',
                     name: 'Zoukathon BCN',
@@ -542,10 +542,10 @@
                         }
                     ]
                 },
-                // === FROM CREATIVES — Summer Fest (preserved) ===
+                // === FROM CREATIVES - Summer Fest (preserved) ===
                 {
                     id: 'summer_creative',
-                    name: 'Summer Fest — AMedia',
+                    name: 'Summer Fest - AMedia',
                     source: 'creative',
                     event: 'summer',
                     type: 'folder',
@@ -860,7 +860,7 @@
                                 ${sourceBadge(node)}${galleryBadge(node)}
                             </div>
                             ${creatorChip(node)}
-                            <div class="text-[10px] text-gray-400 mt-1">${node.fileCount || 0} files &bull; ${node.size || '—'} &bull; ${new Date(node.lastModified).toLocaleDateString()}</div>
+                            <div class="text-[10px] text-gray-400 mt-1">${node.fileCount || 0} files &bull; ${node.size || '-'} &bull; ${new Date(node.lastModified).toLocaleDateString()}</div>
                             ${galleryBtn}
                         </div>
                     </div>
@@ -904,9 +904,9 @@
                     <td class="py-3 px-4">
                         <div class="flex items-center gap-1">${sourceBadge(node)}${galleryBadge(node)}</div>
                     </td>
-                    <td class="py-3 px-4 text-xs text-gray-500">${node.creator || '—'}</td>
+                    <td class="py-3 px-4 text-xs text-gray-500">${node.creator || '-'}</td>
                     <td class="py-3 px-4 text-xs text-gray-500">${node.fileCount || 0} files</td>
-                    <td class="py-3 px-4 text-xs text-gray-500">${node.size || '—'}</td>
+                    <td class="py-3 px-4 text-xs text-gray-500">${node.size || '-'}</td>
                     <td class="py-3 px-4 text-xs text-gray-500">${new Date(node.lastModified).toLocaleDateString()}</td>
                     <td class="py-3 px-4 text-right">
                         <button type="button" onclick='openContextMenu(event, "${node.id}", ${JSON.stringify(childPath)})'
@@ -1278,7 +1278,7 @@
     </div>
 
     <!-- ═══════════════════════════════════════════════
-         MODAL: Upgrade Plan (Organizer — Free user)
+         MODAL: Upgrade Plan (Organizer - Free user)
      ════════════════════════════════════════════════ -->
     <dialog id="modal-upgrade-plan"
         style="border:none;border-radius:1rem;padding:1.75rem;width:100%;max-width:480px;box-shadow:0 20px 60px rgba(0,0,0,.18);font-family:inherit;">
@@ -1297,7 +1297,7 @@
         <!-- Current plan badge -->
         <div class="flex items-center gap-2 mb-4 p-3 bg-gray-50 rounded-xl border border-gray-200">
             <span class="text-xs text-gray-400 font-semibold uppercase tracking-wide">Current:</span>
-            <span class="text-sm font-bold text-gray-600">Standard — 1 GB</span>
+            <span class="text-sm font-bold text-gray-600">Standard - 1 GB</span>
         </div>
         <!-- Plan options -->
         <p class="text-xs text-gray-500 uppercase tracking-wider font-bold mb-3">Upgrade to</p>
@@ -1305,7 +1305,7 @@
             <div class="plan-option" onclick="selectPlan(this)">
                 <div class="flex justify-between items-center">
                     <div>
-                        <p class="text-sm font-bold text-revelti-blue">Plus — 10 GB</p>
+                        <p class="text-sm font-bold text-revelti-blue">Plus - 10 GB</p>
                         <p class="text-xs text-gray-400 mt-0.5">Best for growing events</p>
                     </div>
                     <span class="text-sm font-bold text-revelti-blue">120€<span
@@ -1315,7 +1315,7 @@
             <div class="plan-option" onclick="selectPlan(this)">
                 <div class="flex justify-between items-center">
                     <div>
-                        <p class="text-sm font-bold text-revelti-blue">Premium — 100 GB</p>
+                        <p class="text-sm font-bold text-revelti-blue">Premium - 100 GB</p>
                         <p class="text-xs text-gray-400 mt-0.5">Full creative library access</p>
                     </div>
                     <span class="text-sm font-bold text-revelti-blue">290€<span

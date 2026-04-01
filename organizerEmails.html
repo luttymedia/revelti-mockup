@@ -675,7 +675,7 @@
                             <div class="campaign-row grid grid-cols-12 gap-2 items-center" data-campaign-id="2"
                                 onclick="openCampaign(2)">
                                 <div class="col-span-4">
-                                    <p class="font-semibold text-gray-800 text-sm">VIP Pass — Exclusive Offer</p>
+                                    <p class="font-semibold text-gray-800 text-sm">VIP Pass - Exclusive Offer</p>
                                     <p class="text-xs text-gray-400 mt-0.5 truncate">Special discount for loyal ticket
                                         buyers</p>
                                 </div>
@@ -1051,19 +1051,19 @@
                 name: '🎉 Early Bird Tickets Now Live!',
                 status: 'sent',
                 subject: '{First Name}, early bird tickets for Dance Fest Spain 2026 are live! 🎟️',
-                preheader: 'Limited spots – grab yours before they sell out',
+                preheader: 'Limited spots - grab yours before they sell out',
                 audience: 'Past attendees',
                 blocks: [
-                    { type: 'text', content: 'Hi {First Name},\n\nWe\'re thrilled to announce that Early Bird tickets for Dance Fest Spain 2026 — Dance Fest Spain 2026 are now live! 🎉\n\nThis is your chance to secure your spot at the best bachata festival in Europe at the lowest price.' },
+                    { type: 'text', content: 'Hi {First Name},\n\nWe\'re thrilled to announce that Early Bird tickets for Dance Fest Spain 2026 are now live! 🎉\n\nThis is your chance to secure your spot at the best bachata festival in Europe at the lowest price.' },
                     { type: 'image', caption: 'Dance Fest Spain 2026 Event Banner' },
-                    { type: 'text', content: '🗓 October 8–12, 2026\n📍 Madrid, Spain\n\nEarly Bird pricing ends in 7 days. Don\'t miss out!' },
+                    { type: 'text', content: '🗓 October 8-12, 2026\n📍 Madrid, Spain\n\nEarly Bird pricing ends in 7 days. Don\'t miss out!' },
                     { type: 'button', label: 'Get Early Bird Tickets', url: '#' },
                     { type: 'divider' },
                     { type: 'text', content: 'See you on the dance floor,\nThe LMP Events team' },
                 ]
             },
             2: {
-                name: 'VIP Pass — Exclusive Offer',
+                name: 'VIP Pass - Exclusive Offer',
                 status: 'draft',
                 subject: 'An exclusive offer just for you, {First Name} 🌟',
                 preheader: 'A special deal for our most loyal attendees',
@@ -1072,7 +1072,7 @@
                     { type: 'text', content: 'Hi {First Name},\n\nAs a loyal Dance Fest Spain attendee, we\'d like to offer you an exclusive 15% discount on our new Full Pass for Dance Fest Spain 2026.' },
                     { type: 'button', label: 'Claim Your VIP Discount', url: '#' },
                     { type: 'divider' },
-                    { type: 'text', content: 'Questions? Reply to this email — we\'re happy to help.' }
+                    { type: 'text', content: 'Questions? Reply to this email - we\'re happy to help.' }
                 ]
             }
         };
@@ -1156,7 +1156,7 @@
         const TEMPLATES = {
             promo: {
                 name: 'Promo Email',
-                subject: '🎟️ Exclusive deal for {First Name} — limited time offer!',
+                subject: '🎟️ Exclusive deal for {First Name} - limited time offer!',
                 preheader: 'Don\'t miss out on this special discount',
                 blocks: [
                     { type: 'text', content: 'Hi {First Name},\n\nWe\'re offering an exclusive early bird discount for {Event Name}. Grab your tickets before the offer expires!' },
@@ -1181,7 +1181,7 @@
             'miss-you': {
                 name: '"We Miss You"',
                 subject: 'We miss you, {First Name} 💌',
-                preheader: 'It\'s been a while — come back and join us!',
+                preheader: 'It\'s been a while - come back and join us!',
                 blocks: [
                     { type: 'text', content: 'Hi {First Name},\n\nIt\'s been a while and we miss having you on the dance floor! 💃🕺\n\nWe\'ve got something special coming up and we\'d love to see you back.' },
                     { type: 'button', label: 'See What\'s Coming Up', url: '#' },
@@ -1267,7 +1267,7 @@
         }
 
         // ════════════════════════════════════════════════
-        //  Text formatting — selection-based via execCommand
+        //  Text formatting - selection-based via execCommand
         // ════════════════════════════════════════════════
         const PALETTE = [
             { hex: '#1f2937', label: 'Dark' },
@@ -1397,7 +1397,7 @@
                         oninput="updateBlockCaption(${block.id}, this.value)"
                         placeholder="Image URL or caption…"
                         class="w-full text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-200"/>
-                    <p class="text-xs text-gray-400 mt-1">Image URL support coming soon — caption displayed in preview.</p>`;
+                    <p class="text-xs text-gray-400 mt-1">Image URL support coming soon - caption displayed in preview.</p>`;
                 } else if (block.type === 'button') {
                     inner = `
                     <p class="block-label">Button block</p>

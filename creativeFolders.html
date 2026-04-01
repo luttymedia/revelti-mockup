@@ -302,7 +302,7 @@
                 }
             }
 
-            // Read active filters straight from the URL — single source of truth
+            // Read active filters straight from the URL - single source of truth
             function getFiltersFromURL() {
                 var p = new URLSearchParams(window.location.search);
                 return {
@@ -398,7 +398,7 @@
 
             function applyFiltersAndRender() {
                 loadingOverlay.classList.remove('hidden');
-                // Read straight from URL — immune to any DOM timing issues
+                // Read straight from URL - immune to any DOM timing issues
                 var f = getFiltersFromURL();
 
                 setTimeout(function () {
