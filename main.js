@@ -431,6 +431,12 @@ document.addEventListener("DOMContentLoaded", function () {
                             searchBar.focus();
                         }
                     });
+
+                    searchBar.addEventListener('keypress', function(e) {
+                        if (e.key === 'Enter' && this.value.trim()) {
+                            window.location.href = 'eventListings.html?search=' + encodeURIComponent(this.value.trim());
+                        }
+                    });
                 }
 
                 if (notificationIconButton) {

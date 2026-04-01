@@ -48,7 +48,7 @@
 
                 <!-- Search Bar -->
                 <div class="relative">
-                    <input type="text" placeholder="Search by name, artist, city..."
+                    <input type="text" id="local-search-bar" placeholder="Search by name, artist, city..."
                         class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-revelti-orange">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -56,6 +56,15 @@
                                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
                     </div>
+                </div>
+
+                <!-- Search Results Indicator -->
+                <div id="search-indicator"
+                    class="hidden mt-3 flex items-center justify-between bg-blue-50 px-3 py-2 rounded-lg">
+                    <span class="text-sm text-blue-800">Searching: <span id="search-query-display"
+                            class="font-bold text-blue-800"></span></span>
+                    <button id="clear-search"
+                        class="text-sm text-revelti-blue font-semibold hover:text-blue-600">Clear</button>
                 </div>
 
                 <!-- Filters Button -->
@@ -172,19 +181,19 @@
             { id: 11, name: 'Bachata Sensual World Congress', date: '2027-01-13', location: 'Punta Umbría, Huelva', rating: 4.7, isFeatured: true, isTrending: false, relevance: 1, poster: 'images/eventPoster3.png', isFollowed: false },
             { id: 12, name: 'Sensuality & Essentiality', date: '2025-11-01', location: 'Barcelona', rating: 4.6, isFeatured: true, isTrending: false, relevance: 1, poster: 'images/eventPoster4.png', isFollowed: false },
             { id: 13, name: 'Tallinn Bachata Experience', date: '2026-11-19', location: 'Tallinn', rating: 4.8, isFeatured: true, isTrending: false, relevance: 1, poster: 'images/eventPoster5.png', isFollowed: false },
-            
+
             // Trending Events (3)
             { id: 4, name: 'BCN Bachata Congress', date: '2025-10-10', location: 'Barcelona', rating: 4.6, isFeatured: false, isTrending: true, relevance: 2, poster: 'https://placehold.co/600x400/213c63/ffffff?text=Trending', isFollowed: true },
             { id: 5, name: 'Seville Kizomba Immersion', date: '2025-11-20', location: 'Seville', rating: 4.8, isFeatured: false, isTrending: true, relevance: 2, poster: 'https://placehold.co/600x400/213c63/ffffff?text=Trending', isFollowed: false },
             { id: 6, name: 'Zaragoza Dance Fest', date: '2025-09-28', location: 'Zaragoza', rating: 4.5, isFeatured: false, isTrending: true, relevance: 2, poster: 'https://placehold.co/600x400/213c63/ffffff?text=Trending', isFollowed: false },
-            
+
             // Regular Events (5) - Keep Salsa Spring Fest and Kizomba Connection
             { id: 7, name: 'Salsa Spring Fest', date: '2025-09-05', location: 'Madrid', rating: 4.2, isFeatured: false, isTrending: false, relevance: 3, poster: 'https://placehold.co/600x400/cccccc/ffffff?text=Event', isFollowed: false },
             { id: 8, name: 'Kizomba Connection', date: '2025-09-19', location: 'Valencia', rating: 4.4, isFeatured: false, isTrending: false, relevance: 3, poster: 'https://placehold.co/600x400/cccccc/ffffff?text=Event', isFollowed: false },
             { id: 14, name: 'Bilbao Dance Weekend', date: '2025-12-05', location: 'Bilbao', rating: 4.3, isFeatured: false, isTrending: false, relevance: 3, poster: 'https://placehold.co/600x400/cccccc/ffffff?text=Event', isFollowed: false },
             { id: 15, name: 'Mallorca Beach Festival', date: '2026-06-12', location: 'Mallorca', rating: 4.5, isFeatured: false, isTrending: false, relevance: 3, poster: 'https://placehold.co/600x400/cccccc/ffffff?text=Event', isFollowed: false },
             { id: 16, name: 'Urban Kiz Experience', date: '2026-02-06', location: 'Barcelona', rating: 4.4, isFeatured: false, isTrending: false, relevance: 3, poster: 'https://placehold.co/600x400/cccccc/ffffff?text=Event', isFollowed: false },
-            
+
             // Past edition
             { id: 9, name: 'Dance Fest Spain 2025', date: '2025-10-09', location: 'Madrid', rating: 4.8, isFeatured: false, isTrending: false, relevance: 3, poster: 'images/eventPoster.png', url: 'eventDetail.html', isFollowed: false, seriesName: 'Dance Fest Spain', isPastEdition: true },
         ];
@@ -199,6 +208,20 @@
         const applyFiltersBtn = document.getElementById('apply-filters-btn');
 
         // --- Functions ---
+
+        function filterEvents(events, query) {
+            if (!query) return events;
+            const lowerQuery = query.toLowerCase();
+            return events.filter(e =>
+                e.name.toLowerCase().includes(lowerQuery) ||
+                e.location.toLowerCase().includes(lowerQuery)
+            );
+        }
+
+        function getSearchQuery() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('search') || '';
+        }
 
         /**
          * Creates a star rating element.
@@ -282,6 +305,11 @@
             const sortBy = orderPicker.value;
             let sortedEvents = [...eventsData];
 
+            const searchQuery = getSearchQuery();
+            if (searchQuery) {
+                sortedEvents = filterEvents(sortedEvents, searchQuery);
+            }
+
             switch (sortBy) {
                 case 'relevance':
                     sortedEvents.sort((a, b) => a.relevance - b.relevance || new Date(a.date) - new Date(b.date) || a.name.localeCompare(b.name));
@@ -318,6 +346,50 @@
 
 
         // --- Initial Load and Event Listeners ---
+        const localSearchBar = document.getElementById('local-search-bar');
+        const searchIndicator = document.getElementById('search-indicator');
+        const searchQueryDisplay = document.getElementById('search-query-display');
+        const clearSearchBtn = document.getElementById('clear-search');
+
+        function updateSearchIndicator() {
+            const query = getSearchQuery();
+            if (query && searchIndicator && searchQueryDisplay) {
+                searchQueryDisplay.textContent = query;
+                searchIndicator.classList.remove('hidden');
+            } else if (searchIndicator) {
+                searchIndicator.classList.add('hidden');
+            }
+        }
+
+        if (localSearchBar) {
+            localSearchBar.value = getSearchQuery();
+            updateSearchIndicator();
+            localSearchBar.addEventListener('input', function () {
+                const url = new URL(window.location.href);
+                if (this.value.trim()) {
+                    url.searchParams.set('search', this.value.trim());
+                } else {
+                    url.searchParams.delete('search');
+                }
+                window.history.replaceState({}, '', url);
+                sortAndRender();
+                updateSearchIndicator();
+            });
+        }
+
+        if (clearSearchBtn) {
+            clearSearchBtn.addEventListener('click', function () {
+                const url = new URL(window.location.href);
+                url.searchParams.delete('search');
+                window.history.replaceState({}, '', url);
+                if (localSearchBar) {
+                    localSearchBar.value = '';
+                }
+                sortAndRender();
+                updateSearchIndicator();
+            });
+        }
+
         orderPicker.addEventListener('change', sortAndRender);
         document.addEventListener('DOMContentLoaded', sortAndRender);
 
