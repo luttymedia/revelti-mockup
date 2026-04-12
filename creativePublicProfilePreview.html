@@ -609,11 +609,12 @@
                     <div class="p-6 bg-white info-panel">
                         <!-- Theme Avatar and Name -->
                         <div class="flex items-center mb-4">
-                            <img src="images/creativeIcon.png" alt="Avatar" class="w-20 h-20 rounded-full object-contain bg-black shadow-md p-1">
+                            <img src="images/creativeIcon.png" alt="Avatar"
+                                class="w-20 h-20 rounded-full object-contain bg-black shadow-md p-1">
                             <div class="ml-4">
                                 <h1 id="preview-name" class="text-3xl font-bold text-revelti-blue">AMedia</h1>
                             </div>
-                            <button aria-label="Share Visual Creative profile"
+                            <button aria-label="Share Visual Creative profile" onclick="event.preventDefault()"
                                 class="ml-auto p-2 rounded-full hover:bg-gray-200 transition duration-300 hidden-in-dark">
                                 <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -784,15 +785,49 @@
                                 </a>
                             </summary>
                             <div
-                                class="flex space-x-4 overflow-x-auto pb-4 mt-3 horizontal-scroll lg:grid lg:grid-cols-3 lg:gap-8 lg:overflow-visible">
+                                class="flex space-x-4 lg:space-x-0 overflow-x-auto pb-4 mt-3 horizontal-scroll lg:grid lg:grid-cols-3 lg:gap-8 lg:overflow-visible">
                                 <div class="flex-shrink-0 w-2/3 sm:w-1/2 lg:w-full">
                                     <a href="javascript:openGalleryOverlay()">
                                         <div class="relative rounded-lg overflow-hidden shadow-md">
-                                            <img src="https://placehold.co/600x400/213c63/ffffff?text=Official+Media"
-                                                alt="Album cover" class="w-full h-40 lg:h-48 object-cover">
+                                            <img src="images/eventBanner.png" alt="Album cover"
+                                                class="w-full h-40 lg:h-48 object-cover">
                                             <div class="absolute top-2 right-2 flex space-x-1">
-                                                <button
-                                                    class="p-1.5 bg-green-600 rounded-full text-white hover:text-revelti-orange"><svg
+                                                <button onclick="event.preventDefault()"
+                                                    class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
+                                                        class="w-5 h-5" fill="none" stroke="currentColor"
+                                                        viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="1.5"
+                                                            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
+                                                        </path>
+                                                    </svg></button>
+                                                <button onclick="event.preventDefault()"
+                                                    class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
+                                                        class="w-5 h-5" fill="none" stroke="currentColor"
+                                                        viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="1.5"
+                                                            d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z">
+                                                        </path>
+                                                    </svg></button>
+                                            </div>
+                                            <div class="absolute bottom-4 left-5">
+                                                <span
+                                                    class="px-2 py-0.5 bg-revelti-orange text-white text-[10px] font-bold uppercase tracking-widest rounded-full mb-2 inline-block">Official
+                                                    Media</span>
+                                                <h3 class="text-white text-xl font-bold">Dance Fest Spain 2026</h3>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="flex-shrink-0 w-2/3 sm:w-1/2 lg:w-full">
+                                    <a href="javascript:openGalleryOverlay()">
+                                        <div class="relative rounded-lg overflow-hidden shadow-md">
+                                            <img src="images/eventPoster2.png" alt="Album cover"
+                                                class="w-full h-40 lg:h-48 object-cover">
+                                            <div class="absolute top-2 right-2 flex space-x-1">
+                                                <button onclick="event.preventDefault()"
+                                                    class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
                                                         class="w-5 h-5" fill="none" stroke="currentColor"
                                                         viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -811,7 +846,7 @@
                                                     </svg></button>
                                             </div>
                                             <div class="absolute inset-0 flex items-end p-4">
-                                                <h3 class="text-white text-xl font-bold">Dance Fest Spain 2026</h3>
+                                                <h3 class="text-white text-xl font-bold">Clirge Fest 2024</h3>
                                             </div>
                                         </div>
                                     </a>
@@ -831,14 +866,14 @@
                                 </a>
                             </summary>
                             <div
-                                class="flex space-x-4 overflow-x-auto pb-4 mt-3 horizontal-scroll lg:grid lg:grid-cols-3 lg:gap-8 lg:overflow-visible">
+                                class="flex space-x-4 lg:space-x-0 overflow-x-auto pb-4 mt-3 horizontal-scroll lg:grid lg:grid-cols-3 lg:gap-8 lg:overflow-visible">
                                 <div class="flex-shrink-0 w-2/3 sm:w-1/2 lg:w-full">
                                     <div class="relative rounded-lg overflow-hidden shadow-md">
-                                        <img src="https://placehold.co/600x400/cccccc/ffffff?text=Media"
-                                            alt="Album cover" class="w-full h-40 lg:h-48 object-cover">
+                                        <img src="images/eventPoster3.png" alt="Album cover"
+                                            class="w-full h-40 lg:h-48 object-cover">
                                         <div class="absolute top-2 right-2 flex space-x-1">
-                                            <button
-                                                class="p-1.5 bg-green-600 rounded-full text-white hover:text-revelti-orange"><svg
+                                            <button onclick="event.preventDefault()"
+                                                class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
                                                     class="w-5 h-5" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -846,7 +881,7 @@
                                                         d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
                                                     </path>
                                                 </svg></button>
-                                            <button
+                                            <button onclick="event.preventDefault()"
                                                 class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
                                                     class="w-5 h-5" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24">
@@ -863,10 +898,10 @@
                                 </div>
                                 <div class="flex-shrink-0 w-2/3 sm:w-1/2 lg:w-full">
                                     <div class="relative rounded-lg overflow-hidden shadow-md">
-                                        <img src="https://placehold.co/600x400/cccccc/ffffff?text=Media"
-                                            alt="Album cover" class="w-full h-40 lg:h-48 object-cover">
+                                        <img src="images/eventPoster4.png" alt="Album cover"
+                                            class="w-full h-40 lg:h-48 object-cover">
                                         <div class="absolute top-2 right-2 flex space-x-1">
-                                            <button
+                                            <button onclick="event.preventDefault()"
                                                 class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
                                                     class="w-5 h-5" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24">
@@ -875,7 +910,7 @@
                                                         d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
                                                     </path>
                                                 </svg></button>
-                                            <button
+                                            <button onclick="event.preventDefault()"
                                                 class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
                                                     class="w-5 h-5" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24">
@@ -887,6 +922,65 @@
                                         </div>
                                         <div class="absolute inset-0 flex items-end p-4">
                                             <h3 class="text-white text-xl font-bold">Winter Gala 2024</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex-shrink-0 w-2/3 sm:w-1/2 lg:w-full">
+                                    <div class="relative rounded-lg overflow-hidden shadow-md">
+                                        <img src="images/eventPoster5.png" alt="Album cover"
+                                            class="w-full h-40 lg:h-48 object-cover">
+                                        <div class="absolute top-2 right-2 flex space-x-1">
+                                            <button onclick="event.preventDefault()"
+                                                class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
+                                                    class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
+                                                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
+                                                    </path>
+                                                </svg></button>
+                                            <button onclick="event.preventDefault()"
+                                                class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
+                                                    class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
+                                                        d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z">
+                                                    </path>
+                                                </svg></button>
+                                        </div>
+                                        <div class="absolute inset-0 flex items-end p-4">
+                                            <h3 class="text-white text-xl font-bold">Barcelona Summer Fest</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex-shrink-0 w-2/3 sm:w-1/2 lg:w-full">
+                                    <div class="relative rounded-lg overflow-hidden shadow-md">
+                                        <img src="images/eventPoster6.png"
+                                            alt="Album cover" class="w-full h-40 lg:h-48 object-cover"
+                                            onerror="this.onerror=null;this.src='https://placehold.co/600x400/213c63/fff?text=Bachata+Gala'">
+                                        <div class="absolute top-2 right-2 flex space-x-1">
+                                            <button onclick="event.preventDefault()"
+                                                class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
+                                                    class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
+                                                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
+                                                    </path>
+                                                </svg></button>
+                                            <button onclick="event.preventDefault()"
+                                                class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
+                                                    class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
+                                                        d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z">
+                                                    </path>
+                                                </svg></button>
+                                        </div>
+                                        <div class="absolute inset-0 flex items-end p-4">
+                                            <h3 class="text-white text-xl font-bold">Winter Bachata Gala</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -977,7 +1071,7 @@
                                         d="M19 9l-7 7-7-7"></path>
                                 </svg></summary>
                             <div
-                                class="flex space-x-4 overflow-x-auto pb-4 mt-3 horizontal-scroll lg:grid lg:grid-cols-3 lg:gap-8 lg:overflow-visible">
+                                class="flex space-x-4 lg:space-x-0 overflow-x-auto pb-4 mt-3 horizontal-scroll lg:grid lg:grid-cols-3 lg:gap-8 lg:overflow-visible">
                                 <!-- Event Card 1 -->
                                 <div class="flex-shrink-0 w-2/3 sm:w-1/2 lg:w-full">
                                     <a href="eventDetail.html">
@@ -999,8 +1093,8 @@
                                                     </object>
                                                 </div>
                                                 <div class="absolute top-2 right-2 flex space-x-1">
-                                                    <button
-                                                        class="p-1.5 bg-green-600 rounded-full text-white hover:text-revelti-orange"><svg
+                                                    <button onclick="event.preventDefault()"
+                                                        class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
                                                             class="w-5 h-5" fill="none" stroke="currentColor"
                                                             viewBox="0 0 24 24">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -1039,16 +1133,16 @@
                                         d="M19 9l-7 7-7-7"></path>
                                 </svg></summary>
                             <div
-                                class="flex space-x-4 overflow-x-auto pb-4 mt-3 horizontal-scroll lg:grid lg:grid-cols-3 lg:gap-8 lg:overflow-visible">
+                                class="flex space-x-4 lg:space-x-0 overflow-x-auto pb-4 mt-3 horizontal-scroll lg:grid lg:grid-cols-3 lg:gap-8 lg:overflow-visible">
                                 <!-- Past Event Card -->
                                 <div class="flex-shrink-0 w-2/3 sm:w-1/2 lg:w-full">
                                     <div
                                         class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 shadow-sm opacity-75">
                                         <div class="relative">
-                                            <img src="https://placehold.co/600x400/cccccc/ffffff?text=Past+Event"
-                                                alt="Past Event Poster" class="w-full h-40 lg:h-48 object-cover">
+                                            <img src="images/eventPoster2.png" alt="Past Event Poster"
+                                                class="w-full h-40 lg:h-48 object-cover">
                                             <div class="absolute top-2 right-2 flex space-x-1">
-                                                <button
+                                                <button onclick="event.preventDefault()"
                                                     class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
                                                         class="w-5 h-5" fill="none" stroke="currentColor"
                                                         viewBox="0 0 24 24">
@@ -1057,7 +1151,7 @@
                                                             d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
                                                         </path>
                                                     </svg></button>
-                                                <button
+                                                <button onclick="event.preventDefault()"
                                                     class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
                                                         class="w-5 h-5" fill="none" stroke="currentColor"
                                                         viewBox="0 0 24 24">
@@ -1079,8 +1173,8 @@
                                     <div
                                         class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 shadow-sm opacity-75">
                                         <div class="relative">
-                                            <img src="https://placehold.co/600x400/cccccc/ffffff?text=Past+Event"
-                                                alt="Past Event Poster" class="w-full h-40 lg:h-48 object-cover">
+                                            <img src="images/eventPoster3.png" alt="Past Event Poster"
+                                                class="w-full h-40 lg:h-48 object-cover">
                                             <div class="absolute top-2 right-2 flex space-x-1">
                                                 <button
                                                     class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-revelti-orange"><svg
@@ -1230,7 +1324,8 @@
                                             <path
                                                 d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
                                             </path>
-                                        </svg><svg class="w-5 h-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                                        </svg><svg class="w-5 h-5 text-gray-300" fill="currentColor"
+                                            viewBox="0 0 20 20">
                                             <path
                                                 d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
                                             </path>
@@ -1238,11 +1333,14 @@
                                     </div>
                                     <p class="ml-auto text-sm text-gray-500">Verified Attendee</p>
                                 </div>
-                                <p class="text-gray-700 mt-1">"The photos from the workshops were great, but it took a bit longer than expected to get them."</p>
+                                <p class="text-gray-700 mt-1">"The photos from the workshops were great, but it took a
+                                    bit longer than expected to get them."</p>
                                 <p class="text-sm font-semibold text-gray-800 mt-3">- Javier Gomez</p>
                                 <div class="mt-4 pt-4 border-t border-gray-200">
                                     <p class="text-sm font-bold text-revelti-purple mb-1">Creator Response:</p>
-                                    <p class="text-sm text-gray-600">"Hi Javier! Thanks for the feedback. We had thousands of photos to edit from that weekend, but we're always working to improve our delivery times for the next one!"</p>
+                                    <p class="text-sm text-gray-600">"Hi Javier! Thanks for the feedback. We had
+                                        thousands of photos to edit from that weekend, but we're always working to
+                                        improve our delivery times for the next one!"</p>
                                 </div>
                             </div>
                             <!-- Review 3 -->
@@ -1274,7 +1372,8 @@
                                     </div>
                                     <p class="ml-auto text-sm text-gray-500">Verified User</p>
                                 </div>
-                                <p class="text-gray-700 mt-1">"I always look for events covered by AMedia. Their photos and videos are the best, they really know how to capture the moment!"</p>
+                                <p class="text-gray-700 mt-1">"I always look for events covered by AMedia. Their photos
+                                    and videos are the best, they really know how to capture the moment!"</p>
                                 <p class="text-sm font-semibold text-gray-800 mt-3">- DanceFan123</p>
                             </div>
                         </div>
@@ -1922,18 +2021,23 @@
                                         </svg><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                             <path
                                                 d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg><svg class="w-5 h-5 text-[#46484d]" fill="currentColor" viewBox="0 0 20 20">
+                                        </svg><svg class="w-5 h-5 text-[#46484d]" fill="currentColor"
+                                            viewBox="0 0 20 20">
                                             <path
                                                 d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                         </svg></div><span
                                         class="text-xs text-on-surface-variant bg-secondary/10 border border-secondary/20 px-2 py-1 rounded-full">Verified
                                         Attendee</span>
                                 </div>
-                                <p class="text-on-surface-variant leading-relaxed">&ldquo;The photos from the workshops were great, but it took a bit longer than expected to get them.&rdquo;</p>
-                                <p class="text-sm font-semibold text-on-surface mt-3 font-headline">&mdash; Javier Gomez</p>
+                                <p class="text-on-surface-variant leading-relaxed">&ldquo;The photos from the workshops
+                                    were great, but it took a bit longer than expected to get them.&rdquo;</p>
+                                <p class="text-sm font-semibold text-on-surface mt-3 font-headline">&mdash; Javier Gomez
+                                </p>
                                 <div class="mt-4 pt-4 border-t border-outline-variant/20">
                                     <p class="text-sm font-bold text-[#ff9159] mb-1">Creator Response:</p>
-                                    <p class="text-sm text-on-surface-variant">"Hi Javier! Thanks for the feedback. We had thousands of photos to edit from that weekend, but we're always working to improve our delivery times for the next one!"</p>
+                                    <p class="text-sm text-on-surface-variant">"Hi Javier! Thanks for the feedback. We
+                                        had thousands of photos to edit from that weekend, but we're always working to
+                                        improve our delivery times for the next one!"</p>
                                 </div>
                             </div>
                             <div class="bg-surface-container rounded-2xl p-6 border border-outline-variant/20">
@@ -2204,7 +2308,7 @@
                                 <img alt="Winter Gala"
                                     class="w-full h-full object-cover transition duration-700 group-hover:scale-105"
                                     src="images/eventPoster4.png"
-                                    onerror="this.src='https://placehold.co/600x340/333/fff?text=Salsa+Night'" />
+                                    onerror="this.src='https://placehold.co/600x340/333/fff?text=Bachata+Gala'" />
                                 <div
                                     class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent">
                                 </div>
@@ -2264,7 +2368,7 @@
                                 <img alt="Winter Bachata Gala"
                                     class="w-full h-full object-cover transition duration-700 group-hover:scale-105"
                                     src="images/eventPoster6.png"
-                                    onerror="this.src='https://placehold.co/600x340/333/fff?text=Salsa+Night'" />
+                                    onerror="this.src='https://placehold.co/600x340/333/fff?text=Bachata+Gala'" />
                                 <div
                                     class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent">
                                 </div>
@@ -2623,11 +2727,14 @@
                                 </div>
                                 <p class="ml-auto text-sm text-gray-500">Verified Attendee</p>
                             </div>
-                            <p class="text-gray-700 mt-1">"The photos from the workshops were great, but it took a bit longer than expected to get them."</p>
+                            <p class="text-gray-700 mt-1">"The photos from the workshops were great, but it took a bit
+                                longer than expected to get them."</p>
                             <p class="text-sm font-semibold text-[#2A2A2A] mt-3">- Javier Gomez</p>
                             <div class="mt-4 pt-4 border-t border-gray-200">
                                 <p class="text-sm font-bold text-purple-700 mb-1">Creator Response:</p>
-                                <p class="text-sm text-gray-600">"Hi Javier! Thanks for the feedback. We had thousands of photos to edit from that weekend, but we're always working to improve our delivery times for the next one!"</p>
+                                <p class="text-sm text-gray-600">"Hi Javier! Thanks for the feedback. We had thousands
+                                    of photos to edit from that weekend, but we're always working to improve our
+                                    delivery times for the next one!"</p>
                             </div>
                         </div>
                         <!-- Review 3 -->
@@ -2659,7 +2766,8 @@
                                 </div>
                                 <p class="ml-auto text-sm text-gray-500">Verified User</p>
                             </div>
-                            <p class="text-gray-700 mt-1">"I always look for events covered by AMedia. Their photos and videos are the best, they really know how to capture the moment!"</p>
+                            <p class="text-gray-700 mt-1">"I always look for events covered by AMedia. Their photos and
+                                videos are the best, they really know how to capture the moment!"</p>
                             <p class="text-sm font-semibold text-[#2A2A2A] mt-3">- DanceFan123</p>
                         </div>
                     </div>
@@ -2887,15 +2995,19 @@
                                         <div class="absolute top-2 right-2 flex space-x-1">
                                             <button
                                                 class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-gray-900 transition-colors"><svg
-                                                    class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                    class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
                                                         d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
                                                     </path>
                                                 </svg></button>
                                             <button
                                                 class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-gray-900 transition-colors"><svg
-                                                    class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                    class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
                                                         d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z">
                                                     </path>
                                                 </svg></button>
@@ -2913,15 +3025,19 @@
                                         <div class="absolute top-2 right-2 flex space-x-1">
                                             <button
                                                 class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-gray-900 transition-colors"><svg
-                                                    class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                    class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
                                                         d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
                                                     </path>
                                                 </svg></button>
                                             <button
                                                 class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-gray-900 transition-colors"><svg
-                                                    class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                    class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
                                                         d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z">
                                                     </path>
                                                 </svg></button>
@@ -2939,15 +3055,19 @@
                                         <div class="absolute top-2 right-2 flex space-x-1">
                                             <button
                                                 class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-gray-900 transition-colors"><svg
-                                                    class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                    class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
                                                         d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
                                                     </path>
                                                 </svg></button>
                                             <button
                                                 class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-gray-900 transition-colors"><svg
-                                                    class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                    class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
                                                         d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z">
                                                     </path>
                                                 </svg></button>
@@ -2965,15 +3085,19 @@
                                         <div class="absolute top-2 right-2 flex space-x-1">
                                             <button
                                                 class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-gray-900 transition-colors"><svg
-                                                    class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                    class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
                                                         d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
                                                     </path>
                                                 </svg></button>
                                             <button
                                                 class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-gray-900 transition-colors"><svg
-                                                    class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                    class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
                                                         d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z">
                                                     </path>
                                                 </svg></button>
@@ -3056,15 +3180,19 @@
                                         <div class="absolute top-2 right-2 flex space-x-1">
                                             <button
                                                 class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-gray-900 transition-colors"><svg
-                                                    class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                    class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
                                                         d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
                                                     </path>
                                                 </svg></button>
                                             <button
                                                 class="p-1.5 bg-white/80 rounded-full text-gray-600 hover:text-gray-900 transition-colors"><svg
-                                                    class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                    class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
                                                         d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z">
                                                     </path>
                                                 </svg></button>
@@ -3210,11 +3338,14 @@
                                     <span class="text-xs text-[#444748] bg-white px-2 py-0.5 rounded-full">Verified
                                         Attendee</span>
                                 </div>
-                                <p class="text-sm text-[#1a1c1c]">"The photos from the workshops were great, but it took a bit longer than expected to get them."</p>
+                                <p class="text-sm text-[#1a1c1c]">"The photos from the workshops were great, but it took
+                                    a bit longer than expected to get them."</p>
                                 <p class="text-xs font-semibold text-[#1a1c1c] mt-3">— Javier Gomez</p>
                                 <div class="mt-4 pt-4 border-t border-gray-200">
                                     <p class="text-xs font-bold text-purple-700 mb-1">Creator Response:</p>
-                                    <p class="text-xs text-gray-600">"Hi Javier! Thanks for the feedback. We had thousands of photos to edit from that weekend, but we're always working to improve our delivery times for the next one!"</p>
+                                    <p class="text-xs text-gray-600">"Hi Javier! Thanks for the feedback. We had
+                                        thousands of photos to edit from that weekend, but we're always working to
+                                        improve our delivery times for the next one!"</p>
                                 </div>
                             </div>
                             <div class="bg-[#f3f3f3] p-4 rounded-xl">
@@ -3223,7 +3354,8 @@
                                     <span class="text-xs text-[#444748] bg-white px-2 py-0.5 rounded-full">Verified
                                         User</span>
                                 </div>
-                                <p class="text-sm text-[#1a1c1c]">"I always look for events covered by AMedia. Their photos and videos are the best, they really know how to capture the moment!"</p>
+                                <p class="text-sm text-[#1a1c1c]">"I always look for events covered by AMedia. Their
+                                    photos and videos are the best, they really know how to capture the moment!"</p>
                                 <p class="text-xs font-semibold text-[#1a1c1c] mt-3">— DanceFan123</p>
                             </div>
                         </div>
