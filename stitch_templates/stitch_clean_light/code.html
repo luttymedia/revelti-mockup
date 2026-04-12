@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-highest": "#e2e2e2",
+                    "on-primary-container": "#848484",
+                    "tertiary-fixed": "#e2e2e2",
+                    "secondary-fixed-dim": "#c7c6c6",
+                    "primary-container": "#1b1b1b",
+                    "background": "#f9f9f9",
+                    "surface": "#f9f9f9",
+                    "outline": "#747878",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed": "#e4e2e2",
+                    "secondary": "#5e5e5e",
+                    "inverse-surface": "#2f3131",
+                    "on-primary": "#ffffff",
+                    "surface-variant": "#e2e2e2",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error": "#ffffff",
+                    "on-tertiary-container": "#838484",
+                    "on-primary-fixed-variant": "#474747",
+                    "error": "#ba1a1a",
+                    "inverse-on-surface": "#f1f1f1",
+                    "tertiary-container": "#1a1c1c",
+                    "secondary-container": "#e1dfdf",
+                    "primary-fixed-dim": "#c6c6c6",
+                    "on-secondary-fixed": "#1b1c1c",
+                    "surface-container-high": "#e8e8e8",
+                    "on-background": "#1a1c1c",
+                    "on-surface": "#1a1c1c",
+                    "outline-variant": "#c4c7c7",
+                    "on-tertiary": "#ffffff",
+                    "surface-dim": "#dadada",
+                    "tertiary-fixed-dim": "#c6c6c6",
+                    "primary": "#000000",
+                    "primary-fixed": "#e2e2e2",
+                    "on-surface-variant": "#444748",
+                    "surface-container-low": "#f3f3f3",
+                    "inverse-primary": "#c6c6c6",
+                    "error-container": "#ffdad6",
+                    "surface-bright": "#f9f9f9",
+                    "on-secondary-container": "#626262",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "surface-container": "#eeeeee",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed": "#1b1b1b",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "tertiary": "#000000",
+                    "surface-tint": "#5e5e5e",
+                    "on-secondary-fixed-variant": "#464747"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Newsreader", "serif"],
+                    "body": ["Manrope", "sans-serif"],
+                    "label": ["Manrope", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Manrope', sans-serif; }
+        .editorial-shadow { box-shadow: 0 20px 40px rgba(26, 28, 28, 0.05); }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-white border-b border-stone-100 flex justify-between items-center px-6 py-3">
+<div class="flex items-center gap-2">
+<img alt="revelti logo" class="h-8" src="https://lh3.googleusercontent.com/aida/ADBb0ugk7ek0cUmuVKpsXN6G2WC_5VmRrt8pKxmIeLLXNYCgWCIGg8So8AVyAafoHwlcT9cgLEScWgwTXX6N-VcSrPumqaVHMwy24ndnUXmXBGJrDELbFXo0HwlCkjw7YOjtuJm-1VnSBbp8EgRgyQDTAlPYRbJk5fRxwUS_76JNHItSruH61Gu90tdeF4czYuqeQX7rgzvQaOmTnjeVBVBDoRjMpmVTpu4pNgr3fGcO2dXh52k5FpILQrBxeKJ_OT4_w6Vm27oXvYVr"/>
+</div>
+<div class="flex items-center gap-6 flex-1 justify-end max-w-4xl">
+<div class="relative w-full max-w-md hidden sm:block">
+<input class="w-full bg-stone-50 border border-stone-200 rounded-full px-5 py-2 text-sm font-body focus:outline-none focus:ring-1 focus:ring-primary/20" placeholder="Search events, artists, creators..." type="text"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-stone-400 text-xl">search</span>
+</div>
+<div class="flex items-center gap-5 text-stone-600">
+<span class="material-symbols-outlined cursor-pointer hover:text-black transition-colors">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-black transition-colors">menu</span>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="pt-24 pb-32 px-8 max-w-7xl mx-auto">
+<!-- Subtle Header Background Integration -->
+<div class="relative w-full h-[307px] overflow-hidden rounded-xl mb-12">
+<img class="w-full h-full object-cover opacity-60 mix-blend-multiply" data-alt="abstract artistic background with soft ethereal light leaks and grainy texture in muted beige and charcoal tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVDaVhG5mLDDCGCJJ6shenKL_-DqU2Cowp3F9WShGECdokE5iy1IxG7PchlP2wcnfK8RSe2WeusUM4_SdovyWJJ1k_JypCwGV3futvutz4Cc5bGuND3GU3HCWMvTV9xkBpWuS-KUhm6A1rrLWOLl_THsgpxK4oPeuBXgJzjSkrdmrhU00Y6j-t6wiWCMvSytI4EIATyePmy81_rAPwbRvbtkHVmA5eUu6yscvNcMXVGcVKT4yiu_MZ_FDx5KlDh4KHK5XirO8FcQ"/>
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-background/90"></div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+<!-- Sidebar: AMedia Profile Info -->
+<aside class="lg:col-span-4 space-y-12">
+<div class="space-y-6">
+<h1 class="font-headline italic text-5xl tracking-tight">AMedia</h1>
+<div class="flex items-center gap-2 text-sm font-body">
+<div class="flex">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<span class="font-bold">5.0</span>
+<span class="text-on-surface-variant">(112 reviews)</span>
+</div>
+<p class="text-on-surface-variant font-body leading-relaxed max-w-sm">
+                        Premier digital storytelling and cinematic production house specializing in high-energy festival coverage and intimate cultural documentaries.
+                    </p>
+<div class="flex gap-4 pt-4">
+<button class="bg-primary text-on-primary px-8 py-3 rounded-md font-body font-semibold text-sm hover:opacity-90 transition-all editorial-shadow">Following</button>
+<button class="bg-surface-container-highest text-on-surface px-6 py-3 rounded-md font-body font-semibold text-sm hover:bg-surface-container-high transition-all">Translate</button>
+</div>
+<div class="flex gap-6 pt-6 text-on-surface-variant">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary">language</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary">share</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary">alternate_email</span>
+</div>
+</div>
+<!-- Bento Grid Style Info Cards -->
+<div class="grid grid-cols-1 gap-4">
+<div class="bg-surface-container-low p-6 rounded-lg space-y-2">
+<p class="font-label text-[10px] uppercase tracking-[0.15em] text-on-surface-variant">Primary Location</p>
+<p class="font-body font-semibold">Barcelona, Spain</p>
+</div>
+<div class="bg-surface-container-low p-6 rounded-lg space-y-2">
+<p class="font-label text-[10px] uppercase tracking-[0.15em] text-on-surface-variant">Joined</p>
+<p class="font-body font-semibold">March 2021</p>
+</div>
+</div>
+</aside>
+<!-- Main Gallery Area -->
+<section class="lg:col-span-8 space-y-16">
+<!-- Section Controls: Tabs and Search -->
+<div class="space-y-8">
+<!-- Tabs Navigation -->
+<div class="border-b border-stone-200">
+<nav class="flex gap-10">
+<button class="pb-4 text-sm font-label uppercase tracking-widest font-bold border-b-2 border-primary text-primary">Media</button>
+<button class="pb-4 text-sm font-label uppercase tracking-widest font-bold border-b-2 border-transparent text-on-surface-variant hover:text-on-surface transition-colors">Collaborators</button>
+<button class="pb-4 text-sm font-label uppercase tracking-widest font-bold border-b-2 border-transparent text-on-surface-variant hover:text-on-surface transition-colors">Events</button>
+<button class="pb-4 text-sm font-label uppercase tracking-widest font-bold border-b-2 border-transparent text-on-surface-variant hover:text-on-surface transition-colors">Reviews</button>
+</nav>
+</div>
+<!-- Search Bar -->
+<div class="relative w-full">
+<input class="w-full bg-surface-container-low border border-stone-200 rounded-lg px-5 py-4 text-sm font-body focus:outline-none focus:ring-1 focus:ring-primary/20" placeholder="Search Media" type="text"/>
+<span class="material-symbols-outlined absolute right-5 top-1/2 -translate-y-1/2 text-stone-400">search</span>
+</div>
+</div>
+<!-- Highlighted Content -->
+<div class="space-y-6">
+<div class="flex justify-between items-end">
+<h2 class="font-headline italic text-3xl">Highlighted</h2>
+<span class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold border-b border-on-surface-variant pb-1 cursor-pointer">View Case Study</span>
+</div>
+<div class="relative group overflow-hidden rounded-xl bg-surface-container-low transition-all hover:bg-surface-container-lowest editorial-shadow">
+<div class="aspect-video w-full overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="dynamic wide shot of a professional dance festival stage with colorful spotlights and performers in mid-motion during a night performance" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAFM5MWN0WsGSj9eN_T1UT4CabAO3WyHsnjPrqICUjyfD0DYN9OPwVbfiE9Y1V83wSD6QcWlsxd5eUT_1rOA924Nclp4ZArvXbdYtm4LFE-Ar0yI3FSWL5trzsHGhu85pDR4Wc9OVaGr3qeKHZ72ocrTeilqocozpInbEDHdQdpCZBARfX3D74RqfGQrcR8K4rd83bgTIiG3RZG8s6vRiaQ2SjjdEA1Mcmwid69KdtoZ80S2w6mLrPdyZV4CMEnyk7TCh0VKaCvA"/>
+</div>
+<div class="p-8 space-y-2">
+<h3 class="font-headline text-2xl">Dance Fest Spain 2026</h3>
+<p class="text-on-surface-variant font-body text-sm">Official Cinematic Aftermovie - Capture the rhythm and the passion of Europe's largest dance gathering.</p>
+</div>
+</div>
+</div>
+<!-- More Media Grid -->
+<div class="space-y-8">
+<h2 class="font-headline italic text-3xl">More Media</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Card 1 -->
+<div class="group space-y-4">
+<div class="aspect-square rounded-lg overflow-hidden bg-surface-container-low">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="vibrant outdoor music festival crowd at sunset with hands raised and golden sunlight filtering through the stage area" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDc6f5kJ8o1G-CzQ_YEuWhH8htE0Wx8CCj3T8shjN3JCmvHqUGV5Ynq7OO5CYzMIcJv76Z0cF3AZgScLsrbM6ri9RzD-VY9XsH-FqQ6NKbPtxk81mGiG5xj710cS1UwtFGSusS3AW-LkwACFybpJnJD9zV7f3K3EIW1xzJiqYvZlbJFl6RK-96kyW8jLogBaArQV50plTcjyGNq3IUZF30on4nMF4ZxmWe9866vU14kmk3A9Z_SLU5pFYmDZue5yESJWfhQVsUsZQ"/>
+</div>
+<div class="space-y-1">
+<h4 class="font-body font-bold text-sm">Summer Fest 2024</h4>
+<p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Cinematography</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group space-y-4">
+<div class="aspect-square rounded-lg overflow-hidden bg-surface-container-low">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="elegant ballroom interior during a gala with crystal chandeliers and soft blue lighting, creating a sophisticated atmospheric mood" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4WeqGXykYMK24T2ZQ-85UbkevLj8844eZVEbtVVP7DmEjb9_itpx_ASC3J2Qf9N-6HZaJbZmadoo7_-DkWIyq5zdGSwJeSk-pC6L5hVO9sd_AcdMfEC6cLnC2KptEH-Hh8zdytAEj89q0nCSGCcT11V_p1VvfSYS2eHHG_OUZO7Q25aSC3p3-IWoMknnW4ntKR4Ba8KxjK_gHYPRmDsWbd2lIfiy_Ti9NrYH8WJiQBUa7s8eMrpj8fMC2j7T_apYyXJmXFEIVxw"/>
+</div>
+<div class="space-y-1">
+<h4 class="font-body font-bold text-sm">Winter Gala 2024</h4>
+<p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Live Production</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-6 pb-8 pt-4 bg-[#f9f9f9]/80 backdrop-blur-xl shadow-[0_-20px_40px_rgba(26,28,28,0.05)]">
+<div class="flex flex-col items-center justify-center text-black scale-110">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="font-['Manrope'] text-[10px] uppercase tracking-widest font-semibold mt-1">Media</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-400">
+<span class="material-symbols-outlined">group</span>
+<span class="font-['Manrope'] text-[10px] uppercase tracking-widest font-semibold mt-1">Collaborators</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-400">
+<span class="material-symbols-outlined">event</span>
+<span class="font-['Manrope'] text-[10px] uppercase tracking-widest font-semibold mt-1">Events</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-400">
+<span class="material-symbols-outlined">star</span>
+<span class="font-['Manrope'] text-[10px] uppercase tracking-widest font-semibold mt-1">Reviews</span>
+</div>
+</nav>
+<!-- Footer Space -->
+<footer class="h-24 md:h-12"></footer>
+</body></html>
