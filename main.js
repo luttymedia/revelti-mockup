@@ -308,19 +308,24 @@ function initializeFooter() {
     // Remove active class from all links first to ensure only one is active
     footerLinks.forEach(link => {
         link.classList.remove('footer-link-active');
-        link.classList.remove('revelti-blue'); // Ensure revelti-blue is removed
-        link.classList.add('text-gray-400'); // Add the gray color class
+        link.classList.remove('text-revelti-orange'); // Updated to reflect orange theme
+        link.classList.add('text-revelti-blue'); // Initial inactive color (brand blue)
     });
 
     // Find the link that matches the current page and add the active class
-    // We check if the current path ends with the link's href for a robust match.
     footerLinks.forEach(link => {
-        const linkHref = link.getAttribute('href');
+        let linkHref = link.getAttribute('href');
+        // Strip query string for matching
+        const cleanHref = linkHref.split('?')[0];
+        
+        const isMatch = currentPath.endsWith(cleanHref) || 
+                       (cleanHref === 'homePage.html' && (currentPath.endsWith('/') || currentPath.endsWith('/reveltiMockup/'))) ||
+                       (cleanHref === 'followingTab.html' && currentPath.endsWith('attendeeDashboard.html'));
 
-        if (currentPath.endsWith(linkHref)) {
+        if (isMatch) {
             link.classList.add('footer-link-active');
-            link.classList.remove('text-gray-400');
-            link.classList.add('revelti-blue');
+            link.classList.remove('text-revelti-blue');
+            link.classList.add('text-revelti-orange');
         }
     });
 }

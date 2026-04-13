@@ -25,9 +25,27 @@ body {
 
 /* Footer active state */
 .footer-link-active {
-    color: #213c63;
-    /* revelti-blue */
+    color: #f58220; /* revelti-orange */
     font-weight: 700;
+    position: relative;
+}
+
+/* Footer active state indicator (bar at the top) */
+.footer-link-active::before {
+    content: '';
+    position: absolute;
+    top: 0; /* Align perfectly with the top border of the footer */
+    left: 20%;
+    right: 20%;
+    height: 2px;
+    background-color: #f58220;
+    border-radius: 0 0 4px 4px;
+}
+
+/* Micro-animations for mobile tap */
+.footer-item:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease-out;
 }
 
 /* --- Custom Color Palette --- */
