@@ -248,6 +248,22 @@
         </div>
     </div>
 
+    <!-- Event Detail Modal -->
+    <div id="event-detail-modal"
+        class="hidden fixed inset-0 z-[80] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl w-full max-w-4xl h-[90vh] shadow-2xl flex flex-col overflow-hidden">
+            <div class="flex items-center justify-between p-4 border-b border-gray-200 bg-gray-50">
+                <h3 class="text-lg font-bold text-revelti-blue">Event Details</h3>
+                <button onclick="closeEventDetailModal()" class="p-2 hover:bg-gray-200 rounded-full transition">
+                    <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <iframe id="event-detail-frame" class="flex-1 w-full" src="" frameborder="0"></iframe>
+        </div>
+    </div>
+
     <!-- Status Info Modal -->
     <div id="status-info-modal"
         class="hidden fixed inset-0 z-[70] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
@@ -659,14 +675,21 @@
                     if (searchableText.includes(searchInput)) {
                         hasVisible = true;
                         const card = document.createElement('div');
-                        card.className = 'bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 border border-gray-100 flex flex-col overflow-hidden';
+                        const isLyonSalsa = invite.id === 101;
+                        card.className = 'bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 border border-gray-100 flex flex-col overflow-hidden' + (isLyonSalsa ? ' cursor-pointer' : '');
+                        if (isLyonSalsa) {
+                            card.onclick = (e) => {
+                                e.stopPropagation();
+                                openEventDetailModal();
+                            };
+                        }
 
                         let actionsHtml = '';
                         if (invite.status === 'Pending') {
                             actionsHtml = `
                                 <div class="grid grid-cols-2 gap-3 mt-auto">
-                                    <button onclick="confirmAction('accept', ${invite.id})" class="bg-revelti-purple text-white font-bold py-2 rounded-lg hover:bg-purple-800 transition">Accept</button>
-                                    <button onclick="confirmAction('decline', ${invite.id})" class="bg-gray-100 text-gray-700 font-bold py-2 rounded-lg hover:bg-gray-200 transition border border-gray-200">Decline</button>
+                                    <button onclick="event.stopPropagation(); confirmAction('accept', ${invite.id})" class="bg-revelti-purple text-white font-bold py-2 rounded-lg hover:bg-purple-800 transition">Accept</button>
+                                    <button onclick="event.stopPropagation(); confirmAction('decline', ${invite.id})" class="bg-gray-100 text-gray-700 font-bold py-2 rounded-lg hover:bg-gray-200 transition border border-gray-200">Decline</button>
                                 </div>
                             `;
                         } else {
@@ -727,7 +750,13 @@
                         hasVisible = true;
 
                         const card = document.createElement('div');
-                        card.className = 'bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 border border-gray-100 flex flex-col overflow-hidden';
+                        const isDanceFestSpain = event.id === 1;
+                        card.className = 'bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 border border-gray-100 flex flex-col overflow-hidden' + (isDanceFestSpain ? ' cursor-pointer' : '');
+                        if (isDanceFestSpain) {
+                            card.onclick = () => {
+                                openEventDetailModal();
+                            };
+                        }
 
                         card.innerHTML = `
                             <!-- Card Header -->
@@ -898,6 +927,20 @@
             setTimeout(() => modal.classList.add('hidden'), 200);
         }
 
+        function openEventDetailModal() {
+            const modal = document.getElementById('event-detail-modal');
+            const frame = document.getElementById('event-detail-frame');
+            frame.src = 'eventDetail.html?modal=true';
+            modal.classList.remove('hidden');
+        }
+
+        function closeEventDetailModal() {
+            const modal = document.getElementById('event-detail-modal');
+            const frame = document.getElementById('event-detail-frame');
+            modal.classList.add('hidden');
+            frame.src = '';
+        }
+
         // Event Listeners
         document.addEventListener('DOMContentLoaded', () => {
 
@@ -952,9 +995,11 @@
                 const sortModal = document.getElementById('sort-modal');
                 const confirmModal = document.getElementById('confirmation-modal');
                 const statusModal = document.getElementById('status-info-modal');
+                const eventDetailModal = document.getElementById('event-detail-modal');
                 if (e.target === sortModal) closeSortModal();
                 if (e.target === confirmModal) closeConfirmModal();
                 if (e.target === statusModal) closeStatusModal();
+                if (e.target === eventDetailModal) closeEventDetailModal();
             });
 
             // Check for filter in URL
