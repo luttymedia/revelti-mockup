@@ -49,6 +49,7 @@
             color: white !important;
             border-color: #213c63 !important;
         }
+
         #status-curious-btn.status-active-curious,
         #status-curious-btn.status-active-curious:hover {
             background-color: #f58220 !important;
@@ -60,12 +61,16 @@
         #people-preview-link.people-tab-active {
             color: #f58220 !important;
         }
+
         #people-preview-link {
             background: none !important;
-            color: #4b5563 !important; /* gray-600 */
+            color: #4b5563 !important;
+            /* gray-600 */
         }
+
         #people-preview-link:hover {
-            color: #213c63 !important; /* revelti-blue */
+            color: #213c63 !important;
+            /* revelti-blue */
         }
 
         /* People tab: ensure orange when active */
@@ -73,6 +78,7 @@
             background-color: #f58220 !important;
             color: white !important;
         }
+
         #people-preview-link:active,
         #people-preview-link:focus {
             outline: none;
@@ -83,7 +89,7 @@
         #people-search:focus {
             outline: none;
             border-color: #213c63;
-            box-shadow: 0 0 0 2px rgba(33,60,99,0.12);
+            box-shadow: 0 0 0 2px rgba(33, 60, 99, 0.12);
         }
     </style>
     <script>
@@ -160,8 +166,17 @@
                             </p>
                             <!-- People Preview -->
                             <p class="flex items-center">
-                                <svg class="w-5 h-5 mr-2 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                                <button id="people-preview-link" onclick="handlePeoplePreviewClick()" class="text-gray-600 hover:text-revelti-blue transition-colors text-left" style="background:none;border:none;padding:0;cursor:pointer;font-size:inherit;"><span id="preview-going-count">14</span> going &middot; <span id="preview-curious-count">22</span> curious</button>
+                                <svg class="w-5 h-5 mr-2 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
+                                    </path>
+                                </svg>
+                                <button id="people-preview-link" onclick="handlePeoplePreviewClick()"
+                                    class="text-gray-600 hover:text-revelti-blue transition-colors text-left"
+                                    style="background:none;border:none;padding:0;cursor:pointer;font-size:inherit;"><span
+                                        id="preview-going-count">14</span> going &middot; <span
+                                        id="preview-curious-count">22</span> curious</button>
                             </p>
                         </div>
 
@@ -457,7 +472,7 @@
                         </details>
                     </div>
 
-                    <!-- Media Timeline Section -->
+                    <!-- Uploaded Media Section -->
                     <div id="media" class="tab-content hidden space-y-4">
                         <details open>
                             <summary
@@ -469,15 +484,15 @@
                                 </svg></summary>
                             <div class="flex space-x-4 overflow-x-auto pb-4 pt-2 horizontal-scroll"><a
                                     href="creatorPortfolio.html" class="flex-shrink-0 text-center w-24"><img
-                                        src="https://placehold.co/80x80/f58220/ffffff?text=A" alt="Avatar for AMedia"
-                                        class="w-24 h-24 rounded-full object-cover shadow-md mx-auto">
+                                        src="images/creativeIcon.png" alt="Avatar for AMedia"
+                                        class="w-24 h-24 rounded-full object-contain bg-black shadow-md p-1 mx-auto">
                                     <p class="mt-2 text-sm font-semibold revelti-blue">AMedia</p>
                                 </a></div>
                         </details>
                         <details open>
                             <summary
                                 class="flex justify-between items-center cursor-pointer font-bold text-xl revelti-blue">
-                                Media Timeline <svg class="w-5 h-5 transform transition-transform" fill="none"
+                                Uploaded Media <svg class="w-5 h-5 transform transition-transform" fill="none"
                                     stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                         d="M19 9l-7 7-7-7"></path>
@@ -486,8 +501,8 @@
 
                                 <div class="flex-shrink-0 w-2/3 sm:w-1/2"><a href="javascript:openGalleryOverlay()">
                                         <div class="relative rounded-lg overflow-hidden shadow-md"><img
-                                                src="albums/event/gallery2.jpg"
-                                                alt="Album cover" class="w-full h-40 object-cover">
+                                                src="albums/event/gallery2.jpg" alt="Album cover"
+                                                class="w-full h-40 object-cover">
                                             <div class="absolute top-2 right-2 flex space-x-1"><button
                                                     class="p-1.5 bg-green-600 rounded-full text-white hover:text-revelti-orange"><svg
                                                         class="w-5 h-5" fill="none" stroke="currentColor"
@@ -892,13 +907,14 @@
                                     <summary
                                         class="flex justify-between items-center cursor-pointer font-semibold text-lg revelti-blue py-2">
                                         Are there parking facilities at the venue? <svg
-                                            class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
+                                            class="w-5 h-5 transform transition-transform" fill="none"
+                                            stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                                 d="M19 9l-7 7-7-7"></path>
                                         </svg></summary>
                                     <div class="pb-2 pt-1 pl-2">
-                                        <p class="text-gray-700">Yes, Fira Gran Via has ample underground parking available.
+                                        <p class="text-gray-700">Yes, Fira Gran Via has ample underground parking
+                                            available.
                                             The daily rate is €20. We recommend using public transport as it is very
                                             convenient.</p>
                                     </div>
@@ -907,13 +923,14 @@
                                     <summary
                                         class="flex justify-between items-center cursor-pointer font-semibold text-lg revelti-blue py-2">
                                         Can I bring my own food and drinks? <svg
-                                            class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
+                                            class="w-5 h-5 transform transition-transform" fill="none"
+                                            stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                                 d="M19 9l-7 7-7-7"></path>
                                         </svg></summary>
                                     <div class="pb-2 pt-1 pl-2">
-                                        <p class="text-gray-700">Outside food and drinks are not permitted inside the venue.
+                                        <p class="text-gray-700">Outside food and drinks are not permitted inside the
+                                            venue.
                                             There will be a variety of food trucks and stalls available on-site.</p>
                                     </div>
                                 </details>
@@ -949,25 +966,40 @@
                         <div class="mb-6">
                             <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Are you going?</p>
                             <div class="flex flex-wrap gap-3 items-center">
-                                <button id="status-going-btn"
-                                    onclick="handleGoingClick()"
+                                <button id="status-going-btn" onclick="handleGoingClick()"
                                     class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold border-2 border-gray-200 bg-white text-gray-600 transition-all duration-200">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 13l4 4L19 7"></path>
+                                    </svg>
                                     Going
                                 </button>
-                                <button id="status-curious-btn"
-                                    onclick="setUserStatus('curious')"
+                                <button id="status-curious-btn" onclick="setUserStatus('curious')"
                                     class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold border-2 border-gray-200 bg-white text-gray-600 transition-all duration-200">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                        </path>
+                                    </svg>
                                     Curious
                                 </button>
                                 <!-- Search bar -->
                                 <div class="flex-1 min-w-[140px] relative">
-                                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                                    <input id="people-search" type="text" placeholder="Search people..." oninput="searchPeople(this.value)"
+                                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                    </svg>
+                                    <input id="people-search" type="text" placeholder="Search people..."
+                                        oninput="searchPeople(this.value)"
                                         class="w-full pl-9 pr-8 py-2 text-sm border-2 border-gray-200 rounded-full bg-white text-gray-700 placeholder-gray-400 transition-all duration-200">
-                                    <button id="people-search-clear" onclick="clearPeopleSearch()" class="absolute right-3 top-1/2 -translate-y-1/2 hidden text-gray-400 hover:text-gray-600 transition-colors" aria-label="Clear search">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    <button id="people-search-clear" onclick="clearPeopleSearch()"
+                                        class="absolute right-3 top-1/2 -translate-y-1/2 hidden text-gray-400 hover:text-gray-600 transition-colors"
+                                        aria-label="Clear search">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M6 18L18 6M6 6l12 12"></path>
+                                        </svg>
                                     </button>
                                 </div>
                             </div>
@@ -976,11 +1008,16 @@
                         <!-- Section 2: Social Proof Summary -->
                         <div class="mb-6 flex items-center gap-4 p-3 bg-gray-50 rounded-lg border border-gray-100">
                             <div class="flex -space-x-2 flex-shrink-0">
-                                <img src="https://i.pravatar.cc/40?img=1" class="w-8 h-8 rounded-full border-2 border-white object-cover" alt="">
-                                <img src="https://i.pravatar.cc/40?img=2" class="w-8 h-8 rounded-full border-2 border-white object-cover" alt="">
-                                <img src="https://i.pravatar.cc/40?img=3" class="w-8 h-8 rounded-full border-2 border-white object-cover" alt="">
-                                <img src="https://i.pravatar.cc/40?img=4" class="w-8 h-8 rounded-full border-2 border-white object-cover" alt="">
-                                <img src="https://i.pravatar.cc/40?img=5" class="w-8 h-8 rounded-full border-2 border-white object-cover" alt="">
+                                <img src="https://i.pravatar.cc/40?img=1"
+                                    class="w-8 h-8 rounded-full border-2 border-white object-cover" alt="">
+                                <img src="https://i.pravatar.cc/40?img=2"
+                                    class="w-8 h-8 rounded-full border-2 border-white object-cover" alt="">
+                                <img src="https://i.pravatar.cc/40?img=3"
+                                    class="w-8 h-8 rounded-full border-2 border-white object-cover" alt="">
+                                <img src="https://i.pravatar.cc/40?img=4"
+                                    class="w-8 h-8 rounded-full border-2 border-white object-cover" alt="">
+                                <img src="https://i.pravatar.cc/40?img=5"
+                                    class="w-8 h-8 rounded-full border-2 border-white object-cover" alt="">
                             </div>
                             <div class="text-sm text-gray-600">
                                 <span class="font-bold revelti-blue" id="summary-going-count">14</span> going
@@ -992,11 +1029,9 @@
                         <!-- Section 3: Attendee List with internal filter -->
                         <div>
                             <div class="flex gap-1 p-1 bg-gray-100 rounded-lg mb-4 w-fit">
-                                <button id="list-filter-going"
-                                    onclick="filterPeopleList('going')"
+                                <button id="list-filter-going" onclick="filterPeopleList('going')"
                                     class="px-4 py-1.5 rounded-md text-sm font-semibold bg-white text-revelti-blue shadow-sm transition-all duration-200">Going</button>
-                                <button id="list-filter-curious"
-                                    onclick="filterPeopleList('curious')"
+                                <button id="list-filter-curious" onclick="filterPeopleList('curious')"
                                     class="px-4 py-1.5 rounded-md text-sm font-semibold text-gray-500 transition-all duration-200 hover:text-gray-700">Curious</button>
                             </div>
                             <div id="people-list-going" class="space-y-1"></div>
@@ -1129,7 +1164,7 @@
 
             // Activate the clicked tab button (use the pre-filtered tabButtons list
             // to avoid accidentally matching other elements with the same onclick value)
-            tabButtons.forEach(function(btn) {
+            tabButtons.forEach(function (btn) {
                 if (btn.getAttribute('onclick') === "switchTab('" + targetId + "')") {
                     btn.classList.add('attendee-tab-active');
                 }
@@ -1431,10 +1466,10 @@
 
             var query = peopleSearchQuery.toLowerCase().trim();
 
-            var going = MOCK_ATTENDEES.filter(function(a) {
+            var going = MOCK_ATTENDEES.filter(function (a) {
                 return a.status === 'going' && (!query || a.name.toLowerCase().includes(query));
             });
-            var curious = MOCK_ATTENDEES.filter(function(a) {
+            var curious = MOCK_ATTENDEES.filter(function (a) {
                 return a.status === 'curious' && (!query || a.name.toLowerCase().includes(query));
             });
 
@@ -1446,8 +1481,8 @@
                 : '<p class="text-sm text-gray-400 py-2 px-2">No results found.</p>';
 
             // Counts always reflect total (unfiltered)
-            var totalGoing = MOCK_ATTENDEES.filter(function(a) { return a.status === 'going'; }).length;
-            var totalCurious = MOCK_ATTENDEES.filter(function(a) { return a.status === 'curious'; }).length;
+            var totalGoing = MOCK_ATTENDEES.filter(function (a) { return a.status === 'going'; }).length;
+            var totalCurious = MOCK_ATTENDEES.filter(function (a) { return a.status === 'curious'; }).length;
 
             var summaryGoing = document.getElementById('summary-going-count');
             var summaryCurious = document.getElementById('summary-curious-count');
@@ -1481,7 +1516,7 @@
             var curiousBtn = document.getElementById('status-curious-btn');
 
             // Remove current user entry (id 0) if present
-            var currentIdx = MOCK_ATTENDEES.findIndex(function(a) { return a.id === 0; });
+            var currentIdx = MOCK_ATTENDEES.findIndex(function (a) { return a.id === 0; });
             if (currentIdx !== -1) MOCK_ATTENDEES.splice(currentIdx, 1);
 
             if (userStatus === newStatus) {
@@ -1533,7 +1568,7 @@
         // Sync people-preview-link is handled directly in switchTab above.
 
         // Initialize people lists
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             renderPeopleLists();
         });
 
