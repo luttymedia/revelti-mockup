@@ -944,7 +944,7 @@
                             <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Are you going?</p>
                             <div class="flex flex-wrap gap-3 items-center">
                                 <button id="status-going-btn"
-                                    onclick="setUserStatus('going')"
+                                    onclick="handleGoingClick()"
                                     class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold border-2 border-gray-200 bg-white text-gray-600 transition-all duration-200">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                                     Going
@@ -1301,6 +1301,18 @@
             setFollowSeriesState(true);
             closeFollowModal();
         });
+
+        // Handle Going button click
+        function handleGoingClick() {
+            if (userStatus === 'going') {
+                // Already going - toggle off
+                setUserStatus('going');
+            } else {
+                // Not going - set going status immediately, then open modal to ask about following
+                setUserStatus('going');
+                document.getElementById('follow-edition-modal').classList.remove('hidden');
+            }
+        }
 
         confirmFollowEditionBtn.addEventListener('click', () => {
             setFollowEventState(true);
