@@ -155,7 +155,7 @@
                             <!-- People Preview -->
                             <p class="flex items-center">
                                 <svg class="w-5 h-5 mr-2 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                                <button id="people-preview-link" onclick="switchTab('people')" class="text-gray-600 hover:text-revelti-blue transition-colors text-left" style="background:none;border:none;padding:0;cursor:pointer;font-size:inherit;"><span id="preview-going-count">14</span> going &middot; <span id="preview-curious-count">22</span> curious</button>
+                                <button id="people-preview-link" onclick="handlePeoplePreviewClick()" class="text-gray-600 hover:text-revelti-blue transition-colors text-left" style="background:none;border:none;padding:0;cursor:pointer;font-size:inherit;"><span id="preview-going-count">14</span> going &middot; <span id="preview-curious-count">22</span> curious</button>
                             </p>
                         </div>
 
@@ -315,7 +315,7 @@
             <!-- Right Column -->
             <div class="lg:col-span-2">
                 <!-- Tab Navigation -->
-                <nav class="py-2">
+                <nav id="tab-navigation" class="py-2">
                     <div class="attendee-tab-container-wide overflow-x-auto">
                         <button onclick="switchTab('details')"
                             class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium attendee-tab-active">Details</button>
@@ -1087,6 +1087,18 @@
         // Store references to tab buttons and content panels
         const tabButtons = document.querySelectorAll('.tab-button');
         const tabContents = document.querySelectorAll('.tab-content');
+
+        /**
+         * Handles clicking the people preview link.
+         * Switches to the people tab and scrolls to it.
+         */
+        function handlePeoplePreviewClick() {
+            switchTab('people');
+            const navElement = document.getElementById('tab-navigation');
+            if (navElement) {
+                navElement.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
 
         /**
          * Switches the visible tab in the content area.
