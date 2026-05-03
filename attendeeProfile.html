@@ -26,20 +26,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        #event-search:focus {
+            outline: none;
+            border-color: #213c63;
+            box-shadow: 0 0 0 2px rgba(33,60,99,0.12);
+        }
+        details[open] summary svg {
+            transform: rotate(180deg);
+        }
+    </style>
 </head>
 
 <body class="antialiased text-gray-800 bg-gray-50">
     <div id="navbar-placeholder"></div>
 
     <div class="max-w-lg mx-auto px-4 py-8">
-
-        <!-- Back navigation -->
-        <a href="eventDetail.html" class="inline-flex items-center gap-1.5 text-sm font-semibold text-gray-500 hover:text-revelti-blue transition-colors mb-6">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-            </svg>
-            Back to event
-        </a>
 
         <!-- Profile card -->
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 text-center">
@@ -48,34 +50,153 @@
             <h1 class="text-2xl font-bold revelti-blue">Sofia Martínez</h1>
             <p class="text-sm text-gray-500 mt-1">Madrid, Spain</p>
 
-            <div class="mt-4 flex justify-center gap-2">
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 border border-blue-200 rounded-full text-xs font-bold text-revelti-blue">
-                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                    Going
-                </span>
-            </div>
-
             <p class="mt-5 text-gray-600 text-sm leading-relaxed">
                 Passionate bachata dancer based in Madrid. Attending dance festivals across Europe since 2018.
             </p>
         </div>
 
-        <!-- Placeholder section -->
-        <div class="mt-4 bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-            <h2 class="font-bold text-lg revelti-blue mb-3">Events in common</h2>
-            <div class="flex items-center gap-3 p-2 rounded-lg bg-gray-50">
-                <img src="images/eventPoster.png" alt="Dance Fest Spain 2026"
-                    class="w-12 h-12 rounded-lg object-cover flex-shrink-0"
-                    onerror="this.onerror=null;this.src='https://placehold.co/48x48/f58220/ffffff?text=DFS';">
-                <div>
-                    <p class="text-sm font-semibold text-gray-800">Dance Fest Spain 2026</p>
-                    <p class="text-xs text-gray-500">Oct 08–12, 2026 &bull; Madrid</p>
-                </div>
+        <!-- Search events -->
+        <div class="mt-4">
+            <div class="relative">
+                <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                <input id="event-search" type="text" placeholder="Search events..." oninput="filterEvents(this.value)"
+                    class="w-full pl-9 pr-8 py-2 text-sm border-2 border-gray-200 rounded-full bg-white text-gray-700 placeholder-gray-400 transition-all duration-200">
+                <button id="event-search-clear" onclick="clearEventSearch()" class="absolute right-3 top-1/2 -translate-y-1/2 hidden text-gray-400 hover:text-gray-600 transition-colors" aria-label="Clear search">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
             </div>
         </div>
 
+        <!-- Events in common -->
+        <details open class="mt-4 bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+            <summary class="font-bold text-lg revelti-blue cursor-pointer list-none flex justify-between items-center">
+                Events in common
+                <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </summary>
+            <div class="mt-3">
+                <div class="event-item flex items-center gap-3 p-2 rounded-lg bg-gray-50">
+                    <img src="images/eventPoster.png" alt="Dance Fest Spain 2026"
+                        class="w-12 h-12 rounded-lg object-cover flex-shrink-0"
+                        onerror="this.onerror=null;this.src='https://placehold.co/48x48/f58220/ffffff?text=DFS';">
+                    <div>
+                        <a href="eventDetail.html" class="text-sm font-semibold text-gray-800 hover:text-revelti-blue">Dance Fest Spain 2026</a>
+                        <p class="text-xs text-gray-500">Oct 08–12, 2026 &bull; Madrid</p>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- Going -->
+        <details class="mt-4 bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+            <summary class="font-bold text-lg revelti-blue cursor-pointer list-none flex justify-between items-center">
+                Going
+                <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </summary>
+            <div class="mt-3 space-y-2">
+
+                <div class="event-item flex items-center gap-3 p-2 rounded-lg bg-gray-50">
+                    <img src="images/eventPoster.png" alt="Dance Fest Spain 2026"
+                        class="w-12 h-12 rounded-lg object-cover flex-shrink-0"
+                        onerror="this.onerror=null;this.src='https://placehold.co/48x48/213c63/ffffff?text=DFS';">
+                    <div>
+                        <a href="eventDetail.html" class="text-sm font-semibold text-gray-800 hover:text-revelti-blue">Dance Fest Spain 2026</a>
+                        <p class="text-xs text-gray-500">Oct 8, 2026 &bull; Madrid</p>
+                    </div>
+                </div>
+
+                <div class="event-item flex items-center gap-3 p-2 rounded-lg bg-gray-50">
+                    <img src="images/eventPoster3.png" alt="Bachata Sensual World Congress"
+                        class="w-12 h-12 rounded-lg object-cover flex-shrink-0"
+                        onerror="this.onerror=null;this.src='https://placehold.co/48x48/213c63/ffffff?text=BS';">
+                    <div>
+                        <p class="text-sm font-semibold text-gray-800">Bachata Sensual World Congress</p>
+                        <p class="text-xs text-gray-500">Jan 13, 2027 &bull; Punta Umbría, Huelva</p>
+                    </div>
+                </div>
+
+                <div class="event-item flex items-center gap-3 p-2 rounded-lg bg-gray-50">
+                    <img src="images/eventPoster5.png" alt="Tallinn Bachata Experience"
+                        class="w-12 h-12 rounded-lg object-cover flex-shrink-0"
+                        onerror="this.onerror=null;this.src='https://placehold.co/48x48/213c63/ffffff?text=TBE';">
+                    <div>
+                        <p class="text-sm font-semibold text-gray-800">Tallinn Bachata Experience</p>
+                        <p class="text-xs text-gray-500">Nov 19, 2026 &bull; Tallinn</p>
+                    </div>
+                </div>
+
+            </div>
+        </details>
+
+        <!-- Curious -->
+        <details class="mt-4 bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+            <summary class="font-bold text-lg revelti-blue cursor-pointer list-none flex justify-between items-center">
+                Curious
+                <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </summary>
+            <div class="mt-3 space-y-2">
+
+                <div class="event-item flex items-center gap-3 p-2 rounded-lg bg-gray-50">
+                    <img src="images/eventPoster2.png" alt="Zouk World Barcelona"
+                        class="w-12 h-12 rounded-lg object-cover flex-shrink-0"
+                        onerror="this.onerror=null;this.src='https://placehold.co/48x48/213c63/ffffff?text=ZWB';">
+                    <div>
+                        <p class="text-sm font-semibold text-gray-800">Zouk World Barcelona</p>
+                        <p class="text-xs text-gray-500">Apr 23, 2026 &bull; Santa Susana, Barcelona</p>
+                    </div>
+                </div>
+
+                <div class="event-item flex items-center gap-3 p-2 rounded-lg bg-gray-50">
+                    <img src="images/eventPoster4.png" alt="Sensuality & Essentiality"
+                        class="w-12 h-12 rounded-lg object-cover flex-shrink-0"
+                        onerror="this.onerror=null;this.src='https://placehold.co/48x48/213c63/ffffff?text=SE';">
+                    <div>
+                        <p class="text-sm font-semibold text-gray-800">Sensuality &amp; Essentiality</p>
+                        <p class="text-xs text-gray-500">Nov 1, 2025 &bull; Barcelona</p>
+                    </div>
+                </div>
+
+                <div class="event-item flex items-center gap-3 p-2 rounded-lg bg-gray-50">
+                    <img src="https://placehold.co/48x48/cccccc/ffffff?text=MBF" alt="Mallorca Beach Festival"
+                        class="w-12 h-12 rounded-lg object-cover flex-shrink-0">
+                    <div>
+                        <p class="text-sm font-semibold text-gray-800">Mallorca Beach Festival</p>
+                        <p class="text-xs text-gray-500">Jun 12, 2026 &bull; Mallorca</p>
+                    </div>
+                </div>
+
+            </div>
+        </details>
+
     </div>
 
+    <script>
+        function filterEvents(query) {
+            var clearBtn = document.getElementById('event-search-clear');
+            if (clearBtn) {
+                clearBtn.classList.toggle('hidden', query.length === 0);
+            }
+            
+            query = query.toLowerCase().trim();
+            var eventItems = document.querySelectorAll('.event-item');
+            
+            eventItems.forEach(function(item) {
+                var text = item.textContent.toLowerCase();
+                if (query === '' || text.includes(query)) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        }
+
+        function clearEventSearch() {
+            var input = document.getElementById('event-search');
+            if (input) {
+                input.value = '';
+                filterEvents('');
+            }
+        }
+    </script>
     <script src="main.js" defer></script>
     <div id="footer-placeholder"></div>
 </body>
