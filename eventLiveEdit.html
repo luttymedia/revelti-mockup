@@ -977,6 +977,13 @@
             const publishBtn = document.getElementById('publish-changes-btn');
             const cancelBtn = document.getElementById('cancel-changes-btn');
 
+            if (hasChanges) {
+                publishBtn.classList.remove('hidden');
+                cancelBtn.classList.remove('hidden');
+            } else {
+                publishBtn.classList.add('hidden');
+                cancelBtn.classList.add('hidden');
+            }
             publishBtn.disabled = !hasChanges;
             cancelBtn.disabled = !hasChanges;
         }
