@@ -275,9 +275,7 @@
                         <button onclick="switchTab('reviews')"
                             class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">Reviews</button>
                         <button onclick="switchTab('announcements')"
-                            class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">Updates</button>
-                        <button onclick="switchTab('faq')"
-                            class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">FAQ</button>
+                            class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">Info</button>
                     </div>
                 </nav>
 
@@ -725,6 +723,19 @@
                                     <span
                                         class="text-[10px] font-bold text-gray-500 group-hover:text-revelti-blue uppercase">Workshops</span>
                                 </button>
+
+                                <!-- FAQ Highlight -->
+                                <button onclick="filterUpdates('faq')"
+                                    class="flex flex-col items-center space-y-1 focus:outline-none group">
+                                    <div
+                                        class="w-16 h-16 rounded-full p-0.5 border-2 border-transparent group-hover:border-revelti-orange transition-all duration-300 bg-white shadow-sm overflow-hidden">
+                                        <div
+                                            class="w-full h-full rounded-full bg-gray-200 flex items-center justify-center text-gray-600 text-xs font-bold uppercase group-hover:bg-revelti-blue group-hover:text-white transition-all">
+                                            FAQ</div>
+                                    </div>
+                                    <span
+                                        class="text-[10px] font-bold text-gray-500 group-hover:text-revelti-blue uppercase">FAQ</span>
+                                </button>
                             </div>
                         </div>
 
@@ -801,78 +812,80 @@
                                     hotel room block is almost sold out. Use code GVA2025 for a special rate.</p>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- FAQ Section -->
-                    <div id="faq" class="tab-content hidden">
-                        <h2 class="font-bold text-xl revelti-blue mb-4">Frequently Asked Questions</h2>
-                        <div class="space-y-2">
-                            <details>
-                                <summary
-                                    class="flex justify-between items-center cursor-pointer font-semibold text-lg revelti-blue py-2">
-                                    What is the refund policy? <svg class="w-5 h-5 transform transition-transform"
-                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                            d="M19 9l-7 7-7-7"></path>
-                                    </svg></summary>
-                                <div class="pb-2 pt-1 pl-2">
-                                    <p class="text-gray-700">Tickets are non-refundable but can be transferred to
-                                        another person up to 7 days before the event. Please contact support for
-                                        assistance.</p>
-                                </div>
-                            </details>
-                            <details>
-                                <summary
-                                    class="flex justify-between items-center cursor-pointer font-semibold text-lg revelti-blue py-2">
-                                    Are there parking facilities at the venue? <svg
-                                        class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                            d="M19 9l-7 7-7-7"></path>
-                                    </svg></summary>
-                                <div class="pb-2 pt-1 pl-2">
-                                    <p class="text-gray-700">Yes, Fira Gran Via has ample underground parking available.
-                                        The daily rate is €20. We recommend using public transport as it is very
-                                        convenient.</p>
-                                </div>
-                            </details>
-                            <details>
-                                <summary
-                                    class="flex justify-between items-center cursor-pointer font-semibold text-lg revelti-blue py-2">
-                                    Can I bring my own food and drinks? <svg
-                                        class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                            d="M19 9l-7 7-7-7"></path>
-                                    </svg></summary>
-                                <div class="pb-2 pt-1 pl-2">
-                                    <p class="text-gray-700">Outside food and drinks are not permitted inside the venue.
-                                        There will be a variety of food trucks and stalls available on-site.</p>
-                                </div>
-                            </details>
-                        </div>
-
-                        <!-- Ask a question section -->
-                        <details class="bg-gray-50 border rounded-lg mt-6">
-                            <summary
-                                class="p-4 font-semibold revelti-blue cursor-pointer flex justify-between items-center">
-                                Ask a question<svg class="w-5 h-5 transform transition-transform" fill="none"
-                                    stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                        d="M19 9l-7 7-7-7"></path>
-                                </svg></summary>
-                            <div class="p-4 border-t border-gray-200">
-                                <textarea id="question-text" class="w-full p-2 border border-gray-300 rounded-lg"
-                                    rows="4" placeholder="Type your question here..."></textarea>
-                                <button id="submit-question-btn"
-                                    class="mt-2 w-full sm:w-auto bg-revelti-orange text-white font-bold py-2 px-6 rounded-lg shadow-md hover:bg-orange-600 transition duration-300">Submit
-                                    Question</button>
+                        <!-- FAQ Content (shown only when FAQ bubble is active) -->
+                        <div id="faq-in-updates" class="hidden">
+                            <h2 class="font-bold text-xl revelti-blue mb-4">Frequently Asked Questions</h2>
+                            <div class="space-y-2">
+                                <details>
+                                    <summary
+                                        class="flex justify-between items-center cursor-pointer font-semibold text-lg revelti-blue py-2">
+                                        What is the refund policy? <svg class="w-5 h-5 transform transition-transform"
+                                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                d="M19 9l-7 7-7-7"></path>
+                                        </svg></summary>
+                                    <div class="pb-2 pt-1 pl-2">
+                                        <p class="text-gray-700">Tickets are non-refundable but can be transferred to
+                                            another person up to 7 days before the event. Please contact support for
+                                            assistance.</p>
+                                    </div>
+                                </details>
+                                <details>
+                                    <summary
+                                        class="flex justify-between items-center cursor-pointer font-semibold text-lg revelti-blue py-2">
+                                        Are there parking facilities at the venue? <svg
+                                            class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                d="M19 9l-7 7-7-7"></path>
+                                        </svg></summary>
+                                    <div class="pb-2 pt-1 pl-2">
+                                        <p class="text-gray-700">Yes, Fira Gran Via has ample underground parking available.
+                                            The daily rate is €20. We recommend using public transport as it is very
+                                            convenient.</p>
+                                    </div>
+                                </details>
+                                <details>
+                                    <summary
+                                        class="flex justify-between items-center cursor-pointer font-semibold text-lg revelti-blue py-2">
+                                        Can I bring my own food and drinks? <svg
+                                            class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                d="M19 9l-7 7-7-7"></path>
+                                        </svg></summary>
+                                    <div class="pb-2 pt-1 pl-2">
+                                        <p class="text-gray-700">Outside food and drinks are not permitted inside the venue.
+                                            There will be a variety of food trucks and stalls available on-site.</p>
+                                    </div>
+                                </details>
                             </div>
-                        </details>
 
-                        <!-- Dynamically added questions will go here -->
-                        <div id="submitted-questions-container" class="space-y-4 mt-6"></div>
+                            <!-- Ask a question section -->
+                            <details class="bg-gray-50 border rounded-lg mt-6">
+                                <summary
+                                    class="p-4 font-semibold revelti-blue cursor-pointer flex justify-between items-center">
+                                    Ask a question<svg class="w-5 h-5 transform transition-transform" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                            d="M19 9l-7 7-7-7"></path>
+                                    </svg></summary>
+                                <div class="p-4 border-t border-gray-200">
+                                    <textarea id="question-text" class="w-full p-2 border border-gray-300 rounded-lg"
+                                        rows="4" placeholder="Type your question here..."></textarea>
+                                    <button id="submit-question-btn"
+                                        class="mt-2 w-full sm:w-auto bg-revelti-orange text-white font-bold py-2 px-6 rounded-lg shadow-md hover:bg-orange-600 transition duration-300">Submit
+                                        Question</button>
+                                </div>
+                            </details>
+
+                            <!-- Dynamically added questions will go here -->
+                            <div id="submitted-questions-container" class="space-y-4 mt-6"></div>
+                        </div>
                     </div>
+
+
                 </main>
             </div>
         </div>
@@ -996,38 +1009,64 @@
         function filterUpdates(highlightId) {
             const updates = document.querySelectorAll('.update-item');
             const buttons = document.querySelectorAll('#announcements button');
+            const updatesHeader = document.querySelector('#announcements h2');
+            const updatesList = document.getElementById('updates-list');
+            const faqContent = document.getElementById('faq-in-updates');
+
+            // Toggle FAQ mode vs normal updates mode
+            const isFaq = highlightId === 'faq';
+            if (faqContent) faqContent.classList.toggle('hidden', !isFaq);
+            if (updatesList) updatesList.classList.toggle('hidden', isFaq);
+            if (updatesHeader) updatesHeader.classList.toggle('hidden', isFaq);
 
             // Update active state of highlight bubbles
             buttons.forEach(btn => {
+                const onclick = btn.getAttribute('onclick') || '';
+                // Skip buttons that are not filter bubbles (e.g. Submit Question)
+                if (!onclick.startsWith('filterUpdates')) return;
+
                 const bubble = btn.querySelector('.w-16.h-16');
                 const text = btn.querySelector('span');
+                const innerDiv = bubble ? bubble.querySelector('div') : null;
 
-                if (btn.getAttribute('onclick').includes(`'${highlightId}'`)) {
+                if (onclick.includes(`'${highlightId}'`)) {
                     if (bubble) bubble.classList.add('border-revelti-orange');
                     if (bubble) bubble.classList.remove('border-transparent');
                     if (text) text.classList.add('text-revelti-blue');
                     if (text) text.classList.remove('text-gray-500');
-                } else if (!btn.getAttribute('onclick').includes('switchTab')) {
+                    // For FAQ bubble's inner div, apply active style
+                    if (innerDiv && innerDiv.textContent.trim() === 'FAQ') {
+                        innerDiv.classList.add('bg-revelti-blue', 'text-white');
+                        innerDiv.classList.remove('bg-gray-200', 'text-gray-600');
+                    }
+                } else {
                     if (bubble) bubble.classList.remove('border-revelti-orange');
                     if (bubble) bubble.classList.add('border-transparent');
                     if (text) text.classList.remove('text-revelti-blue');
                     if (text) text.classList.add('text-gray-500');
-                }
-            });
-
-            // Show/hide updates
-            updates.forEach(update => {
-                if (highlightId === 'all') {
-                    update.classList.remove('hidden');
-                } else {
-                    const highlights = update.getAttribute('data-highlights') || '';
-                    if (highlights.split(',').includes(highlightId)) {
-                        update.classList.remove('hidden');
-                    } else {
-                        update.classList.add('hidden');
+                    // Reset FAQ bubble's inner div to default
+                    if (innerDiv && innerDiv.textContent.trim() === 'FAQ') {
+                        innerDiv.classList.remove('bg-revelti-blue', 'text-white');
+                        innerDiv.classList.add('bg-gray-200', 'text-gray-600');
                     }
                 }
             });
+
+            // Show/hide update posts (only relevant when not in FAQ mode)
+            if (!isFaq) {
+                updates.forEach(update => {
+                    if (highlightId === 'all') {
+                        update.classList.remove('hidden');
+                    } else {
+                        const highlights = update.getAttribute('data-highlights') || '';
+                        if (highlights.split(',').includes(highlightId)) {
+                            update.classList.remove('hidden');
+                        } else {
+                            update.classList.add('hidden');
+                        }
+                    }
+                });
+            }
         }
 
         // --- Star Rating Interaction ---
