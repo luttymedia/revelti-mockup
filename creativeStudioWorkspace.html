@@ -263,7 +263,35 @@
                             clickable: true,
                             created: '2025-10-01T10:00:00Z',
                             lastModified: '2025-11-05T14:30:00Z',
+                            galleryDisplayOptions: {
+                                showMediaTypeFilter: true,
+                                showCreatorsFilter: true
+                            },
+                            galleryFilters: [
+                                {
+                                    id: 'gf1',
+                                    label: '',
+                                    style: 'tabs',
+                                    options: [
+                                        { id: 'go1', label: 'Workshops', folderIds: ['dfs_fri_workshops', 'dfs_sat_workshops', 'dfs_sun_workshops'], alwaysShow: false },
+                                        { id: 'go2', label: 'J&J', folderIds: ['dfs_sat_jj', 'dfs_sun_jj'], alwaysShow: true },
+                                        { id: 'go3', label: 'Social', folderIds: ['dfs_fri_social', 'dfs_sat_social', 'dfs_sun_social'], alwaysShow: false },
+                                        { id: 'go4', label: 'Shows', folderIds: ['dfs_fri_shows'], alwaysShow: false }
+                                    ]
+                                },
+                                {
+                                    id: 'gf2',
+                                    label: 'All Days',
+                                    style: 'dropdown',
+                                    options: [
+                                        { id: 'go5', label: 'Friday', folderIds: ['dfs_friday'], alwaysShow: false },
+                                        { id: 'go6', label: 'Saturday', folderIds: ['dfs_saturday'], alwaysShow: false },
+                                        { id: 'go7', label: 'Sunday', folderIds: ['dfs_sunday'], alwaysShow: false }
+                                    ]
+                                }
+                            ],
                             children: [
+
                                 {
                                     id: 'dfs_2026',
                                     name: '2026',
@@ -1174,9 +1202,33 @@
                 awarenessMsg.classList.add('hidden');
             }
 
+            // --- Filter Builder Initialization ---
+            if (typeof switchCGTab === 'function') {
+                switchCGTab('general');
+                cgCurrentNode = targetId ? findNodeById(targetId, mockGalleryData) : null;
+                cgPrefilledFromAuto = false;
+                cgFilterMode = 'auto';
+                setCGFilterMode('auto');
+
+                if (cgCurrentNode && cgCurrentNode.galleryDisplayOptions) {
+                    cgDisplayOptions = { ...cgCurrentNode.galleryDisplayOptions };
+                } else {
+                    cgDisplayOptions = { showMediaTypeFilter: true, showCreatorsFilter: true };
+                }
+                syncDisplayOptionsToUI();
+
+                if (cgCurrentNode && cgCurrentNode.galleryFilters && cgCurrentNode.galleryFilters.length > 0) {
+                    cgDimensions = JSON.parse(JSON.stringify(cgCurrentNode.galleryFilters));
+                    cgPrefilledFromAuto = true;
+                    setCGFilterMode('custom');
+                    renderCGDimensions();
+                }
+            }
+            // ------------------------------------
+
             const titleInput = document.getElementById('cg-gallery-title');
             if (titleInput) {
-                if (targetId === 'dfs_main') {
+                if (targetId === 'dfs_main_coverage') {
                     titleInput.value = 'Main Festival Coverage';
                 } else {
                     titleInput.value = '';
@@ -1624,25 +1676,465 @@
         resetAdvancedFilters();
         initializeFromUrl();
 
+        // ============================================================
+        // GALLERY SETTINGS MODAL — TABS, FILTER MODE, FILTER BUILDER
+        // ============================================================
+
+        let cgCurrentNode = null;      // gallery node being edited
+        let cgFilterMode = 'auto';     // 'auto' | 'custom'
+        let cgDimensions = [];         // live working copy of galleryFilters
+        let cgDisplayOptions = { showMediaTypeFilter: true, showCreatorsFilter: true };
+        let cgPrefilledFromAuto = false;
+        let cgActivePicker = null;     // { dimIdx, optIdx } — which option's picker is open
+
+        // --- Tab switching ---
+        function switchCGTab(tab) {
+            ['general', 'filters'].forEach(t => {
+                const panel = document.getElementById(`cg-panel-${t}`);
+                const btn = document.getElementById(`cg-tab-${t}`);
+                if (t === tab) {
+                    panel.classList.remove('hidden');
+                    btn.classList.add('border-revelti-blue', 'text-revelti-blue');
+                    btn.classList.remove('border-transparent', 'text-gray-500');
+                } else {
+                    panel.classList.add('hidden');
+                    btn.classList.remove('border-revelti-blue', 'text-revelti-blue');
+                    btn.classList.add('border-transparent', 'text-gray-500');
+                }
+            });
+        }
+
+        // --- Display option toggle ---
+        function updateCGDisplayOptionToggle(checkboxId, toggleId) {
+            const cb = document.getElementById(checkboxId);
+            const tog = document.getElementById(toggleId);
+            const dot = tog.querySelector('div');
+            if (cb.checked) {
+                tog.classList.add('bg-revelti-blue');
+                tog.classList.remove('bg-gray-300');
+                dot.classList.add('translate-x-5');
+                dot.classList.remove('translate-x-0');
+            } else {
+                tog.classList.remove('bg-revelti-blue');
+                tog.classList.add('bg-gray-300');
+                dot.classList.remove('translate-x-5');
+                dot.classList.add('translate-x-0');
+            }
+        }
+
+        // --- Sync display options to UI ---
+        function syncDisplayOptionsToUI() {
+            const mtCb = document.getElementById('cg-show-media-type');
+            const crCb = document.getElementById('cg-show-creators');
+            if (mtCb) { mtCb.checked = cgDisplayOptions.showMediaTypeFilter; updateCGDisplayOptionToggle('cg-show-media-type', 'cg-toggle-media-type'); }
+            if (crCb) { crCb.checked = cgDisplayOptions.showCreatorsFilter; updateCGDisplayOptionToggle('cg-show-creators', 'cg-toggle-creators'); }
+        }
+
+        // --- Filter mode toggle ---
+        function setCGFilterMode(mode) {
+            cgFilterMode = mode;
+            const autoLabel = document.getElementById('cg-mode-auto-label');
+            const customLabel = document.getElementById('cg-mode-custom-label');
+            const autoInfo = document.getElementById('cg-auto-info');
+            const builder = document.getElementById('cg-filter-builder');
+
+            if (mode === 'auto') {
+                autoLabel.classList.add('border-revelti-blue', 'bg-blue-50');
+                autoLabel.classList.remove('border-gray-200', 'bg-white');
+                customLabel.classList.remove('border-revelti-blue', 'bg-blue-50');
+                customLabel.classList.add('border-gray-200', 'bg-white');
+                autoInfo.classList.remove('hidden');
+                builder.classList.add('hidden');
+            } else {
+                customLabel.classList.add('border-revelti-blue', 'bg-blue-50');
+                customLabel.classList.remove('border-gray-200', 'bg-white');
+                autoLabel.classList.remove('border-revelti-blue', 'bg-blue-50');
+                autoLabel.classList.add('border-gray-200', 'bg-white');
+                autoInfo.classList.add('hidden');
+                builder.classList.remove('hidden');
+                // Pre-fill from node data if first switch or node has filters
+                if (!cgPrefilledFromAuto) {
+                    cgPrefilledFromAuto = true;
+                    if (cgCurrentNode && cgCurrentNode.galleryFilters && cgCurrentNode.galleryFilters.length > 0) {
+                        cgDimensions = JSON.parse(JSON.stringify(cgCurrentNode.galleryFilters));
+                    } else {
+                        cgDimensions = buildAutoFiltersFromHierarchy(cgCurrentNode);
+                    }
+                    renderCGDimensions();
+                }
+            }
+            document.querySelector(`input[name="cg-filter-mode"][value="${mode}"]`).checked = true;
+        }
+
+        // --- Auto-derive filters from folder hierarchy ---
+        function buildAutoFiltersFromHierarchy(node) {
+            if (!node || !node.children || node.children.length === 0) return [];
+            const dims = [];
+            // Level 1: direct children of gallery root
+            const l1 = node.children;
+            dims.push({
+                id: 'gf_auto_1', label: '', style: 'pills',
+                options: l1.map((c, i) => ({ id: `go_a1_${i}`, label: c.name, folderIds: [c.id], alwaysShow: false }))
+            });
+            // Level 2: children of first level-1 child (if any)
+            if (l1[0] && l1[0].children && l1[0].children.length > 0) {
+                const l2ids = new Set();
+                const l2opts = [];
+                l1.forEach(l1n => {
+                    (l1n.children || []).forEach((c, i) => {
+                        if (!l2ids.has(c.name)) { l2ids.add(c.name); l2opts.push({ id: `go_a2_${l2opts.length}`, label: c.name, folderIds: [c.id], alwaysShow: false }); }
+                    });
+                });
+                if (l2opts.length) dims.push({ id: 'gf_auto_2', label: '', style: 'dropdown', options: l2opts });
+            }
+            return dims;
+        }
+
+        // --- Collect all descendant folders of gallery root for picker ---
+        function collectDescendants(node) {
+            const result = [];
+            function walk(n, depth) {
+                if (n !== node) result.push({ id: n.id, name: n.name, depth });
+                (n.children || []).forEach(c => walk(c, depth + 1));
+            }
+            walk(node, 0);
+            return result;
+        }
+
+        // --- Render all dimensions ---
+        function renderCGDimensions() {
+            const list = document.getElementById('cg-dimensions-list');
+            list.innerHTML = '';
+            cgDimensions.forEach((dim, di) => renderCGDimension(dim, di));
+        }
+
+        function renderCGDimension(dim, di) {
+            const list = document.getElementById('cg-dimensions-list');
+            const styleOpts = ['pills', 'dropdown', 'tabs'].map(s =>
+                `<option value="${s}" ${dim.style === s ? 'selected' : ''}>${s.charAt(0).toUpperCase() + s.slice(1)}</option>`
+            ).join('');
+
+            const card = document.createElement('div');
+            card.className = 'border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm';
+            card.id = `cg-dim-${di}`;
+
+            card.innerHTML = `
+                <!-- Dimension header -->
+                <div class="flex items-center gap-3 px-4 py-3 bg-gray-50 border-b border-gray-200">
+                    <div class="flex flex-col gap-0.5 cursor-move text-gray-300">
+                        <div class="w-4 h-0.5 bg-gray-300 rounded"></div>
+                        <div class="w-4 h-0.5 bg-gray-300 rounded"></div>
+                        <div class="w-4 h-0.5 bg-gray-300 rounded"></div>
+                    </div>
+                    <div class="flex items-center gap-2 flex-1 flex-wrap">
+                        <input type="text" value="${dim.label}" placeholder="Label (optional)"
+                            oninput="cgDimensions[${di}].label = this.value; cgUpdateStyleBadge(${di}, cgDimensions[${di}].style)"
+                            class="border border-gray-300 rounded-lg px-2 py-1 text-xs font-semibold text-gray-700 bg-white focus:outline-none focus:border-revelti-blue w-36 placeholder-gray-400">
+                        <select onchange="cgDimensions[${di}].style = this.value; cgUpdateStyleBadge(${di}, this.value)"
+                            class="border border-gray-300 rounded-lg px-2 py-1 text-xs text-gray-600 bg-white focus:outline-none focus:border-revelti-blue">
+                            ${styleOpts}
+                        </select>
+                        <div id="cg-style-preview-${di}" class="flex items-center">${cgStylePreviewHTML(dim.style, dim.label)}</div>
+                    </div>
+                    <div class="flex items-center gap-1 shrink-0">
+                        <button onclick="cgMoveDimension(${di}, -1)" title="Move up" class="p-1 text-gray-400 hover:text-gray-700 transition" ${di === 0 ? 'disabled' : ''}>
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+                        </button>
+                        <button onclick="cgMoveDimension(${di}, 1)" title="Move down" class="p-1 text-gray-400 hover:text-gray-700 transition" ${di === cgDimensions.length - 1 ? 'disabled' : ''}>
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <button onclick="cgConfirmRemoveDimension(${di})" title="Remove dimension" class="p-1 text-gray-400 hover:text-red-500 transition">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                        </button>
+                    </div>
+                </div>
+                <!-- Remove confirm (hidden) -->
+                <div id="cg-dim-confirm-${di}" class="hidden bg-red-50 border-b border-red-200 px-4 py-2 flex items-center justify-between text-xs">
+                    <span class="text-red-700 font-semibold">Remove this filter dimension and all its options?</span>
+                    <div class="flex gap-2">
+                        <button onclick="cgRemoveDimension(${di})" class="px-2 py-1 bg-red-600 text-white rounded font-bold hover:bg-red-700 transition">Remove</button>
+                        <button onclick="document.getElementById('cg-dim-confirm-${di}').classList.add('hidden')" class="px-2 py-1 bg-white border border-gray-300 rounded text-gray-600 hover:bg-gray-50 transition">Cancel</button>
+                    </div>
+                </div>
+                <!-- Options -->
+                <div class="p-3 space-y-2" id="cg-opts-${di}">
+                    ${dim.options.map((opt, oi) => cgRenderOptionHTML(di, oi, opt)).join('')}
+                </div>
+                <div class="px-3 pb-3">
+                    <button onclick="cgAddOption(${di})"
+                        class="flex items-center gap-1 text-xs font-semibold text-revelti-blue hover:text-blue-800 px-3 py-1.5 border border-dashed border-blue-200 rounded-lg w-full justify-center hover:border-blue-300 transition">
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+                        Add option
+                    </button>
+                </div>`;
+            list.appendChild(card);
+        }
+
+        function cgStylePreviewHTML(style, label) {
+            const displayLabel = label || 'Category';
+            if (style === 'tabs') {
+                return `<div class="flex gap-4 border-b border-gray-200 pointer-events-none ml-2 mt-0.5">
+                    <div class="text-[11px] font-bold text-revelti-blue border-b-2 border-revelti-blue pb-0.5">Option 1</div>
+                    <div class="text-[11px] font-semibold text-gray-400 pb-0.5">Option 2</div>
+                </div>`;
+            }
+            if (style === 'dropdown') {
+                return `<div class="relative ml-2">
+                    <button type="button" onclick="const menu = this.nextElementSibling; menu.classList.toggle('hidden'); const close = (e) => { if (!this.parentElement.contains(e.target)) { menu.classList.add('hidden'); document.removeEventListener('click', close); } }; setTimeout(() => document.addEventListener('click', close), 0);" class="border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 px-2 py-0.5 rounded text-[11px] font-semibold flex items-center gap-1 shadow-sm transition">
+                        ${displayLabel} <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                    </button>
+                    <div class="hidden absolute top-full left-0 mt-1 w-28 bg-white border border-gray-200 rounded shadow-lg z-50 overflow-hidden">
+                        <div class="px-3 py-1.5 text-[11px] font-bold text-revelti-blue bg-blue-50 border-b border-gray-100 hover:bg-blue-100 cursor-pointer">Option 1</div>
+                        <div class="px-3 py-1.5 text-[11px] font-semibold text-gray-600 hover:bg-gray-50 cursor-pointer">Option 2</div>
+                    </div>
+                </div>`;
+            }
+            return `<div class="flex gap-1.5 pointer-events-none ml-2">
+                <div class="text-[11px] font-bold text-revelti-blue bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200 leading-none">Option 1</div>
+                <div class="text-[11px] font-semibold text-gray-400 bg-gray-50 px-2 py-0.5 rounded-full border border-transparent leading-none">Option 2</div>
+            </div>`;
+        }
+
+        function cgUpdateStyleBadge(di, style) {
+            const preview = document.getElementById(`cg-style-preview-${di}`);
+            if (preview) { preview.innerHTML = cgStylePreviewHTML(style, cgDimensions[di].label); }
+        }
+
+        function cgRenderOptionHTML(di, oi, opt) {
+            const badges = (opt.folderIds || []).map(fid => {
+                const node = findNodeById(fid, cgCurrentNode);
+                const name = node ? node.name : fid;
+                const pathNames = findPathById(fid, cgCurrentNode);
+                const titleStr = pathNames ? pathNames.map(id => findNodeById(id, cgCurrentNode)?.name || id).join(' > ') : name;
+                return `<span title="${titleStr.replace(/"/g, '&quot;')}" class="inline-flex items-center gap-1 bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold px-2 py-0.5 rounded-full cursor-help">
+                    <svg class="w-2.5 h-2.5 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"/></svg>
+                    ${name}
+                    <button onclick="cgRemoveFolderBadge(${di},${oi},'${fid}')" class="ml-0.5 text-blue-400 hover:text-red-500 transition leading-none">&times;</button>
+                </span>`;
+            }).join('');
+
+            const alwaysOnClass = opt.alwaysShow ? 'bg-revelti-orange' : 'bg-gray-300';
+            const alwaysDotClass = opt.alwaysShow ? 'translate-x-4' : 'translate-x-0';
+
+            return `<div class="border border-gray-100 rounded-lg p-2.5 bg-gray-50 space-y-2" id="cg-opt-${di}-${oi}">
+                <div class="flex items-center gap-2 flex-wrap">
+                    <input type="text" value="${opt.label}" placeholder="Option label"
+                        oninput="cgDimensions[${di}].options[${oi}].label = this.value"
+                        class="border border-gray-300 rounded px-2 py-1 text-xs font-semibold text-gray-700 bg-white focus:outline-none focus:border-revelti-blue w-28 placeholder-gray-400">
+                    <div class="flex flex-wrap gap-1 items-center flex-1">
+                        ${badges}
+                        <button onclick="cgTogglePicker(${di},${oi})" class="inline-flex items-center gap-1 text-xs text-revelti-blue font-semibold hover:underline">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+                            folder
+                        </button>
+                    </div>
+                    <div class="flex items-center gap-2 shrink-0 ml-auto">
+                        <button onclick="cgToggleAlwaysShow(${di},${oi})" title="Always show regardless of other filters"
+                            class="flex items-center gap-1.5 text-xs font-semibold ${opt.alwaysShow ? 'text-revelti-orange' : 'text-gray-400'} hover:text-revelti-orange transition">
+                            <div class="w-7 h-4 rounded-full ${alwaysOnClass} transition-colors flex items-center px-0.5">
+                                <div class="w-3 h-3 bg-white rounded-full shadow transition-transform ${alwaysDotClass}"></div>
+                            </div>
+                            <span>Always show</span>
+                        </button>
+                        <button onclick="cgRemoveOption(${di},${oi})" class="text-gray-300 hover:text-red-500 transition text-base leading-none">&times;</button>
+                    </div>
+                </div>
+                <!-- Folder picker (hidden by default) -->
+                <div id="cg-picker-${di}-${oi}" class="hidden border border-blue-200 rounded-lg bg-white overflow-hidden">
+                    <div class="px-3 py-2 bg-blue-50 border-b border-blue-200 flex items-center justify-between">
+                        <span class="text-xs font-bold text-blue-700">Select folders</span>
+                        <button onclick="cgClosePicker(${di},${oi})" class="text-xs font-semibold text-blue-600 hover:text-blue-800">Done</button>
+                    </div>
+                    <div class="max-h-40 overflow-y-auto py-1" id="cg-picker-tree-${di}-${oi}">
+                        ${cgBuildPickerTree(di, oi, opt.folderIds || [])}
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        // --- Build picker tree HTML ---
+        function cgBuildPickerTree(di, oi, selectedIds) {
+            if (!cgCurrentNode) return '<p class="text-xs text-gray-400 px-3 py-2">No folders available.</p>';
+            const folders = collectDescendants(cgCurrentNode);
+            if (!folders.length) return '<p class="text-xs text-gray-400 px-3 py-2">No subfolders found.</p>';
+            return folders.map(f => {
+                const checked = selectedIds.includes(f.id) ? 'checked' : '';
+                const indent = f.depth * 12;
+                return `<label class="flex items-center gap-2 px-3 py-1.5 hover:bg-gray-50 cursor-pointer" style="padding-left:${12 + indent}px">
+                    <input type="checkbox" ${checked} onchange="cgPickerToggleFolder(${di},${oi},'${f.id}',this.checked)"
+                        class="rounded text-revelti-blue focus:ring-revelti-blue h-3.5 w-3.5 shrink-0">
+                    <svg class="w-3.5 h-3.5 text-revelti-blue shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"/></svg>
+                    <span class="text-xs text-gray-700">${f.name}</span>
+                </label>`;
+            }).join('');
+        }
+
+        // --- Picker toggle ---
+        function cgTogglePicker(di, oi) {
+            const picker = document.getElementById(`cg-picker-${di}-${oi}`);
+            if (!picker) return;
+            const isHidden = picker.classList.contains('hidden');
+            // Close any open picker
+            if (cgActivePicker) {
+                const prev = document.getElementById(`cg-picker-${cgActivePicker.di}-${cgActivePicker.oi}`);
+                if (prev) prev.classList.add('hidden');
+            }
+            if (isHidden) {
+                picker.classList.remove('hidden');
+                cgActivePicker = { di, oi };
+            } else {
+                picker.classList.add('hidden');
+                cgActivePicker = null;
+            }
+        }
+
+        function cgClosePicker(di, oi) {
+            const picker = document.getElementById(`cg-picker-${di}-${oi}`);
+            if (picker) picker.classList.add('hidden');
+            cgActivePicker = null;
+        }
+
+        // --- Folder picker checkbox change ---
+        function cgPickerToggleFolder(di, oi, folderId, checked) {
+            const opt = cgDimensions[di].options[oi];
+            if (!opt.folderIds) opt.folderIds = [];
+            if (checked && !opt.folderIds.includes(folderId)) {
+                opt.folderIds.push(folderId);
+            } else if (!checked) {
+                opt.folderIds = opt.folderIds.filter(id => id !== folderId);
+            }
+            // Refresh badges without closing picker
+            const container = document.getElementById(`cg-opt-${di}-${oi}`);
+            if (!container) return;
+            const badgeRow = container.querySelector('.flex.flex-wrap.gap-1');
+            if (!badgeRow) return;
+            const newBadgesHtml = (opt.folderIds || []).map(fid => {
+                const n = findNodeById(fid, cgCurrentNode);
+                const name = n ? n.name : fid;
+                return `<span class="inline-flex items-center gap-1 bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold px-2 py-0.5 rounded-full">
+                    <svg class="w-2.5 h-2.5 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"/></svg>
+                    ${name}
+                    <button onclick="cgRemoveFolderBadge(${di},${oi},'${fid}')" class="ml-0.5 text-blue-400 hover:text-red-500 transition leading-none">&times;</button>
+                </span>`;
+            }).join('');
+            badgeRow.innerHTML = newBadgesHtml + `<button onclick="cgTogglePicker(${di},${oi})" class="inline-flex items-center gap-1 text-xs text-revelti-blue font-semibold hover:underline">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+                folder</button>`;
+        }
+
+        function cgRemoveFolderBadge(di, oi, folderId) {
+            cgDimensions[di].options[oi].folderIds = cgDimensions[di].options[oi].folderIds.filter(id => id !== folderId);
+            renderCGDimensions();
+        }
+
+        // --- Always show toggle ---
+        function cgToggleAlwaysShow(di, oi) {
+            cgDimensions[di].options[oi].alwaysShow = !cgDimensions[di].options[oi].alwaysShow;
+            renderCGDimensions();
+        }
+
+        // --- Add / Remove dimensions ---
+        function cgAddDimension() {
+            cgDimensions.push({ id: `gf_new_${Date.now()}`, label: '', style: 'pills', options: [] });
+            renderCGDimensions();
+        }
+
+        function cgConfirmRemoveDimension(di) {
+            const confirm = document.getElementById(`cg-dim-confirm-${di}`);
+            if (confirm) confirm.classList.remove('hidden');
+        }
+
+        function cgRemoveDimension(di) {
+            cgDimensions.splice(di, 1);
+            renderCGDimensions();
+        }
+
+        function cgMoveDimension(di, dir) {
+            const target = di + dir;
+            if (target < 0 || target >= cgDimensions.length) return;
+            [cgDimensions[di], cgDimensions[target]] = [cgDimensions[target], cgDimensions[di]];
+            renderCGDimensions();
+        }
+
+        // --- Add / Remove options ---
+        function cgAddOption(di) {
+            cgDimensions[di].options.push({ id: `go_new_${Date.now()}`, label: '', folderIds: [], alwaysShow: false });
+            renderCGDimensions();
+        }
+
+        function cgRemoveOption(di, oi) {
+            cgDimensions[di].options.splice(oi, 1);
+            renderCGDimensions();
+        }
+
+        // --- findNodeById (helper for picker labels) ---
+        function findNodeById(id, root) {
+            if (!root) return null;
+            if (root.id === id) return root;
+            for (const c of (root.children || [])) {
+                const found = findNodeById(id, c);
+                if (found) return found;
+            }
+            return null;
+        }
+
+
+
+        // --- findPathById (helper for navigation) ---
+        function findPathById(targetId, node = mockGalleryData, currentPath = []) {
+            if (node.id === targetId) return currentPath;
+            for (const child of (node.children || [])) {
+                const foundPath = findPathById(targetId, child, [...currentPath, child.id]);
+                if (foundPath) return foundPath;
+            }
+            return null;
+        }
+
+        // --- Auto-open from URL param ---
+        (function () {
+            const params = new URLSearchParams(window.location.search);
+            const openGS = params.get('open_gallery_settings');
+            if (openGS) {
+                const node = findNodeById(openGS, mockGalleryData);
+                if (node) {
+                    const path = findPathById(openGS);
+                    if (path) {
+                        navigateToPath(path);
+                    }
+                    window.addEventListener('DOMContentLoaded', () => { }, { once: true });
+                    setTimeout(() => {
+                        openCreateGalleryModal(node.name, node.id, 'Edit Gallery Settings');
+                    }, 300);
+                }
+            }
+        })();
     </script>
 
     <!-- Modals Simulation Sandbox -->
     <div id="modal-backdrop"
         class="fixed inset-0 bg-gray-900 bg-opacity-50 z-[100] hidden flex items-center justify-center">
-        <!-- Create Gallery Modal -->
+        <!-- Create / Edit Gallery Settings Modal -->
         <div id="modal-create-gallery"
-            class="bg-white rounded-xl shadow-xl w-full max-w-lg overflow-hidden hidden transform transition-all max-h-[90vh] flex flex-col">
+            class="bg-white rounded-xl shadow-xl w-full max-w-5xl overflow-hidden hidden transform transition-all max-h-[90vh] flex flex-col">
             <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center shrink-0">
                 <h3 class="font-bold text-gray-800 text-lg" id="modal-create-gallery-title">Create Gallery</h3>
                 <button onclick="closeModals()" class="text-gray-400 hover:text-gray-600">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                            d="M6 18L18 6M6 6l12 12">
-                        </path>
+                            d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                 </button>
             </div>
-            <div class="p-6 space-y-6 overflow-y-auto">
+            <!-- Tab bar -->
+            <div class="border-b border-gray-100 px-6 flex gap-6 shrink-0" id="cg-tab-bar">
+                <button onclick="switchCGTab('general')" id="cg-tab-general"
+                    class="py-3 text-sm font-semibold border-b-2 border-revelti-blue text-revelti-blue -mb-px transition">General</button>
+                <button onclick="switchCGTab('filters')" id="cg-tab-filters"
+                    class="py-3 text-sm font-semibold border-b-2 border-transparent text-gray-500 hover:text-gray-700 -mb-px transition">Filters</button>
+            </div>
+
+            <!-- General Tab -->
+            <div id="cg-panel-general" class="p-6 space-y-6 overflow-y-auto flex-1">
                 <p class="text-sm text-gray-600">Turn this folder into a gallery. The folder structure will
                     define how content is organized and can influence gallery navigation.</p>
                 <div>
@@ -1691,12 +2183,126 @@
                     </div>
                 </div>
             </div>
-            <div class="px-6 py-4 bg-gray-50 flex justify-end space-x-3 shrink-0">
+
+            <!-- Filters Tab -->
+            <div id="cg-panel-filters" class="hidden overflow-y-auto flex-1 flex flex-col">
+                <!-- Mode Toggle -->
+                <div class="p-6 border-b border-gray-100">
+                    <h4 class="font-bold text-gray-800 text-sm mb-3">Filter Mode</h4>
+                    <div class="grid grid-cols-2 gap-3 max-w-lg">
+                        <label id="cg-mode-auto-label"
+                            class="relative flex items-start p-3 border-2 border-revelti-blue bg-blue-50 rounded-xl cursor-pointer transition"
+                            onclick="setCGFilterMode('auto')">
+                            <input type="radio" name="cg-filter-mode" value="auto" class="sr-only" checked>
+                            <div class="flex items-start gap-3">
+                                <div
+                                    class="w-8 h-8 rounded-lg bg-white border border-blue-200 flex items-center justify-center shrink-0">
+                                    <svg class="w-4 h-4 text-revelti-blue" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                            d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <span class="block text-sm font-bold text-revelti-blue">Auto</span>
+                                    <span class="block text-xs text-blue-600 mt-0.5">From folder structure</span>
+                                </div>
+                            </div>
+                        </label>
+                        <label id="cg-mode-custom-label"
+                            class="relative flex items-start p-3 border-2 border-gray-200 bg-white rounded-xl cursor-pointer hover:border-gray-300 transition"
+                            onclick="setCGFilterMode('custom')">
+                            <input type="radio" name="cg-filter-mode" value="custom" class="sr-only">
+                            <div class="flex items-start gap-3">
+                                <div
+                                    class="w-8 h-8 rounded-lg bg-gray-50 border border-gray-200 flex items-center justify-center shrink-0">
+                                    <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                            d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <span class="block text-sm font-bold text-gray-600">Custom</span>
+                                    <span class="block text-xs text-gray-500 mt-0.5">Map manually to folders</span>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                    <!-- Auto info note -->
+                    <div id="cg-auto-info"
+                        class="mt-3 p-3 bg-gray-50 border border-gray-200 rounded-lg text-xs text-gray-500 flex items-start gap-2">
+                        <svg class="w-4 h-4 text-revelti-blue shrink-0 mt-0.5" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Filters are automatically derived from your folder hierarchy: <strong
+                                class="text-gray-700">Year → Day → Category</strong>. Switch to Custom to map each
+                            filter option to specific folders.</span>
+                    </div>
+                </div>
+
+                <!-- Display Options (always visible) -->
+                <div class="px-6 py-4 border-b border-gray-100">
+                    <h4 class="font-bold text-gray-800 text-sm mb-3">Display Options</h4>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <label class="flex items-center gap-3 cursor-pointer group">
+                            <div class="relative">
+                                <input type="checkbox" id="cg-show-media-type" class="sr-only" checked
+                                    onchange="updateCGDisplayOptionToggle('cg-show-media-type', 'cg-toggle-media-type')">
+                                <div id="cg-toggle-media-type"
+                                    class="w-10 h-5 rounded-full bg-revelti-blue transition-colors flex items-center px-0.5">
+                                    <div
+                                        class="w-4 h-4 bg-white rounded-full shadow transition-transform translate-x-5">
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="block text-sm font-semibold text-gray-700">Show Photos / Videos
+                                    filter</span>
+                                <span class="block text-xs text-gray-400">Attendees can filter by media type</span>
+                            </div>
+                        </label>
+                        <label class="flex items-center gap-3 cursor-pointer group">
+                            <div class="relative">
+                                <input type="checkbox" id="cg-show-creators" class="sr-only" checked
+                                    onchange="updateCGDisplayOptionToggle('cg-show-creators', 'cg-toggle-creators')">
+                                <div id="cg-toggle-creators"
+                                    class="w-10 h-5 rounded-full bg-revelti-blue transition-colors flex items-center px-0.5">
+                                    <div
+                                        class="w-4 h-4 bg-white rounded-full shadow transition-transform translate-x-5">
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="block text-sm font-semibold text-gray-700">Show Creators filter</span>
+                                <span class="block text-xs text-gray-400">Attendees can filter by creative</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Filter Builder (Custom mode only) -->
+                <div id="cg-filter-builder" class="hidden p-6 space-y-4">
+                    <div id="cg-dimensions-list" class="space-y-3"></div>
+                    <button onclick="cgAddDimension()"
+                        class="flex items-center gap-2 text-sm font-semibold text-revelti-blue hover:text-blue-800 px-3 py-2 border-2 border-dashed border-blue-200 rounded-xl w-full justify-center hover:border-blue-300 transition">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                        Add filter dimension
+                    </button>
+                </div>
+            </div>
+
+            <div class="px-6 py-4 bg-gray-50 flex justify-end space-x-3 shrink-0 border-t border-gray-100">
                 <button onclick="closeModals()"
                     class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50 transition">Cancel</button>
-                <button onclick="showToast('Gallery created successfully', 'success'); closeModals()"
-                    class="px-4 py-2 bg-revelti-purple text-white rounded-lg text-sm font-bold hover:bg-purple-800 transition">Create
-                    Gallery</button>
+                <button onclick="showToast('Gallery settings saved', 'success'); closeModals()"
+                    class="px-4 py-2 bg-revelti-purple text-white rounded-lg text-sm font-bold hover:bg-purple-800 transition">Save
+                    Changes</button>
             </div>
         </div>
 
