@@ -41,6 +41,50 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
+        /* Status toggle buttons: force white text+icon when active, even on hover */
+        #status-going-btn.status-active-going,
+        #status-going-btn.status-active-going:hover {
+            background-color: #213c63 !important;
+            color: white !important;
+            border-color: #213c63 !important;
+        }
+        #status-curious-btn.status-active-curious,
+        #status-curious-btn.status-active-curious:hover {
+            background-color: #f58220 !important;
+            color: white !important;
+            border-color: #f58220 !important;
+        }
+
+        /* People preview link: active tab color */
+        #people-preview-link.people-tab-active {
+            color: #f58220 !important;
+        }
+        #people-preview-link {
+            background: none !important;
+            color: #4b5563 !important; /* gray-600 */
+        }
+        #people-preview-link:hover {
+            color: #213c63 !important; /* revelti-blue */
+        }
+
+        /* People tab: ensure orange when active */
+        button[onclick="switchTab('people')"].attendee-tab-active {
+            background-color: #f58220 !important;
+            color: white !important;
+        }
+        #people-preview-link:active,
+        #people-preview-link:focus {
+            outline: none;
+            background: none !important;
+        }
+
+        /* People search bar */
+        #people-search:focus {
+            outline: none;
+            border-color: #213c63;
+            box-shadow: 0 0 0 2px rgba(33,60,99,0.12);
+        }
     </style>
 </head>
 
@@ -107,6 +151,11 @@
                                         d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg>
                                 Madrid, Spain
+                            </p>
+                            <!-- People Preview -->
+                            <p class="flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                                <button id="people-preview-link" onclick="switchTab('people')" class="text-gray-600 hover:text-revelti-blue transition-colors text-left" style="background:none;border:none;padding:0;cursor:pointer;font-size:inherit;"><span id="preview-going-count">14</span> going &middot; <span id="preview-curious-count">22</span> curious</button>
                             </p>
                         </div>
 
@@ -272,10 +321,12 @@
                             class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium attendee-tab-active">Details</button>
                         <button onclick="switchTab('media')"
                             class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">Media</button>
-                        <button onclick="switchTab('reviews')"
-                            class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">Reviews</button>
                         <button onclick="switchTab('announcements')"
                             class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">Info</button>
+                        <button onclick="switchTab('people')"
+                            class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">People</button>
+                        <button onclick="switchTab('reviews')"
+                            class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">Reviews</button>
                     </div>
                 </nav>
 
@@ -885,6 +936,70 @@
                         </div>
                     </div>
 
+                    <!-- ===== PEOPLE TAB ===== -->
+                    <div id="people" class="tab-content hidden">
+
+                        <!-- Section 1: User Status Toggles + Search -->
+                        <div class="mb-6">
+                            <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Are you going?</p>
+                            <div class="flex flex-wrap gap-3 items-center">
+                                <button id="status-going-btn"
+                                    onclick="setUserStatus('going')"
+                                    class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold border-2 border-gray-200 bg-white text-gray-600 transition-all duration-200">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    Going
+                                </button>
+                                <button id="status-curious-btn"
+                                    onclick="setUserStatus('curious')"
+                                    class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold border-2 border-gray-200 bg-white text-gray-600 transition-all duration-200">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    Curious
+                                </button>
+                                <!-- Search bar -->
+                                <div class="flex-1 min-w-[140px] relative">
+                                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                    <input id="people-search" type="text" placeholder="Search people..." oninput="searchPeople(this.value)"
+                                        class="w-full pl-9 pr-8 py-2 text-sm border-2 border-gray-200 rounded-full bg-white text-gray-700 placeholder-gray-400 transition-all duration-200">
+                                    <button id="people-search-clear" onclick="clearPeopleSearch()" class="absolute right-3 top-1/2 -translate-y-1/2 hidden text-gray-400 hover:text-gray-600 transition-colors" aria-label="Clear search">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 2: Social Proof Summary -->
+                        <div class="mb-6 flex items-center gap-4 p-3 bg-gray-50 rounded-lg border border-gray-100">
+                            <div class="flex -space-x-2 flex-shrink-0">
+                                <img src="https://i.pravatar.cc/40?img=1" class="w-8 h-8 rounded-full border-2 border-white object-cover" alt="">
+                                <img src="https://i.pravatar.cc/40?img=2" class="w-8 h-8 rounded-full border-2 border-white object-cover" alt="">
+                                <img src="https://i.pravatar.cc/40?img=3" class="w-8 h-8 rounded-full border-2 border-white object-cover" alt="">
+                                <img src="https://i.pravatar.cc/40?img=4" class="w-8 h-8 rounded-full border-2 border-white object-cover" alt="">
+                                <img src="https://i.pravatar.cc/40?img=5" class="w-8 h-8 rounded-full border-2 border-white object-cover" alt="">
+                            </div>
+                            <div class="text-sm text-gray-600">
+                                <span class="font-bold revelti-blue" id="summary-going-count">14</span> going
+                                <span class="mx-1 text-gray-300">&middot;</span>
+                                <span class="font-bold text-gray-700" id="summary-curious-count">22</span> curious
+                            </div>
+                        </div>
+
+                        <!-- Section 3: Attendee List with internal filter -->
+                        <div>
+                            <div class="flex gap-1 p-1 bg-gray-100 rounded-lg mb-4 w-fit">
+                                <button id="list-filter-going"
+                                    onclick="filterPeopleList('going')"
+                                    class="px-4 py-1.5 rounded-md text-sm font-semibold bg-white text-revelti-blue shadow-sm transition-all duration-200">Going</button>
+                                <button id="list-filter-curious"
+                                    onclick="filterPeopleList('curious')"
+                                    class="px-4 py-1.5 rounded-md text-sm font-semibold text-gray-500 transition-all duration-200 hover:text-gray-700">Curious</button>
+                            </div>
+                            <div id="people-list-going" class="space-y-1"></div>
+                            <div id="people-list-curious" class="space-y-1 hidden"></div>
+                        </div>
+
+                    </div>
+                    <!-- ===== END PEOPLE TAB ===== -->
+
 
                 </main>
             </div>
@@ -994,11 +1109,18 @@
                 targetContent.classList.remove('hidden');
             }
 
-            // Activate the clicked tab button
-            // We find the button that controls the targetId
-            const targetButton = document.querySelector(`[onclick="switchTab('${targetId}')"]`);
-            if (targetButton) {
-                targetButton.classList.add('attendee-tab-active');
+            // Activate the clicked tab button (use the pre-filtered tabButtons list
+            // to avoid accidentally matching other elements with the same onclick value)
+            tabButtons.forEach(function(btn) {
+                if (btn.getAttribute('onclick') === "switchTab('" + targetId + "')") {
+                    btn.classList.add('attendee-tab-active');
+                }
+            });
+
+            // Sync people-preview-link color
+            var previewLink = document.getElementById('people-preview-link');
+            if (previewLink) {
+                previewLink.classList.toggle('people-tab-active', targetId === 'people');
             }
         }
 
@@ -1223,6 +1345,169 @@
                 questionTextarea.value = '';
             }
         });
+
+        // ===== PEOPLE TAB LOGIC =====
+
+        const MOCK_ATTENDEES = [
+            { id: 1, name: 'Sofia Mart\u00ednez', location: 'Madrid, Spain', status: 'going', avatar: 'https://i.pravatar.cc/40?img=10' },
+            { id: 2, name: 'Lucas Ferreira', location: 'Lisbon, Portugal', status: 'going', avatar: 'https://i.pravatar.cc/40?img=11' },
+            { id: 3, name: 'Mia Hoffmann', location: 'Berlin, Germany', status: 'going', avatar: 'https://i.pravatar.cc/40?img=12' },
+            { id: 4, name: 'Carlos Ruiz', location: 'Barcelona, Spain', status: 'going', avatar: 'https://i.pravatar.cc/40?img=13' },
+            { id: 5, name: 'Elena Popescu', location: 'Bucharest, Romania', status: 'going', avatar: 'https://i.pravatar.cc/40?img=14' },
+            { id: 6, name: 'James O\u2019Brien', location: 'Dublin, Ireland', status: 'going', avatar: 'https://i.pravatar.cc/40?img=15' },
+            { id: 7, name: 'Priya Nair', location: 'London, UK', status: 'going', avatar: 'https://i.pravatar.cc/40?img=16' },
+            { id: 8, name: 'Andr\u00e9 Leblanc', location: 'Paris, France', status: 'going', avatar: 'https://i.pravatar.cc/40?img=17' },
+            { id: 9, name: 'Yuki Tanaka', location: 'Tokyo, Japan', status: 'going', avatar: 'https://i.pravatar.cc/40?img=18' },
+            { id: 10, name: 'Isabella Rossi', location: 'Rome, Italy', status: 'going', avatar: 'https://i.pravatar.cc/40?img=19' },
+            { id: 11, name: 'Marco Silva', location: 'Porto, Portugal', status: 'going', avatar: 'https://i.pravatar.cc/40?img=20' },
+            { id: 12, name: 'Fatima El Amine', location: 'Casablanca, Morocco', status: 'going', avatar: 'https://i.pravatar.cc/40?img=21' },
+            { id: 13, name: 'Nicol\u00e1s Vargas', location: 'Buenos Aires, Argentina', status: 'going', avatar: 'https://i.pravatar.cc/40?img=22' },
+            { id: 14, name: 'Anya Kowalski', location: 'Warsaw, Poland', status: 'going', avatar: 'https://i.pravatar.cc/40?img=23' },
+            { id: 15, name: 'Daniel Kim', location: 'Seoul, South Korea', status: 'curious', avatar: 'https://i.pravatar.cc/40?img=24' },
+            { id: 16, name: 'Camille Dubois', location: 'Lyon, France', status: 'curious', avatar: 'https://i.pravatar.cc/40?img=25' },
+            { id: 17, name: 'Ravi Shankar', location: 'Mumbai, India', status: 'curious', avatar: 'https://i.pravatar.cc/40?img=26' },
+            { id: 18, name: 'Lena M\u00fcller', location: 'Vienna, Austria', status: 'curious', avatar: 'https://i.pravatar.cc/40?img=27' },
+            { id: 19, name: 'Jo\u00e3o Carvalho', location: 'S\u00e3o Paulo, Brazil', status: 'curious', avatar: 'https://i.pravatar.cc/40?img=28' },
+            { id: 20, name: 'Hana Novak', location: 'Prague, Czech Republic', status: 'curious', avatar: 'https://i.pravatar.cc/40?img=29' },
+            { id: 21, name: 'Tom\u00e1s Garc\u00eda', location: 'Seville, Spain', status: 'curious', avatar: 'https://i.pravatar.cc/40?img=30' },
+            { id: 22, name: 'Chiara Bianchi', location: 'Milan, Italy', status: 'curious', avatar: 'https://i.pravatar.cc/40?img=31' },
+            { id: 23, name: 'Erik Lindqvist', location: 'Stockholm, Sweden', status: 'curious', avatar: 'https://i.pravatar.cc/40?img=32' },
+            { id: 24, name: 'Amara Diallo', location: 'Dakar, Senegal', status: 'curious', avatar: 'https://i.pravatar.cc/40?img=33' },
+            { id: 25, name: 'Valentina Cruz', location: 'Mexico City, Mexico', status: 'curious', avatar: 'https://i.pravatar.cc/40?img=34' },
+            { id: 26, name: 'Oliver Svensson', location: 'Gothenburg, Sweden', status: 'curious', avatar: 'https://i.pravatar.cc/40?img=35' },
+            { id: 27, name: 'Sara Al-Hassan', location: 'Dubai, UAE', status: 'curious', avatar: 'https://i.pravatar.cc/40?img=36' },
+            { id: 28, name: 'Pablo Mendez', location: 'Valencia, Spain', status: 'curious', avatar: 'https://i.pravatar.cc/40?img=37' },
+        ];
+
+        let userStatus = null;
+        let currentPeopleFilter = 'going';
+        let peopleSearchQuery = '';
+
+        function buildAttendeeItem(attendee) {
+            return '<a href="attendeeProfile.html" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors group">' +
+                '<img src="' + attendee.avatar + '" alt="' + attendee.name + '" class="w-9 h-9 rounded-full object-cover flex-shrink-0">' +
+                '<div class="min-w-0">' +
+                '<p class="text-sm font-semibold text-gray-800 group-hover:text-revelti-blue transition-colors truncate">' + attendee.name + '</p>' +
+                '<p class="text-xs text-gray-400 truncate">' + attendee.location + '</p>' +
+                '</div>' +
+                '<svg class="w-4 h-4 text-gray-300 group-hover:text-revelti-blue ml-auto flex-shrink-0 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>' +
+                '</a>';
+        }
+
+        function renderPeopleLists() {
+            var goingList = document.getElementById('people-list-going');
+            var curiousList = document.getElementById('people-list-curious');
+            if (!goingList || !curiousList) return;
+
+            var query = peopleSearchQuery.toLowerCase().trim();
+
+            var going = MOCK_ATTENDEES.filter(function(a) {
+                return a.status === 'going' && (!query || a.name.toLowerCase().includes(query));
+            });
+            var curious = MOCK_ATTENDEES.filter(function(a) {
+                return a.status === 'curious' && (!query || a.name.toLowerCase().includes(query));
+            });
+
+            goingList.innerHTML = going.length
+                ? going.map(buildAttendeeItem).join('')
+                : '<p class="text-sm text-gray-400 py-2 px-2">No results found.</p>';
+            curiousList.innerHTML = curious.length
+                ? curious.map(buildAttendeeItem).join('')
+                : '<p class="text-sm text-gray-400 py-2 px-2">No results found.</p>';
+
+            // Counts always reflect total (unfiltered)
+            var totalGoing = MOCK_ATTENDEES.filter(function(a) { return a.status === 'going'; }).length;
+            var totalCurious = MOCK_ATTENDEES.filter(function(a) { return a.status === 'curious'; }).length;
+
+            var summaryGoing = document.getElementById('summary-going-count');
+            var summaryCurious = document.getElementById('summary-curious-count');
+            var previewGoing = document.getElementById('preview-going-count');
+            var previewCurious = document.getElementById('preview-curious-count');
+
+            if (summaryGoing) summaryGoing.textContent = totalGoing;
+            if (summaryCurious) summaryCurious.textContent = totalCurious;
+            if (previewGoing) previewGoing.textContent = totalGoing;
+            if (previewCurious) previewCurious.textContent = totalCurious;
+        }
+
+        function searchPeople(query) {
+            peopleSearchQuery = query;
+            var clearBtn = document.getElementById('people-search-clear');
+            if (clearBtn) clearBtn.classList.toggle('hidden', !query);
+            renderPeopleLists();
+        }
+
+        function clearPeopleSearch() {
+            peopleSearchQuery = '';
+            var input = document.getElementById('people-search');
+            var clearBtn = document.getElementById('people-search-clear');
+            if (input) input.value = '';
+            if (clearBtn) clearBtn.classList.add('hidden');
+            renderPeopleLists();
+        }
+
+        function setUserStatus(newStatus) {
+            var goingBtn = document.getElementById('status-going-btn');
+            var curiousBtn = document.getElementById('status-curious-btn');
+
+            // Remove current user entry (id 0) if present
+            var currentIdx = MOCK_ATTENDEES.findIndex(function(a) { return a.id === 0; });
+            if (currentIdx !== -1) MOCK_ATTENDEES.splice(currentIdx, 1);
+
+            if (userStatus === newStatus) {
+                // Toggle off
+                userStatus = null;
+                goingBtn.classList.remove('status-active-going');
+                curiousBtn.classList.remove('status-active-curious');
+            } else {
+                userStatus = newStatus;
+                MOCK_ATTENDEES.unshift({ id: 0, name: 'You', location: 'Barcelona, Spain', status: newStatus, avatar: 'images/attendeeAvatar.png' });
+
+                if (newStatus === 'going') {
+                    goingBtn.classList.add('status-active-going');
+                    curiousBtn.classList.remove('status-active-curious');
+                } else {
+                    curiousBtn.classList.add('status-active-curious');
+                    goingBtn.classList.remove('status-active-going');
+                }
+            }
+
+            renderPeopleLists();
+            filterPeopleList(currentPeopleFilter);
+        }
+
+        function filterPeopleList(filter) {
+            currentPeopleFilter = filter;
+            var goingList = document.getElementById('people-list-going');
+            var curiousList = document.getElementById('people-list-curious');
+            var goingFilterBtn = document.getElementById('list-filter-going');
+            var curiousFilterBtn = document.getElementById('list-filter-curious');
+
+            if (filter === 'going') {
+                goingList.classList.remove('hidden');
+                curiousList.classList.add('hidden');
+                goingFilterBtn.classList.add('bg-white', 'text-revelti-blue', 'shadow-sm');
+                goingFilterBtn.classList.remove('text-gray-500');
+                curiousFilterBtn.classList.remove('bg-white', 'text-revelti-blue', 'shadow-sm');
+                curiousFilterBtn.classList.add('text-gray-500');
+            } else {
+                curiousList.classList.remove('hidden');
+                goingList.classList.add('hidden');
+                curiousFilterBtn.classList.add('bg-white', 'text-revelti-blue', 'shadow-sm');
+                curiousFilterBtn.classList.remove('text-gray-500');
+                goingFilterBtn.classList.remove('bg-white', 'text-revelti-blue', 'shadow-sm');
+                goingFilterBtn.classList.add('text-gray-500');
+            }
+        }
+
+        // Sync people-preview-link is handled directly in switchTab above.
+
+        // Initialize people lists
+        document.addEventListener('DOMContentLoaded', function() {
+            renderPeopleLists();
+        });
+
+        // ===== END PEOPLE TAB LOGIC =====
     </script>
     <script src="main.js" defer></script>
     <script src="js/galleryOverlay.js"></script>
