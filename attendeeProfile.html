@@ -67,6 +67,16 @@
             </div>
         </div>
 
+        <!-- Time filter toggle -->
+        <div class="mt-4 flex gap-1 p-1 bg-gray-100 rounded-lg w-fit mx-auto">
+            <button id="filter-all" onclick="filterByTime('all')"
+                class="px-4 py-1.5 rounded-md text-sm font-semibold bg-white text-revelti-blue shadow-sm transition-all duration-200">All</button>
+            <button id="filter-upcoming" onclick="filterByTime('upcoming')"
+                class="px-4 py-1.5 rounded-md text-sm font-semibold text-gray-500 transition-all duration-200 hover:text-gray-700">Upcoming</button>
+            <button id="filter-past" onclick="filterByTime('past')"
+                class="px-4 py-1.5 rounded-md text-sm font-semibold text-gray-500 transition-all duration-200 hover:text-gray-700">Past</button>
+        </div>
+
         <!-- Events in common -->
         <details open class="mt-4 bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
             <summary class="font-bold text-lg revelti-blue cursor-pointer list-none flex justify-between items-center">
@@ -74,7 +84,7 @@
                 <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
             </summary>
             <div class="mt-3">
-                <div class="event-item flex items-center gap-3 p-2 rounded-lg bg-gray-50">
+                <div class="event-item flex items-center gap-3 p-2 rounded-lg bg-gray-50" data-date="2026-10-08">
                     <img src="images/eventPoster.png" alt="Dance Fest Spain 2026"
                         class="w-12 h-12 rounded-lg object-cover flex-shrink-0"
                         onerror="this.onerror=null;this.src='https://placehold.co/48x48/f58220/ffffff?text=DFS';">
@@ -94,7 +104,7 @@
             </summary>
             <div class="mt-3 space-y-2">
 
-                <div class="event-item flex items-center gap-3 p-2 rounded-lg bg-gray-50">
+                <div class="event-item flex items-center gap-3 p-2 rounded-lg bg-gray-50" data-date="2026-10-08">
                     <img src="images/eventPoster.png" alt="Dance Fest Spain 2026"
                         class="w-12 h-12 rounded-lg object-cover flex-shrink-0"
                         onerror="this.onerror=null;this.src='https://placehold.co/48x48/213c63/ffffff?text=DFS';">
@@ -104,7 +114,7 @@
                     </div>
                 </div>
 
-                <div class="event-item flex items-center gap-3 p-2 rounded-lg bg-gray-50">
+                <div class="event-item flex items-center gap-3 p-2 rounded-lg bg-gray-50" data-date="2027-01-13">
                     <img src="images/eventPoster3.png" alt="Bachata Sensual World Congress"
                         class="w-12 h-12 rounded-lg object-cover flex-shrink-0"
                         onerror="this.onerror=null;this.src='https://placehold.co/48x48/213c63/ffffff?text=BS';">
@@ -114,7 +124,7 @@
                     </div>
                 </div>
 
-                <div class="event-item flex items-center gap-3 p-2 rounded-lg bg-gray-50">
+                <div class="event-item flex items-center gap-3 p-2 rounded-lg bg-gray-50" data-date="2026-11-19">
                     <img src="images/eventPoster5.png" alt="Tallinn Bachata Experience"
                         class="w-12 h-12 rounded-lg object-cover flex-shrink-0"
                         onerror="this.onerror=null;this.src='https://placehold.co/48x48/213c63/ffffff?text=TBE';">
@@ -135,7 +145,7 @@
             </summary>
             <div class="mt-3 space-y-2">
 
-                <div class="event-item flex items-center gap-3 p-2 rounded-lg bg-gray-50">
+                <div class="event-item flex items-center gap-3 p-2 rounded-lg bg-gray-50" data-date="2026-04-23">
                     <img src="images/eventPoster2.png" alt="Zouk World Barcelona"
                         class="w-12 h-12 rounded-lg object-cover flex-shrink-0"
                         onerror="this.onerror=null;this.src='https://placehold.co/48x48/213c63/ffffff?text=ZWB';">
@@ -145,7 +155,7 @@
                     </div>
                 </div>
 
-                <div class="event-item flex items-center gap-3 p-2 rounded-lg bg-gray-50">
+                <div class="event-item flex items-center gap-3 p-2 rounded-lg bg-gray-50" data-date="2025-11-01">
                     <img src="images/eventPoster4.png" alt="Sensuality & Essentiality"
                         class="w-12 h-12 rounded-lg object-cover flex-shrink-0"
                         onerror="this.onerror=null;this.src='https://placehold.co/48x48/213c63/ffffff?text=SE';">
@@ -155,7 +165,7 @@
                     </div>
                 </div>
 
-                <div class="event-item flex items-center gap-3 p-2 rounded-lg bg-gray-50">
+                <div class="event-item flex items-center gap-3 p-2 rounded-lg bg-gray-50" data-date="2026-06-12">
                     <img src="https://placehold.co/48x48/cccccc/ffffff?text=MBF" alt="Mallorca Beach Festival"
                         class="w-12 h-12 rounded-lg object-cover flex-shrink-0">
                     <div>
@@ -170,23 +180,17 @@
     </div>
 
     <script>
+        var currentSearchQuery = '';
+        var currentTimeFilter = 'all';
+        
         function filterEvents(query) {
             var clearBtn = document.getElementById('event-search-clear');
             if (clearBtn) {
                 clearBtn.classList.toggle('hidden', query.length === 0);
             }
             
-            query = query.toLowerCase().trim();
-            var eventItems = document.querySelectorAll('.event-item');
-            
-            eventItems.forEach(function(item) {
-                var text = item.textContent.toLowerCase();
-                if (query === '' || text.includes(query)) {
-                    item.classList.remove('hidden');
-                } else {
-                    item.classList.add('hidden');
-                }
-            });
+            currentSearchQuery = query.toLowerCase().trim();
+            applyFilters();
         }
 
         function clearEventSearch() {
@@ -195,6 +199,68 @@
                 input.value = '';
                 filterEvents('');
             }
+        }
+
+        function filterByTime(filter) {
+            currentTimeFilter = filter;
+            applyFilters();
+        }
+        
+        function applyFilters() {
+            var allBtn = document.getElementById('filter-all');
+            var upcomingBtn = document.getElementById('filter-upcoming');
+            var pastBtn = document.getElementById('filter-past');
+            
+            // Update button styles
+            if (allBtn && upcomingBtn && pastBtn) {
+                var buttons = {
+                    'all': allBtn,
+                    'upcoming': upcomingBtn,
+                    'past': pastBtn
+                };
+                Object.keys(buttons).forEach(function(key) {
+                    if (key === currentTimeFilter) {
+                        buttons[key].className = 'px-4 py-1.5 rounded-md text-sm font-semibold bg-white text-revelti-blue shadow-sm transition-all duration-200';
+                    } else {
+                        buttons[key].className = 'px-4 py-1.5 rounded-md text-sm font-semibold text-gray-500 transition-all duration-200 hover:text-gray-700';
+                    }
+                });
+            }
+            
+            var today = new Date();
+            today.setHours(0, 0, 0, 0);
+            var eventItems = document.querySelectorAll('.event-item');
+            
+            eventItems.forEach(function(item) {
+                var text = item.textContent.toLowerCase();
+                
+                // Check search filter
+                var matchesSearch = currentSearchQuery === '' || text.includes(currentSearchQuery);
+                
+                // Check time filter
+                var dateStr = item.getAttribute('data-date');
+                var isUpcoming = true;
+                if (dateStr) {
+                    var eventDate = new Date(dateStr);
+                    isUpcoming = eventDate >= today;
+                }
+                
+                var matchesTime = true;
+                if (currentTimeFilter === 'all') {
+                    matchesTime = true;
+                } else if (currentTimeFilter === 'upcoming') {
+                    matchesTime = isUpcoming;
+                } else if (currentTimeFilter === 'past') {
+                    matchesTime = !isUpcoming;
+                }
+                
+                // Show item only if it matches both filters
+                if (matchesSearch && matchesTime) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
         }
     </script>
     <script src="main.js" defer></script>
