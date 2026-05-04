@@ -470,6 +470,110 @@
                         }
                     ]
                 },
+                // ===================== BCN ZOUK WORLD CONGRESS =====================
+                {
+                    id: 'bcn_zouk_world_congress',
+                    name: 'BCN Zouk World Congress',
+                    status: 'Public',
+                    owner: 'AMedia',
+                    type: 'folder',
+                    isGalleryRoot: true,
+                    clickable: true,
+                    created: '2025-05-01T10:00:00Z',
+                    lastModified: '2025-05-04T14:30:00Z',
+                    galleryDisplayOptions: {
+                        showMediaTypeFilter: true,
+                        showCreatorsFilter: true
+                    },
+                    galleryFilters: [
+                        {
+                            id: 'gf_year',
+                            label: 'Year',
+                            style: 'pills',
+                            options: [
+                                { id: 'go_2024', label: '2024', folderIds: ['bcn_zouk_2024'], alwaysShow: false },
+                                { id: 'go_2025', label: '2025', folderIds: ['bcn_zouk_2025'], alwaysShow: false },
+                                { id: 'go_2026', label: '2026', folderIds: ['bcn_zouk_2026'], alwaysShow: false }
+                            ]
+                        },
+                        {
+                            id: 'gf_days',
+                            label: 'All Days',
+                            style: 'dropdown',
+                            options: [
+                                { id: 'go_all_days', label: 'ALL DAYS', folderIds: ['bcn_zouk_2026'], alwaysShow: false },
+                                { id: 'go_friday', label: 'FRIDAY', folderIds: ['bcn_zouk_02_jj_friday', 'bcn_zouk_03_jj_allstars', 'bcn_zouk_04_friday_social', 'bcn_zouk_vid_01_social_friday'], alwaysShow: false },
+                                { id: 'go_saturday', label: 'SATURDAY', folderIds: ['bcn_zouk_06_jj_saturday', 'bcn_zouk_07_shows', 'bcn_zouk_08_saturday_social', 'bcn_zouk_vid_02_social_saturday'], alwaysShow: false },
+                                { id: 'go_sunday', label: 'SUNDAY', folderIds: ['bcn_zouk_09_jj_sunday_winners'], alwaysShow: false }
+                            ]
+                        },
+                        {
+                            id: 'gf_categories',
+                            label: '',
+                            style: 'tabs',
+                            options: [
+                                { id: 'go_workshops', label: 'Workshops', folderIds: ['bcn_zouk_01_workshops'], alwaysShow: true },
+                                { id: 'go_jj', label: 'J&J', folderIds: ['bcn_zouk_02_jj_friday', 'bcn_zouk_03_jj_allstars', 'bcn_zouk_06_jj_saturday', 'bcn_zouk_09_jj_sunday_winners'], alwaysShow: false },
+                                { id: 'go_socials', label: 'Socials', folderIds: ['bcn_zouk_04_friday_social', 'bcn_zouk_08_saturday_social', 'bcn_zouk_vid_01_social_friday', 'bcn_zouk_vid_02_social_saturday'], alwaysShow: false },
+                                { id: 'go_day_socials', label: 'Day Socials', folderIds: ['bcn_zouk_05_day_socials'], alwaysShow: true },
+                                { id: 'go_shows', label: 'Shows', folderIds: ['bcn_zouk_07_shows'], alwaysShow: false }
+                            ]
+                        }
+                    ],
+                    children: [
+                        {
+                            id: 'bcn_zouk_2026',
+                            name: '2026',
+                            status: 'Public',
+                            owner: 'AMedia',
+                            type: 'folder',
+                            clickable: true,
+                            created: '2025-05-01T09:00:00Z',
+                            lastModified: '2025-05-04T12:00:00Z',
+                            children: [
+                                // Photos folder
+                                {
+                                    id: 'bcn_zouk_photos',
+                                    name: 'Photos',
+                                    status: 'Public',
+                                    owner: 'AMedia',
+                                    type: 'folder',
+                                    clickable: true,
+                                    created: '2025-05-01T09:00:00Z',
+                                    lastModified: '2025-05-04T12:00:00Z',
+                                    children: [
+                                        { id: 'bcn_zouk_01_workshops', name: '01.Workshops', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-05-01T08:00:00Z', lastModified: '2025-05-04T12:00:00Z', children: [] },
+                                        { id: 'bcn_zouk_02_jj_friday', name: '02.J&J Friday', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-05-01T08:00:00Z', lastModified: '2025-05-04T12:00:00Z', children: [] },
+                                        { id: 'bcn_zouk_03_jj_allstars', name: '03.J&J All Stars', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-05-01T08:00:00Z', lastModified: '2025-05-04T12:00:00Z', children: [] },
+                                        { id: 'bcn_zouk_04_friday_social', name: '04.Friday Social', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-05-01T08:00:00Z', lastModified: '2025-05-04T12:00:00Z', children: [] },
+                                        { id: 'bcn_zouk_05_day_socials', name: '05.Day Socials', status: 'Scheduled', schedule: 'May 09, 2026 11:00 AM', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-05-01T08:00:00Z', lastModified: '2025-05-04T12:00:00Z', children: [] },
+                                        { id: 'bcn_zouk_06_jj_saturday', name: '06.J&J Saturday', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-05-01T08:00:00Z', lastModified: '2025-05-04T12:00:00Z', children: [] },
+                                        { id: 'bcn_zouk_07_shows', name: '07.Shows', status: 'Scheduled', schedule: 'May 09, 2026 11:00 AM', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-05-01T08:00:00Z', lastModified: '2025-05-04T12:00:00Z', children: [] },
+                                        { id: 'bcn_zouk_08_saturday_social', name: '08.Saturday Social', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-05-01T08:00:00Z', lastModified: '2025-05-04T12:00:00Z', children: [] },
+                                        { id: 'bcn_zouk_09_jj_sunday_winners', name: '09.J&J Sunday + Winners', status: 'Scheduled', schedule: 'May 09, 2026 11:00 AM', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-05-01T08:00:00Z', lastModified: '2025-05-04T12:00:00Z', children: [] }
+                                    ]
+                                },
+                                // Videos folder
+                                {
+                                    id: 'bcn_zouk_videos',
+                                    name: 'Videos',
+                                    status: 'Public',
+                                    owner: 'AMedia',
+                                    type: 'folder',
+                                    clickable: true,
+                                    created: '2025-05-01T09:00:00Z',
+                                    lastModified: '2025-05-04T12:00:00Z',
+                                    children: [
+                                        { id: 'bcn_zouk_vid_01_social_friday', name: '01.Social Dance Friday', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-05-01T08:00:00Z', lastModified: '2025-05-04T12:00:00Z', children: [] },
+                                        { id: 'bcn_zouk_vid_02_social_saturday', name: '02.Social Dance Saturday', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-05-01T08:00:00Z', lastModified: '2025-05-04T12:00:00Z', children: [] }
+                                    ]
+                                }
+                            ]
+                        },
+                        { id: 'bcn_zouk_2025', name: '2025', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2024-05-01T09:00:00Z', lastModified: '2024-05-04T12:00:00Z', children: [] },
+                        { id: 'bcn_zouk_2024', name: '2024', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2023-05-01T09:00:00Z', lastModified: '2023-05-04T12:00:00Z', children: [] }
+                    ]
+                },
                 // ===================== OTHER EXISTING EVENTS (preserved) =====================
                 { id: 'zouk_zurich', name: 'Zouk Festival Zurich', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-10-02T10:00:00Z', lastModified: '2025-11-05T14:00:00Z', children: [] },
                 { id: 'bailando_sensual', name: 'Bailando Sensual', status: 'Public', owner: 'AMedia', type: 'folder', clickable: false, created: '2025-10-03T10:00:00Z', lastModified: '2025-11-05T13:30:00Z', children: [] },
