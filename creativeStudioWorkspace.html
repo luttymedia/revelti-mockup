@@ -267,29 +267,47 @@
                                 showMediaTypeFilter: true,
                                 showCreatorsFilter: true
                             },
-                            galleryFilters: [
-                                {
-                                    id: 'gf1',
-                                    label: '',
-                                    style: 'tabs',
+                            galleryFilters: {
+                                hasSplitter: true,
+                                splitter: {
+                                    id: 'gf_dfs_years',
+                                    label: 'Year',
                                     options: [
-                                        { id: 'go1', label: 'Workshops', folderIds: ['dfs_fri_workshops', 'dfs_sat_workshops', 'dfs_sun_workshops'], alwaysShow: false },
-                                        { id: 'go2', label: 'J&J', folderIds: ['dfs_sat_jj', 'dfs_sun_jj'], alwaysShow: true },
-                                        { id: 'go3', label: 'Social', folderIds: ['dfs_fri_social', 'dfs_sat_social', 'dfs_sun_social'], alwaysShow: false },
-                                        { id: 'go4', label: 'Shows', folderIds: ['dfs_fri_shows'], alwaysShow: false }
+                                        { 
+                                            id: 'opt_dfs_2026', 
+                                            label: '2026', 
+                                            folderIds: ['dfs_2026'],
+                                            subDimensions: [
+                                                {
+                                                    id: 'gf1_2026',
+                                                    label: '',
+                                                    style: 'tabs',
+                                                    options: [
+                                                        { id: 'go1', label: 'Workshops', folderIds: ['dfs_fri_workshops', 'dfs_sat_workshops', 'dfs_sun_workshops'], alwaysShow: false },
+                                                        { id: 'go2', label: 'J&J', folderIds: ['dfs_sat_jj', 'dfs_sun_jj'], alwaysShow: false },
+                                                        { id: 'go3', label: 'Social', folderIds: ['dfs_fri_social', 'dfs_sat_social', 'dfs_sun_social'], alwaysShow: false },
+                                                        { id: 'go4', label: 'Shows', folderIds: ['dfs_fri_shows'], alwaysShow: false }
+                                                    ]
+                                                },
+                                                {
+                                                    id: 'gf2_2026',
+                                                    label: 'All Days',
+                                                    style: 'dropdown',
+                                                    options: [
+                                                        { id: 'go_all_dfs', label: 'All days', folderIds: ['dfs_2026'], alwaysShow: false },
+                                                        { id: 'go5', label: 'Friday', folderIds: ['dfs_friday'], alwaysShow: false },
+                                                        { id: 'go6', label: 'Saturday', folderIds: ['dfs_saturday'], alwaysShow: false },
+                                                        { id: 'go7', label: 'Sunday', folderIds: ['dfs_sunday'], alwaysShow: false }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        { id: 'opt_dfs_2025', label: '2025', folderIds: ['dfs_2025'], subDimensions: [] },
+                                        { id: 'opt_dfs_2024', label: '2024', folderIds: ['dfs_2024'], subDimensions: [] }
                                     ]
                                 },
-                                {
-                                    id: 'gf2',
-                                    label: 'All Days',
-                                    style: 'dropdown',
-                                    options: [
-                                        { id: 'go5', label: 'Friday', folderIds: ['dfs_friday'], alwaysShow: false },
-                                        { id: 'go6', label: 'Saturday', folderIds: ['dfs_saturday'], alwaysShow: false },
-                                        { id: 'go7', label: 'Sunday', folderIds: ['dfs_sunday'], alwaysShow: false }
-                                    ]
-                                }
-                            ],
+                                dimensions: []
+                            },
                             children: [
 
                                 {
@@ -448,6 +466,33 @@
                             clickable: true,
                             created: '2026-01-01T10:00:00Z',
                             lastModified: '2026-03-20T14:30:00Z',
+                            galleryFilters: {
+                                hasSplitter: true,
+                                splitter: {
+                                    id: 'gf_zouk_year',
+                                    label: 'Year',
+                                    options: [
+                                        { 
+                                            id: 'opt_zouk_2026', 
+                                            label: '2026', 
+                                            folderIds: ['zouk_2026'],
+                                            subDimensions: [
+                                                {
+                                                    id: 'gf_zouk_editions',
+                                                    label: 'Editions',
+                                                    style: 'dropdown',
+                                                    options: [
+                                                        { id: 'zgo_1', label: 'April 17', folderIds: ['zouk_2026_04_17'], alwaysShow: false },
+                                                        { id: 'zgo_2', label: 'March 20', folderIds: ['zouk_2026_03_20'], alwaysShow: false }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        { id: 'opt_zouk_2025', label: '2025', folderIds: ['zouk_2025'], subDimensions: [] }
+                                    ]
+                                },
+                                dimensions: []
+                            },
                             children: [
                                 {
                                     id: 'zouk_2026',
@@ -485,41 +530,48 @@
                         showMediaTypeFilter: true,
                         showCreatorsFilter: true
                     },
-                    galleryFilters: [
-                        {
-                            id: 'gf_year',
+                    galleryFilters: {
+                        hasSplitter: true,
+                        splitter: {
+                            id: 'gf_bcn_year',
                             label: 'Year',
-                            style: 'pills',
                             options: [
-                                { id: 'go_2024', label: '2024', folderIds: ['bcn_zouk_2024'], alwaysShow: false },
-                                { id: 'go_2025', label: '2025', folderIds: ['bcn_zouk_2025'], alwaysShow: false },
-                                { id: 'go_2026', label: '2026', folderIds: ['bcn_zouk_2026'], alwaysShow: false }
+                                {
+                                    id: 'opt_bcn_2026',
+                                    label: '2026',
+                                    folderIds: ['bcn_zouk_2026'],
+                                    subDimensions: [
+                                        {
+                                            id: 'gf_days_2026',
+                                            label: 'All Days',
+                                            style: 'dropdown',
+                                            options: [
+                                                { id: 'go_all_days', label: 'ALL DAYS', folderIds: ['bcn_zouk_2026'], alwaysShow: false },
+                                                { id: 'go_friday', label: 'FRIDAY', folderIds: ['bcn_zouk_02_jj_friday', 'bcn_zouk_03_jj_allstars', 'bcn_zouk_04_friday_social', 'bcn_zouk_vid_01_social_friday'], alwaysShow: false },
+                                                { id: 'go_saturday', label: 'SATURDAY', folderIds: ['bcn_zouk_06_jj_saturday', 'bcn_zouk_07_shows', 'bcn_zouk_08_saturday_social', 'bcn_zouk_vid_02_social_saturday'], alwaysShow: false },
+                                                { id: 'go_sunday', label: 'SUNDAY', folderIds: ['bcn_zouk_09_jj_sunday_winners'], alwaysShow: false }
+                                            ]
+                                        },
+                                        {
+                                            id: 'gf_categories_2026',
+                                            label: '',
+                                            style: 'tabs',
+                                            options: [
+                                                { id: 'go_workshops', label: 'Workshops', folderIds: ['bcn_zouk_01_workshops'], alwaysShow: true },
+                                                { id: 'go_jj', label: 'J&J', folderIds: ['bcn_zouk_02_jj_friday', 'bcn_zouk_03_jj_allstars', 'bcn_zouk_06_jj_saturday', 'bcn_zouk_09_jj_sunday_winners'], alwaysShow: false },
+                                                { id: 'go_socials', label: 'Socials', folderIds: ['bcn_zouk_04_friday_social', 'bcn_zouk_08_saturday_social', 'bcn_zouk_vid_01_social_friday', 'bcn_zouk_vid_02_social_saturday'], alwaysShow: false },
+                                                { id: 'go_day_socials', label: 'Day Socials', folderIds: ['bcn_zouk_05_day_socials'], alwaysShow: true },
+                                                { id: 'go_shows', label: 'Shows', folderIds: ['bcn_zouk_07_shows'], alwaysShow: false }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                { id: 'opt_bcn_2025', label: '2025', folderIds: ['bcn_zouk_2025'], subDimensions: [] },
+                                { id: 'opt_bcn_2024', label: '2024', folderIds: ['bcn_zouk_2024'], subDimensions: [] }
                             ]
                         },
-                        {
-                            id: 'gf_days',
-                            label: 'All Days',
-                            style: 'dropdown',
-                            options: [
-                                { id: 'go_all_days', label: 'ALL DAYS', folderIds: ['bcn_zouk_2026'], alwaysShow: false },
-                                { id: 'go_friday', label: 'FRIDAY', folderIds: ['bcn_zouk_02_jj_friday', 'bcn_zouk_03_jj_allstars', 'bcn_zouk_04_friday_social', 'bcn_zouk_vid_01_social_friday'], alwaysShow: false },
-                                { id: 'go_saturday', label: 'SATURDAY', folderIds: ['bcn_zouk_06_jj_saturday', 'bcn_zouk_07_shows', 'bcn_zouk_08_saturday_social', 'bcn_zouk_vid_02_social_saturday'], alwaysShow: false },
-                                { id: 'go_sunday', label: 'SUNDAY', folderIds: ['bcn_zouk_09_jj_sunday_winners'], alwaysShow: false }
-                            ]
-                        },
-                        {
-                            id: 'gf_categories',
-                            label: '',
-                            style: 'tabs',
-                            options: [
-                                { id: 'go_workshops', label: 'Workshops', folderIds: ['bcn_zouk_01_workshops'], alwaysShow: true },
-                                { id: 'go_jj', label: 'J&J', folderIds: ['bcn_zouk_02_jj_friday', 'bcn_zouk_03_jj_allstars', 'bcn_zouk_06_jj_saturday', 'bcn_zouk_09_jj_sunday_winners'], alwaysShow: false },
-                                { id: 'go_socials', label: 'Socials', folderIds: ['bcn_zouk_04_friday_social', 'bcn_zouk_08_saturday_social', 'bcn_zouk_vid_01_social_friday', 'bcn_zouk_vid_02_social_saturday'], alwaysShow: false },
-                                { id: 'go_day_socials', label: 'Day Socials', folderIds: ['bcn_zouk_05_day_socials'], alwaysShow: true },
-                                { id: 'go_shows', label: 'Shows', folderIds: ['bcn_zouk_07_shows'], alwaysShow: false }
-                            ]
-                        }
-                    ],
+                        dimensions: []
+                    },
                     children: [
                         {
                             id: 'bcn_zouk_2026',
@@ -1258,6 +1310,21 @@
         }
 
         // Modals Simulation Logic
+                function saveGallerySettings() {
+            if (cgCurrentNode) {
+                if (cgFilterMode === 'custom') {
+                    cgCurrentNode.galleryFilters = {
+                        hasSplitter: cgHasSplitter,
+                        splitter: cgSplitter ? JSON.parse(JSON.stringify(cgSplitter)) : null,
+                        dimensions: JSON.parse(JSON.stringify(cgGlobalDimensions))
+                    };
+                }
+                cgCurrentNode.galleryDisplayOptions = { ...cgDisplayOptions };
+            }
+            showToast('Gallery settings saved', 'success');
+            closeModals();
+        }
+
         function closeModals() {
             document.getElementById('modal-backdrop').classList.add('hidden');
             document.querySelectorAll('#modal-backdrop > div').forEach(el => el.classList.add('hidden'));
@@ -1321,11 +1388,8 @@
                 }
                 syncDisplayOptionsToUI();
 
-                if (cgCurrentNode && cgCurrentNode.galleryFilters && cgCurrentNode.galleryFilters.length > 0) {
-                    cgDimensions = JSON.parse(JSON.stringify(cgCurrentNode.galleryFilters));
-                    cgPrefilledFromAuto = true;
+                if (cgCurrentNode && cgCurrentNode.galleryFilters && (cgCurrentNode.galleryFilters.hasSplitter !== undefined || cgCurrentNode.galleryFilters.length > 0)) {
                     setCGFilterMode('custom');
-                    renderCGDimensions();
                 }
             }
             // ------------------------------------
@@ -1786,7 +1850,88 @@
 
         let cgCurrentNode = null;      // gallery node being edited
         let cgFilterMode = 'auto';     // 'auto' | 'custom'
-        let cgDimensions = [];         // live working copy of galleryFilters
+        
+        let cgHasSplitter = false;
+        let cgSplitter = null;
+        let cgGlobalDimensions = [];
+        let cgActiveSplitterOptId = null;
+
+        window.cgGetActiveDims = function() {
+            if (cgHasSplitter && cgSplitter && cgActiveSplitterOptId) {
+                const opt = cgSplitter.options.find(o => o.id === cgActiveSplitterOptId);
+                if (opt) {
+                    if (!opt.subDimensions) opt.subDimensions = [];
+                    return opt.subDimensions;
+                }
+            }
+            return cgGlobalDimensions;
+        };
+        
+        function cgToggleSplitter(enabled) {
+            cgHasSplitter = enabled;
+            if (enabled && !cgSplitter) {
+                cgSplitter = { id: 'gf_splitter', label: 'Editions', options: [] };
+            }
+            renderCGDimensions();
+        }
+        
+        function cgAddSplitterOption() {
+            if (!cgSplitter.options) cgSplitter.options = [];
+            cgSplitter.options.push({ id: 'opt_s_' + Date.now(), label: '', folderIds: [], subDimensions: [] });
+            if (!cgActiveSplitterOptId) cgActiveSplitterOptId = cgSplitter.options[0].id;
+            renderCGDimensions();
+        }
+        
+        function cgRemoveSplitterOption(oi) {
+            cgSplitter.options.splice(oi, 1);
+            if (cgSplitter.options.length > 0) {
+                if (!cgSplitter.options.find(o => o.id === cgActiveSplitterOptId)) {
+                    cgActiveSplitterOptId = cgSplitter.options[0].id;
+                }
+            } else {
+                cgActiveSplitterOptId = null;
+            }
+            renderCGDimensions();
+        }
+        
+        function cgRenderSplitterOptionHTML(oi, opt) {
+            const badges = (opt.folderIds || []).map(fid => {
+                const node = findNodeById(fid, cgCurrentNode);
+                const name = node ? node.name : fid;
+                return `<span class="inline-flex items-center gap-1 bg-orange-100 border border-orange-200 text-orange-800 text-xs font-semibold px-2 py-0.5 rounded-full">
+                    ${name}
+                    <button onclick="cgRemoveFolderBadge('splitter',${oi},'${fid}')" class="ml-0.5 text-orange-400 hover:text-red-500 transition leading-none">&times;</button>
+                </span>`;
+            }).join('');
+
+            return `<div class="border border-orange-100 rounded-lg p-2.5 bg-white space-y-2" id="cg-opt-splitter-${oi}">
+                <div class="flex items-center gap-2 flex-wrap">
+                    <input type="text" value="${opt.label}" placeholder="Option label"
+                        oninput="cgSplitter.options[${oi}].label = this.value; renderCGDimensions()"
+                        class="border border-gray-300 rounded px-2 py-1 text-xs font-semibold text-gray-700 bg-white focus:outline-none focus:border-revelti-orange w-28">
+                    <div class="flex flex-wrap gap-1 items-center flex-1">
+                        ${badges}
+                        <button onclick="cgTogglePicker('splitter',${oi})" class="inline-flex items-center gap-1 text-xs text-revelti-orange font-semibold hover:underline">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+                            folder
+                        </button>
+                    </div>
+                    <button onclick="cgRemoveSplitterOption(${oi})" class="text-gray-300 hover:text-red-500 transition text-base leading-none ml-auto">&times;</button>
+                </div>
+                <div id="cg-picker-splitter-${oi}" class="hidden border border-orange-200 rounded-lg bg-white overflow-hidden">
+                    <div class="px-3 py-2 bg-orange-50 border-b border-orange-200 flex items-center justify-between">
+                        <span class="text-xs font-bold text-orange-700">Select root folder for edition</span>
+                        <button onclick="cgClosePicker('splitter',${oi})" class="text-xs font-semibold text-orange-600 hover:text-orange-800">Done</button>
+                    </div>
+                    <div class="max-h-40 overflow-y-auto py-1">
+                        ${cgBuildPickerTree('splitter', oi, opt.folderIds || [])}
+                    </div>
+                </div>
+            </div>`;
+        }
+        
+        let cgDimensions = []; // legacy
+
         let cgDisplayOptions = { showMediaTypeFilter: true, showCreatorsFilter: true };
         let cgPrefilledFromAuto = false;
         let cgActivePicker = null;     // { dimIdx, optIdx } — which option's picker is open
@@ -1859,10 +2004,30 @@
                 // Pre-fill from node data if first switch or node has filters
                 if (!cgPrefilledFromAuto) {
                     cgPrefilledFromAuto = true;
-                    if (cgCurrentNode && cgCurrentNode.galleryFilters && cgCurrentNode.galleryFilters.length > 0) {
-                        cgDimensions = JSON.parse(JSON.stringify(cgCurrentNode.galleryFilters));
+                    if (cgCurrentNode && cgCurrentNode.galleryFilters) {
+                        if (cgCurrentNode.galleryFilters.hasSplitter !== undefined) {
+                            cgHasSplitter = cgCurrentNode.galleryFilters.hasSplitter;
+                            cgSplitter = cgCurrentNode.galleryFilters.splitter ? JSON.parse(JSON.stringify(cgCurrentNode.galleryFilters.splitter)) : null;
+                            cgGlobalDimensions = cgCurrentNode.galleryFilters.dimensions ? JSON.parse(JSON.stringify(cgCurrentNode.galleryFilters.dimensions)) : [];
+                            if (cgHasSplitter && cgSplitter && cgSplitter.options && cgSplitter.options.length > 0) {
+                                cgActiveSplitterOptId = cgSplitter.options[0].id;
+                            }
+                        } else if (Array.isArray(cgCurrentNode.galleryFilters) && cgCurrentNode.galleryFilters.length > 0) {
+                            cgHasSplitter = false;
+                            cgSplitter = null;
+                            cgGlobalDimensions = JSON.parse(JSON.stringify(cgCurrentNode.galleryFilters));
+                            cgActiveSplitterOptId = null;
+                        } else {
+                            cgHasSplitter = false;
+                            cgSplitter = null;
+                            cgGlobalDimensions = buildAutoFiltersFromHierarchy(cgCurrentNode);
+                            cgActiveSplitterOptId = null;
+                        }
                     } else {
-                        cgDimensions = buildAutoFiltersFromHierarchy(cgCurrentNode);
+                        cgHasSplitter = false;
+                        cgSplitter = null;
+                        cgGlobalDimensions = buildAutoFiltersFromHierarchy(cgCurrentNode);
+                        cgActiveSplitterOptId = null;
                     }
                     renderCGDimensions();
                 }
@@ -1907,13 +2072,88 @@
 
         // --- Render all dimensions ---
         function renderCGDimensions() {
-            const list = document.getElementById('cg-dimensions-list');
-            list.innerHTML = '';
-            cgDimensions.forEach((dim, di) => renderCGDimension(dim, di));
+            const builder = document.getElementById('cg-filter-builder');
+            if(!builder) return;
+            builder.innerHTML = '';
+
+            // Splitter section
+            const splitterContainer = document.createElement('div');
+            if (!cgHasSplitter) {
+                splitterContainer.innerHTML = `<button onclick="cgToggleSplitter(true)" class="flex items-center gap-2 text-sm font-semibold text-revelti-orange hover:text-orange-600 mb-4 px-3 py-2 bg-orange-50 border border-orange-200 rounded-xl w-full justify-center transition" title="Use a Main Dimension (like 'Edition' or 'Year') to separate filter configurations, ensuring sub-filters only apply within their specific edition.">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+                        Enable Edition Splitter (Main Dimension)
+                    </button>`;
+            } else {
+                splitterContainer.innerHTML = `<div class="mb-4 border-2 border-revelti-orange bg-orange-50 rounded-xl overflow-hidden shadow-sm relative">
+                        <div class="absolute top-2 right-2 flex gap-2">
+                            <button onclick="cgToggleSplitter(false)" class="text-xs text-gray-400 hover:text-red-500 font-semibold px-2 py-1 bg-white rounded border border-gray-200 shadow-sm" title="Remove Edition Splitter">Disable</button>
+                        </div>
+                        <div class="px-4 py-3 border-b border-orange-200 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-revelti-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
+                            <h4 class="font-bold text-gray-800" title="The Main Dimension splits your filters into separate contexts (e.g., Years). Select an edition tab below to configure its unique sub-filters.">Edition Splitter <svg class="w-3.5 h-3.5 inline text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></h4>
+                        </div>
+                        <div class="p-4 space-y-3">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="text-xs font-semibold text-gray-600">Label:</span>
+                                <input type="text" value="${cgSplitter.label || ''}" placeholder="e.g. Editions" oninput="cgSplitter.label = this.value" class="border border-gray-300 rounded px-2 py-1 text-xs font-semibold text-gray-700 bg-white w-48">
+                            </div>
+                            <div class="space-y-2">
+                                ${(cgSplitter.options || []).map((opt, oi) => cgRenderSplitterOptionHTML(oi, opt)).join('')}
+                            </div>
+                            <button onclick="cgAddSplitterOption()" class="flex items-center gap-1 text-xs font-semibold text-revelti-orange hover:text-orange-700 px-3 py-1.5 border border-dashed border-orange-300 rounded-lg w-full justify-center bg-white transition">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+                                Add Edition Option
+                            </button>
+                        </div>
+                    </div>`;
+            }
+            builder.appendChild(splitterContainer);
+
+            // Sub dimensions
+            const subContainer = document.createElement('div');
+            let activeDims = window.cgGetActiveDims();
+
+            if (cgHasSplitter && cgSplitter && cgSplitter.options && cgSplitter.options.length > 0) {
+                if (!cgActiveSplitterOptId || !cgSplitter.options.find(o => o.id === cgActiveSplitterOptId)) {
+                    cgActiveSplitterOptId = cgSplitter.options[0].id;
+                }
+                const tabsHtml = `<div class="flex border-b border-gray-200 mb-4 overflow-x-auto gap-4">
+                        ${cgSplitter.options.map(o => `
+                            <button onclick="cgActiveSplitterOptId='${o.id}'; renderCGDimensions()" class="pb-2 text-sm font-semibold border-b-2 whitespace-nowrap ${o.id === cgActiveSplitterOptId ? 'border-revelti-blue text-revelti-blue' : 'border-transparent text-gray-500 hover:text-gray-700'}">
+                                ${o.label || 'Unnamed'}
+                            </button>
+                        `).join('')}
+                    </div>`;
+                const tabsWrapper = document.createElement('div');
+                tabsWrapper.innerHTML = tabsHtml;
+                subContainer.appendChild(tabsWrapper);
+                activeDims = window.cgGetActiveDims();
+            } else if (cgHasSplitter) {
+                const emptySplit = document.createElement('div');
+                emptySplit.className = 'p-4 text-center text-sm text-gray-500 italic bg-gray-50 rounded border border-gray-200';
+                emptySplit.innerText = 'Add an Edition Option above to configure its filters.';
+                subContainer.appendChild(emptySplit);
+                builder.appendChild(subContainer);
+                return; 
+            }
+
+            const dimList = document.createElement('div');
+            dimList.id = 'cg-dimensions-list';
+            dimList.className = 'space-y-3 mb-3';
+            activeDims.forEach((dim, di) => renderCGDimension(dim, di, dimList));
+            subContainer.appendChild(dimList);
+
+            const addBtn = document.createElement('button');
+            addBtn.onclick = () => cgAddDimension();
+            addBtn.className = 'flex items-center gap-2 text-sm font-semibold text-revelti-blue hover:text-blue-800 px-3 py-2 border-2 border-dashed border-blue-200 rounded-xl w-full justify-center hover:border-blue-300 transition bg-blue-50';
+            addBtn.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg> Add filter dimension`;
+            subContainer.appendChild(addBtn);
+
+            builder.appendChild(subContainer);
         }
 
-        function renderCGDimension(dim, di) {
-            const list = document.getElementById('cg-dimensions-list');
+        function renderCGDimension(dim, di, listContainer) {
+            const list = listContainer || document.getElementById('cg-dimensions-list');
             const styleOpts = ['pills', 'dropdown', 'tabs'].map(s =>
                 `<option value="${s}" ${dim.style === s ? 'selected' : ''}>${s.charAt(0).toUpperCase() + s.slice(1)}</option>`
             ).join('');
@@ -1923,18 +2163,12 @@
             card.id = `cg-dim-${di}`;
 
             card.innerHTML = `
-                <!-- Dimension header -->
                 <div class="flex items-center gap-3 px-4 py-3 bg-gray-50 border-b border-gray-200">
-                    <div class="flex flex-col gap-0.5 cursor-move text-gray-300">
-                        <div class="w-4 h-0.5 bg-gray-300 rounded"></div>
-                        <div class="w-4 h-0.5 bg-gray-300 rounded"></div>
-                        <div class="w-4 h-0.5 bg-gray-300 rounded"></div>
-                    </div>
                     <div class="flex items-center gap-2 flex-1 flex-wrap">
                         <input type="text" value="${dim.label}" placeholder="Label (optional)"
-                            oninput="cgDimensions[${di}].label = this.value; cgUpdateStyleBadge(${di}, cgDimensions[${di}].style)"
+                            oninput="window.cgGetActiveDims()[${di}].label = this.value; cgUpdateStyleBadge(${di}, window.cgGetActiveDims()[${di}].style)"
                             class="border border-gray-300 rounded-lg px-2 py-1 text-xs font-semibold text-gray-700 bg-white focus:outline-none focus:border-revelti-blue w-36 placeholder-gray-400">
-                        <select onchange="cgDimensions[${di}].style = this.value; cgUpdateStyleBadge(${di}, this.value)"
+                        <select onchange="window.cgGetActiveDims()[${di}].style = this.value; cgUpdateStyleBadge(${di}, this.value)"
                             class="border border-gray-300 rounded-lg px-2 py-1 text-xs text-gray-600 bg-white focus:outline-none focus:border-revelti-blue">
                             ${styleOpts}
                         </select>
@@ -1944,7 +2178,7 @@
                         <button onclick="cgMoveDimension(${di}, -1)" title="Move up" class="p-1 text-gray-400 hover:text-gray-700 transition" ${di === 0 ? 'disabled' : ''}>
                             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
                         </button>
-                        <button onclick="cgMoveDimension(${di}, 1)" title="Move down" class="p-1 text-gray-400 hover:text-gray-700 transition" ${di === cgDimensions.length - 1 ? 'disabled' : ''}>
+                        <button onclick="cgMoveDimension(${di}, 1)" title="Move down" class="p-1 text-gray-400 hover:text-gray-700 transition" ${di === window.cgGetActiveDims().length - 1 ? 'disabled' : ''}>
                             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                         </button>
                         <button onclick="cgConfirmRemoveDimension(${di})" title="Remove dimension" class="p-1 text-gray-400 hover:text-red-500 transition">
@@ -1974,7 +2208,7 @@
             list.appendChild(card);
         }
 
-        function cgStylePreviewHTML(style, label) {
+function cgStylePreviewHTML(style, label) {
             const displayLabel = label || 'Category';
             if (style === 'tabs') {
                 return `<div class="flex gap-4 border-b border-gray-200 pointer-events-none ml-2 mt-0.5">
@@ -2001,7 +2235,7 @@
 
         function cgUpdateStyleBadge(di, style) {
             const preview = document.getElementById(`cg-style-preview-${di}`);
-            if (preview) { preview.innerHTML = cgStylePreviewHTML(style, cgDimensions[di].label); }
+            if (preview) { preview.innerHTML = cgStylePreviewHTML(style, window.cgGetActiveDims()[di].label); }
         }
 
         function cgRenderOptionHTML(di, oi, opt) {
@@ -2100,7 +2334,7 @@
 
         // --- Folder picker checkbox change ---
         function cgPickerToggleFolder(di, oi, folderId, checked) {
-            const opt = cgDimensions[di].options[oi];
+            const opt = di === 'splitter' ? cgSplitter.options[oi] : window.cgGetActiveDims()[di].options[oi];
             if (!opt.folderIds) opt.folderIds = [];
             if (checked && !opt.folderIds.includes(folderId)) {
                 opt.folderIds.push(folderId);
@@ -2127,19 +2361,23 @@
         }
 
         function cgRemoveFolderBadge(di, oi, folderId) {
-            cgDimensions[di].options[oi].folderIds = cgDimensions[di].options[oi].folderIds.filter(id => id !== folderId);
+            if (di === 'splitter') {
+                cgSplitter.options[oi].folderIds = cgSplitter.options[oi].folderIds.filter(id => id !== folderId);
+            } else {
+                window.cgGetActiveDims()[di].options[oi].folderIds = window.cgGetActiveDims()[di].options[oi].folderIds.filter(id => id !== folderId);
+            }
             renderCGDimensions();
         }
 
         // --- Always show toggle ---
         function cgToggleAlwaysShow(di, oi) {
-            cgDimensions[di].options[oi].alwaysShow = !cgDimensions[di].options[oi].alwaysShow;
+            window.cgGetActiveDims()[di].options[oi].alwaysShow = !window.cgGetActiveDims()[di].options[oi].alwaysShow;
             renderCGDimensions();
         }
 
         // --- Add / Remove dimensions ---
         function cgAddDimension() {
-            cgDimensions.push({ id: `gf_new_${Date.now()}`, label: '', style: 'pills', options: [] });
+            window.cgGetActiveDims().push({ id: `gf_new_${Date.now()}`, label: '', style: 'pills', options: [] });
             renderCGDimensions();
         }
 
@@ -2149,25 +2387,25 @@
         }
 
         function cgRemoveDimension(di) {
-            cgDimensions.splice(di, 1);
+            window.cgGetActiveDims().splice(di, 1);
             renderCGDimensions();
         }
 
         function cgMoveDimension(di, dir) {
             const target = di + dir;
             if (target < 0 || target >= cgDimensions.length) return;
-            [cgDimensions[di], cgDimensions[target]] = [cgDimensions[target], cgDimensions[di]];
+            [window.cgGetActiveDims()[di], window.cgGetActiveDims()[target]] = [window.cgGetActiveDims()[target], window.cgGetActiveDims()[di]];
             renderCGDimensions();
         }
 
         // --- Add / Remove options ---
         function cgAddOption(di) {
-            cgDimensions[di].options.push({ id: `go_new_${Date.now()}`, label: '', folderIds: [], alwaysShow: false });
+            window.cgGetActiveDims()[di].options.push({ id: `go_new_${Date.now()}`, label: '', folderIds: [], alwaysShow: false });
             renderCGDimensions();
         }
 
         function cgRemoveOption(di, oi) {
-            cgDimensions[di].options.splice(oi, 1);
+            window.cgGetActiveDims()[di].options.splice(oi, 1);
             renderCGDimensions();
         }
 
@@ -2404,7 +2642,7 @@
             <div class="px-6 py-4 bg-gray-50 flex justify-end space-x-3 shrink-0 border-t border-gray-100">
                 <button onclick="closeModals()"
                     class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50 transition">Cancel</button>
-                <button onclick="showToast('Gallery settings saved', 'success'); closeModals()"
+                <button onclick="saveGallerySettings()"
                     class="px-4 py-2 bg-revelti-purple text-white rounded-lg text-sm font-bold hover:bg-purple-800 transition">Save
                     Changes</button>
             </div>
