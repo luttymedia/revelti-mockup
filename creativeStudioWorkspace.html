@@ -273,9 +273,9 @@
                                     id: 'gf_dfs_years',
                                     label: 'Year',
                                     options: [
-                                        { 
-                                            id: 'opt_dfs_2026', 
-                                            label: '2026', 
+                                        {
+                                            id: 'opt_dfs_2026',
+                                            label: '2026',
                                             folderIds: ['dfs_2026'],
                                             subDimensions: [
                                                 {
@@ -472,9 +472,9 @@
                                     id: 'gf_zouk_year',
                                     label: 'Year',
                                     options: [
-                                        { 
-                                            id: 'opt_zouk_2026', 
-                                            label: '2026', 
+                                        {
+                                            id: 'opt_zouk_2026',
+                                            label: '2026',
                                             folderIds: ['zouk_2026'],
                                             subDimensions: [
                                                 {
@@ -1310,7 +1310,7 @@
         }
 
         // Modals Simulation Logic
-                function saveGallerySettings() {
+        function saveGallerySettings() {
             if (cgCurrentNode) {
                 if (cgFilterMode === 'custom') {
                     cgCurrentNode.galleryFilters = {
@@ -1850,13 +1850,13 @@
 
         let cgCurrentNode = null;      // gallery node being edited
         let cgFilterMode = 'auto';     // 'auto' | 'custom'
-        
+
         let cgHasSplitter = false;
         let cgSplitter = null;
         let cgGlobalDimensions = [];
         let cgActiveSplitterOptId = null;
 
-        window.cgGetActiveDims = function() {
+        window.cgGetActiveDims = function () {
             if (cgHasSplitter && cgSplitter && cgActiveSplitterOptId) {
                 const opt = cgSplitter.options.find(o => o.id === cgActiveSplitterOptId);
                 if (opt) {
@@ -1866,7 +1866,7 @@
             }
             return cgGlobalDimensions;
         };
-        
+
         function cgToggleSplitter(enabled) {
             cgHasSplitter = enabled;
             if (enabled && !cgSplitter) {
@@ -1874,14 +1874,14 @@
             }
             renderCGDimensions();
         }
-        
+
         function cgAddSplitterOption() {
             if (!cgSplitter.options) cgSplitter.options = [];
             cgSplitter.options.push({ id: 'opt_s_' + Date.now(), label: '', folderIds: [], subDimensions: [] });
             if (!cgActiveSplitterOptId) cgActiveSplitterOptId = cgSplitter.options[0].id;
             renderCGDimensions();
         }
-        
+
         function cgRemoveSplitterOption(oi) {
             cgSplitter.options.splice(oi, 1);
             if (cgSplitter.options.length > 0) {
@@ -1893,7 +1893,7 @@
             }
             renderCGDimensions();
         }
-        
+
         function cgRenderSplitterOptionHTML(oi, opt) {
             const badges = (opt.folderIds || []).map(fid => {
                 const node = findNodeById(fid, cgCurrentNode);
@@ -1929,7 +1929,7 @@
                 </div>
             </div>`;
         }
-        
+
         let cgDimensions = []; // legacy
 
         let cgDisplayOptions = { showMediaTypeFilter: true, showCreatorsFilter: true };
@@ -2073,7 +2073,7 @@
         // --- Render all dimensions ---
         function renderCGDimensions() {
             const builder = document.getElementById('cg-filter-builder');
-            if(!builder) return;
+            if (!builder) return;
             builder.innerHTML = '';
 
             // Splitter section
@@ -2134,7 +2134,7 @@
                 emptySplit.innerText = 'Add an Edition Option above to configure its filters.';
                 subContainer.appendChild(emptySplit);
                 builder.appendChild(subContainer);
-                return; 
+                return;
             }
 
             const dimList = document.createElement('div');
@@ -2208,7 +2208,7 @@
             list.appendChild(card);
         }
 
-function cgStylePreviewHTML(style, label) {
+        function cgStylePreviewHTML(style, label) {
             const displayLabel = label || 'Category';
             if (style === 'tabs') {
                 return `<div class="flex gap-4 border-b border-gray-200 pointer-events-none ml-2 mt-0.5">
@@ -2580,7 +2580,7 @@ function cgStylePreviewHTML(style, label) {
                                 d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                         <span>Filters are automatically derived from your folder hierarchy: <strong
-                                class="text-gray-700">Year → Day → Category</strong>. Switch to Custom to map each
+                                class="text-gray-700">Level 1 → Level 2 → Level 3</strong>. Switch to Custom to map each
                             filter option to specific folders.</span>
                     </div>
                 </div>
