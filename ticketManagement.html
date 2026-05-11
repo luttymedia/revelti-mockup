@@ -738,6 +738,7 @@
                     class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
             </header>
             <main class="p-6 space-y-4 text-gray-700 overflow-y-auto">
+
                 <h4 class="font-bold text-lg revelti-blue">Ticket Status</h4>
                 <p>A ticket's status controls its visibility and availability on your public event page.</p>
                 <ul class="list-disc list-inside space-y-1 pl-2">
@@ -756,17 +757,26 @@
                         perfect for early-bird discounts or creating urgency.</li>
                 </ul>
 
-                <h4 class="font-bold text-lg revelti-blue pt-4 border-t mt-4">Understanding Dynamic Pricing</h4>
+                <h4 class="font-bold text-lg revelti-blue pt-4 border-t mt-4">Dynamic Pricing — Date-Based Rules</h4>
                 <p>When you select Dynamic Pricing, you set a <b>Base Price</b> and then add <b>Pricing Rules</b>. Each
-                    rule defines a future price increase.</p>
+                    rule defines a future price increase by date.</p>
                 <p><b>Example:</b></p>
                 <div class="bg-gray-50 p-3 rounded-md border text-sm">
                     <p><b>Base Price:</b> €170.00</p>
                     <p><b>Rule 1:</b> Increase price to <b>€190.00</b> when <b>Date is after > Sep 1, 2025</b></p>
                     <p><b>Rule 2:</b> Increase price to <b>€220.00</b> when <b>Date is after > Oct 1, 2025</b></p>
                 </div>
-                <p class="mt-2">This setup means the ticket will cost €170 initially, then automatically jump to €190 on
+                <p class="mt-2">The ticket will cost €170 initially, then automatically jump to €190 on
                     September 2nd, and finally to €220 on October 2nd.</p>
+
+                <h4 class="font-bold text-lg revelti-blue pt-4 border-t mt-4">Dynamic Pricing — Sales-Based Rules</h4>
+                <p>You can also set rules that trigger a price change when a certain number of tickets have been sold.</p>
+                <div class="bg-gray-50 p-3 rounded-md border text-sm">
+                    <p><b>Base Price:</b> €10.00</p>
+                    <p><b>Rule 1:</b> Increase price to <b>€15.00</b> when <b>20+ tickets sold</b></p>
+                    <p><b>Rule 2:</b> Increase price to <b>€20.00</b> when <b>30+ tickets sold</b></p>
+                </div>
+                <p class="mt-2">This creates natural urgency — as demand grows, the price increases automatically.</p>
 
                 <h4 class="font-bold text-lg revelti-blue pt-4 border-t mt-4">Display Final Price (Strikethrough)</h4>
                 <p>This feature shows a higher, "final" price with a strikethrough next to the current price,
@@ -777,6 +787,23 @@
                     <li><b>For marketing</b>, you can check the box to manually enter a different, often higher, price
                         to show an even bigger discount.</li>
                 </ul>
+
+                <h4 class="font-bold text-lg revelti-blue pt-4 border-t mt-4">Shared Capacity Pool</h4>
+                <p>Group multiple ticket types into a <b>Shared Capacity Pool</b> so they draw from the same inventory limit. Sales of any ticket in the pool count toward this shared limit — ideal for tiered pricing or linked accommodations.</p>
+                <ul class="list-disc list-inside space-y-1 pl-2">
+                    <li>Select 2 or more tickets using the checkboxes in the tickets table</li>
+                    <li>Click <b>Group into Shared Capacity Pool</b></li>
+                    <li>Set a shared limit — all tickets in the pool will respect this cap</li>
+                </ul>
+
+                <h4 class="font-bold text-lg revelti-blue pt-4 border-t mt-4">Venue Capacity Bar</h4>
+                <p>The venue capacity bar gives you a real-time view of how many tickets you've allocated versus the physical venue limit. Enter a venue capacity and the bar will update automatically as you add or adjust ticket quantities.</p>
+                <p>If allocated tickets exceed venue capacity, a red warning is shown.</p>
+
+                <h4 class="font-bold text-lg revelti-blue pt-4 border-t mt-4">Checkout Override</h4>
+                <p>By default, every attendee answers the same set of checkout questions (Full Name, Email, etc.).</p>
+                <p>If a specific ticket type needs different information, enable <b>Override Checkout Questions</b> on that ticket. The questions will then be specific to that ticket only.</p>
+
             </main>
         </div>
     </div>

@@ -1635,6 +1635,27 @@ Ready to join the party?`,
                 document.getElementById('page-title').textContent = 'Create a New Event';
                 document.getElementById('page-subtitle').textContent = 'Follow the steps to get your event ready for the public.';
                 selectedSeriesId = null;
+
+                // Reset all step fields
+                document.getElementById('field-title').value = '';
+                document.getElementById('field-venue').value = '';
+                document.getElementById('field-location').value = '';
+                document.getElementById('field-type').selectedIndex = 0;
+                document.getElementById('field-language').selectedIndex = 0;
+                document.getElementById('field-start-date').value = '';
+                document.getElementById('field-end-date').value = '';
+                document.getElementById('field-description').value = '';
+                document.getElementById('field-artists').value = '';
+                document.getElementById('field-tags').value = '';
+
+                // Reset step 3 tickets
+                ticketsData = [];
+                renderTickets();
+
+                // Reset featured toggle
+                document.getElementById('featured-checkbox').checked = false;
+                featuredSelected = false;
+                premiumSelected = false;
             }
         }
 
@@ -1685,7 +1706,7 @@ Ready to join the party?`,
             document.getElementById('field-tags').value = series.tags;
 
             // --- Step 3: inject tickets, reset qty to 0 (fresh edition) ---
-            eventTickets = [];
+            ticketsData = [];
             series.tickets.forEach(t => {
                 let pricing;
                 if (t.strategy === 'simple') {
@@ -1698,15 +1719,18 @@ Ready to join the party?`,
                         finalPriceOverride: t.finalPriceOverride || null
                     };
                 }
-                eventTickets.push({
+                ticketsData.push({
                     id: Date.now() + Math.random(),
                     name: t.name,
                     quantity: 0,
                     status: t.status,
-                    pricing: pricing
+                    sold: 0,
+                    description: '',
+                    pricing: pricing,
+                    checkoutOverride: false
                 });
             });
-            renderTicketSummaries();
+            renderTickets();
         }
 
         // --- Check for ?edition=new URL param (Create next edition mode from external links) ---
@@ -1724,8 +1748,12 @@ Ready to join the party?`,
                 // Select the series in the dropdown
                 document.getElementById('series-dropdown').value = seriesId;
 
-                // Trigger pre-fill
+                // Trigger pre-fill (this will populate ticketsData via preFillAllSteps)
                 preFillAllSteps(seriesId);
+            } else {
+                // Step 3 tickets must not be pre-filled unless Dance Fest Spain was selected
+                ticketsData = [];
+                renderTickets();
             }
         });
 
@@ -2213,6 +2241,85 @@ Ready to join the party?`,
                 <button onclick="closeTicketManagementModal('pool-limit-modal')" class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg">Cancel</button>
                 <button onclick="confirmPoolLimit()" class="px-4 py-2 font-bold bg-revelti-blue text-white rounded-lg">Confirm</button>
             </footer>
+</div>
+</div>
+
+    <!-- Ticket Creation Guide Modal -->
+    <div id="help-modal" class="modal fixed inset-0 flex items-center justify-center p-4 hidden z-50" style="z-index: 60;">
+        <div class="bg-white rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col">
+            <header class="p-4 border-b flex justify-between items-center">
+                <h3 class="font-bold text-xl revelti-blue">Ticket Creation Guide</h3>
+                <button onclick="closeTicketManagementModal('help-modal')"
+                    class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+            </header>
+            <main class="p-6 space-y-4 text-gray-700 overflow-y-auto">
+
+                <h4 class="font-bold text-lg revelti-blue">Ticket Status</h4>
+                <p>A ticket's status controls its visibility and availability on your public event page.</p>
+                <ul class="list-disc list-inside space-y-1 pl-2">
+                    <li><b>On Sale:</b> The ticket is live and can be purchased immediately.</li>
+                    <li><b>Draft:</b> The ticket is saved in the system but is hidden from the public. Use this to
+                        prepare tickets in advance.</li>
+                    <li><b>Scheduled:</b> The ticket will automatically become "On Sale" at a future date you specify.
+                    </li>
+                </ul>
+
+                <h4 class="font-bold text-lg revelti-blue pt-4 border-t mt-4">Pricing Strategy</h4>
+                <p>Choose how your ticket's price is determined.</p>
+                <ul class="list-disc list-inside space-y-1 pl-2">
+                    <li><b>Simple Price:</b> The ticket has one fixed price that does not change.</li>
+                    <li><b>Dynamic Pricing:</b> The ticket price changes automatically based on rules you set. This is
+                        perfect for early-bird discounts or creating urgency.</li>
+                </ul>
+
+                <h4 class="font-bold text-lg revelti-blue pt-4 border-t mt-4">Dynamic Pricing — Date-Based Rules</h4>
+                <p>When you select Dynamic Pricing, you set a <b>Base Price</b> and then add <b>Pricing Rules</b>. Each
+                    rule defines a future price increase by date.</p>
+                <p><b>Example:</b></p>
+                <div class="bg-gray-50 p-3 rounded-md border text-sm">
+                    <p><b>Base Price:</b> €170.00</p>
+                    <p><b>Rule 1:</b> Increase price to <b>€190.00</b> when <b>Date is after > Sep 1, 2025</b></p>
+                    <p><b>Rule 2:</b> Increase price to <b>€220.00</b> when <b>Date is after > Oct 1, 2025</b></p>
+                </div>
+                <p class="mt-2">The ticket will cost €170 initially, then automatically jump to €190 on
+                    September 2nd, and finally to €220 on October 2nd.</p>
+
+                <h4 class="font-bold text-lg revelti-blue pt-4 border-t mt-4">Dynamic Pricing — Sales-Based Rules</h4>
+                <p>You can also set rules that trigger a price change when a certain number of tickets have been sold.</p>
+                <div class="bg-gray-50 p-3 rounded-md border text-sm">
+                    <p><b>Base Price:</b> €10.00</p>
+                    <p><b>Rule 1:</b> Increase price to <b>€15.00</b> when <b>20+ tickets sold</b></p>
+                    <p><b>Rule 2:</b> Increase price to <b>€20.00</b> when <b>30+ tickets sold</b></p>
+                </div>
+                <p class="mt-2">This creates natural urgency — as demand grows, the price increases automatically.</p>
+
+                <h4 class="font-bold text-lg revelti-blue pt-4 border-t mt-4">Display Final Price (Strikethrough)</h4>
+                <p>This feature shows a higher, "final" price with a strikethrough next to the current price,
+                    highlighting the discount for buyers (e.g., <span class="line-through">€220.00</span> €190.00).</p>
+                <ul class="list-disc list-inside space-y-1 pl-2">
+                    <li><b>By default</b>, the system automatically uses the highest price from your dynamic rules as
+                        the final price.</li>
+                    <li><b>For marketing</b>, you can check the box to manually enter a different, often higher, price
+                        to show an even bigger discount.</li>
+                </ul>
+
+                <h4 class="font-bold text-lg revelti-blue pt-4 border-t mt-4">Shared Capacity Pool</h4>
+                <p>Group multiple ticket types into a <b>Shared Capacity Pool</b> so they draw from the same inventory limit. Sales of any ticket in the pool count toward this shared limit — ideal for tiered pricing or linked accommodations.</p>
+                <ul class="list-disc list-inside space-y-1 pl-2">
+                    <li>Select 2 or more tickets using the checkboxes in Step 3</li>
+                    <li>Click <b>Group into Shared Capacity Pool</b></li>
+                    <li>Set a shared limit — all tickets in the pool will respect this cap</li>
+                </ul>
+
+                <h4 class="font-bold text-lg revelti-blue pt-4 border-t mt-4">Venue Capacity Bar</h4>
+                <p>The venue capacity bar gives you a real-time view of how many tickets you've allocated versus the physical venue limit. Enter a venue capacity in Step 3 and the bar will update automatically as you add or adjust ticket quantities.</p>
+                <p>If allocated tickets exceed venue capacity, a red warning is shown.</p>
+
+                <h4 class="font-bold text-lg revelti-blue pt-4 border-t mt-4">Checkout Override</h4>
+                <p>By default, every attendee answers the same set of checkout questions (Full Name, Email, etc.).</p>
+                <p>If a specific ticket type needs different information, enable <b>Override Checkout Questions</b> on that ticket. The questions will then be specific to that ticket only.</p>
+
+            </main>
         </div>
     </div>
 
