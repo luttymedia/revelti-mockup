@@ -34,6 +34,160 @@
     <!-- Your Custom Stylesheet -->
     <link rel="stylesheet" href="style.css">
 
+    <style>
+        /* ── Feature 1: Capacity Bar ── */
+        .capacity-bar-track {
+            height: 10px;
+            background: #e5e7eb;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+        .capacity-bar-fill {
+            height: 100%;
+            border-radius: 999px;
+            transition: width 0.4s ease, background-color 0.3s ease;
+            background: #213c63;
+        }
+        .capacity-bar-fill.over { background: #dc2626; }
+        .pool-group {
+            border-left: 3px solid #f58220;
+            background: #fff8f2;
+            border-radius: 0 8px 8px 0;
+            animation: poolSnap 0.25s ease;
+        }
+        @keyframes poolSnap {
+            0% { transform: translateX(-6px); opacity: 0.5; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+        .select-checkbox { cursor: pointer; width: 16px; height: 16px; accent-color: #213c63; }
+
+        /* ── Feature 2: Pricing Timeline ── */
+        .pricing-timeline {
+            display: flex;
+            align-items: center;
+            overflow-x: auto;
+            padding: 12px 0 8px;
+            gap: 0;
+        }
+        .timeline-segment {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 80px;
+            position: relative;
+        }
+        .timeline-node {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #213c63;
+            border: 3px solid #fff;
+            box-shadow: 0 0 0 2px #213c63;
+            cursor: pointer;
+            transition: transform 0.15s ease;
+            position: relative;
+            z-index: 1;
+        }
+        .timeline-node:hover { transform: scale(1.2); }
+        .timeline-node.conflict { background: #dc2626; box-shadow: 0 0 0 2px #dc2626; animation: flashRed 0.6s ease 2; }
+        @keyframes flashRed {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        .timeline-label { font-size: 10px; color: #6b7280; text-align: center; margin-top: 4px; max-width: 72px; line-height: 1.3; }
+        .timeline-price { font-size: 11px; font-weight: 700; color: #213c63; text-align: center; }
+        .timeline-connector {
+            flex: 1;
+            height: 3px;
+            background: #d1d5db;
+            min-width: 24px;
+            margin-bottom: 22px;
+        }
+        .timeline-tooltip {
+            position: absolute;
+            bottom: 34px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1f2937;
+            color: #fff;
+            font-size: 11px;
+            white-space: nowrap;
+            padding: 4px 8px;
+            border-radius: 6px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.15s;
+        }
+        .timeline-node:hover .timeline-tooltip { opacity: 1; }
+        .timeline-current-marker {
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 8px;
+            background: #f58220;
+            border-radius: 50%;
+        }
+
+        /* ── Feature 3: Campaign Engine ── */
+        .campaign-summary-box {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 13px;
+            color: #166534;
+            line-height: 1.5;
+            transition: all 0.2s ease;
+        }
+        .campaign-summary-box.error-state {
+            background: #fef2f2;
+            border-color: #fecaca;
+            color: #991b1b;
+        }
+        .code-valid-icon { color: #16a34a; font-size: 16px; }
+        .code-invalid-icon { color: #dc2626; font-size: 16px; }
+
+        /* ── Feature 4: Smart Inheritance ── */
+        .checkout-badge {
+            display: inline-flex;
+            align-items: center;
+            font-size: 10px;
+            background: #eff6ff;
+            color: #1d4ed8;
+            border: 1px solid #bfdbfe;
+            border-radius: 999px;
+            padding: 1px 7px;
+            margin-left: 6px;
+        }
+        .checkout-override-panel {
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+            background: #eff6ff;
+            padding: 12px;
+            animation: slideDown 0.2s ease;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .toggle-row:last-child { border-bottom: none; }
+
+        /* ── Shared rule-enter animation ── */
+        .rule-enter { opacity: 0; transform: translateY(-4px); transition: opacity 0.2s, transform 0.2s; }
+        .rule-enter-active { opacity: 1; transform: translateY(0); }
+        .commission-tier-enter { opacity: 0; transition: opacity 0.2s; }
+        .commission-tier-enter-active { opacity: 1; }
+    </style>
+
 </head>
 
 <body class="dashboard-layout bg-gray-100 antialiased text-gray-800" data-role="organizer">
@@ -68,35 +222,57 @@
                         </div>
                     </header>
 
-                    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="bg-white rounded-xl shadow-md">
                         <main class="p-6 md:p-8">
                             <div class="space-y-8">
                                 <details open>
                                     <summary
                                         class="flex justify-between items-center cursor-pointer font-bold text-xl revelti-blue">
-                                        Ticket Types & Pricing <svg
+                                        Ticket Types &amp; Pricing <svg
                                             class="w-5 h-5 transform transition-transform accordion-arrow" fill="none"
                                             stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                                 d="M19 9l-7 7-7-7"></path>
                                         </svg></summary>
-                                    <div class="mt-4">
+                                    <div class="mt-4 space-y-4">
+
+                                        <!-- Feature 1: Venue Capacity Bar -->
+                                        <div id="capacity-section" class="p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                                            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                                                <div class="flex items-center gap-3">
+                                                    <label class="font-semibold text-gray-700 text-sm whitespace-nowrap group relative cursor-help z-20">
+                                                        Venue Capacity
+                                                        <span class="hidden group-hover:block absolute bottom-full mb-2 w-64 p-2 bg-gray-800 text-white text-xs font-normal whitespace-normal rounded shadow-lg left-1/2 -translate-x-1/2">The maximum physical capacity of the entire event space. Limits total ticket sales.</span>
+                                                    </label>
+                                                    <input id="venue-capacity-input" type="number" placeholder="e.g. 600"
+                                                        class="p-1.5 border border-gray-300 rounded-lg text-sm w-28"
+                                                        oninput="venueCapacity = parseInt(this.value) || null; updateCapacityBar()">
+                                                </div>
+                                                <div id="capacity-numbers" class="text-sm font-semibold text-gray-600 hidden">
+                                                    <span id="capacity-allocated">0</span> / <span id="capacity-total">0</span> allocated
+                                                </div>
+                                            </div>
+                                            <div id="capacity-bar-wrapper" class="hidden">
+                                                <div class="capacity-bar-track">
+                                                    <div id="capacity-bar-fill" class="capacity-bar-fill" style="width:0%"></div>
+                                                </div>
+                                                <p id="capacity-warning" class="hidden text-xs text-red-600 font-semibold mt-1">
+                                                    &#9888;&#65039; Allocated tickets exceed venue capacity. Reduce quantities or increase venue capacity before publishing.
+                                                </p>
+                                            </div>
+                                        </div>
+
                                         <div class="overflow-x-auto">
                                             <table class="min-w-full bg-white">
                                                 <thead class="bg-gray-50">
                                                     <tr>
-                                                        <th
-                                                            class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase w-1/3">
-                                                            Name</th>
-                                                        <th
-                                                            class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
-                                                            Current Price</th>
-                                                        <th
-                                                            class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
-                                                            Sold</th>
-                                                        <th
-                                                            class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
-                                                            Status</th>
+                                                        <th class="px-3 py-2 w-8">
+                                                            <input type="checkbox" class="select-checkbox" id="select-all-tickets" onchange="toggleSelectAll(this)" title="Select all">
+                                                        </th>
+                                                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase w-1/3">Name</th>
+                                                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Current Price</th>
+                                                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Sold</th>
+                                                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
                                                         <th class="px-4 py-2"></th>
                                                     </tr>
                                                 </thead>
@@ -104,16 +280,86 @@
                                                 </tbody>
                                             </table>
                                         </div>
+
+                                        <!-- Bulk action: Group into Shared Pool -->
+                                        <div id="pool-action-bar" class="hidden items-center gap-3 p-3 bg-orange-50 border border-orange-200 rounded-lg text-sm">
+                                            <span class="font-semibold text-gray-700"><span id="selected-count">0</span> tickets selected</span>
+                                            <button onclick="groupSelectedIntoPool()" class="px-3 py-1 font-bold bg-revelti-orange text-white rounded-lg hover:opacity-90">&#128279; Group into Shared Capacity Pool</button>
+                                            <button onclick="clearTicketSelection()" class="text-gray-500 hover:text-gray-700">Cancel</button>
+                                        </div>
+
+                                        <!-- Shared Capacity Pools display -->
+                                        <div class="mt-6 border-t pt-4">
+                                            <h4 class="font-semibold text-gray-700 text-sm flex items-center gap-2 group relative cursor-help w-max mb-2 z-10">
+                                                Shared Capacity Pools
+                                                <svg class="w-4 h-4 text-gray-400 group-hover:text-revelti-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                                <span class="hidden group-hover:block absolute bottom-full mb-2 w-64 p-2 bg-gray-800 text-white text-xs font-normal whitespace-normal rounded shadow-lg left-0">A Shared Capacity Pool allows multiple ticket types to draw from the same inventory limit. Sales of any ticket in the pool count towards this shared limit. Useful for tiered pricing or shared accommodations.</span>
+                                            </h4>
+                                            <div id="pools-container" class="space-y-2">
+                                                <p id="empty-pools-msg" class="text-xs text-gray-500 italic">Select multiple tickets above and click "Group into Shared Capacity Pool" to create one.</p>
+                                            </div>
+                                        </div>
+
                                         <button onclick="openTicketModal()"
-                                            class="w-full md:w-auto mt-4 px-4 py-2 font-bold bg-revelti-blue text-white rounded-lg hover:bg-blue-800">Create
+                                            class="w-full md:w-auto mt-2 px-4 py-2 font-bold bg-revelti-blue text-white rounded-lg hover:bg-blue-800">Create
                                             New Ticket Type</button>
                                     </div>
                                 </details>
 
+                                <!-- Feature 4: Checkout Settings Global Panel -->
+                                <details>
+                                    <summary class="flex justify-between items-center cursor-pointer font-bold text-xl revelti-blue">
+                                        Checkout Settings <svg class="w-5 h-5 transform transition-transform accordion-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </summary>
+                                    <div class="mt-4 space-y-3">
+                                        <p class="text-sm text-gray-500">These fields are collected from every attendee at checkout by default. You can override them per ticket type.</p>
+                                        <div class="p-4 border border-gray-200 rounded-lg space-y-1 bg-gray-50">
+                                            <div class="toggle-row">
+                                                <span class="text-sm font-semibold text-gray-700">Full Name</span>
+                                                <label class="relative inline-flex items-center cursor-pointer">
+                                                    <input type="checkbox" id="global-field-name" class="sr-only peer" checked onchange="syncCheckoutDefaults()">
+                                                    <div class="w-9 h-5 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-revelti-blue"></div>
+                                                </label>
+                                            </div>
+                                            <div class="toggle-row">
+                                                <span class="text-sm font-semibold text-gray-700">Email Address</span>
+                                                <label class="relative inline-flex items-center cursor-pointer">
+                                                    <input type="checkbox" id="global-field-email" class="sr-only peer" checked onchange="syncCheckoutDefaults()">
+                                                    <div class="w-9 h-5 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-revelti-blue"></div>
+                                                </label>
+                                            </div>
+                                            <div class="toggle-row">
+                                                <span class="text-sm font-semibold text-gray-700">Phone Number</span>
+                                                <label class="relative inline-flex items-center cursor-pointer">
+                                                    <input type="checkbox" id="global-field-phone" class="sr-only peer" onchange="syncCheckoutDefaults()">
+                                                    <div class="w-9 h-5 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-revelti-blue"></div>
+                                                </label>
+                                            </div>
+                                            <div class="toggle-row">
+                                                <span class="text-sm font-semibold text-gray-700">ID / Passport Number</span>
+                                                <label class="relative inline-flex items-center cursor-pointer">
+                                                    <input type="checkbox" id="global-field-id" class="sr-only peer" onchange="syncCheckoutDefaults()">
+                                                    <div class="w-9 h-5 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-revelti-blue"></div>
+                                                </label>
+                                            </div>
+                                            <div class="toggle-row">
+                                                <span class="text-sm font-semibold text-gray-700">T-Shirt Size</span>
+                                                <label class="relative inline-flex items-center cursor-pointer">
+                                                    <input type="checkbox" id="global-field-tshirt" class="sr-only peer" onchange="syncCheckoutDefaults()">
+                                                    <div class="w-9 h-5 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-revelti-blue"></div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </details>
+
+                                <!-- Feature 3: Campaigns & Promotions (renamed from Discount Codes) -->
                                 <details>
                                     <summary
                                         class="flex justify-between items-center cursor-pointer font-bold text-xl revelti-blue">
-                                        Discount Codes <svg
+                                        Campaigns &amp; Promotions <svg
                                             class="w-5 h-5 transform transition-transform accordion-arrow" fill="none"
                                             stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -124,15 +370,13 @@
                                             <table class="min-w-full bg-white border">
                                                 <thead class="bg-gray-50">
                                                     <tr>
-                                                        <th
-                                                            class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
-                                                            Code</th>
+                                                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Code / Trigger</th>
                                                         <th
                                                             class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
                                                             Promoter</th>
                                                         <th
                                                             class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
-                                                            Discount</th>
+                                                            Action / Benefit</th>
                                                         <th
                                                             class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">
                                                             Commission</th>
@@ -153,8 +397,8 @@
                                             </table>
                                         </div>
                                         <button onclick="openCodeModal()"
-                                            class="w-full md:w-auto mt-4 px-4 py-2 font-bold bg-revelti-blue text-white rounded-lg hover:bg-blue-800">Generate
-                                            New Code</button>
+                                            class="w-full md:w-auto mt-4 px-4 py-2 font-bold bg-revelti-blue text-white rounded-lg hover:bg-blue-800">Create
+                                            Campaign</button>
                                     </div>
                                 </details>
                             </div>
@@ -166,6 +410,23 @@
     </div>
 
     <div id="modal-backdrop" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40" onclick="closeAllModals()"></div>
+
+    <div id="delete-campaign-modal" class="modal fixed inset-0 flex items-center justify-center p-4 hidden z-50" style="z-index: 60;">
+        <div class="bg-white rounded-xl shadow-xl w-full max-w-md max-h-[90vh] flex flex-col">
+            <header class="p-4 border-b flex justify-between items-center">
+                <h3 id="delete-campaign-modal-title" class="font-bold text-xl text-red-600">Delete Campaign?</h3>
+                <button onclick="closeTicketManagementModal('delete-campaign-modal')"
+                    class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+            </header>
+            <main class="p-6">
+                <p id="delete-campaign-message" class="text-gray-700"></p>
+            </main>
+            <footer class="p-4 border-t flex justify-end space-x-2 bg-gray-50">
+                <button onclick="closeTicketManagementModal('delete-campaign-modal')" class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg">Cancel</button>
+                <button id="delete-campaign-confirm-btn" onclick="confirmDeleteCampaign()" class="px-4 py-2 font-bold bg-red-600 text-white rounded-lg hidden">Yes, Delete</button>
+            </footer>
+        </div>
+    </div>
 
     <div id="ticket-modal" class="modal fixed inset-0 flex items-center justify-center p-4 hidden z-50">
         <div class="bg-white rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col">
@@ -188,6 +449,9 @@
                 <input type="hidden" id="editing-ticket-id">
                 <div><label class="font-semibold text-gray-700">Ticket Name</label><input id="ticket-name" type="text"
                         placeholder="e.g., Weekend Pass" class="w-full p-2 border border-gray-300 rounded-lg mt-1">
+                </div>
+                <div><label class="font-semibold text-gray-700">Description</label>
+                    <textarea id="ticket-description" placeholder="Brief details about what is included..." class="w-full p-2 border border-gray-300 rounded-lg mt-1 text-sm h-16 resize-none"></textarea>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div><label class="font-semibold text-gray-700">Quantity Available</label><input id="ticket-qty"
@@ -227,22 +491,87 @@
                 <div id="dynamic-price-view" class="hidden space-y-4">
                     <div><label class="font-semibold text-gray-700">Base Price (€)</label><input id="base-price"
                             type="number" placeholder="The first price tier"
-                            class="w-full p-2 border border-gray-300 rounded-lg mt-1"></div>
+                            class="w-full p-2 border border-gray-300 rounded-lg mt-1" oninput="renderPricingTimeline()"></div>
                     <div id="pricing-rules-container" class="space-y-2">
                     </div>
                     <button type="button" onclick="addPricingRule()"
                         class="text-sm font-semibold revelti-blue hover:underline">+ Add Pricing Rule</button>
 
+                    <!-- Feature 2: Pricing Timeline -->
+                    <div id="pricing-timeline-wrapper" class="hidden pt-3 border-t">
+                        <p class="text-xs font-semibold text-gray-500 mb-1">Price Timeline Preview</p>
+                        <div id="pricing-timeline" class="pricing-timeline"></div>
+                    </div>
+
                     <div class="pt-4 border-t">
                         <label class="flex items-center text-sm">
                             <input type="checkbox" id="final-price-override-check" class="mr-2"
                                 onchange="toggleFinalPriceOverride()">
-                            Manually set a different "final price" for display (strikethrough price)
+                            Manually set a different &ldquo;final price&rdquo; for display (strikethrough price)
                         </label>
                         <div id="final-price-override-container" class="hidden mt-2">
                             <label class="font-semibold text-gray-700">Display Final Price (€)</label>
                             <input id="final-price-override-value" type="number" placeholder="e.g., 250.00"
                                 class="w-full p-2 border border-gray-300 rounded-lg mt-1">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 4: Smart Inheritance – Checkout Override -->
+                <div class="pt-4 border-t">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <label class="font-semibold text-gray-700">Override Checkout Questions</label>
+                            <p class="text-xs text-gray-500">When on, this ticket collects different fields than the global defaults.</p>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="checkout-override-toggle" class="sr-only peer" onchange="toggleCheckoutOverride()">
+                            <div class="w-11 h-6 bg-gray-300 peer-focus:ring-2 peer-focus:ring-revelti-blue rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-revelti-blue"></div>
+                        </label>
+                    </div>
+                    <div id="checkout-override-panel" class="hidden mt-3 checkout-override-panel">
+                        <p class="text-xs text-blue-700 font-semibold mb-2">Pre-filled from global defaults — adjust as needed:</p>
+                        <div class="space-y-1">
+                            <div class="toggle-row">
+                                <span class="text-sm text-gray-700">Full Name</span>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" id="override-field-name" class="sr-only peer">
+                                    <div class="w-9 h-5 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-revelti-blue"></div>
+                                </label>
+                            </div>
+                            <div class="toggle-row">
+                                <span class="text-sm text-gray-700">Email Address</span>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" id="override-field-email" class="sr-only peer">
+                                    <div class="w-9 h-5 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-revelti-blue"></div>
+                                </label>
+                            </div>
+                            <div class="toggle-row">
+                                <span class="text-sm text-gray-700">Phone Number</span>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" id="override-field-phone" class="sr-only peer">
+                                    <div class="w-9 h-5 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-revelti-blue"></div>
+                                </label>
+                            </div>
+                            <div class="toggle-row">
+                                <span class="text-sm text-gray-700">ID / Passport Number</span>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" id="override-field-id" class="sr-only peer">
+                                    <div class="w-9 h-5 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-revelti-blue"></div>
+                                </label>
+                            </div>
+                            <div class="toggle-row">
+                                <span class="text-sm text-gray-700">T-Shirt Size</span>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" id="override-field-tshirt" class="sr-only peer">
+                                    <div class="w-9 h-5 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-revelti-blue"></div>
+                                </label>
+                            </div>
+                            <div class="mt-2">
+                                <label class="font-semibold text-gray-700 text-sm">Custom Question (optional)</label>
+                                <input id="override-custom-question" type="text" placeholder="e.g., Dietary requirements?"
+                                    class="w-full p-2 border border-gray-300 rounded-lg mt-1 text-sm">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -264,7 +593,7 @@
     <div id="code-modal" class="modal fixed inset-0 flex items-center justify-center p-4 hidden z-50">
         <div class="bg-white rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col">
             <header class="p-4 border-b flex justify-between items-center">
-                <h3 id="code-modal-title" class="font-bold text-xl revelti-blue">Generate New Discount Code</h3>
+                <h3 id="code-modal-title" class="font-bold text-xl revelti-blue">Create Campaign</h3>
                 <button onclick="closeTicketManagementModal('code-modal')"
                     class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
             </header>
@@ -273,21 +602,53 @@
                 <div id="edit-code-note" class="hidden text-sm bg-yellow-100 text-yellow-800 p-3 rounded-lg">For active
                     codes, only the number of uses and commission structure are editable.</div>
 
-                <h4 class="font-semibold text-lg revelti-blue">Discount Details</h4>
-                <div><label class="font-semibold text-gray-700">Discount Code</label><input id="code-text" type="text"
-                        placeholder="e.g., EARLYBIRD15" class="w-full p-2 border border-gray-300 rounded-lg mt-1"></div>
+                <h4 class="font-semibold text-lg revelti-blue">&#9889; Trigger</h4>
+                <div class="flex items-center gap-2">
+                    <div class="flex-1">
+                        <label class="font-semibold text-gray-700">Promo Code</label>
+                        <div class="flex items-center gap-2 mt-1">
+                            <input id="code-text" type="text" oninput="validateCodeUniqueness()"
+                                placeholder="e.g., EARLYBIRD15" class="flex-1 p-2 border border-gray-300 rounded-lg">
+                            <span id="code-validation-icon" class="text-lg"></span>
+                        </div>
+                        <p id="code-duplicate-error" class="hidden text-xs text-red-600 mt-1">This code is already in use by another campaign.</p>
+                    </div>
+                </div>
                 <div><label class="font-semibold text-gray-700">Promoter Name (Optional)</label><input
                         id="promoter-name" type="text" placeholder="e.g., John Doe"
                         class="w-full p-2 border border-gray-300 rounded-lg mt-1"></div>
-                <div class="grid grid-cols-2 gap-4">
-                    <div><label class="font-semibold text-gray-700">Discount Type</label><select id="code-type"
-                            class="w-full p-2 border border-gray-300 rounded-lg mt-1">
-                            <option value="percentage">Percentage (%)</option>
-                            <option value="fixed">Fixed Amount (€)</option>
-                        </select></div>
-                    <div><label class="font-semibold text-gray-700">Value</label><input id="code-value" type="number"
-                            placeholder="15" class="w-full p-2 border border-gray-300 rounded-lg mt-1"></div>
+
+                <h4 class="font-semibold text-lg revelti-blue pt-2">&#127881; Result</h4>
+                <div>
+                    <label class="font-semibold text-gray-700">Action Type</label>
+                    <select id="result-type" class="w-full p-2 border border-gray-300 rounded-lg mt-1" onchange="toggleResultType()">
+                        <option value="discount">&#128181; Apply Discount</option>
+                        <option value="reveal">&#129695; Reveal Hidden Ticket</option>
+                    </select>
                 </div>
+
+                <!-- Discount fields (shown when result-type = discount) -->
+                <div id="discount-fields">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div><label class="font-semibold text-gray-700">Discount Type</label><select id="code-type"
+                                class="w-full p-2 border border-gray-300 rounded-lg mt-1" onchange="updateCampaignSummary()">
+                                <option value="percentage">Percentage (%)</option>
+                                <option value="fixed">Fixed Amount (&euro;)</option>
+                            </select></div>
+                        <div><label class="font-semibold text-gray-700">Value</label><input id="code-value" type="number"
+                                placeholder="15" class="w-full p-2 border border-gray-300 rounded-lg mt-1" oninput="updateCampaignSummary()"></div>
+                    </div>
+                </div>
+
+                <!-- Reveal ticket fields (shown when result-type = reveal) -->
+                <div id="reveal-fields" class="hidden">
+                    <label class="font-semibold text-gray-700">Ticket to Reveal</label>
+                    <select id="reveal-ticket-select" class="w-full p-2 border border-gray-300 rounded-lg mt-1" onchange="updateCampaignSummary()">
+                        <!-- Populated dynamically -->
+                    </select>
+                    <p class="text-xs text-gray-500 mt-1">Only Draft tickets can be set as hidden &amp; revealed via a code.</p>
+                </div>
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div><label class="font-semibold text-gray-700">Total Uses Available</label><input id="code-uses"
                             type="number" placeholder="100" class="w-full p-2 border border-gray-300 rounded-lg mt-1">
@@ -317,7 +678,14 @@
                     </div>
                 </div>
 
-                <div class="pt-4 border-t mt-4">
+                <!-- Natural-language campaign summary (Feature 3) -->
+                <div id="campaign-summary-wrapper" class="hidden">
+                    <div id="campaign-summary-box" class="campaign-summary-box">
+                        <span id="campaign-summary-text"></span>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t mt-2">
                     <h4 class="font-semibold text-lg revelti-blue">Promoter Commission</h4>
                     <p class="text-sm text-gray-600 mb-2">Set a commission for the promoter for each ticket sold with
                         this code.</p>
@@ -347,7 +715,9 @@
                 </div>
 
             </main>
-            <footer class="p-4 border-t flex justify-end bg-gray-50">
+            <footer class="p-4 border-t flex justify-between bg-gray-50">
+                <button id="delete-code-btn" onclick="deleteCampaign()"
+                    class="px-4 py-2 font-bold bg-red-600 text-white rounded-lg hidden">Delete</button>
                 <div class="flex space-x-2">
                     <button onclick="closeTicketManagementModal('code-modal')"
                         class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg">Cancel</button>
@@ -411,53 +781,100 @@
         </div>
     </div>
 
+    <div id="pool-limit-modal" class="modal fixed inset-0 flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-xl shadow-xl w-full max-w-sm flex flex-col">
+            <header class="p-4 border-b flex justify-between items-center">
+                <h3 class="font-bold text-lg revelti-blue">Set Shared Capacity</h3>
+                <button onclick="closeTicketManagementModal('pool-limit-modal')" class="text-gray-500 hover:text-gray-800 text-2xl leading-none">&times;</button>
+            </header>
+            <main class="p-4 space-y-4">
+                <p class="text-sm text-gray-600" id="pool-limit-description"></p>
+                <div>
+                    <label class="font-semibold text-gray-700 text-sm">Shared Limit</label>
+                    <input id="pool-limit-input" type="number" class="w-full p-2 border border-gray-300 rounded-lg mt-1">
+                </div>
+            </main>
+            <footer class="p-4 border-t flex justify-end space-x-2 bg-gray-50 rounded-b-xl">
+                <button onclick="closeTicketManagementModal('pool-limit-modal')" class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg">Cancel</button>
+                <button onclick="confirmPoolLimit()" class="px-4 py-2 font-bold bg-revelti-blue text-white rounded-lg">Confirm</button>
+            </footer>
+        </div>
+    </div>
+
     <script>
         // --- DATA ---
         let ticketsData = [
             {
-                id: 1, name: 'Sensuality Pass', quantity: 200, sold: 150, status: 'On Sale',
-                pricing: { strategy: 'dynamic', basePrice: 170.00, rules: [{ type: 'date', value: '2025-08-01', newPrice: 180.00 }, { type: 'date', value: '2025-09-01', newPrice: 190.00 }, { type: 'date', value: '2025-10-01', newPrice: 220.00 }], finalPriceOverride: null }
+                id: 1, name: 'Sensuality Pass', description: 'Access to all main workshops and social parties.', quantity: 200, sold: 150, status: 'On Sale',
+                pricing: { strategy: 'dynamic', basePrice: 170.00, rules: [{ type: 'date', value: '2025-08-01', newPrice: 180.00 }, { type: 'date', value: '2025-09-01', newPrice: 190.00 }, { type: 'date', value: '2025-10-01', newPrice: 220.00 }], finalPriceOverride: null },
+                checkoutOverride: false
             },
             {
-                id: 2, name: 'Essentiality Pass', quantity: 200, sold: 120, status: 'On Sale',
-                pricing: { strategy: 'dynamic', basePrice: 170.00, rules: [{ type: 'date', value: '2025-08-01', newPrice: 180.00 }, { type: 'date', value: '2025-09-01', newPrice: 190.00 }, { type: 'date', value: '2025-10-01', newPrice: 220.00 }], finalPriceOverride: 250.00 }
+                id: 2, name: 'Essentiality Pass', description: 'Access to selected foundational workshops and evening parties.', quantity: 200, sold: 120, status: 'On Sale',
+                pricing: { strategy: 'dynamic', basePrice: 170.00, rules: [{ type: 'date', value: '2025-08-01', newPrice: 180.00 }, { type: 'date', value: '2025-09-01', newPrice: 190.00 }, { type: 'date', value: '2025-10-01', newPrice: 220.00 }], finalPriceOverride: 250.00 },
+                checkoutOverride: false
             },
             {
-                id: 3, name: 'J&J Amateur', quantity: 40, sold: 17, status: 'On Sale',
-                pricing: { strategy: 'dynamic', basePrice: 10.00, rules: [{ type: 'sales', value: 20, newPrice: 15.00 }, { type: 'sales', value: 30, newPrice: 20.00 }], finalPriceOverride: null }
+                id: 3, name: 'J&J Amateur', description: 'Entry fee for the Jack & Jill Amateur competition.', quantity: 40, sold: 17, status: 'On Sale',
+                pricing: { strategy: 'dynamic', basePrice: 10.00, rules: [{ type: 'sales', value: 20, newPrice: 15.00 }, { type: 'sales', value: 30, newPrice: 20.00 }], finalPriceOverride: null },
+                checkoutOverride: false
             },
             {
-                id: 4, name: 'Training Tracks', quantity: 50, sold: 0, status: 'Draft',
-                pricing: { strategy: 'simple', simplePrice: 100.00 }
+                id: 4, name: 'Training Tracks', description: 'Special intensive training sessions.', quantity: 50, sold: 0, status: 'Draft',
+                pricing: { strategy: 'simple', simplePrice: 100.00 },
+                checkoutOverride: false
             },
             {
-                id: 5, name: 'Party Pass', quantity: 100, sold: 0, status: 'Scheduled', scheduledDate: '2025-10-15',
-                pricing: { strategy: 'simple', simplePrice: 80.00 }
+                id: 5, name: 'Party Pass', description: 'Access to all evening social parties.', quantity: 100, sold: 0, status: 'Scheduled', scheduledDate: '2025-10-15',
+                pricing: { strategy: 'simple', simplePrice: 80.00 },
+                checkoutOverride: true, checkoutCustomQuestion: 'What role do you dance (leader/follower)?'
+            },
+            {
+                id: 6, name: 'Backstage Pass', description: 'VIP access including front row seats and backstage passes.', quantity: 10, sold: 0, status: 'Draft',
+                pricing: { strategy: 'simple', simplePrice: 300.00 },
+                checkoutOverride: false
             }
         ];
 
         let discountCodesData = [
             {
                 id: 1, text: 'DJSPARKUS10', promoterName: 'DJ Sparkus', type: 'percentage', value: 10, uses: 100, claimed: 45, status: 'Active',
+                resultType: 'discount',
                 applicableTicketIds: [1, 2],
                 commission: { strategy: 'tiered', baseRate: 10, tiers: [{ name: 'Silver', threshold: 20, rate: 12 }, { name: 'Golden', threshold: 50, rate: 15 }] }
             },
             {
                 id: 2, text: 'VALENTINES', promoterName: 'Jane Doe', type: 'fixed', value: 5, uses: 150, claimed: 25, status: 'Active',
+                resultType: 'discount',
                 applicableTicketIds: [], // Applies to all
                 commission: { strategy: 'simple', simpleRate: 8 }
             },
             {
                 id: 3, text: 'EARLYBIRD', promoterName: '', type: 'percentage', value: 15, uses: 50, claimed: 50, status: 'Inactive',
+                resultType: 'discount',
                 applicableTicketIds: [1, 2, 5],
                 commission: { strategy: 'simple', simpleRate: 0 }
             },
             {
-                id: 4, text: 'NEWPROMO', promoterName: 'John Appleseed', type: 'fixed', value: 20, uses: 200, claimed: 0, status: 'Draft',
-                applicableTicketIds: [3],
+                id: 4, text: 'VIP10', promoterName: 'John Appleseed', type: 'fixed', value: 20, uses: 200, claimed: 0, status: 'Draft',
+                resultType: 'reveal', revealTicketId: 4,
+                applicableTicketIds: [],
                 commission: { strategy: 'tiered', baseRate: 15, tiers: [{ name: '', threshold: 100, rate: 20 }] }
             },
+            {
+                id: 5, text: 'VIP-REVEAL', promoterName: 'System', type: 'percentage', value: 0, uses: 10, claimed: 0, status: 'Active',
+                resultType: 'reveal', revealTicketId: 6,
+                applicableTicketIds: [], // Applies to all
+                commission: { strategy: 'simple', simpleRate: 0 }
+            }
         ];
+
+        // Feature 1: Capacity & pools
+        let venueCapacity = null;
+        let pools = [];
+
+        // Feature 4: Checkout global defaults
+        let checkoutDefaults = { name: true, email: true, phone: false, id: false, tshirt: false };
 
 
         // --- UTILITY FUNCTIONS ---
@@ -522,14 +939,21 @@
             tableBody.innerHTML = '';
             ticketsData.forEach(ticket => {
                 const row = document.createElement('tr');
+                row.dataset.ticketId = ticket.id;
                 let priceDisplay = formatCurrency(getCurrentPrice(ticket));
                 if (ticket.pricing.strategy === 'dynamic') {
                     priceDisplay += ' <span class="text-xs text-revelti-orange font-bold">⚡ Dynamic</span>';
                 }
+                const checkoutBadge = ticket.checkoutOverride
+                    ? '<span class="checkout-badge">⚙️ Custom Checkout</span>' : '';
 
                 row.innerHTML = `
+                    <td class="px-3 py-3 align-top w-8">
+                        <input type="checkbox" class="select-checkbox ticket-row-check" data-id="${ticket.id}" onchange="onTicketCheckboxChange()">
+                    </td>
                     <td class="px-4 py-3 whitespace-nowrap align-top">
-                        <div class="font-semibold">${ticket.name}</div>
+                        <div class="font-semibold">${ticket.name}${checkoutBadge}</div>
+                        ${ticket.description ? `<div class="text-xs text-gray-500 mt-0.5 whitespace-normal">${ticket.description}</div>` : ''}
                         ${ticket.pricing.strategy === 'dynamic' ? renderRulesSummary(ticket) : ''}
                     </td>
                     <td class="px-4 py-3 align-top">${priceDisplay}</td>
@@ -541,6 +965,8 @@
                 `;
                 tableBody.appendChild(row);
             });
+            updateCapacityBar();
+            renderPools();
         };
 
         const renderRulesSummary = (ticket) => {
@@ -584,8 +1010,14 @@
             tableBody.innerHTML = '';
             discountCodesData.forEach(code => {
                 const row = document.createElement('tr');
-                const discountText = code.type === 'percentage' ? `${code.value}%` : formatCurrency(code.value);
-
+                let actionHtml = '';
+                if (code.resultType === 'reveal') {
+                    const ticketName = ticketsData.find(t => t.id == code.revealTicketId)?.name || 'Ticket';
+                    actionHtml = `<div class="flex items-center gap-1 text-revelti-purple"><svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg><span class="font-semibold text-xs leading-tight">Reveal:<br>${ticketName}</span></div>`;
+                } else {
+                    const discountVal = code.type === 'percentage' ? `${code.value}%` : formatCurrency(code.value);
+                    actionHtml = `<div class="flex items-center gap-1 text-green-600"><svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg><span class="font-semibold text-xs leading-tight">Discount:<br>${discountVal}</span></div>`;
+                }
                 let commissionDisplay = formatCurrency(getCurrentCommission(code));
                 if (code.commission.strategy === 'tiered') {
                     commissionDisplay += ' <span class="text-xs text-revelti-orange font-bold">⚡ Tiered</span>';
@@ -601,7 +1033,7 @@
                 row.innerHTML = `
                     <td class="px-4 py-3 whitespace-nowrap font-semibold align-top">${code.text}</td>
                     <td class="px-4 py-3 align-top">${code.promoterName || 'N/A'}</td>
-                    <td class="px-4 py-3 align-top">${discountText}</td>
+                    <td class="px-4 py-3 align-top">${actionHtml}</td>
                     <td class="px-4 py-3 align-top">
                         <div>${commissionDisplay}</div>
                         ${code.commission.strategy === 'tiered' ? renderCommissionSummary(code) : ''}
@@ -641,6 +1073,253 @@
             return html;
         };
 
+        // --- FEATURE 1: UNIFIED CAPACITY ARCHITECTURE ---
+        const getTotalAllocated = () => {
+            const pooledIds = pools.flatMap(p => p.ticketIds);
+            const poolLimits = pools.reduce((sum, p) => sum + p.limit, 0);
+            const unPooledSum = ticketsData
+                .filter(t => !pooledIds.includes(t.id))
+                .reduce((sum, t) => sum + (t.quantity || 0), 0);
+            return poolLimits + unPooledSum;
+        };
+
+        const updateCapacityBar = () => {
+            const inputEl = document.getElementById('venue-capacity-input');
+            const inputVal = parseInt(inputEl?.value);
+            venueCapacity = (!inputVal || inputVal <= 0) ? null : inputVal;
+            const cap = venueCapacity;
+            const allocated = getTotalAllocated();
+            const wrapper = document.getElementById('capacity-bar-wrapper');
+            const numbers = document.getElementById('capacity-numbers');
+            const fill = document.getElementById('capacity-bar-fill');
+            const warning = document.getElementById('capacity-warning');
+
+            if (!cap) {
+                wrapper.classList.add('hidden');
+                numbers.classList.add('hidden');
+                return;
+            }
+            wrapper.classList.remove('hidden');
+            numbers.classList.remove('hidden');
+            document.getElementById('capacity-allocated').textContent = allocated;
+            document.getElementById('capacity-total').textContent = cap;
+
+            const pct = Math.min((allocated / cap) * 100, 100);
+            fill.style.width = pct + '%';
+            const isOver = allocated > cap;
+            fill.classList.toggle('over', isOver);
+            warning.classList.toggle('hidden', !isOver);
+        };
+
+        const onTicketCheckboxChange = () => {
+            const checked = document.querySelectorAll('.ticket-row-check:checked');
+            const bar = document.getElementById('pool-action-bar');
+            document.getElementById('selected-count').textContent = checked.length;
+            bar.classList.toggle('hidden', checked.length < 2);
+            bar.classList.toggle('flex', checked.length >= 2);
+            document.getElementById('select-all-tickets').checked =
+                checked.length === ticketsData.length;
+        };
+
+        const toggleSelectAll = (master) => {
+            document.querySelectorAll('.ticket-row-check').forEach(cb => cb.checked = master.checked);
+            onTicketCheckboxChange();
+        };
+
+        const clearTicketSelection = () => {
+            document.querySelectorAll('.ticket-row-check').forEach(cb => cb.checked = false);
+            document.getElementById('select-all-tickets').checked = false;
+            onTicketCheckboxChange();
+        };
+
+        let pendingPoolIds = [];
+        const groupSelectedIntoPool = () => {
+            const checkedBoxes = document.querySelectorAll('.ticket-row-check:checked');
+            if (checkedBoxes.length < 2) return;
+            pendingPoolIds = Array.from(checkedBoxes).map(cb => parseInt(cb.dataset.id));
+            const names = pendingPoolIds.map(id => ticketsData.find(t => t.id === id)?.name).filter(Boolean);
+            const defaultLimit = pendingPoolIds.reduce((s, id) => s + (ticketsData.find(t => t.id === id)?.quantity || 0), 0);
+            
+            document.getElementById('pool-limit-description').innerHTML = `Set a shared capacity limit for:<br><b>${names.join(', ')}</b>`;
+            document.getElementById('pool-limit-input').value = defaultLimit;
+            openModal('pool-limit-modal');
+        };
+
+        const confirmPoolLimit = () => {
+            const limit = parseInt(document.getElementById('pool-limit-input').value);
+            if (!limit || isNaN(limit)) return;
+            pools.push({ id: Date.now(), ticketIds: pendingPoolIds, limit });
+            clearTicketSelection();
+            renderTickets();
+            closeTicketManagementModal('pool-limit-modal');
+        };
+
+        const renderPools = () => {
+            const container = document.getElementById('pools-container');
+            container.innerHTML = '';
+            
+            if (pools.length === 0) {
+                container.innerHTML = '<p id="empty-pools-msg" class="text-xs text-gray-500 italic">Select multiple tickets above and click "Group into Shared Capacity Pool" to create one.</p>';
+            }
+            
+            pools.forEach(pool => {
+                const names = pool.ticketIds.map(id => ticketsData.find(t => t.id === id)?.name || `Ticket #${id}`).join(', ');
+                const div = document.createElement('div');
+                div.className = 'pool-group p-3 flex items-center justify-between text-sm bg-orange-50 border border-orange-100 rounded-lg';
+                div.innerHTML = `
+                    <div>
+                        <span class="font-bold text-revelti-orange">🔗 Shared Pool</span>
+                        <span class="ml-2 text-gray-700">${names}</span>
+                        <span class="ml-2 text-gray-500">— limit: <strong>${pool.limit}</strong></span>
+                    </div>
+                    <button onclick="deletePool(${pool.id})" class="text-red-500 hover:text-red-700 text-xs font-semibold ml-4">Remove</button>
+                `;
+                container.appendChild(div);
+            });
+            updateCapacityBar();
+        };
+
+        const deletePool = (poolId) => {
+            pools = pools.filter(p => p.id !== poolId);
+            renderPools();
+        };
+
+        // --- FEATURE 2: PRICING TIMELINE ---
+        const renderPricingTimeline = () => {
+            const wrapper = document.getElementById('pricing-timeline-wrapper');
+            const timeline = document.getElementById('pricing-timeline');
+            const basePrice = parseFloat(document.getElementById('base-price').value);
+            const rules = [];
+            document.querySelectorAll('#pricing-rules-container > div').forEach(ruleDiv => {
+                rules.push({
+                    type: ruleDiv.querySelector('.rule-type')?.value,
+                    value: ruleDiv.querySelector('.rule-value')?.value,
+                    newPrice: parseFloat(ruleDiv.querySelector('.rule-price')?.value) || 0
+                });
+            });
+
+            if (!basePrice && rules.length === 0) {
+                wrapper.classList.add('hidden');
+                return;
+            }
+            wrapper.classList.remove('hidden');
+            timeline.innerHTML = '';
+
+            const segments = [{ label: 'Start', price: basePrice || 0, isBase: true }];
+            const dateRules = rules.filter(r => r.type === 'date').sort((a, b) => new Date(a.value) - new Date(b.value));
+            const salesRules = rules.filter(r => r.type === 'sales').sort((a, b) => a.value - b.value);
+            dateRules.forEach(r => segments.push({ label: r.value ? formatDate(r.value) : '?', price: r.newPrice, type: 'date' }));
+            salesRules.forEach(r => segments.push({ label: `${r.value} sales`, price: r.newPrice, type: 'sales' }));
+
+            // Check for conflicts (price going down or out of order dates)
+            let hasConflict = false;
+            for (let i = 1; i < segments.length; i++) {
+                if (segments[i].price <= segments[i - 1].price) hasConflict = true;
+            }
+
+            segments.forEach((seg, i) => {
+                const segEl = document.createElement('div');
+                segEl.className = 'timeline-segment';
+                const isConflict = hasConflict && i > 0 && seg.price <= segments[i - 1]?.price;
+                segEl.innerHTML = `
+                    <div class="timeline-price">${formatCurrency(seg.price)}</div>
+                    <div class="timeline-node ${isConflict ? 'conflict' : ''}">
+                        <div class="timeline-tooltip">${formatCurrency(seg.price)} — ${seg.label}</div>
+                    </div>
+                    <div class="timeline-label">${seg.label}${seg.type === 'sales' ? ' 🔢' : ''}</div>
+                `;
+                timeline.appendChild(segEl);
+                if (i < segments.length - 1) {
+                    const connector = document.createElement('div');
+                    connector.className = 'timeline-connector';
+                    timeline.appendChild(connector);
+                }
+            });
+        };
+
+        // --- FEATURE 3: CAMPAIGN ENGINE ---
+        const validateCodeUniqueness = () => {
+            const editingId = parseInt(document.getElementById('editing-code-id').value);
+            const val = document.getElementById('code-text').value.trim().toUpperCase();
+            const icon = document.getElementById('code-validation-icon');
+            const errorEl = document.getElementById('code-duplicate-error');
+            const isDuplicate = discountCodesData.some(c => c.text === val && c.id !== editingId);
+
+            if (!val) { icon.textContent = ''; errorEl.classList.add('hidden'); updateCampaignSummary(); return; }
+            if (isDuplicate) {
+                icon.innerHTML = '<span class="code-invalid-icon">✗</span>';
+                errorEl.classList.remove('hidden');
+            } else {
+                icon.innerHTML = '<span class="code-valid-icon">✓</span>';
+                errorEl.classList.add('hidden');
+            }
+            updateCampaignSummary();
+        };
+
+        const toggleResultType = () => {
+            const type = document.getElementById('result-type').value;
+            document.getElementById('discount-fields').classList.toggle('hidden', type !== 'discount');
+            document.getElementById('reveal-fields').classList.toggle('hidden', type !== 'reveal');
+            updateCampaignSummary();
+        };
+
+        const updateCampaignSummary = () => {
+            const wrapper = document.getElementById('campaign-summary-wrapper');
+            const summaryEl = document.getElementById('campaign-summary-text');
+            const box = document.getElementById('campaign-summary-box');
+            const code = document.getElementById('code-text').value.trim().toUpperCase();
+            const type = document.getElementById('result-type').value;
+            const isDuplicate = document.getElementById('code-duplicate-error')?.classList.contains('hidden') === false;
+
+            if (!code) { wrapper.classList.add('hidden'); return; }
+            wrapper.classList.remove('hidden');
+
+            let summary = '';
+            if (isDuplicate) {
+                box.classList.add('error-state');
+                summaryEl.textContent = '⚠️ Fix the duplicate code to see the campaign summary.';
+                return;
+            }
+            box.classList.remove('error-state');
+
+            if (type === 'discount') {
+                const val = document.getElementById('code-value').value;
+                const discType = document.getElementById('code-type').value;
+                const valDisplay = val ? (discType === 'percentage' ? `${val}%` : `€${val}`) : '[value]';
+                summary = `When an attendee uses code "${code}", they will receive a ${valDisplay} discount.`;
+            } else {
+                const revealSel = document.getElementById('reveal-ticket-select');
+                const revealName = revealSel.options[revealSel.selectedIndex]?.text || '[ticket]';
+                summary = `When an attendee uses code "${code}", they will unlock access to: "${revealName}".`;
+            }
+            summaryEl.textContent = '🎯 ' + summary;
+        };
+
+        // --- FEATURE 4: SMART INHERITANCE ---
+        const syncCheckoutDefaults = () => {
+            checkoutDefaults = {
+                name: document.getElementById('global-field-name').checked,
+                email: document.getElementById('global-field-email').checked,
+                phone: document.getElementById('global-field-phone').checked,
+                id: document.getElementById('global-field-id').checked,
+                tshirt: document.getElementById('global-field-tshirt').checked,
+            };
+        };
+
+        const toggleCheckoutOverride = () => {
+            const isOn = document.getElementById('checkout-override-toggle').checked;
+            const panel = document.getElementById('checkout-override-panel');
+            panel.classList.toggle('hidden', !isOn);
+            if (isOn) {
+                // Pre-fill from global defaults
+                document.getElementById('override-field-name').checked = checkoutDefaults.name;
+                document.getElementById('override-field-email').checked = checkoutDefaults.email;
+                document.getElementById('override-field-phone').checked = checkoutDefaults.phone;
+                document.getElementById('override-field-id').checked = checkoutDefaults.id;
+                document.getElementById('override-field-tshirt').checked = checkoutDefaults.tshirt;
+            }
+        };
+
         // --- MODAL LOGIC ---
         const modalBackdrop = document.getElementById('modal-backdrop');
         const allModals = document.querySelectorAll('.modal');
@@ -675,6 +1354,7 @@
                 deleteBtn.classList.toggle('hidden', ticket.status === 'On Sale');
 
                 document.getElementById('ticket-name').value = ticket.name;
+                document.getElementById('ticket-description').value = ticket.description || '';
                 document.getElementById('ticket-qty').value = ticket.quantity;
                 document.getElementById('ticket-status').value = ticket.status;
                 toggleScheduledDate(ticket.status);
@@ -698,12 +1378,22 @@
                     if (ticket.pricing.finalPriceOverride) {
                         document.getElementById('final-price-override-value').value = ticket.pricing.finalPriceOverride;
                     }
+                    renderPricingTimeline();
+                }
+
+                // Feature 4: load checkout override
+                const overrideToggle = document.getElementById('checkout-override-toggle');
+                overrideToggle.checked = !!ticket.checkoutOverride;
+                toggleCheckoutOverride();
+                if (ticket.checkoutOverride && ticket.checkoutCustomQuestion) {
+                    document.getElementById('override-custom-question').value = ticket.checkoutCustomQuestion;
                 }
 
             } else { // Creating a new ticket
                 document.getElementById('ticket-modal-title').textContent = 'Create New Ticket Type';
                 deleteBtn.classList.remove('hidden'); // Can always delete a new draft
                 document.getElementById('ticket-name').value = '';
+                document.getElementById('ticket-description').value = '';
                 document.getElementById('ticket-qty').value = '';
                 document.getElementById('ticket-status').value = 'On Sale';
                 toggleScheduledDate('On Sale');
@@ -714,6 +1404,11 @@
                 document.getElementById('pricing-rules-container').innerHTML = '';
                 document.getElementById('final-price-override-check').checked = false;
                 toggleFinalPriceOverride();
+                document.getElementById('pricing-timeline-wrapper').classList.add('hidden');
+                // Reset checkout override
+                document.getElementById('checkout-override-toggle').checked = false;
+                document.getElementById('checkout-override-panel').classList.add('hidden');
+                document.getElementById('override-custom-question').value = '';
             }
             openModal('ticket-modal');
         };
@@ -736,18 +1431,35 @@
                 `;
             });
 
+            // Populate reveal-ticket dropdown with Draft tickets
+            const revealSelect = document.getElementById('reveal-ticket-select');
+            revealSelect.innerHTML = '';
+            ticketsData.filter(t => t.status === 'Draft').forEach(ticket => {
+                revealSelect.add(new Option(ticket.name, ticket.id));
+            });
+            if (revealSelect.options.length === 0) revealSelect.add(new Option('No Draft tickets available', ''));
+
             const fieldsToDisable = ['code-text', 'code-type', 'code-value'];
 
             if (codeId) {
                 const code = discountCodesData.find(c => c.id === codeId);
-                document.getElementById('code-modal-title').textContent = 'Edit Discount Code';
+                document.getElementById('code-modal-title').textContent = 'Edit Campaign';
                 note.classList.remove('hidden');
+                document.getElementById('delete-code-btn').classList.remove('hidden');
 
                 document.getElementById('code-text').value = code.text;
                 document.getElementById('promoter-name').value = code.promoterName;
                 document.getElementById('code-type').value = code.type;
                 document.getElementById('code-value').value = code.value;
                 document.getElementById('code-uses').value = code.uses;
+
+                // Feature 3: set result type
+                const resultType = code.resultType || 'discount';
+                document.getElementById('result-type').value = resultType;
+                toggleResultType();
+                if (resultType === 'reveal' && code.revealTicketId) {
+                    document.getElementById('reveal-ticket-select').value = code.revealTicketId;
+                }
 
                 if (code.status === 'Draft') {
                     ['Draft', 'Active', 'Inactive'].forEach(s => statusSelect.add(new Option(s, s)));
@@ -762,7 +1474,8 @@
                 document.querySelectorAll('.applicable-ticket-checkbox').forEach(checkbox => {
                     checkbox.checked = code.applicableTicketIds.includes(parseInt(checkbox.value));
                 });
-                updateTicketSelectionText(); // Update dropdown text
+                updateTicketSelectionText();
+                updateCampaignSummary();
 
                 // Commission section
                 const commissionStrategy = code.commission.strategy;
@@ -777,10 +1490,16 @@
                 }
 
             } else {
-                document.getElementById('code-modal-title').textContent = 'Generate New Discount Code';
+                document.getElementById('code-modal-title').textContent = 'Create Campaign';
                 note.classList.add('hidden');
+                document.getElementById('delete-code-btn').classList.add('hidden');
                 ['code-text', 'promoter-name', 'code-value', 'code-uses'].forEach(id => document.getElementById(id).value = '');
                 document.getElementById('code-type').value = 'percentage';
+                document.getElementById('result-type').value = 'discount';
+                toggleResultType();
+                document.getElementById('campaign-summary-wrapper').classList.add('hidden');
+                document.getElementById('code-validation-icon').textContent = '';
+                document.getElementById('code-duplicate-error').classList.add('hidden');
                 ['Draft', 'Active', 'Inactive'].forEach(s => statusSelect.add(new Option(s, s)));
                 statusSelect.value = 'Draft';
                 fieldsToDisable.forEach(id => document.getElementById(id).disabled = false);
@@ -845,17 +1564,17 @@
 
             ruleDiv.innerHTML = `
                 <span>Increase to</span>
-                <input type="number" placeholder="220.00" class="rule-price p-2 border border-gray-300 rounded-lg w-24" value="${rule?.newPrice || ''}">
+                <input type="number" placeholder="220.00" class="rule-price p-2 border border-gray-300 rounded-lg w-24" value="${rule?.newPrice || ''}" oninput="renderPricingTimeline()">
                 <span>when</span>
                 <select class="rule-type p-2 border border-gray-300 rounded-lg" onchange="updateRuleInputType(this)">
                     <option value="date" ${rule?.type === 'date' ? 'selected' : ''}>Date is after</option>
-                    <option value="sales" ${rule?.type === 'sales' ? 'selected' : ''}>Tickets Sold ></option>
+                    <option value="sales" ${rule?.type === 'sales' ? 'selected' : ''}>Tickets Sold &gt;</option>
                 </select>
-                <input type="${rule?.type === 'sales' ? 'number' : 'date'}" class="rule-value p-2 border border-gray-300 rounded-lg flex-1" value="${rule?.value || ''}">
-                <button type="button" onclick="this.parentElement.remove()" class="text-red-500 hover:text-red-700 font-bold">&times;</button>
+                <input type="${rule?.type === 'sales' ? 'number' : 'date'}" class="rule-value p-2 border border-gray-300 rounded-lg flex-1" value="${rule?.value || ''}" oninput="renderPricingTimeline()">
+                <button type="button" onclick="this.parentElement.remove(); renderPricingTimeline();" class="text-red-500 hover:text-red-700 font-bold">&times;</button>
             `;
             container.appendChild(ruleDiv);
-            requestAnimationFrame(() => ruleDiv.classList.add('rule-enter-active'));
+            requestAnimationFrame(() => { ruleDiv.classList.add('rule-enter-active'); renderPricingTimeline(); });
         };
 
         const addCommissionTier = (tier = null) => {
@@ -881,6 +1600,7 @@
             const valueInput = selectElement.nextElementSibling;
             valueInput.type = selectElement.value === 'date' ? 'date' : 'number';
             valueInput.value = '';
+            renderPricingTimeline();
         };
 
         const saveTicket = () => {
@@ -910,13 +1630,19 @@
                 };
             }
 
+            // Feature 4: checkout override
+            const hasOverride = document.getElementById('checkout-override-toggle').checked;
+
             const ticketPayload = {
                 name: document.getElementById('ticket-name').value || 'Unnamed Ticket',
+                description: document.getElementById('ticket-description').value,
                 quantity: parseInt(document.getElementById('ticket-qty').value) || 0,
                 status: status,
                 scheduledDate: status === 'Scheduled' ? document.getElementById('scheduled-date').value : null,
                 pricing: pricingData,
-                sold: ticketId ? ticketsData.find(t => t.id === ticketId).sold : 0
+                sold: ticketId ? ticketsData.find(t => t.id === ticketId).sold : 0,
+                checkoutOverride: hasOverride,
+                checkoutCustomQuestion: hasOverride ? document.getElementById('override-custom-question').value : ''
             };
 
             if (ticketId) {
@@ -945,6 +1671,44 @@
                 }
             } else { // "Deleting" a new, unsaved ticket is just closing the modal
                 closeTicketManagementModal('ticket-modal');
+            }
+        };
+
+        let pendingDeleteCampaignId = null;
+
+        const deleteCampaign = () => {
+            const codeId = parseInt(document.getElementById('editing-code-id').value);
+            if (codeId) {
+                const code = discountCodesData.find(c => c.id === codeId);
+                const modalTitle = document.getElementById('delete-campaign-modal-title');
+                const modalMessage = document.getElementById('delete-campaign-message');
+                const confirmBtn = document.getElementById('delete-campaign-confirm-btn');
+                
+                if (code.claimed > 0) {
+                    modalTitle.textContent = "Cannot Delete Campaign";
+                    modalTitle.className = "font-bold text-xl text-gray-800";
+                    modalMessage.innerHTML = `This campaign has already been claimed <strong>${code.claimed}</strong> time(s) and cannot be deleted.<br><br>You can mark its Status as 'Inactive' instead.`;
+                    confirmBtn.classList.add('hidden');
+                } else {
+                    modalTitle.textContent = "Delete Campaign?";
+                    modalTitle.className = "font-bold text-xl text-red-600";
+                    modalMessage.textContent = "Are you sure you want to delete this campaign? This action cannot be undone.";
+                    confirmBtn.classList.remove('hidden');
+                    pendingDeleteCampaignId = codeId;
+                }
+                openModal('delete-campaign-modal');
+            } else {
+                closeTicketManagementModal('code-modal');
+            }
+        };
+
+        const confirmDeleteCampaign = () => {
+            if (pendingDeleteCampaignId) {
+                discountCodesData = discountCodesData.filter(c => c.id !== pendingDeleteCampaignId);
+                renderDiscountCodes();
+                closeTicketManagementModal('delete-campaign-modal');
+                closeTicketManagementModal('code-modal');
+                pendingDeleteCampaignId = null;
             }
         };
 
@@ -980,6 +1744,9 @@
                 };
             }
 
+            const resultType = document.getElementById('result-type').value;
+            const revealTicketId = resultType === 'reveal' ? parseInt(document.getElementById('reveal-ticket-select').value) : null;
+
             if (codeId) { // Editing
                 const index = discountCodesData.findIndex(c => c.id === codeId);
                 discountCodesData[index].uses = parseInt(document.getElementById('code-uses').value) || 0;
@@ -987,16 +1754,20 @@
                 discountCodesData[index].promoterName = document.getElementById('promoter-name').value;
                 discountCodesData[index].applicableTicketIds = applicableTicketIds;
                 discountCodesData[index].commission = commissionData;
+                discountCodesData[index].resultType = resultType;
+                discountCodesData[index].revealTicketId = revealTicketId;
             } else { // Creating
                 const newCode = {
                     id: Math.max(...discountCodesData.map(c => c.id), 0) + 1,
-                    text: document.getElementById('code-text').value,
+                    text: document.getElementById('code-text').value.toUpperCase(),
                     promoterName: document.getElementById('promoter-name').value,
                     type: document.getElementById('code-type').value,
                     value: parseFloat(document.getElementById('code-value').value) || 0,
                     uses: parseInt(document.getElementById('code-uses').value) || 0,
                     claimed: 0,
                     status: document.getElementById('code-status').value,
+                    resultType: resultType,
+                    revealTicketId: revealTicketId,
                     applicableTicketIds: applicableTicketIds,
                     commission: commissionData
                 };
@@ -1010,6 +1781,13 @@
         document.addEventListener('DOMContentLoaded', () => {
             renderTickets();
             renderDiscountCodes();
+
+            // Feature 1: wire up venue capacity input
+            document.getElementById('venue-capacity-input').addEventListener('input', function () {
+                const val = parseInt(this.value);
+                venueCapacity = isNaN(val) || val <= 0 ? null : val;
+                updateCapacityBar();
+            });
 
             // Close ticket dropdown if clicking outside
             window.addEventListener('click', function (e) {

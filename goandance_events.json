@@ -1,0 +1,188 @@
+{
+  "stages": [
+    {
+      "stage_name": "Initial Event Setup Wizard",
+      "user_goal": "Establish the foundational details of the event to create a draft in the system.",
+      "actions": [
+        "Selects 'Create event' from professional dashboard",
+        "Enters event name, type, dates, and times",
+        "Attempts to select organizer profile, clicks to create a new one",
+        "Fills out new organizer details (name, email, socials, logo) in an overlay modal",
+        "Enters and validates event location on a map",
+        "Uploads event poster image (fails once due to size, succeeds on retry)",
+        "Configures a basic first ticket (name, units, fee distribution, price, type)",
+        "Defines audience parameters (attendee count, location, level, dance styles)"
+      ],
+      "system_responsibilities": "Generate the database record for the event, associate it with a geographic location and an organizer entity, and initialize a draft state. The system does NOT auto-save progress if the user abandons the modal.",
+      "decision_points": [
+        {
+          "decision": "Fee distribution model (Apply to client, Assume fee, Split)",
+          "required_information": "Understanding of how the platform's fees are calculated and how they impact final payout vs. perceived customer price.",
+          "information_available": false,
+          "cognitive_load": "Medium",
+          "notes": "[Inference] The user must decide how to handle fees without a real-time calculator on this specific screen showing the exact monetary impact."
+        },
+        {
+          "decision": "Creating a new organizer vs. selecting an existing one",
+          "required_information": "Whether the event belongs to a new brand or an existing entity.",
+          "information_available": true,
+          "cognitive_load": "Low",
+          "notes": "Interrupts the primary linear flow with a heavy sub-workflow."
+        }
+      ],
+      "friction_points": [
+        "Hidden constraints: Image upload size requirements (minimum 500px) are only revealed after an upload fails, causing unnecessary rework.",
+        "Flow interruption: Creating an organizer profile is a lengthy process forced into a modal inside step 2 of a 6-step wizard. This breaks the user's mental model of simple event creation.",
+        "Premature complex decisions: Forcing the user to define fee structures and audience demographics during the initial 'quick' setup increases time-to-value."
+      ],
+      "implicit_assumptions": [
+        "User has all marketing assets (logos, posters) ready before starting.",
+        "User understands the platform's specific terminology regarding fee splitting.",
+        "User intends to complete the 6-step wizard in a single session."
+      ],
+      "opportunity_areas": [
+        "Allow bypassing organizer creation and image uploads during the initial draft phase.",
+        "Display image size and aspect ratio requirements proactively before the upload interaction.",
+        "Move audience demographic questions to a post-creation 'marketing profile' section."
+      ]
+    },
+    {
+      "stage_name": "Advanced Ticket Configuration",
+      "user_goal": "Define complex pricing tiers, grouping, and purchasing rules for attendees.",
+      "actions": [
+        "Navigates to 'Tickets' in the event dashboard",
+        "Duplicates an existing ticket to act as a template",
+        "Creates a 'Group' to visually organize tickets",
+        "Edits ticket prices, selecting 'Scaled by dates' or 'Scaled by sales'",
+        "Adds multiple price rows for dynamic pricing",
+        "Modifies ticket visibility and availability windows",
+        "Configures which data fields are required from the purchaser (Email, ID, Phone, etc.)",
+        "Reorders tickets using a drag-and-drop 'Change order' toggle"
+      ],
+      "system_responsibilities": "Store discrete ticket entities, apply chronological or inventory-based triggers to adjust prices automatically, and enforce data collection rules during checkout.",
+      "decision_points": [
+        {
+          "decision": "Price scaling strategy (Fixed vs. Date-based vs. Sales-based)",
+          "required_information": "Anticipated demand curve and financial targets for the event.",
+          "information_available": true,
+          "cognitive_load": "High",
+          "notes": "Requires building a mental matrix of dates, capacities, and prices without a visual preview of the resulting pricing timeline."
+        },
+        {
+          "decision": "Required attendee data",
+          "required_information": "Legal or operational requirements for identifying attendees at the door.",
+          "information_available": true,
+          "cognitive_load": "Medium",
+          "notes": "Granular toggles (Full name, Email, Phone, Gender, etc.) per ticket require repetitive configuration if multiple ticket types exist."
+        }
+      ],
+      "friction_points": [
+        "Overloaded interface: The ticket edit modal contains a massive amount of configuration hidden behind nested tabs (General, Prices, Texts, Advanced), making it easy to miss crucial settings.",
+        "Lack of visual validation: Setting up 'Scaled by dates' pricing requires the user to input date ranges and prices manually. There is no timeline graph to warn the user if they create a gap or overlap in their pricing dates.",
+        "Mode switching: Reordering tickets requires activating a specific 'Change order' mode, moving items, and then deactivating it, rather than just natively allowing drag-and-drop in the default view."
+      ],
+      "implicit_assumptions": [
+        "User possesses an advanced mental model of yield management and dynamic pricing.",
+        "User remembers to replicate data collection requirements across every individual ticket they create."
+      ],
+      "opportunity_areas": [
+        "Implement a visual timeline or capacity bar chart to preview how dynamic pricing will behave over time.",
+        "Allow global data collection settings (e.g., 'Require ID for all tickets') rather than forcing per-ticket configuration.",
+        "Enable inline editing for basic ticket properties (price, name) without opening a heavy modal."
+      ]
+    },
+    {
+      "stage_name": "Stock Control & Inventory Linking",
+      "user_goal": "Prevent overselling by capping the total available inventory across multiple ticket variants.",
+      "actions": [
+        "Navigates to 'Stock control' section",
+        "Creates a new stock control entity",
+        "Sets a total unit limit",
+        "Selects multiple existing tickets to share this specific limit limit"
+      ],
+      "system_responsibilities": "Monitor combined sales of linked tickets and automatically halt sales for all linked items when the master cap is reached.",
+      "decision_points": [
+        {
+          "decision": "Which tickets share a capacity pool",
+          "required_information": "Physical venue capacity constraints vs. individual ticket allocations.",
+          "information_available": true,
+          "cognitive_load": "High",
+          "notes": "User must abstractly link discrete items created in a previous step to a new mathematical constraint."
+        }
+      ],
+      "friction_points": [
+        "Hidden dependencies: The relationship between 'Tickets' and 'Stock control' is disjointed. A user could easily create 5 ticket types, forget to navigate to the separate 'Stock control' tab, and accidentally oversell their venue by 5x.",
+        "Abstract mental model: Treating 'Stock' as a separate entity from 'Tickets' requires the user to understand relational database logic, rather than just saying 'Cap total event sales at X'."
+      ],
+      "implicit_assumptions": [
+        "User understands that ticket unit limits and global stock limits are two separate variables that interact with each other.",
+        "User will actively monitor and remember to update stock controls if they add new ticket types later."
+      ],
+      "opportunity_areas": [
+        "Integrate basic global capacity limits directly into the main 'Tickets' view.",
+        "Warn the user if the sum of individual ticket capacities exceeds a known maximum, rather than relying solely on abstract 'Stock controls'."
+      ]
+    },
+    {
+      "stage_name": "Marketing & Promotional Mechanics",
+      "user_goal": "Configure incentives, hidden access, and trackable links to drive sales.",
+      "actions": [
+        "Navigates to Discounts",
+        "Creates a discount code (Value, Type, Limit by uses, Limit by dates, applies to specific tickets)",
+        "Navigates to Private Sales",
+        "Creates a private sale link to hide specific tickets behind a custom URL",
+        "Views Promotions tab (paid advertising options)"
+      ],
+      "system_responsibilities": "Generate unique URLs, apply mathematical deductions to checkout sessions based on code matching, and manage visibility states based on access links.",
+      "decision_points": [
+        {
+          "decision": "Discount applicability",
+          "required_information": "Which specific tickets should be eligible for the discount.",
+          "information_available": true,
+          "cognitive_load": "Medium",
+          "notes": "User must manually map discounts to tickets using toggle switches."
+        },
+        {
+          "decision": "Purchasing paid promotions",
+          "required_information": "Expected ROI of the platform's proprietary advertising packages.",
+          "information_available": true,
+          "cognitive_load": "High",
+          "notes": "[Inference] Evaluated based on the pricing matrix shown (e.g., Promo Basic vs Promo Boost)."
+        }
+      ],
+      "friction_points": [
+        "Siloed promotional tools: 'Discounts', 'Private sales', and 'Promoters' are separated into entirely distinct workflows. Creating a campaign that uses elements of all three requires significant back-and-forth navigation.",
+        "Redundant ticket mapping: Just like stock control, the user must re-select which tickets apply to which discount or private link, relying heavily on memory of their ticket hierarchy."
+      ],
+      "implicit_assumptions": [
+        "User runs structured marketing campaigns that cleanly fit into either 'public discount' or 'private link' paradigms.",
+        "User is willing to invest in the platform's internal advertising tools."
+      ],
+      "opportunity_areas": [
+        "Unify 'Discounts' and 'Private Sales' into a single 'Campaigns' or 'Access Rules' interface.",
+        "Allow creating a discount directly from the ticket creation modal, rather than forcing navigation to a new module."
+      ]
+    }
+  ],
+  "global_analysis": {
+    "structural_patterns": [
+      "Database-driven UI: The interface closely mirrors the underlying relational database structure (Event -> Ticket -> Stock Pool -> Discount). It forces the user to assemble the relationships manually.",
+      "Siloed Configuration: Major features (Pricing, Capacity, Marketing, Analytics) are strictly segregated by a heavy left-hand navigation menu.",
+      "Gamified Onboarding: The use of the 'Potential Index' acts as a structural pattern to encourage users to fill out more database fields to improve their listing quality."
+    ],
+    "core_weaknesses": [
+      "Fragmented Capacity Management: Separating ticket creation from stock control creates a severe risk of accidental overselling.",
+      "High Interaction Cost for Basic Tasks: Simple edits (like reordering tickets or changing a price) require mode-switches or opening heavy modal windows.",
+      "Blind Configuration: The system asks for complex date/time/price matrices without providing visual feedback or timelines to verify the logic.",
+      "Redundant Data Entry: Applying settings (like attendee data requirements or discounts) to multiple tickets requires repetitive, granular clicking rather than bulk actions.",
+      "Delayed Error Validation: Important constraints (like image minimum sizes) are not communicated prior to the action, causing failure states."
+    ],
+    "cognitive_load_map": [
+      "High: Dynamic Pricing ('Scaled by dates/sales'). User must map out future timelines and price jumps purely in their head.",
+      "High: Stock Control. User must understand the difference between ticket-level capacity and pool-level capacity.",
+      "Medium: Initial Wizard. Juggling event setup while simultaneously being forced to create an organizer profile and make fee structure decisions."
+    ],
+    "decision_quality": "Variable. Users are well-supported when making simple text/content decisions, but are largely unsupported when making complex logistical decisions (dynamic pricing, stock linking). They are forced to make blind configurations without visual previews or 'what-if' calculators.",
+    "product_philosophy": "Power over Simplicity. The product is designed to accommodate highly complex, edge-case event structures (multi-room festivals, tiered pricing, segregated stock). It achieves this by giving the user direct access to database parameters, sacrificing intuitive guidance and guardrails in favor of absolute flexibility."
+  }
+}

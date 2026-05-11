@@ -1,0 +1,350 @@
+{
+  "interaction_models": [
+    {
+      "concept_name": "Unified Capacity Architecture",
+      "goal": "Set ticket availability limits without exceeding the total physical space of the venue.",
+      "user_mental_model": "All tickets share the same physical venue space. I want to bundle some tickets together while tracking total attendees.",
+      "system_model": "Hierarchical capacity validation. Venue capacity serves as the absolute ceiling. Ticket quantities are tracked individually or as part of a shared stock pool. [Inference] This is expected behavior, not guaranteed.",
+      "core_entities": [
+        {
+          "name": "Event",
+          "purpose": "Root container for capacity",
+          "key_properties": "venue_capacity"
+        },
+        {
+          "name": "Shared Capacity Pool",
+          "purpose": "Group multiple ticket types under a single limit",
+          "key_properties": "pool_id, pool_limit, assigned_tickets"
+        },
+        {
+          "name": "Ticket",
+          "purpose": "Purchasable item variant",
+          "key_properties": "ticket_id, individual_limit, pool_reference"
+        }
+      ],
+      "interaction_flow": [
+        {
+          "user_action": "Inputs value in 'Venue Capacity' field",
+          "system_response": "Renders a capacity progress bar indicating 0 / [Value]. [Inference] This is expected behavior, not guaranteed.",
+          "visible_feedback": "Visual bar appears at the top of the interface.",
+          "state_change": "Event.venue_capacity updated"
+        },
+        {
+          "user_action": "Drags Ticket row onto another Ticket row",
+          "system_response": "Creates a new Shared Capacity Pool containing both tickets. [Inference] This is expected behavior, not guaranteed.",
+          "visible_feedback": "Rows snap together into a grouped container with a new 'Shared Limit' input field.",
+          "state_change": "SharedPool object created; Ticket.pool_reference updated"
+        },
+        {
+          "user_action": "Sets 'Shared Limit' value",
+          "system_response": "Updates the global capacity progress bar. [Inference] This is expected behavior, not guaranteed.",
+          "visible_feedback": "Progress bar fills proportionally. Numerical ratio updates.",
+          "state_change": "SharedPool.pool_limit updated"
+        }
+      ],
+      "decision_points": [
+        {
+          "decision_description": "Determine if specific ticket types should share a stock limit",
+          "required_information": "Sales strategy",
+          "is_information_available": "Yes, user knowledge",
+          "cognitive_load": "Low"
+        }
+      ],
+      "automation_opportunities": [
+        "Dynamically calculate and display remaining unallocated venue capacity.",
+        "Auto-group tickets into a default pool if no individual limits are specified."
+      ],
+      "edge_cases": [
+        "Sum of individual ticket limits and pool limits exceeds venue capacity.",
+        "User attempts to delete a pool that already has sold tickets."
+      ],
+      "failure_states": [
+        {
+          "cause": "Total configured limits exceed venue capacity",
+          "system_behavior": "Blocks publishing and flags the overage. [Inference] This is expected behavior, not guaranteed.",
+          "user_feedback": "Capacity bar turns red. Tooltip explains by how much the limit is exceeded."
+        }
+      ],
+      "success_feedback": [
+        "Real-time visual update of the capacity bar remaining within safe thresholds."
+      ],
+      "complexity_score": {
+        "cognitive_load": "Medium",
+        "structural_complexity": "High",
+        "notes": "System must evaluate capacity math instantaneously during user input."
+      }
+    },
+    {
+      "concept_name": "Interactive Pricing Timeline",
+      "goal": "Configure and verify scheduled price changes or quantity-based price tiers.",
+      "user_mental_model": "I want to see a timeline of how much a ticket costs on any given day or after a certain number of sales.",
+      "system_model": "Chronological array of pricing rules. The system evaluates the current date or current sales volume against the array to output the active price. [Inference] This is expected behavior, not guaranteed.",
+      "core_entities": [
+        {
+          "name": "Pricing Rule",
+          "purpose": "Define a condition and the resulting price",
+          "key_properties": "trigger_type (date/sales), trigger_value, new_price"
+        },
+        {
+          "name": "Timeline Data",
+          "purpose": "Data structure for rendering the visual chart",
+          "key_properties": "milestones, segments"
+        }
+      ],
+      "interaction_flow": [
+        {
+          "user_action": "Clicks 'Add Pricing Rule'",
+          "system_response": "Opens input fields for trigger condition and price. [Inference] This is expected behavior, not guaranteed.",
+          "visible_feedback": "New row appears in configuration modal.",
+          "state_change": "Empty PricingRule object initialized"
+        },
+        {
+          "user_action": "Inputs Date and New Price",
+          "system_response": "Plots the new point on the horizontal timeline chart. [Inference] This is expected behavior, not guaranteed.",
+          "visible_feedback": "Chart updates immediately, showing the old price trajectory changing to the new price at the specified date.",
+          "state_change": "PricingRule populated and added to Timeline Data"
+        }
+      ],
+      "decision_points": [
+        {
+          "decision_description": "Choose between time-based or volume-based price changes",
+          "required_information": "Event marketing strategy",
+          "is_information_available": "Yes, user knowledge",
+          "cognitive_load": "Medium"
+        }
+      ],
+      "automation_opportunities": [
+        "Sort rules chronologically automatically upon entry.",
+        "Suggest standard 'Early Bird' intervals based on event date."
+      ],
+      "edge_cases": [
+        "Two rules configured for the exact same date or sales threshold.",
+        "A date rule is set after the event start date."
+      ],
+      "failure_states": [
+        {
+          "cause": "Chronological gap or invalid sequence (e.g., setting a date backwards)",
+          "system_behavior": "Highlights the overlapping or illogical rule. [Inference] This is expected behavior, not guaranteed.",
+          "user_feedback": "The timeline visually displays a red warning icon at the conflict point; conflicting inputs are outlined in red."
+        }
+      ],
+      "success_feedback": [
+        "Smooth rendering of the yield curve visually confirming the strategy."
+      ],
+      "complexity_score": {
+        "cognitive_load": "Low",
+        "structural_complexity": "Medium",
+        "notes": "Reduces cognitive load by offloading timeline visualization to the system."
+      }
+    },
+    {
+      "concept_name": "Unified Campaign Engine",
+      "goal": "Create promotional strategies using codes, links, or referrals in one place.",
+      "user_mental_model": "I want to give someone special access or a discount using a code or link.",
+      "system_model": "A unified rules engine evaluating Trigger inputs against configured Conditions to output a Result modifier. [Inference] This is expected behavior, not guaranteed.",
+      "core_entities": [
+        {
+          "name": "Campaign",
+          "purpose": "Container for a promotional rule",
+          "key_properties": "campaign_name, active_status"
+        },
+        {
+          "name": "Trigger",
+          "purpose": "The user input or context that activates the campaign",
+          "key_properties": "trigger_type (code, url_param, referrer), trigger_value"
+        },
+        {
+          "name": "Result",
+          "purpose": "The modification applied to the checkout state",
+          "key_properties": "action_type (discount, reveal_ticket), action_value"
+        }
+      ],
+      "interaction_flow": [
+        {
+          "user_action": "Selects 'Create Campaign'",
+          "system_response": "Displays Trigger and Result selection interface. [Inference] This is expected behavior, not guaranteed.",
+          "visible_feedback": "Dropdown menus for 'When attendee uses...' and 'They receive...'",
+          "state_change": "Campaign object initialized"
+        },
+        {
+          "user_action": "Selects Trigger: 'Promo Code' and inputs 'VIP10'",
+          "system_response": "Validates code uniqueness. [Inference] This is expected behavior, not guaranteed.",
+          "visible_feedback": "Green checkmark next to code input.",
+          "state_change": "Trigger object configured"
+        },
+        {
+          "user_action": "Selects Result: 'Reveal hidden ticket' and selects 'Backstage Pass'",
+          "system_response": "Links the target ticket visibility state to this campaign. [Inference] This is expected behavior, not guaranteed.",
+          "visible_feedback": "Summary text reads: 'Code VIP10 will reveal Backstage Pass'.",
+          "state_change": "Result object configured"
+        }
+      ],
+      "decision_points": [
+        {
+          "decision_description": "Define the combination of trigger and result",
+          "required_information": "Target audience and discount margins",
+          "is_information_available": "Yes, user knowledge",
+          "cognitive_load": "Medium"
+        }
+      ],
+      "automation_opportunities": [
+        "Auto-generate random alphanumeric strings for promo codes.",
+        "Automatically append URL parameters for sharing based on campaign name."
+      ],
+      "edge_cases": [
+        "Attendee applies multiple conflicting codes.",
+        "A campaign targets a ticket type that is sold out."
+      ],
+      "failure_states": [
+        {
+          "cause": "Duplicate trigger value used across different campaigns",
+          "system_behavior": "Rejects the trigger input. [Inference] This is expected behavior, not guaranteed.",
+          "user_feedback": "Error message: 'This code is already in use by another campaign.'"
+        }
+      ],
+      "success_feedback": [
+        "Clear, plain-English summary sentence of the configured campaign logic."
+      ],
+      "complexity_score": {
+        "cognitive_load": "Low",
+        "structural_complexity": "High",
+        "notes": "Simplifies multiple disparate marketing tools into a single logic flow."
+      }
+    },
+    {
+      "concept_name": "Smart Inheritance",
+      "goal": "Set checkout questions for all tickets, altering them only when a specific ticket requires it.",
+      "user_mental_model": "I need everyone's name and email, but I only need a t-shirt size for the VIP pass.",
+      "system_model": "Parent configuration object applies default properties to children. Children evaluate an override boolean to determine inheritance. [Inference] This is expected behavior, not guaranteed.",
+      "core_entities": [
+        {
+          "name": "Event Defaults",
+          "purpose": "Global checkout settings",
+          "key_properties": "global_required_fields, global_custom_questions"
+        },
+        {
+          "name": "Ticket Override",
+          "purpose": "Local modification of checkout settings",
+          "key_properties": "use_custom_data_collection (boolean), local_required_fields"
+        }
+      ],
+      "interaction_flow": [
+        {
+          "user_action": "Sets 'Require Phone Number' at Event Level",
+          "system_response": "Updates global defaults; applies to all child tickets without explicit overrides. [Inference] This is expected behavior, not guaranteed.",
+          "visible_feedback": "Toggle switch activates.",
+          "state_change": "EventDefaults.global_required_fields updated"
+        },
+        {
+          "user_action": "Opens individual Ticket settings and toggles 'Custom Data Collection'",
+          "system_response": "Breaks inheritance for this specific ticket and displays local configuration options. [Inference] This is expected behavior, not guaranteed.",
+          "visible_feedback": "Expands a panel pre-filled with the event defaults, allowing modification.",
+          "state_change": "TicketOverride.use_custom_data_collection set to true"
+        },
+        {
+          "user_action": "Adds 'T-Shirt Size' question to the specific ticket",
+          "system_response": "Saves local override. [Inference] This is expected behavior, not guaranteed.",
+          "visible_feedback": "Question appears in the local list.",
+          "state_change": "TicketOverride.local_required_fields updated"
+        }
+      ],
+      "decision_points": [
+        {
+          "decision_description": "Decide if a ticket needs unique information collected at checkout",
+          "required_information": "Logistical requirements per ticket tier",
+          "is_information_available": "Yes, user knowledge",
+          "cognitive_load": "Low"
+        }
+      ],
+      "automation_opportunities": [
+        "Pre-fill ticket overrides with event defaults so the user doesn't start from scratch when toggling the override."
+      ],
+      "edge_cases": [
+        "User modifies Event Defaults after setting up custom Ticket Overrides."
+      ],
+      "failure_states": [
+        {
+          "cause": "Conflicting data types in custom questions",
+          "system_behavior": "Validates field types. [Inference] This is expected behavior, not guaranteed.",
+          "user_feedback": "Displays format validation error on the specific field."
+        }
+      ],
+      "success_feedback": [
+        "A badge on the ticket row indicating 'Custom Checkout Rules Applied'."
+      ],
+      "complexity_score": {
+        "cognitive_load": "Low",
+        "structural_complexity": "Medium",
+        "notes": "Drastically reduces repetitive data entry."
+      }
+    },
+    {
+      "concept_name": "Deferring the Friction",
+      "goal": "Build the core event quickly without being blocked by administrative setup.",
+      "user_mental_model": "I want to see what my event page looks like before I spend 20 minutes finding my bank details.",
+      "system_model": "State machine separating draft viability from publishing validation. Validation schemas are conditionally applied based on the requested transition state. [Inference] This is expected behavior, not guaranteed.",
+      "core_entities": [
+        {
+          "name": "Event Draft",
+          "purpose": "Current state of event data",
+          "key_properties": "status (draft/published), basic_info, ticket_info"
+        },
+        {
+          "name": "Pre-Flight Checklist",
+          "purpose": "Gatekeeper module for publishing",
+          "key_properties": "bank_details_complete, identity_verified, payout_split_configured"
+        }
+      ],
+      "interaction_flow": [
+        {
+          "user_action": "Completes basic event and ticket details in wizard",
+          "system_response": "Saves data and generates a usable draft preview. [Inference] This is expected behavior, not guaranteed.",
+          "visible_feedback": "Navigates to Event Dashboard; status shows 'Draft'.",
+          "state_change": "Event status set to 'Draft'"
+        },
+        {
+          "user_action": "Clicks 'Publish Event'",
+          "system_response": "Evaluates Pre-Flight Checklist requirements. [Inference] This is expected behavior, not guaranteed.",
+          "visible_feedback": "Opens a modal listing pending administrative tasks (e.g., 'Add Bank Account').",
+          "state_change": "None"
+        },
+        {
+          "user_action": "Completes missing bank details from the modal",
+          "system_response": "Updates checklist status and executes state transition to Published. [Inference] This is expected behavior, not guaranteed.",
+          "visible_feedback": "Task is marked complete; modal closes; status updates to 'Published' with a live link.",
+          "state_change": "Event status set to 'Published'"
+        }
+      ],
+      "decision_points": [
+        {
+          "decision_description": "Provide legal and financial information",
+          "required_information": "IBAN, tax ID, company details",
+          "is_information_available": "Might require user to look it up",
+          "cognitive_load": "High"
+        }
+      ],
+      "automation_opportunities": [
+        "Reuse bank and organizer details from previously published events."
+      ],
+      "edge_cases": [
+        "User abandons the flow at the Pre-Flight check.",
+        "External verification service (e.g., KYC) is delayed."
+      ],
+      "failure_states": [
+        {
+          "cause": "Attempting to publish with incomplete administrative data",
+          "system_behavior": "Blocks state transition to Published. [Inference] This is expected behavior, not guaranteed.",
+          "user_feedback": "Highlights missing mandatory fields in the Pre-Flight Checklist."
+        }
+      ],
+      "success_feedback": [
+        "Confetti animation or distinct 'Live' status badge upon successful publication."
+      ],
+      "complexity_score": {
+        "cognitive_load": "Medium",
+        "structural_complexity": "Medium",
+        "notes": "Isolates the highest cognitive load tasks to the very end of the user journey, increasing upfront conversion."
+      }
+    }
+  ]
+}
