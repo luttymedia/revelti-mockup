@@ -472,6 +472,16 @@
                     <input id="scheduled-date" type="date" class="w-full p-2 border border-gray-300 rounded-lg mt-1">
                 </div>
 
+                <div class="pt-4 border-t mb-4">
+                    <label class="font-semibold text-gray-700">Commission Fee Paid By</label>
+                    <p class="text-xs text-gray-500 mb-2">Choose who absorbs the platform commission for this ticket type.</p>
+                    <div class="flex space-x-4">
+                        <label class="flex items-center"><input type="radio" name="commission-payer" value="attendee" class="mr-2" checked> Attendee (Added to price)</label>
+                        <label class="flex items-center"><input type="radio" name="commission-payer" value="organizer" class="mr-2"> Organizer (Deducted from payout)</label>
+                        <label class="flex items-center"><input type="radio" name="commission-payer" value="split" class="mr-2"> 50/50 Split</label>
+                    </div>
+                </div>
+
                 <div class="pt-4 border-t">
                     <label class="font-semibold text-gray-700">Pricing Strategy</label>
                     <div class="flex space-x-4 mt-2">
@@ -749,6 +759,14 @@
                     </li>
                 </ul>
 
+                <h4 class="font-bold text-lg revelti-blue pt-4 border-t mt-4">Commission Fee Paid By</h4>
+                <p>Choose who absorbs the platform's commission fee for this ticket type.</p>
+                <ul class="list-disc list-inside space-y-1 pl-2">
+                    <li><b>Attendee:</b> The commission fee is added on top of the ticket price and paid by the attendee at checkout.</li>
+                    <li><b>Organizer:</b> The attendee pays the exact ticket price, and the commission fee is deducted from your final payout.</li>
+                    <li><b>50/50 Split:</b> The commission fee is split evenly between the attendee and the organizer.</li>
+                </ul>
+
                 <h4 class="font-bold text-lg revelti-blue pt-4 border-t mt-4">Pricing Strategy</h4>
                 <p>Choose how your ticket's price is determined.</p>
                 <ul class="list-disc list-inside space-y-1 pl-2">
@@ -834,32 +852,32 @@
             {
                 id: 1, name: 'Sensuality Pass', description: 'Access to all main workshops and social parties.', quantity: 200, sold: 150, status: 'On Sale',
                 pricing: { strategy: 'dynamic', basePrice: 170.00, rules: [{ type: 'date', value: '2025-08-01', newPrice: 180.00 }, { type: 'date', value: '2025-09-01', newPrice: 190.00 }, { type: 'date', value: '2025-10-01', newPrice: 220.00 }], finalPriceOverride: null },
-                checkoutOverride: false
+                checkoutOverride: false, commissionPayer: 'attendee'
             },
             {
                 id: 2, name: 'Essentiality Pass', description: 'Access to selected foundational workshops and evening parties.', quantity: 200, sold: 120, status: 'On Sale',
                 pricing: { strategy: 'dynamic', basePrice: 170.00, rules: [{ type: 'date', value: '2025-08-01', newPrice: 180.00 }, { type: 'date', value: '2025-09-01', newPrice: 190.00 }, { type: 'date', value: '2025-10-01', newPrice: 220.00 }], finalPriceOverride: 250.00 },
-                checkoutOverride: false
+                checkoutOverride: false, commissionPayer: 'attendee'
             },
             {
                 id: 3, name: 'J&J Amateur', description: 'Entry fee for the Jack & Jill Amateur competition.', quantity: 40, sold: 17, status: 'On Sale',
                 pricing: { strategy: 'dynamic', basePrice: 10.00, rules: [{ type: 'sales', value: 20, newPrice: 15.00 }, { type: 'sales', value: 30, newPrice: 20.00 }], finalPriceOverride: null },
-                checkoutOverride: false
+                checkoutOverride: false, commissionPayer: 'attendee'
             },
             {
                 id: 4, name: 'Training Tracks', description: 'Special intensive training sessions.', quantity: 50, sold: 0, status: 'Draft',
                 pricing: { strategy: 'simple', simplePrice: 100.00 },
-                checkoutOverride: false
+                checkoutOverride: false, commissionPayer: 'attendee'
             },
             {
                 id: 5, name: 'Party Pass', description: 'Access to all evening social parties.', quantity: 100, sold: 0, status: 'Scheduled', scheduledDate: '2025-10-15',
                 pricing: { strategy: 'simple', simplePrice: 80.00 },
-                checkoutOverride: true, checkoutCustomQuestion: 'What role do you dance (leader/follower)?'
+                checkoutOverride: true, checkoutCustomQuestion: 'What role do you dance (leader/follower)?', commissionPayer: 'split'
             },
             {
                 id: 6, name: 'Backstage Pass', description: 'VIP access including front row seats and backstage passes.', quantity: 10, sold: 0, status: 'Draft',
                 pricing: { strategy: 'simple', simplePrice: 300.00 },
-                checkoutOverride: false
+                checkoutOverride: false, commissionPayer: 'organizer'
             }
         ];
 
@@ -973,13 +991,15 @@
                 }
                 const checkoutBadge = ticket.checkoutOverride
                     ? '<span class="checkout-badge">⚙️ Custom Checkout</span>' : '';
+                const commissionBadgeText = ticket.commissionPayer === 'organizer' ? 'Organizer' : (ticket.commissionPayer === 'split' ? '50/50 Split' : 'Attendee');
+                const commissionBadge = `<span class="checkout-badge">Fee: ${commissionBadgeText}</span>`;
 
                 row.innerHTML = `
                     <td class="px-3 py-3 align-top w-8">
                         <input type="checkbox" class="select-checkbox ticket-row-check" data-id="${ticket.id}" onchange="onTicketCheckboxChange()">
                     </td>
                     <td class="px-4 py-3 whitespace-nowrap align-top">
-                        <div class="font-semibold">${ticket.name}${checkoutBadge}</div>
+                        <div class="font-semibold">${ticket.name}${checkoutBadge}${commissionBadge}</div>
                         ${ticket.description ? `<div class="text-xs text-gray-500 mt-0.5 whitespace-normal">${ticket.description}</div>` : ''}
                         ${ticket.pricing.strategy === 'dynamic' ? renderRulesSummary(ticket) : ''}
                     </td>
@@ -1416,6 +1436,11 @@
                     document.getElementById('override-custom-question').value = ticket.checkoutCustomQuestion;
                 }
 
+                // Commission Payer
+                const commissionPayer = ticket.commissionPayer || 'attendee';
+                const commissionRadio = document.querySelector(`input[name="commission-payer"][value="${commissionPayer}"]`);
+                if (commissionRadio) commissionRadio.checked = true;
+
             } else { // Creating a new ticket
                 document.getElementById('ticket-modal-title').textContent = 'Create New Ticket Type';
                 deleteBtn.classList.remove('hidden'); // Can always delete a new draft
@@ -1436,6 +1461,9 @@
                 document.getElementById('checkout-override-toggle').checked = false;
                 document.getElementById('checkout-override-panel').classList.add('hidden');
                 document.getElementById('override-custom-question').value = '';
+
+                // Reset commission payer to default
+                document.querySelector('input[name="commission-payer"][value="attendee"]').checked = true;
             }
             openModal('ticket-modal');
         };
@@ -1660,6 +1688,9 @@
             // Feature 4: checkout override
             const hasOverride = document.getElementById('checkout-override-toggle').checked;
 
+            // Commission
+            const commissionPayer = document.querySelector('input[name="commission-payer"]:checked').value;
+
             const ticketPayload = {
                 name: document.getElementById('ticket-name').value || 'Unnamed Ticket',
                 description: document.getElementById('ticket-description').value,
@@ -1669,7 +1700,8 @@
                 pricing: pricingData,
                 sold: ticketId ? ticketsData.find(t => t.id === ticketId).sold : 0,
                 checkoutOverride: hasOverride,
-                checkoutCustomQuestion: hasOverride ? document.getElementById('override-custom-question').value : ''
+                checkoutCustomQuestion: hasOverride ? document.getElementById('override-custom-question').value : '',
+                commissionPayer: commissionPayer
             };
 
             if (ticketId) {
