@@ -285,6 +285,52 @@
             // Load Following content inline for mobile
             loadMobileFollowing();
         });
+
+        // ===== FOLLOWING TAB: People search =====
+        // Defined here (global scope) so oninput calls work after innerHTML injection.
+        var FOLLOWING_CONNECTIONS = [
+            { name: 'Sofia Mart\u00ednez', location: 'Madrid, Spain', avatar: 'https://i.pravatar.cc/40?img=10' },
+            { name: 'Lucas Ferreira', location: 'Lisbon, Portugal', avatar: 'https://i.pravatar.cc/40?img=11' },
+            { name: 'Mia Hoffmann', location: 'Berlin, Germany', avatar: 'https://i.pravatar.cc/40?img=12' },
+            { name: 'Carlos Ruiz', location: 'Barcelona, Spain', avatar: 'https://i.pravatar.cc/40?img=13' },
+            { name: 'Elena Popescu', location: 'Bucharest, Romania', avatar: 'https://i.pravatar.cc/40?img=14' },
+            { name: 'James O\u2019Brien', location: 'Dublin, Ireland', avatar: 'https://i.pravatar.cc/40?img=15' },
+        ];
+
+        function renderFollowingPeople(query) {
+            var lists = document.querySelectorAll('#following-people-list');
+            if (!lists.length) return;
+            var q = (query || '').toLowerCase().trim();
+            var filtered = FOLLOWING_CONNECTIONS.filter(function(c) {
+                return !q || c.name.toLowerCase().includes(q) || c.location.toLowerCase().includes(q);
+            });
+            var html = filtered.length
+                ? filtered.map(function(c) {
+                    return '<a href="attendeeProfile.html" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors group">' +
+                        '<img src="' + c.avatar + '" alt="' + c.name + '" class="w-9 h-9 rounded-full object-cover flex-shrink-0">' +
+                        '<div class="min-w-0">' +
+                        '<p class="text-sm font-semibold text-gray-800 group-hover:text-revelti-blue transition-colors truncate">' + c.name + '</p>' +
+                        '<p class="text-xs text-gray-400 truncate">' + c.location + '</p>' +
+                        '</div>' +
+                        '<svg class="w-4 h-4 text-gray-300 group-hover:text-revelti-blue ml-auto flex-shrink-0 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>' +
+                        '</a>';
+                }).join('')
+                : '<p class="text-sm text-gray-400 py-2 px-2">No results found.</p>';
+            lists.forEach(function(list) { list.innerHTML = html; });
+        }
+
+        function filterFollowingPeople(query) {
+            document.querySelectorAll('#following-people-clear').forEach(function(btn) {
+                btn.classList.toggle('hidden', !query);
+            });
+            renderFollowingPeople(query);
+        }
+
+        function clearFollowingPeopleSearch() {
+            document.querySelectorAll('#following-people-search').forEach(function(inp) { inp.value = ''; });
+            filterFollowingPeople('');
+        }
+        // ===== END: People search =====
     </script>
 
     <script src="js/galleryOverlay.js"></script>

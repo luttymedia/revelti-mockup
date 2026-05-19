@@ -27,13 +27,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        #event-search:focus {
+        #event-search:focus,
+        #conn-search:focus {
             outline: none;
             border-color: #213c63;
-            box-shadow: 0 0 0 2px rgba(33,60,99,0.12);
+            box-shadow: 0 0 0 2px rgba(33, 60, 99, 0.12);
         }
+
         details[open] summary svg {
             transform: rotate(180deg);
+        }
+
+        #connect-btn.connected-state {
+            background-color: #213c63;
+            color: white;
+            border-color: #213c63;
+        }
+
+        #connect-btn.pending-state {
+            background-color: #f58220;
+            color: white;
+            border-color: #f58220;
         }
     </style>
 </head>
@@ -53,16 +67,47 @@
             <p class="mt-5 text-gray-600 text-sm leading-relaxed">
                 Passionate bachata dancer based in Madrid. Attending dance festivals across Europe since 2018.
             </p>
+
+            <!-- Connected counter + Connect button -->
+            <div class="mt-5 flex items-center justify-center gap-3">
+                <button id="connected-counter-btn" onclick="openConnectionsModal()"
+                    class="flex items-center gap-1.5 px-4 py-1.5 rounded-full border-2 border-gray-200 bg-gray-50 text-sm font-semibold text-gray-600 hover:border-revelti-blue hover:text-revelti-blue transition-all duration-200">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z">
+                        </path>
+                    </svg>
+                    <span id="connected-count">24</span> Connections
+                </button>
+                <button id="connect-btn" onclick="handleConnectClick()"
+                    class="flex items-center gap-1.5 px-4 py-1.5 rounded-full border-2 border-revelti-orange text-revelti-orange text-sm font-bold hover:bg-revelti-orange hover:text-white transition-all duration-200">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z">
+                        </path>
+                    </svg>
+                    <span id="connect-btn-label">Connect</span>
+                </button>
+            </div>
         </div>
 
         <!-- Search events -->
         <div class="mt-4">
             <div class="relative">
-                <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none"
+                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
                 <input id="event-search" type="text" placeholder="Search events..." oninput="filterEvents(this.value)"
                     class="w-full pl-9 pr-8 py-2 text-sm border-2 border-gray-200 rounded-full bg-white text-gray-700 placeholder-gray-400 transition-all duration-200">
-                <button id="event-search-clear" onclick="clearEventSearch()" class="absolute right-3 top-1/2 -translate-y-1/2 hidden text-gray-400 hover:text-gray-600 transition-colors" aria-label="Clear search">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                <button id="event-search-clear" onclick="clearEventSearch()"
+                    class="absolute right-3 top-1/2 -translate-y-1/2 hidden text-gray-400 hover:text-gray-600 transition-colors"
+                    aria-label="Clear search">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
                 </button>
             </div>
         </div>
@@ -81,7 +126,10 @@
         <details open class="mt-4 bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
             <summary class="font-bold text-lg revelti-blue cursor-pointer list-none flex justify-between items-center">
                 Events in common
-                <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
             </summary>
             <div class="mt-3">
                 <div class="event-item flex items-center gap-3 p-2 rounded-lg bg-gray-50" data-date="2026-10-08">
@@ -89,7 +137,9 @@
                         class="w-12 h-12 rounded-lg object-cover flex-shrink-0"
                         onerror="this.onerror=null;this.src='https://placehold.co/48x48/f58220/ffffff?text=DFS';">
                     <div>
-                        <a href="eventDetail.html" class="text-sm font-semibold text-gray-800 hover:text-revelti-blue">Dance Fest Spain 2026</a>
+                        <a href="eventDetail.html"
+                            class="text-sm font-semibold text-gray-800 hover:text-revelti-blue">Dance Fest Spain
+                            2026</a>
                         <p class="text-xs text-gray-500">Oct 08–12, 2026 &bull; Madrid</p>
                     </div>
                 </div>
@@ -100,7 +150,10 @@
         <details class="mt-4 bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
             <summary class="font-bold text-lg revelti-blue cursor-pointer list-none flex justify-between items-center">
                 Going
-                <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
             </summary>
             <div class="mt-3 space-y-2">
 
@@ -109,7 +162,9 @@
                         class="w-12 h-12 rounded-lg object-cover flex-shrink-0"
                         onerror="this.onerror=null;this.src='https://placehold.co/48x48/213c63/ffffff?text=DFS';">
                     <div>
-                        <a href="eventDetail.html" class="text-sm font-semibold text-gray-800 hover:text-revelti-blue">Dance Fest Spain 2026</a>
+                        <a href="eventDetail.html"
+                            class="text-sm font-semibold text-gray-800 hover:text-revelti-blue">Dance Fest Spain
+                            2026</a>
                         <p class="text-xs text-gray-500">Oct 8, 2026 &bull; Madrid</p>
                     </div>
                 </div>
@@ -141,7 +196,10 @@
         <details class="mt-4 bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
             <summary class="font-bold text-lg revelti-blue cursor-pointer list-none flex justify-between items-center">
                 Curious
-                <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
             </summary>
             <div class="mt-3 space-y-2">
 
@@ -182,13 +240,13 @@
     <script>
         var currentSearchQuery = '';
         var currentTimeFilter = 'all';
-        
+
         function filterEvents(query) {
             var clearBtn = document.getElementById('event-search-clear');
             if (clearBtn) {
                 clearBtn.classList.toggle('hidden', query.length === 0);
             }
-            
+
             currentSearchQuery = query.toLowerCase().trim();
             applyFilters();
         }
@@ -205,12 +263,12 @@
             currentTimeFilter = filter;
             applyFilters();
         }
-        
+
         function applyFilters() {
             var allBtn = document.getElementById('filter-all');
             var upcomingBtn = document.getElementById('filter-upcoming');
             var pastBtn = document.getElementById('filter-past');
-            
+
             // Update button styles
             if (allBtn && upcomingBtn && pastBtn) {
                 var buttons = {
@@ -218,7 +276,7 @@
                     'upcoming': upcomingBtn,
                     'past': pastBtn
                 };
-                Object.keys(buttons).forEach(function(key) {
+                Object.keys(buttons).forEach(function (key) {
                     if (key === currentTimeFilter) {
                         buttons[key].className = 'px-4 py-1.5 rounded-md text-sm font-semibold bg-white text-revelti-blue shadow-sm transition-all duration-200';
                     } else {
@@ -226,17 +284,17 @@
                     }
                 });
             }
-            
+
             var today = new Date();
             today.setHours(0, 0, 0, 0);
             var eventItems = document.querySelectorAll('.event-item');
-            
-            eventItems.forEach(function(item) {
+
+            eventItems.forEach(function (item) {
                 var text = item.textContent.toLowerCase();
-                
+
                 // Check search filter
                 var matchesSearch = currentSearchQuery === '' || text.includes(currentSearchQuery);
-                
+
                 // Check time filter
                 var dateStr = item.getAttribute('data-date');
                 var isUpcoming = true;
@@ -244,7 +302,7 @@
                     var eventDate = new Date(dateStr);
                     isUpcoming = eventDate >= today;
                 }
-                
+
                 var matchesTime = true;
                 if (currentTimeFilter === 'all') {
                     matchesTime = true;
@@ -253,7 +311,7 @@
                 } else if (currentTimeFilter === 'past') {
                     matchesTime = !isUpcoming;
                 }
-                
+
                 // Show item only if it matches both filters
                 if (matchesSearch && matchesTime) {
                     item.classList.remove('hidden');
@@ -263,6 +321,231 @@
             });
         }
     </script>
+    <!-- ===== CONNECTION REQUEST MODAL ===== -->
+    <div id="connect-request-modal"
+        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+        <div id="connect-request-modal-content" class="bg-white rounded-2xl shadow-xl p-6 w-full max-w-sm">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold revelti-blue">Send Connection Request</h3>
+                <button onclick="closeConnectModal()" class="text-gray-400 hover:text-gray-600 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+            <div class="flex items-center gap-3 mb-4 p-3 bg-gray-50 rounded-xl">
+                <img src="https://i.pravatar.cc/120?img=10" alt="Sofia Martínez"
+                    class="w-12 h-12 rounded-full object-cover shadow-sm">
+                <div>
+                    <p class="font-bold text-gray-800">Sofia Martínez</p>
+                    <p class="text-sm text-gray-500">Madrid, Spain</p>
+                </div>
+            </div>
+            <p class="text-sm text-gray-600 leading-relaxed">
+                Once <strong>Sofia</strong> accepts your request, she'll appear in your <strong>Following</strong> tab
+                under <em>People</em>, making it easy to find her at future events.
+            </p>
+            <button onclick="confirmConnect()"
+                class="mt-5 w-full bg-revelti-orange text-white font-bold py-2.5 px-4 rounded-xl hover:bg-orange-600 transition duration-200">
+                Send Request
+            </button>
+            <button onclick="closeConnectModal()"
+                class="mt-2 w-full text-gray-500 text-sm py-1.5 hover:text-gray-700 transition-colors">Cancel</button>
+        </div>
+    </div>
+
+    <!-- ===== CONNECTIONS LIST MODAL ===== -->
+    <div id="connections-modal"
+        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+        <div id="connections-modal-content" class="bg-white rounded-2xl shadow-xl w-full max-w-sm flex flex-col"
+            style="max-height:80vh;">
+            <div class="flex justify-between items-center p-5 border-b border-gray-100">
+                <h3 class="text-xl font-bold revelti-blue">Sofia's Connections</h3>
+                <button onclick="closeConnectionsModal()" class="text-gray-400 hover:text-gray-600 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Search -->
+            <div class="px-5 pt-4 pb-2">
+                <div class="relative">
+                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none"
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                    <input id="conn-search" type="text" placeholder="Search connections..."
+                        oninput="filterConnections(this.value)"
+                        class="w-full pl-9 pr-8 py-2 text-sm border-2 border-gray-200 rounded-full bg-white text-gray-700 placeholder-gray-400 transition-all duration-200">
+                    <button id="conn-search-clear" onclick="clearConnSearch()"
+                        class="absolute right-3 top-1/2 -translate-y-1/2 hidden text-gray-400 hover:text-gray-600 transition-colors"
+                        aria-label="Clear">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <!-- List -->
+            <div id="connections-list" class="overflow-y-auto flex-1 px-3 pb-4 space-y-1">
+                <!-- rendered by JS -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== CONNECTION STATE =====
+        // 0 = not connected, 1 = pending, 2 = connected
+        var connectionState = 0;
+
+        var MOCK_CONNECTIONS = [
+            { name: 'Lucas Ferreira', location: 'Lisbon, Portugal', avatar: 'https://i.pravatar.cc/40?img=11' },
+            { name: 'Mia Hoffmann', location: 'Berlin, Germany', avatar: 'https://i.pravatar.cc/40?img=12' },
+            { name: 'Carlos Ruiz', location: 'Barcelona, Spain', avatar: 'https://i.pravatar.cc/40?img=13' },
+            { name: 'Elena Popescu', location: 'Bucharest, Romania', avatar: 'https://i.pravatar.cc/40?img=14' },
+            { name: 'James O\u2019Brien', location: 'Dublin, Ireland', avatar: 'https://i.pravatar.cc/40?img=15' },
+            { name: 'Priya Nair', location: 'London, UK', avatar: 'https://i.pravatar.cc/40?img=16' },
+            { name: 'Andr\u00e9 Leblanc', location: 'Paris, France', avatar: 'https://i.pravatar.cc/40?img=17' },
+            { name: 'Yuki Tanaka', location: 'Tokyo, Japan', avatar: 'https://i.pravatar.cc/40?img=18' },
+            { name: 'Isabella Rossi', location: 'Rome, Italy', avatar: 'https://i.pravatar.cc/40?img=19' },
+            { name: 'Marco Silva', location: 'Porto, Portugal', avatar: 'https://i.pravatar.cc/40?img=20' },
+            { name: 'Fatima El Amine', location: 'Casablanca, Morocco', avatar: 'https://i.pravatar.cc/40?img=21' },
+            { name: 'Nicol\u00e1s Vargas', location: 'Buenos Aires, Argentina', avatar: 'https://i.pravatar.cc/40?img=22' },
+            { name: 'Anya Kowalski', location: 'Warsaw, Poland', avatar: 'https://i.pravatar.cc/40?img=23' },
+            { name: 'Daniel Kim', location: 'Seoul, South Korea', avatar: 'https://i.pravatar.cc/40?img=24' },
+            { name: 'Camille Dubois', location: 'Lyon, France', avatar: 'https://i.pravatar.cc/40?img=25' },
+            { name: 'Ravi Shankar', location: 'Mumbai, India', avatar: 'https://i.pravatar.cc/40?img=26' },
+            { name: 'Lena M\u00fcller', location: 'Vienna, Austria', avatar: 'https://i.pravatar.cc/40?img=27' },
+            { name: 'Jo\u00e3o Carvalho', location: 'S\u00e3o Paulo, Brazil', avatar: 'https://i.pravatar.cc/40?img=28' },
+            { name: 'Hana Novak', location: 'Prague, Czech Republic', avatar: 'https://i.pravatar.cc/40?img=29' },
+            { name: 'Tom\u00e1s Garc\u00eda', location: 'Seville, Spain', avatar: 'https://i.pravatar.cc/40?img=30' },
+            { name: 'Chiara Bianchi', location: 'Milan, Italy', avatar: 'https://i.pravatar.cc/40?img=31' },
+            { name: 'Erik Lindqvist', location: 'Stockholm, Sweden', avatar: 'https://i.pravatar.cc/40?img=32' },
+            { name: 'Amara Diallo', location: 'Dakar, Senegal', avatar: 'https://i.pravatar.cc/40?img=33' },
+            { name: 'Valentina Cruz', location: 'Mexico City, Mexico', avatar: 'https://i.pravatar.cc/40?img=34' },
+        ];
+
+        var connSearchQuery = '';
+
+        function handleConnectClick() {
+            if (connectionState === 0) {
+                // Show confirmation modal
+                document.getElementById('connect-request-modal').classList.remove('hidden');
+            } else if (connectionState === 1) {
+                // Pending: cancel the request
+                connectionState = 0;
+                updateConnectBtn();
+            } else if (connectionState === 2) {
+                // Already connected: toggle off (disconnect)
+                connectionState = 0;
+                updateConnectBtn();
+            }
+        }
+
+        function confirmConnect() {
+            connectionState = 1;
+            closeConnectModal();
+            updateConnectBtn();
+        }
+
+        function updateConnectBtn() {
+            var btn = document.getElementById('connect-btn');
+            var label = document.getElementById('connect-btn-label');
+            btn.classList.remove('connected-state', 'pending-state',
+                'border-revelti-orange', 'text-revelti-orange',
+                'hover:bg-revelti-orange', 'hover:text-white');
+
+            if (connectionState === 0) {
+                btn.classList.add('border-revelti-orange', 'text-revelti-orange', 'hover:bg-revelti-orange', 'hover:text-white');
+                label.textContent = 'Connect';
+                // Restore icon to plus-person
+                btn.querySelector('svg path').setAttribute('d', 'M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z');
+            } else if (connectionState === 1) {
+                btn.classList.add('pending-state');
+                label.textContent = 'Pending\u2026';
+                btn.querySelector('svg path').setAttribute('d', 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z');
+            } else if (connectionState === 2) {
+                btn.classList.add('connected-state');
+                label.textContent = 'Connected';
+                btn.querySelector('svg path').setAttribute('d', 'M5 13l4 4L19 7');
+            }
+        }
+
+        function closeConnectModal() {
+            document.getElementById('connect-request-modal').classList.add('hidden');
+        }
+
+        // Connections list modal
+        function openConnectionsModal() {
+            renderConnections('');
+            document.getElementById('connections-modal').classList.remove('hidden');
+        }
+
+        function closeConnectionsModal() {
+            document.getElementById('connections-modal').classList.add('hidden');
+            // Reset search
+            var inp = document.getElementById('conn-search');
+            if (inp) inp.value = '';
+            document.getElementById('conn-search-clear').classList.add('hidden');
+            connSearchQuery = '';
+        }
+
+        function filterConnections(query) {
+            connSearchQuery = query;
+            var clearBtn = document.getElementById('conn-search-clear');
+            if (clearBtn) clearBtn.classList.toggle('hidden', !query);
+            renderConnections(query);
+        }
+
+        function clearConnSearch() {
+            var inp = document.getElementById('conn-search');
+            if (inp) inp.value = '';
+            filterConnections('');
+        }
+
+        function renderConnections(query) {
+            var list = document.getElementById('connections-list');
+            if (!list) return;
+            var q = (query || '').toLowerCase().trim();
+            var filtered = MOCK_CONNECTIONS.filter(function (c) {
+                return !q || c.name.toLowerCase().includes(q) || c.location.toLowerCase().includes(q);
+            });
+            if (!filtered.length) {
+                list.innerHTML = '<p class="text-sm text-gray-400 py-4 text-center">No results found.</p>';
+                return;
+            }
+            list.innerHTML = filtered.map(function (c) {
+                return '<a href="attendeeProfile.html" class="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-50 transition-colors group">' +
+                    '<img src="' + c.avatar + '" alt="' + c.name + '" class="w-10 h-10 rounded-full object-cover flex-shrink-0">' +
+                    '<div class="min-w-0">' +
+                    '<p class="text-sm font-semibold text-gray-800 group-hover:text-revelti-blue transition-colors truncate">' + c.name + '</p>' +
+                    '<p class="text-xs text-gray-400 truncate">' + c.location + '</p>' +
+                    '</div>' +
+                    '<svg class="w-4 h-4 text-gray-300 group-hover:text-revelti-blue ml-auto flex-shrink-0 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>' +
+                    '</a>';
+            }).join('');
+        }
+
+        // Close modals on backdrop click
+        document.addEventListener('DOMContentLoaded', function () {
+            var crModal = document.getElementById('connect-request-modal');
+            var crContent = document.getElementById('connect-request-modal-content');
+            crModal.addEventListener('click', function (e) {
+                if (!crContent.contains(e.target)) closeConnectModal();
+            });
+
+            var cModal = document.getElementById('connections-modal');
+            var cContent = document.getElementById('connections-modal-content');
+            cModal.addEventListener('click', function (e) {
+                if (!cContent.contains(e.target)) closeConnectionsModal();
+            });
+        });
+    </script>
+
     <script src="main.js" defer></script>
     <div id="footer-placeholder"></div>
 </body>

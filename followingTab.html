@@ -217,9 +217,145 @@
                         </a>
                     </div>
                 </details>
+
+                <!-- People / Connections Subsection -->
+                <details open>
+                    <summary class="flex justify-between items-center cursor-pointer font-bold text-xl revelti-blue">
+                        People <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </summary>
+                    <!-- Search bar — constrained width on larger screens -->
+                    <div class="mt-3 relative w-full max-w-xs">
+                        <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        <input id="following-people-search" type="text" placeholder="Search people..."
+                            oninput="filterFollowingPeople(this.value)"
+                            class="w-full pl-9 pr-8 py-2 text-sm border-2 border-gray-200 rounded-full bg-white text-gray-700 placeholder-gray-400 transition-all duration-200"
+                            style="outline:none;">
+                        <button id="following-people-clear" onclick="clearFollowingPeopleSearch()"
+                            class="absolute right-3 top-1/2 -translate-y-1/2 hidden text-gray-400 hover:text-gray-600 transition-colors" aria-label="Clear">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        </button>
+                    </div>
+                    <!-- Static people list — visible immediately even when injected via innerHTML -->
+                    <div id="following-people-list" class="mt-2 space-y-1">
+                        <a href="attendeeProfile.html" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors group">
+                            <img src="https://i.pravatar.cc/40?img=10" alt="Sofia Martínez" class="w-9 h-9 rounded-full object-cover flex-shrink-0">
+                            <div class="min-w-0">
+                                <p class="text-sm font-semibold text-gray-800 group-hover:text-revelti-blue transition-colors truncate">Sofia Martínez</p>
+                                <p class="text-xs text-gray-400 truncate">Madrid, Spain</p>
+                            </div>
+                            <svg class="w-4 h-4 text-gray-300 group-hover:text-revelti-blue ml-auto flex-shrink-0 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                        <a href="attendeeProfile.html" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors group">
+                            <img src="https://i.pravatar.cc/40?img=11" alt="Lucas Ferreira" class="w-9 h-9 rounded-full object-cover flex-shrink-0">
+                            <div class="min-w-0">
+                                <p class="text-sm font-semibold text-gray-800 group-hover:text-revelti-blue transition-colors truncate">Lucas Ferreira</p>
+                                <p class="text-xs text-gray-400 truncate">Lisbon, Portugal</p>
+                            </div>
+                            <svg class="w-4 h-4 text-gray-300 group-hover:text-revelti-blue ml-auto flex-shrink-0 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                        <a href="attendeeProfile.html" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors group">
+                            <img src="https://i.pravatar.cc/40?img=12" alt="Mia Hoffmann" class="w-9 h-9 rounded-full object-cover flex-shrink-0">
+                            <div class="min-w-0">
+                                <p class="text-sm font-semibold text-gray-800 group-hover:text-revelti-blue transition-colors truncate">Mia Hoffmann</p>
+                                <p class="text-xs text-gray-400 truncate">Berlin, Germany</p>
+                            </div>
+                            <svg class="w-4 h-4 text-gray-300 group-hover:text-revelti-blue ml-auto flex-shrink-0 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                        <a href="attendeeProfile.html" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors group">
+                            <img src="https://i.pravatar.cc/40?img=13" alt="Carlos Ruiz" class="w-9 h-9 rounded-full object-cover flex-shrink-0">
+                            <div class="min-w-0">
+                                <p class="text-sm font-semibold text-gray-800 group-hover:text-revelti-blue transition-colors truncate">Carlos Ruiz</p>
+                                <p class="text-xs text-gray-400 truncate">Barcelona, Spain</p>
+                            </div>
+                            <svg class="w-4 h-4 text-gray-300 group-hover:text-revelti-blue ml-auto flex-shrink-0 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                        <a href="attendeeProfile.html" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors group">
+                            <img src="https://i.pravatar.cc/40?img=14" alt="Elena Popescu" class="w-9 h-9 rounded-full object-cover flex-shrink-0">
+                            <div class="min-w-0">
+                                <p class="text-sm font-semibold text-gray-800 group-hover:text-revelti-blue transition-colors truncate">Elena Popescu</p>
+                                <p class="text-xs text-gray-400 truncate">Bucharest, Romania</p>
+                            </div>
+                            <svg class="w-4 h-4 text-gray-300 group-hover:text-revelti-blue ml-auto flex-shrink-0 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                        <a href="attendeeProfile.html" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors group">
+                            <img src="https://i.pravatar.cc/40?img=15" alt="James O'Brien" class="w-9 h-9 rounded-full object-cover flex-shrink-0">
+                            <div class="min-w-0">
+                                <p class="text-sm font-semibold text-gray-800 group-hover:text-revelti-blue transition-colors truncate">James O'Brien</p>
+                                <p class="text-xs text-gray-400 truncate">Dublin, Ireland</p>
+                            </div>
+                            <svg class="w-4 h-4 text-gray-300 group-hover:text-revelti-blue ml-auto flex-shrink-0 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                    </div>
+                </details>
             </div>
         </main>
     </div>
+
+    <script>
+        // These functions work both standalone and when oninput fires after innerHTML injection
+        var FOLLOWING_CONNECTIONS = [
+            { name: 'Sofia Mart\u00ednez', location: 'Madrid, Spain', avatar: 'https://i.pravatar.cc/40?img=10' },
+            { name: 'Lucas Ferreira', location: 'Lisbon, Portugal', avatar: 'https://i.pravatar.cc/40?img=11' },
+            { name: 'Mia Hoffmann', location: 'Berlin, Germany', avatar: 'https://i.pravatar.cc/40?img=12' },
+            { name: 'Carlos Ruiz', location: 'Barcelona, Spain', avatar: 'https://i.pravatar.cc/40?img=13' },
+            { name: 'Elena Popescu', location: 'Bucharest, Romania', avatar: 'https://i.pravatar.cc/40?img=14' },
+            { name: 'James O\u2019Brien', location: 'Dublin, Ireland', avatar: 'https://i.pravatar.cc/40?img=15' },
+        ];
+
+        function renderFollowingPeople(query) {
+            var list = document.getElementById('following-people-list');
+            if (!list) return;
+            var q = (query || '').toLowerCase().trim();
+            var filtered = FOLLOWING_CONNECTIONS.filter(function(c) {
+                return !q || c.name.toLowerCase().includes(q) || c.location.toLowerCase().includes(q);
+            });
+            if (!filtered.length) {
+                list.innerHTML = '<p class="text-sm text-gray-400 py-2 px-2">No results found.</p>';
+                return;
+            }
+            list.innerHTML = filtered.map(function(c) {
+                return '<a href="attendeeProfile.html" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors group">' +
+                    '<img src="' + c.avatar + '" alt="' + c.name + '" class="w-9 h-9 rounded-full object-cover flex-shrink-0">' +
+                    '<div class="min-w-0">' +
+                    '<p class="text-sm font-semibold text-gray-800 group-hover:text-revelti-blue transition-colors truncate">' + c.name + '</p>' +
+                    '<p class="text-xs text-gray-400 truncate">' + c.location + '</p>' +
+                    '</div>' +
+                    '<svg class="w-4 h-4 text-gray-300 group-hover:text-revelti-blue ml-auto flex-shrink-0 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>' +
+                    '</a>';
+            }).join('');
+        }
+
+        function filterFollowingPeople(query) {
+            var clearBtn = document.getElementById('following-people-clear');
+            if (clearBtn) clearBtn.classList.toggle('hidden', !query);
+            renderFollowingPeople(query);
+        }
+
+        function clearFollowingPeopleSearch() {
+            var inp = document.getElementById('following-people-search');
+            if (inp) inp.value = '';
+            filterFollowingPeople('');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var inp = document.getElementById('following-people-search');
+            if (inp) {
+                inp.addEventListener('focus', function() {
+                    this.style.borderColor = '#213c63';
+                    this.style.boxShadow = '0 0 0 2px rgba(33,60,99,0.12)';
+                });
+                inp.addEventListener('blur', function() {
+                    this.style.borderColor = '';
+                    this.style.boxShadow = '';
+                });
+            }
+        });
+    </script>
+
     <script src="main.js" defer></script>
     <div id="footer-placeholder"></div>
 </body>
