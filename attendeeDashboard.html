@@ -331,6 +331,52 @@
             filterFollowingPeople('');
         }
         // ===== END: People search =====
+
+        // ===== FOLLOWING TAB: Events filter toggle =====
+        // Defined here (global scope) so onclick calls work after innerHTML injection.
+        var followingEventFilter = 'all';
+
+        function filterFollowingEvents(filter) {
+            followingEventFilter = filter;
+            var today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            // Use querySelectorAll so both mobile AND desktop injected instances are updated
+            var activeClass  = 'px-3 py-1.5 rounded-md text-sm font-semibold bg-white text-revelti-blue shadow-sm transition-all duration-200';
+            var inactiveClass = 'px-3 py-1.5 rounded-md text-sm font-semibold text-gray-500 transition-all duration-200 hover:text-gray-700';
+            ['all', 'current', 'upcoming', 'past'].forEach(function(key) {
+                document.querySelectorAll('#ev-filter-' + key).forEach(function(btn) {
+                    btn.className = (key === filter) ? activeClass : inactiveClass;
+                });
+            });
+
+            var cards = document.querySelectorAll('.following-event-card');
+            var visibleCount = 0;
+            cards.forEach(function(card) {
+                var start = card.getAttribute('data-start');
+                var end   = card.getAttribute('data-end') || start;
+                var startDate = start ? new Date(start) : null;
+                var endDate   = end   ? new Date(end)   : null;
+                if (endDate) endDate.setHours(23, 59, 59, 999);
+
+                var show = true;
+                if (filter === 'current') {
+                    show = startDate && endDate && startDate <= today && today <= endDate;
+                } else if (filter === 'upcoming') {
+                    show = startDate && startDate > today;
+                } else if (filter === 'past') {
+                    show = endDate && endDate < today;
+                }
+                card.style.display = show ? '' : 'none';
+                if (show) visibleCount++;
+            });
+
+            // Show/hide the empty-state message
+            document.querySelectorAll('#following-events-empty').forEach(function(el) {
+                el.classList.toggle('hidden', visibleCount > 0);
+            });
+        }
+        // ===== END: Events filter toggle =====
     </script>
 
     <script src="js/galleryOverlay.js"></script>
