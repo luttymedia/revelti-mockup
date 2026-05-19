@@ -255,7 +255,8 @@
                 </details>
 
                 <!-- People / Connections Subsection -->
-                <details open>
+                <span id="following-people-anchor"></span>
+                <details id="people-section" open>
                     <summary class="flex justify-between items-center cursor-pointer font-bold text-xl revelti-blue">
                         People <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24">
@@ -263,6 +264,17 @@
                             </path>
                         </svg>
                     </summary>
+                    <!-- Requests quick-access link -->
+                    <div class="mt-3 mb-1">
+                        <a href="profileTab.html#connection-requests-section"
+                            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-orange-200 bg-orange-50 text-xs font-bold text-revelti-orange hover:bg-orange-100 hover:border-revelti-orange transition-all duration-200 shadow-sm">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                            </svg>
+                            Requests
+                            <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-revelti-orange text-white text-[10px] font-bold leading-none">3</span>
+                        </a>
+                    </div>
                     <!-- Search bar — constrained width on larger screens -->
                     <div class="mt-3 relative w-full max-w-xs">
                         <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
@@ -418,6 +430,13 @@
             var inp = document.getElementById('following-people-search');
             if (inp) inp.value = '';
             filterFollowingPeople('');
+        }
+
+        function openPeopleSection() {
+            var section = document.getElementById('people-section');
+            if (section) section.open = true;
+            var anchor = document.getElementById('following-people-anchor');
+            if (anchor) setTimeout(function() { anchor.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 50);
         }
 
         document.addEventListener('DOMContentLoaded', function() {
