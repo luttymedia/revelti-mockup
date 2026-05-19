@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     try {
-        if (role === 'creative' || role === 'organizer') {
+        if (role === 'creative' || role === 'organizer' || role === 'promoter') {
             const _v = Date.now();
             const [sidebarHtml, navbarHtml] = await Promise.all([
                 fetch(`${role}Sidebar.snippet?v=${_v}`).then(r => r.text()),

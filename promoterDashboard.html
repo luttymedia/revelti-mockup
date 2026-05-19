@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revelti - Promoter Dashboard</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        revelti: {
+                            blue: '#213c63',
+                            orange: '#f58220',
+                            purple: '#6b21a8',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Settings Accordion Styles */
+        .toggle-switch input { display: none; }
+        .toggle-switch .slider {
+            width: 44px; height: 24px; background: #d1d5db; border-radius: 9999px; position: relative; cursor: pointer; transition: background .2s; display: inline-block;
+        }
+        .toggle-switch .slider::after {
+            content: ''; position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; background: white; border-radius: 50%; transition: transform .2s;
+        }
+        .toggle-switch input:checked+.slider { background: #6b7280; /* Gray for promoter */ }
+        .toggle-switch input:checked+.slider::after { transform: translateX(20px); }
+        details[open] summary .accordion-chevron { transform: rotate(180deg); }
+        .accordion-chevron { transition: transform .2s ease; }
+        .settings-section {
+            background: white; border-radius: 0.75rem; box-shadow: 0 1px 3px rgba(0, 0, 0, .08); margin-bottom: 1rem; border: 1px solid #f1f5f9; overflow: hidden;
+        }
+        .settings-section summary {
+            padding: 1rem 1.25rem; display: flex; align-items: center; gap: 0.75rem; cursor: pointer; list-style: none; justify-content: space-between;
+        }
+        .settings-section summary::-webkit-details-marker { display: none; }
+        .settings-section summary .section-left { display: flex; align-items: center; gap: 0.75rem; }
+        .settings-section summary .section-icon {
+            width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .settings-section .section-body { padding: 1.25rem; border-top: 1px solid #f1f5f9; background: #fafbfc; }
+        .form-row { margin-bottom: 1rem; }
+        .form-row label { display: block; font-weight: 600; font-size: .875rem; color: #374151; margin-bottom: .25rem; }
+        .form-row input[type=text], .form-row input[type=email], .form-row input[type=password], .form-row select {
+            width: 100%; padding: .5rem .75rem; border: 1px solid #d1d5db; border-radius: 0.5rem; font-size: .875rem; outline: none; transition: border-color .15s;
+        }
+        .form-row input:focus, .form-row select:focus { border-color: #4b5563; box-shadow: 0 0 0 2px rgba(75, 85, 99, .12); }
+        .toggle-row { display: flex; justify-content: space-between; align-items: center; padding: .6rem 0; border-bottom: 1px solid #f1f5f9; }
+        .toggle-row:last-child { border-bottom: none; }
+        .toggle-row .toggle-label { font-size: .875rem; color: #374151; font-weight: 500; }
+        .toggle-row .toggle-desc { font-size: .75rem; color: #9ca3af; }
+    </style>
+</head>
+
+<body class="antialiased text-gray-800 bg-white" data-role="promoter">
+    <div id="promoter-navbar-placeholder"></div>
+
+    <div class="max-w-2xl md:max-w-full lg:max-w-full mx-auto bg-white overflow-hidden">
+        <main class="w-full">
+                <div class="px-4 py-1 sm:px-4 lg:px-6">
+                    
+                    <header class="flex flex-col md:flex-row justify-between items-center mb-6">
+                        <div class="flex items-center mb-4 md:mb-0">
+                            <img src="https://placehold.co/80x80/cccccc/000000?text=JD" alt="Promoter Avatar"
+                                class="w-20 h-20 rounded-full object-cover shadow-md p-1 bg-white">
+                            <div class="ml-4">
+                                <h1 class="text-3xl font-bold text-gray-800">John Doe</h1>
+                                <p class="text-gray-500 font-semibold">Promoter Dashboard</p>
+                            </div>
+                        </div>
+                    </header>
+
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                        <!-- Tab Navigation -->
+                        <nav class="py-2 border-b border-gray-100">
+                            <div class="creative-tab-container-wide">
+                                <button onclick="switchTab('overview')"
+                                    class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium creative-tab-active">Overview</button>
+                                <button onclick="switchTab('promotions')"
+                                    class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">My Promotions</button>
+                                <button onclick="switchTab('settings')"
+                                    class="tab-button flex-1 px-3 py-2 text-center text-gray-500 hover:bg-gray-200 rounded-full transition-all duration-200 text-sm font-medium">Account Settings</button>
+                            </div>
+                        </nav>
+
+                        <main class="p-6 md:p-8">
+                            <!-- Overview Tab -->
+                            <div id="overview" class="tab-content">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <!-- Stats Card -->
+                                    <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                                        <div class="flex items-center space-x-3 mb-4 border-b pb-2">
+                                            <div class="p-2 bg-gray-100 rounded-lg">
+                                                <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                                                </svg>
+                                            </div>
+                                            <h3 class="text-lg font-bold text-gray-800">Total Performance</h3>
+                                        </div>
+                                        <div class="flex justify-between items-center px-2">
+                                            <div class="text-center">
+                                                <p class="text-sm text-gray-500 uppercase tracking-wide">Tickets Sold</p>
+                                                <p class="text-3xl font-extrabold text-gray-800 mt-1">124</p>
+                                            </div>
+                                            <div class="h-10 border-r border-gray-200"></div>
+                                            <div class="text-center">
+                                                <p class="text-sm text-gray-500 uppercase tracking-wide">Commissions</p>
+                                                <p class="text-3xl font-extrabold text-green-600 mt-1">€620</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Pending Invitations -->
+                                    <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                                        <div class="flex items-center justify-between mb-4 border-b pb-2">
+                                            <div class="flex items-center space-x-3">
+                                                <div class="p-2 bg-orange-50 rounded-lg">
+                                                    <svg class="w-6 h-6 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+                                                    </svg>
+                                                </div>
+                                                <h3 class="text-lg font-bold text-gray-800 flex items-center gap-2">
+                                                    Invitations
+                                                    <span id="invitation-count" class="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">1</span>
+                                                </h3>
+                                            </div>
+                                        </div>
+                                        <div id="invitations-list" class="space-y-3">
+                                            <div id="invite-1" class="flex flex-col sm:flex-row sm:items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-200 gap-3">
+                                                <div>
+                                                    <p class="font-bold text-gray-800 text-sm">BCN Sensual Weekend</p>
+                                                    <p class="text-[11px] text-gray-500">LMP Events • Mar 10 - 12</p>
+                                                </div>
+                                                <div class="flex items-center gap-2">
+                                                    <button onclick="handleInvite(1, 'accept')" class="px-3 py-1.5 bg-gray-800 text-white text-xs font-bold rounded shadow-sm hover:bg-gray-900 transition">Accept</button>
+                                                    <button onclick="handleInvite(1, 'decline')" class="px-3 py-1.5 bg-white text-gray-700 text-xs font-bold rounded border border-gray-300 hover:bg-gray-50 transition">Decline</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="no-invitations" class="hidden text-center py-4">
+                                            <p class="text-sm text-gray-400 italic">No pending invitations</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- My Promotions Tab -->
+                            <div id="promotions" class="tab-content hidden">
+                                <div class="mb-4">
+                                    <h2 class="text-xl font-bold text-gray-800">Active Promotions</h2>
+                                    <p class="text-gray-500 text-sm">Manage your promotional codes and track their performance.</p>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="promotions-grid">
+                                    <!-- Event 1 -->
+                                    <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex flex-col h-full">
+                                        <div class="flex justify-between items-start mb-4">
+                                            <div>
+                                                <h3 class="font-bold text-gray-800">Summer Dance Fest</h3>
+                                                <p class="text-xs text-gray-500">Jul 15 - 18, 2026</p>
+                                            </div>
+                                            <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded">Active</span>
+                                        </div>
+                                        <div class="mb-4 bg-gray-50 p-3 rounded-lg border border-gray-100">
+                                            <div class="flex justify-between items-center mb-1">
+                                                <span class="text-xs font-bold text-gray-500 uppercase">Your Code</span>
+                                                <button class="text-xs font-bold text-blue-600 hover:text-blue-800" onclick="editCode('SUMMER-ALEX')">Edit</button>
+                                            </div>
+                                            <div class="flex items-center space-x-2">
+                                                <code class="flex-1 bg-white border border-gray-300 px-3 py-2 rounded text-sm font-mono text-gray-800">SUMMER-ALEX</code>
+                                                <button class="p-2 bg-gray-800 text-white rounded hover:bg-gray-900 transition" onclick="copyCode('SUMMER-ALEX', this)">
+                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="grid grid-cols-2 gap-4 mt-auto border-t border-gray-100 pt-3">
+                                            <div>
+                                                <p class="text-xs text-gray-500 uppercase">Tickets</p>
+                                                <p class="font-bold text-gray-800">42</p>
+                                            </div>
+                                            <div>
+                                                <p class="text-xs text-gray-500 uppercase">Commission</p>
+                                                <p class="font-bold text-green-600">€210</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Event 2 -->
+                                    <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex flex-col h-full">
+                                        <div class="flex justify-between items-start mb-4">
+                                            <div>
+                                                <h3 class="font-bold text-gray-800">Bachata Weekend</h3>
+                                                <p class="text-xs text-gray-500">Aug 5 - 7, 2026</p>
+                                            </div>
+                                            <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded">Active</span>
+                                        </div>
+                                        <div class="mb-4 bg-gray-50 p-3 rounded-lg border border-gray-100">
+                                            <div class="flex justify-between items-center mb-1">
+                                                <span class="text-xs font-bold text-gray-500 uppercase">Your Code</span>
+                                                <button class="text-xs font-bold text-blue-600 hover:text-blue-800" onclick="editCode('ALEX-BACHATA')">Edit</button>
+                                            </div>
+                                            <div class="flex items-center space-x-2">
+                                                <code class="flex-1 bg-white border border-gray-300 px-3 py-2 rounded text-sm font-mono text-gray-800">ALEX-BACHATA</code>
+                                                <button class="p-2 bg-gray-800 text-white rounded hover:bg-gray-900 transition" onclick="copyCode('ALEX-BACHATA', this)">
+                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="grid grid-cols-2 gap-4 mt-auto border-t border-gray-100 pt-3">
+                                            <div>
+                                                <p class="text-xs text-gray-500 uppercase">Tickets</p>
+                                                <p class="font-bold text-gray-800">82</p>
+                                            </div>
+                                            <div>
+                                                <p class="text-xs text-gray-500 uppercase">Commission</p>
+                                                <p class="font-bold text-green-600">€410</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Settings Tab -->
+                            <div id="settings" class="tab-content hidden max-w-3xl mx-auto">
+                                
+                                <!-- ── 1. PUBLIC PROFILE & IDENTITY ─────────────────────────────── -->
+                                <details class="settings-section" open>
+                                    <summary>
+                                        <div class="section-left">
+                                            <div class="section-icon bg-gray-100">
+                                                <svg class="w-5 h-5 text-gray-600 no-rotate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <p class="font-bold text-gray-800">Public Profile & Identity</p>
+                                                <p class="text-xs text-gray-400">Profile picture, name & bio</p>
+                                            </div>
+                                        </div>
+                                        <svg class="w-5 h-5 text-gray-400 accordion-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </summary>
+                                    <div class="section-body space-y-5">
+                                        <!-- Profile Picture -->
+                                        <div>
+                                            <p class="text-sm font-semibold text-gray-600 mb-2">Profile Picture</p>
+                                            <div class="flex items-center gap-4">
+                                                <img src="https://placehold.co/80x80/cccccc/000000?text=JD" alt="Profile" class="w-16 h-16 rounded-full object-cover shadow-sm bg-white p-0.5 border border-gray-200">
+                                                <div>
+                                                    <button class="px-3 py-1.5 text-sm font-semibold bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">Upload New</button>
+                                                    <p class="text-xs text-gray-400 mt-1">JPG, PNG · Max 5 MB</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr class="border-gray-200">
+                                        <div class="form-row mb-0">
+                                            <label>Display Name</label>
+                                            <input type="text" value="John Doe">
+                                        </div>
+                                        <div class="form-row mb-0">
+                                            <label>Short Bio</label>
+                                            <input type="text" value="Event Promoter">
+                                        </div>
+                                        <div class="flex justify-end pt-2">
+                                            <button class="px-5 py-2 bg-gray-800 text-white text-sm font-bold rounded-lg hover:bg-gray-900 transition shadow-sm">Save Changes</button>
+                                        </div>
+                                    </div>
+                                </details>
+
+                                <!-- ── 2. ACCOUNT DETAILS ─────────────────────────────── -->
+                                <details class="settings-section">
+                                    <summary>
+                                        <div class="section-left">
+                                            <div class="section-icon bg-blue-50">
+                                                <svg class="w-5 h-5 text-blue-600 no-rotate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <p class="font-bold text-gray-800">Account Details</p>
+                                                <p class="text-xs text-gray-400">Login email & phone</p>
+                                            </div>
+                                        </div>
+                                        <svg class="w-5 h-5 text-gray-400 accordion-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </summary>
+                                    <div class="section-body space-y-4">
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                            <div class="form-row mb-0">
+                                                <label>Email Address</label>
+                                                <input type="email" value="john.doe@example.com">
+                                            </div>
+                                            <div class="form-row mb-0">
+                                                <label>Phone Number</label>
+                                                <input type="text" value="+34 600 000 000">
+                                            </div>
+                                        </div>
+                                        <div class="flex justify-end pt-2">
+                                            <button class="px-5 py-2 bg-gray-800 text-white text-sm font-bold rounded-lg hover:bg-gray-900 transition shadow-sm">Save Changes</button>
+                                        </div>
+                                    </div>
+                                </details>
+
+                                <!-- ── 3. PAYOUT METHODS ─────────────────────────────── -->
+                                <details class="settings-section">
+                                    <summary>
+                                        <div class="section-left">
+                                            <div class="section-icon bg-green-50">
+                                                <svg class="w-5 h-5 text-green-600 no-rotate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <p class="font-bold text-gray-800">Payout Methods</p>
+                                                <p class="text-xs text-gray-400">Where to send your commissions</p>
+                                            </div>
+                                        </div>
+                                        <svg class="w-5 h-5 text-gray-400 accordion-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </summary>
+                                    <div class="section-body space-y-4">
+                                        <div class="bg-white border border-gray-200 rounded-lg p-4 flex justify-between items-center shadow-sm">
+                                            <div class="flex items-center gap-3">
+                                                <div class="p-2 bg-gray-50 border border-gray-100 rounded">
+                                                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"/></svg>
+                                                </div>
+                                                <div>
+                                                    <p class="font-bold text-gray-800">Bank Transfer (IBAN)</p>
+                                                    <p class="text-xs text-gray-500">**** **** **** 4321</p>
+                                                </div>
+                                            </div>
+                                            <span class="px-2 py-1 bg-green-100 text-green-700 text-[10px] uppercase font-bold tracking-wide rounded">Default</span>
+                                        </div>
+                                        <div class="flex justify-end pt-2">
+                                            <button class="px-5 py-2 bg-gray-100 text-gray-700 text-sm font-bold rounded-lg hover:bg-gray-200 transition border border-gray-200">Add New Payout Method</button>
+                                        </div>
+                                    </div>
+                                </details>
+
+                                <!-- ── 4. NOTIFICATIONS ─────────────────────────────── -->
+                                <details class="settings-section">
+                                    <summary>
+                                        <div class="section-left">
+                                            <div class="section-icon bg-yellow-50">
+                                                <svg class="w-5 h-5 text-yellow-600 no-rotate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <p class="font-bold text-gray-800">Notifications</p>
+                                                <p class="text-xs text-gray-400">Email & push alerts</p>
+                                            </div>
+                                        </div>
+                                        <svg class="w-5 h-5 text-gray-400 accordion-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </summary>
+                                    <div class="section-body">
+                                        <div class="toggle-row">
+                                            <div>
+                                                <p class="toggle-label">New Event Invitations</p>
+                                                <p class="toggle-desc">When an organizer invites you to promote</p>
+                                            </div>
+                                            <label class="toggle-switch"><input type="checkbox" checked><span class="slider"></span></label>
+                                        </div>
+                                        <div class="toggle-row">
+                                            <div>
+                                                <p class="toggle-label">Weekly Performance Summary</p>
+                                                <p class="toggle-desc">Tickets sold and commissions earned</p>
+                                            </div>
+                                            <label class="toggle-switch"><input type="checkbox" checked><span class="slider"></span></label>
+                                        </div>
+                                        <div class="toggle-row">
+                                            <div>
+                                                <p class="toggle-label">New Commissions</p>
+                                                <p class="toggle-desc">Immediate alerts on new sales</p>
+                                            </div>
+                                            <label class="toggle-switch"><input type="checkbox"><span class="slider"></span></label>
+                                        </div>
+                                    </div>
+                                </details>
+
+                                <!-- ── 5. SECURITY ─────────────────────────────── -->
+                                <details class="settings-section">
+                                    <summary>
+                                        <div class="section-left">
+                                            <div class="section-icon bg-red-50">
+                                                <svg class="w-5 h-5 text-red-500 no-rotate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <p class="font-bold text-gray-800">Security</p>
+                                                <p class="text-xs text-gray-400">Password & device sessions</p>
+                                            </div>
+                                        </div>
+                                        <svg class="w-5 h-5 text-gray-400 accordion-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </summary>
+                                    <div class="section-body space-y-4">
+                                        <div class="form-row mb-0"><label>Current Password</label><input type="password" placeholder="••••••••"></div>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                            <div class="form-row mb-0"><label>New Password</label><input type="password" placeholder="••••••••"></div>
+                                            <div class="form-row mb-0"><label>Confirm New Password</label><input type="password" placeholder="••••••••"></div>
+                                        </div>
+                                        <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                                            <button class="px-5 py-2 bg-gray-800 text-white text-sm font-bold rounded-lg hover:bg-gray-900 transition shadow-sm">Update Password</button>
+                                            <button class="px-5 py-2 bg-white text-gray-600 text-sm font-semibold rounded-lg hover:bg-gray-50 transition border border-gray-200">Log out from all devices</button>
+                                        </div>
+                                    </div>
+                                </details>
+
+                                <!-- ── 6. DEFAULT PREFERENCES ─────────────────────────────── -->
+                                <details class="settings-section">
+                                    <summary>
+                                        <div class="section-left">
+                                            <div class="section-icon bg-purple-50">
+                                                <svg class="w-5 h-5 text-purple-600 no-rotate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <p class="font-bold text-gray-800">Default Preferences</p>
+                                                <p class="text-xs text-gray-400">Language, currency & formatting</p>
+                                            </div>
+                                        </div>
+                                        <svg class="w-5 h-5 text-gray-400 accordion-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </summary>
+                                    <div class="section-body space-y-4">
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                            <div class="form-row mb-0">
+                                                <label>Language</label>
+                                                <select>
+                                                    <option>English (US)</option>
+                                                    <option>Spanish (ES)</option>
+                                                    <option>French (FR)</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-row mb-0">
+                                                <label>Currency</label>
+                                                <select>
+                                                    <option>EUR (€)</option>
+                                                    <option>USD ($)</option>
+                                                    <option>GBP (£)</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="flex justify-end pt-2">
+                                            <button class="px-5 py-2 bg-gray-800 text-white text-sm font-bold rounded-lg hover:bg-gray-900 transition shadow-sm">Save Preferences</button>
+                                        </div>
+                                    </div>
+                                </details>
+
+                            </div>
+
+                        </main>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Edit Code Modal -->
+    <div id="editCodeModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-xl shadow-2xl max-w-md w-full overflow-hidden transform transition-all">
+            <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50">
+                <h3 class="text-xl font-bold text-gray-800">Edit Custom Code</h3>
+                <button onclick="closeModal('editCodeModal')" class="text-gray-400 hover:text-gray-600 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <div class="p-6">
+                <p class="text-sm text-gray-600 mb-4">You can customize the code you share with your audience. Note: it must be unique for this event.</p>
+                <div class="mb-4">
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Promotional Code</label>
+                    <input type="text" id="customCodeInput" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-gray-800 focus:border-gray-800 font-mono text-lg uppercase outline-none transition" placeholder="e.g. YOUR-NAME">
+                </div>
+            </div>
+            <div class="p-4 bg-gray-50 border-t border-gray-100 flex justify-end gap-3">
+                <button onclick="closeModal('editCodeModal')" class="px-5 py-2.5 rounded-lg text-sm font-bold text-gray-600 hover:bg-gray-200 transition-colors">Cancel</button>
+                <button onclick="saveCustomCode()" class="px-5 py-2.5 rounded-lg text-sm font-bold bg-gray-800 text-white hover:bg-gray-900 transition-colors shadow-md">Save Code</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="layout-injector.js"></script>
+    <script>
+        // Tab switching logic
+        function switchTab(tabId) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.add('hidden');
+            });
+            // Show selected tab
+            document.getElementById(tabId).classList.remove('hidden');
+
+            // Update button styles
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('creative-tab-active', 'text-gray-800');
+                btn.classList.add('text-gray-500');
+            });
+            // Find and style active button
+            const activeBtn = Array.from(document.querySelectorAll('.tab-button')).find(btn => btn.getAttribute('onclick').includes(tabId));
+            if (activeBtn) {
+                activeBtn.classList.add('creative-tab-active', 'text-gray-800');
+                activeBtn.classList.remove('text-gray-500');
+            }
+        }
+
+        // Invitations logic
+        function handleInvite(id, action) {
+            const inviteElement = document.getElementById(`invite-${id}`);
+            if (inviteElement) {
+                inviteElement.style.opacity = '0';
+                setTimeout(() => {
+                    inviteElement.remove();
+                    
+                    // Update count
+                    const countSpan = document.getElementById('invitation-count');
+                    const currentCount = parseInt(countSpan.textContent);
+                    if (currentCount > 1) {
+                        countSpan.textContent = currentCount - 1;
+                    } else {
+                        countSpan.style.display = 'none';
+                        document.getElementById('no-invitations').classList.remove('hidden');
+                    }
+
+                    // If accepted, add to promotions grid (Mock implementation)
+                    if(action === 'accept') {
+                        const newPromoHtml = `
+                            <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex flex-col h-full opacity-0 transition-opacity duration-500" id="new-promo" style="animation: fadeIn 0.5s forwards;">
+                                <div class="flex justify-between items-start mb-4">
+                                    <div>
+                                        <h3 class="font-bold text-gray-800">BCN Sensual Weekend</h3>
+                                        <p class="text-xs text-gray-500">Mar 10 - 12</p>
+                                    </div>
+                                    <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded">Active</span>
+                                </div>
+                                <div class="mb-4 bg-gray-50 p-3 rounded-lg border border-gray-100">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="text-xs font-bold text-gray-500 uppercase">Your Code</span>
+                                        <button class="text-xs font-bold text-blue-600 hover:text-blue-800" onclick="editCode('ALEX-BCN')">Edit</button>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <code class="flex-1 bg-white border border-gray-300 px-3 py-2 rounded text-sm font-mono text-gray-800">ALEX-BCN</code>
+                                        <button class="p-2 bg-gray-800 text-white rounded hover:bg-gray-900 transition" onclick="copyCode('ALEX-BCN', this)">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 mt-auto border-t border-gray-100 pt-3">
+                                    <div>
+                                        <p class="text-xs text-gray-500 uppercase">Tickets</p>
+                                        <p class="font-bold text-gray-800">0</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs text-gray-500 uppercase">Commission</p>
+                                        <p class="font-bold text-green-600">€0</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        const grid = document.getElementById('promotions-grid');
+                        if (grid) {
+                            grid.insertAdjacentHTML('afterbegin', newPromoHtml);
+                            setTimeout(() => { switchTab('promotions'); }, 500);
+                        }
+                    }
+                }, 300);
+            }
+        }
+
+        // Code copy logic
+        function copyCode(code, buttonElement) {
+            navigator.clipboard.writeText(code).then(() => {
+                const originalHTML = buttonElement.innerHTML;
+                buttonElement.innerHTML = `<svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
+                buttonElement.classList.add('bg-gray-900');
+                setTimeout(() => {
+                    buttonElement.innerHTML = originalHTML;
+                    buttonElement.classList.remove('bg-gray-900');
+                }, 2000);
+            });
+        }
+
+        // Code Edit Logic
+        let activeEditCode = '';
+        function editCode(currentCode) {
+            activeEditCode = currentCode;
+            document.getElementById('customCodeInput').value = currentCode;
+            document.getElementById('editCodeModal').classList.remove('hidden');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        function saveCustomCode() {
+            const newCode = document.getElementById('customCodeInput').value.toUpperCase();
+            // Mock: Just find the code and replace it
+            if(newCode && newCode !== activeEditCode) {
+                const codes = document.querySelectorAll('code');
+                codes.forEach(c => {
+                    if(c.textContent === activeEditCode) {
+                        c.textContent = newCode;
+                        // Also update the copy button's onclick
+                        const btn = c.nextElementSibling;
+                        btn.setAttribute('onclick', `copyCode('${newCode}', this)`);
+                        // Update edit button onclick
+                        const editBtn = c.parentElement.previousElementSibling.querySelector('button');
+                        editBtn.setAttribute('onclick', `editCode('${newCode}')`);
+                    }
+                });
+            }
+            closeModal('editCodeModal');
+            alert('Custom code updated successfully!');
+        }
+
+        // Removed preview logic, code edit/copy logic remains unchanged
+        
+        // Add minimal CSS for the active tab
+        const style = document.createElement('style');
+        style.innerHTML = `
+            .creative-tab-active {
+                background-color: #f3f4f6; /* bg-gray-100 */
+                color: #1f2937; /* text-gray-800 */
+                font-weight: 700;
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+
+</html>
