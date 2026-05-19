@@ -51,6 +51,17 @@
         <main class="px-4 py-4 bg-white">
             <!-- Profile Tab Content -->
             <div id="profile" class="tab-content space-y-4">
+                <!-- View Public Profile -->
+                <div>
+                    <a href="attendeeProfile.html"
+                        class="flex md:inline-flex items-center justify-center gap-2 w-full md:w-auto py-2.5 px-6 rounded-lg border-2 border-revelti-orange text-revelti-orange font-bold hover:bg-revelti-orange hover:text-white transition-all duration-200">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                        View My Public Profile
+                    </a>
+                </div>
                 <details>
                     <summary
                         class="flex justify-between items-center cursor-pointer font-semibold text-lg revelti-blue p-3 bg-white border rounded-lg">
@@ -172,18 +183,18 @@
                     <div class="p-4 space-y-4 bg-white border-x border-b rounded-b-lg">
                         <div><label class="font-semibold text-gray-700">Change Password:</label>
                             <input type="password" placeholder="Current Password"
-                                class="w-full p-2 border border-gray-300 rounded-lg mt-1">
+                                class="w-full md:max-w-md block p-2 border border-gray-300 rounded-lg mt-1">
                             <input type="password" placeholder="New Password"
-                                class="w-full p-2 border border-gray-300 rounded-lg mt-2">
+                                class="w-full md:max-w-md block p-2 border border-gray-300 rounded-lg mt-2">
                             <input type="password" placeholder="Confirm New Password"
-                                class="w-full p-2 border border-gray-300 rounded-lg mt-2">
+                                class="w-full md:max-w-md block p-2 border border-gray-300 rounded-lg mt-2">
                         </div>
                         <button
-                            class="w-full bg-revelti-blue text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-800 transition duration-300">Update
+                            class="w-full md:w-auto md:px-8 bg-revelti-blue text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-800 transition duration-300">Update
                             Password</button>
                         <div class="border-t pt-4 mt-4">
                             <button
-                                class="w-full bg-red-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-700 transition duration-300">Delete
+                                class="w-full md:w-auto md:px-8 bg-red-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-700 transition duration-300">Delete
                                 Account</button>
                         </div>
                     </div>
