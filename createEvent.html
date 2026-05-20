@@ -331,6 +331,24 @@
         .rule-enter-active { opacity: 1; transform: translateY(0); }
         .commission-tier-enter { opacity: 0; transition: opacity 0.2s; }
         .commission-tier-enter-active { opacity: 1; }
+
+        /* ── Feature: Smart Pricing Prediction ── */
+        .ghost-rule {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1.5px dashed #a5b4fc;
+            border-radius: 8px;
+            padding: 6px 10px;
+            background: #f5f3ff;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.15s, background 0.15s;
+            font-size: 13px;
+            color: #6b7280;
+            margin-top: 4px;
+        }
+        .ghost-rule:hover { opacity: 1; background: #ede9fe; }
     </style>
 
     <!-- Tailwind CSS for styling -->
@@ -1249,33 +1267,157 @@
             if (strategy === 'dynamic') renderPricingTimeline();
         };
 
+        // ── Helper: read current real rules from DOM ──
+        const getRulesFromDOM = () => {
+            const rules = [];
+            document.querySelectorAll('#pricing-rules-container > div:not(.ghost-rule)').forEach(div => {
+                rules.push({
+                    type:     div.querySelector('.rule-type')?.value,
+                    value:    div.querySelector('.rule-value')?.value,
+                    newPrice: parseFloat(div.querySelector('.rule-price')?.value) || 0
+                });
+            });
+            return rules;
+        };
+
+        // ── Calendar milestone snapping ──
+        // Given a raw predicted date and an anchor (must be strictly after),
+        // return the nearest natural calendar boundary.
+        const snapToCalendarMilestone = (rawDate, afterDate) => {
+            const y = rawDate.getUTCFullYear();
+            const m = rawDate.getUTCMonth(); // 0-indexed
+
+            const candidates = [
+                new Date(Date.UTC(y, m, 1)),       // 1st of current month
+                new Date(Date.UTC(y, m + 1, 0)),   // Last day of current month
+                new Date(Date.UTC(y, m + 1, 1)),   // 1st of next month
+                new Date(Date.UTC(y, m + 2, 1)),   // 1st of month after next
+            ];
+
+            // Week boundaries around rawDate (Mon & Sun)
+            const dow = rawDate.getUTCDay(); // 0=Sun
+            const toMon = (dow === 0 ? -6 : 1 - dow);
+            [-7, 0, 7].forEach(offset => {
+                candidates.push(new Date(rawDate.getTime() + (toMon + offset) * 86400000));      // Monday
+                candidates.push(new Date(rawDate.getTime() + (toMon + offset + 6) * 86400000));  // Sunday
+            });
+
+            const valid = candidates.filter(c => c > afterDate);
+            if (valid.length === 0) return rawDate; // fallback
+            return valid.reduce((best, c) =>
+                Math.abs(c - rawDate) < Math.abs(best - rawDate) ? c : best
+            );
+        };
+
+        // ── Feature 1: Pattern Continuation — predict next rule ──
+        const getPrediction = () => {
+            const rules = getRulesFromDOM().filter(r => r.value && r.newPrice);
+            if (rules.length === 0) return null;
+            // Note: createEvent.html doesn't have a specific base-price input for dynamic rules.
+            // But we'll try to get it if it exists.
+            const basePriceEl = document.getElementById('base-price');
+            const basePrice = basePriceEl ? parseFloat(basePriceEl.value) || 0 : 0;
+            const last = rules[rules.length - 1];
+
+            if (rules.length === 1) {
+                const priceDelta = last.newPrice - basePrice;
+                if (priceDelta <= 0) return null;
+                if (last.type === 'date') {
+                    const d = new Date(last.value);
+                    if (isNaN(d)) return null;
+                    const today = new Date();
+                    const todayUTC = new Date(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()));
+                    const gapMs = d - todayUTC;
+                    const rawNext = new Date(d.getTime() + Math.max(gapMs, 7 * 86400000));
+                    const snapped = snapToCalendarMilestone(rawNext, d);
+                    return { type: 'date', value: snapped.toISOString().split('T')[0], newPrice: +(last.newPrice + priceDelta).toFixed(2) };
+                } else {
+                    return { type: 'sales', value: parseFloat(last.value) * 2, newPrice: +(last.newPrice + priceDelta).toFixed(2) };
+                }
+            }
+
+            const prev = rules[rules.length - 2];
+            const priceDelta = +(last.newPrice - prev.newPrice).toFixed(2);
+            if (priceDelta <= 0) return null;
+
+            if (last.type === 'date' && prev.type === 'date' && last.value && prev.value) {
+                const d1 = new Date(prev.value), d2 = new Date(last.value);
+                if (isNaN(d1) || isNaN(d2)) return null;
+                const gap = d2 - d1;
+                const rawNext = new Date(d2.getTime() + gap);
+                const snapped = snapToCalendarMilestone(rawNext, d2);
+                return { type: 'date', value: snapped.toISOString().split('T')[0], newPrice: +(last.newPrice + priceDelta).toFixed(2) };
+            }
+            if (last.type === 'sales' && prev.type === 'sales') {
+                const gap = parseFloat(last.value) - parseFloat(prev.value);
+                return { type: 'sales', value: parseFloat(last.value) + gap, newPrice: +(last.newPrice + priceDelta).toFixed(2) };
+            }
+            return null;
+        };
+
+        // ── Feature 2: Ghost Preview Row ──
+        const updateGhostRule = () => {
+            const container = document.getElementById('pricing-rules-container');
+            if (!container) return;
+            container.querySelector('.ghost-rule')?.remove();
+            const p = getPrediction();
+            if (!p) return;
+            const ghost = document.createElement('div');
+            ghost.className = 'ghost-rule';
+            const valDisplay = p.type === 'date' ? p.value : `${p.value} tickets`;
+            ghost.innerHTML = `
+                <span style="font-size:10px;background:#e0e7ff;color:#4338ca;border-radius:999px;padding:2px 8px;font-weight:700;">Predicted</span>
+                <span>Increase to</span>
+                <strong style="color:#374151;">€${p.newPrice.toFixed(2)}</strong>
+                <span>when ${p.type === 'date' ? 'Date is after' : 'Tickets Sold >'}</span>
+                <strong style="color:#374151;">${valDisplay}</strong>
+                <span style="font-size:11px;color:#6366f1;margin-left:auto;">↩ click to accept</span>
+            `;
+            ghost.addEventListener('click', () => { ghost.remove(); addPricingRule(p); });
+            container.appendChild(ghost);
+        };
+
         const addPricingRule = (rule = null) => {
             const container = document.getElementById('pricing-rules-container');
+            container.querySelector('.ghost-rule')?.remove();
+
+            // When user clicks "+ Add Pricing Rule" (no rule arg), pre-fill from prediction
+            const prediction = (!rule) ? getPrediction() : null;
+            const src = rule || prediction || {};
+            const ruleType  = src.type     || 'date';
+            const rulePrice = src.newPrice || '';
+            const ruleValue = src.value    || '';
+
             const ruleDiv = document.createElement('div');
             ruleDiv.className = 'flex items-center space-x-2 rule-enter';
-
             ruleDiv.innerHTML = `
                 <span>Increase to</span>
-                <input type="number" placeholder="220.00" class="rule-price p-2 border border-gray-300 rounded-lg w-24" value="${rule?.newPrice || ''}" oninput="renderPricingTimeline()">
+                <input type="number" placeholder="220.00" class="rule-price p-2 border border-gray-300 rounded-lg w-24" value="${rulePrice}" oninput="renderPricingTimeline(); updateGhostRule();">
                 <span>when</span>
                 <select class="rule-type p-2 border border-gray-300 rounded-lg" onchange="updateRuleInputType(this)">
-                    <option value="date" ${rule?.type === 'date' ? 'selected' : ''}>Date is after</option>
-                    <option value="sales" ${rule?.type === 'sales' ? 'selected' : ''}>Tickets Sold &gt;</option>
+                    <option value="date"  ${ruleType === 'date'  ? 'selected' : ''}>Date is after</option>
+                    <option value="sales" ${ruleType === 'sales' ? 'selected' : ''}>Tickets Sold &gt;</option>
                 </select>
-                <input type="${rule?.type === 'sales' ? 'number' : 'date'}" class="rule-value p-2 border border-gray-300 rounded-lg flex-1" value="${rule?.value || ''}" oninput="renderPricingTimeline()">
-                <button type="button" onclick="this.parentElement.remove(); renderPricingTimeline();" class="text-red-500 hover:text-red-700 font-bold">&times;</button>
+                <div class="relative flex-1">
+                    <input type="${ruleType === 'sales' ? 'number' : 'date'}" class="rule-value p-2 border border-gray-300 rounded-lg w-full" value="${ruleValue}" oninput="renderPricingTimeline(); updateGhostRule();">
+                </div>
+                <button type="button" onclick="this.closest('.rule-enter').remove(); renderPricingTimeline(); updateGhostRule();" class="text-red-500 hover:text-red-700 font-bold">&times;</button>
             `;
             container.appendChild(ruleDiv);
+
             requestAnimationFrame(() => { ruleDiv.classList.add('rule-enter-active'); renderPricingTimeline(); });
         };
 
         const updateRuleInputType = (selectEl) => {
             const ruleDiv = selectEl.closest('.rule-enter');
-            const valueInput = ruleDiv?.querySelector('.rule-value');
+            const wrapper = ruleDiv?.querySelector('.relative');
+            const valueInput = wrapper?.querySelector('.rule-value');
             if (!valueInput) return;
             valueInput.value = '';
-            valueInput.type = selectEl.value === 'sales' ? 'number' : 'date';
+            const newType = selectEl.value === 'sales' ? 'number' : 'date';
+            valueInput.type = newType;
             renderPricingTimeline();
+            updateGhostRule();
         };
 
         const toggleFinalPriceOverride = () => {
