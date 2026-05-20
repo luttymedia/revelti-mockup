@@ -1249,26 +1249,33 @@
             if (strategy === 'dynamic') renderPricingTimeline();
         };
 
-        const addPricingRule = (rule) => {
+        const addPricingRule = (rule = null) => {
             const container = document.getElementById('pricing-rules-container');
-            const div = document.createElement('div');
-            div.className = 'flex items-center gap-2 bg-gray-50 p-2 rounded-lg rule-enter';
-            div.innerHTML = `
-                <select class="rule-type p-1.5 border border-gray-300 rounded text-sm">
-                    <option value="date" ${rule?.type === 'date' ? 'selected' : ''}>Date</option>
-                    <option value="sales" ${rule?.type === 'sales' ? 'selected' : ''}>Sales threshold</option>
+            const ruleDiv = document.createElement('div');
+            ruleDiv.className = 'flex items-center space-x-2 rule-enter';
+
+            ruleDiv.innerHTML = `
+                <span>Increase to</span>
+                <input type="number" placeholder="220.00" class="rule-price p-2 border border-gray-300 rounded-lg w-24" value="${rule?.newPrice || ''}" oninput="renderPricingTimeline()">
+                <span>when</span>
+                <select class="rule-type p-2 border border-gray-300 rounded-lg" onchange="updateRuleInputType(this)">
+                    <option value="date" ${rule?.type === 'date' ? 'selected' : ''}>Date is after</option>
+                    <option value="sales" ${rule?.type === 'sales' ? 'selected' : ''}>Tickets Sold &gt;</option>
                 </select>
-                <input type="text" class="rule-value p-1.5 border border-gray-300 rounded text-sm w-28" placeholder="${rule?.type === 'date' ? 'YYYY-MM-DD' : 'e.g., 50 sales'}" value="${rule?.value || ''}">
-                <input type="number" class="rule-price p-1.5 border border-gray-300 rounded text-sm w-24" placeholder="€" value="${rule?.newPrice || ''}">
-                <button onclick="this.parentElement.remove(); renderPricingTimeline();" class="text-red-500 font-bold">&times;</button>
+                <input type="${rule?.type === 'sales' ? 'number' : 'date'}" class="rule-value p-2 border border-gray-300 rounded-lg flex-1" value="${rule?.value || ''}" oninput="renderPricingTimeline()">
+                <button type="button" onclick="this.parentElement.remove(); renderPricingTimeline();" class="text-red-500 hover:text-red-700 font-bold">&times;</button>
             `;
-            container.appendChild(div);
-            // Trigger animation
-            requestAnimationFrame(() => div.classList.add('rule-enter-active'));
-            div.querySelector('.rule-value')?.addEventListener('input', renderPricingTimeline);
-            div.querySelector('.rule-price')?.addEventListener('input', renderPricingTimeline);
-            div.querySelector('.rule-type')?.addEventListener('change', renderPricingTimeline);
-            if (rule) renderPricingTimeline();
+            container.appendChild(ruleDiv);
+            requestAnimationFrame(() => { ruleDiv.classList.add('rule-enter-active'); renderPricingTimeline(); });
+        };
+
+        const updateRuleInputType = (selectEl) => {
+            const ruleDiv = selectEl.closest('.rule-enter');
+            const valueInput = ruleDiv?.querySelector('.rule-value');
+            if (!valueInput) return;
+            valueInput.value = '';
+            valueInput.type = selectEl.value === 'sales' ? 'number' : 'date';
+            renderPricingTimeline();
         };
 
         const toggleFinalPriceOverride = () => {
@@ -1897,215 +1904,6 @@ Ready to join the party?`,
                 <div><label class="font-semibold text-gray-700">Ticket Name</label><input id="ticket-name" type="text"
                         placeholder="e.g., Weekend Pass" class="w-full p-2 border border-gray-300 rounded-lg mt-1">
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div><label class="font-semibold text-gray-700">Quantity Available</label><input id="ticket-qty"
-                            type="number" placeholder="e.g., 200"
-                            class="w-full p-2 border border-gray-300 rounded-lg mt-1"></div>
-                    <div>
-                        <label class="font-semibold text-gray-700">Status</label>
-                        <select id="ticket-status" class="w-full p-2 border border-gray-300 rounded-lg mt-1"
-                            onchange="toggleScheduledDate(this.value)">
-                            <option value="On Sale">On Sale</option>
-                            <option value="Draft">Draft</option>
-                            <option value="Scheduled">Scheduled</option>
-                        </select>
-                    </div>
-                </div>
-                <div id="scheduled-date-container" class="hidden">
-                    <label class="font-semibold text-gray-700">Sale Start Date</label>
-                    <input id="scheduled-date" type="date" class="w-full p-2 border border-gray-300 rounded-lg mt-1">
-                </div>
-
-                <div class="pt-4 border-t mt-4">
-                    <label class="font-semibold text-gray-700">Commission Fee Paid By</label>
-                    <p class="text-xs text-gray-500 mb-2">Decide who absorbs the platform &amp; payment processing fees.</p>
-                    <div class="flex space-x-4 mt-2">
-                        <label class="flex items-center text-sm"><input type="radio" name="commission-payer" value="attendee" class="mr-2" checked> Attendee</label>
-                        <label class="flex items-center text-sm"><input type="radio" name="commission-payer" value="organizer" class="mr-2"> Organizer</label>
-                        <label class="flex items-center text-sm"><input type="radio" name="commission-payer" value="split" class="mr-2"> 50/50 Split</label>
-                    </div>
-                </div>
-
-                <div class="pt-4 border-t mt-4">
-                    <label class="font-semibold text-gray-700">Pricing Strategy</label>
-                    <div class="flex space-x-4 mt-2">
-                        <label class="flex items-center"><input type="radio" name="pricing-strategy" value="simple"
-                                class="mr-2" onchange="togglePricingStrategy(this.value)" checked> Simple Price</label>
-                        <label class="flex items-center"><input type="radio" name="pricing-strategy" value="dynamic"
-                                class="mr-2" onchange="togglePricingStrategy(this.value)"> Dynamic Pricing</label>
-                    </div>
-                </div>
-
-                <div id="simple-price-view">
-                    <div><label class="font-semibold text-gray-700">Price (€)</label><input id="simple-price"
-                            type="number" placeholder="e.g., 190.00"
-                            class="w-full p-2 border border-gray-300 rounded-lg mt-1"></div>
-                </div>
-
-                <div id="dynamic-price-view" class="hidden space-y-4">
-                    <div><label class="font-semibold text-gray-700">Base Price (€)</label><input id="base-price"
-                            type="number" placeholder="The first price tier"
-                            class="w-full p-2 border border-gray-300 rounded-lg mt-1" oninput="renderPricingTimeline()"></div>
-                    <div id="pricing-rules-container" class="space-y-2">
-                    </div>
-                    <button type="button" onclick="addPricingRule()"
-                        class="text-sm font-semibold revelti-blue hover:underline">+ Add Pricing Rule</button>
-
-                    <!-- Feature 2: Pricing Timeline -->
-                    <div id="pricing-timeline-wrapper" class="hidden pt-3 border-t">
-                        <p class="text-xs font-semibold text-gray-500 mb-1">Price Timeline Preview</p>
-                        <div id="pricing-timeline" class="pricing-timeline"></div>
-                    </div>
-
-                    <div class="pt-4 border-t">
-                        <label class="flex items-center text-sm">
-                            <input type="checkbox" id="final-price-override-check" class="mr-2"
-                                onchange="toggleFinalPriceOverride()">
-                            Manually set a different &ldquo;final price&rdquo; for display (strikethrough price)
-                        </label>
-                        <div id="final-price-override-container" class="hidden mt-2">
-                            <label class="font-semibold text-gray-700">Display Final Price (€)</label>
-                            <input id="final-price-override-value" type="number" placeholder="e.g., 250.00"
-                                class="w-full p-2 border border-gray-300 rounded-lg mt-1">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Feature 4: Smart Inheritance – Checkout Override -->
-                <div class="pt-4 border-t">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <label class="font-semibold text-gray-700">Override Checkout Questions</label>
-                            <p class="text-xs text-gray-500">When on, this ticket collects different fields than the global defaults.</p>
-                        </div>
-                        <label class="relative inline-flex items-center cursor-pointer">
-                            <input type="checkbox" id="checkout-override-toggle" class="sr-only peer" onchange="toggleCheckoutOverride()">
-                            <div class="w-11 h-6 bg-gray-300 peer-focus:ring-2 peer-focus:ring-revelti-blue rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-revelti-blue"></div>
-                        </label>
-                    </div>
-                    <div id="checkout-override-panel" class="hidden mt-3 checkout-override-panel">
-                        <p class="text-xs text-blue-700 font-semibold mb-2">Pre-filled from global defaults — adjust as needed:</p>
-                        <div class="space-y-1">
-                            <div class="toggle-row">
-                                <span class="text-sm text-gray-700">Full Name</span>
-                                <label class="relative inline-flex items-center cursor-pointer">
-                                    <input type="checkbox" id="override-field-name" class="sr-only peer">
-                                    <div class="w-9 h-5 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-revelti-blue"></div>
-                                </label>
-                            </div>
-                            <div class="toggle-row">
-                                <span class="text-sm text-gray-700">Email Address</span>
-                                <label class="relative inline-flex items-center cursor-pointer">
-                                    <input type="checkbox" id="override-field-email" class="sr-only peer">
-                                    <div class="w-9 h-5 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-revelti-blue"></div>
-                                </label>
-                            </div>
-                            <div class="toggle-row">
-                                <span class="text-sm text-gray-700">Phone Number</span>
-                                <label class="relative inline-flex items-center cursor-pointer">
-                                    <input type="checkbox" id="override-field-phone" class="sr-only peer">
-                                    <div class="w-9 h-5 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-revelti-blue"></div>
-                                </label>
-                            </div>
-                            <div class="toggle-row">
-                                <span class="text-sm text-gray-700">ID / Passport Number</span>
-                                <label class="relative inline-flex items-center cursor-pointer">
-                                    <input type="checkbox" id="override-field-id" class="sr-only peer">
-                                    <div class="w-9 h-5 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-revelti-blue"></div>
-                                </label>
-                            </div>
-                            <div class="toggle-row">
-                                <span class="text-sm text-gray-700">T-Shirt Size</span>
-                                <label class="relative inline-flex items-center cursor-pointer">
-                                    <input type="checkbox" id="override-field-tshirt" class="sr-only peer">
-                                    <div class="w-9 h-5 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-revelti-blue"></div>
-                                </label>
-                            </div>
-                            <div class="mt-2">
-                                <label class="font-semibold text-gray-700 text-sm">Custom Question (optional)</label>
-                                <input id="override-custom-question" type="text" placeholder="e.g., Dietary requirements?"
-                                    class="w-full p-2 border border-gray-300 rounded-lg mt-1 text-sm">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </main>
-
-            <footer class="p-4 border-t flex justify-between bg-gray-50">
-                <button id="delete-ticket-btn" onclick="deleteTicket()"
-                    class="px-4 py-2 font-bold bg-red-600 text-white rounded-lg hidden">Delete</button>
-                <div class="flex space-x-2">
-                    <button onclick="closeTicketManagementModal('ticket-modal')"
-                        class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg">Cancel</button>
-                    <button onclick="saveTicket()"
-                        class="px-4 py-2 font-bold bg-revelti-blue text-white rounded-lg">Save Ticket</button>
-                </div>
-            </footer>
-        </div>
-    </div>
-
-<div id="pool-limit-modal" class="modal fixed inset-0 flex items-center justify-center p-4 hidden z-50">
-        <div class="bg-white rounded-xl shadow-xl w-full max-w-sm flex flex-col">
-            <header class="p-4 border-b flex justify-between items-center">
-                <h3 class="font-bold text-lg revelti-blue">Set Shared Capacity</h3>
-                <button onclick="closeTicketManagementModal('pool-limit-modal')" class="text-gray-500 hover:text-gray-800 text-2xl leading-none">&times;</button>
-            </header>
-            <main class="p-4 space-y-4">
-                <p class="text-sm text-gray-600" id="pool-limit-description"></p>
-                <div>
-                    <label class="font-semibold text-gray-700 text-sm">Shared Limit</label>
-                    <input id="pool-limit-input" type="number" class="w-full p-2 border border-gray-300 rounded-lg mt-1">
-                </div>
-            </main>
-            <footer class="p-4 border-t flex justify-end space-x-2 bg-gray-50 rounded-b-xl">
-                <button onclick="closeTicketManagementModal('pool-limit-modal')" class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg">Cancel</button>
-                <button onclick="confirmPoolLimit()" class="px-4 py-2 font-bold bg-revelti-blue text-white rounded-lg">Confirm</button>
-            </footer>
-        </div>
-    </div>
-
-
-<div id="modal-backdrop" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40" onclick="closeAllModals()"></div>
-
-    <div id="delete-campaign-modal" class="modal fixed inset-0 flex items-center justify-center p-4 hidden z-50" style="z-index: 60;">
-        <div class="bg-white rounded-xl shadow-xl w-full max-w-md max-h-[90vh] flex flex-col">
-            <header class="p-4 border-b flex justify-between items-center">
-                <h3 id="delete-campaign-modal-title" class="font-bold text-xl text-red-600">Delete Campaign?</h3>
-                <button onclick="closeTicketManagementModal('delete-campaign-modal')"
-                    class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
-            </header>
-            <main class="p-6">
-                <p id="delete-campaign-message" class="text-gray-700"></p>
-            </main>
-            <footer class="p-4 border-t flex justify-end space-x-2 bg-gray-50">
-                <button onclick="closeTicketManagementModal('delete-campaign-modal')" class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg">Cancel</button>
-                <button id="delete-campaign-confirm-btn" onclick="confirmDeleteCampaign()" class="px-4 py-2 font-bold bg-red-600 text-white rounded-lg hidden">Yes, Delete</button>
-            </footer>
-        </div>
-    </div>
-
-    <div id="ticket-modal" class="modal fixed inset-0 flex items-center justify-center p-4 hidden z-50">
-        <div class="bg-white rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col">
-            <header class="p-4 border-b flex justify-between items-center">
-                <h3 id="ticket-modal-title" class="font-bold text-xl revelti-blue">Create New Ticket Type</h3>
-                <div class="flex items-center space-x-2">
-                    <button onclick="openModal('help-modal')" class="text-gray-400 hover:text-revelti-orange">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
-                    <button onclick="closeTicketManagementModal('ticket-modal')"
-                        class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
-                </div>
-            </header>
-
-            <main class="p-6 space-y-4 overflow-y-auto">
-                <input type="hidden" id="editing-ticket-id">
-                <div><label class="font-semibold text-gray-700">Ticket Name</label><input id="ticket-name" type="text"
-                        placeholder="e.g., Weekend Pass" class="w-full p-2 border border-gray-300 rounded-lg mt-1">
-                </div>
                 <div><label class="font-semibold text-gray-700">Description</label>
                     <textarea id="ticket-description" placeholder="Brief details about what is included..." class="w-full p-2 border border-gray-300 rounded-lg mt-1 text-sm h-16 resize-none"></textarea>
                 </div>
@@ -2128,7 +1926,17 @@ Ready to join the party?`,
                     <input id="scheduled-date" type="date" class="w-full p-2 border border-gray-300 rounded-lg mt-1">
                 </div>
 
-                <div class="pt-4 border-t">
+                <div class="pt-4 border-t mb-4">
+                    <label class="font-semibold text-gray-700">Commission Fee Paid By</label>
+                    <p class="text-xs text-gray-500 mb-2">Choose who absorbs the platform commission for this ticket type.</p>
+                    <div class="flex space-x-4">
+                        <label class="flex items-center"><input type="radio" name="commission-payer" value="attendee" class="mr-2" checked> Attendee (Added to price)</label>
+                        <label class="flex items-center"><input type="radio" name="commission-payer" value="organizer" class="mr-2"> Organizer (Deducted from payout)</label>
+                        <label class="flex items-center"><input type="radio" name="commission-payer" value="split" class="mr-2"> 50/50 Split</label>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t mt-4">
                     <label class="font-semibold text-gray-700">Pricing Strategy</label>
                     <div class="flex space-x-4 mt-2">
                         <label class="flex items-center"><input type="radio" name="pricing-strategy" value="simple"
@@ -2263,8 +2071,9 @@ Ready to join the party?`,
                 <button onclick="closeTicketManagementModal('pool-limit-modal')" class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg">Cancel</button>
                 <button onclick="confirmPoolLimit()" class="px-4 py-2 font-bold bg-revelti-blue text-white rounded-lg">Confirm</button>
             </footer>
-</div>
-</div>
+        </div>
+    </div>
+
 
     <!-- Ticket Creation Guide Modal -->
     <div id="help-modal" class="modal fixed inset-0 flex items-center justify-center p-4 hidden z-50" style="z-index: 60;">
