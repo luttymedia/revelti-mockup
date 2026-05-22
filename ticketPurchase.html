@@ -1,517 +1,418 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revelti - Purchase Tickets</title>
-    
-    <!-- Tailwind CSS for styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Tailwind Configuration -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        revelti: {
-                            blue: '#213c63',
-                            orange: '#f58220',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-
-    
-    <!-- Google Fonts: Nunito -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Link to external stylesheet -->
-    <link rel="stylesheet" href="style.css">
-
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revelti - Purchase Tickets</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{colors:{revelti:{blue:'#213c63',orange:'#f58220'}}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.qty-btn{width:2rem;height:2rem;display:flex;align-items:center;justify-content:center;border-radius:9999px;background:#e5e7eb;font-weight:700;font-size:1.1rem;transition:background .15s}
+.qty-btn:hover{background:#d1d5db}
+.qty-btn:disabled{opacity:.4;cursor:not-allowed}
+#constraint-toast{transition:opacity .3s;pointer-events:none}
+</style>
 </head>
 <body class="antialiased text-gray-800 bg-white">
-    <div id="navbar-placeholder"></div>
+<div id="navbar-placeholder"></div>
+<div class="max-w-2xl md:max-w-full lg:max-w-full mx-auto bg-white overflow-hidden">
 
-    <!-- Main container with a max-w and shadow for larger screens -->
-    <div class="max-w-2xl md:max-w-full lg:max-w-full mx-auto bg-white overflow-hidden">
+<header class="sticky top-0 bg-white z-10 px-4 py-1 md:static md:px-6 md:py-6 border-b text-center">
+  <p class="text-sm revelti-orange font-semibold">You are buying tickets for</p>
+  <h1 class="text-2xl font-bold revelti-blue">Dance Fest Spain 2026</h1>
+  <p class="text-sm text-gray-500">Oct 08-12, 2026 &bull; by LMP Events</p>
+</header>
 
-        <!-- Header Section -->
-        <header class="sticky top-0 bg-white z-10 px-4 py-1 md:static md:px-6 md:py-6 border-b text-center">
-            <p class="text-sm revelti-orange font-semibold">You are buying tickets for</p>
-            <h1 class="text-2xl font-bold revelti-blue">Dance Fest Spain 2026</h1>
-            <p class="text-sm text-gray-500">Oct 08-12, 2026</p>
-            <p class="text-sm text-gray-500">by LMP Events</p>
-        </header>
-        
-        <!-- Main Content -->
-        <main class="p-4 bg-white md:px-4 md:py-4 pb-24"> <!-- Added padding-bottom for footer spacing -->
-            <div class="space-y-4">
-                <!-- Discount Code Section (Collapsible) -->
-                <details class="bg-white border rounded-lg">
-                    <summary class="p-4 font-semibold revelti-blue cursor-pointer flex justify-between items-center text-lg">
-                        Discount Code
-                        <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path></svg>
-                    </summary>
-                    <div class="p-4 border-t border-gray-200">
-                        <div class="flex items-center space-x-2">
-                            <input type="text" id="discount-code-input" placeholder="Enter code" class="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-revelti-blue">
-                            <button id="apply-discount-btn" class="bg-revelti-orange text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-orange-600 transition duration-300 flex-shrink-0">
-                                Apply
-                            </button>
-                        </div>
-                        <div id="discount-message" class="mt-2 text-sm font-semibold"></div>
-                    </div>
-                </details>
-
-                <!-- Main Passes -->
-                <details class="bg-white border rounded-lg" open>
-                    <summary class="p-4 font-semibold revelti-blue cursor-pointer flex justify-between items-center text-xl">Main Passes <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path></svg></summary>
-                    <div class="p-4 border-t border-gray-200 space-y-4">
-                        <!-- Sensuality Pass Card -->
-                        <div class="bg-gray-50 p-4 rounded-lg border border-gray-100 shadow-sm">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <h3 class="font-bold text-lg revelti-blue">Sensuality Pass</h3>
-                                    <p class="text-sm text-gray-600 mt-1">Access to all workshops and parties for the Sensuality track.</p>
-                                </div>
-                                <div class="text-right">
-                                    <p class="text-gray-500 line-through">€220.00</p>
-                                    <p class="font-bold text-2xl revelti-orange">€190.00</p>
-                                    <p class="text-xs text-green-600">You save €30.00</p>
-                                    <button class="price-info-trigger text-left w-full">
-                                        <div class="flex items-start justify-end text-xs text-gray-500 mt-1">
-                                            <svg class="w-4 h-4 mr-1 revelti-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                            <span>Until Aug 31, 2025</span>
-                                        </div>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="flex justify-end items-center mt-2">
-                                <div class="flex items-center space-x-3">
-                                    <button class="quantity-btn p-1 rounded-full bg-gray-200 text-gray-700" data-item-id="1" data-action="decrease">-</button>
-                                    <span class="quantity-display font-bold text-lg" id="quantity-1">0</span>
-                                    <button class="quantity-btn p-1 rounded-full bg-gray-200 text-gray-700" data-item-id="1" data-action="increase">+</button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Essentiality Pass Card -->
-                        <div class="bg-gray-50 p-4 rounded-lg border border-gray-100 shadow-sm">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <h3 class="font-bold text-lg revelti-blue">Essentiality Pass</h3>
-                                    <p class="text-sm text-gray-600 mt-1">Access to all workshops and parties for the Essentiality track.</p>
-                                </div>
-                                <div class="text-right">
-                                    <p class="text-gray-500 line-through">€220.00</p>
-                                    <p class="font-bold text-2xl revelti-orange">€190.00</p>
-                                    <p class="text-xs text-green-600">You save €30.00</p>
-                                     <button class="price-info-trigger text-left w-full">
-                                        <div class="flex items-start justify-end text-xs text-gray-500 mt-1">
-                                            <svg class="w-4 h-4 mr-1 revelti-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                            <span>Until Aug 31, 2025</span>
-                                        </div>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="flex justify-end items-center mt-2">
-                                <div class="flex items-center space-x-3">
-                                    <button class="quantity-btn p-1 rounded-full bg-gray-200 text-gray-700" data-item-id="2" data-action="decrease">-</button>
-                                    <span class="quantity-display font-bold text-lg" id="quantity-2">0</span>
-                                    <button class="quantity-btn p-1 rounded-full bg-gray-200 text-gray-700" data-item-id="2" data-action="increase">+</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </details>
-
-                <!-- Training Tracks -->
-                <details class="bg-white border rounded-lg">
-                    <summary class="p-4 font-semibold revelti-blue cursor-pointer flex justify-between items-center text-xl">Training Tracks <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path></svg></summary>
-                    <div class="p-4 border-t border-gray-200 space-y-4">
-                        <!-- Sensuality Training Track -->
-                        <div class="bg-gray-50 p-4 rounded-lg border border-gray-100 shadow-sm">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <h3 class="font-bold text-lg revelti-blue">Sensuality Training Track</h3>
-                                    <p class="text-sm text-gray-600 mt-1">Intensive training focused on sensuality techniques.</p>
-                                </div>
-                                <p class="font-bold text-xl revelti-orange">€100.00</p>
-                            </div>
-                            <div class="flex justify-end items-center mt-2">
-                                <div class="flex items-center space-x-3">
-                                    <button class="quantity-btn p-1 rounded-full bg-gray-200 text-gray-700" data-item-id="3" data-action="decrease">-</button>
-                                    <span class="quantity-display font-bold text-lg" id="quantity-3">0</span>
-                                    <button class="quantity-btn p-1 rounded-full bg-gray-200 text-gray-700" data-item-id="3" data-action="increase">+</button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Essentiality Training Track -->
-                        <div class="bg-gray-50 p-4 rounded-lg border border-gray-100 shadow-sm">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <h3 class="font-bold text-lg revelti-blue">Essentiality Training Track</h3>
-                                    <p class="text-sm text-gray-600 mt-1">Intensive training focused on essential dance foundations.</p>
-                                </div>
-                                <p class="font-bold text-xl revelti-orange">€100.00</p>
-                            </div>
-                            <div class="flex justify-end items-center mt-2">
-                                <div class="flex items-center space-x-3">
-                                    <button class="quantity-btn p-1 rounded-full bg-gray-200 text-gray-700" data-item-id="4" data-action="decrease">-</button>
-                                    <span class="quantity-display font-bold text-lg" id="quantity-4">0</span>
-                                    <button class="quantity-btn p-1 rounded-full bg-gray-200 text-gray-700" data-item-id="4" data-action="increase">+</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </details>
-
-                <!-- Jack & Jill -->
-                <details class="bg-white border rounded-lg">
-                    <summary class="p-4 font-semibold revelti-blue cursor-pointer flex justify-between items-center text-xl">Jack & Jill <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path></svg></summary>
-                    <div class="p-4 border-t border-gray-200 space-y-4">
-                         <div class="bg-gray-50 p-4 rounded-lg border border-gray-100 shadow-sm">
-                            <div class="flex justify-between items-start">
-                                <div><h3 class="font-bold text-lg revelti-blue">J&J Amateur</h3><p class="text-sm text-gray-600 mt-1">For non-professional dancers.</p><p class="text-xs text-gray-500 mt-1">3 more entries available before price increases.</p></div>
-                                <p class="font-bold text-xl revelti-orange">€10.00</p>
-                            </div>
-                            <div class="flex justify-end items-center mt-2">
-                                <div class="flex items-center space-x-3">
-                                    <button class="quantity-btn p-1 rounded-full bg-gray-200 text-gray-700" data-item-id="5" data-action="decrease">-</button>
-                                    <span class="quantity-display font-bold text-lg" id="quantity-5">0</span>
-                                    <button class="quantity-btn p-1 rounded-full bg-gray-200 text-gray-700" data-item-id="5" data-action="increase">+</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="bg-gray-50 p-4 rounded-lg border border-gray-100 shadow-sm">
-                            <div class="flex justify-between items-start">
-                                <div><h3 class="font-bold text-lg revelti-blue">J&J Pro</h3><p class="text-sm text-gray-600 mt-1">For professional dancers and instructors.</p><p class="text-xs text-gray-500 mt-1">5 more entries available before price increases.</p></div>
-                                <p class="font-bold text-xl revelti-orange">€15.00</p>
-                            </div>
-                            <div class="flex justify-end items-center mt-2">
-                                <div class="flex items-center space-x-3">
-                                    <button class="quantity-btn p-1 rounded-full bg-gray-200 text-gray-700" data-item-id="7" data-action="decrease">-</button>
-                                    <span class="quantity-display font-bold text-lg" id="quantity-7">0</span>
-                                    <button class="quantity-btn p-1 rounded-full bg-gray-200 text-gray-700" data-item-id="7" data-action="increase">+</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </details>
-
-                 <!-- Add-ons -->
-                <details class="bg-white border rounded-lg">
-                    <summary class="p-4 font-semibold revelti-blue cursor-pointer flex justify-between items-center text-xl">Add-ons <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path></svg></summary>
-                    <div class="p-4 border-t border-gray-200 space-y-4">
-                        <div class="bg-gray-50 p-4 rounded-lg border border-gray-100 shadow-sm">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <h3 class="font-bold text-lg revelti-blue">Official T-shirt</h3>
-                                    <p class="text-sm text-gray-600 mt-1">Get the official event T-shirt.</p>
-                                </div>
-                                <p class="font-bold text-xl revelti-orange">€25.00</p>
-                            </div>
-                            <div id="tshirt-rows-container" class="space-y-2 mt-2">
-                                <!-- T-shirt selector rows will be dynamically added here -->
-                            </div>
-                        </div>
-                    </div>
-                </details>
-            </div>
-        </main>
-
-        <!-- Fixed Footer: Order Summary -->
-        <footer class="fixed bottom-14 lg:bottom-0 left-0 right-0 max-w-2xl md:max-w-full lg:max-w-full mx-auto bg-white border-t border-gray-200 z-50">
-             <details>
-                <summary id="footer-summary" class="p-4 flex justify-between items-center cursor-pointer">
-                    <div class="flex items-center">
-                        <span class="font-bold text-2xl revelti-blue" id="total-price">€0.00</span>
-                        <svg class="w-5 h-5 text-gray-500 ml-2 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path></svg>
-                    </div>
-                    <button class="bg-revelti-orange text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-orange-600 transition duration-300">
-                        Proceed to Checkout
-                    </button>
-                </summary>
-                <div id="cart-details" class="p-4 border-t border-gray-200 max-h-48 overflow-y-auto">
-                    <!-- Cart items will be populated here -->
-                </div>
-            </details>
-        </footer>
-    </div>
-    
-    <!-- Price Info Modal -->
-    <div id="price-info-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
-        <div class="bg-white rounded-xl shadow-xl w-full max-w-sm p-6">
-            <div class="flex justify-between items-center mb-4">
-                <h4 class="font-bold text-lg revelti-blue">Price Evolution</h4>
-                <button id="close-price-modal" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
-            </div>
-            <div class="space-y-2 text-gray-700">
-                <p class="line-through">Early bird <b>€120.00</b></p>
-                <p class="line-through">Until 30 Jul <b>€170.00</b></p>
-                <p class="line-through">Until 31 Jul <b>€180.00</b></p>
-                <p class="revelti-orange font-bold">Until 31 Aug €190.00</p>
-                <p>Final price <b>€220.00</b></p>
-            </div>
+<main class="p-4 pb-24">
+  <div class="space-y-4">
+    <!-- Discount Code -->
+    <details class="bg-white border rounded-lg">
+      <summary class="p-4 font-semibold revelti-blue cursor-pointer flex justify-between items-center text-lg">
+        Discount Code
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"/></svg>
+      </summary>
+      <div class="p-4 border-t">
+        <div class="flex gap-2">
+          <input type="text" id="discount-code-input" placeholder="Enter code" class="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-revelti-blue">
+          <button id="apply-discount-btn" class="bg-revelti-orange text-white font-semibold py-2 px-4 rounded-lg hover:bg-orange-600 transition">Apply</button>
         </div>
+        <div id="discount-message" class="mt-2 text-sm font-semibold"></div>
+      </div>
+    </details>
+    <!-- Ticket Sections -->
+    <div id="ticket-sections"></div>
+  </div>
+</main>
+
+<footer class="fixed bottom-14 lg:bottom-0 left-0 right-0 max-w-2xl md:max-w-full lg:max-w-full mx-auto bg-white border-t z-50">
+  <details>
+    <summary class="p-4 flex justify-between items-center cursor-pointer">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-2xl revelti-blue" id="total-price">&#8364;0.00</span>
+        <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"/></svg>
+      </div>
+      <button id="checkout-btn" class="bg-revelti-orange text-white font-bold py-3 px-6 rounded-lg hover:bg-orange-600 transition disabled:opacity-50 disabled:cursor-not-allowed">Proceed to Checkout</button>
+    </summary>
+    <div id="cart-details" class="p-4 border-t max-h-48 overflow-y-auto"></div>
+  </details>
+</footer>
+</div>
+
+<!-- Price Info Modal -->
+<div id="price-info-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+  <div class="bg-white rounded-xl shadow-xl w-full max-w-sm p-6">
+    <div class="flex justify-between items-center mb-4">
+      <h4 class="font-bold text-lg revelti-blue">Price Evolution</h4>
+      <button id="close-price-modal" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
     </div>
+    <div id="price-info-content" class="space-y-2 text-gray-700"></div>
+  </div>
+</div>
 
-    <script>
-        const tickets = [
-            { id: 1, name: 'Sensuality Pass', price: 190.00 },
-            { id: 2, name: 'Essentiality Pass', price: 190.00 },
-            { id: 3, name: 'Sensuality Training Track', price: 100.00 },
-            { id: 4, name: 'Essentiality Training Track', price: 100.00 },
-            { id: 5, name: 'J&J Amateur', price: 10.00 },
-            { id: 7, name: 'J&J Pro', price: 15.00 },
-            { id: '6-S', name: 'Official T-shirt (Size S)', price: 25.00 },
-            { id: '6-M', name: 'Official T-shirt (Size M)', price: 25.00 },
-            { id: '6-L', name: 'Official T-shirt (Size L)', price: 25.00 },
-            { id: '6-XL', name: 'Official T-shirt (Size XL)', price: 25.00 },
-        ];
+<!-- Toast -->
+<div id="constraint-toast" class="fixed bottom-32 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-sm font-semibold px-4 py-2 rounded-full opacity-0 z-50"></div>
 
-        let cart = {};
-        const distributionFee = 3.00;
-        const discountValue = 10.00;
-        let discountCode = null;
-        let tshirtRowCounter = 0;
+<script>
+const MOCK_DATE = new Date('2025-09-15T12:00:00');
 
-        /**
-         * Updates the order summary section based on the current cart and discount.
-         */
-        function updateSummary() {
-            let totalItems = 0;
-            let subtotal = 0;
-            let totalDiscount = 0;
-            const cartDetailsContainer = document.getElementById('cart-details');
-            cartDetailsContainer.innerHTML = '';
+const TICKETS = [
+  {id:1,name:'Sensuality Pass',desc:'Access to all main workshops and social parties.',cat:'Main Passes',qty:200,sold:150,status:'On Sale',
+   pricing:{strategy:'dynamic',basePrice:170,rules:[{type:'date',value:'2025-08-01',newPrice:180},{type:'date',value:'2025-09-01',newPrice:190},{type:'date',value:'2025-10-01',newPrice:220}],finalPriceOverride:null},constraint:null},
+  {id:2,name:'Essentiality Pass',desc:'Access to selected foundational workshops and evening parties.',cat:'Main Passes',qty:200,sold:120,status:'On Sale',
+   pricing:{strategy:'dynamic',basePrice:170,rules:[{type:'date',value:'2025-08-01',newPrice:180},{type:'date',value:'2025-09-01',newPrice:190},{type:'date',value:'2025-10-01',newPrice:220}],finalPriceOverride:250},constraint:null},
+  {id:8,name:'Group Early-Bird',desc:'Discounted pass for groups of 10+. All members must register together.',cat:'Main Passes',qty:200,sold:30,status:'On Sale',
+   pricing:{strategy:'simple',simplePrice:140},constraint:{mode:'minQty',minQty:10}},
+  {id:3,name:'J&J Amateur',desc:'Entry fee for the Jack &amp; Jill Amateur competition.',cat:'Jack &amp; Jill',qty:40,sold:17,status:'On Sale',
+   pricing:{strategy:'dynamic',basePrice:10,rules:[{type:'sales',value:20,newPrice:15},{type:'sales',value:30,newPrice:20}],finalPriceOverride:null},constraint:null},
+  {id:9,name:'J&J Pro',desc:'Entry fee for the Jack &amp; Jill Professional competition.',cat:'Jack &amp; Jill',qty:40,sold:5,status:'On Sale',
+   pricing:{strategy:'simple',simplePrice:15},constraint:null},
+  {id:10,name:'Sensuality Training Track',desc:'Intensive training focused on Sensuality technique and styling.',cat:'Training Tracks',qty:50,sold:0,status:'On Sale',
+   pricing:{strategy:'simple',simplePrice:100},constraint:null},
+  {id:11,name:'Essentiality Training Track',desc:'Intensive training focused on essential dance foundations.',cat:'Training Tracks',qty:50,sold:0,status:'On Sale',
+   pricing:{strategy:'simple',simplePrice:100},constraint:null},
+  {id:4,name:'Training Tracks',desc:'Special intensive training sessions.',cat:'Training Tracks',qty:50,sold:0,status:'Draft',
+   pricing:{strategy:'simple',simplePrice:100},constraint:null},
+  {id:5,name:'Party Pass',desc:'Access to all evening social parties.',cat:'Social Passes',qty:100,sold:0,status:'Scheduled',scheduledDate:'2025-10-15',
+   pricing:{strategy:'simple',simplePrice:80},constraint:null},
+  {id:6,name:'Backstage Pass',desc:'VIP access including front row seats and backstage passes.',cat:'VIP',qty:10,sold:0,status:'Draft',
+   pricing:{strategy:'simple',simplePrice:300},constraint:null},
+  {id:7,name:'Hotel Double Room',desc:'Shared double room for two dancers \u2014 includes 3 nights accommodation near the venue.',cat:'Accommodation',qty:40,sold:6,status:'On Sale',
+   pricing:{strategy:'simple',simplePrice:220},constraint:{mode:'grouped',groupSize:2}},
+  {id:12,name:'Official T-shirt',desc:'Official event T-shirt. Size selected at checkout.',cat:'Add-ons',qty:200,sold:0,status:'On Sale',
+   pricing:{strategy:'simple',simplePrice:25},constraint:null,isTshirt:true}
+];
 
-            for (const itemId in cart) {
-                if (cart[itemId] > 0) {
-                    const quantity = cart[itemId];
-                    totalItems += quantity;
-                    const ticket = tickets.find(t => t.id == itemId);
-                    
-                    let itemPrice = ticket.price;
-                    if (discountCode === 'LUTTY' && (itemId == 1 || itemId == 2)) {
-                        totalDiscount += quantity * discountValue;
-                    }
-                    
-                    subtotal += quantity * itemPrice;
+const CAT_ORDER = ['Main Passes','Jack &amp; Jill','Training Tracks','Social Passes','VIP','Accommodation','Add-ons'];
+let cart = {};
+let discountCode = null;
+const FEE = 3;
+let tshirtCounter = 0;
 
-                    const itemEl = document.createElement('div');
-                    itemEl.className = 'flex justify-between items-center text-sm text-gray-700';
-                    itemEl.innerHTML = `
-                        <span>${quantity} x ${ticket.name}</span>
-                        <div class="flex items-center">
-                            <span>€${(quantity * itemPrice).toFixed(2)}</span>
-                            <button class="cart-remove-btn p-1 text-red-500 hover:text-red-700 ml-2" data-item-id="${itemId}">&times;</button>
-                        </div>
-                    `;
-                    cartDetailsContainer.appendChild(itemEl);
-                }
-            }
-            
-            let finalTotal = subtotal;
-            
-            // Apply the discount to the final total
-            if (totalDiscount > 0) {
-                 const discountEl = document.createElement('div');
-                 discountEl.className = 'flex justify-between text-sm text-green-600 font-semibold mt-2 pt-2 border-t';
-                 discountEl.innerHTML = `
-                     <span>Discount "LUTTY" Applied</span>
-                     <span>-€${totalDiscount.toFixed(2)}</span>
-                 `;
-                 cartDetailsContainer.appendChild(discountEl);
-                 finalTotal -= totalDiscount;
-            }
+const fmt = n => '\u20AC' + parseFloat(n).toFixed(2);
+const fmtDate = ds => { const d = new Date(ds+'T12:00:00'); return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); };
 
-            // Apply distribution fee if any items are in the cart
-            if (totalItems > 0) {
-                const fee = totalItems * distributionFee;
-                finalTotal += fee;
-                const feeEl = document.createElement('div');
-                feeEl.className = 'flex justify-between text-sm text-gray-500 mt-2 pt-2 border-t';
-                feeEl.innerHTML = `
-                    <span>Distribution Fee</span>
-                    <span>€${fee.toFixed(2)}</span>
-                `;
-                cartDetailsContainer.appendChild(feeEl);
-            }
+function getCurrentPrice(t) {
+  if (t.pricing.strategy === 'simple') return t.pricing.simplePrice;
+  let p = t.pricing.basePrice;
+  t.pricing.rules.forEach(r => {
+    let triggered = r.type === 'date' ? MOCK_DATE >= new Date(r.value) : t.sold >= r.value;
+    if (triggered && r.newPrice > p) p = r.newPrice;
+  });
+  return p;
+}
 
-            document.getElementById('total-price').textContent = `€${finalTotal.toFixed(2)}`;
-            const totalItemsSpan = document.querySelector('#footer-summary p span');
-             if (totalItemsSpan) {
-                totalItemsSpan.textContent = totalItems;
-            }
-        }
-        
-        /**
-         * Increases or decreases the quantity of a cart item.
-         * @param {string} itemId The ID of the item to update.
-         * @param {string} action 'increase' or 'decrease'.
-         */
-        function updateCartItem(itemId, action) {
-             if (!cart[itemId]) cart[itemId] = 0;
-             if (action === 'increase') cart[itemId]++;
-             else if (action === 'decrease' && cart[itemId] > 0) cart[itemId]--;
-             
-             const quantityDisplay = document.getElementById(`quantity-${itemId}`);
-             if (quantityDisplay) {
-                quantityDisplay.textContent = cart[itemId];
-             }
-             updateSummary();
-        }
+function getMaxPrice(t) {
+  if (t.pricing.strategy === 'simple') return null;
+  if (t.pricing.finalPriceOverride) return t.pricing.finalPriceOverride;
+  return Math.max(t.pricing.basePrice, ...t.pricing.rules.map(r => r.newPrice));
+}
 
-        /**
-         * Creates a new row for T-shirt size and quantity selection.
-         */
-        function createTshirtRow() {
-            const container = document.getElementById('tshirt-rows-container');
-            const rowId = `tshirt-row-${tshirtRowCounter++}`;
-            const row = document.createElement('div');
-            row.id = rowId;
-            row.className = 'tshirt-row flex justify-between items-center';
-            row.innerHTML = `
-                <select class="tshirt-size-select border border-gray-300 rounded-lg p-1 text-sm">
-                    <option value="S">Size S</option>
-                    <option value="M">Size M</option>
-                    <option value="L">Size L</option>
-                    <option value="XL">Size XL</option>
-                </select>
-                <div class="flex items-center space-x-3">
-                    <button class="tshirt-quantity-btn p-1 rounded-full bg-gray-200 text-gray-700" data-action="decrease">-</button>
-                    <span class="quantity-display font-bold text-lg">0</span>
-                    <button class="tshirt-quantity-btn p-1 rounded-full bg-gray-200 text-gray-700" data-action="increase">+</button>
-                </div>
-            `;
-            container.appendChild(row);
-        }
+function showToast(msg) {
+  const el = document.getElementById('constraint-toast');
+  el.textContent = msg; el.style.opacity = '1';
+  setTimeout(() => el.style.opacity = '0', 2500);
+}
 
-        document.getElementById('tshirt-rows-container').addEventListener('click', (event) => {
-            const button = event.target.closest('.tshirt-quantity-btn');
-            if (!button) return;
+function updateQty(id, action) {
+  const t = TICKETS.find(x => x.id == id);
+  if (!t || t.status === 'Draft' || t.status === 'Scheduled') return;
+  const pc = t.constraint;
+  const step = pc?.mode === 'grouped' ? pc.groupSize : 1;
+  const cur = cart[id] || 0;
+  if (action === 'increase') {
+    cart[id] = (cur === 0 && pc?.mode === 'minQty') ? pc.minQty : cur + step;
+  } else {
+    if (pc?.mode === 'minQty' && cur > 0 && cur - 1 > 0 && cur - 1 < pc.minQty) {
+      showToast('Minimum ' + pc.minQty + ' required \u2014 removing all');
+      cart[id] = 0;
+    } else {
+      cart[id] = Math.max(0, cur - step);
+    }
+  }
+  const el = document.getElementById('qty-' + id);
+  if (el) el.textContent = cart[id];
+  updateSummary();
+}
 
-            const row = button.closest('.tshirt-row');
-            const size = row.querySelector('.tshirt-size-select').value;
-            const itemId = `6-${size}`;
-            const action = button.dataset.action;
+function renderCard(t) {
+  const locked = t.status !== 'On Sale';
+  const price = getCurrentPrice(t);
+  const maxP = getMaxPrice(t);
+  const savings = maxP && maxP > price ? maxP - price : null;
+  const pc = t.constraint;
 
-            if (!cart[itemId]) cart[itemId] = 0;
+  let statusBadge = '';
+  if (t.status === 'Draft') statusBadge = '<span class="text-xs font-bold bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full ml-1">Coming Soon</span>';
+  if (t.status === 'Scheduled') statusBadge = '<span class="text-xs font-bold bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full ml-1">\uD83D\uDD12 From ' + fmtDate(t.scheduledDate) + '</span>';
 
-            if (action === 'increase') {
-                cart[itemId]++;
-            } else if (action === 'decrease' && cart[itemId] > 0) {
-                cart[itemId]--;
-            }
-            
-            row.querySelector('.quantity-display').textContent = cart[itemId];
+  let constraintBadge = '';
+  if (pc?.mode === 'grouped') constraintBadge = '<div class="mt-1"><span class="text-xs font-bold bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full">\uD83D\uDC65 Must buy in groups of ' + pc.groupSize + '</span></div>';
+  if (pc?.mode === 'minQty') constraintBadge = '<div class="mt-1"><span class="text-xs font-bold bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full">\uD83D\uDCE6 Minimum ' + pc.minQty + ' tickets per order</span></div>';
 
-            const allRows = document.querySelectorAll('.tshirt-row');
-            const lastRow = allRows[allRows.length - 1];
-            if (parseInt(lastRow.querySelector('.quantity-display').textContent) > 0) {
-                createTshirtRow();
-            }
-            updateSummary();
-        });
-        
-        document.querySelectorAll('.quantity-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                updateCartItem(button.dataset.itemId, button.dataset.action);
-            });
-        });
-        
-        document.getElementById('cart-details').addEventListener('click', (event) => {
-            const button = event.target.closest('.cart-remove-btn');
-            if (button) {
-                const itemId = button.dataset.itemId;
-                if (cart[itemId] > 0) {
-                    cart[itemId]--;
-                    
-                    const quantityDisplay = document.getElementById(`quantity-${itemId}`);
-                     if (quantityDisplay) {
-                        quantityDisplay.textContent = cart[itemId];
-                    } else {
-                        // Handle T-shirt display update
-                        document.querySelectorAll('.tshirt-row').forEach(row => {
-                            const size = row.querySelector('.tshirt-size-select').value;
-                            if (`6-${size}` === itemId) {
-                                row.querySelector('.quantity-display').textContent = cart[itemId];
-                            }
-                        });
-                    }
-                    updateSummary();
-                }
-            }
-        });
+  let priceHTML = '';
+  if (savings) {
+    priceHTML = '<p class="text-gray-400 line-through text-sm">' + fmt(maxP) + '</p>' +
+      '<p class="font-bold text-2xl revelti-orange">' + fmt(price) + '</p>' +
+      '<p class="text-xs text-green-600">You save ' + fmt(savings) + '</p>' +
+      '<button class="price-info-btn w-full text-right mt-1" data-ticket-id="' + t.id + '"><span class="text-xs text-gray-400 hover:text-revelti-blue">\u2139\uFE0F Price evolution</span></button>';
+  } else {
+    priceHTML = '<p class="font-bold text-2xl revelti-orange">' + fmt(price) + '</p>';
+    if (t.pricing.strategy === 'dynamic') {
+      const next = (t.pricing.rules || []).filter(r => r.type === 'sales' && t.sold < r.value).sort((a,b) => a.value - b.value)[0];
+      if (next) priceHTML += '<p class="text-xs text-gray-500 mt-1">' + (next.value - t.sold) + ' more before ' + fmt(next.newPrice) + '</p>';
+    }
+  }
 
-        // Event listener for the discount button
-        document.getElementById('apply-discount-btn').addEventListener('click', () => {
-            const codeInput = document.getElementById('discount-code-input');
-            const messageEl = document.getElementById('discount-message');
-            const code = codeInput.value.trim().toUpperCase();
+  let qtyHTML = '';
+  if (t.isTshirt && !locked) {
+    qtyHTML = '<div id="tshirt-container-' + t.id + '" class="w-full space-y-2 mt-1"></div>';
+  } else if (!locked) {
+    const q = cart[t.id] || 0;
+    qtyHTML = '<div class="flex items-center gap-3"><button class="qty-btn" data-id="' + t.id + '" data-action="decrease">\u2212</button><span class="font-bold text-lg min-w-[2rem] text-center" id="qty-' + t.id + '">' + q + '</span><button class="qty-btn" data-id="' + t.id + '" data-action="increase">+</button></div>';
+  } else {
+    qtyHTML = '<span class="text-xs text-gray-400 font-semibold">Not available yet</span>';
+  }
 
-            if (code === 'LUTTY') {
-                discountCode = code;
-                messageEl.innerHTML = `Discount code "LUTTY" applied! <span id="clear-discount" class="revelti-blue font-bold cursor-pointer ml-2">Clear</span>`;
-                messageEl.classList.remove('text-red-500');
-                messageEl.classList.add('text-green-600');
-            } else {
-                discountCode = null;
-                messageEl.textContent = `Invalid discount code.`;
-                messageEl.classList.remove('text-green-600');
-                messageEl.classList.add('text-red-500');
-            }
-            updateSummary();
-        });
+  const card = document.createElement('div');
+  card.className = 'bg-gray-50 p-4 rounded-lg border border-gray-100 shadow-sm' + (locked ? ' opacity-70' : '');
+  card.innerHTML = '<div class="flex justify-between items-start gap-4"><div class="flex-1"><h3 class="font-bold text-lg revelti-blue">' + t.name + statusBadge + '</h3>' + constraintBadge + '<p class="text-sm text-gray-600 mt-1">' + t.desc + '</p></div><div class="text-right flex-shrink-0">' + priceHTML + '</div></div><div class="flex justify-end items-center mt-3">' + qtyHTML + '</div>';
+  return card;
+}
 
-        // Event listener for the clear discount link
-        document.getElementById('discount-message').addEventListener('click', (event) => {
-            if (event.target.id === 'clear-discount') {
-                discountCode = null;
-                document.getElementById('discount-code-input').value = '';
-                document.getElementById('discount-message').textContent = '';
-                updateSummary();
-            }
-        });
-        
-        // --- Price Info Modal Interaction --
-        const priceInfoModal = document.getElementById('price-info-modal');
-        const closePriceModalBtn = document.getElementById('close-price-modal');
-        const priceInfoTriggers = document.querySelectorAll('.price-info-trigger');
+function renderAll() {
+  const container = document.getElementById('ticket-sections');
+  container.innerHTML = '';
+  const grouped = {};
+  CAT_ORDER.forEach(c => grouped[c] = []);
+  TICKETS.forEach(t => { if (grouped[t.cat]) grouped[t.cat].push(t); });
+  CAT_ORDER.forEach((cat, i) => {
+    const tickets = grouped[cat];
+    if (!tickets || !tickets.length) return;
+    const sec = document.createElement('details');
+    sec.className = 'bg-white border rounded-lg';
+    if (i === 0) sec.open = true;
+    const bodyId = 'sec-' + i;
+    sec.innerHTML = '<summary class="p-4 font-semibold revelti-blue cursor-pointer flex justify-between items-center text-xl">' + cat + '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"/></svg></summary><div class="p-4 border-t space-y-4" id="' + bodyId + '"></div>';
+    container.appendChild(sec);
+    const body = document.getElementById(bodyId);
+    tickets.forEach(t => {
+      const card = renderCard(t);
+      body.appendChild(card);
+      if (t.isTshirt && t.status === 'On Sale') addTshirtRow(t.id);
+    });
+  });
+}
 
-        priceInfoTriggers.forEach(trigger => {
-            trigger.addEventListener('click', () => priceInfoModal.classList.remove('hidden'));
-        });
-        const closePriceModal = () => priceInfoModal.classList.add('hidden');
-        closePriceModalBtn.addEventListener('click', closePriceModal);
-        priceInfoModal.addEventListener('click', (event) => {
-            if (event.target === priceInfoModal) closePriceModal();
-        });
-        
-        // Initial setup
-        document.addEventListener('DOMContentLoaded', () => {
-            createTshirtRow();
+// Tshirt logic
+function addTshirtRow(ticketId) {
+  const container = document.getElementById('tshirt-container-' + ticketId);
+  if (!container) return;
+  const rid = 'tr-' + (tshirtCounter++);
+  const row = document.createElement('div');
+  row.id = rid;
+  row.className = 'flex items-center justify-between gap-2';
+  row.innerHTML = '<select class="tshirt-size border border-gray-300 rounded-lg p-1 text-sm"><option>S</option><option>M</option><option>L</option><option>XL</option></select><div class="flex items-center gap-2"><button class="qty-btn tshirt-dec" data-row="' + rid + '" data-tid="' + ticketId + '">\u2212</button><span class="font-bold text-lg min-w-[2rem] text-center tshirt-qty" id="tq-' + rid + '">0</span><button class="qty-btn tshirt-inc" data-row="' + rid + '" data-tid="' + ticketId + '">+</button></div>';
+  container.appendChild(row);
+}
 
-            // Check for a promo code in the URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const promoCode = urlParams.get('promo');
-            
-            if (promoCode && promoCode.toUpperCase() === 'LUTTY') {
-                document.getElementById('discount-code-input').value = 'LUTTY';
-                document.getElementById('apply-discount-btn').click();
-                const discountSection = document.querySelector('details');
-                if (discountSection) {
-                    discountSection.open = true;
-                }
-            }
-        });
-    </script>
-    <script src="main.js" defer></script>
-    <div id="footer-placeholder"></div>
+document.addEventListener('click', e => {
+  // qty buttons
+  const qb = e.target.closest('.qty-btn[data-id]');
+  if (qb) { updateQty(qb.dataset.id, qb.dataset.action); return; }
+
+  // tshirt inc
+  const ti = e.target.closest('.tshirt-inc');
+  if (ti) {
+    const rid = ti.dataset.row, tid = ti.dataset.tid;
+    const el = document.getElementById('tq-' + rid);
+    const cur = parseInt(el.textContent) || 0;
+    el.textContent = cur + 1;
+    // auto-add new row if last one has qty > 0
+    const container = document.getElementById('tshirt-container-' + tid);
+    const rows = container.querySelectorAll('[id^="tr-"]');
+    const last = rows[rows.length - 1];
+    if (last && parseInt(last.querySelector('.tshirt-qty').textContent) > 0) addTshirtRow(tid);
+    updateSummary(); return;
+  }
+
+  // tshirt dec
+  const td2 = e.target.closest('.tshirt-dec');
+  if (td2) {
+    const rid = td2.dataset.row;
+    const el = document.getElementById('tq-' + rid);
+    el.textContent = Math.max(0, (parseInt(el.textContent) || 0) - 1);
+    updateSummary(); return;
+  }
+
+  // cart remove
+  const rb = e.target.closest('.cart-remove-btn');
+  if (rb) {
+    cart[rb.dataset.id] = 0;
+    const el = document.getElementById('qty-' + rb.dataset.id);
+    if (el) el.textContent = 0;
+    updateSummary(); return;
+  }
+
+  // price info
+  const pb = e.target.closest('.price-info-btn');
+  if (pb) {
+    const t = TICKETS.find(x => x.id == pb.dataset.ticketId);
+    if (!t || t.pricing.strategy !== 'dynamic') return;
+    const content = document.getElementById('price-info-content');
+    content.innerHTML = '';
+    const curP = getCurrentPrice(t);
+    const allSteps = [{label:'Base price', price: t.pricing.basePrice}, ...t.pricing.rules.map(r => ({
+      label: r.type === 'date' ? 'From ' + fmtDate(r.value) : 'After ' + r.value + ' sold',
+      price: r.newPrice
+    }))];
+    if (t.pricing.finalPriceOverride) allSteps.push({label:'Final price', price: t.pricing.finalPriceOverride});
+    allSteps.forEach(s => {
+      const el = document.createElement('p');
+      const isCur = s.price === curP && s !== allSteps[allSteps.length-1];
+      el.className = isCur ? 'font-bold revelti-orange' : (s.price < curP ? 'line-through text-gray-400' : '');
+      el.innerHTML = s.label + ': <b>' + fmt(s.price) + '</b>' + (isCur ? ' &larr; current' : '');
+      content.appendChild(el);
+    });
+    document.getElementById('price-info-modal').classList.remove('hidden');
+    return;
+  }
+});
+
+function updateSummary() {
+  let subtotal = 0, disc = 0, items = 0;
+  const cd = document.getElementById('cart-details');
+  cd.innerHTML = '';
+
+  TICKETS.filter(t => !t.isTshirt).forEach(t => {
+    const q = cart[t.id] || 0;
+    if (!q) return;
+    items += q;
+    const p = getCurrentPrice(t);
+    let d = (discountCode === 'LUTTY' && (t.id === 1 || t.id === 2)) ? q * 10 : 0;
+    disc += d; subtotal += q * p;
+    const el = document.createElement('div');
+    el.className = 'flex justify-between items-center text-sm text-gray-700';
+    el.innerHTML = '<span>' + q + ' \xD7 ' + t.name + '</span><div class="flex items-center gap-1"><span>' + fmt(q*p) + '</span><button class="cart-remove-btn text-red-500 hover:text-red-700 text-base leading-none px-1" data-id="' + t.id + '">&times;</button></div>';
+    cd.appendChild(el);
+  });
+
+  // tshirt rows
+  document.querySelectorAll('[id^="tq-"]').forEach(el => {
+    const rid = el.id.replace('tq-', '');
+    const row = document.getElementById('tr-' + rid.split('-').slice(1).join('-'));
+    if (!row) return;
+    const q = parseInt(el.textContent) || 0;
+    if (!q) return;
+    const size = row.querySelector('.tshirt-size')?.value || 'S';
+    items += q; subtotal += q * 25;
+    const div = document.createElement('div');
+    div.className = 'flex justify-between text-sm text-gray-700';
+    div.innerHTML = '<span>' + q + ' \xD7 T-shirt (' + size + ')</span><span>' + fmt(q * 25) + '</span>';
+    cd.appendChild(div);
+  });
+
+  let total = subtotal;
+  if (disc > 0) {
+    total -= disc;
+    const el = document.createElement('div');
+    el.className = 'flex justify-between text-sm text-green-600 font-semibold mt-2 pt-2 border-t';
+    el.innerHTML = '<span>Discount "LUTTY"</span><span>-' + fmt(disc) + '</span>';
+    cd.appendChild(el);
+  }
+  if (items > 0) {
+    const fee = items * FEE;
+    total += fee;
+    const el = document.createElement('div');
+    el.className = 'flex justify-between text-sm text-gray-500 mt-2 pt-2 border-t';
+    el.innerHTML = '<span>Distribution Fee</span><span>' + fmt(fee) + '</span>';
+    cd.appendChild(el);
+  }
+
+  document.getElementById('total-price').textContent = fmt(total);
+
+  // minQty violations: block checkout
+  const violations = TICKETS.filter(t => {
+    const pc = t.constraint;
+    if (pc?.mode !== 'minQty') return false;
+    const q = cart[t.id] || 0;
+    return q > 0 && q < pc.minQty;
+  });
+  const btn = document.getElementById('checkout-btn');
+  btn.disabled = violations.length > 0;
+  btn.title = violations.length ? 'Add at least ' + violations[0].constraint.minQty + ' of ' + violations[0].name : '';
+}
+
+// Discount
+document.getElementById('apply-discount-btn').addEventListener('click', () => {
+  const code = document.getElementById('discount-code-input').value.trim().toUpperCase();
+  const msg = document.getElementById('discount-message');
+  if (code === 'LUTTY') {
+    discountCode = code;
+    msg.className = 'mt-2 text-sm font-semibold text-green-600';
+    msg.innerHTML = 'Code "LUTTY" applied! <span id="clear-discount" class="revelti-blue cursor-pointer ml-2 underline">Clear</span>';
+  } else {
+    discountCode = null;
+    msg.className = 'mt-2 text-sm font-semibold text-red-500';
+    msg.textContent = 'Invalid discount code.';
+  }
+  updateSummary();
+});
+
+document.getElementById('discount-message').addEventListener('click', e => {
+  if (e.target.id === 'clear-discount') {
+    discountCode = null;
+    document.getElementById('discount-code-input').value = '';
+    document.getElementById('discount-message').textContent = '';
+    updateSummary();
+  }
+});
+
+// Price modal close
+document.getElementById('close-price-modal').addEventListener('click', () => document.getElementById('price-info-modal').classList.add('hidden'));
+document.getElementById('price-info-modal').addEventListener('click', e => { if (e.target === document.getElementById('price-info-modal')) document.getElementById('price-info-modal').classList.add('hidden'); });
+
+function proceedToCheckout() {
+  const hasItems = Object.values(cart).some(q => q > 0) || document.querySelectorAll('[id^="tq-"]').length > 0;
+  if (!hasItems) { showToast('Please add at least one ticket'); return; }
+  window.location.href = 'checkout.html';
+}
+
+// Init
+document.addEventListener('DOMContentLoaded', () => {
+  renderAll();
+  const params = new URLSearchParams(window.location.search);
+  const promo = params.get('promo');
+  if (promo && promo.toUpperCase() === 'LUTTY') {
+    document.getElementById('discount-code-input').value = 'LUTTY';
+    document.getElementById('apply-discount-btn').click();
+    document.querySelector('details').open = true;
+  }
+});
+</script>
+<script src="main.js" defer></script>
+<div id="footer-placeholder"></div>
 </body>
 </html>
