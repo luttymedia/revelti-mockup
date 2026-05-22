@@ -80,35 +80,34 @@ const MOCK_DATE = new Date('2025-09-15T12:00:00');
 
 const TICKETS = [
   {id:1,name:'Sensuality Pass',desc:'Access to all main workshops and social parties.',cat:'Main Passes',qty:200,sold:150,status:'On Sale',
-   pricing:{strategy:'dynamic',basePrice:170,rules:[{type:'date',value:'2025-08-01',newPrice:180},{type:'date',value:'2025-09-01',newPrice:190},{type:'date',value:'2025-10-01',newPrice:220}],finalPriceOverride:null},constraint:null},
+   pricing:{strategy:'dynamic',basePrice:170,rules:[{type:'date',value:'2025-08-01',newPrice:180},{type:'date',value:'2025-09-01',newPrice:190},{type:'date',value:'2025-10-01',newPrice:220}],finalPriceOverride:null},constraint:null,commissionPayer:'attendee'},
   {id:2,name:'Essentiality Pass',desc:'Access to selected foundational workshops and evening parties.',cat:'Main Passes',qty:200,sold:120,status:'On Sale',
-   pricing:{strategy:'dynamic',basePrice:170,rules:[{type:'date',value:'2025-08-01',newPrice:180},{type:'date',value:'2025-09-01',newPrice:190},{type:'date',value:'2025-10-01',newPrice:220}],finalPriceOverride:250},constraint:null},
+   pricing:{strategy:'dynamic',basePrice:170,rules:[{type:'date',value:'2025-08-01',newPrice:180},{type:'date',value:'2025-09-01',newPrice:190},{type:'date',value:'2025-10-01',newPrice:220}],finalPriceOverride:250},constraint:null,commissionPayer:'attendee'},
   {id:8,name:'Group Early-Bird',desc:'Discounted pass for groups of 10+. All members must register together.',cat:'Main Passes',qty:200,sold:30,status:'On Sale',
-   pricing:{strategy:'simple',simplePrice:140},constraint:{mode:'minQty',minQty:10}},
+   pricing:{strategy:'simple',simplePrice:140},constraint:{mode:'minQty',minQty:10},commissionPayer:'attendee'},
   {id:3,name:'J&J Amateur',desc:'Entry fee for the Jack &amp; Jill Amateur competition.',cat:'Jack &amp; Jill',qty:40,sold:17,status:'On Sale',
-   pricing:{strategy:'dynamic',basePrice:10,rules:[{type:'sales',value:20,newPrice:15},{type:'sales',value:30,newPrice:20}],finalPriceOverride:null},constraint:null},
+   pricing:{strategy:'dynamic',basePrice:10,rules:[{type:'sales',value:20,newPrice:15},{type:'sales',value:30,newPrice:20}],finalPriceOverride:null},constraint:null,commissionPayer:'attendee'},
   {id:9,name:'J&J Pro',desc:'Entry fee for the Jack &amp; Jill Professional competition.',cat:'Jack &amp; Jill',qty:40,sold:5,status:'On Sale',
-   pricing:{strategy:'simple',simplePrice:15},constraint:null},
+   pricing:{strategy:'simple',simplePrice:15},constraint:null,commissionPayer:'attendee'},
   {id:10,name:'Sensuality Training Track',desc:'Intensive training focused on Sensuality technique and styling.',cat:'Training Tracks',qty:50,sold:0,status:'On Sale',
-   pricing:{strategy:'simple',simplePrice:100},constraint:null},
+   pricing:{strategy:'simple',simplePrice:100},constraint:null,commissionPayer:'attendee'},
   {id:11,name:'Essentiality Training Track',desc:'Intensive training focused on essential dance foundations.',cat:'Training Tracks',qty:50,sold:0,status:'On Sale',
-   pricing:{strategy:'simple',simplePrice:100},constraint:null},
+   pricing:{strategy:'simple',simplePrice:100},constraint:null,commissionPayer:'attendee'},
   {id:4,name:'Training Tracks',desc:'Special intensive training sessions.',cat:'Training Tracks',qty:50,sold:0,status:'Draft',
-   pricing:{strategy:'simple',simplePrice:100},constraint:null},
+   pricing:{strategy:'simple',simplePrice:100},constraint:null,commissionPayer:'attendee'},
   {id:5,name:'Party Pass',desc:'Access to all evening social parties.',cat:'Social Passes',qty:100,sold:0,status:'Scheduled',scheduledDate:'2025-10-15',
-   pricing:{strategy:'simple',simplePrice:80},constraint:null},
+   pricing:{strategy:'simple',simplePrice:80},constraint:null,commissionPayer:'split'},
   {id:6,name:'Backstage Pass',desc:'VIP access including front row seats and backstage passes.',cat:'VIP',qty:10,sold:0,status:'Draft',
-   pricing:{strategy:'simple',simplePrice:300},constraint:null},
+   pricing:{strategy:'simple',simplePrice:300},constraint:null,commissionPayer:'organizer'},
   {id:7,name:'Hotel Double Room',desc:'Shared double room for two dancers \u2014 includes 3 nights accommodation near the venue.',cat:'Accommodation',qty:40,sold:6,status:'On Sale',
-   pricing:{strategy:'simple',simplePrice:220},constraint:{mode:'grouped',groupSize:2}},
+   pricing:{strategy:'simple',simplePrice:220},constraint:{mode:'grouped',groupSize:2},commissionPayer:'attendee'},
   {id:12,name:'Official T-shirt',desc:'Official event T-shirt. Size selected at checkout.',cat:'Add-ons',qty:200,sold:0,status:'On Sale',
-   pricing:{strategy:'simple',simplePrice:25},constraint:null,isTshirt:true}
+   pricing:{strategy:'simple',simplePrice:25},constraint:null,isTshirt:true,commissionPayer:'attendee'}
 ];
 
 const CAT_ORDER = ['Main Passes','Jack &amp; Jill','Training Tracks','Social Passes','VIP','Accommodation','Add-ons'];
 let cart = {};
 let discountCode = null;
-const FEE = 3;
 let tshirtCounter = 0;
 
 const fmt = n => '\u20AC' + parseFloat(n).toFixed(2);
@@ -303,6 +302,7 @@ document.addEventListener('click', e => {
 
 function updateSummary() {
   let subtotal = 0, disc = 0, items = 0;
+  let totalFee = 0;
   const cd = document.getElementById('cart-details');
   cd.innerHTML = '';
 
@@ -313,6 +313,14 @@ function updateSummary() {
     const p = getCurrentPrice(t);
     let d = (discountCode === 'LUTTY' && (t.id === 1 || t.id === 2)) ? q * 10 : 0;
     disc += d; subtotal += q * p;
+
+    let baseFee = p > 28 ? (p * 0.03) : 0.83;
+    let feeWithVat = baseFee * 1.21;
+    let attendeeFee = 0;
+    if (t.commissionPayer === 'attendee') attendeeFee = feeWithVat;
+    else if (t.commissionPayer === 'split') attendeeFee = feeWithVat / 2;
+    totalFee += attendeeFee * q;
+
     const el = document.createElement('div');
     el.className = 'flex justify-between items-center text-sm text-gray-700';
     el.innerHTML = '<span>' + q + ' \xD7 ' + t.name + '</span><div class="flex items-center gap-1"><span>' + fmt(q*p) + '</span><button class="cart-remove-btn text-red-500 hover:text-red-700 text-base leading-none px-1" data-id="' + t.id + '">&times;</button></div>';
@@ -328,6 +336,17 @@ function updateSummary() {
     if (!q) return;
     const size = row.querySelector('.tshirt-size')?.value || 'S';
     items += q; subtotal += q * 25;
+    
+    const t = TICKETS.find(x => x.id == 12);
+    if (t) {
+      let baseFee = 25 > 28 ? (25 * 0.03) : 0.83;
+      let feeWithVat = baseFee * 1.21;
+      let attendeeFee = 0;
+      if (t.commissionPayer === 'attendee') attendeeFee = feeWithVat;
+      else if (t.commissionPayer === 'split') attendeeFee = feeWithVat / 2;
+      totalFee += attendeeFee * q;
+    }
+
     const div = document.createElement('div');
     div.className = 'flex justify-between text-sm text-gray-700';
     div.innerHTML = '<span>' + q + ' \xD7 T-shirt (' + size + ')</span><span>' + fmt(q * 25) + '</span>';
@@ -342,12 +361,11 @@ function updateSummary() {
     el.innerHTML = '<span>Discount "LUTTY"</span><span>-' + fmt(disc) + '</span>';
     cd.appendChild(el);
   }
-  if (items > 0) {
-    const fee = items * FEE;
-    total += fee;
+  if (totalFee > 0) {
+    total += totalFee;
     const el = document.createElement('div');
     el.className = 'flex justify-between text-sm text-gray-500 mt-2 pt-2 border-t';
-    el.innerHTML = '<span>Distribution Fee</span><span>' + fmt(fee) + '</span>';
+    el.innerHTML = '<span>Distribution Fee</span><span>' + fmt(totalFee) + '</span>';
     cd.appendChild(el);
   }
 
