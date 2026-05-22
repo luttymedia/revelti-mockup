@@ -600,7 +600,33 @@
                                 <input id="override-custom-question" type="text" placeholder="e.g., Dietary requirements?"
                                     class="w-full p-2 border border-gray-300 rounded-lg mt-1 text-sm">
                             </div>
+                            <p id="grouped-checkout-note" class="hidden text-xs text-indigo-600 mt-2 font-medium">&#128101; These questions will be repeated for each attendee in the group.</p>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Purchase Constraint -->
+                <div class="pt-4 border-t">
+                    <label class="font-semibold text-gray-700">Purchase Constraint</label>
+                    <p class="text-xs text-gray-500 mb-2">Control how many tickets a buyer must purchase at once.</p>
+                    <div class="flex flex-wrap gap-4 mt-2">
+                        <label class="flex items-center"><input type="radio" name="constraint-mode" value="none" class="mr-2" onchange="toggleConstraintMode('none')" checked> None</label>
+                        <label class="flex items-center"><input type="radio" name="constraint-mode" value="grouped" class="mr-2" onchange="toggleConstraintMode('grouped')"> Grouped (fixed pack)</label>
+                        <label class="flex items-center"><input type="radio" name="constraint-mode" value="minQty" class="mr-2" onchange="toggleConstraintMode('minQty')"> Minimum quantity</label>
+                    </div>
+
+                    <div id="constraint-grouped-panel" class="hidden mt-3 p-3 bg-indigo-50 border border-indigo-200 rounded-lg">
+                        <label class="font-semibold text-gray-700 text-sm">Group Size (attendees per purchase unit)</label>
+                        <input id="constraint-group-size" type="number" min="2" placeholder="e.g. 2"
+                            class="w-full p-2 border border-gray-300 rounded-lg mt-1">
+                        <p class="text-xs text-indigo-600 mt-1">Buyers must purchase this ticket in exact multiples of this number (e.g. 1&times;group, 2&times;groups, &hellip;).</p>
+                    </div>
+
+                    <div id="constraint-minqty-panel" class="hidden mt-3 p-3 bg-indigo-50 border border-indigo-200 rounded-lg">
+                        <label class="font-semibold text-gray-700 text-sm">Minimum Tickets per Purchase</label>
+                        <input id="constraint-min-qty" type="number" min="2" placeholder="e.g. 10"
+                            class="w-full p-2 border border-gray-300 rounded-lg mt-1">
+                        <p class="text-xs text-indigo-600 mt-1">Buyers must add at least this many tickets in a single order. Any quantity above this minimum is allowed.</p>
                     </div>
                 </div>
             </main>
@@ -840,6 +866,15 @@
                 <p>By default, every attendee answers the same set of checkout questions (Full Name, Email, etc.).</p>
                 <p>If a specific ticket type needs different information, enable <b>Override Checkout Questions</b> on that ticket. The questions will then be specific to that ticket only.</p>
 
+                <h4 class="font-bold text-lg revelti-blue pt-4 border-t mt-4">Purchase Constraint</h4>
+                <p>Control the quantity rules buyers must follow when adding this ticket to their order.</p>
+                <ul class="list-disc list-inside space-y-1 pl-2">
+                    <li><b>None:</b> No restriction — buyers can purchase any number of tickets individually.</li>
+                    <li><b>Grouped (fixed pack):</b> Tickets must be purchased in exact multiples of a fixed group size. Ideal for hotel rooms, couple passes, or table bookings (e.g. group size of 2 means buyers must purchase 2, 4, 6&hellip; tickets at a time).</li>
+                    <li><b>Minimum quantity:</b> Buyers must add at least a set number of tickets in a single order. Any quantity above the minimum is allowed (e.g. minimum 10 means buyers can purchase 10, 11, 12&hellip;). Useful for group discounts.</li>
+                </ul>
+                <p class="mt-2">The two modes are mutually exclusive — a ticket can only use one at a time. Both modes are fully compatible with dynamic pricing, shared capacity pools, and campaign codes.</p>
+
             </main>
         </div>
     </div>
@@ -896,6 +931,18 @@
                 id: 6, name: 'Backstage Pass', description: 'VIP access including front row seats and backstage passes.', quantity: 10, sold: 0, status: 'Draft',
                 pricing: { strategy: 'simple', simplePrice: 300.00 },
                 checkoutOverride: false, commissionPayer: 'organizer'
+            },
+            {
+                id: 7, name: 'Hotel Double Room', description: 'Shared double room package for two dancers — includes 3 nights accommodation near the venue.', quantity: 40, sold: 6, status: 'On Sale',
+                pricing: { strategy: 'simple', simplePrice: 220.00 },
+                checkoutOverride: true, checkoutCustomQuestion: 'Any special room requirements?', commissionPayer: 'attendee',
+                purchaseConstraint: { mode: 'grouped', groupSize: 2 }
+            },
+            {
+                id: 8, name: 'Group Early-Bird', description: 'Discounted pass for groups of 10 or more. All members must register together in a single order.', quantity: 200, sold: 30, status: 'On Sale',
+                pricing: { strategy: 'simple', simplePrice: 140.00 },
+                checkoutOverride: false, commissionPayer: 'attendee',
+                purchaseConstraint: { mode: 'minQty', minQty: 10 }
             }
         ];
 
@@ -1011,13 +1058,19 @@
                     ? '<span class="checkout-badge">⚙️ Custom Checkout</span>' : '';
                 const commissionBadgeText = ticket.commissionPayer === 'organizer' ? 'Organizer' : (ticket.commissionPayer === 'split' ? '50/50 Split' : 'Attendee');
                 const commissionBadge = `<span class="checkout-badge">Fee: ${commissionBadgeText}</span>`;
+                const pc = ticket.purchaseConstraint;
+                const constraintBadge = pc?.mode === 'grouped'
+                    ? `<span class="checkout-badge">&#128101; &times;${pc.groupSize} Pack</span>`
+                    : pc?.mode === 'minQty'
+                    ? `<span class="checkout-badge">&#128230; Min &times;${pc.minQty}</span>`
+                    : '';
 
                 row.innerHTML = `
                     <td class="px-3 py-3 align-top w-8">
                         <input type="checkbox" class="select-checkbox ticket-row-check" data-id="${ticket.id}" onchange="onTicketCheckboxChange()">
                     </td>
                     <td class="px-4 py-3 whitespace-nowrap align-top">
-                        <div class="font-semibold">${ticket.name}${checkoutBadge}${commissionBadge}</div>
+                        <div class="font-semibold">${ticket.name}${checkoutBadge}${commissionBadge}${constraintBadge}</div>
                         ${ticket.description ? `<div class="text-xs text-gray-500 mt-0.5 whitespace-normal">${ticket.description}</div>` : ''}
                         ${ticket.pricing.strategy === 'dynamic' ? renderRulesSummary(ticket) : ''}
                     </td>
@@ -1385,6 +1438,27 @@
                 document.getElementById('override-field-id').checked = checkoutDefaults.id;
                 document.getElementById('override-field-tshirt').checked = checkoutDefaults.tshirt;
             }
+            syncGroupedCheckoutNote();
+        };
+
+        // Show informational note inside the checkout override panel when groupSize > 1
+        const syncGroupedCheckoutNote = () => {
+            const note = document.getElementById('grouped-checkout-note');
+            if (!note) return;
+            const mode = document.querySelector('input[name="constraint-mode"]:checked')?.value;
+            const gs = parseInt(document.getElementById('constraint-group-size')?.value);
+            const overrideOn = document.getElementById('checkout-override-toggle').checked;
+            note.classList.toggle('hidden', !(overrideOn && mode === 'grouped' && gs >= 2));
+            if (overrideOn && mode === 'grouped' && gs >= 2) {
+                note.textContent = `\u{1F465} These questions will be repeated for each attendee in the group (\u00D7${gs}).`;
+            }
+        };
+
+        // --- PURCHASE CONSTRAINT ---
+        const toggleConstraintMode = (mode) => {
+            document.getElementById('constraint-grouped-panel').classList.toggle('hidden', mode !== 'grouped');
+            document.getElementById('constraint-minqty-panel').classList.toggle('hidden', mode !== 'minQty');
+            syncGroupedCheckoutNote();
         };
 
         // --- MODAL LOGIC ---
@@ -1461,6 +1535,14 @@
                 const commissionRadio = document.querySelector(`input[name="commission-payer"][value="${commissionPayer}"]`);
                 if (commissionRadio) commissionRadio.checked = true;
 
+                // Purchase Constraint
+                const pc = ticket.purchaseConstraint;
+                const pcMode = pc?.mode || 'none';
+                document.querySelector(`input[name="constraint-mode"][value="${pcMode}"]`).checked = true;
+                toggleConstraintMode(pcMode);
+                if (pcMode === 'grouped') document.getElementById('constraint-group-size').value = pc.groupSize || '';
+                if (pcMode === 'minQty')  document.getElementById('constraint-min-qty').value   = pc.minQty  || '';
+
             } else { // Creating a new ticket
                 document.getElementById('ticket-modal-title').textContent = 'Create New Ticket Type';
                 deleteBtn.classList.remove('hidden'); // Can always delete a new draft
@@ -1484,6 +1566,12 @@
 
                 // Reset commission payer to default
                 document.querySelector('input[name="commission-payer"][value="attendee"]').checked = true;
+
+                // Reset purchase constraint
+                document.querySelector('input[name="constraint-mode"][value="none"]').checked = true;
+                toggleConstraintMode('none');
+                document.getElementById('constraint-group-size').value = '';
+                document.getElementById('constraint-min-qty').value = '';
             }
             openModal('ticket-modal');
         };
@@ -1838,6 +1926,35 @@
             // Commission
             const commissionPayer = document.querySelector('input[name="commission-payer"]:checked').value;
 
+            // Purchase Constraint — read & validate
+            const constraintMode = document.querySelector('input[name="constraint-mode"]:checked').value;
+            let purchaseConstraint = null;
+            if (constraintMode === 'grouped') {
+                const gs = parseInt(document.getElementById('constraint-group-size').value);
+                const qty = parseInt(document.getElementById('ticket-qty').value) || 0;
+                if (!gs || gs < 2) {
+                    alert('Group size must be 2 or more.');
+                    return;
+                }
+                if (qty > 0 && gs > qty) {
+                    alert('Group size cannot exceed the total quantity available.');
+                    return;
+                }
+                purchaseConstraint = { mode: 'grouped', groupSize: gs };
+            } else if (constraintMode === 'minQty') {
+                const mq = parseInt(document.getElementById('constraint-min-qty').value);
+                const qty = parseInt(document.getElementById('ticket-qty').value) || 0;
+                if (!mq || mq < 2) {
+                    alert('Minimum quantity must be 2 or more.');
+                    return;
+                }
+                if (qty > 0 && mq > qty) {
+                    alert('Minimum quantity cannot exceed the total quantity available.');
+                    return;
+                }
+                purchaseConstraint = { mode: 'minQty', minQty: mq };
+            }
+
             const ticketPayload = {
                 name: document.getElementById('ticket-name').value || 'Unnamed Ticket',
                 description: document.getElementById('ticket-description').value,
@@ -1848,7 +1965,8 @@
                 sold: ticketId ? ticketsData.find(t => t.id === ticketId).sold : 0,
                 checkoutOverride: hasOverride,
                 checkoutCustomQuestion: hasOverride ? document.getElementById('override-custom-question').value : '',
-                commissionPayer: commissionPayer
+                commissionPayer: commissionPayer,
+                purchaseConstraint: purchaseConstraint
             };
 
             if (ticketId) {
