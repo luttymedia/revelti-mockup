@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revelti - Checkout</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{colors:{revelti:{blue:'#213c63',orange:'#f58220'}}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .input-field {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .input-field:focus {
+    border-color: #213c63;
+    box-shadow: 0 0 0 3px rgba(33, 60, 99, 0.1);
+  }
+  .form-section {
+    background: #ffffff;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .success-modal {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .success-modal.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .spinner {
+    border: 3px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top: 3px solid white;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+  }
+  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+</style>
+</head>
+<body class="antialiased text-gray-800 bg-white">
+<div id="navbar-placeholder"></div>
+
+<header class="bg-white border-b px-4 py-6 text-center shadow-sm">
+  <p class="text-sm revelti-orange font-semibold">Secure Checkout</p>
+  <h1 class="text-2xl font-bold revelti-blue">Dance Fest Spain 2026</h1>
+</header>
+
+<main class="max-w-6xl mx-auto px-4 py-8 pb-32">
+  <div class="flex flex-col gap-6 lg:grid lg:grid-cols-3 lg:gap-8 lg:items-start">
+    
+    <!-- Buyer & Attendee Forms -->
+    <div class="lg:col-span-2 w-full space-y-6 order-1">
+      
+      <!-- Buyer Information -->
+      <div class="form-section border-t-4 border-revelti-blue border border-gray-200">
+        <h2 class="text-xl font-bold revelti-blue mb-4">Buyer Information</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">Full Name</label>
+            <input type="text" class="input-field" placeholder="John Doe" required>
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">Email Address</label>
+            <input type="email" class="input-field" placeholder="john@example.com" required>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic Attendee Forms will be injected here -->
+      <div id="attendee-forms-container"></div>
+
+    </div>
+
+    <!-- Right Column: Order Summary -->
+    <div class="lg:col-span-1 w-full order-2 lg:row-span-2 sticky top-6">
+      <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+        <h3 class="text-xl font-bold revelti-blue mb-4 pb-2 border-b">Order Summary</h3>
+        <div id="order-items" class="space-y-3 mb-4 max-h-96 overflow-y-auto pr-2"></div>
+        <div class="border-t pt-4 space-y-2">
+          <div class="flex justify-between text-gray-600">
+            <span>Subtotal</span>
+            <span id="summary-subtotal" class="font-semibold">€0.00</span>
+          </div>
+          <div id="summary-discount-row" class="flex justify-between text-green-600 font-semibold hidden">
+            <span>Discount (<span id="summary-discount-code"></span>)</span>
+            <span id="summary-discount-amt">-€0.00</span>
+          </div>
+          <div id="summary-fee-row" class="flex justify-between text-gray-500 text-sm hidden">
+            <span>Distribution Fee</span>
+            <span id="summary-fee-amt">€0.00</span>
+          </div>
+        </div>
+        <div class="border-t mt-4 pt-4 flex justify-between items-center">
+          <span class="font-bold text-lg text-gray-800">Total</span>
+          <span id="summary-total" class="font-bold text-3xl revelti-orange">€0.00</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment Method & Pay button -->
+    <div class="lg:col-span-2 w-full space-y-6 order-3">
+      <!-- Payment Method -->
+      <div class="form-section border border-gray-200">
+        <h2 class="text-xl font-bold revelti-blue mb-4">Payment Method</h2>
+        
+        <div class="flex gap-4 mb-6">
+          <button class="flex-1 py-3 border-2 border-revelti-blue rounded-lg bg-blue-50 font-semibold text-revelti-blue flex items-center justify-center gap-2">
+            💳 Credit Card
+          </button>
+          <button class="flex-1 py-3 border border-gray-300 rounded-lg bg-white hover:bg-gray-50 font-semibold text-gray-700 flex items-center justify-center gap-2 transition">
+            PayPal
+          </button>
+        </div>
+
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">Cardholder Name</label>
+            <input type="text" class="input-field" placeholder="Name on card">
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">Card Number</label>
+            <input type="text" class="input-field" placeholder="0000 0000 0000 0000">
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-1">Expiry Date</label>
+              <input type="text" class="input-field" placeholder="MM/YY">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-1">CVC</label>
+              <input type="text" class="input-field" placeholder="123">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button id="pay-btn" class="w-full bg-revelti-orange text-white font-bold text-xl py-4 rounded-xl hover:bg-orange-600 transition shadow-lg flex items-center justify-center gap-3">
+        <span>Pay &amp; Complete Order</span>
+        <div id="pay-spinner" class="spinner hidden"></div>
+      </button>
+    </div>
+
+  </div>
+</main>
+
+<!-- Success Modal -->
+<div id="success-modal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 success-modal">
+  <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-sm w-full text-center transform scale-95 transition-transform duration-300" id="success-modal-content">
+    <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+      <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+    </div>
+    <h3 class="text-2xl font-bold text-gray-800 mb-2">Payment Successful!</h3>
+    <p class="text-gray-600 mb-6">Your tickets have been secured. You will receive an email confirmation shortly.</p>
+    <p class="text-sm text-gray-500 mb-6">Redirecting to your tickets...</p>
+    <div class="spinner border-revelti-blue border-t-transparent mx-auto"></div>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+
+<script>
+const MOCK_DATE = new Date('2025-09-15T12:00:00');
+
+// Shared Ticket Logic & Mock Settings
+const TICKETS = [
+  {id:1,name:'Sensuality Pass',cat:'Main Passes', pricing:{strategy:'dynamic',basePrice:170,rules:[{type:'date',value:'2025-08-01',newPrice:180},{type:'date',value:'2025-09-01',newPrice:190},{type:'date',value:'2025-10-01',newPrice:220}]},commissionPayer:'attendee', constraint:null},
+  {id:2,name:'Essentiality Pass',cat:'Main Passes', pricing:{strategy:'dynamic',basePrice:170,rules:[{type:'date',value:'2025-08-01',newPrice:180},{type:'date',value:'2025-09-01',newPrice:190},{type:'date',value:'2025-10-01',newPrice:220}]},commissionPayer:'attendee', constraint:null},
+  {id:8,name:'Group Early-Bird',cat:'Main Passes', pricing:{strategy:'simple',simplePrice:140},commissionPayer:'attendee', constraint:{mode:'minQty',minQty:10}},
+  {id:3,name:'J&J Amateur',cat:'Jack &amp; Jill', pricing:{strategy:'dynamic',basePrice:10,rules:[{type:'sales',value:20,newPrice:15},{type:'sales',value:30,newPrice:20}]},commissionPayer:'attendee', constraint:null, checkoutOverride: { name: true, email: true, id: true, customQuestion: 'Partner name?' }},
+  {id:9,name:'J&J Pro',cat:'Jack &amp; Jill', pricing:{strategy:'simple',simplePrice:15},commissionPayer:'attendee', constraint:null, checkoutOverride: { name: true, email: true, id: true, customQuestion: 'Partner name?' }},
+  {id:10,name:'Sensuality Training Track',cat:'Training Tracks', pricing:{strategy:'simple',simplePrice:100},commissionPayer:'attendee', constraint:null},
+  {id:11,name:'Essentiality Training Track',cat:'Training Tracks', pricing:{strategy:'simple',simplePrice:100},commissionPayer:'attendee', constraint:null},
+  {id:4,name:'Training Tracks',cat:'Training Tracks', pricing:{strategy:'simple',simplePrice:100},commissionPayer:'attendee', constraint:null},
+  {id:5,name:'Party Pass',cat:'Social Passes', pricing:{strategy:'simple',simplePrice:80},commissionPayer:'split', constraint:null},
+  {id:6,name:'Backstage Pass',cat:'VIP', pricing:{strategy:'simple',simplePrice:300},commissionPayer:'organizer', constraint:null},
+  {id:7,name:'Hotel Double Room',cat:'Accommodation', pricing:{strategy:'simple',simplePrice:220},commissionPayer:'attendee', constraint:{mode:'grouped',groupSize:2}, checkoutOverride: { name: true, email: true, phone: true }},
+  {id:12,name:'Official T-shirt',cat:'Add-ons', pricing:{strategy:'simple',simplePrice:25},commissionPayer:'attendee', constraint:null, isTshirt:true, checkoutOverride: { name: true }} 
+];
+
+const fmt = n => '\u20AC' + parseFloat(n).toFixed(2);
+
+function getCurrentPrice(t) {
+  if (t.pricing.strategy === 'simple') return t.pricing.simplePrice;
+  let p = t.pricing.basePrice;
+  t.pricing.rules.forEach(r => {
+    let triggered = r.type === 'date' ? MOCK_DATE >= new Date(r.value) : 100 >= r.value; // Mock 100 sold
+    if (triggered && r.newPrice > p) p = r.newPrice;
+  });
+  return p;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const cartJson = sessionStorage.getItem('reveltiCart');
+  const discountCode = sessionStorage.getItem('reveltiDiscount');
+  
+  if (!cartJson) {
+    window.location.href = 'ticketPurchase.html';
+    return;
+  }
+
+  const cart = JSON.parse(cartJson);
+  const container = document.getElementById('attendee-forms-container');
+  const orderItems = document.getElementById('order-items');
+  
+  let subtotal = 0, disc = 0, totalFee = 0, formCounter = 1;
+
+  Object.entries(cart).forEach(([key, qty]) => {
+    if (qty <= 0) return;
+    
+    let t, isTshirt = false, tshirtSize = '';
+    
+    if (key.includes('_TShirt_')) {
+      isTshirt = true;
+      const parts = key.split('_TShirt_');
+      t = TICKETS.find(x => x.id == parts[0]);
+      tshirtSize = parts[1];
+    } else {
+      t = TICKETS.find(x => x.id == key);
+    }
+    
+    if (!t) return;
+
+    const p = getCurrentPrice(t);
+    const itemTotal = q => q * p;
+
+    // Order Summary rendering
+    if (isTshirt) {
+      subtotal += itemTotal(qty);
+      const el = document.createElement('div');
+      el.className = 'flex justify-between text-sm text-gray-700';
+      el.innerHTML = `<span>${qty} &times; ${t.name} (${tshirtSize})</span><span>${fmt(itemTotal(qty))}</span>`;
+      orderItems.appendChild(el);
+    } else {
+      subtotal += itemTotal(qty);
+      if (discountCode === 'LUTTY' && (t.id === 1 || t.id === 2)) disc += qty * 10;
+      
+      const el = document.createElement('div');
+      el.className = 'flex justify-between text-sm text-gray-700 font-medium';
+      el.innerHTML = `<span>${qty} &times; ${t.name}</span><span>${fmt(itemTotal(qty))}</span>`;
+      orderItems.appendChild(el);
+    }
+
+    // Fee calculation
+    let baseFee = p > 28 ? (p * 0.03) : 0.83;
+    let feeWithVat = baseFee * 1.21;
+    let attendeeFee = 0;
+    if (t.commissionPayer === 'attendee') attendeeFee = feeWithVat;
+    else if (t.commissionPayer === 'split') attendeeFee = feeWithVat / 2;
+    totalFee += attendeeFee * qty;
+
+    // Forms Rendering Logic
+    // If constraint is grouped, the cart stores `qty` as total individuals. 
+    // Example: groupSize=2, 1 pack = qty 2. We need to render 2 forms.
+    // So we just iterate `qty` times to create individual forms.
+    
+    for (let i = 0; i < qty; i++) {
+      const section = document.createElement('div');
+      section.className = 'form-section';
+      
+      let title = isTshirt ? `T-Shirt Attendee (${tshirtSize})` : `Attendee ${formCounter} - ${t.name}`;
+      formCounter++;
+
+      const fields = t.checkoutOverride || { name: true, email: true }; // Mocking global default vs override
+
+      let fieldsHtml = '<div class="grid grid-cols-1 md:grid-cols-2 gap-4">';
+      
+      if (fields.name) fieldsHtml += `<div><label class="block text-sm font-semibold text-gray-700 mb-1">Full Name</label><input type="text" class="input-field" placeholder="Full Name" required></div>`;
+      if (fields.email) fieldsHtml += `<div><label class="block text-sm font-semibold text-gray-700 mb-1">Email Address</label><input type="email" class="input-field" placeholder="Email" required></div>`;
+      if (fields.phone) fieldsHtml += `<div><label class="block text-sm font-semibold text-gray-700 mb-1">Phone Number</label><input type="tel" class="input-field" placeholder="+1..." required></div>`;
+      if (fields.id) fieldsHtml += `<div><label class="block text-sm font-semibold text-gray-700 mb-1">ID / Passport</label><input type="text" class="input-field" placeholder="ID Number" required></div>`;
+      if (fields.customQuestion) fieldsHtml += `<div class="col-span-1 md:col-span-2"><label class="block text-sm font-semibold text-gray-700 mb-1">${fields.customQuestion}</label><input type="text" class="input-field" placeholder="Answer..." required></div>`;
+
+      fieldsHtml += '</div>';
+      
+      section.innerHTML = `
+        <h3 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2 flex justify-between items-center">
+          <span>${title}</span>
+          ${isTshirt ? '' : `<span class="text-sm font-normal text-gray-500 bg-gray-100 px-2 py-1 rounded">Ticket #${i+1}</span>`}
+        </h3>
+        ${fieldsHtml}
+      `;
+      container.appendChild(section);
+    }
+  });
+
+  // Render totals
+  document.getElementById('summary-subtotal').textContent = fmt(subtotal);
+  let finalTotal = subtotal;
+
+  if (disc > 0) {
+    document.getElementById('summary-discount-row').classList.remove('hidden');
+    document.getElementById('summary-discount-code').textContent = discountCode;
+    document.getElementById('summary-discount-amt').textContent = '-' + fmt(disc);
+    finalTotal -= disc;
+  }
+
+  if (totalFee > 0) {
+    document.getElementById('summary-fee-row').classList.remove('hidden');
+    document.getElementById('summary-fee-amt').textContent = fmt(totalFee);
+    finalTotal += totalFee;
+  }
+
+  document.getElementById('summary-total').textContent = fmt(finalTotal);
+  
+  // Pay Action
+  document.getElementById('pay-btn').addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    // Simulate simple form validation (check if inputs are filled)
+    const inputs = document.querySelectorAll('input[required]');
+    for (let inp of inputs) {
+      if (!inp.value.trim()) {
+        inp.focus();
+        inp.classList.add('border-red-500');
+        setTimeout(() => inp.classList.remove('border-red-500'), 2000);
+        return;
+      }
+    }
+
+    // Simulate Processing
+    const btn = this;
+    const spinner = document.getElementById('pay-spinner');
+    const btnText = btn.querySelector('span');
+    
+    btn.disabled = true;
+    btn.classList.add('opacity-80', 'cursor-not-allowed');
+    btnText.textContent = 'Processing...';
+    spinner.classList.remove('hidden');
+
+    setTimeout(() => {
+      // Clear cart
+      sessionStorage.removeItem('reveltiCart');
+      sessionStorage.removeItem('reveltiDiscount');
+      
+      // Show Success Modal
+      const modal = document.getElementById('success-modal');
+      const modalContent = document.getElementById('success-modal-content');
+      modal.classList.add('show');
+      modalContent.classList.remove('scale-95');
+      modalContent.classList.add('scale-100');
+      
+      // Redirect to purchaseDetails
+      setTimeout(() => {
+        window.location.href = 'purchaseDetails.html';
+      }, 2500);
+
+    }, 1500);
+  });
+});
+</script>
+<script src="main.js" defer></script>
+</body>
+</html>
