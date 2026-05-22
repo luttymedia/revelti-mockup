@@ -605,9 +605,23 @@
                             <div class="toggle-row">
                                 <span class="text-sm text-gray-700">T-Shirt Size</span>
                                 <label class="relative inline-flex items-center cursor-pointer">
-                                    <input type="checkbox" id="override-field-tshirt" class="sr-only peer">
+                                    <input type="checkbox" id="override-field-tshirt" class="sr-only peer" onchange="document.getElementById('tshirt-sizes-container').classList.toggle('hidden', !this.checked)">
                                     <div class="w-9 h-5 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-revelti-blue"></div>
                                 </label>
+                            </div>
+                            <div id="tshirt-sizes-container" class="hidden pl-4 mt-2 mb-4 border-l-2 border-revelti-orange">
+                                <p class="text-xs text-gray-500 mb-2">Available Sizes:</p>
+                                <div class="grid grid-cols-5 gap-2">
+                                    <label class="flex items-center gap-1 text-sm"><input type="checkbox" id="tshirt-size-xs"> XS</label>
+                                    <label class="flex items-center gap-1 text-sm"><input type="checkbox" id="tshirt-size-s" checked> S</label>
+                                    <label class="flex items-center gap-1 text-sm"><input type="checkbox" id="tshirt-size-m" checked> M</label>
+                                    <label class="flex items-center gap-1 text-sm"><input type="checkbox" id="tshirt-size-l" checked> L</label>
+                                    <label class="flex items-center gap-1 text-sm"><input type="checkbox" id="tshirt-size-xl" checked> XL</label>
+                                </div>
+                                <div class="mt-2">
+                                    <label class="block text-xs text-gray-500 mb-1">Others (comma separated):</label>
+                                    <input type="text" id="tshirt-size-others" class="w-full p-2 border border-gray-300 rounded-md text-sm" placeholder="e.g. XXL, 3XL">
+                                </div>
                             </div>
                             <div class="mt-2">
                                 <label class="font-semibold text-gray-700 text-sm">Custom Question (optional)</label>
@@ -979,7 +993,7 @@
             {
                 id: 12, name: 'Official T-shirt', description: 'Official event T-shirt. Size will be selected at checkout.', category: 'Add-ons', quantity: 200, sold: 0, status: 'On Sale',
                 pricing: { strategy: 'simple', simplePrice: 25.00 },
-                checkoutOverride: false, commissionPayer: 'attendee'
+                checkoutOverride: { tshirt: true }, commissionPayer: 'attendee'
             }
         ];
 
@@ -1477,6 +1491,9 @@
                 document.getElementById('override-field-phone').checked = checkoutDefaults.phone;
                 document.getElementById('override-field-id').checked = checkoutDefaults.id;
                 document.getElementById('override-field-tshirt').checked = checkoutDefaults.tshirt;
+                document.getElementById('tshirt-sizes-container')?.classList.toggle('hidden', !checkoutDefaults.tshirt);
+            } else {
+                document.getElementById('tshirt-sizes-container')?.classList.add('hidden');
             }
             syncGroupedCheckoutNote();
         };
@@ -1567,6 +1584,16 @@
                 const overrideToggle = document.getElementById('checkout-override-toggle');
                 overrideToggle.checked = !!ticket.checkoutOverride;
                 toggleCheckoutOverride();
+                if (typeof ticket.checkoutOverride === 'object') {
+                    document.getElementById('override-field-name').checked = !!ticket.checkoutOverride.name;
+                    document.getElementById('override-field-email').checked = !!ticket.checkoutOverride.email;
+                    document.getElementById('override-field-phone').checked = !!ticket.checkoutOverride.phone;
+                    document.getElementById('override-field-id').checked = !!ticket.checkoutOverride.id;
+                    document.getElementById('override-field-tshirt').checked = !!ticket.checkoutOverride.tshirt;
+                    document.getElementById('tshirt-sizes-container').classList.toggle('hidden', !ticket.checkoutOverride.tshirt);
+                } else {
+                    document.getElementById('tshirt-sizes-container').classList.add('hidden');
+                }
                 if (ticket.checkoutOverride && ticket.checkoutCustomQuestion) {
                     document.getElementById('override-custom-question').value = ticket.checkoutCustomQuestion;
                 }
@@ -1604,6 +1631,7 @@
                 // Reset checkout override
                 document.getElementById('checkout-override-toggle').checked = false;
                 document.getElementById('checkout-override-panel').classList.add('hidden');
+                document.getElementById('tshirt-sizes-container').classList.add('hidden');
                 document.getElementById('override-custom-question').value = '';
 
                 // Reset commission payer to default

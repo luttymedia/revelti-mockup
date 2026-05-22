@@ -187,7 +187,7 @@ const TICKETS = [
   {id:5,name:'Party Pass',cat:'Social Passes', pricing:{strategy:'simple',simplePrice:80},commissionPayer:'split', constraint:null},
   {id:6,name:'Backstage Pass',cat:'VIP', pricing:{strategy:'simple',simplePrice:300},commissionPayer:'organizer', constraint:null},
   {id:7,name:'Hotel Double Room',cat:'Accommodation', pricing:{strategy:'simple',simplePrice:220},commissionPayer:'attendee', constraint:{mode:'grouped',groupSize:2}, checkoutOverride: { name: true, email: true, phone: true }},
-  {id:12,name:'Official T-shirt',cat:'Add-ons', pricing:{strategy:'simple',simplePrice:25},commissionPayer:'attendee', constraint:null, isTshirt:true, checkoutOverride: { name: true }} 
+  {id:12,name:'Official T-shirt',cat:'Add-ons', pricing:{strategy:'simple',simplePrice:25},commissionPayer:'attendee', constraint:null, isTshirt:true, checkoutOverride: { tshirt: true }} 
 ];
 
 const fmt = n => '\u20AC' + parseFloat(n).toFixed(2);
@@ -266,33 +266,35 @@ document.addEventListener('DOMContentLoaded', () => {
     // Example: groupSize=2, 1 pack = qty 2. We need to render 2 forms.
     // So we just iterate `qty` times to create individual forms.
     
-    for (let i = 0; i < qty; i++) {
-      const section = document.createElement('div');
-      section.className = 'form-section';
-      
-      let title = isTshirt ? `T-Shirt Attendee (${tshirtSize})` : `Attendee ${formCounter} - ${t.name}`;
-      formCounter++;
+    if (!isTshirt) {
+      for (let i = 0; i < qty; i++) {
+        const section = document.createElement('div');
+        section.className = 'form-section';
+        
+        let title = `Attendee ${formCounter} - ${t.name}`;
+        formCounter++;
 
-      const fields = t.checkoutOverride || { name: true, email: true }; // Mocking global default vs override
+        const fields = t.checkoutOverride || { name: true, email: true }; // Mocking global default vs override
 
-      let fieldsHtml = '<div class="grid grid-cols-1 md:grid-cols-2 gap-4">';
-      
-      if (fields.name) fieldsHtml += `<div><label class="block text-sm font-semibold text-gray-700 mb-1">Full Name</label><input type="text" class="input-field" placeholder="Full Name" required></div>`;
-      if (fields.email) fieldsHtml += `<div><label class="block text-sm font-semibold text-gray-700 mb-1">Email Address</label><input type="email" class="input-field" placeholder="Email" required></div>`;
-      if (fields.phone) fieldsHtml += `<div><label class="block text-sm font-semibold text-gray-700 mb-1">Phone Number</label><input type="tel" class="input-field" placeholder="+1..." required></div>`;
-      if (fields.id) fieldsHtml += `<div><label class="block text-sm font-semibold text-gray-700 mb-1">ID / Passport</label><input type="text" class="input-field" placeholder="ID Number" required></div>`;
-      if (fields.customQuestion) fieldsHtml += `<div class="col-span-1 md:col-span-2"><label class="block text-sm font-semibold text-gray-700 mb-1">${fields.customQuestion}</label><input type="text" class="input-field" placeholder="Answer..." required></div>`;
+        let fieldsHtml = '<div class="grid grid-cols-1 md:grid-cols-2 gap-4">';
+        
+        if (fields.name) fieldsHtml += `<div><label class="block text-sm font-semibold text-gray-700 mb-1">Full Name</label><input type="text" class="input-field" placeholder="Full Name" required></div>`;
+        if (fields.email) fieldsHtml += `<div><label class="block text-sm font-semibold text-gray-700 mb-1">Email Address</label><input type="email" class="input-field" placeholder="Email" required></div>`;
+        if (fields.phone) fieldsHtml += `<div><label class="block text-sm font-semibold text-gray-700 mb-1">Phone Number</label><input type="tel" class="input-field" placeholder="+1..." required></div>`;
+        if (fields.id) fieldsHtml += `<div><label class="block text-sm font-semibold text-gray-700 mb-1">ID / Passport</label><input type="text" class="input-field" placeholder="ID Number" required></div>`;
+        if (fields.customQuestion) fieldsHtml += `<div class="col-span-1 md:col-span-2"><label class="block text-sm font-semibold text-gray-700 mb-1">${fields.customQuestion}</label><input type="text" class="input-field" placeholder="Answer..." required></div>`;
 
-      fieldsHtml += '</div>';
-      
-      section.innerHTML = `
-        <h3 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2 flex justify-between items-center">
-          <span>${title}</span>
-          ${isTshirt ? '' : `<span class="text-sm font-normal text-gray-500 bg-gray-100 px-2 py-1 rounded">Ticket #${i+1}</span>`}
-        </h3>
-        ${fieldsHtml}
-      `;
-      container.appendChild(section);
+        fieldsHtml += '</div>';
+        
+        section.innerHTML = `
+          <h3 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2 flex justify-between items-center">
+            <span>${title}</span>
+            <span class="text-sm font-normal text-gray-500 bg-gray-100 px-2 py-1 rounded">Ticket #${i+1}</span>
+          </h3>
+          ${fieldsHtml}
+        `;
+        container.appendChild(section);
+      }
     }
   });
 
