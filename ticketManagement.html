@@ -31,8 +31,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 
+    <!-- DataTables.js for advanced tables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+
     <!-- Your Custom Stylesheet -->
     <link rel="stylesheet" href="style.css">
+
 
     <style>
         /* ── Feature 1: Capacity Bar ── */
@@ -242,7 +256,19 @@
 
                     <div class="bg-white rounded-xl shadow-md">
                         <main class="p-6 md:p-8">
-                            <div class="space-y-8">
+                            <!-- Tabs Navigation -->
+                            <div class="border-b border-gray-200 mb-6">
+                                <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+                                    <button id="tab-config-btn" class="border-revelti-orange text-revelti-orange pb-4 px-1 border-b-2 font-bold text-sm md:text-base cursor-pointer focus:outline-none">
+                                        🎟️ Configuration & Pricing
+                                    </button>
+                                    <button id="tab-sales-btn" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 pb-4 px-1 border-b-2 font-semibold text-sm md:text-base cursor-pointer focus:outline-none">
+                                        📊 Tickets Sold
+                                    </button>
+                                </nav>
+                            </div>
+
+                            <div id="tab-config-content" class="space-y-8">
                                 <details open>
                                     <summary
                                         class="flex justify-between items-center cursor-pointer font-bold text-xl revelti-blue">
@@ -419,6 +445,99 @@
                                             Campaign</button>
                                     </div>
                                 </details>
+                            </div> <!-- End of tab-config-content -->
+
+                            <div id="tab-sales-content" class="hidden space-y-6">
+                                <!-- KPI Cards -->
+                                <div id="sales-kpis" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                                    <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                                        <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider text-ellipsis overflow-hidden">Total Tickets Sold</h3>
+                                        <p id="kpi-total-tickets" class="text-2xl font-bold text-revelti-blue mt-1">0</p>
+                                    </div>
+                                    <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                                        <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider text-ellipsis overflow-hidden">Total Revenue</h3>
+                                        <p id="kpi-total-revenue" class="text-2xl font-bold text-revelti-blue mt-1">€0.00</p>
+                                    </div>
+                                    <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                                        <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider text-ellipsis overflow-hidden">Online Sales</h3>
+                                        <p id="kpi-online-sales" class="text-2xl font-bold text-revelti-blue mt-1">0</p>
+                                    </div>
+                                    <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                                        <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider text-ellipsis overflow-hidden">Offline Sales</h3>
+                                        <p id="kpi-offline-sales" class="text-2xl font-bold text-revelti-blue mt-1">0</p>
+                                    </div>
+                                </div>
+
+                                <!-- Filter Controls -->
+                                <div class="bg-gray-50 border border-gray-200 rounded-xl p-4 md:p-6 space-y-4">
+                                    <div class="flex flex-wrap items-center justify-between gap-4 border-b border-gray-200 pb-4">
+                                        <h3 class="text-lg font-bold text-revelti-blue flex items-center gap-2">
+                                            <span>🔍 Filters & Search</span>
+                                        </h3>
+                                        <div class="flex space-x-2">
+                                            <button id="add-offline-ticket-btn" class="px-4 py-2 font-bold bg-revelti-orange text-white rounded-lg hover:opacity-90 transition duration-300 flex items-center gap-2">
+                                                <span>➕ Add Offline Ticket</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                                        <div>
+                                            <label class="block text-sm font-semibold text-gray-700 mb-1">Ticket Type</label>
+                                            <select id="filter-ticket-type" class="w-full p-2 border border-gray-300 rounded-lg text-sm bg-white">
+                                                <option value="">All Ticket Types</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-semibold text-gray-700 mb-1">Promoter</label>
+                                            <select id="filter-promoter" class="w-full p-2 border border-gray-300 rounded-lg text-sm bg-white">
+                                                <option value="">All Promoters</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-semibold text-gray-700 mb-1">Payment Method</label>
+                                            <select id="filter-payment-method" class="w-full p-2 border border-gray-300 rounded-lg text-sm bg-white">
+                                                <option value="">All Methods</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-semibold text-gray-700 mb-1">Status</label>
+                                            <select id="filter-status" class="w-full p-2 border border-gray-300 rounded-lg text-sm bg-white">
+                                                <option value="">All Statuses</option>
+                                                <option value="Completed">Completed</option>
+                                                <option value="Refunded">Refunded</option>
+                                                <option value="Pending">Pending</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-end space-x-2 pt-2">
+                                        <button id="reset-sales-filters" class="px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition duration-300">
+                                            Reset Filters
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- DataTable Container -->
+                                <div class="overflow-x-auto">
+                                    <table id="ticketsSoldTable" class="min-w-full bg-white border border-gray-200 rounded-lg">
+                                        <thead class="bg-gray-50">
+                                            <tr>
+                                                <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Transaction ID</th>
+                                                <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Date</th>
+                                                <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Attendee</th>
+                                                <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Ticket Type</th>
+                                                <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Qty</th>
+                                                <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Total Paid</th>
+                                                <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Promoter</th>
+                                                <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Method</th>
+                                                <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Status</th>
+                                                <th class="px-4 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-gray-200 text-sm">
+                                            <!-- Dynamic entries -->
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </main>
                     </div>
@@ -442,6 +561,129 @@
             <footer class="p-4 border-t flex justify-end space-x-2 bg-gray-50">
                 <button onclick="closeTicketManagementModal('delete-campaign-modal')" class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg">Cancel</button>
                 <button id="delete-campaign-confirm-btn" onclick="confirmDeleteCampaign()" class="px-4 py-2 font-bold bg-red-600 text-white rounded-lg hidden">Yes, Delete</button>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Add/Edit Offline Ticket Modal -->
+    <div id="offline-ticket-modal" class="modal fixed inset-0 flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col">
+            <header class="p-4 border-b flex justify-between items-center bg-gray-50 rounded-t-xl">
+                <h3 id="offline-ticket-modal-title" class="font-bold text-xl text-revelti-blue">Add Offline Ticket</h3>
+                <button onclick="closeTicketManagementModal('offline-ticket-modal')"
+                    class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+            </header>
+            <main class="p-6 space-y-4 overflow-y-auto">
+                <input type="hidden" id="offline-sale-id">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700">Ticket Type *</label>
+                        <select id="offline-ticket-type" class="w-full p-2 border border-gray-300 rounded-lg mt-1 text-sm bg-white" onchange="onOfflineTicketTypeChange()">
+                            <!-- Populated dynamically -->
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700">Quantity *</label>
+                        <input id="offline-qty" type="number" min="1" value="1" class="w-full p-2 border border-gray-300 rounded-lg mt-1 text-sm" oninput="calculateOfflineTotal()">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700">Price Paid per Ticket (€) *</label>
+                        <input id="offline-price" type="number" step="0.01" class="w-full p-2 border border-gray-300 rounded-lg mt-1 text-sm" oninput="calculateOfflineTotal()">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700">Total Price Paid (€)</label>
+                        <input id="offline-total" type="number" step="0.01" readonly class="w-full p-2 border border-gray-100 bg-gray-50 rounded-lg mt-1 font-bold text-revelti-blue text-sm">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700">Promoter</label>
+                        <select id="offline-promoter" class="w-full p-2 border border-gray-300 rounded-lg mt-1 text-sm bg-white">
+                            <!-- Populated dynamically -->
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700">Discount Code Used</label>
+                        <select id="offline-discount" class="w-full p-2 border border-gray-300 rounded-lg mt-1 text-sm bg-white" onchange="onOfflineDiscountChange()">
+                            <!-- Populated dynamically -->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700">Payment Method *</label>
+                        <select id="offline-payment-method" class="w-full p-2 border border-gray-300 rounded-lg mt-1 text-sm bg-white">
+                            <option value="Cash">Cash</option>
+                            <option value="Bank Transfer">Bank Transfer</option>
+                            <option value="Stripe">Stripe (POS)</option>
+                            <option value="PayPal">PayPal</option>
+                            <option value="Credit Card">Credit Card</option>
+                            <option value="Complimentary">Complimentary (Free)</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700">Status *</label>
+                        <select id="offline-status" class="w-full p-2 border border-gray-300 rounded-lg mt-1 text-sm bg-white">
+                            <option value="Completed">Completed</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Refunded">Refunded</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Dynamic Attendee Checkout Questions Section -->
+                <div class="pt-4 border-t">
+                    <h4 class="font-bold text-gray-800 text-sm mb-1">Attendee Information</h4>
+                    <p class="text-xs text-gray-500 mb-4">Fields display based on configuration details (Ticket Type modal, "Checkout questions" section).</p>
+                    
+                    <div id="offline-attendee-fields-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div id="field-group-name">
+                            <label class="block text-sm font-semibold text-gray-700">Full Name *</label>
+                            <input id="offline-field-value-name" type="text" class="w-full p-2 border border-gray-300 rounded-lg mt-1 text-sm" placeholder="e.g. John Doe">
+                        </div>
+                        <div id="field-group-email">
+                            <label class="block text-sm font-semibold text-gray-700">Email Address *</label>
+                            <input id="offline-field-value-email" type="email" class="w-full p-2 border border-gray-300 rounded-lg mt-1 text-sm" placeholder="e.g. john@example.com">
+                        </div>
+                        <div id="field-group-phone" class="hidden">
+                            <label class="block text-sm font-semibold text-gray-700">Phone Number *</label>
+                            <input id="offline-field-value-phone" type="tel" class="w-full p-2 border border-gray-300 rounded-lg mt-1 text-sm" placeholder="e.g. +34 600 000 000">
+                        </div>
+                        <div id="field-group-id" class="hidden">
+                            <label class="block text-sm font-semibold text-gray-700">ID / Passport Number *</label>
+                            <input id="offline-field-value-id" type="text" class="w-full p-2 border border-gray-300 rounded-lg mt-1 text-sm" placeholder="e.g. DNI/NIE/Passport">
+                        </div>
+                        <div id="field-group-tshirt" class="hidden">
+                            <label class="block text-sm font-semibold text-gray-700">T-Shirt Size *</label>
+                            <select id="offline-field-value-tshirt" class="w-full p-2 border border-gray-300 rounded-lg mt-1 text-sm bg-white">
+                                <option value="">Select Size</option>
+                                <option value="XS">XS</option>
+                                <option value="S">S</option>
+                                <option value="M">M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                                <option value="XXL">XXL</option>
+                            </select>
+                        </div>
+                        <div id="field-group-custom" class="hidden col-span-2">
+                            <label id="offline-field-label-custom" class="block text-sm font-semibold text-gray-700">Custom Question *</label>
+                            <input id="offline-field-value-custom" type="text" class="w-full p-2 border border-gray-300 rounded-lg mt-1 text-sm" placeholder="Your answer...">
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <footer class="p-4 border-t flex justify-end space-x-2 bg-gray-50 rounded-b-xl">
+                <button onclick="closeTicketManagementModal('offline-ticket-modal')"
+                    class="px-4 py-2 font-semibold bg-gray-200 text-gray-700 rounded-lg text-sm">Cancel</button>
+                <button onclick="saveOfflineTicket()"
+                    class="px-4 py-2 font-bold bg-revelti-blue text-white rounded-lg text-sm">Save Ticket</button>
             </footer>
         </div>
     </div>
@@ -931,6 +1173,649 @@
     </div>
 
     <script>
+        // --- TICKETS SOLD DATA STATE ---
+        let salesData = [];
+        let salesTable = null;
+
+        // --- TABS LOGIC ---
+        const setupTabs = () => {
+            const tabConfigBtn = document.getElementById('tab-config-btn');
+            const tabSalesBtn = document.getElementById('tab-sales-btn');
+            const tabConfigContent = document.getElementById('tab-config-content');
+            const tabSalesContent = document.getElementById('tab-sales-content');
+
+            if (!tabConfigBtn || !tabSalesBtn || !tabConfigContent || !tabSalesContent) return;
+
+            tabConfigBtn.addEventListener('click', () => {
+                // Active styles for Config
+                tabConfigBtn.className = "border-revelti-orange text-revelti-orange pb-4 px-1 border-b-2 font-bold text-sm md:text-base cursor-pointer focus:outline-none";
+                tabSalesBtn.className = "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 pb-4 px-1 border-b-2 font-semibold text-sm md:text-base cursor-pointer focus:outline-none";
+                
+                // Toggle visibility
+                tabConfigContent.classList.remove('hidden');
+                tabSalesContent.classList.add('hidden');
+            });
+
+            tabSalesBtn.addEventListener('click', () => {
+                // Active styles for Sales
+                tabSalesBtn.className = "border-revelti-orange text-revelti-orange pb-4 px-1 border-b-2 font-bold text-sm md:text-base cursor-pointer focus:outline-none";
+                tabConfigBtn.className = "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 pb-4 px-1 border-b-2 font-semibold text-sm md:text-base cursor-pointer focus:outline-none";
+                
+                // Toggle visibility
+                tabConfigContent.classList.add('hidden');
+                tabSalesContent.classList.remove('hidden');
+                
+                // Recalculate column widths for DataTable when switching to tab
+                if (salesTable) {
+                    salesTable.columns.adjust().draw();
+                }
+            });
+        };
+
+        // --- SMART INHERITANCE FIELD REQUIREMENT RESOLVER ---
+        const getTicketFields = (ticket) => {
+            let fields = { name: true, email: true, phone: false, id: false, tshirt: false, customQuestion: null };
+            if (ticket.checkoutOverride) {
+                if (typeof ticket.checkoutOverride === 'object') {
+                    fields.name = ticket.checkoutOverride.name !== undefined ? !!ticket.checkoutOverride.name : true;
+                    fields.email = ticket.checkoutOverride.email !== undefined ? !!ticket.checkoutOverride.email : true;
+                    fields.phone = !!ticket.checkoutOverride.phone;
+                    fields.id = !!ticket.checkoutOverride.id;
+                    fields.tshirt = !!ticket.checkoutOverride.tshirt;
+                } else {
+                    // Boolean true - fallback to global defaults
+                    fields.name = !!checkoutDefaults.name;
+                    fields.email = !!checkoutDefaults.email;
+                    fields.phone = !!checkoutDefaults.phone;
+                    fields.id = !!checkoutDefaults.id;
+                    fields.tshirt = !!checkoutDefaults.tshirt;
+                }
+                if (ticket.checkoutCustomQuestion) {
+                    fields.customQuestion = ticket.checkoutCustomQuestion;
+                }
+            } else {
+                // Use global defaults
+                fields.name = !!checkoutDefaults.name;
+                fields.email = !!checkoutDefaults.email;
+                fields.phone = !!checkoutDefaults.phone;
+                fields.id = !!checkoutDefaults.id;
+                fields.tshirt = !!checkoutDefaults.tshirt;
+            }
+            return fields;
+        };
+
+        // --- DATA LOADING & DATATABLE INITIALIZATION ---
+        const loadSalesData = async () => {
+            try {
+                const response = await fetch('data/transactions.json');
+                if (!response.ok) throw new Error('Failed to load transaction data');
+                const rawData = await response.json();
+                
+                salesData = rawData.filter(t => t.Event_Name === 'Dance Fest Spain 2026').map(t => {
+                    const price = (t.Qty > 0) ? t.Gross_Amount / t.Qty : 0;
+                    return {
+                        Transaction_ID: t.Transaction_ID,
+                        Transaction_Date: t.Transaction_Date,
+                        Attendee_Name: t.Attendee_Name,
+                        Attendee_Email: '',
+                        Attendee_Phone: '',
+                        Attendee_ID: '',
+                        Attendee_Tshirt: '',
+                        Attendee_Custom: '',
+                        Ticket_Type: t.Ticket_Type,
+                        Promoter_Name: t.Promoter_Name || 'N/A',
+                        Discount_Code_Used: t.Discount_Code_Used || 'N/A',
+                        Qty: t.Qty,
+                        Gross_Amount: t.Gross_Amount,
+                        Payment_Method: t.Payment_Method,
+                        Status: t.Status,
+                        Is_Offline: false
+                    };
+                });
+                
+                initializeSalesTable();
+                populateSalesFilterDropdowns();
+            } catch (error) {
+                console.error("Error loading transactions:", error);
+                initializeSalesTable();
+            }
+        };
+
+        const initializeSalesTable = () => {
+            salesTable = $('#ticketsSoldTable').DataTable({
+                data: salesData,
+                columns: [
+                    { data: 'Transaction_ID' },
+                    { data: 'Transaction_Date' },
+                    { data: 'Attendee_Name' },
+                    { data: 'Ticket_Type' },
+                    { data: 'Qty' },
+                    { data: 'Gross_Amount', render: $.fn.dataTable.render.number(',', '.', 2, '€') },
+                    { data: 'Promoter_Name' },
+                    { data: 'Payment_Method' },
+                    { data: 'Status', render: (status) => {
+                        let badgeClass = 'bg-gray-100 text-gray-800';
+                        if (status === 'Completed') badgeClass = 'bg-green-100 text-green-800 border border-green-200 bg-green-50 bg-opacity-30';
+                        else if (status === 'Pending') badgeClass = 'bg-yellow-100 text-yellow-800 border border-yellow-200 bg-yellow-50 bg-opacity-30';
+                        else if (status === 'Refunded') badgeClass = 'bg-red-100 text-red-800 border border-red-200 bg-red-50 bg-opacity-30';
+                        return `<span class="px-2.5 py-0.5 rounded-full text-xs font-semibold ${badgeClass}">${status}</span>`;
+                    }},
+                    { 
+                        data: null, 
+                        orderable: false,
+                        className: 'text-center',
+                        render: (data, type, row) => {
+                            return `<button onclick="openOfflineTicketModal('${row.Transaction_ID}')" class="text-xs font-bold text-revelti-blue hover:underline">Edit</button>`;
+                        }
+                    }
+                ],
+                order: [[1, 'desc']],
+                dom: "lBfrtip",
+                buttons: [
+                    {
+                        extend: 'collection',
+                        text: 'Export List',
+                        className: 'bg-revelti-blue text-white hover:bg-blue-800 rounded-lg px-4 py-2 font-bold text-sm',
+                        buttons: ['csv', 'excel', 'pdf']
+                    }
+                ],
+                responsive: true,
+                drawCallback: function () {
+                    updateSalesKpis();
+                }
+            });
+            
+            // Wire up search bar / custom filters
+            $('#filter-ticket-type').on('change', function() {
+                salesTable.column(3).search(this.value).draw();
+            });
+            
+            $('#filter-promoter').on('change', function() {
+                if (this.value === 'N/A') {
+                    salesTable.column(6).search('^(N/A|)$', true, false).draw();
+                } else {
+                    salesTable.column(6).search(this.value ? '^' + $.fn.dataTable.util.escapeRegex(this.value) + '$' : '', true, false).draw();
+                }
+            });
+            
+            $('#filter-payment-method').on('change', function() {
+                salesTable.column(7).search(this.value ? '^' + $.fn.dataTable.util.escapeRegex(this.value) + '$' : '', true, false).draw();
+            });
+            
+            $('#filter-status').on('change', function() {
+                salesTable.column(8).search(this.value ? '^' + $.fn.dataTable.util.escapeRegex(this.value) + '$' : '', true, false).draw();
+            });
+            
+            $('#reset-sales-filters').on('click', function() {
+                $('#filter-ticket-type').val('');
+                $('#filter-promoter').val('');
+                $('#filter-payment-method').val('');
+                $('#filter-status').val('');
+                salesTable.search('').columns().search('').draw();
+            });
+            
+            // Wire up Add Offline button
+            $('#add-offline-ticket-btn').on('click', () => {
+                openOfflineTicketModal();
+            });
+        };
+
+        const populateSalesFilterDropdowns = () => {
+            const ticketTypeSelect = document.getElementById('filter-ticket-type');
+            if (ticketTypeSelect) {
+                ticketTypeSelect.innerHTML = '<option value="">All Ticket Types</option>';
+                ticketsData.forEach(t => {
+                    const opt = document.createElement('option');
+                    opt.value = t.name;
+                    opt.textContent = t.name;
+                    ticketTypeSelect.appendChild(opt);
+                });
+            }
+
+            const promoterSelect = document.getElementById('filter-promoter');
+            if (promoterSelect) {
+                const promotersSet = new Set();
+                discountCodesData.forEach(c => {
+                    if (c.promoterName) promotersSet.add(c.promoterName);
+                });
+                salesData.forEach(s => {
+                    if (s.Promoter_Name && s.Promoter_Name !== 'N/A') {
+                        promotersSet.add(s.Promoter_Name);
+                    }
+                });
+                
+                promoterSelect.innerHTML = '<option value="">All Promoters</option>';
+                const naOpt = document.createElement('option');
+                naOpt.value = 'N/A';
+                naOpt.textContent = 'None / Organic';
+                promoterSelect.appendChild(naOpt);
+                
+                Array.from(promotersSet).sort().forEach(p => {
+                    const opt = document.createElement('option');
+                    opt.value = p;
+                    opt.textContent = p;
+                    promoterSelect.appendChild(opt);
+                });
+            }
+
+            const paymentSelect = document.getElementById('filter-payment-method');
+            if (paymentSelect) {
+                const paymentSet = new Set();
+                salesData.forEach(s => {
+                    if (s.Payment_Method) paymentSet.add(s.Payment_Method);
+                });
+                
+                paymentSelect.innerHTML = '<option value="">All Methods</option>';
+                Array.from(paymentSet).sort().forEach(pm => {
+                    const opt = document.createElement('option');
+                    opt.value = pm;
+                    opt.textContent = pm;
+                    paymentSelect.appendChild(opt);
+                });
+            }
+        };
+
+        const updateSalesKpis = () => {
+            if (!salesTable) return;
+            const filteredData = salesTable.rows({ search: 'applied' }).data().toArray();
+            let totalTickets = 0;
+            let totalRevenue = 0;
+            let onlineCount = 0;
+            let offlineCount = 0;
+            
+            filteredData.forEach(item => {
+                const multiplier = item.Status === 'Refunded' ? -1 : 1;
+                const qty = item.Qty * multiplier;
+                const total = item.Gross_Amount * multiplier;
+                
+                totalTickets += qty;
+                totalRevenue += total;
+                if (item.Is_Offline) {
+                    offlineCount += qty;
+                } else {
+                    onlineCount += qty;
+                }
+            });
+            
+            const totalTicketsEl = document.getElementById('kpi-total-tickets');
+            const totalRevenueEl = document.getElementById('kpi-total-revenue');
+            const onlineSalesEl = document.getElementById('kpi-online-sales');
+            const offlineSalesEl = document.getElementById('kpi-offline-sales');
+
+            if (totalTicketsEl) totalTicketsEl.textContent = totalTickets.toLocaleString();
+            if (totalRevenueEl) totalRevenueEl.textContent = '€' + totalRevenue.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            if (onlineSalesEl) onlineSalesEl.textContent = onlineCount.toLocaleString();
+            if (offlineSalesEl) offlineSalesEl.textContent = offlineCount.toLocaleString();
+        };
+
+        // --- OFFLINE TICKET MODAL FUNCTIONS ---
+        const openOfflineTicketModal = (saleId = null) => {
+            const modalTitle = document.getElementById('offline-ticket-modal-title');
+            const saleIdInput = document.getElementById('offline-sale-id');
+            const typeSelect = document.getElementById('offline-ticket-type');
+            const promoterSelect = document.getElementById('offline-promoter');
+            const discountSelect = document.getElementById('offline-discount');
+            
+            if (!typeSelect || !promoterSelect || !discountSelect) return;
+
+            // Populate Ticket Type dropdown
+            typeSelect.innerHTML = '';
+            ticketsData.forEach(t => {
+                const opt = document.createElement('option');
+                opt.value = t.id;
+                opt.textContent = `${t.name} (Current: ${formatCurrency(getCurrentPrice(t))})`;
+                typeSelect.appendChild(opt);
+            });
+            
+            // Populate Promoter dropdown
+            promoterSelect.innerHTML = '<option value="">None / Organic</option>';
+            const promotersSet = new Set();
+            discountCodesData.forEach(c => {
+                if (c.promoterName) promotersSet.add(c.promoterName);
+            });
+            Array.from(promotersSet).sort().forEach(p => {
+                const opt = document.createElement('option');
+                opt.value = p;
+                opt.textContent = p;
+                promoterSelect.appendChild(opt);
+            });
+            
+            // Populate Discount Code dropdown
+            discountSelect.innerHTML = '<option value="">No Discount</option>';
+            discountCodesData.forEach(c => {
+                if (c.status === 'Active') {
+                    const opt = document.createElement('option');
+                    opt.value = c.id;
+                    opt.textContent = `${c.text} (${c.type === 'percentage' ? c.value + '%' : '€' + c.value} Off)`;
+                    discountSelect.appendChild(opt);
+                }
+            });
+
+            saleIdInput.value = saleId || '';
+            
+            if (saleId) {
+                modalTitle.textContent = 'Edit Ticket Sale';
+                const sale = salesData.find(s => s.Transaction_ID === saleId);
+                if (!sale) return;
+                
+                const ticket = ticketsData.find(t => t.name === sale.Ticket_Type);
+                if (ticket) {
+                    typeSelect.value = ticket.id;
+                }
+                
+                document.getElementById('offline-qty').value = sale.Qty;
+                const pricePerTicket = sale.Qty > 0 ? sale.Gross_Amount / sale.Qty : 0;
+                document.getElementById('offline-price').value = pricePerTicket.toFixed(2);
+                
+                if (sale.Promoter_Name && sale.Promoter_Name !== 'N/A') {
+                    promoterSelect.value = sale.Promoter_Name;
+                } else {
+                    promoterSelect.value = '';
+                }
+                
+                const discount = discountCodesData.find(c => c.text === sale.Discount_Code_Used);
+                if (discount) {
+                    discountSelect.value = discount.id;
+                } else {
+                    discountSelect.value = '';
+                }
+                
+                document.getElementById('offline-payment-method').value = sale.Payment_Method || 'Cash';
+                document.getElementById('offline-status').value = sale.Status || 'Completed';
+                
+                onOfflineTicketTypeChange();
+                
+                if (document.getElementById('offline-field-value-name')) {
+                    document.getElementById('offline-field-value-name').value = sale.Attendee_Name || '';
+                }
+                if (document.getElementById('offline-field-value-email')) {
+                    document.getElementById('offline-field-value-email').value = sale.Attendee_Email || '';
+                }
+                if (document.getElementById('offline-field-value-phone')) {
+                    document.getElementById('offline-field-value-phone').value = sale.Attendee_Phone || '';
+                }
+                if (document.getElementById('offline-field-value-id')) {
+                    document.getElementById('offline-field-value-id').value = sale.Attendee_ID || '';
+                }
+                if (document.getElementById('offline-field-value-tshirt')) {
+                    document.getElementById('offline-field-value-tshirt').value = sale.Attendee_Tshirt || '';
+                }
+                if (document.getElementById('offline-field-value-custom')) {
+                    document.getElementById('offline-field-value-custom').value = sale.Attendee_Custom || '';
+                }
+            } else {
+                modalTitle.textContent = 'Add Offline Ticket';
+                typeSelect.selectedIndex = 0;
+                document.getElementById('offline-qty').value = 1;
+                promoterSelect.value = '';
+                discountSelect.value = '';
+                document.getElementById('offline-payment-method').value = 'Cash';
+                document.getElementById('offline-status').value = 'Completed';
+                
+                onOfflineTicketTypeChange();
+            }
+            
+            calculateOfflineTotal();
+            openModal('offline-ticket-modal');
+        };
+
+        const onOfflineTicketTypeChange = () => {
+            const ticketId = parseInt(document.getElementById('offline-ticket-type').value);
+            const ticket = ticketsData.find(t => t.id === ticketId);
+            if (!ticket) return;
+            
+            const saleId = document.getElementById('offline-sale-id').value;
+            
+            // Apply purchase constraints to quantity input
+            const pc = ticket.purchaseConstraint;
+            const qtyInput = document.getElementById('offline-qty');
+            if (qtyInput) {
+                if (pc && pc.mode === 'grouped') {
+                    qtyInput.min = pc.groupSize;
+                    qtyInput.step = pc.groupSize;
+                    const currentVal = parseInt(qtyInput.value) || 0;
+                    if (currentVal < pc.groupSize || currentVal % pc.groupSize !== 0) {
+                        qtyInput.value = pc.groupSize;
+                    }
+                } else if (pc && pc.mode === 'minQty') {
+                    qtyInput.min = pc.minQty;
+                    qtyInput.step = 1;
+                    const currentVal = parseInt(qtyInput.value) || 0;
+                    if (currentVal < pc.minQty) {
+                        qtyInput.value = pc.minQty;
+                    }
+                } else {
+                    qtyInput.min = 1;
+                    qtyInput.step = 1;
+                    const currentVal = parseInt(qtyInput.value) || 0;
+                    if (currentVal < 1) {
+                        qtyInput.value = 1;
+                    }
+                }
+            }
+
+            if (!saleId) {
+                document.getElementById('offline-discount').value = '';
+                document.getElementById('offline-price').value = getCurrentPrice(ticket).toFixed(2);
+            }
+            
+            const fields = getTicketFields(ticket);
+            
+            const nameField = document.getElementById('field-group-name');
+            const emailField = document.getElementById('field-group-email');
+            const phoneField = document.getElementById('field-group-phone');
+            const idField = document.getElementById('field-group-id');
+            const tshirtField = document.getElementById('field-group-tshirt');
+            const customField = document.getElementById('field-group-custom');
+            
+            if (nameField) nameField.classList.toggle('hidden', !fields.name);
+            if (emailField) emailField.classList.toggle('hidden', !fields.email);
+            if (phoneField) phoneField.classList.toggle('hidden', !fields.phone);
+            if (idField) idField.classList.toggle('hidden', !fields.id);
+            if (tshirtField) tshirtField.classList.toggle('hidden', !fields.tshirt);
+            
+            if (customField) {
+                if (fields.customQuestion) {
+                    customField.classList.remove('hidden');
+                    document.getElementById('offline-field-label-custom').textContent = fields.customQuestion + " *";
+                } else {
+                    customField.classList.add('hidden');
+                }
+            }
+            
+            if (!saleId) {
+                if (document.getElementById('offline-field-value-name')) document.getElementById('offline-field-value-name').value = '';
+                if (document.getElementById('offline-field-value-email')) document.getElementById('offline-field-value-email').value = '';
+                if (document.getElementById('offline-field-value-phone')) document.getElementById('offline-field-value-phone').value = '';
+                if (document.getElementById('offline-field-value-id')) document.getElementById('offline-field-value-id').value = '';
+                if (document.getElementById('offline-field-value-tshirt')) document.getElementById('offline-field-value-tshirt').value = '';
+                if (document.getElementById('offline-field-value-custom')) document.getElementById('offline-field-value-custom').value = '';
+            }
+            
+            calculateOfflineTotal();
+        };
+
+        const calculateOfflineTotal = () => {
+            const qty = parseInt(document.getElementById('offline-qty').value) || 0;
+            const price = parseFloat(document.getElementById('offline-price').value) || 0;
+            const total = qty * price;
+            const totalInput = document.getElementById('offline-total');
+            if (totalInput) totalInput.value = total.toFixed(2);
+        };
+
+        const onOfflineDiscountChange = () => {
+            const ticketSelect = document.getElementById('offline-ticket-type');
+            const ticketId = parseInt(ticketSelect.value);
+            const ticket = ticketsData.find(t => t.id === ticketId);
+            if (!ticket) return;
+
+            let price = getCurrentPrice(ticket);
+
+            const discountSelect = document.getElementById('offline-discount');
+            const discountId = parseInt(discountSelect.value);
+            const code = discountCodesData.find(c => c.id === discountId);
+            
+            if (code) {
+                if (code.type === 'percentage') {
+                    price = price * (1 - code.value / 100);
+                } else if (code.type === 'fixed') {
+                    price = Math.max(0, price - code.value);
+                }
+            }
+            
+            document.getElementById('offline-price').value = price.toFixed(2);
+            calculateOfflineTotal();
+        };
+
+        const saveOfflineTicket = () => {
+            const ticketId = parseInt(document.getElementById('offline-ticket-type').value);
+            const ticket = ticketsData.find(t => t.id === ticketId);
+            if (!ticket) {
+                alert('Please select a ticket type.');
+                return;
+            }
+            
+            const fields = getTicketFields(ticket);
+            
+            if (fields.name) {
+                const val = document.getElementById('offline-field-value-name').value.trim();
+                if (!val) {
+                    alert('Full Name is required.');
+                    return;
+                }
+            }
+            if (fields.email) {
+                const val = document.getElementById('offline-field-value-email').value.trim();
+                if (!val) {
+                    alert('Email Address is required.');
+                    return;
+                }
+            }
+            if (fields.phone) {
+                const val = document.getElementById('offline-field-value-phone').value.trim();
+                if (!val) {
+                    alert('Phone Number is required.');
+                    return;
+                }
+            }
+            if (fields.id) {
+                const val = document.getElementById('offline-field-value-id').value.trim();
+                if (!val) {
+                    alert('ID / Passport Number is required.');
+                    return;
+                }
+            }
+            if (fields.tshirt) {
+                const val = document.getElementById('offline-field-value-tshirt').value;
+                if (!val) {
+                    alert('T-Shirt Size is required.');
+                    return;
+                }
+            }
+            if (fields.customQuestion) {
+                const val = document.getElementById('offline-field-value-custom').value.trim();
+                if (!val) {
+                    alert(`"${fields.customQuestion}" is required.`);
+                    return;
+                }
+            }
+            
+            const qty = parseInt(document.getElementById('offline-qty').value) || 0;
+            if (qty <= 0) {
+                alert('Quantity must be 1 or more.');
+                return;
+            }
+            
+            // Validate Quantity against constraints
+            const pc = ticket.purchaseConstraint;
+            if (pc) {
+                if (pc.mode === 'grouped') {
+                    if (qty < pc.groupSize || qty % pc.groupSize !== 0) {
+                        alert(`Quantity for this ticket type must be a multiple of ${pc.groupSize} (e.g., ${pc.groupSize}, ${pc.groupSize * 2}, ${pc.groupSize * 3}...).`);
+                        return;
+                    }
+                } else if (pc.mode === 'minQty') {
+                    if (qty < pc.minQty) {
+                        alert(`Minimum quantity for this ticket type is ${pc.minQty}.`);
+                        return;
+                    }
+                }
+            }
+            
+            const price = parseFloat(document.getElementById('offline-price').value);
+            if (isNaN(price) || price < 0) {
+                alert('Price Paid must be a non-negative number.');
+                return;
+            }
+            
+            const total = parseFloat(document.getElementById('offline-total').value);
+            const promoterVal = document.getElementById('offline-promoter').value;
+            const discountId = parseInt(document.getElementById('offline-discount').value);
+            const discountCodeObj = discountCodesData.find(c => c.id === discountId);
+            const discountCodeText = discountCodeObj ? discountCodeObj.text : 'N/A';
+            const paymentMethod = document.getElementById('offline-payment-method').value;
+            const status = document.getElementById('offline-status').value;
+            
+            const saleId = document.getElementById('offline-sale-id').value;
+            
+            if (saleId) {
+                const sale = salesData.find(s => s.Transaction_ID === saleId);
+                if (sale) {
+                    const oldTicket = ticketsData.find(t => t.name === sale.Ticket_Type);
+                    if (oldTicket && sale.Status !== 'Refunded') {
+                        oldTicket.sold = Math.max(0, oldTicket.sold - sale.Qty);
+                    }
+                    
+                    sale.Attendee_Name = document.getElementById('offline-field-value-name')?.value.trim() || '';
+                    sale.Attendee_Email = document.getElementById('offline-field-value-email')?.value.trim() || '';
+                    sale.Attendee_Phone = document.getElementById('offline-field-value-phone')?.value.trim() || '';
+                    sale.Attendee_ID = document.getElementById('offline-field-value-id')?.value.trim() || '';
+                    sale.Attendee_Tshirt = document.getElementById('offline-field-value-tshirt')?.value || '';
+                    sale.Attendee_Custom = document.getElementById('offline-field-value-custom')?.value.trim() || '';
+                    sale.Ticket_Type = ticket.name;
+                    sale.Promoter_Name = promoterVal || 'N/A';
+                    sale.Discount_Code_Used = discountCodeText;
+                    sale.Qty = qty;
+                    sale.Gross_Amount = total;
+                    sale.Payment_Method = paymentMethod;
+                    sale.Status = status;
+                    
+                    if (status !== 'Refunded') {
+                        ticket.sold += qty;
+                    }
+                }
+            } else {
+                const newSale = {
+                    Transaction_ID: 'TRN' + Math.floor(10000000 + Math.random() * 90000000),
+                    Transaction_Date: new Date().toISOString().slice(0, 19).replace('T', ' '),
+                    Attendee_Name: document.getElementById('offline-field-value-name')?.value.trim() || '',
+                    Attendee_Email: document.getElementById('offline-field-value-email')?.value.trim() || '',
+                    Attendee_Phone: document.getElementById('offline-field-value-phone')?.value.trim() || '',
+                    Attendee_ID: document.getElementById('offline-field-value-id')?.value.trim() || '',
+                    Attendee_Tshirt: document.getElementById('offline-field-value-tshirt')?.value || '',
+                    Attendee_Custom: document.getElementById('offline-field-value-custom')?.value.trim() || '',
+                    Ticket_Type: ticket.name,
+                    Promoter_Name: promoterVal || 'N/A',
+                    Discount_Code_Used: discountCodeText,
+                    Qty: qty,
+                    Gross_Amount: total,
+                    Payment_Method: paymentMethod,
+                    Status: status,
+                    Is_Offline: true
+                };
+                salesData.unshift(newSale);
+                
+                if (status !== 'Refunded') {
+                    ticket.sold += qty;
+                }
+            }
+            
+            renderTickets();
+            salesTable.clear().rows.add(salesData).draw();
+            populateSalesFilterDropdowns();
+            closeTicketManagementModal('offline-ticket-modal');
+        };
+
         // --- DATA ---
         let ticketsData = [
             {
@@ -1992,6 +2877,13 @@
 
             // Feature 4: checkout override
             const hasOverride = document.getElementById('checkout-override-toggle').checked;
+            const checkoutOverrideValue = hasOverride ? {
+                name: document.getElementById('override-field-name').checked,
+                email: document.getElementById('override-field-email').checked,
+                phone: document.getElementById('override-field-phone').checked,
+                id: document.getElementById('override-field-id').checked,
+                tshirt: document.getElementById('override-field-tshirt').checked
+            } : false;
 
             // Commission
             const commissionPayer = document.querySelector('input[name="commission-payer"]:checked').value;
@@ -2034,7 +2926,7 @@
                 scheduledDate: status === 'Scheduled' ? document.getElementById('scheduled-date').value : null,
                 pricing: pricingData,
                 sold: ticketId ? ticketsData.find(t => t.id === ticketId).sold : 0,
-                checkoutOverride: hasOverride,
+                checkoutOverride: checkoutOverrideValue,
                 checkoutCustomQuestion: hasOverride ? document.getElementById('override-custom-question').value : '',
                 commissionPayer: commissionPayer,
                 purchaseConstraint: purchaseConstraint
@@ -2176,6 +3068,8 @@
         document.addEventListener('DOMContentLoaded', () => {
             renderTickets();
             renderDiscountCodes();
+            setupTabs();
+            loadSalesData();
 
             // Feature 1: wire up venue capacity input
             document.getElementById('venue-capacity-input').addEventListener('input', function () {
@@ -2183,6 +3077,39 @@
                 venueCapacity = isNaN(val) || val <= 0 ? null : val;
                 updateCapacityBar();
             });
+
+            // Offline qty blur listener to auto-enforce constraints
+            const offlineQtyInput = document.getElementById('offline-qty');
+            if (offlineQtyInput) {
+                offlineQtyInput.addEventListener('blur', function () {
+                    const ticketId = parseInt(document.getElementById('offline-ticket-type').value);
+                    const ticket = ticketsData.find(t => t.id === ticketId);
+                    if (!ticket) return;
+                    
+                    const pc = ticket.purchaseConstraint;
+                    let val = parseInt(this.value) || 0;
+                    
+                    if (pc) {
+                        if (pc.mode === 'grouped') {
+                            if (val < pc.groupSize) {
+                                this.value = pc.groupSize;
+                            } else if (val % pc.groupSize !== 0) {
+                                // Round to nearest multiple of groupSize
+                                this.value = Math.round(val / pc.groupSize) * pc.groupSize;
+                            }
+                        } else if (pc.mode === 'minQty') {
+                            if (val < pc.minQty) {
+                                this.value = pc.minQty;
+                            }
+                        }
+                    } else {
+                        if (val < 1) {
+                            this.value = 1;
+                        }
+                    }
+                    calculateOfflineTotal();
+                });
+            }
 
             // Close ticket dropdown if clicking outside
             window.addEventListener('click', function (e) {
