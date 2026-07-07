@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revelti - The All-in-One Platform for Events & Creatives</title>
+    <!-- Tailwind CSS for modern responsive styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        revelti: {
+                            blue: '#213c63',
+                            orange: '#f58220',
+                            purple: '#6b21a8',
+                            dark: '#0c0e12',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Nunito', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts: Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+        }
+
+        /* Custom smooth transition */
+        .tab-transition {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 400%;
+            height: 100%;
+        }
+
+        .carousel-slide {
+            width: 25%;
+            flex-shrink: 0;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-900 antialiased overflow-x-hidden">
+
+    <!-- Header / Navigation -->
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100 transition-all duration-300">
+        <div id="nav-content" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between transition-all duration-300">
+            <a href="#" class="flex items-center group">
+                <img src="images/reveltiLogo.png" alt="Revelti Logo" class="h-5 w-auto object-contain transform group-hover:scale-105 transition duration-300"
+                    onerror="this.onerror=null; this.src='https://placehold.co/120x30/213c63/ffffff?text=Revelti';">
+            </a>
+            <a href="#footer-waitlist"
+                class="px-4 py-1.5 bg-revelti-blue text-white font-extrabold rounded-full hover:bg-opacity-90 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 text-xs sm:text-sm whitespace-nowrap shadow-sm">
+                Join Waitlist
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-16 pb-12 md:pt-24 md:pb-16 bg-gray-50 text-gray-900 overflow-hidden">
+        <!-- Background Glowing Orbs -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none z-0 overflow-hidden">
+            <!-- Blue Orb -->
+            <div
+                class="absolute top-[-10%] left-[-10%] w-[300px] h-[300px] sm:w-[600px] sm:h-[600px] bg-revelti-blue/10 rounded-full filter blur-[80px] sm:blur-[120px]">
+            </div>
+            <!-- Orange Orb -->
+            <div
+                class="absolute top-[20%] right-[-10%] w-[300px] h-[300px] sm:w-[600px] sm:h-[600px] bg-revelti-orange/10 rounded-full filter blur-[80px] sm:blur-[120px]">
+            </div>
+        </div>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
+            <span
+                class="inline-block bg-white text-revelti-orange border border-revelti-orange/20 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-6 shadow-sm">
+                Coming Soon
+            </span>
+            <h1
+                class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight max-w-4xl mx-auto text-gray-900">
+                The event doesn't end<br class="hidden md:inline"> when the music stops.
+            </h1>
+            <p class="mt-6 text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-medium">
+                <span class="font-extrabold text-revelti-blue">Revelti</span> brings organizers, creatives, and attendees together in one ridiculously simple platform. Stop
+                juggling spreadsheets and messy folders. Build the event, share the memories, and make the entire
+                experience reliveable.
+            </p>
+
+            <!-- Email Capture Form -->
+            <div class="mt-6 max-w-md mx-auto">
+                <form onsubmit="handleWaitlistSubmit(event)"
+                    class="flex flex-col sm:flex-row gap-3 p-1.5 bg-white rounded-2xl border border-gray-200 shadow-xl shadow-gray-200/50 focus-within:border-revelti-blue/50 transition relative z-20">
+                    <input type="email" placeholder="Enter your email address" required
+                        class="w-full px-4 py-3 bg-transparent text-gray-800 placeholder-gray-400 focus:outline-none text-base rounded-xl">
+                    <button type="submit"
+                        class="px-6 py-3 bg-revelti-blue text-white font-bold rounded-xl hover:bg-[#1a2f4d] transition text-base whitespace-nowrap shadow-md shadow-revelti-blue/20 flex-shrink-0">
+                        Get Early Access
+                    </button>
+                </form>
+                <p class="mt-3 text-xs text-gray-500 font-semibold relative z-20">
+                    Join the waitlist today to lock in exclusive perks for our earliest members when we launch.
+                </p>
+            </div>
+        </div>
+
+        <!-- UI Peek (Floating Cards) -->
+        <div class="relative z-10 max-w-5xl mx-auto mt-10 md:mt-12 px-4 h-[320px] hidden md:block">
+
+            <!-- Left Card: Organizer Dashboard Peek -->
+            <div
+                class="absolute left-1/2 -translate-x-[85%] top-0 w-[420px] h-[300px] bg-white rounded-xl border border-gray-200 shadow-2xl shadow-gray-300/60 transform -rotate-2 hover:-translate-y-2 hover:-rotate-1 transition duration-500 overflow-hidden flex flex-col z-20 text-gray-800">
+                <!-- Header -->
+                <div class="h-10 bg-gray-50 border-b border-gray-100 flex items-center px-4 space-x-2">
+                    <div class="flex space-x-1.5">
+                        <div class="w-2.5 h-2.5 bg-red-400 rounded-full"></div>
+                        <div class="w-2.5 h-2.5 bg-yellow-400 rounded-full"></div>
+                        <div class="w-2.5 h-2.5 bg-green-400 rounded-full"></div>
+                    </div>
+                    <div class="ml-4 w-32 text-[10px] text-gray-400 font-mono">revelti.com/organizer</div>
+                </div>
+                <!-- Body -->
+                <div class="flex flex-1 bg-gray-100">
+                    <!-- Sidebar -->
+                    <div class="w-1/4 bg-white border-r border-gray-200 p-3 flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-1 text-revelti-blue font-extrabold text-sm"><span
+                                    class="w-2.5 h-2.5 bg-revelti-orange rounded-full"></span><span>Revelti</span></div>
+                            <ul class="space-y-2 text-[10px] font-bold text-gray-500">
+                                <li class="p-1.5 rounded-lg bg-gray-100 text-revelti-blue flex items-center space-x-1">
+                                    <span>🎫 Tickets</span></li>
+                                <li class="p-1.5 rounded-lg hover:bg-gray-50 flex items-center space-x-1"><span>📢
+                                        Broadcast</span></li>
+                                <li class="p-1.5 rounded-lg hover:bg-gray-50 flex items-center space-x-1"><span>👥
+                                        Team</span></li>
+                                <li class="p-1.5 rounded-lg hover:bg-gray-50 flex items-center space-x-1"><span>📈
+                                        Analytics</span></li>
+                            </ul>
+                        </div>
+                        <div class="flex items-center space-x-1.5 text-[9px] text-gray-400 border-t pt-2">
+                            <div class="w-4 h-4 rounded-full bg-slate-200"></div><span>LMP Events</span>
+                        </div>
+                    </div>
+                    <!-- Main content -->
+                    <div class="flex-1 p-5 flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center pb-2 border-b border-gray-200">
+                                <h5 class="font-extrabold text-xs text-revelti-blue">Ticket Management</h5>
+                                <span
+                                    class="text-[9px] font-bold bg-green-100 text-green-800 px-2 py-0.5 rounded-full">Active</span>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="bg-white p-2.5 rounded-lg shadow-sm border border-gray-100">
+                                    <div class="flex justify-between text-[10px] font-bold text-gray-700 mb-1">
+                                        <span>Early Bird (€29)</span>
+                                        <span class="text-green-600">150 / 150 Sold</span>
+                                    </div>
+                                    <div class="w-full bg-gray-100 h-1.5 rounded-full overflow-hidden">
+                                        <div class="bg-revelti-orange h-full rounded-full" style="width: 100%"></div>
+                                    </div>
+                                </div>
+                                <div class="bg-white p-2.5 rounded-lg shadow-sm border border-gray-100">
+                                    <div class="flex justify-between text-[10px] font-bold text-gray-700 mb-1">
+                                        <span>General Admission (€49)</span>
+                                        <span class="text-gray-500">180 / 300 Sold</span>
+                                    </div>
+                                    <div class="w-full bg-gray-100 h-1.5 rounded-full overflow-hidden">
+                                        <div class="bg-revelti-blue h-full rounded-full" style="width: 60%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-[10px] text-gray-400 border-t pt-2 flex justify-between">
+                            <span>Last updated: just now</span>
+                            <span class="font-bold text-revelti-blue">€13,170 Revenue</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Card: Creative Studio Peek -->
+            <div
+                class="absolute left-1/2 -translate-x-[15%] top-10 w-[420px] h-[300px] bg-white rounded-xl border border-gray-200 shadow-2xl shadow-gray-300/60 transform rotate-2 hover:-translate-y-2 hover:rotate-1 transition duration-500 overflow-hidden flex flex-col z-30 text-gray-800">
+                <!-- Header -->
+                <div class="h-10 bg-gray-50 border-b border-gray-100 flex items-center px-4 space-x-2">
+                    <div class="flex space-x-1.5">
+                        <div class="w-2.5 h-2.5 bg-red-400 rounded-full"></div>
+                        <div class="w-2.5 h-2.5 bg-yellow-400 rounded-full"></div>
+                        <div class="w-2.5 h-2.5 bg-green-400 rounded-full"></div>
+                    </div>
+                    <div class="ml-4 w-32 text-[10px] text-gray-400 font-mono">revelti.com/creative/studio</div>
+                </div>
+                <!-- Body -->
+                <div class="flex flex-1 bg-gray-100">
+                    <!-- Sidebar -->
+                    <div class="w-1/4 bg-white border-r border-gray-200 p-3 flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-1 text-revelti-purple font-extrabold text-sm"><span
+                                    class="w-2.5 h-2.5 bg-revelti-orange rounded-full"></span><span>Studio</span></div>
+                            <ul class="space-y-2 text-[10px] font-bold text-gray-500">
+                                <li
+                                    class="p-1.5 rounded-lg bg-gray-100 text-revelti-purple flex items-center space-x-1">
+                                    <span>📁 Workspace</span></li>
+                                <li class="p-1.5 rounded-lg hover:bg-gray-50 flex items-center space-x-1"><span>📤
+                                        Upload Manager</span></li>
+                                <li class="p-1.5 rounded-lg hover:bg-gray-50 flex items-center space-x-1"><span>🖼️
+                                        Galleries</span></li>
+                                <li class="p-1.5 rounded-lg hover:bg-gray-50 flex items-center space-x-1"><span>👤
+                                        Profile</span></li>
+                            </ul>
+                        </div>
+                        <div class="flex items-center space-x-1.5 text-[9px] text-gray-400 border-t pt-2">
+                            <div class="w-4 h-4 rounded-full bg-slate-200"></div><span>AMedia</span>
+                        </div>
+                    </div>
+                    <!-- Main content -->
+                    <div class="flex-1 p-5 flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center pb-2 border-b border-gray-200">
+                                <h5 class="font-extrabold text-xs text-revelti-purple">My Studio Space</h5>
+                                <span class="text-[9px] text-gray-400">14.5 GB / 100 GB</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 text-[10px]">
+                                <div class="bg-white p-2 rounded-lg border border-gray-100 shadow-sm">
+                                    <span class="font-bold text-gray-800 block truncate">Dance Fest Spain</span>
+                                    <span class="text-gray-400 text-[8px] block">242 photos • 4.2 GB</span>
+                                </div>
+                                <div class="bg-white p-2 rounded-lg border border-gray-100 shadow-sm">
+                                    <span class="font-bold text-gray-800 block truncate">Croatia Warmup</span>
+                                    <span class="text-gray-400 text-[8px] block">180 photos • 3.1 GB</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-[10px] text-gray-400 border-t pt-2 flex justify-between">
+                            <span>Workspace healthy</span>
+                            <span class="font-bold text-revelti-purple">14.5 GB Used</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Profile Selector Section -->
+    <section class="py-8 bg-gray-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-xl font-bold text-gray-500 uppercase tracking-wider mb-4">Choose your perspective</h2>
+            <div class="inline-flex p-1.5 bg-gray-200/80 rounded-full">
+                <button onclick="switchTab('organizer')" id="btn-organizer"
+                    class="px-8 py-3 rounded-full text-base font-bold transition duration-300 bg-revelti-blue text-white shadow-md">
+                    I am an Organizer
+                </button>
+                <button onclick="switchTab('creative')" id="btn-creative"
+                    class="px-8 py-3 rounded-full text-base font-bold transition duration-300 text-gray-600 hover:text-gray-900">
+                    I am a Creative
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Area with Dynamic Swapping -->
+    <section class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+
+            <!-- 3A. ORGANIZER SECTION -->
+            <div id="section-organizer"
+                class="tab-transition grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                <!-- Value Props List (Left Column) -->
+                <div class="lg:col-span-5 space-y-8">
+                    <div>
+                        <span class="text-sm font-bold text-revelti-blue uppercase tracking-widest">Organizers</span>
+                        <h3 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2">Your Event,<br>Without the Chaos
+                        </h3>
+                        <p class="mt-4 text-gray-600 text-lg">
+                            We take care of the heavy lifting so you can focus on building unforgettable experiences.
+                        </p>
+                    </div>
+
+                    <ul class="space-y-3">
+                        <!-- Prop 1 (Ticketing) -->
+                        <li onclick="goToOrganizerSlide(0)" id="org-prop-0"
+                            class="flex items-start space-x-4 p-4 rounded-xl cursor-pointer bg-slate-50 border border-slate-100 border-l-4 border-l-revelti-blue transition org-prop-active">
+                            <div class="p-3 bg-blue-50 text-revelti-blue rounded-xl flex-shrink-0">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900">Effortless Ticketing & Sales</h4>
+                                <p class="text-gray-600 mt-1 text-sm">Set up your event, manage ticket tiers, and track
+                                    your sales without needing a math degree. It just works.</p>
+                            </div>
+                        </li>
+                        <!-- Prop 2 (Communication) -->
+                        <li onclick="goToOrganizerSlide(1)" id="org-prop-1"
+                            class="flex items-start space-x-4 p-4 rounded-xl cursor-pointer hover:bg-slate-50 transition border border-transparent border-l-4">
+                            <div class="p-3 bg-blue-50 text-revelti-blue rounded-xl flex-shrink-0">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900">Direct Audience Connection</h4>
+                                <p class="text-gray-600 mt-1 text-sm">Keep your crowd in the loop. Communicate directly
+                                    with your ticket holders before, during, and after the event from one simple
+                                    dashboard.</p>
+                            </div>
+                        </li>
+                        <!-- Prop 3 (Media sync) -->
+                        <li onclick="goToOrganizerSlide(2)" id="org-prop-2"
+                            class="flex items-start space-x-4 p-4 rounded-xl cursor-pointer hover:bg-slate-50 transition border border-transparent border-l-4">
+                            <div class="p-3 bg-blue-50 text-revelti-blue rounded-xl flex-shrink-0">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900">Your Media Team, Synced</h4>
+                                <p class="text-gray-600 mt-1 text-sm">Connect directly with your photographers and
+                                    videographers. No more chasing down files. Their work goes straight into your
+                                    official event gallery.</p>
+                            </div>
+                        </li>
+                        <!-- Prop 4 (Stats) -->
+                        <li onclick="goToOrganizerSlide(3)" id="org-prop-3"
+                            class="flex items-start space-x-4 p-4 rounded-xl cursor-pointer hover:bg-slate-50 transition border border-transparent border-l-4">
+                            <div class="p-3 bg-blue-50 text-revelti-blue rounded-xl flex-shrink-0">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900">Everything Measured</h4>
+                                <p class="text-gray-600 mt-1 text-sm">Beautiful, easy-to-read stats on everything from
+                                    ticket sales to crowd engagement. Know exactly how your event is doing at a single
+                                    glance.</p>
+                            </div>
+                        </li>
+                    </ul>
+                    <div>
+                        <a href="#footer-waitlist"
+                            class="inline-block px-8 py-3.5 bg-revelti-blue text-white font-bold rounded-xl hover:bg-opacity-95 transition text-base shadow-lg shadow-revelti-blue/15">
+                            Reserve Organizer Access
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Interactive Carousel Column (Right Column) -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="relative bg-white rounded-2xl p-2 shadow-2xl border border-gray-200 overflow-hidden">
+                        <!-- Mockup header bar (Light themed like actual browser) -->
+                        <div class="flex items-center justify-between px-4 py-2.5 border-b border-gray-100 bg-gray-50">
+                            <div class="flex space-x-1.5">
+                                <span class="w-3 h-3 bg-red-400 rounded-full"></span>
+                                <span class="w-3 h-3 bg-yellow-400 rounded-full"></span>
+                                <span class="w-3 h-3 bg-green-400 rounded-full"></span>
+                            </div>
+                            <span id="org-mockup-url"
+                                class="text-[11px] text-gray-400 font-mono">revelti.com/organizer/ticketing</span>
+                            <div class="flex space-x-1">
+                                <button onclick="prevOrganizerSlide()"
+                                    class="p-1 rounded bg-gray-200 hover:bg-gray-300 text-gray-600 transition">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 19l-7-7 7-7"></path>
+                                    </svg>
+                                </button>
+                                <button onclick="nextOrganizerSlide()"
+                                    class="p-1 rounded bg-gray-200 hover:bg-gray-300 text-gray-600 transition">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Carousel Wrapper (Light background styled like actual app dashboard layout) -->
+                        <div class="carousel-container aspect-[16/10] bg-gray-100">
+                            <div id="organizer-carousel-track" class="carousel-track">
+
+                                <!-- Slide 1: Ticketing & Sales (Mocking ticketManagement.html) -->
+                                <div class="carousel-slide flex text-gray-800 bg-gray-100">
+                                    <!-- Mini Sidebar -->
+                                    <div
+                                        class="w-1/4 bg-white border-r border-gray-200 p-3 hidden sm:flex flex-col justify-between">
+                                        <div class="space-y-4">
+                                            <div
+                                                class="flex items-center space-x-1 text-revelti-blue font-extrabold text-sm">
+                                                <span
+                                                    class="w-2.5 h-2.5 bg-revelti-orange rounded-full"></span><span>Revelti</span>
+                                            </div>
+                                            <ul class="space-y-2 text-[10px] font-bold text-gray-500">
+                                                <li
+                                                    class="p-1.5 rounded-lg bg-gray-100 text-revelti-blue flex items-center space-x-1">
+                                                    <span>🎫 Tickets</span></li>
+                                                <li
+                                                    class="p-1.5 rounded-lg hover:bg-gray-50 flex items-center space-x-1">
+                                                    <span>📢 Broadcast</span></li>
+                                                <li
+                                                    class="p-1.5 rounded-lg hover:bg-gray-50 flex items-center space-x-1">
+                                                    <span>👥 Team</span></li>
+                                                <li
+                                                    class="p-1.5 rounded-lg hover:bg-gray-50 flex items-center space-x-1">
+                                                    <span>📈 Analytics</span></li>
+                                            </ul>
+                                        </div>
+                                        <div
+                                            class="flex items-center space-x-1.5 text-[9px] text-gray-400 border-t pt-2">
+                                            <div class="w-4 h-4 rounded-full bg-slate-200"></div><span>LMP Events</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Main Panel -->
+                                    <div class="flex-1 p-5 flex flex-col justify-between">
+                                        <div class="space-y-3">
+                                            <div
+                                                class="flex justify-between items-center pb-2 border-b border-gray-200">
+                                                <h5 class="font-extrabold text-xs text-revelti-blue">Ticket Management
+                                                </h5>
+                                                <span
+                                                    class="text-[9px] font-bold bg-green-100 text-green-800 px-2 py-0.5 rounded-full">Active</span>
+                                            </div>
+
+                                            <!-- Mini Interactive Tickets Mockup -->
+                                            <div class="space-y-2">
+                                                <div class="bg-white p-2.5 rounded-lg shadow-sm border border-gray-100">
+                                                    <div
+                                                        class="flex justify-between text-[10px] font-bold text-gray-700 mb-1">
+                                                        <span>Early Bird (€29)</span>
+                                                        <span class="text-green-600">150 / 150 Sold</span>
+                                                    </div>
+                                                    <div class="w-full bg-gray-100 h-1.5 rounded-full overflow-hidden">
+                                                        <div class="bg-revelti-orange h-full rounded-full"
+                                                            style="width: 100%"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="bg-white p-2.5 rounded-lg shadow-sm border border-gray-100">
+                                                    <div
+                                                        class="flex justify-between text-[10px] font-bold text-gray-700 mb-1">
+                                                        <span>General Admission (€49)</span>
+                                                        <span class="text-gray-500">180 / 300 Sold</span>
+                                                    </div>
+                                                    <div class="w-full bg-gray-100 h-1.5 rounded-full overflow-hidden">
+                                                        <div class="bg-revelti-blue h-full rounded-full"
+                                                            style="width: 60%"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-[10px] text-gray-400 flex justify-between border-t pt-2">
+                                            <span>Active Event Session</span>
+                                            <span class="font-bold text-revelti-blue">Total: €14,580</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 2: Direct Audience Connection (Mocking organizer communication tabs) -->
+                                <div class="carousel-slide flex text-gray-800 bg-gray-100">
+                                    <!-- Mini Sidebar -->
+                                    <div
+                                        class="w-1/4 bg-white border-r border-gray-200 p-3 hidden sm:flex flex-col justify-between">
+                                        <div class="space-y-4">
+                                            <div
+                                                class="flex items-center space-x-1 text-revelti-blue font-extrabold text-sm">
+                                                <span
+                                                    class="w-2.5 h-2.5 bg-revelti-orange rounded-full"></span><span>Revelti</span>
+                                            </div>
+                                            <ul class="space-y-2 text-[10px] font-bold text-gray-500">
+                                                <li
+                                                    class="p-1.5 rounded-lg hover:bg-gray-50 flex items-center space-x-1">
+                                                    <span>🎫 Tickets</span></li>
+                                                <li
+                                                    class="p-1.5 rounded-lg bg-gray-100 text-revelti-blue flex items-center space-x-1">
+                                                    <span>📢 Broadcast</span></li>
+                                                <li
+                                                    class="p-1.5 rounded-lg hover:bg-gray-50 flex items-center space-x-1">
+                                                    <span>👥 Team</span></li>
+                                                <li
+                                                    class="p-1.5 rounded-lg hover:bg-gray-50 flex items-center space-x-1">
+                                                    <span>📈 Analytics</span></li>
+                                            </ul>
+                                        </div>
+                                        <div
+                                            class="flex items-center space-x-1.5 text-[9px] text-gray-400 border-t pt-2">
+                                            <div class="w-4 h-4 rounded-full bg-slate-200"></div><span>LMP Events</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Main Panel -->
+                                    <div class="flex-1 p-5 flex flex-col justify-between">
+                                        <div class="space-y-3">
+                                            <div
+                                                class="flex justify-between items-center pb-2 border-b border-gray-200">
+                                                <h5 class="font-extrabold text-xs text-revelti-blue">Audience Broadcast
+                                                </h5>
+                                                <span
+                                                    class="text-[9px] font-bold bg-revelti-orange/10 text-revelti-orange px-2 py-0.5 rounded-full">New
+                                                    Broadcast</span>
+                                            </div>
+                                            <div class="space-y-2 text-[10px]">
+                                                <div class="bg-white p-2 rounded-lg border border-gray-100">
+                                                    <span class="text-gray-400 block text-[9px]">To:</span>
+                                                    <span class="font-bold text-gray-700">All Registered Attendees
+                                                        (350)</span>
+                                                </div>
+                                                <div
+                                                    class="bg-white p-2.5 rounded-lg border border-gray-100 text-gray-600 font-sans italic">
+                                                    "Doors open at 8 PM tonight! Park in Lot B. See you there!"
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex justify-between items-center border-t pt-2">
+                                            <span class="text-[10px] text-gray-400">Ready to broadcast</span>
+                                            <button onclick="alert('Message broadcasted!')"
+                                                class="px-3 py-1 bg-revelti-blue text-white font-bold rounded-lg text-[10px] hover:bg-opacity-95">Send
+                                                Alert</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 3: Your Media Team, Synced (Mocking eventCollaboratorManagement.html) -->
+                                <div class="carousel-slide flex text-gray-800 bg-gray-100">
+                                    <!-- Mini Sidebar -->
+                                    <div
+                                        class="w-1/4 bg-white border-r border-gray-200 p-3 hidden sm:flex flex-col justify-between">
+                                        <div class="space-y-4">
+                                            <div
+                                                class="flex items-center space-x-1 text-revelti-blue font-extrabold text-sm">
+                                                <span
+                                                    class="w-2.5 h-2.5 bg-revelti-orange rounded-full"></span><span>Revelti</span>
+                                            </div>
+                                            <ul class="space-y-2 text-[10px] font-bold text-gray-500">
+                                                <li
+                                                    class="p-1.5 rounded-lg hover:bg-gray-50 flex items-center space-x-1">
+                                                    <span>🎫 Tickets</span></li>
+                                                <li
+                                                    class="p-1.5 rounded-lg hover:bg-gray-50 flex items-center space-x-1">
+                                                    <span>📢 Broadcast</span></li>
+                                                <li
+                                                    class="p-1.5 rounded-lg bg-gray-100 text-revelti-blue flex items-center space-x-1">
+                                                    <span>👥 Team</span></li>
+                                                <li
+                                                    class="p-1.5 rounded-lg hover:bg-gray-50 flex items-center space-x-1">
+                                                    <span>📈 Analytics</span></li>
+                                            </ul>
+                                        </div>
+                                        <div
+                                            class="flex items-center space-x-1.5 text-[9px] text-gray-400 border-t pt-2">
+                                            <div class="w-4 h-4 rounded-full bg-slate-200"></div><span>LMP Events</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Main Panel -->
+                                    <div class="flex-1 p-5 flex flex-col justify-between">
+                                        <div class="space-y-3">
+                                            <div
+                                                class="flex justify-between items-center pb-2 border-b border-gray-200">
+                                                <h5 class="font-extrabold text-xs text-revelti-blue">Media Collaborators
+                                                </h5>
+                                                <span
+                                                    class="text-[9px] font-bold bg-green-100 text-green-800 px-2 py-0.5 rounded-full">Sync
+                                                    Active</span>
+                                            </div>
+
+                                            <div
+                                                class="bg-white p-3 rounded-lg shadow-sm border border-gray-100 flex items-center justify-between">
+                                                <div class="flex items-center space-x-2">
+                                                    <div
+                                                        class="w-8 h-8 rounded-full bg-revelti-purple text-white flex items-center justify-center font-bold text-[10px]">
+                                                        AM</div>
+                                                    <div>
+                                                        <h6 class="text-[10px] font-bold text-gray-800">Alex Martinez
+                                                        </h6>
+                                                        <p class="text-[9px] text-gray-400">Photographer</p>
+                                                    </div>
+                                                </div>
+                                                <span
+                                                    class="text-[9px] bg-emerald-50 text-emerald-800 px-2 py-0.5 rounded border border-emerald-100 font-bold">142
+                                                    Uploads</span>
+                                            </div>
+                                        </div>
+                                        <div class="text-[10px] text-gray-400 border-t pt-2 flex justify-between">
+                                            <span>Team connection active</span>
+                                            <span class="text-green-600 font-bold">Auto-sync ON</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 4: Everything Measured (Mocking organizerDashboard.html stats tab) -->
+                                <div class="carousel-slide flex text-gray-800 bg-gray-100">
+                                    <!-- Mini Sidebar -->
+                                    <div
+                                        class="w-1/4 bg-white border-r border-gray-200 p-3 hidden sm:flex flex-col justify-between">
+                                        <div class="space-y-4">
+                                            <div
+                                                class="flex items-center space-x-1 text-revelti-blue font-extrabold text-sm">
+                                                <span
+                                                    class="w-2.5 h-2.5 bg-revelti-orange rounded-full"></span><span>Revelti</span>
+                                            </div>
+                                            <ul class="space-y-2 text-[10px] font-bold text-gray-500">
+                                                <li
+                                                    class="p-1.5 rounded-lg hover:bg-gray-50 flex items-center space-x-1">
+                                                    <span>🎫 Tickets</span></li>
+                                                <li
+                                                    class="p-1.5 rounded-lg hover:bg-gray-50 flex items-center space-x-1">
+                                                    <span>📢 Broadcast</span></li>
+                                                <li
+                                                    class="p-1.5 rounded-lg bg-gray-100 text-revelti-blue flex items-center space-x-1">
+                                                    <span>👥 Team</span></li>
+                                                <li
+                                                    class="p-1.5 rounded-lg hover:bg-gray-50 flex items-center space-x-1">
+                                                    <span>📈 Analytics</span></li>
+                                            </ul>
+                                        </div>
+                                        <div
+                                            class="flex items-center space-x-1.5 text-[9px] text-gray-400 border-t pt-2">
+                                            <div class="w-4 h-4 rounded-full bg-slate-200"></div><span>LMP Events</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Main Panel -->
+                                    <div class="flex-1 p-5 flex flex-col justify-between">
+                                        <div class="space-y-3">
+                                            <div
+                                                class="flex justify-between items-center pb-2 border-b border-gray-200">
+                                                <h5 class="font-extrabold text-xs text-revelti-blue">Event Analytics
+                                                </h5>
+                                                <span class="text-[9px] font-bold text-gray-400">Live</span>
+                                            </div>
+
+                                            <div class="grid grid-cols-2 gap-2 text-center">
+                                                <div class="bg-white p-2 rounded-lg border border-gray-100 shadow-sm">
+                                                    <span
+                                                        class="text-[8px] text-gray-400 font-bold block uppercase">Revenue</span>
+                                                    <span
+                                                        class="text-xs font-black text-revelti-blue mt-0.5 block">€14,580</span>
+                                                </div>
+                                                <div class="bg-white p-2 rounded-lg border border-gray-100 shadow-sm">
+                                                    <span
+                                                        class="text-[8px] text-gray-400 font-bold block uppercase">Check-ins</span>
+                                                    <span
+                                                        class="text-xs font-black text-revelti-orange mt-0.5 block">88%</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="bg-white p-2 rounded-lg border border-gray-100 text-center">
+                                                <span
+                                                    class="text-[8px] text-gray-400 font-bold block uppercase mb-1">Gallery
+                                                    Views</span>
+                                                <span class="text-sm font-black text-gray-800 block">1,842 Views</span>
+                                            </div>
+                                        </div>
+                                        <div class="text-[10px] text-gray-400 border-t pt-2">
+                                            <span>Metrics update automatically</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Navigation dots -->
+                        <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-1.5 z-10">
+                            <span onclick="goToOrganizerSlide(0)" id="org-dot-0"
+                                class="w-2 h-2 rounded-full cursor-pointer transition bg-revelti-blue"></span>
+                            <span onclick="goToOrganizerSlide(1)" id="org-dot-1"
+                                class="w-2 h-2 rounded-full cursor-pointer transition bg-gray-300"></span>
+                            <span onclick="goToOrganizerSlide(2)" id="org-dot-2"
+                                class="w-2 h-2 rounded-full cursor-pointer transition bg-gray-300"></span>
+                            <span onclick="goToOrganizerSlide(3)" id="org-dot-3"
+                                class="w-2 h-2 rounded-full cursor-pointer transition bg-gray-300"></span>
+                        </div>
+                    </div>
+                    <!-- Caption/Disclaimer replacing the old hardcoded filenames footer -->
+                    <p class="text-center text-xs text-gray-500 font-semibold italic mt-2">
+                        *Preview of in-development features. Final interface and layouts may vary.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 3B. CREATIVE SECTION -->
+            <div id="section-creative"
+                class="tab-transition hidden grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                <!-- Value Props List (Left Column) -->
+                <div class="lg:col-span-5 space-y-8">
+                    <div>
+                        <span class="text-sm font-bold text-revelti-purple uppercase tracking-widest">Creatives</span>
+                        <h3 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2">Your Work, Finally Organized
+                            & Seen</h3>
+                        <p class="mt-4 text-gray-600 text-lg">
+                            Ditch the scattered file systems. Get a professional home for your files and immediate
+                            exposure to thousands.
+                        </p>
+                    </div>
+
+                    <ul class="space-y-3">
+                        <!-- Prop 1 (Storage/Presentation) -->
+                        <li onclick="goToCreativeSlide(0)" id="cr-prop-0"
+                            class="flex items-start space-x-4 p-4 rounded-xl cursor-pointer bg-slate-50 border border-slate-100 border-l-4 border-l-revelti-purple transition cr-prop-active">
+                            <div class="p-3 bg-purple-50 text-revelti-purple rounded-xl flex-shrink-0">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900">Storage Meets Presentation</h4>
+                                <p class="text-gray-600 mt-1 text-sm">Get the best of both worlds. A rock-solid
+                                    workspace to safely store all your files, plus stunning, professional galleries to
+                                    show off your final edits.</p>
+                            </div>
+                        </li>
+                        <!-- Prop 2 (Direct Upload) -->
+                        <li onclick="goToCreativeSlide(1)" id="cr-prop-1"
+                            class="flex items-start space-x-4 p-4 rounded-xl cursor-pointer hover:bg-slate-50 transition border border-transparent border-l-4">
+                            <div class="p-3 bg-purple-50 text-revelti-purple rounded-xl flex-shrink-0">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900">Ditch the Transfer Links</h4>
+                                <p class="text-gray-600 mt-1 text-sm">Upload your media directly to the official event.
+                                    No more messy file-sharing links, expiring downloads, or lost folders.</p>
+                            </div>
+                        </li>
+                        <!-- Prop 3 (Seen by thousands) -->
+                        <li onclick="goToCreativeSlide(2)" id="cr-prop-2"
+                            class="flex items-start space-x-4 p-4 rounded-xl cursor-pointer hover:bg-slate-50 transition border border-transparent border-l-4">
+                            <div class="p-3 bg-purple-50 text-revelti-purple rounded-xl flex-shrink-0">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900">Get Seen by Thousands</h4>
+                                <p class="text-gray-600 mt-1 text-sm">Because your work lives in the official event
+                                    gallery, every single attendee who looks for their photos will see your name and
+                                    your art. Massive, built-in exposure for your business.</p>
+                            </div>
+                        </li>
+                        <!-- Prop 4 (Portfolio) -->
+                        <li onclick="goToCreativeSlide(3)" id="cr-prop-3"
+                            class="flex items-start space-x-4 p-4 rounded-xl cursor-pointer hover:bg-slate-50 transition border border-transparent border-l-4">
+                            <div class="p-3 bg-purple-50 text-revelti-purple rounded-xl flex-shrink-0">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900">A Beautiful Portfolio</h4>
+                                <p class="text-gray-600 mt-1 text-sm">Show off your best shots to future clients with a
+                                    customizable public profile that does your art justice.</p>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="pt-4">
+                        <a href="#footer-waitlist"
+                            class="inline-block px-8 py-3.5 bg-revelti-purple text-white font-bold rounded-xl hover:bg-opacity-95 transition text-base shadow-lg shadow-revelti-purple/15">
+                            Reserve Creative Access
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Interactive Carousel Column (Right Column) -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="relative bg-white rounded-2xl p-2 shadow-2xl border border-gray-200 overflow-hidden">
+                        <!-- Mockup header bar (Light themed browser) -->
+                        <div class="flex items-center justify-between px-4 py-2.5 border-b border-gray-100 bg-gray-50">
+                            <div class="flex space-x-1.5">
+                                <span class="w-3 h-3 bg-red-400 rounded-full"></span>
+                                <span class="w-3 h-3 bg-yellow-400 rounded-full"></span>
+                                <span class="w-3 h-3 bg-green-400 rounded-full"></span>
+                            </div>
+                            <span id="creative-mockup-url"
+                                class="text-[11px] text-gray-400 font-mono">revelti.com/creative/studio</span>
+                            <div class="flex space-x-1">
+                                <button onclick="prevCreativeSlide()"
+                                    class="p-1 rounded bg-gray-200 hover:bg-gray-300 text-gray-600 transition">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 19l-7-7 7-7"></path>
+                                    </svg>
+                                </button>
+                                <button onclick="nextCreativeSlide()"
+                                    class="p-1 rounded bg-gray-200 hover:bg-gray-300 text-gray-600 transition">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Carousel Wrapper (Light background styled like actual app dashboard layout) -->
+                        <div class="carousel-container aspect-[16/10] bg-gray-100">
+                            <div id="creative-carousel-track" class="carousel-track">
+
+                                <!-- Slide 1: Storage Meets Presentation (Mocking creativeStudioWorkspace.html) -->
+                                <div class="carousel-slide flex text-gray-800 bg-gray-100">
+                                    <!-- Mini Sidebar -->
+                                    <div
+                                        class="w-1/4 bg-white border-r border-gray-200 p-3 hidden sm:flex flex-col justify-between">
+                                        <div class="space-y-4">
+                                            <div
+                                                class="flex items-center space-x-1 text-revelti-purple font-extrabold text-sm">
+                                                <span
+                                                    class="w-2.5 h-2.5 bg-revelti-orange rounded-full"></span><span>Studio</span>
+                                            </div>
+                                            <ul class="space-y-2 text-[10px] font-bold text-gray-500">
+                                                <li
+                                                    class="p-1.5 rounded-lg bg-gray-100 text-revelti-purple flex items-center space-x-1">
+                                                    <span>📁 Workspace</span></li>
+                                                <li
+                                                    class="p-1.5 rounded-lg hover:bg-gray-50 flex items-center space-x-1">
+                                                    <span>📤 Upload Manager</span></li>
+                                                <li
+                                                    class="p-1.5 rounded-lg hover:bg-gray-50 flex items-center space-x-1">
+                                                    <span>🖼️ Galleries</span></li>
+                                                <li
+                                                    class="p-1.5 rounded-lg hover:bg-gray-50 flex items-center space-x-1">
+                                                    <span>👤 Profile</span></li>
+                                            </ul>
+                                        </div>
+                                        <div
+                                            class="flex items-center space-x-1.5 text-[9px] text-gray-400 border-t pt-2">
+                                            <div class="w-4 h-4 rounded-full bg-slate-200"></div><span>AMedia</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Main Panel -->
+                                    <div class="flex-1 p-5 flex flex-col justify-between">
+                                        <div class="space-y-3">
+                                            <div
+                                                class="flex justify-between items-center pb-2 border-b border-gray-200">
+                                                <h5 class="font-extrabold text-xs text-revelti-purple">My Studio Space
+                                                </h5>
+                                                <span class="text-[9px] text-gray-400">14.5 GB / 100 GB</span>
+                                            </div>
+                                            <div class="grid grid-cols-2 gap-2 text-[10px]">
+                                                <div class="bg-white p-2 rounded-lg border border-gray-100 shadow-sm">
+                                                    <span class="font-bold text-gray-800 block truncate">Dance Fest
+                                                        Spain</span>
+                                                    <span class="text-gray-400 text-[8px] block">242 photos • 4.2
+                                                        GB</span>
+                                                </div>
+                                                <div class="bg-white p-2 rounded-lg border border-gray-100 shadow-sm">
+                                                    <span class="font-bold text-gray-800 block truncate">Croatia
+                                                        Warmup</span>
+                                                    <span class="text-gray-400 text-[8px] block">180 photos • 3.1
+                                                        GB</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-[10px] text-gray-400 border-t pt-2 flex justify-between">
+                                            <span>Workspace healthy</span>
+                                            <span class="font-bold text-revelti-purple">14.5 GB Used</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 2: Ditch the Transfer Links (Mocking uploadManager.html) -->
+                                <div class="carousel-slide flex text-gray-800 bg-gray-100">
+                                    <!-- Mini Sidebar -->
+                                    <div
+                                        class="w-1/4 bg-white border-r border-gray-200 p-3 hidden sm:flex flex-col justify-between">
+                                        <div class="space-y-4">
+                                            <div
+                                                class="flex items-center space-x-1 text-revelti-purple font-extrabold text-sm">
+                                                <span
+                                                    class="w-2.5 h-2.5 bg-revelti-orange rounded-full"></span><span>Studio</span>
+                                            </div>
+                                            <ul class="space-y-2 text-[10px] font-bold text-gray-500">
+                                                <li
+                                                    class="p-1.5 rounded-lg hover:bg-gray-50 flex items-center space-x-1">
+                                                    <span>📁 Workspace</span></li>
+                                                <li
+                                                    class="p-1.5 rounded-lg bg-gray-100 text-revelti-purple flex items-center space-x-1">
+                                                    <span>📤 Upload Manager</span></li>
+                                                <li
+                                                    class="p-1.5 rounded-lg hover:bg-gray-50 flex items-center space-x-1">
+                                                    <span>🖼️ Galleries</span></li>
+                                                <li
+                                                    class="p-1.5 rounded-lg hover:bg-gray-50 flex items-center space-x-1">
+                                                    <span>👤 Profile</span></li>
+                                            </ul>
+                                        </div>
+                                        <div
+                                            class="flex items-center space-x-1.5 text-[9px] text-gray-400 border-t pt-2">
+                                            <div class="w-4 h-4 rounded-full bg-slate-200"></div><span>AMedia</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Main Panel -->
+                                    <div class="flex-1 p-5 flex flex-col justify-between">
+                                        <div class="space-y-3">
+                                            <div
+                                                class="flex justify-between items-center pb-2 border-b border-gray-200">
+                                                <h5 class="font-extrabold text-xs text-revelti-purple">Upload Queue</h5>
+                                                <span class="text-[9px] font-bold text-revelti-purple">Uploading</span>
+                                            </div>
+                                            <div class="space-y-2 text-[10px]">
+                                                <div class="bg-white p-2 rounded-lg border border-gray-100 shadow-sm">
+                                                    <div class="flex justify-between text-[9px] text-gray-700 mb-1">
+                                                        <span>IMG_8492.raw (45 MB)</span>
+                                                        <span class="text-revelti-purple font-bold">75%</span>
+                                                    </div>
+                                                    <div class="w-full bg-gray-100 h-1.5 rounded-full overflow-hidden">
+                                                        <div class="bg-revelti-purple h-full rounded-full"
+                                                            style="width: 75%"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-[10px] text-gray-400 border-t pt-2">
+                                            <span>Upload speed optimized</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 3: Get Seen by Thousands (Mocking publicGalleryView.html) -->
+                                <div class="carousel-slide flex text-gray-800 bg-gray-100">
+                                    <!-- Mini Sidebar -->
+                                    <div
+                                        class="w-1/4 bg-white border-r border-gray-200 p-3 hidden sm:flex flex-col justify-between">
+                                        <div class="space-y-4">
+                                            <div
+                                                class="flex items-center space-x-1 text-revelti-purple font-extrabold text-sm">
+                                                <span
+                                                    class="w-2.5 h-2.5 bg-revelti-orange rounded-full"></span><span>Studio</span>
+                                            </div>
+                                            <ul class="space-y-2 text-[10px] font-bold text-gray-500">
+                                                <li
+                                                    class="p-1.5 rounded-lg hover:bg-gray-50 flex items-center space-x-1">
+                                                    <span>📁 Workspace</span></li>
+                                                <li
+                                                    class="p-1.5 rounded-lg hover:bg-gray-50 flex items-center space-x-1">
+                                                    <span>📤 Upload Manager</span></li>
+                                                <li
+                                                    class="p-1.5 rounded-lg bg-gray-100 text-revelti-purple flex items-center space-x-1">
+                                                    <span>🖼️ Galleries</span></li>
+                                                <li
+                                                    class="p-1.5 rounded-lg hover:bg-gray-50 flex items-center space-x-1">
+                                                    <span>👤 Profile</span></li>
+                                            </ul>
+                                        </div>
+                                        <div
+                                            class="flex items-center space-x-1.5 text-[9px] text-gray-400 border-t pt-2">
+                                            <div class="w-4 h-4 rounded-full bg-slate-200"></div><span>AMedia</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Main Panel -->
+                                    <div class="flex-1 p-5 flex flex-col justify-between">
+                                        <div class="space-y-3">
+                                            <div
+                                                class="flex justify-between items-center pb-2 border-b border-gray-200">
+                                                <h5 class="font-extrabold text-xs text-revelti-purple">Gallery View</h5>
+                                                <span class="text-[9px] text-gray-400">Preview</span>
+                                            </div>
+
+                                            <!-- Gallery mock card -->
+                                            <div
+                                                class="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm">
+                                                <div
+                                                    class="bg-gray-50 px-2 py-1 flex items-center justify-between border-b border-gray-200">
+                                                    <div class="flex items-center space-x-1">
+                                                        <div
+                                                            class="w-4 h-4 rounded-full bg-revelti-purple text-white flex items-center justify-center font-bold text-[7px]">
+                                                            AM</div>
+                                                        <span class="text-[8px] font-bold text-gray-700">Photos by
+                                                            AMedia</span>
+                                                    </div>
+                                                    <span
+                                                        class="text-[7px] text-revelti-purple font-bold">Contact</span>
+                                                </div>
+                                                <div class="grid grid-cols-4 gap-1 p-1">
+                                                    <div class="aspect-square bg-gray-200 rounded"></div>
+                                                    <div class="aspect-square bg-gray-200 rounded"></div>
+                                                    <div class="aspect-square bg-gray-200 rounded"></div>
+                                                    <div class="aspect-square bg-gray-200 rounded"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-[10px] text-gray-400 border-t pt-2 flex justify-between">
+                                            <span>Attendee view preview</span>
+                                            <span class="text-revelti-purple font-bold">Seen by guests</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 4: A Beautiful Portfolio (Mocking creativePublicProfilePreview.html) -->
+                                <div class="carousel-slide flex text-gray-800 bg-gray-100">
+                                    <!-- Mini Sidebar -->
+                                    <div
+                                        class="w-1/4 bg-white border-r border-gray-200 p-3 hidden sm:flex flex-col justify-between">
+                                        <div class="space-y-4">
+                                            <div
+                                                class="flex items-center space-x-1 text-revelti-purple font-extrabold text-sm">
+                                                <span
+                                                    class="w-2.5 h-2.5 bg-revelti-orange rounded-full"></span><span>Studio</span>
+                                            </div>
+                                            <ul class="space-y-2 text-[10px] font-bold text-gray-500">
+                                                <li
+                                                    class="p-1.5 rounded-lg hover:bg-gray-50 flex items-center space-x-1">
+                                                    <span>📁 Workspace</span></li>
+                                                <li
+                                                    class="p-1.5 rounded-lg hover:bg-gray-50 flex items-center space-x-1">
+                                                    <span>📤 Upload Manager</span></li>
+                                                <li
+                                                    class="p-1.5 rounded-lg bg-gray-100 text-revelti-purple flex items-center space-x-1">
+                                                    <span>🖼️ Galleries</span></li>
+                                                <li
+                                                    class="p-1.5 rounded-lg hover:bg-gray-50 flex items-center space-x-1">
+                                                    <span>👤 Profile</span></li>
+                                            </ul>
+                                        </div>
+                                        <div
+                                            class="flex items-center space-x-1.5 text-[9px] text-gray-400 border-t pt-2">
+                                            <div class="w-4 h-4 rounded-full bg-slate-200"></div><span>AMedia</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Main Panel -->
+                                    <div class="flex-1 p-5 flex flex-col justify-between">
+                                        <div class="space-y-3">
+                                            <div
+                                                class="flex justify-between items-center pb-2 border-b border-gray-200">
+                                                <h5 class="font-extrabold text-xs text-revelti-purple">Public Profile
+                                                </h5>
+                                                <span class="text-[9px] text-gray-400">Live</span>
+                                            </div>
+
+                                            <div
+                                                class="bg-white p-3 rounded-lg border border-gray-100 text-center space-y-1.5 shadow-sm">
+                                                <div
+                                                    class="w-8 h-8 rounded-full bg-revelti-purple mx-auto flex items-center justify-center font-bold text-white text-[9px]">
+                                                    AM</div>
+                                                <div>
+                                                    <h6 class="text-[9px] font-bold text-gray-800">Alex Martinez
+                                                        (AMedia)</h6>
+                                                    <p class="text-[8px] text-gray-400">Live Events Photographer</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-[10px] text-gray-400 border-t pt-2">
+                                            <span>Public view preview</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Navigation dots -->
+                        <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-1.5 z-10">
+                            <span onclick="goToCreativeSlide(0)" id="cr-dot-0"
+                                class="w-2 h-2 rounded-full cursor-pointer transition bg-revelti-purple"></span>
+                            <span onclick="goToCreativeSlide(1)" id="cr-dot-1"
+                                class="w-2 h-2 rounded-full cursor-pointer transition bg-gray-300"></span>
+                            <span onclick="goToCreativeSlide(2)" id="cr-dot-2"
+                                class="w-2 h-2 rounded-full cursor-pointer transition bg-gray-300"></span>
+                            <span onclick="goToCreativeSlide(3)" id="cr-dot-3"
+                                class="w-2 h-2 rounded-full cursor-pointer transition bg-gray-300"></span>
+                        </div>
+                    </div>
+                    <!-- Caption/Disclaimer replacing the old hardcoded filenames footer -->
+                    <p class="text-center text-xs text-gray-500 font-semibold italic mt-2">
+                        *Preview of in-development features. Final interface and layouts may vary.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- The Ecosystem Section -->
+    <section class="py-20 bg-slate-900 text-white relative overflow-hidden">
+        <div
+            class="absolute inset-0 opacity-10 bg-[radial-gradient(#f58220_1px,transparent_1px)] [background-size:24px_24px]">
+        </div>
+        <div class="relative max-w-4xl mx-auto px-6 text-center flex flex-col items-center">
+            <!-- Sleek Badge -->
+            <div class="inline-flex items-center justify-center space-x-2 px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700 backdrop-blur-sm mb-6 shadow-sm">
+                <span class="w-2 h-2 rounded-full bg-revelti-orange shadow-[0_0_8px_rgba(245,130,32,0.8)] animate-pulse"></span>
+                <span class="text-[10px] font-bold uppercase tracking-widest text-gray-300">The Ecosystem</span>
+            </div>
+            
+            <!-- Upgraded Title -->
+            <h3 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-6 text-white drop-shadow-sm">
+                Better <span class="text-transparent bg-clip-text bg-gradient-to-r from-revelti-orange to-yellow-400 drop-shadow-md">Together.</span>
+            </h3>
+            
+            <!-- Subtitle -->
+            <p class="text-lg sm:text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">
+                When organizers and creatives share the exact same platform, the magic happens. Event media gets to
+                attendees faster, everything looks more professional, and everyone saves hours of busywork.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer / Bottom CTA -->
+    <footer id="footer-waitlist" class="bg-slate-950 text-white py-20 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-6 space-y-6">
+                    <img src="images/reveltiLogoWhite.png" alt="Revelti White Logo" class="h-12 w-auto object-contain"
+                        onerror="this.onerror=null; this.src='https://placehold.co/150x40/ffffff/000000?text=Revelti';">
+                    <h3 class="text-2xl sm:text-3xl font-extrabold">Be the first to experience <span class="text-revelti-orange">Revelti</span>.</h3>
+                    <p class="text-gray-400 text-base max-w-md">
+                        We are putting the finishing touches on something special. Join the waitlist today to secure
+                        exclusive early-bird perks and get a sneak peek before anyone else.
+                    </p>
+                </div>
+
+                <div class="lg:col-span-6">
+                    <div class="bg-slate-900/50 border border-slate-800 p-8 rounded-2xl max-w-md ml-auto">
+                        <form onsubmit="handleWaitlistSubmit(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Email
+                                    Address</label>
+                                <input type="email" placeholder="you@example.com" required
+                                    class="w-full px-4 py-3 bg-slate-950 text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-revelti-orange/50 border border-slate-800 rounded-xl">
+                            </div>
+                            <button type="submit"
+                                class="w-full py-3.5 bg-revelti-orange text-white font-bold rounded-xl hover:bg-opacity-95 transition text-base shadow-lg shadow-revelti-orange/15">
+                                Join the Waitlist
+                            </button>
+                        </form>
+                        <p class="mt-4 text-center text-xs text-gray-500">
+                            By joining, you secure your reservation for early onboarding perks.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-16 pt-8 border-t border-slate-900 text-center text-xs text-gray-500">
+                <p>&copy; 2026 Revelti. All rights reserved. Built for attendees, creators and organizers.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Success Modal (Replaces browser alert) -->
+    <div id="success-modal" class="fixed inset-0 z-[100] flex items-center justify-center hidden">
+        <!-- Backdrop overlay -->
+        <div class="absolute inset-0 bg-slate-950/60 backdrop-blur-sm" onclick="closeSuccessModal()"></div>
+        <!-- Modal card -->
+        <div
+            class="relative bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl border border-gray-100 text-center space-y-6 transform scale-95 transition-all duration-300">
+            <!-- Icon -->
+            <div
+                class="w-16 h-16 bg-emerald-50 text-emerald-500 rounded-full flex items-center justify-center mx-auto border border-emerald-100">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                </svg>
+            </div>
+            <!-- Title & Text -->
+            <div class="space-y-2">
+                <h4 class="text-2xl font-extrabold text-revelti-blue">You're on the list!</h4>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                    Thank you for joining the <span class="font-extrabold text-revelti-blue">Revelti</span> waitlist. We've locked in your early access perks and saved your
+                    address: <span id="success-modal-email"
+                        class="font-bold text-gray-900 block mt-1 break-all bg-gray-50 p-2 rounded-lg border border-gray-100"></span>
+                </p>
+            </div>
+            <!-- Button -->
+            <button onclick="closeSuccessModal()"
+                class="w-full py-3 bg-revelti-blue text-white font-bold rounded-xl hover:bg-opacity-95 transition shadow-lg shadow-revelti-blue/15">
+                Awesome, thank you!
+            </button>
+        </div>
+    </div>
+
+    <!-- Interactive script to handle tab switching & waitlist submission -->
+    <script>
+        // Floating Glassmorphism Navigation on Scroll
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('main-header');
+            const content = document.getElementById('nav-content');
+            if (window.scrollY > 20) {
+                // Floating pill state
+                header.classList.remove('bg-white/95', 'border-b', 'border-gray-100', 'backdrop-blur-sm');
+                header.classList.add('bg-transparent', 'pointer-events-none');
+                
+                content.classList.remove('max-w-7xl', 'px-4', 'sm:px-6', 'lg:px-8');
+                content.classList.add('max-w-4xl', 'mx-4', 'sm:mx-auto', 'px-6', 'mt-4', 'bg-white/80', 'backdrop-blur-md', 'shadow-lg', 'rounded-full', 'border', 'border-gray-200/50', 'pointer-events-auto');
+            } else {
+                // Default full-width state
+                header.classList.add('bg-white/95', 'border-b', 'border-gray-100', 'backdrop-blur-sm');
+                header.classList.remove('bg-transparent', 'pointer-events-none');
+                
+                content.classList.add('max-w-7xl', 'px-4', 'sm:px-6', 'lg:px-8');
+                content.classList.remove('max-w-4xl', 'mx-4', 'sm:mx-auto', 'px-6', 'mt-4', 'bg-white/80', 'backdrop-blur-md', 'shadow-lg', 'rounded-full', 'border', 'border-gray-200/50', 'pointer-events-auto');
+            }
+        });
+
+        // Tab switching (Organizer vs Creative perspective)
+        function switchTab(role) {
+            const sectionOrganizer = document.getElementById('section-organizer');
+            const sectionCreative = document.getElementById('section-creative');
+            const btnOrganizer = document.getElementById('btn-organizer');
+            const btnCreative = document.getElementById('btn-creative');
+
+            if (role === 'organizer') {
+                sectionOrganizer.classList.remove('hidden');
+                sectionCreative.classList.add('hidden');
+
+                btnOrganizer.className = 'px-8 py-3 rounded-full text-base font-bold transition duration-300 bg-revelti-blue text-white shadow-md';
+                btnCreative.className = 'px-8 py-3 rounded-full text-base font-bold transition duration-300 text-gray-600 hover:text-gray-900';
+
+                // Reset slide to 0 and highlight first item
+                currentOrgSlide = 0;
+                updateOrganizerCarousel();
+            } else {
+                sectionOrganizer.classList.add('hidden');
+                sectionCreative.classList.remove('hidden');
+
+                btnOrganizer.className = 'px-8 py-3 rounded-full text-base font-bold transition duration-300 text-gray-600 hover:text-gray-900';
+                btnCreative.className = 'px-8 py-3 rounded-full text-base font-bold transition duration-300 bg-revelti-purple text-white shadow-md';
+
+                // Reset slide to 0 and highlight first item
+                currentCrSlide = 0;
+                updateCreativeCarousel();
+            }
+        }
+
+        // Waitlist submission handler using custom Modal
+        function handleWaitlistSubmit(event) {
+            event.preventDefault();
+            const emailInput = event.target.querySelector('input[type="email"]');
+            const email = emailInput ? emailInput.value : '';
+            if (email) {
+                // Set email text in the modal
+                document.getElementById('success-modal-email').textContent = email;
+
+                // Show modal
+                const modal = document.getElementById('success-modal');
+                modal.classList.remove('hidden');
+
+                // Trigger transition animation
+                setTimeout(() => {
+                    const card = modal.querySelector('.relative');
+                    card.classList.remove('scale-95');
+                    card.classList.add('scale-100');
+                }, 10);
+
+                event.target.reset();
+            }
+        }
+
+        // Close waitlist success modal
+        function closeSuccessModal() {
+            const modal = document.getElementById('success-modal');
+            const card = modal.querySelector('.relative');
+            card.classList.remove('scale-100');
+            card.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 150);
+        }
+
+        // CAROUSEL LOGIC: ORGANIZER
+        let currentOrgSlide = 0;
+        const totalOrgSlides = 4;
+        const orgUrls = [
+            'revelti.com/organizer/ticketing',
+            'revelti.com/organizer/broadcast',
+            'revelti.com/organizer/collaborators',
+            'revelti.com/organizer/dashboard'
+        ];
+
+        function updateOrganizerCarousel() {
+            const track = document.getElementById('organizer-carousel-track');
+            track.style.transform = `translateX(-${currentOrgSlide * 25}%)`;
+
+            // Update URL bar
+            document.getElementById('org-mockup-url').textContent = orgUrls[currentOrgSlide];
+
+            // Update feature list active style
+            for (let i = 0; i < totalOrgSlides; i++) {
+                const el = document.getElementById(`org-prop-${i}`);
+                const dot = document.getElementById(`org-dot-${i}`);
+                if (i === currentOrgSlide) {
+                    el.className = "flex items-start space-x-4 p-4 rounded-xl cursor-pointer bg-slate-50 border border-slate-100 border-l-4 border-l-revelti-blue transition org-prop-active";
+                    dot.className = "w-2.5 h-2.5 rounded-full cursor-pointer transition bg-revelti-blue";
+                } else {
+                    el.className = "flex items-start space-x-4 p-4 rounded-xl cursor-pointer hover:bg-slate-50 transition border border-transparent border-l-4";
+                    dot.className = "w-2 h-2 rounded-full cursor-pointer transition bg-gray-300";
+                }
+            }
+        }
+
+        function goToOrganizerSlide(index) {
+            currentOrgSlide = index;
+            updateOrganizerCarousel();
+        }
+
+        function nextOrganizerSlide() {
+            currentOrgSlide = (currentOrgSlide + 1) % totalOrgSlides;
+            updateOrganizerCarousel();
+        }
+
+        function prevOrganizerSlide() {
+            currentOrgSlide = (currentOrgSlide - 1 + totalOrgSlides) % totalOrgSlides;
+            updateOrganizerCarousel();
+        }
+
+
+        // CAROUSEL LOGIC: CREATIVE
+        let currentCrSlide = 0;
+        const totalCrSlides = 4;
+        const crUrls = [
+            'revelti.com/creative/studio',
+            'revelti.com/creative/upload',
+            'revelti.com/creative/gallery',
+            'revelti.com/creative/portfolio'
+        ];
+
+        function updateCreativeCarousel() {
+            const track = document.getElementById('creative-carousel-track');
+            track.style.transform = `translateX(-${currentCrSlide * 25}%)`;
+
+            // Update URL bar
+            document.getElementById('creative-mockup-url').textContent = crUrls[currentCrSlide];
+
+            // Update feature list active style
+            for (let i = 0; i < totalCrSlides; i++) {
+                const el = document.getElementById(`cr-prop-${i}`);
+                const dot = document.getElementById(`cr-dot-${i}`);
+                if (i === currentCrSlide) {
+                    el.className = "flex items-start space-x-4 p-4 rounded-xl cursor-pointer bg-slate-50 border border-slate-100 border-l-4 border-l-revelti-purple transition cr-prop-active";
+                    dot.className = "w-2.5 h-2.5 rounded-full cursor-pointer transition bg-revelti-purple";
+                } else {
+                    el.className = "flex items-start space-x-4 p-4 rounded-xl cursor-pointer hover:bg-slate-50 transition border border-transparent border-l-4";
+                    dot.className = "w-2 h-2 rounded-full cursor-pointer transition bg-gray-300";
+                }
+            }
+        }
+
+        function goToCreativeSlide(index) {
+            currentCrSlide = index;
+            updateCreativeCarousel();
+        }
+
+        function nextCreativeSlide() {
+            currentCrSlide = (currentCrSlide + 1) % totalCrSlides;
+            updateCreativeCarousel();
+        }
+
+        function prevCreativeSlide() {
+            currentCrSlide = (currentCrSlide - 1 + totalCrSlides) % totalCrSlides;
+            updateCreativeCarousel();
+        }
+
+        // Initialize carousel highlights on load
+        window.addEventListener('DOMContentLoaded', () => {
+            updateOrganizerCarousel();
+            updateCreativeCarousel();
+        });
+    </script>
+</body>
+
+</html>
