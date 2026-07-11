@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revelti - Super Admin Dashboard</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        revelti: {
+                            blue: '#213c63',
+                            orange: '#f58220',
+                            rose: '#be123c'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts: Nunito -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Chart.js for visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="dashboard-layout bg-gray-100 antialiased text-gray-800" data-role="superadmin">
+    <!-- Navbar Placeholder -->
+    <div id="superadmin-navbar-placeholder"></div>
+
+    <div class="dashboard-main-area">
+        <aside id="sidebar-placeholder" class="sidebar-container bg-white z-20"></aside>
+
+        <div class="main-wrapper">
+            <main class="page-content">
+                <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+                    <!-- Header -->
+                    <header class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between">
+                        <div>
+                            <h1 class="text-3xl font-extrabold text-slate-900 flex items-center">
+                                Platform Overview
+                            </h1>
+                            <p class="text-gray-500 mt-1">Cross-role analytics and operational health.</p>
+                        </div>
+                        <div class="mt-4 md:mt-0 flex space-x-2">
+                            <span class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-rose-100 text-rose-800">
+                                Global Mode: God View
+                            </span>
+                        </div>
+                    </header>
+
+                    <!-- KPI Cards -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                        <!-- Gross Ticket Sales -->
+                        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Gross Ticket Volume</span>
+                                <span class="text-rose-700 bg-rose-50 text-xs px-2 py-0.5 rounded-full font-bold">Monthly</span>
+                            </div>
+                            <h3 class="text-3xl font-extrabold text-slate-950">€84,520.00</h3>
+                            <div class="mt-2 text-xs text-gray-500 flex items-center">
+                                <span class="text-emerald-500 font-semibold mr-1">▲ 14.2%</span>
+                                <span>vs last month</span>
+                            </div>
+                        </div>
+
+                        <!-- Platform Net Commission -->
+                        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Platform Commission (5%)</span>
+                                <span class="text-rose-700 bg-rose-50 text-xs px-2 py-0.5 rounded-full font-bold">Monthly</span>
+                            </div>
+                            <h3 class="text-3xl font-extrabold text-rose-700">€4,226.00</h3>
+                            <div class="mt-2 text-xs text-gray-500 flex items-center">
+                                <span class="text-emerald-500 font-semibold mr-1">▲ 14.2%</span>
+                                <span>net earnings</span>
+                            </div>
+                        </div>
+
+                        <!-- Active Subscriptions MRR -->
+                        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Subscriptions MRR</span>
+                                <span class="text-purple-700 bg-purple-50 text-xs px-2 py-0.5 rounded-full font-bold">Storage Plans</span>
+                            </div>
+                            <h3 class="text-3xl font-extrabold text-slate-950">€12,850.00</h3>
+                            <div class="mt-2 text-xs text-gray-500 flex items-center">
+                                <span>Active subscribers: <b>642</b></span>
+                            </div>
+                        </div>
+
+                        <!-- Active Events -->
+                        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Active Live Events</span>
+                                <span class="bg-emerald-50 text-emerald-700 text-xs px-2.5 py-0.5 rounded-full font-semibold">Live</span>
+                            </div>
+                            <h3 class="text-3xl font-extrabold text-slate-950">148</h3>
+                            <div class="mt-2 text-xs text-gray-500 flex items-center">
+                                <span>Total organizers: <b>42</b> active</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts Grid -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                        <!-- Revenue Trajectory -->
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 lg:col-span-2">
+                            <h3 class="text-lg font-bold text-slate-900 mb-4">Platform Earnings Growth</h3>
+                            <div style="height: 300px; position: relative;">
+                                <canvas id="revenueChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Signups by Role -->
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                            <h3 class="text-lg font-bold text-slate-900 mb-4">User Registrations Distribution</h3>
+                            <div class="flex flex-col items-center justify-center h-64">
+                                <div class="w-48 h-48 relative">
+                                    <canvas id="rolesChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="mt-4 grid grid-cols-4 gap-2 text-center text-xs text-gray-500">
+                                <div>
+                                    <span class="inline-block w-2.5 h-2.5 rounded-full bg-blue-600 mr-1"></span>
+                                    <span>Orgs</span>
+                                </div>
+                                <div>
+                                    <span class="inline-block w-2.5 h-2.5 rounded-full bg-purple-600 mr-1"></span>
+                                    <span>Creatives</span>
+                                </div>
+                                <div>
+                                    <span class="inline-block w-2.5 h-2.5 rounded-full bg-gray-500 mr-1"></span>
+                                    <span>Proms</span>
+                                </div>
+                                <div>
+                                    <span class="inline-block w-2.5 h-2.5 rounded-full bg-orange-500 mr-1"></span>
+                                    <span>Atts</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lower Overview: Recent Alerts & System Health -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Operational Notifications -->
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                            <h3 class="text-lg font-bold text-slate-900 mb-4">System Alerts & Notices</h3>
+                            <div class="space-y-3">
+                                <!-- Notice 1 -->
+                                <div class="flex items-start p-3 bg-amber-50 rounded-lg border border-amber-100">
+                                    <div class="p-1.5 bg-white rounded shadow-sm text-sm mr-3">⚠️</div>
+                                    <div class="flex-grow">
+                                        <p class="text-sm font-bold text-amber-900 leading-none">Event Disputed</p>
+                                        <p class="text-xs text-amber-700 mt-1">Dispute raised for 'Ibiza Summer Rave' refund.</p>
+                                    </div>
+                                    <a href="superAdminModeration.html" class="text-xs font-semibold text-rose-700 hover:underline">Review</a>
+                                </div>
+                                <!-- Notice 2 -->
+                                <div class="flex items-start p-3 bg-red-50 rounded-lg border border-red-100">
+                                    <div class="p-1.5 bg-white rounded shadow-sm text-sm mr-3">🚫</div>
+                                    <div class="flex-grow">
+                                        <p class="text-sm font-bold text-red-900 leading-none">KYC Verification Failed</p>
+                                        <p class="text-xs text-red-700 mt-1">Stripe failed KYC for organizer 'LMP Events'.</p>
+                                    </div>
+                                    <a href="superAdminUsers.html" class="text-xs font-semibold text-rose-700 hover:underline">Fix</a>
+                                </div>
+                                <!-- Notice 3 -->
+                                <div class="flex items-start p-3 bg-blue-50 rounded-lg border border-blue-100">
+                                    <div class="p-1.5 bg-white rounded shadow-sm text-sm mr-3">💡</div>
+                                    <div class="flex-grow">
+                                        <p class="text-sm font-bold text-blue-900 leading-none">Storage Limit Approaching</p>
+                                        <p class="text-xs text-blue-700 mt-1">Creative 'AMedia' is at 92% of their 1 TB storage.</p>
+                                    </div>
+                                    <a href="superAdminStorage.html" class="text-xs font-semibold text-rose-700 hover:underline">Monitor</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Statistics & Metrics -->
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                            <h3 class="text-lg font-bold text-slate-900 mb-4">Platform Activity (Last 24h)</h3>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="p-4 bg-gray-50 rounded-lg border border-gray-100">
+                                    <p class="text-xs text-gray-500 uppercase tracking-wide">Ticket Sales (24h)</p>
+                                    <p class="text-xl font-extrabold text-slate-900 mt-1">342 sold</p>
+                                </div>
+                                <div class="p-4 bg-gray-50 rounded-lg border border-gray-100">
+                                    <p class="text-xs text-gray-500 uppercase tracking-wide">Media Uploads (24h)</p>
+                                    <p class="text-xl font-extrabold text-slate-900 mt-1">14,204 files</p>
+                                </div>
+                                <div class="p-4 bg-gray-50 rounded-lg border border-gray-100">
+                                    <p class="text-xs text-gray-500 uppercase tracking-wide">New Registrations (24h)</p>
+                                    <p class="text-xl font-extrabold text-slate-900 mt-1">29 users</p>
+                                </div>
+                                <div class="p-4 bg-gray-50 rounded-lg border border-gray-100">
+                                    <p class="text-xs text-gray-500 uppercase tracking-wide">Payouts Cleared (24h)</p>
+                                    <p class="text-xl font-extrabold text-emerald-600 mt-1">€4,510.00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Layout Injector Script -->
+    <script src="layout-injector.js"></script>
+
+    <!-- Chart Configuration Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Revenue Chart
+            const ctxRev = document.getElementById('revenueChart').getContext('2d');
+            new Chart(ctxRev, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                    datasets: [
+                        {
+                            label: 'Platform Net Commission (5%) (€)',
+                            data: [1200, 1800, 2400, 2100, 3200, 3900, 4226],
+                            borderColor: '#be123c',
+                            backgroundColor: 'rgba(190, 18, 60, 0.05)',
+                            tension: 0.3,
+                            fill: true,
+                            borderWidth: 3
+                        },
+                        {
+                            label: 'Subscription Plan Earnings (€)',
+                            data: [6500, 7200, 8400, 9100, 10500, 11800, 12850],
+                            borderColor: '#6b21a8',
+                            backgroundColor: 'rgba(107, 33, 168, 0.05)',
+                            tension: 0.3,
+                            fill: true,
+                            borderWidth: 3
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#f3f4f6' }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    }
+                }
+            });
+
+            // Roles Distribution Chart
+            const ctxRoles = document.getElementById('rolesChart').getContext('2d');
+            new Chart(ctxRoles, {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: [120, 340, 180, 2800],
+                        backgroundColor: ['#2563eb', '#9333ea', '#6b7280', '#f97316'],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    cutout: '75%'
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

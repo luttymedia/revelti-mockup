@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revelti - Storage &amp; Subscriptions</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        revelti: {
+                            blue: '#213c63',
+                            orange: '#f58220',
+                            rose: '#be123c'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts: Nunito -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="dashboard-layout bg-gray-100 antialiased text-gray-800" data-role="superadmin">
+    <!-- Navbar Placeholder -->
+    <div id="superadmin-navbar-placeholder"></div>
+
+    <div class="dashboard-main-area">
+        <aside id="sidebar-placeholder" class="sidebar-container bg-white z-20"></aside>
+
+        <div class="main-wrapper">
+            <main class="page-content">
+                <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+                    <!-- Header -->
+                    <header class="mb-6">
+                        <h1 class="text-3xl font-extrabold text-slate-900">Storage &amp; Subscriptions</h1>
+                        <p class="text-gray-500 mt-1">Audit platform storage consumption and track plan upgrades for Organizers and Creatives.</p>
+                    </header>
+
+                    <!-- Storage Utilization Bar -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 mb-6">
+                        <div class="flex justify-between items-center mb-3">
+                            <div>
+                                <h3 class="text-lg font-bold text-slate-900">Platform Infrastructure Storage</h3>
+                                <p class="text-xs text-gray-400">Total assets stored on AWS S3 / CDN</p>
+                            </div>
+                            <span class="text-sm font-bold text-rose-700 bg-rose-50 px-2.5 py-0.5 rounded-full">46.5% Utilized</span>
+                        </div>
+                        <div class="w-full bg-gray-150 rounded-full h-4 mb-2">
+                            <div class="bg-gradient-to-r from-rose-700 to-purple-700 h-4 rounded-full" style="width: 46.5%"></div>
+                        </div>
+                        <div class="flex justify-between text-xs text-gray-500 font-semibold">
+                            <span>Used: <b>46.5 TB</b></span>
+                            <span>Total Provisioned: <b>100.0 TB</b></span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                        <!-- Top Storage Consuming Users -->
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 lg:col-span-2">
+                            <h3 class="text-lg font-bold text-slate-900 mb-4">Top Storage Consuming Users</h3>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left text-sm">
+                                    <thead>
+                                        <tr class="bg-gray-50 border-b border-gray-200">
+                                            <th class="p-3 font-bold text-gray-500">User / Company</th>
+                                            <th class="p-3 font-bold text-gray-500">Role</th>
+                                            <th class="p-3 font-bold text-gray-500">Current Plan</th>
+                                            <th class="p-3 font-bold text-gray-500">Storage Used</th>
+                                            <th class="p-3 font-bold text-gray-500">Usage %</th>
+                                            <th class="p-3 font-bold text-gray-500">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-150">
+                                        <tr>
+                                            <td class="p-3 font-semibold">AMedia</td>
+                                            <td class="p-3"><span class="text-xs px-2 py-0.5 bg-purple-100 text-purple-800 rounded font-semibold">Creative</span></td>
+                                            <td class="p-3">Pro (1 TB)</td>
+                                            <td class="p-3 font-bold">920.40 GB</td>
+                                            <td class="p-3">
+                                                <div class="flex items-center space-x-2">
+                                                    <span class="text-xs font-bold text-amber-600">92%</span>
+                                                    <div class="w-16 bg-gray-150 rounded-full h-1.5">
+                                                        <div class="bg-amber-500 h-1.5 rounded-full" style="width: 92%"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="p-3"><button onclick="adjustQuota('AMedia', '1 TB')" class="text-xs font-bold text-rose-700 hover:underline">Adjust Quota</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3 font-semibold">LMP Events</td>
+                                            <td class="p-3"><span class="text-xs px-2 py-0.5 bg-blue-100 text-blue-800 rounded font-semibold">Organizer</span></td>
+                                            <td class="p-3">Free (1 GB)</td>
+                                            <td class="p-3 font-bold">780.20 MB</td>
+                                            <td class="p-3">
+                                                <div class="flex items-center space-x-2">
+                                                    <span class="text-xs font-bold text-gray-600">78%</span>
+                                                    <div class="w-16 bg-gray-150 rounded-full h-1.5">
+                                                        <div class="bg-gray-500 h-1.5 rounded-full" style="width: 78%"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="p-3"><button onclick="adjustQuota('LMP Events', '1 GB')" class="text-xs font-bold text-rose-700 hover:underline">Adjust Quota</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3 font-semibold">Ibiza Clicks</td>
+                                            <td class="p-3"><span class="text-xs px-2 py-0.5 bg-purple-100 text-purple-800 rounded font-semibold">Creative</span></td>
+                                            <td class="p-3">Pro (1 TB)</td>
+                                            <td class="p-3 font-bold">450.10 GB</td>
+                                            <td class="p-3">
+                                                <div class="flex items-center space-x-2">
+                                                    <span class="text-xs font-bold text-gray-600">45%</span>
+                                                    <div class="w-16 bg-gray-150 rounded-full h-1.5">
+                                                        <div class="bg-gray-500 h-1.5 rounded-full" style="width: 45%"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="p-3"><button onclick="adjustQuota('Ibiza Clicks', '1 TB')" class="text-xs font-bold text-rose-700 hover:underline">Adjust Quota</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3 font-semibold">Madrid Photography</td>
+                                            <td class="p-3"><span class="text-xs px-2 py-0.5 bg-purple-100 text-purple-800 rounded font-semibold">Creative</span></td>
+                                            <td class="p-3">Free (1 GB)</td>
+                                            <td class="p-3 font-bold">950.00 MB</td>
+                                            <td class="p-3">
+                                                <div class="flex items-center space-x-2">
+                                                    <span class="text-xs font-bold text-rose-600">95%</span>
+                                                    <div class="w-16 bg-gray-150 rounded-full h-1.5">
+                                                        <div class="bg-rose-500 h-1.5 rounded-full" style="width: 95%"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="p-3"><button onclick="adjustQuota('Madrid Photography', '1 GB')" class="text-xs font-bold text-rose-700 hover:underline">Adjust Quota</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Subscription Distribution Chart -->
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                            <h3 class="text-lg font-bold text-slate-900 mb-4">Storage Plan Breakdown</h3>
+                            <div class="flex flex-col items-center justify-center h-48">
+                                <div class="w-40 h-40 relative">
+                                    <canvas id="planChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="mt-4 space-y-2 text-xs text-gray-500">
+                                <div class="flex justify-between">
+                                    <span>Creative Free Plan (1 GB)</span>
+                                    <span class="font-bold text-slate-950">280 users (82.3%)</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Creative Pro Plan (1 TB)</span>
+                                    <span class="font-bold text-slate-950">60 users (17.7%)</span>
+                                </div>
+                                <div class="flex justify-between pt-2 border-t">
+                                    <span>Organizer Free Plan (1 GB)</span>
+                                    <span class="font-bold text-slate-950">110 users (91.6%)</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Organizer Business Plan (50 GB)</span>
+                                    <span class="font-bold text-slate-950">10 users (8.4%)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Layout Injector Script -->
+    <script src="layout-injector.js"></script>
+
+    <!-- Page Interaction Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const ctxPlan = document.getElementById('planChart').getContext('2d');
+            new Chart(ctxPlan, {
+                type: 'pie',
+                data: {
+                    labels: ['Creative Free', 'Creative Pro', 'Organizer Free', 'Organizer Business'],
+                    datasets: [{
+                        data: [280, 60, 110, 10],
+                        backgroundColor: ['#e5e7eb', '#6b21a8', '#3b82f6', '#1d4ed8'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        });
+
+        function adjustQuota(user, currentLimit) {
+            const newLimit = prompt(`Adjust storage quota limit for ${user}. Currently: ${currentLimit}`, currentLimit);
+            if (newLimit !== null) {
+                alert(`Storage limit for ${user} updated to ${newLimit} via Admin Override.`);
+            }
+        }
+    </script>
+</body>
+
+</html>

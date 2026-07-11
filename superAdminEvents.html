@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revelti - Events Oversight</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        revelti: {
+                            blue: '#213c63',
+                            orange: '#f58220',
+                            rose: '#be123c'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts: Nunito -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- DataTables.js for advanced tables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+            background: #be123c !important;
+            color: white !important;
+            border: 1px solid #be123c !important;
+            border-radius: 9999px;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            background: #be123c !important;
+            color: white !important;
+            border: 1px solid #be123c !important;
+        }
+    </style>
+</head>
+
+<body class="dashboard-layout bg-gray-100 antialiased text-gray-800" data-role="superadmin">
+    <!-- Navbar Placeholder -->
+    <div id="superadmin-navbar-placeholder"></div>
+
+    <div class="dashboard-main-area">
+        <aside id="sidebar-placeholder" class="sidebar-container bg-white z-20"></aside>
+
+        <div class="main-wrapper">
+            <main class="page-content">
+                <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+                    <!-- Header -->
+                    <header class="mb-6">
+                        <h1 class="text-3xl font-extrabold text-slate-900">Events Oversight</h1>
+                        <p class="text-gray-500 mt-1">Monitor all platform events, enforce compliance, and inspect event sales.</p>
+                    </header>
+
+                    <!-- Statistics Summary -->
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+                        <div class="p-4 bg-white rounded-xl border border-gray-150 shadow-sm text-center">
+                            <p class="text-xs text-gray-400 font-bold uppercase">Total Platform Events</p>
+                            <p class="text-2xl font-extrabold text-slate-950 mt-1">428</p>
+                        </div>
+                        <div class="p-4 bg-white rounded-xl border border-gray-150 shadow-sm text-center">
+                            <p class="text-xs text-gray-400 font-bold uppercase">Live Events</p>
+                            <p class="text-2xl font-extrabold text-rose-700 mt-1">148</p>
+                        </div>
+                        <div class="p-4 bg-white rounded-xl border border-gray-150 shadow-sm text-center">
+                            <p class="text-xs text-gray-400 font-bold uppercase">Tickets Sold (Total)</p>
+                            <p class="text-2xl font-extrabold text-slate-950 mt-1">24,910</p>
+                        </div>
+                        <div class="p-4 bg-white rounded-xl border border-gray-150 shadow-sm text-center">
+                            <p class="text-xs text-gray-400 font-bold uppercase">Unpublished/Flagged</p>
+                            <p class="text-2xl font-extrabold text-amber-500 mt-1">4 events</p>
+                        </div>
+                    </div>
+
+                    <!-- Events Table Container -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                        <div class="border-b border-gray-200 bg-gray-50/50 px-6 py-3 flex justify-between items-center">
+                            <span class="text-sm font-bold text-slate-900">Platform Events List</span>
+                        </div>
+
+                        <div class="p-6">
+                            <div class="overflow-x-auto">
+                                <table id="eventsTable" class="w-full text-left text-sm">
+                                    <thead>
+                                        <tr class="bg-gray-50 border-b border-gray-200">
+                                            <th class="p-3 font-bold text-gray-500">Event Name</th>
+                                            <th class="p-3 font-bold text-gray-500">Organizer</th>
+                                            <th class="p-3 font-bold text-gray-500">Status</th>
+                                            <th class="p-3 font-bold text-gray-500">Capacity / Venue Cap</th>
+                                            <th class="p-3 font-bold text-gray-500">Tickets Sold</th>
+                                            <th class="p-3 font-bold text-gray-500">Gross Revenue</th>
+                                            <th class="p-3 font-bold text-gray-500">Date of Event</th>
+                                            <th class="p-3 font-bold text-gray-500">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-150">
+                                        <!-- Event 1 -->
+                                        <tr>
+                                            <td class="p-3 font-semibold text-slate-900">Dance Fest Spain</td>
+                                            <td class="p-3 text-gray-600">LMP Events</td>
+                                            <td class="p-3"><span class="px-2.5 py-0.5 bg-emerald-100 text-emerald-800 rounded-full text-xs font-bold">Live</span></td>
+                                            <td class="p-3">342 / 500</td>
+                                            <td class="p-3">342 tickets</td>
+                                            <td class="p-3 font-semibold">€24,800.00</td>
+                                            <td class="p-3 text-xs">2026-08-15</td>
+                                            <td class="p-3">
+                                                <button onclick="openUnpublishModal('Dance Fest Spain', this)" class="px-3 py-1 bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold rounded transition">Unpublish</button>
+                                            </td>
+                                        </tr>
+                                        <!-- Event 2 -->
+                                        <tr>
+                                            <td class="p-3 font-semibold text-slate-900">Ibiza Summer Rave</td>
+                                            <td class="p-3 text-gray-600">Global Rave S.L.</td>
+                                            <td class="p-3"><span class="px-2.5 py-0.5 bg-emerald-100 text-emerald-800 rounded-full text-xs font-bold">Live</span></td>
+                                            <td class="p-3">890 / 1000</td>
+                                            <td class="p-3">890 tickets</td>
+                                            <td class="p-3 font-semibold">€80,100.00</td>
+                                            <td class="p-3 text-xs">2026-07-20</td>
+                                            <td class="p-3">
+                                                <button onclick="openUnpublishModal('Ibiza Summer Rave', this)" class="px-3 py-1 bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold rounded transition">Unpublish</button>
+                                            </td>
+                                        </tr>
+                                        <!-- Event 3 -->
+                                        <tr>
+                                            <td class="p-3 font-semibold text-slate-900">Madrid Bachata Congress</td>
+                                            <td class="p-3 text-gray-600">LMP Events</td>
+                                            <td class="p-3"><span class="px-2.5 py-0.5 bg-gray-150 text-gray-800 rounded-full text-xs font-bold">Draft</span></td>
+                                            <td class="p-3">0 / 300</td>
+                                            <td class="p-3">0 tickets</td>
+                                            <td class="p-3 font-semibold">€0.00</td>
+                                            <td class="p-3 text-xs">2026-09-01</td>
+                                            <td class="p-3">
+                                                <button disabled class="px-3 py-1 bg-gray-250 text-gray-400 text-xs font-bold rounded cursor-not-allowed">Unpublish</button>
+                                            </td>
+                                        </tr>
+                                        <!-- Event 4 -->
+                                        <tr>
+                                            <td class="p-3 font-semibold text-slate-900">Spam Gala 2026</td>
+                                            <td class="p-3 text-gray-600">Spammy Org</td>
+                                            <td class="p-3"><span class="px-2.5 py-0.5 bg-rose-100 text-rose-800 rounded-full text-xs font-bold">Suspended</span></td>
+                                            <td class="p-3">—</td>
+                                            <td class="p-3">0 tickets</td>
+                                            <td class="p-3 font-semibold">€0.00</td>
+                                            <td class="p-3 text-xs">2026-07-15</td>
+                                            <td class="p-3">
+                                                <button onclick="reactivateEvent(this)" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded transition">Reactivate</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Unpublish Reason Modal -->
+    <div id="unpublishModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-xl shadow-xl border border-gray-100 p-6 max-w-md w-full">
+            <h3 class="text-lg font-bold text-slate-950 mb-2">Unpublish Event</h3>
+            <p class="text-xs text-gray-500 mb-4">You are about to force-unpublish the event "<span id="modalEventName" class="font-bold text-rose-700"></span>". The organizer will receive an automatic email notification with your reasoning.</p>
+            
+            <div class="mb-4">
+                <label class="block text-xs font-bold text-gray-500 mb-1.5 uppercase">Select Violation Reason</label>
+                <select id="violationReason" class="w-full border rounded-lg p-2 text-sm focus:outline-none focus:ring-2 focus:ring-rose-500">
+                    <option value="TOS Violation">Terms of Service violation</option>
+                    <option value="Fraudulent Listing">Suspected Fraud / Scam</option>
+                    <option value="Copyright Infringement">Copyright / DMCA Violation</option>
+                    <option value="Organizer Request">Requested by Organizer</option>
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-xs font-bold text-gray-500 mb-1.5 uppercase">Additional Administrative Notes</label>
+                <textarea id="adminNotes" rows="3" placeholder="Provide additional details for the email alert..." class="w-full border rounded-lg p-2 text-sm focus:outline-none focus:ring-2 focus:ring-rose-500"></textarea>
+            </div>
+
+            <div class="flex justify-end space-x-2">
+                <button onclick="closeUnpublishModal()" class="px-4 py-2 border rounded-lg text-sm font-semibold text-gray-600 hover:bg-gray-50 transition">Cancel</button>
+                <button onclick="submitUnpublish()" class="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white text-sm font-bold rounded-lg shadow-sm transition">Force Unpublish</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Layout Injector Script -->
+    <script src="layout-injector.js"></script>
+
+    <!-- Page Interaction Script -->
+    <script>
+        let currentTargetBtn = null;
+
+        $(document).ready(function() {
+            $('#eventsTable').DataTable({
+                pageLength: 10,
+                ordering: true,
+                searching: true,
+                lengthChange: false,
+                info: false
+            });
+        });
+
+        function openUnpublishModal(eventName, btn) {
+            currentTargetBtn = btn;
+            document.getElementById('modalEventName').innerText = eventName;
+            document.getElementById('unpublishModal').classList.remove('hidden');
+        }
+
+        function closeUnpublishModal() {
+            document.getElementById('unpublishModal').classList.add('hidden');
+            currentTargetBtn = null;
+        }
+
+        function submitUnpublish() {
+            const reason = document.getElementById('violationReason').value;
+            const notes = document.getElementById('adminNotes').value;
+
+            if (currentTargetBtn) {
+                const row = currentTargetBtn.closest('tr');
+                const statusSpan = row.querySelector('td:nth-child(3) span');
+                
+                statusSpan.innerText = "Suspended";
+                statusSpan.className = "px-2.5 py-0.5 bg-rose-100 text-rose-800 rounded-full text-xs font-bold";
+
+                currentTargetBtn.outerHTML = `<button onclick="reactivateEvent(this)" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded transition">Reactivate</button>`;
+            }
+
+            alert(`Event unpublished successfully. Reason: ${reason}. Notes: ${notes}`);
+            closeUnpublishModal();
+        }
+
+        function reactivateEvent(btn) {
+            const row = btn.closest('tr');
+            const statusSpan = row.querySelector('td:nth-child(3) span');
+
+            statusSpan.innerText = "Live";
+            statusSpan.className = "px-2.5 py-0.5 bg-emerald-100 text-emerald-800 rounded-full text-xs font-bold";
+
+            const eventName = row.querySelector('td:nth-child(1)').innerText;
+            btn.outerHTML = `<button onclick="openUnpublishModal('${eventName}', this)" class="px-3 py-1 bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold rounded transition">Unpublish</button>`;
+
+            alert("Event reactivated successfully.");
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revelti - Platform Financials</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        revelti: {
+                            blue: '#213c63',
+                            orange: '#f58220',
+                            rose: '#be123c'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts: Nunito -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- DataTables.js for advanced tables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+            background: #be123c !important;
+            color: white !important;
+            border: 1px solid #be123c !important;
+            border-radius: 9999px;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            background: #be123c !important;
+            color: white !important;
+            border: 1px solid #be123c !important;
+        }
+    </style>
+</head>
+
+<body class="dashboard-layout bg-gray-100 antialiased text-gray-800" data-role="superadmin">
+    <!-- Navbar Placeholder -->
+    <div id="superadmin-navbar-placeholder"></div>
+
+    <div class="dashboard-main-area">
+        <aside id="sidebar-placeholder" class="sidebar-container bg-white z-20"></aside>
+
+        <div class="main-wrapper">
+            <main class="page-content">
+                <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+                    <!-- Header -->
+                    <header class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between">
+                        <div>
+                            <h1 class="text-3xl font-extrabold text-slate-900">Platform Financials</h1>
+                            <p class="text-gray-500 mt-1">Stripe integration health, subscription logs, and commission transactions.</p>
+                        </div>
+                    </header>
+
+                    <!-- Tab Navigation -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 mb-6 overflow-hidden">
+                        <nav class="flex border-b border-gray-200">
+                            <button onclick="switchTab('overview')" id="tab-overview" class="flex-1 py-3 text-center font-bold text-sm border-b-2 border-rose-700 text-rose-700">Financial Overview</button>
+                            <button onclick="switchTab('payouts')" id="tab-payouts" class="flex-1 py-3 text-center font-semibold text-sm text-gray-500 hover:text-rose-700 transition">Stripe Payout Log (Auto-Approved)</button>
+                            <button onclick="switchTab('ledger')" id="tab-ledger" class="flex-1 py-3 text-center font-semibold text-sm text-gray-500 hover:text-rose-700 transition">Transaction Ledger</button>
+                        </nav>
+
+                        <div class="p-6">
+                            <!-- Tab Content: Overview -->
+                            <div id="content-overview" class="tab-content">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                                    <div class="p-5 rounded-lg border border-gray-200 bg-gray-50">
+                                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wide">Gross Ticket Sales Volume</h4>
+                                        <p class="text-2xl font-extrabold text-slate-950 mt-2">€482,900.00</p>
+                                        <p class="text-xs text-gray-500 mt-1">Platform fee: 5% avg</p>
+                                    </div>
+                                    <div class="p-5 rounded-lg border border-gray-200 bg-gray-50">
+                                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wide">Stripe Net Payouts Disbursed</h4>
+                                        <p class="text-2xl font-extrabold text-emerald-600 mt-2">€458,755.00</p>
+                                        <p class="text-xs text-gray-500 mt-1">Stripe auto-transferred: 95% total volume</p>
+                                    </div>
+                                    <div class="p-5 rounded-lg border border-gray-200 bg-gray-50">
+                                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wide">Revelti Net Share Accumulated</h4>
+                                        <p class="text-2xl font-extrabold text-rose-700 mt-2">€24,145.00</p>
+                                        <p class="text-xs text-gray-500 mt-1">Direct payout commission reserve</p>
+                                    </div>
+                                </div>
+
+                                <div class="border border-gray-200 rounded-lg p-5">
+                                    <h3 class="text-lg font-bold text-slate-950 mb-3">Subscription Metrics</h3>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div>
+                                            <p class="text-sm font-semibold text-gray-600 mb-2">Revenue Split By Plan Type</p>
+                                            <div class="space-y-2.5">
+                                                <div>
+                                                    <div class="flex justify-between text-xs font-bold mb-1">
+                                                        <span>Creative Studio Pro Plan (€29/mo)</span>
+                                                        <span>€7,830.00 (61%)</span>
+                                                    </div>
+                                                    <div class="w-full bg-gray-150 rounded-full h-2">
+                                                        <div class="bg-rose-700 h-2 rounded-full" style="width: 61%"></div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="flex justify-between text-xs font-bold mb-1">
+                                                        <span>Organizer Business Plan (€99/mo)</span>
+                                                        <span>€5,020.00 (39%)</span>
+                                                    </div>
+                                                    <div class="w-full bg-gray-150 rounded-full h-2">
+                                                        <div class="bg-purple-700 h-2 rounded-full" style="width: 39%"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-col justify-center">
+                                            <div class="p-4 bg-rose-50/50 rounded-lg border border-rose-100/50 text-rose-950">
+                                                <p class="text-sm font-bold">Stripe Connect Integration Health</p>
+                                                <p class="text-xs text-rose-800 mt-1">Auto-payout schedules are running dynamically. Payout reserves are backed by Stripe Connect balances.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tab Content: Payout Log -->
+                            <div id="content-payouts" class="tab-content hidden">
+                                <div class="mb-4 p-3 bg-amber-50 rounded-lg border border-amber-100 flex items-center justify-between text-amber-900 text-xs font-semibold">
+                                    <span>💡 Stripe automatically payouts funds to organizers and promoters. You can enforce a manual hold on any pending status in case of a dispute.</span>
+                                </div>
+                                <div class="overflow-x-auto">
+                                    <table id="payoutsTable" class="w-full text-left text-sm">
+                                        <thead>
+                                            <tr class="bg-gray-50 border-b border-gray-200">
+                                                <th class="p-3 font-bold text-gray-500">Payout ID</th>
+                                                <th class="p-3 font-bold text-gray-500">Recipient</th>
+                                                <th class="p-3 font-bold text-gray-500">Role</th>
+                                                <th class="p-3 font-bold text-gray-500">Stripe Transfer ID</th>
+                                                <th class="p-3 font-bold text-gray-500">Amount</th>
+                                                <th class="p-3 font-bold text-gray-500">Date Triggered</th>
+                                                <th class="p-3 font-bold text-gray-500">Status</th>
+                                                <th class="p-3 font-bold text-gray-500">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-gray-150">
+                                            <tr>
+                                                <td class="p-3 font-semibold">PAY-9810</td>
+                                                <td class="p-3">LMP Events</td>
+                                                <td class="p-3"><span class="text-xs px-2 py-0.5 bg-blue-100 text-blue-800 rounded font-semibold">Organizer</span></td>
+                                                <td class="p-3 font-mono text-xs text-gray-500">tr_1NbK2V2eZvKYlo</td>
+                                                <td class="p-3 font-bold text-slate-900">€3,160.50</td>
+                                                <td class="p-3 text-xs">2026-07-11 14:20</td>
+                                                <td class="p-3"><span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full text-xs font-bold">Paid</span></td>
+                                                <td class="p-3"><button onclick="togglePayoutHold(this, 'PAY-9810')" class="px-3 py-1 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded text-xs transition">Pause Transfer</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="p-3 font-semibold">PAY-9809</td>
+                                                <td class="p-3">AMedia</td>
+                                                <td class="p-3"><span class="text-xs px-2 py-0.5 bg-purple-100 text-purple-800 rounded font-semibold">Creative</span></td>
+                                                <td class="p-3 font-mono text-xs text-gray-500">tr_1NbK2V2eZvKYl1</td>
+                                                <td class="p-3 font-bold text-slate-900">€1,240.00</td>
+                                                <td class="p-3 text-xs">2026-07-11 11:05</td>
+                                                <td class="p-3"><span class="px-2 py-0.5 bg-yellow-100 text-yellow-800 rounded-full text-xs font-bold">Processing</span></td>
+                                                <td class="p-3"><button onclick="togglePayoutHold(this, 'PAY-9809')" class="px-3 py-1 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded text-xs transition">Pause Transfer</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="p-3 font-semibold">PAY-9808</td>
+                                                <td class="p-3">John Doe</td>
+                                                <td class="p-3"><span class="text-xs px-2 py-0.5 bg-gray-150 text-gray-800 rounded font-semibold">Promoter</span></td>
+                                                <td class="p-3 font-mono text-xs text-gray-500">tr_1NbK2V2eZvKYl2</td>
+                                                <td class="p-3 font-bold text-slate-900">€240.50</td>
+                                                <td class="p-3 text-xs">2026-07-10 18:30</td>
+                                                <td class="p-3"><span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full text-xs font-bold">Paid</span></td>
+                                                <td class="p-3"><button onclick="togglePayoutHold(this, 'PAY-9808')" class="px-3 py-1 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded text-xs transition">Pause Transfer</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="p-3 font-semibold">PAY-9807</td>
+                                                <td class="p-3">Dance Fest Spain</td>
+                                                <td class="p-3"><span class="text-xs px-2 py-0.5 bg-blue-100 text-blue-800 rounded font-semibold">Organizer</span></td>
+                                                <td class="p-3 font-mono text-xs text-gray-500">tr_1NbK2V2eZvKYl3</td>
+                                                <td class="p-3 font-bold text-slate-900">€14,800.00</td>
+                                                <td class="p-3 text-xs">2026-07-09 09:15</td>
+                                                <td class="p-3"><span class="px-2 py-0.5 bg-rose-100 text-rose-800 rounded-full text-xs font-bold">Failed</span></td>
+                                                <td class="p-3"><button disabled class="px-3 py-1 bg-gray-300 text-gray-500 font-bold rounded text-xs cursor-not-allowed">Stripe Blocked</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- Tab Content: Ledger -->
+                            <div id="content-ledger" class="tab-content hidden">
+                                <div class="overflow-x-auto">
+                                    <table id="ledgerTable" class="w-full text-left text-sm">
+                                        <thead>
+                                            <tr class="bg-gray-50 border-b border-gray-200">
+                                                <th class="p-3 font-bold text-gray-500">Txn ID</th>
+                                                <th class="p-3 font-bold text-gray-500">Buyer</th>
+                                                <th class="p-3 font-bold text-gray-500">Associated Event</th>
+                                                <th class="p-3 font-bold text-gray-500">Gross Amount</th>
+                                                <th class="p-3 font-bold text-gray-500">Platform Comm (5%)</th>
+                                                <th class="p-3 font-bold text-gray-500">Promoter Comm</th>
+                                                <th class="p-3 font-bold text-gray-500">Method</th>
+                                                <th class="p-3 font-bold text-gray-500">Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-gray-150">
+                                            <tr>
+                                                <td class="p-3 font-semibold">TXN-45091</td>
+                                                <td class="p-3">Alex Johnson</td>
+                                                <td class="p-3">Dance Fest Spain</td>
+                                                <td class="p-3 font-bold">€150.00</td>
+                                                <td class="p-3 font-bold text-rose-700">€7.50</td>
+                                                <td class="p-3">€15.00</td>
+                                                <td class="p-3 text-xs">Stripe (Card)</td>
+                                                <td class="p-3 text-xs">2026-07-11 15:42</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="p-3 font-semibold">TXN-45090</td>
+                                                <td class="p-3">Emma Watson</td>
+                                                <td class="p-3">Ibiza Summer Rave</td>
+                                                <td class="p-3 font-bold">€90.00</td>
+                                                <td class="p-3 font-bold text-rose-700">€4.50</td>
+                                                <td class="p-3">—</td>
+                                                <td class="p-3 text-xs">Stripe (Apple Pay)</td>
+                                                <td class="p-3 text-xs">2026-07-11 15:10</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="p-3 font-semibold">TXN-45089</td>
+                                                <td class="p-3">Marcus Aurelius</td>
+                                                <td class="p-3">Madrid Bachata Congress</td>
+                                                <td class="p-3 font-bold">€200.00</td>
+                                                <td class="p-3 font-bold text-rose-700">€10.00</td>
+                                                <td class="p-3">€20.00</td>
+                                                <td class="p-3 text-xs">Stripe (Card)</td>
+                                                <td class="p-3 text-xs">2026-07-11 14:02</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="p-3 font-semibold">SUB-3011</td>
+                                                <td class="p-3">AMedia (Creative Subscription)</td>
+                                                <td class="p-3">—</td>
+                                                <td class="p-3 font-bold">€29.00</td>
+                                                <td class="p-3 font-bold text-rose-700">€29.00</td>
+                                                <td class="p-3">—</td>
+                                                <td class="p-3 text-xs">Stripe (Recurring)</td>
+                                                <td class="p-3 text-xs">2026-07-10 09:00</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="p-3 font-semibold">SUB-3010</td>
+                                                <td class="p-3">LMP Events (Organizer Subscription)</td>
+                                                <td class="p-3">—</td>
+                                                <td class="p-3 font-bold">€99.00</td>
+                                                <td class="p-3 font-bold text-rose-700">€99.00</td>
+                                                <td class="p-3">—</td>
+                                                <td class="p-3 text-xs">Stripe (Recurring)</td>
+                                                <td class="p-3 text-xs">2026-07-10 08:30</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="layout-injector.js"></script>
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+            document.getElementById(`content-${tabId}`).classList.remove('hidden');
+
+            document.querySelectorAll('nav button').forEach(b => {
+                b.classList.remove('border-b-2', 'border-rose-700', 'text-rose-700');
+                b.classList.add('text-gray-500');
+            });
+            const activeBtn = document.getElementById(`tab-${tabId}`);
+            activeBtn.classList.remove('text-gray-500');
+            activeBtn.classList.add('border-b-2', 'border-rose-700', 'text-rose-700');
+        }
+
+        function togglePayoutHold(btn, payoutId) {
+            if (btn.innerText === "Pause Transfer") {
+                btn.innerText = "Resume Transfer";
+                btn.classList.remove('bg-amber-500', 'hover:bg-amber-600');
+                btn.classList.add('bg-rose-600', 'hover:bg-rose-700');
+                
+                // Visual status modification
+                const row = btn.closest('tr');
+                const statusSpan = row.querySelector('td:nth-child(7) span');
+                statusSpan.innerText = "Paused";
+                statusSpan.classList.remove('bg-yellow-100', 'text-yellow-800', 'bg-emerald-100', 'text-emerald-800');
+                statusSpan.classList.add('bg-rose-100', 'text-rose-800');
+            } else {
+                btn.innerText = "Pause Transfer";
+                btn.classList.remove('bg-rose-600', 'hover:bg-rose-700');
+                btn.classList.add('bg-amber-500', 'hover:bg-amber-600');
+
+                const row = btn.closest('tr');
+                const statusSpan = row.querySelector('td:nth-child(7) span');
+                statusSpan.innerText = "Processing";
+                statusSpan.classList.remove('bg-rose-100', 'text-rose-800');
+                statusSpan.classList.add('bg-yellow-100', 'text-yellow-800');
+            }
+        }
+
+        $(document).ready(function() {
+            $('#payoutsTable').DataTable({
+                pageLength: 10,
+                ordering: true,
+                searching: true,
+                lengthChange: false,
+                info: false
+            });
+            $('#ledgerTable').DataTable({
+                pageLength: 10,
+                ordering: true,
+                searching: true,
+                lengthChange: false,
+                info: false
+            });
+        });
+    </script>
+</body>
+
+</html>

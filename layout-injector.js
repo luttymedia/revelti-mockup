@@ -5,13 +5,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     const pathname = window.location.pathname;
     const isLoginPage = pathname.endsWith('attendeeDashboard.html') ||
         pathname.endsWith('organizerDashboard.html') ||
-        pathname.endsWith('creativeDashboard.html');
+        pathname.endsWith('creativeDashboard.html') ||
+        pathname.endsWith('superAdminDashboard.html');
 
     if (isLoginPage) {
         localStorage.setItem('revelti_logged_in', 'true');
         if (pathname.endsWith('attendeeDashboard.html')) localStorage.setItem('revelti_active_role', 'attendee');
         else if (pathname.endsWith('organizerDashboard.html')) localStorage.setItem('revelti_active_role', 'organizer');
         else if (pathname.endsWith('creativeDashboard.html')) localStorage.setItem('revelti_active_role', 'creative');
+        else if (pathname.endsWith('superAdminDashboard.html')) localStorage.setItem('revelti_active_role', 'superadmin');
     }
 
     if (role) {
@@ -41,7 +43,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     try {
-        if (role === 'creative' || role === 'organizer' || role === 'promoter') {
+        if (role === 'creative' || role === 'organizer' || role === 'promoter' || role === 'superadmin') {
             const _v = Date.now();
             const [sidebarHtml, navbarHtml] = await Promise.all([
                 fetch(`${role}Sidebar.snippet?v=${_v}`).then(r => r.text()),

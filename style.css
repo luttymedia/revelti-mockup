@@ -738,6 +738,24 @@ div.dt-button-background {
     /* purple-50 */
 }
 
+/* Active State Color for Super Admin View */
+.active-link-superadmin {
+    color: #be123c !important;
+    /* rose-700 / crimson */
+    font-weight: 700;
+}
+
+.active-link-superadmin svg {
+    color: #be123c !important;
+    stroke: #be123c !important;
+}
+
+/* Background Highlight for Sidebar Links in Super Admin View */
+.sidebar-container .active-link-superadmin {
+    background-color: #fff1f2 !important;
+    /* rose-50 */
+}
+
 /* --- Sidebar Group (details/summary) Styles --- */
 
 /* Rotate chevron when group is open */
