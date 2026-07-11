@@ -818,3 +818,81 @@ details[open] summary .accordion-chevron { transform: rotate(180deg); }
 .toggle-row:last-child { border-bottom: none; }
 .toggle-row .toggle-label { font-size: .875rem; color: #374151; font-weight: 500; }
 .toggle-row .toggle-desc { font-size: .75rem; color: #9ca3af; }
+
+/* --- Mobile Viewport Overrides (ONLY MOBILE) --- */
+@media (max-width: 767px) {
+    /* Hide sidebar completely on mobile to prevent squishing layout */
+    .sidebar-container,
+    #sidebar-placeholder {
+        display: none !important;
+        width: 0 !important;
+        min-width: 0 !important;
+    }
+
+    /* Reset layout padding-left or margins where sidebar was assumed */
+    .dashboard-layout {
+        padding-top: 3rem !important;
+    }
+
+    /* Horizontal scroll for all tab containers instead of text wrap/squish */
+    .attendee-tab-container,
+    .attendee-tab-container-wide,
+    .organizer-tab-container,
+    .organizer-tab-container-wide,
+    .creative-tab-container,
+    .creative-tab-container-wide {
+        overflow-x: auto !important;
+        white-space: nowrap !important;
+        justify-content: flex-start !important;
+        border-radius: 0.5rem !important;
+        max-width: 100% !important;
+        scrollbar-width: none !important; /* Firefox */
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .attendee-tab-container::-webkit-scrollbar,
+    .attendee-tab-container-wide::-webkit-scrollbar,
+    .organizer-tab-container::-webkit-scrollbar,
+    .organizer-tab-container-wide::-webkit-scrollbar,
+    .creative-tab-container::-webkit-scrollbar,
+    .creative-tab-container-wide::-webkit-scrollbar {
+        display: none !important; /* Chrome/Safari/Webkit */
+    }
+
+    .attendee-tab-container button,
+    .attendee-tab-container-wide button,
+    .organizer-tab-container button,
+    .organizer-tab-container-wide button,
+    .creative-tab-container button,
+    .creative-tab-container-wide button,
+    .attendee-tab-container a,
+    .attendee-tab-container-wide a,
+    .organizer-tab-container a,
+    .organizer-tab-container-wide a,
+    .creative-tab-container a,
+    .creative-tab-container-wide a {
+        flex: 0 0 auto !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    /* Table scrolling auto-wrapping */
+    table {
+        display: block !important;
+        width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+
+    /* Responsive grid items layout scaling */
+    .mobile-col-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Stacking header items vertically */
+    .flex-row-mobile-wrap {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 1rem !important;
+    }
+}

@@ -71,13 +71,13 @@
                     </nav>
 
                     <!-- Header: Title Row + Search Bar -->
-                    <div class="flex items-center justify-between mb-3 gap-4">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-3 gap-4">
                         <!-- Left: Page Title -->
                         <h1 id="folder-title" class="text-3xl font-bold text-revelti-blue whitespace-nowrap">Studio
                             Workspace</h1>
 
                         <!-- Right: Search Bar -->
-                        <div class="relative flex-1 max-w-md ml-auto">
+                        <div class="relative w-full sm:max-w-md sm:ml-auto">
                             <input type="text" id="studio-search-input" placeholder="Search in Studio"
                                 oninput="handleSearchInput(this.value)"
                                 class="w-full border border-gray-300 rounded-lg py-2 pl-4 pr-10 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-revelti-blue/30 focus:border-revelti-blue placeholder-gray-400">
@@ -94,9 +94,9 @@
                     </div>
 
                     <!-- Header: Toolbar Row -->
-                    <div class="flex items-center justify-between mb-4">
+                    <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
                         <!-- Left: Compact Action Buttons -->
-                        <div class="flex items-center gap-2">
+                        <div class="flex flex-wrap items-center gap-2">
                             <!-- Upload -->
                             <button onclick="alert('Simulating File Upload Dialog')"
                                 class="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-600 bg-white border border-gray-300 rounded-lg px-3 py-1.5 hover:bg-gray-50 hover:border-gray-400 transition shadow-sm">
