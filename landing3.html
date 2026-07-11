@@ -1,0 +1,4409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revelti - The event doesn't end when the music stops.</title>
+  <meta name="description"
+    content="Revelti is the all-in-one platform for event organizers, creatives, and attendees. Stop juggling tools. Join the waitlist and be the first to experience it.">
+  <meta property="og:title" content="Revelti - The event doesn't end when the music stops.">
+  <meta property="og:description"
+    content="One platform. Organizers. Creatives. Attendees. Memories that live forever. Join the waitlist.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --blue: #213c63;
+      --orange: #f58220;
+      --purple: #6b21a8;
+      --green: #2e7d32;
+      --dark: #f8fafc;
+      --dark2: #ffffff;
+      --surface: #ffffff;
+      --surface2: #f1f5f9;
+      --text: #1e293b;
+      --muted: #64748b;
+      --glow-blue: rgba(33, 60, 99, 0.08);
+      --glow-orange: rgba(245, 130, 32, 0.08);
+      --creative-accent: #6b21a8;
+      --organizer-accent: #213c63;
+      --attendee-accent: #f58220;
+
+      --border-color: rgba(33, 60, 99, 0.08);
+      --border-color-strong: rgba(33, 60, 99, 0.15);
+      --fill-color: rgba(33, 60, 99, 0.03);
+      --fill-color-hover: rgba(33, 60, 99, 0.06);
+      --fill-color-subtle: rgba(33, 60, 99, 0.015);
+      --shadow-premium: 0 10px 30px rgba(33, 60, 99, 0.04), 0 1px 3px rgba(33, 60, 99, 0.02);
+      --shadow-active: 0 15px 40px rgba(33, 60, 99, 0.07);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--dark);
+      color: var(--text);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    .brand-highlight {
+      color: var(--orange);
+      font-weight: 800;
+    }
+
+    /* ===================== CUSTOM CURSOR ===================== */
+    #cursor {
+      position: fixed;
+      width: 12px;
+      height: 12px;
+      background: var(--orange);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1000000;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease, opacity 0.2s;
+      mix-blend-mode: normal;
+    }
+
+    #cursor-ring {
+      position: fixed;
+      width: 36px;
+      height: 36px;
+      border: 1.5px solid rgba(245, 130, 32, 0.4);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 999999;
+      transform: translate(-50%, -50%);
+      transition: all 0.15s ease;
+    }
+
+    body:hover #cursor {
+      opacity: 1;
+    }
+
+    a:hover~#cursor,
+    button:hover~#cursor {
+      transform: translate(-50%, -50%) scale(2);
+    }
+
+    /* ===================== CANVAS ===================== */
+    #particles-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.6;
+    }
+
+    /* ===================== GLOBAL NAV ===================== */
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      height: 56px;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .top-bar-inner {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+    }
+
+    .logo-img {
+      height: 22px;
+      object-fit: contain;
+      transition: transform 0.3s;
+    }
+
+    .logo-img:hover {
+      transform: scale(1.05);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-link {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover {
+      color: var(--orange);
+    }
+
+    .nav-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 20px;
+      border-radius: 999px;
+      border: none;
+      background: var(--organizer-accent);
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 13px;
+      text-decoration: none;
+      box-shadow: 0 2px 4px rgba(33, 60, 99, 0.1);
+      transition: all 0.2s ease-in-out;
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    .nav-pill:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(33, 60, 99, 0.15);
+    }
+
+    /* Mobile Hamburger Menu */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 20px;
+      height: 14px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      z-index: 101;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: var(--text);
+      transition: all 0.3s;
+      border-radius: 2px;
+    }
+
+    .menu-toggle.open span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .menu-toggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.open span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(10px);
+      z-index: 99;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s;
+    }
+
+    .mobile-menu.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .mobile-menu .nav-link {
+      font-size: 20px;
+    }
+
+    /* ===================== CHAPTER DOTS ===================== */
+    .chapter-nav {
+      position: fixed;
+      right: 28px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .chapter-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(33, 60, 99, 0.18);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .chapter-dot.active {
+      width: 6px;
+      height: 24px;
+      background: var(--orange);
+      box-shadow: 0 0 10px rgba(245, 130, 32, 0.6);
+    }
+
+    .chapter-dot:hover {
+      background: rgba(245, 130, 32, 0.6);
+      transform: scale(1.3);
+    }
+
+    /* ===================== SECTIONS ===================== */
+    section {
+      position: relative;
+      z-index: 1;
+      min-height: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 24px;
+    }
+
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 24px 16px;
+      position: relative;
+      overflow: hidden;
+      background: var(--dark);
+    }
+
+    .hero-container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+      padding-top: 20px;
+    }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(245, 130, 32, 0.1);
+      border: 1px solid rgba(245, 130, 32, 0.25);
+      color: var(--orange);
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .pulse-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--orange);
+      border-radius: 50%;
+      animation: pulse-anim 1.6s infinite;
+    }
+
+    @keyframes pulse-anim {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 rgba(245, 130, 32, 0.7);
+      }
+
+      50% {
+        box-shadow: 0 0 0 6px rgba(245, 130, 32, 0);
+      }
+    }
+
+    .hero-headline {
+      font-family: inherit;
+      font-size: clamp(34px, 5.5vw, 56px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      max-width: 950px;
+      margin: 0 auto 24px;
+      animation: fadeUp 0.9s 0.1s ease both;
+    }
+
+    .headline-line {
+      display: block;
+    }
+
+    .headline-accent {
+      background: linear-gradient(90deg, var(--orange) 0%, #ff9f50 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .glitch-word {
+      display: inline-block;
+      position: relative;
+    }
+
+    .glitch-word.glitching {
+      animation: glitch 0.4s steps(1) forwards;
+    }
+
+    @keyframes glitch {
+      0% {
+        clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+        transform: translate(-2px);
+      }
+
+      14% {
+        clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+        transform: translate(2px);
+      }
+
+      28% {
+        clip-path: polygon(0 20%, 100% 20%, 100% 55%, 0 55%);
+        transform: translate(-1px);
+      }
+
+      42% {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        transform: translate(0);
+      }
+
+      56% {
+        clip-path: polygon(0 40%, 100% 40%, 100% 70%, 0 70%);
+        transform: translate(1px);
+      }
+
+      70% {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        transform: translate(0);
+      }
+
+      100% {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        transform: translate(0);
+      }
+    }
+
+    .hero-sub {
+      font-size: clamp(15px, 2vw, 18px);
+      color: var(--muted);
+      max-width: 580px;
+      margin: 0 auto 36px;
+      line-height: 1.65;
+      font-weight: 400;
+      animation: fadeUp 1s 0.2s ease both;
+    }
+
+    /* ===================== HERO CHOOSE YOUR JOURNEY CARDS ===================== */
+    .hero-picker-wrapper {
+      margin-top: 48px;
+      animation: fadeUp 1.2s 0.4s ease both;
+    }
+
+    .picker-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 24px;
+      font-weight: 800;
+    }
+
+    .picker-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .picker-card {
+      background: var(--surface);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 24px 20px;
+      text-align: left;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+      box-shadow: var(--shadow-premium);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .picker-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(33, 60, 99, 0.06);
+    }
+
+    .picker-card.org-card:hover {
+      border-color: rgba(33, 60, 99, 0.4);
+    }
+
+    .picker-card.cre-card:hover {
+      border-color: rgba(107, 33, 168, 0.4);
+    }
+
+    .picker-card.att-card:hover {
+      border-color: rgba(245, 130, 32, 0.4);
+    }
+
+    .picker-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .picker-tag {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+      width: fit-content;
+    }
+
+    .picker-card.org-card .picker-tag {
+      background: rgba(33, 60, 99, 0.08);
+      color: #213c63;
+    }
+
+    .picker-card.cre-card .picker-tag {
+      background: rgba(107, 33, 168, 0.08);
+      color: var(--creative-accent);
+    }
+
+    .picker-card.att-card .picker-tag {
+      background: rgba(245, 130, 32, 0.08);
+      color: var(--attendee-accent);
+    }
+
+    .picker-card-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .picker-card-desc {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .picker-arrow {
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s;
+    }
+
+    .picker-card.org-card .picker-arrow {
+      color: var(--organizer-accent);
+    }
+
+    .picker-card.cre-card .picker-arrow {
+      color: var(--creative-accent);
+    }
+
+    .picker-card.att-card .picker-arrow {
+      color: var(--attendee-accent);
+    }
+
+    .picker-card:hover .picker-arrow {
+      gap: 12px;
+    }
+
+    /* ===================== SCROLL INDICATOR ===================== */
+    .scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      animation: fadeUpScroll 1s 1s ease both;
+    }
+
+    @keyframes fadeUpScroll {
+      from {
+        opacity: 0;
+        transform: translate(-50%, 28px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+    }
+
+    @keyframes fadeUpMobileScroll {
+      from {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .scroll-hint-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(245, 130, 32, 0.6), transparent);
+      animation: scrollLine 1.8s ease-in-out infinite;
+    }
+
+    @keyframes scrollLine {
+      0% {
+        transform: scaleY(0);
+        transform-origin: top;
+      }
+
+      50% {
+        transform: scaleY(1);
+        transform-origin: top;
+      }
+
+      51% {
+        transform: scaleY(1);
+        transform-origin: bottom;
+      }
+
+      100% {
+        transform: scaleY(0);
+        transform-origin: bottom;
+      }
+    }
+
+    /* ===================== SECTION: THE PROBLEM ===================== */
+    #chaos {
+      padding: 60px 24px;
+      background: var(--dark2);
+    }
+
+    .chaos-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--orange);
+      font-weight: 700;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--orange);
+    }
+
+    .section-headline {
+      font-family: inherit;
+      font-size: clamp(32px, 4.5vw, 48px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      margin-bottom: 24px;
+    }
+
+    .section-body {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .pain-list {
+      margin-top: 28px;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .pain-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .pain-icon {
+      width: 32px;
+      height: 32px;
+      background: rgba(245, 130, 32, 0.08);
+      border: 1px solid rgba(245, 130, 32, 0.15);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .chaos-visual {
+      position: relative;
+    }
+
+    .chaos-stack {
+      position: relative;
+      height: 280px;
+    }
+
+    .chaos-tool {
+      position: absolute;
+      background: var(--surface);
+      border: 1px solid rgba(239, 68, 68, 0.12);
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+      color: var(--muted);
+      box-shadow: var(--shadow-premium);
+      animation: chaosFloat linear infinite;
+      transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.3s, color 0.3s, box-shadow 0.3s;
+    }
+
+    .chaos-tool:hover {
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+      z-index: 10;
+    }
+
+    @keyframes chaosFloat {
+      0% {
+        transform: translate(0, 0) rotate(var(--rot));
+      }
+
+      33% {
+        transform: translate(var(--dx), var(--dy)) rotate(calc(var(--rot) + 3deg));
+      }
+
+      66% {
+        transform: translate(calc(var(--dx) * -0.5), calc(var(--dy) * 0.8)) rotate(calc(var(--rot) - 2deg));
+      }
+
+      100% {
+        transform: translate(0, 0) rotate(var(--rot));
+      }
+    }
+
+    /* ===================== PERSPECTIVE SECTIONS (ALWAYS VISIBLE) ===================== */
+    .perspective-section {
+      padding: 80px 24px;
+      background: var(--dark2);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .perspective-section:nth-of-type(even) {
+      background: var(--dark);
+    }
+
+    .perspective-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .pp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      grid-template-rows: auto auto;
+      gap: 0 60px;
+      align-items: stretch;
+    }
+
+    .pp-headline {
+      font-family: inherit;
+      font-size: clamp(30px, 4vw, 44px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      margin-bottom: 20px;
+    }
+
+    .pp-body {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 36px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      font-size: 15px;
+      line-height: 1.5;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      border-left: 4px solid transparent;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .fi-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .fi-icon.creative {
+      background: rgba(107, 33, 168, 0.12);
+    }
+
+    .fi-icon.org {
+      background: rgba(74, 127, 212, 0.12);
+    }
+
+    .fi-icon.att {
+      background: rgba(245, 130, 32, 0.12);
+    }
+
+    .fi-text strong {
+      display: block;
+      color: var(--text);
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .fi-text span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .pp-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: all 0.25s;
+      text-decoration: none;
+    }
+
+    .pp-cta.creative-cta {
+      background: var(--creative-accent);
+      color: #fff;
+      box-shadow: 0 8px 30px rgba(107, 33, 168, 0.3);
+    }
+
+    .pp-cta.org-cta {
+      background: var(--organizer-accent);
+      color: #fff;
+      box-shadow: 0 8px 30px rgba(33, 60, 99, 0.3);
+    }
+
+    .pp-cta.att-cta {
+      background: var(--attendee-accent);
+      color: #fff;
+      box-shadow: 0 8px 30px rgba(245, 130, 32, 0.3);
+    }
+
+    .pp-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(107, 33, 168, 0.45);
+    }
+
+    .pp-cta.org-cta:hover {
+      box-shadow: 0 14px 40px rgba(33, 60, 99, 0.45);
+    }
+
+    .pp-cta.att-cta:hover {
+      box-shadow: 0 14px 40px rgba(245, 130, 32, 0.45);
+    }
+
+    /* perspective mockup area */
+    .pp-mockup {
+      position: relative;
+      margin-top: 20px;
+    }
+
+    .mockup-window {
+      background: var(--surface);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow-premium);
+    }
+
+    .mockup-titlebar {
+      height: 36px;
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      gap: 6px;
+    }
+
+    .mockup-body {
+      padding: 0;
+    }
+
+    /* ===================== NEW CREATIVE GALLERY WALL ===================== */
+    .creative-gallery-section {
+      background: #090514;
+      color: #f8fafc;
+      padding: 80px 24px;
+      border-bottom: 1px solid rgba(107, 33, 168, 0.25);
+    }
+
+    .creative-gallery-section .pp-headline {
+      color: #ffffff;
+    }
+
+    .creative-gallery-section .pp-body {
+      color: #94a3b8;
+    }
+
+    .creative-gallery-section .fi-text strong {
+      color: #ffffff;
+    }
+
+    .creative-gallery-section .fi-text span {
+      color: #94a3b8;
+    }
+
+    .creative-gallery-section .cr-feat-active .fi-text strong {
+      color: #c084fc !important;
+    }
+
+    .creative-gallery-section .fi-icon.creative {
+      background: rgba(168, 85, 247, 0.25) !important;
+      color: #d8b4fe !important;
+    }
+
+    .creative-gallery-section .cr-feat-active .fi-icon {
+      filter: brightness(1.2);
+      opacity: 1 !important;
+    }
+
+    .creative-gallery-section .feature-item:not(.cr-feat-active) {
+      border-color: transparent !important;
+      background: transparent !important;
+      box-shadow: none !important;
+    }
+
+    .creative-gallery-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .creative-mosaic-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: 260px;
+      gap: 24px;
+      margin-top: 48px;
+      margin-bottom: 48px;
+    }
+
+    .creative-mosaic-item {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(107, 33, 168, 0.25);
+      background-size: cover;
+      background-position: center;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+      transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .creative-mosaic-item::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(9, 5, 20, 0.25) 0%, rgba(9, 5, 20, 0.92) 100%);
+      transition: opacity 0.4s ease;
+      z-index: 1;
+    }
+
+    .creative-mosaic-item .mosaic-content {
+      position: relative;
+      z-index: 2;
+      padding: 28px;
+      transition: all 0.4s ease;
+    }
+
+    .creative-mosaic-item .mosaic-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .creative-mosaic-item .mosaic-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .creative-mosaic-item .mosaic-desc {
+      font-size: 13.5px;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+
+    /* Desktop hover animations */
+    @media (min-width: 769px) {
+      .creative-mosaic-item.item-large {
+        grid-column: span 7;
+      }
+
+      .creative-mosaic-item.item-small {
+        grid-column: span 5;
+      }
+
+      .creative-mosaic-item:hover {
+        transform: translateY(-8px) scale(1.015);
+        border-color: rgba(168, 85, 247, 0.55);
+        box-shadow: 0 25px 50px rgba(107, 33, 168, 0.35);
+      }
+
+      .creative-mosaic-item:hover::before {
+        opacity: 0.95;
+      }
+
+      .creative-mosaic-item:hover .mosaic-icon {
+        transform: scale(1.15) rotate(-5deg);
+      }
+
+      .creative-mosaic-item .mosaic-desc {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.4s ease;
+      }
+
+      .creative-mosaic-item:hover .mosaic-desc {
+        max-height: 100px;
+        opacity: 1;
+        margin-top: 6px;
+      }
+    }
+
+    /* Mobile / Tablet visual scroll fallback */
+    @media (max-width: 768px) {
+      .creative-mosaic-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+        gap: 20px;
+      }
+
+      .creative-mosaic-item {
+        grid-column: span 12 !important;
+        min-height: 220px;
+      }
+
+      .creative-mosaic-item::before {
+        background: linear-gradient(180deg, rgba(9, 5, 20, 0.4) 0%, rgba(9, 5, 20, 0.95) 100%);
+      }
+
+      .creative-mosaic-item .mosaic-desc {
+        opacity: 1;
+        max-height: none;
+      }
+    }
+
+    /* ===================== ATTENDEE CLICKABLE SIMULATOR ===================== */
+    .attendee-sim-container {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .sim-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .sim-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      padding: 20px;
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      background: var(--surface);
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .sim-step.active {
+      border-color: var(--attendee-accent);
+      background: rgba(245, 130, 32, 0.06);
+      box-shadow: 0 10px 25px rgba(245, 130, 32, 0.05);
+      transform: translateX(8px);
+    }
+
+    .sim-step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--surface2);
+      border: 1px solid var(--border-color-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 14px;
+      color: var(--muted);
+      flex-shrink: 0;
+      transition: all 0.3s;
+    }
+
+    .sim-step.active .sim-step-num {
+      background: var(--attendee-accent);
+      border-color: var(--attendee-accent);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(245, 130, 32, 0.3);
+    }
+
+    .sim-step-text strong {
+      display: block;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 4px;
+      transition: color 0.3s;
+    }
+
+    .sim-step.active .sim-step-text strong {
+      color: var(--attendee-accent);
+    }
+
+    .sim-step-text span {
+      display: block;
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* Phone Simulator layout changes */
+    .phone-mockup {
+      width: 290px;
+      height: 580px;
+      background: #000;
+      border: 12px solid #1e293b;
+      border-radius: 40px;
+      overflow: hidden;
+      box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.3);
+      position: relative;
+      margin: 0 auto;
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: #f8fafc;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .phone-notch {
+      width: 120px;
+      height: 20px;
+      background: #1e293b;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      border-bottom-left-radius: 14px;
+      border-bottom-right-radius: 14px;
+      z-index: 10;
+    }
+
+    .phone-header {
+      height: 52px;
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 10px;
+      font-weight: 800;
+      font-size: 14px;
+      color: var(--blue);
+      letter-spacing: -0.02em;
+    }
+
+    .phone-body {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+      background: #f8fafc;
+    }
+
+    .phone-footer {
+      height: 50px;
+      background: #ffffff;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      font-size: 18px;
+      color: var(--muted);
+      z-index: 5;
+    }
+
+    .phone-footer-tab {
+      cursor: pointer;
+      transition: color 0.2s, transform 0.2s;
+    }
+
+    .phone-footer-tab:active {
+      transform: scale(0.85);
+    }
+
+    .phone-footer-tab.active {
+      color: var(--attendee-accent);
+    }
+
+    /* Slide framework for phone mockup */
+    .fp-slide {
+      position: absolute;
+      inset: 0;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      animation: phoneSlideIn 0.35s cubic-bezier(0.23, 1, 0.32, 1) both;
+    }
+
+    .fp-slide-hidden {
+      display: none !important;
+    }
+
+    @keyframes phoneSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Simulation Component Styles */
+    .sim-card {
+      background: #ffffff;
+      border: 1px solid rgba(33, 60, 99, 0.08);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 4px 12px rgba(33, 60, 99, 0.02);
+      margin-bottom: 12px;
+      transition: all 0.3s ease;
+    }
+
+    /* Screen 0: Find & Buy Screen */
+    .sim-ticket-btn {
+      width: 100%;
+      background: var(--attendee-accent);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      margin-top: 12px;
+      box-shadow: 0 4px 12px rgba(245, 130, 32, 0.25);
+      transition: all 0.3s;
+    }
+
+    .sim-ticket-btn:hover {
+      transform: scale(1.02);
+    }
+
+    .sim-ticket-btn.issued {
+      background: #10b981;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+    }
+
+    .att-qr-pixel {
+      background: var(--blue);
+      border-radius: 2px;
+      transition: background 0.3s;
+    }
+
+    .sim-ticket-btn.issued~.att-qr-holder .att-qr-pixel {
+      background: #10b981;
+    }
+
+    /* Screen 1: Companion Alerts */
+    .sim-alert-banner {
+      background: #fffbeb;
+      border: 1px solid #fef3c7;
+      border-radius: 12px;
+      padding: 12px;
+      font-size: 12px;
+      color: #b45309;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      animation: bounceAlert 1s infinite alternate;
+    }
+
+    @keyframes bounceAlert {
+      from {
+        transform: translateY(0);
+      }
+
+      to {
+        transform: translateY(-4px);
+      }
+    }
+
+    /* Screen 2: Friends */
+    .sim-btn-coord {
+      width: 100%;
+      background: var(--blue);
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: all 0.25s;
+    }
+
+    .sim-btn-coord.sent {
+      background: #10b981;
+    }
+
+    /* Screen 3: Media Gallery */
+    .sim-notif-push {
+      background: rgba(107, 33, 168, 0.06);
+      border: 1px dashed rgba(107, 33, 168, 0.3);
+      border-radius: 12px;
+      padding: 12px;
+      font-size: 11px;
+      color: #6b21a8;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      animation: alertPulse 1.8s infinite;
+    }
+
+    @keyframes alertPulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(107, 33, 168, 0.2);
+      }
+
+      70% {
+        box-shadow: 0 0 0 6px rgba(107, 33, 168, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(107, 33, 168, 0);
+      }
+    }
+
+    .sim-gallery-thumb {
+      aspect-ratio: 1;
+      border-radius: 8px;
+      background: #e2e8f0;
+      overflow: hidden;
+      position: relative;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .sim-gallery-thumb.pop-in {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .sim-gallery-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gallery-notify-pulse {
+      width: 8px;
+      height: 8px;
+      background: var(--attendee-accent);
+      border-radius: 50%;
+      animation: pulse-anim 1.5s infinite;
+    }
+
+    /* active feature colors */
+    .org-feat-active {
+      background: rgba(33, 60, 99, 0.04);
+      border-color: rgba(33, 60, 99, 0.06) !important;
+      border-left-color: var(--organizer-accent) !important;
+    }
+
+    .org-feat-active .fi-text strong,
+    .org-feat-active .fi-text {
+      color: #213c63;
+    }
+
+    .org-feat-active .fi-icon {
+      filter: brightness(1.1);
+    }
+
+    .att-feat-active {
+      background: rgba(245, 130, 32, 0.04);
+      border-color: rgba(245, 130, 32, 0.06) !important;
+      border-left-color: var(--attendee-accent) !important;
+    }
+
+    .att-feat-active .fi-text strong,
+    .att-feat-active .fi-text {
+      color: var(--attendee-accent);
+    }
+
+    .att-feat-active .fi-icon {
+      filter: brightness(1.1);
+    }
+
+    .cr-feat-active {
+      background: rgba(168, 85, 247, 0.08);
+      border-color: rgba(168, 85, 247, 0.1) !important;
+      border-left-color: var(--creative-accent) !important;
+    }
+
+    .cr-feat-active .fi-text strong,
+    .cr-feat-active .fi-text {
+      color: var(--creative-accent);
+    }
+
+    .cr-feat-active .fi-icon {
+      filter: brightness(1.1);
+    }
+
+    .org-feat,
+    .att-feat,
+    .cr-feat {
+      background: transparent;
+      border-color: transparent;
+      border-left-color: transparent;
+      transition: all 0.3s ease;
+    }
+
+    .org-feat .fi-text,
+    .att-feat .fi-text,
+    .cr-feat .fi-text {
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+
+    .org-feat .fi-icon,
+    .att-feat .fi-icon,
+    .cr-feat .fi-icon {
+      opacity: 1;
+      transition: all 0.2s;
+    }
+
+    .fp-team-member {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 5px;
+      padding: 5px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .fp-team-avatar {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .fp-team-name {
+      font-size: 8px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .fp-team-role {
+      font-size: 7px;
+      color: var(--muted);
+    }
+
+    .fp-team-status {
+      font-size: 7px;
+      color: #6bcb77;
+      font-weight: 700;
+      margin-left: auto;
+    }
+
+    .fp-stat-mini {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 4px;
+    }
+
+    .fp-stat-mini-item {
+      text-align: center;
+      flex: 1;
+    }
+
+    .fp-stat-mini-val {
+      font-size: 14px;
+      font-weight: 800;
+      color: #213c63;
+      line-height: 1;
+    }
+
+    .fp-stat-mini-label {
+      font-size: 7px;
+      color: var(--muted);
+      margin-top: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ORG mockup content */
+    .org-dashboard {}
+
+    .dash-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .dash-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .dash-live {
+      font-size: 9px;
+      background: rgba(33, 60, 99, 0.08);
+      border: 1px solid rgba(33, 60, 99, 0.15);
+      color: #213c63;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .dash-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .dash-stat {
+      background: var(--surface2);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 10px;
+    }
+
+    .ds-val {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .ds-label {
+      font-size: 8px;
+      color: var(--muted);
+      margin-top: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .ds-change {
+      font-size: 9px;
+      color: #6bcb77;
+      margin-top: 2px;
+      font-weight: 600;
+    }
+
+    .dash-divider {
+      height: 1px;
+      background: var(--border-color);
+      margin: 12px 0;
+    }
+
+    .dash-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .dash-row-label {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .dash-row-val {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .dash-msg-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+      background: var(--surface2);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    .dash-msg-icon {
+      font-size: 14px;
+    }
+
+    .dash-msg-text {
+      flex: 1;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .dash-msg-send {
+      font-size: 9px;
+      color: #213c63;
+      font-weight: 700;
+    }
+
+    /* CREATIVE mockup content */
+    .creative-studio {}
+
+    .studio-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .studio-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .studio-badge {
+      font-size: 9px;
+      background: rgba(245, 130, 32, 0.1);
+      border: 1px solid rgba(245, 130, 32, 0.2);
+      color: var(--orange);
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    .studio-folders {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .studio-folder {
+      background: var(--surface2);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 10px;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .studio-folder:hover {
+      border-color: rgba(245, 130, 32, 0.3);
+    }
+
+    .sf-icon {
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .sf-name {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .sf-count {
+      font-size: 8px;
+      color: var(--muted);
+      margin-top: 1px;
+    }
+
+    .studio-gallery-preview {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 5px;
+      margin-top: 8px;
+    }
+
+    .sgp-thumb {
+      aspect-ratio: 1;
+      border-radius: 6px;
+      background: var(--surface2);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .sgp-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.65;
+    }
+
+    .sgp-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 50%, rgba(245, 130, 32, 0.3) 100%);
+    }
+
+    .studio-expo-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 10px;
+      background: rgba(245, 130, 32, 0.06);
+      border: 1px solid rgba(245, 130, 32, 0.12);
+      border-radius: 8px;
+      padding: 7px 10px;
+    }
+
+    .ser-left {
+      font-size: 9px;
+      color: var(--orange);
+      font-weight: 700;
+    }
+
+    .ser-right {
+      font-size: 9px;
+      color: var(--muted);
+    }
+
+    /* ===== ECOSYSTEM TRIANGLE ===== */
+    .eco-tri-wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* Top row: 2 equal cards side by side */
+    .eco-tri-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      padding-bottom: 52px;
+      /* space for the hub to overlap */
+    }
+
+    /* Bottom row: single card, centered, same width as one top card */
+    .eco-tri-bottom {
+      display: flex;
+      justify-content: center;
+      padding-top: 52px;
+      /* space for the hub to overlap */
+    }
+
+    .eco-tri-bottom .eco-node {
+      width: calc(50% - 10px);
+      text-align: center;
+    }
+
+    /* Hub icon: absolutely centered between top and bottom */
+    .eco-tri-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      /* vertically center between the bottom of top row and top of bottom row */
+      bottom: calc(50% - 36px);
+      /* 36px = half hub height */
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mobile-only-hub {
+      display: none !important;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .eco-tri-top {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        padding-bottom: 0;
+      }
+
+      .eco-tri-bottom {
+        padding-top: 0;
+        display: flex;
+        justify-content: center;
+      }
+
+      .eco-tri-bottom .eco-node {
+        width: 100%;
+      }
+
+      .eco-tri-center {
+        position: relative;
+        left: auto;
+        bottom: auto;
+        transform: none;
+        padding: 0;
+        margin: 19px 0;
+        z-index: 10;
+      }
+
+      .mobile-only-hub {
+        display: flex !important;
+        position: relative;
+        left: auto;
+        bottom: auto;
+        transform: none;
+        padding: 0;
+        margin: 19px 0;
+        z-index: 10;
+      }
+
+      .eco-node {
+        text-align: center !important;
+      }
+    }
+
+    #ecosystem {
+      padding: 60px 24px;
+      background: var(--dark);
+      position: relative;
+    }
+
+    #organizer-section {
+      background: var(--dark);
+    }
+
+    .ecosystem-inner {
+      max-width: 880px;
+      margin: 0 auto;
+    }
+
+    .eco-headline {
+      font-family: inherit;
+      font-size: clamp(32px, 5vw, 62px);
+      font-weight: 800;
+      line-height: 1.06;
+      letter-spacing: -0.025em;
+      margin-bottom: 24px;
+    }
+
+    .eco-sub {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 580px;
+      margin: 0 auto 64px;
+    }
+
+    /* TRIANGLE layout */
+    .eco-triangle {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    /* top row: Organizer | center hub | Creative */
+    .eco-top-row {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 20px;
+      align-items: center;
+      width: 100%;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    /* bottom row: Attendee centered */
+    .eco-bottom-row {
+      margin-top: 20px;
+      width: 100%;
+      max-width: 820px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    /* SVG lines between nodes */
+    .eco-lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: visible;
+    }
+
+    .eco-node {
+      background: var(--surface);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 22px 20px;
+      text-align: left;
+      transition: all 0.3s;
+      position: relative;
+      z-index: 1;
+      box-shadow: var(--shadow-premium);
+    }
+
+    /* Profile specific card styling - color-coded by default */
+    .eco-node.org {
+      border-color: rgba(33, 60, 99, 0.18);
+      background: linear-gradient(180deg, var(--surface) 0%, rgba(33, 60, 99, 0.015) 100%);
+    }
+
+    .eco-node.cre {
+      border-color: rgba(107, 33, 168, 0.18);
+      background: linear-gradient(180deg, var(--surface) 0%, rgba(107, 33, 168, 0.015) 100%);
+    }
+
+    .eco-node.att {
+      border-color: rgba(245, 130, 32, 0.18);
+      background: linear-gradient(180deg, var(--surface) 0%, rgba(245, 130, 32, 0.015) 100%);
+    }
+
+    .eco-node:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .eco-node.org:hover {
+      border-color: rgba(33, 60, 99, 0.45);
+      background: linear-gradient(180deg, var(--surface) 0%, rgba(33, 60, 99, 0.05) 100%);
+    }
+
+    .eco-node.cre:hover {
+      border-color: rgba(107, 33, 168, 0.45);
+      background: linear-gradient(180deg, var(--surface) 0%, rgba(107, 33, 168, 0.05) 100%);
+    }
+
+    .eco-node.att:hover {
+      border-color: rgba(245, 130, 32, 0.45);
+      background: linear-gradient(180deg, var(--surface) 0%, rgba(245, 130, 32, 0.05) 100%);
+    }
+
+    .eco-node-icon {
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+
+    .eco-node-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 5px;
+    }
+
+    .eco-node-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+      transition: all 0.25s;
+    }
+
+    .eco-node-tag.org {
+      background: rgba(33, 60, 99, 0.07);
+      color: #213c63;
+      border: 1px solid rgba(33, 60, 99, 0.18);
+    }
+
+    .eco-node-tag.cre {
+      background: rgba(107, 33, 168, 0.07);
+      color: var(--creative-accent);
+      border: 1px solid rgba(107, 33, 168, 0.18);
+    }
+
+    .eco-node-tag.att {
+      background: rgba(245, 130, 32, 0.07);
+      color: var(--attendee-accent);
+      border: 1px solid rgba(245, 130, 32, 0.18);
+    }
+
+    /* Pill pop animations on card hover */
+    .eco-node.org:hover .eco-node-tag {
+      background: rgba(33, 60, 99, 0.12);
+      border-color: rgba(33, 60, 99, 0.3);
+      transform: scale(1.05);
+    }
+
+    .eco-node.cre:hover .eco-node-tag {
+      background: rgba(107, 33, 168, 0.12);
+      border-color: rgba(107, 33, 168, 0.3);
+      transform: scale(1.05);
+    }
+
+    .eco-node.att:hover .eco-node-tag {
+      background: rgba(245, 130, 32, 0.12);
+      border-color: rgba(245, 130, 32, 0.3);
+      transform: scale(1.05);
+    }
+
+    .eco-node-body {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* center hub badge */
+    .eco-hub {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .eco-hub-badge {
+      width: 72px;
+      height: 72px;
+      background: var(--surface);
+      border: 1px solid rgba(245, 130, 32, 0.25);
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(245, 130, 32, 0.12);
+      position: relative;
+      z-index: 2;
+    }
+
+    .eco-hub-icon {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+    }
+
+    /* Orbital rings */
+    .eco-orbit {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 130px;
+      height: 130px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      border: 1px solid rgba(245, 130, 32, 0.2);
+      z-index: 1;
+      animation: orbitSpin 15s linear infinite;
+    }
+
+    .eco-orbit-arrow {
+      position: absolute;
+      color: var(--orange);
+      font-size: 10px;
+      line-height: 1;
+    }
+
+    .eco-orbit-arrow.top {
+      top: -5px;
+      left: 50%;
+      transform: translateX(-50%) rotate(0deg);
+    }
+
+    .eco-orbit-arrow.bottom {
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%) rotate(180deg);
+    }
+
+    @keyframes orbitSpin {
+      from {
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+
+      to {
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
+    }
+
+    .eco-connector-line {
+      font-size: 14px;
+      color: rgba(245, 130, 32, 0.35);
+      line-height: 1;
+      letter-spacing: -2px;
+    }
+
+    /* bottom spacer columns */
+    .eco-spacer {
+      /* empty col for centering attendee */
+    }
+
+    .eco-attendee-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .eco-v-line {
+      width: 1px;
+      height: 28px;
+      background: linear-gradient(to bottom, rgba(107, 203, 119, 0.5), rgba(107, 203, 119, 0.15));
+    }
+
+    /* mobile */
+    @media (max-width: 768px) {
+      .eco-top-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .eco-hub {
+        flex-direction: row;
+        justify-content: center;
+      }
+
+      .eco-bottom-row {
+        grid-template-columns: 1fr;
+      }
+
+      .eco-node {
+        text-align: center;
+      }
+
+      .eco-attendee-wrapper {
+        align-items: center;
+      }
+    }
+
+    /* ===================== SECTION: WAITLIST (FINAL CTA) ===================== */
+    #waitlist {
+      padding: 60px 24px;
+      background: linear-gradient(135deg, #f58220 0%, #e06d10 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      color: #ffffff;
+    }
+
+    #waitlist .waitlist-eyebrow {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    #waitlist .waitlist-headline {
+      color: #ffffff;
+    }
+
+    #waitlist .headline-accent {
+      background: none !important;
+      -webkit-text-fill-color: #1e293b !important;
+      color: #1e293b !important;
+      background-clip: initial !important;
+    }
+
+    #waitlist .waitlist-sub {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    #waitlist .waitlist-perks {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    #waitlist .perk-check {
+      color: #ffffff;
+    }
+
+    #waitlist .role-btn {
+      border: 1px solid rgba(255, 255, 255, 0.35) !important;
+      background: rgba(255, 255, 255, 0.12) !important;
+      color: rgba(255, 255, 255, 0.9) !important;
+    }
+
+    #waitlist .role-btn:hover {
+      background: rgba(255, 255, 255, 0.2) !important;
+    }
+
+    #waitlist .role-btn.active.org,
+    #waitlist .role-btn.active.cre,
+    #waitlist .role-btn.active.att {
+      background: #ffffff !important;
+      border-color: #ffffff !important;
+      color: #e06d10 !important;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    #waitlist .waitlist-btn {
+      background: #1e293b;
+      color: #ffffff;
+    }
+
+    #waitlist .waitlist-btn:hover {
+      background: #0f172a;
+      box-shadow: 0 8px 30px rgba(15, 23, 42, 0.4);
+    }
+
+    .waitlist-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(245, 130, 32, 0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .waitlist-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .waitlist-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--orange);
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .waitlist-headline {
+      font-family: inherit;
+      font-size: clamp(36px, 5vw, 48px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      margin-bottom: 20px;
+    }
+
+    .waitlist-sub {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 30px;
+    }
+
+    /* Waitlist role picker styling */
+    .waitlist-role-selector {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .role-btn {
+      flex: 1;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      background: var(--surface);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .role-btn span {
+      font-size: 16px;
+    }
+
+    .role-btn.active.org {
+      border-color: var(--organizer-accent);
+      background: rgba(33, 60, 99, 0.06);
+      color: var(--organizer-accent);
+    }
+
+    .role-btn.active.cre {
+      border-color: var(--creative-accent);
+      background: rgba(107, 33, 168, 0.06);
+      color: var(--creative-accent);
+    }
+
+    .role-btn.active.att {
+      border-color: var(--attendee-accent);
+      background: rgba(245, 130, 32, 0.06);
+      color: var(--attendee-accent);
+    }
+
+    .waitlist-form {
+      display: flex;
+      gap: 0;
+      background: var(--surface);
+      border: 1px solid var(--border-color-strong);
+      border-radius: 18px;
+      padding: 6px;
+      max-width: 480px;
+      margin: 0 auto 20px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      overflow: hidden;
+      box-shadow: var(--shadow-premium);
+    }
+
+    .waitlist-form:focus-within {
+      border-color: rgba(245, 130, 32, 0.5);
+      box-shadow: 0 0 0 3px rgba(245, 130, 32, 0.1), var(--shadow-active);
+    }
+
+    .waitlist-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      padding: 14px 18px;
+      font-family: inherit;
+      font-size: 14px;
+      color: var(--text);
+      min-width: 0;
+    }
+
+    .waitlist-input::placeholder {
+      color: var(--muted);
+      opacity: 0.65;
+    }
+
+    .waitlist-btn {
+      padding: 14px 24px;
+      background: var(--orange);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .waitlist-btn:hover {
+      background: #ff9030;
+      box-shadow: 0 8px 30px rgba(245, 130, 32, 0.4);
+    }
+
+    .waitlist-perks {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 16px;
+    }
+
+    .waitlist-perk {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .perk-check {
+      color: var(--orange);
+      font-size: 13px;
+    }
+
+    /* ===================== COUNTER BAR ===================== */
+    .fomo-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 90;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(16px);
+      border-top: 1px solid var(--border-color);
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--muted);
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.03);
+    }
+
+    .fomo-count {
+      color: var(--orange);
+      font-weight: 800;
+      font-size: 15px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .fomo-dot {
+      width: 5px;
+      height: 5px;
+      background: var(--orange);
+      border-radius: 50%;
+      animation: pulse-anim 1.4s infinite;
+    }
+
+    /* ===================== MODAL ===================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(248, 250, 252, 0.85);
+      backdrop-filter: blur(16px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-card {
+      background: var(--surface);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 40px;
+      max-width: 420px;
+      width: 90%;
+      text-align: center;
+      transform: translateY(20px);
+      transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+      box-shadow: var(--shadow-active);
+    }
+
+    .modal-overlay.open .modal-card {
+      transform: translateY(0);
+    }
+
+    .modal-icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 20px;
+      background: linear-gradient(135deg, rgba(33, 60, 99, 0.06), rgba(245, 130, 32, 0.06));
+      border: 1px solid rgba(245, 130, 32, 0.15);
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+    }
+
+    .modal-title {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .modal-body {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 28px;
+    }
+
+    .modal-body strong {
+      color: var(--text);
+    }
+
+    .modal-close {
+      padding: 12px 32px;
+      background: var(--orange);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .modal-close:hover {
+      background: #ff9030;
+      transform: translateY(-1px);
+    }
+
+    /* ===================== FOOTER ===================== */
+    footer {
+      padding: 32px 24px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+      font-size: 12px;
+      color: var(--muted);
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-note {
+      font-size: 10px;
+      font-style: italic;
+      opacity: 0.7;
+    }
+
+    /* ===================== ANIMATION UTILITIES ===================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 {
+      transition-delay: 0.1s;
+    }
+
+    .reveal-delay-2 {
+      transition-delay: 0.2s;
+    }
+
+    .reveal-delay-3 {
+      transition-delay: 0.3s;
+    }
+
+    .reveal-delay-4 {
+      transition-delay: 0.4s;
+    }
+
+    .reveal-delay-5 {
+      transition-delay: 0.5s;
+    }
+
+    /* ===================== RESPONSIVE ===================== */
+    @media (max-width: 768px) {
+      body {
+        cursor: auto;
+      }
+
+      #cursor,
+      #cursor-ring {
+        display: none;
+      }
+
+      .chapter-nav {
+        display: none;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .chaos-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .chaos-visual {
+        order: -1;
+      }
+
+      .pp-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .pp-mockup {
+        margin-top: 0;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+
+      .fomo-bar {
+        font-size: 11px;
+        gap: 8px;
+      }
+
+      .hero-container {
+        padding-top: 0;
+      }
+
+      #hero {
+        padding-top: 80px;
+        padding-bottom: 40px;
+        min-height: auto;
+        justify-content: flex-start;
+      }
+
+      .picker-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .scroll-hint {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        transform: none;
+        margin: 24px auto 0;
+        animation: fadeUpMobileScroll 1s 1s ease both;
+      }
+
+      #ecosystem {
+        padding-bottom: 36px;
+      }
+
+      #waitlist {
+        padding-top: 36px;
+        padding-bottom: 48px;
+      }
+
+      .perspective-section {
+        padding: 60px 24px;
+      }
+
+      /* Creative Split View Mobile */
+      .creative-split-container {
+        grid-template-columns: 1fr !important;
+        height: auto !important;
+      }
+
+      .creative-split-portfolio {
+        border-left: none !important;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .creative-split-masonry {
+        height: 300px;
+      }
+
+      .creative-split-desc {
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .waitlist-form {
+        flex-direction: column;
+        border-radius: 14px;
+      }
+
+      .waitlist-btn {
+        border-radius: 10px;
+      }
+
+      .chaos-tool {
+        font-size: 11px;
+        padding: 9px 12px;
+      }
+
+      .waitlist-role-selector {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+
+    /* Mobile Mockup Modal & Clickable Highlights styling */
+    .mobile-mockup-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.98);
+      z-index: 99999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    @media (max-width: 991px) {
+      .pp-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 24px !important;
+      }
+
+      .pp-grid>* {
+        grid-column: auto !important;
+        grid-row: auto !important;
+        align-self: auto !important;
+      }
+
+      /* Hide mockups below text on mobile */
+      #organizer-section .pp-mockup,
+      #creative-section .pp-mockup,
+      #attendee-section .pp-mockup {
+        display: none !important;
+      }
+
+      .feature-item {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 14px;
+        padding: 16px;
+        position: relative;
+        cursor: pointer;
+        display: flex !important;
+        flex-direction: column;
+        gap: 6px;
+        transition: all 0.25s ease;
+      }
+
+      #creative-section .feature-item {
+        background: transparent;
+        border-color: transparent;
+      }
+
+      .feature-item::after {
+        content: "🔍 Tap to view screen details";
+        align-self: flex-end;
+        font-size: 10px;
+        font-weight: 700;
+        opacity: 0.65;
+        margin-top: 4px;
+      }
+
+      .feature-item.org-feat::after {
+        color: #60a5fa;
+      }
+
+      .feature-item.cr-feat::after {
+        color: #c084fc;
+      }
+
+      .feature-item.att-feat::after {
+        color: #f97316;
+      }
+
+      /* Active highlights styling on mobile */
+      .org-feat-active {
+        border-color: rgba(96, 165, 250, 0.4) !important;
+        background: rgba(96, 165, 250, 0.05) !important;
+      }
+
+      .cr-feat-active {
+        border-color: rgba(192, 132, 252, 0.4) !important;
+        background: rgba(192, 132, 252, 0.05) !important;
+      }
+
+      .att-feat-active {
+        border-color: rgba(249, 115, 22, 0.4) !important;
+        background: rgba(249, 115, 22, 0.05) !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- CUSTOM CURSOR -->
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- TOP BAR -->
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <a href="#">
+        <img src="images/reveltiLogo.png" alt="Revelti" class="logo-img"
+          onerror="this.onerror=null;this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<span style=\'font-family:Nunito,sans-serif;font-size:18px;font-weight:800;color:#213c63;letter-spacing:-0.03em;\'>revelti</span>')">
+      </a>
+
+      <nav class="nav-links">
+        <a href="#organizer-section" class="nav-link">Organizer</a>
+        <a href="#creative-section" class="nav-link">Creative</a>
+        <a href="#attendee-section" class="nav-link">Attendee</a>
+        <a href="#waitlist" class="nav-pill" onclick="scrollToWaitlist(event)">Join Waitlist</a>
+      </nav>
+
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle mobile menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MOBILE MENU DRAWER -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#organizer-section" class="nav-link" onclick="toggleMobileMenu()">Organizer</a>
+    <a href="#creative-section" class="nav-link" onclick="toggleMobileMenu()">Creative</a>
+    <a href="#attendee-section" class="nav-link" onclick="toggleMobileMenu()">Attendee</a>
+    <a href="#waitlist" class="nav-pill" onclick="scrollToWaitlist(event); toggleMobileMenu();">Join Waitlist</a>
+  </div>
+
+  <!-- CHAPTER NAV DOTS -->
+  <nav class="chapter-nav" aria-label="Page sections">
+    <div class="chapter-dot active" data-section="hero" onclick="scrollToSection('hero')" title="Start"></div>
+    <div class="chapter-dot" data-section="chaos" onclick="scrollToSection('chaos')" title="The Problem"></div>
+    <div class="chapter-dot" data-section="organizer-section" onclick="scrollToSection('organizer-section')"
+      title="Organizer"></div>
+    <div class="chapter-dot" data-section="creative-section" onclick="scrollToSection('creative-section')"
+      title="Creative"></div>
+    <div class="chapter-dot" data-section="attendee-section" onclick="scrollToSection('attendee-section')"
+      title="Attendee"></div>
+    <div class="chapter-dot" data-section="ecosystem" onclick="scrollToSection('ecosystem')" title="Together"></div>
+    <div class="chapter-dot" data-section="waitlist" onclick="scrollToSection('waitlist')" title="Join"></div>
+  </nav>
+
+  <!-- ===================== HERO ===================== -->
+  <section id="hero">
+    <!-- PARTICLE CANVAS -->
+    <canvas id="particles-canvas"></canvas>
+    <div class="hero-container">
+      <div style="text-align:center;">
+        <div class="hero-label">
+          <span class="pulse-dot"></span>
+          Coming Soon - Join the Waitlist
+        </div>
+
+        <h1 class="hero-headline">
+          <span class="headline-line">The event doesn't end</span>
+          <span class="headline-line"><span class="glitch-word headline-accent" id="glitch-target">when the music
+              stops.</span></span>
+        </h1>
+
+        <p class="hero-sub">
+          <strong class="brand-highlight">Revelti</strong> is one ridiculously simple platform where event organizers
+          run the show, creatives get their spotlight, and attendees relive the night forever.
+        </p>
+
+        <!-- Choose Your Journey Cards Picker -->
+        <div class="hero-picker-wrapper">
+          <h2 class="picker-title">Choose your perspective</h2>
+          <div class="picker-grid">
+            <!-- Card 1: Organizer -->
+            <div class="picker-card org-card" onclick="scrollToSection('organizer-section')">
+              <div>
+                <div class="picker-icon">🎪</div>
+                <span class="picker-tag">Organizer</span>
+                <h3 class="picker-card-title">Run the Show</h3>
+                <p class="picker-card-desc">Ticketing, collaborator management, and live post-event galleries in one
+                  beautiful place.</p>
+              </div>
+              <span class="picker-arrow">Explore Features &rarr;</span>
+            </div>
+
+            <!-- Card 2: Creative -->
+            <div class="picker-card cre-card" onclick="scrollToSection('creative-section')">
+              <div>
+                <div class="picker-icon">📷</div>
+                <span class="picker-tag">Creative</span>
+                <h3 class="picker-card-title">Own the Spotlight</h3>
+                <p class="picker-card-desc">No more WeTransfer links. Seamless delivery, automatic portfolio building,
+                  and client bookings.</p>
+              </div>
+              <span class="picker-arrow">Explore Features &rarr;</span>
+            </div>
+
+            <!-- Card 3: Attendee -->
+            <div class="picker-card att-card" onclick="scrollToSection('attendee-section')">
+              <div>
+                <div class="picker-icon">🎉</div>
+                <span class="picker-tag">Attendee</span>
+                <h3 class="picker-card-title">Relive the Night</h3>
+                <p class="picker-card-desc">Buy tickets, access event schedules, see who's going, and get direct photo
+                  updates instantly.</p>
+              </div>
+              <span class="picker-arrow">Explore Features &rarr;</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <div class="scroll-hint-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ===================== SECTION: THE PROBLEM ===================== -->
+  <section id="chaos">
+    <div class="chaos-inner">
+      <div>
+        <div class="section-label reveal">The old way</div>
+        <h2 class="section-headline reveal reveal-delay-1">
+          Events shouldn't feel<br>like organized chaos.
+        </h2>
+        <p class="section-body reveal reveal-delay-2">
+          We're juggling too many apps, link sharing services, messaging threads, and expired folder links. It's a
+          hassle for everyone involved.
+        </p>
+        <ul class="pain-list">
+          <li class="pain-item reveal reveal-delay-3">
+            <div class="pain-icon">🎪</div>
+            <div><strong>Organizers:</strong> Juggling separate ticket pages, group messages, and spreadsheets.</div>
+          </li>
+          <li class="pain-item reveal reveal-delay-4">
+            <div class="pain-icon">📷</div>
+            <div><strong>Creatives:</strong> Chasing organizers, paying for expiring folder links, losing exposure.
+            </div>
+          </li>
+          <li class="pain-item reveal reveal-delay-5">
+            <div class="pain-icon">🎉</div>
+            <div><strong>Attendees:</strong> Lost ticket emails, missing event info, and hunting for photos afterwards.
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="chaos-visual reveal reveal-delay-2">
+        <div class="chaos-stack" id="chaos-stack">
+          <div class="chaos-tool" style="top:10px;left:0;--rot:-5deg;--dx:8px;--dy:-6px;animation-duration:7s;">
+            📁 Expired WeTransfer Link
+          </div>
+          <div class="chaos-tool"
+            style="top:60px;left:80px;--rot:4deg;--dx:-10px;--dy:8px;animation-duration:9s;animation-delay:1s;">
+            💬 WhatsApp group spam (1,247)
+          </div>
+          <div class="chaos-tool"
+            style="top:120px;left:20px;--rot:-2deg;--dx:5px;--dy:12px;animation-duration:8s;animation-delay:0.5s;">
+            🎟️ Where is my ticket email?
+          </div>
+          <div class="chaos-tool"
+            style="top:175px;left:100px;--rot:6deg;--dx:-8px;--dy:-10px;animation-duration:10s;animation-delay:2s;">
+            💸 Bank transfer refs search
+          </div>
+          <div class="chaos-tool"
+            style="top:220px;left:10px;--rot:-3deg;--dx:12px;--dy:4px;animation-duration:7.5s;animation-delay:1.5s;">
+            📧 Separate email newsletters
+          </div>
+          <div class="chaos-tool"
+            style="top:0px;left:180px;--rot:3deg;--dx:-6px;--dy:8px;animation-duration:11s;animation-delay:3s;">
+            📂 Lost Google Drive Folder
+          </div>
+          <div class="chaos-tool"
+            style="top:150px;left:195px;--rot:-4deg;--dx:4px;--dy:-9px;animation-duration:8.5s;animation-delay:0.8s;">
+            📊 Excel checklist v12.xlsx
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SECTION: ORGANIZERS ===================== -->
+  <section id="organizer-section" class="perspective-section">
+    <div class="perspective-inner">
+      <div style="text-align:center; max-width:700px; margin:0 auto 48px;">
+        <div class="section-label" style="color:var(--organizer-accent); justify-content:center;">For Organizers</div>
+        <h3 class="pp-headline">Your event,<br><span
+            style="background:linear-gradient(90deg,var(--organizer-accent) 0%,#7cb4ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">without
+            the chaos.</span></h3>
+        <p class="pp-body">
+          You've got enough on your plate. <strong class="brand-highlight">Revelti</strong> handles the moving parts -
+          tickets, crowd comms, media team, and real-time stats - so you can focus on making the night unforgettable.
+        </p>
+      </div>
+
+      <div class="pp-grid">
+        <!-- Left Column: Highlights list -->
+        <ul class="feature-list" style="grid-column: 1; grid-row: 1; margin-bottom: 0;">
+          <li class="feature-item org-feat org-feat-active" id="org-feat-0"
+            onclick="goToOrgSlide(0); openMobileMockupModal('organizer', 0)">
+            <div class="fi-icon org">🎫</div>
+            <div class="fi-text">
+              <strong>Effortless ticketing &amp; sales</strong>
+              <span>Set up your event, manage ticket tiers, and track sales live. No spreadsheets. It just works.</span>
+            </div>
+          </li>
+          <li class="feature-item org-feat" id="org-feat-1"
+            onclick="goToOrgSlide(1); openMobileMockupModal('organizer', 1)">
+            <div class="fi-icon org">📢</div>
+            <div class="fi-text">
+              <strong>Direct audience connection</strong>
+              <span>Keep your crowd in the loop before, during, and after the event - all from one dashboard.</span>
+            </div>
+          </li>
+          <li class="feature-item org-feat" id="org-feat-2"
+            onclick="goToOrgSlide(2); openMobileMockupModal('organizer', 2)">
+            <div class="fi-icon org">📸</div>
+            <div class="fi-text">
+              <strong>Your media team, synced</strong>
+              <span>Connect directly with your photographers. Their work goes straight into the official event gallery.
+                Done.</span>
+            </div>
+          </li>
+          <li class="feature-item org-feat" id="org-feat-3"
+            onclick="goToOrgSlide(3); openMobileMockupModal('organizer', 3)">
+            <div class="fi-icon org">📈</div>
+            <div class="fi-text">
+              <strong>Know exactly how you did</strong>
+              <span>Beautiful, easy-to-read stats on everything from ticket sales to post-event engagement. Know your
+                numbers.</span>
+            </div>
+          </li>
+        </ul>
+
+        <!-- Right Column: Mockup Window -->
+        <div class="pp-mockup" style="grid-column: 2; grid-row: 1; align-self: center; margin-top: 0;">
+          <div class="mockup-window"
+            style="width: 100%; height: auto; aspect-ratio: 1489/866; position: relative; overflow: hidden; border-radius: 12px; box-shadow: 0 25px 50px -12px rgba(33,60,99,0.15); border: none; background: none;">
+            <img id="org-slide-0" src="images/screenshots/1-orgTicketing.png"
+              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 0 !important; margin: 0 !important; cursor: pointer;"
+              class="fp-slide" onclick="openScreenshotLightbox('organizer', 0)">
+            <img id="org-slide-1" src="images/screenshots/2-orgEmails.png"
+              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 0 !important; margin: 0 !important; cursor: pointer;"
+              class="fp-slide fp-slide-hidden" onclick="openScreenshotLightbox('organizer', 1)">
+            <img id="org-slide-2" src="images/screenshots/3-orgMedia.png"
+              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 0 !important; margin: 0 !important; cursor: pointer;"
+              class="fp-slide fp-slide-hidden" onclick="openScreenshotLightbox('organizer', 2)">
+            <img id="org-slide-3" src="images/screenshots/4-orgReports.png"
+              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 0 !important; margin: 0 !important; cursor: pointer;"
+              class="fp-slide fp-slide-hidden" onclick="openScreenshotLightbox('organizer', 3)">
+          </div>
+        </div>
+
+        <!-- Left Column: CTA button -->
+        <div style="grid-column: 1; grid-row: 2; margin-top: 24px;">
+          <a href="#waitlist" class="pp-cta org-cta" onclick="scrollToWaitlist(event, 'organizer')">
+            Reserve Organizer Access →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SECTION: CREATIVES ===================== -->
+  <section id="creative-section" class="creative-gallery-section">
+    <div class="perspective-inner">
+      <div style="text-align:center; max-width:700px; margin:0 auto 48px;">
+        <div class="section-label" style="color:var(--creative-accent); justify-content:center;">For Creatives</div>
+        <h3 class="pp-headline">Overhaul your workspace.<br><span
+            style="background:linear-gradient(90deg,var(--creative-accent) 0%,#a855f7 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Own
+            the event spotlight.</span></h3>
+        <p class="pp-body">
+          You're not just taking photos — you're capturing memories. Revelti replaces expired links and messy handoffs
+          with a visual ecosystem that stores your shots, delivers them instantly, and puts your brand in front of every
+          attendee.
+        </p>
+      </div>
+
+      <div class="pp-grid">
+        <!-- Left Column: Highlights list -->
+        <ul class="feature-list" style="grid-column: 1; grid-row: 1; margin-bottom: 0;">
+          <li class="feature-item cr-feat cr-feat-active" id="cr-feat-0"
+            onclick="goToCrSlide(0); openMobileMockupModal('creative', 0)" style="cursor: pointer;">
+            <div class="fi-icon creative">💾</div>
+            <div class="fi-text">
+              <strong>Storage meets presentation</strong>
+              <span>Your workspace and your gallery in one place. Upload raw files, export polished albums — all in one
+                platform.</span>
+            </div>
+          </li>
+          <li class="feature-item cr-feat" id="cr-feat-1" onclick="goToCrSlide(1); openMobileMockupModal('creative', 1)"
+            style="cursor: pointer;">
+            <div class="fi-icon creative">🚫</div>
+            <div class="fi-text">
+              <strong>No more transfer links</strong>
+              <span>Deliver media directly to the official event. No expiring links, no lost folders, no messy
+                DMs.</span>
+            </div>
+          </li>
+          <li class="feature-item cr-feat" id="cr-feat-2" onclick="goToCrSlide(2); openMobileMockupModal('creative', 2)"
+            style="cursor: pointer;">
+            <div class="fi-icon creative">👁️</div>
+            <div class="fi-text">
+              <strong>Automatic exposure</strong>
+              <span>Every attendee looking for their photos sees your profile and your art. Thousands of organic
+                eyes.</span>
+            </div>
+          </li>
+          <li class="feature-item cr-feat" id="cr-feat-3" onclick="goToCrSlide(3); openMobileMockupModal('creative', 3)"
+            style="cursor: pointer;">
+            <div class="fi-icon creative">✨</div>
+            <div class="fi-text">
+              <strong>A portfolio that does you justice</strong>
+              <span>A stunning public profile to send to every future client — built automatically from the events you
+                shoot.</span>
+            </div>
+          </li>
+        </ul>
+
+        <!-- Right Column: SLEEK DARK Mockup Window -->
+        <div class="pp-mockup" style="grid-column: 2; grid-row: 1; align-self: center; margin-top: 0;">
+          <div class="mockup-window"
+            style="width: 100%; height: auto; aspect-ratio: 1489/866; position: relative; overflow: hidden; border-radius: 12px; box-shadow: 0 25px 50px -12px rgba(107,33,168,0.25); border: none; background: none;">
+            <img id="cr-slide-0" src="images/screenshots/1-creUpload.png"
+              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 0 !important; margin: 0 !important; cursor: pointer;"
+              class="fp-slide" onclick="openScreenshotLightbox('creative', 0)">
+            <img id="cr-slide-1" src="images/screenshots/2-creEvents.png"
+              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 0 !important; margin: 0 !important; cursor: pointer;"
+              class="fp-slide fp-slide-hidden" onclick="openScreenshotLightbox('creative', 1)">
+            <img id="cr-slide-2" src="images/screenshots/3-creGallery.png"
+              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 0 !important; margin: 0 !important; cursor: pointer;"
+              class="fp-slide fp-slide-hidden" onclick="openScreenshotLightbox('creative', 2)">
+            <img id="cr-slide-3" src="images/screenshots/4-crePage.png"
+              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 0 !important; margin: 0 !important; cursor: pointer;"
+              class="fp-slide fp-slide-hidden" onclick="openScreenshotLightbox('creative', 3)">
+          </div>
+        </div>
+
+        <!-- Left Column: CTA button -->
+        <div style="grid-column: 1; grid-row: 2; margin-top: 24px;">
+          <a href="#waitlist" class="pp-cta creative-cta" onclick="scrollToWaitlist(event, 'creative')"
+            style="background:var(--creative-accent);box-shadow:0 8px 30px rgba(107,33,168,0.35); margin-top: 0;">
+            Claim Your Creative Studio →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SECTION: ATTENDEES ===================== -->
+  <section id="attendee-section" class="perspective-section">
+    <div class="perspective-inner">
+      <div style="text-align:center; max-width:700px; margin:0 auto 48px;">
+        <div class="section-label" style="color:var(--attendee-accent); justify-content:center;">For Attendees</div>
+        <h3 class="pp-headline">Your entire event,<br><span
+            style="background:linear-gradient(90deg,var(--attendee-accent) 0%,#ff9f50 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">in
+            the palm of your hand.</span></h3>
+        <p class="pp-body">
+          Carry the event in your pocket. From buying tickets to staying in sync with friends and accessing the live
+          media gallery afterward, <strong class="brand-highlight">Revelti</strong> keeps you connected. Tap the steps
+          below to run the live phone simulation!
+        </p>
+      </div>
+
+      <div class="pp-grid">
+        <!-- Left: Feature list + CTA -->
+        <div style="display: flex; flex-direction: column;">
+          <ul class="feature-list" style="margin-bottom: 0;">
+            <li class="feature-item att-feat att-feat-active" id="sim-step-0"
+              onclick="goToAttSlide(0); openMobileMockupModal('attendee', 0)" style="cursor: pointer;">
+              <div class="fi-icon att">🎫</div>
+              <div class="fi-text">
+                <strong>Find events &amp; buy tickets</strong>
+                <span>Browse events, buy secure tickets, and get your digital QR code ready for check-in.</span>
+              </div>
+            </li>
+            <li class="feature-item att-feat" id="sim-step-1"
+              onclick="goToAttSlide(1); openMobileMockupModal('attendee', 1)" style="cursor: pointer;">
+              <div class="fi-icon att">📢</div>
+              <div class="fi-text">
+                <strong>Your event companion</strong>
+                <span>Get real-time updates from organizers. Schedule changes, maps, and important updates.</span>
+              </div>
+            </li>
+            <li class="feature-item att-feat" id="sim-step-2"
+              onclick="goToAttSlide(2); openMobileMockupModal('attendee', 2)" style="cursor: pointer;">
+              <div class="fi-icon att">👥</div>
+              <div class="fi-text">
+                <strong>See who is going</strong>
+                <span>See which of your friends are attending upcoming events. Never miss a chance to dance
+                  together.</span>
+              </div>
+            </li>
+            <li class="feature-item att-feat" id="sim-step-3"
+              onclick="goToAttSlide(3); openMobileMockupModal('attendee', 3)" style="cursor: pointer;">
+              <div class="fi-icon att">📸</div>
+              <div class="fi-text">
+                <strong>Relive the whole event</strong>
+                <span>Get notified the instant photographers publish. Find, download, and share your favorites.</span>
+              </div>
+            </li>
+          </ul>
+          <div style="margin-top: 24px;">
+            <a href="#waitlist" class="pp-cta att-cta" onclick="scrollToWaitlist(event, 'attendee')"
+              style="background:var(--attendee-accent); box-shadow:0 8px 30px rgba(245,130,32,0.35);">
+              Join the Attendee Waitlist →
+            </a>
+          </div>
+        </div>
+        <!-- Right: Interactive Mobile App Mockup -->
+        <div class="pp-mockup" style="align-self: center; display: flex; justify-content: center;">
+          <div
+            style="width: 300px; height: 600px; background: #fff; border-radius: 40px; box-shadow: 0 25px 50px -12px rgba(245, 130, 32, 0.25), 0 0 0 10px #1e293b, 0 0 0 12px rgba(255,255,255,0.2); position: relative; overflow: hidden; display: flex; flex-direction: column; text-align: left; font-family: 'Nunito', sans-serif;">
+            <!-- Notch -->
+            <div
+              style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 120px; height: 25px; background: #1e293b; border-bottom-left-radius: 16px; border-bottom-right-radius: 16px; z-index: 10;">
+            </div>
+
+            <!-- App Title / Header Bar -->
+            <div
+              style="height: 60px; background: #1e293b; color: white; display: flex; align-items: center; justify-content: center; padding-top: 20px; font-weight: 800; font-size: 14px; flex-shrink: 0; position: relative; z-index: 5;">
+              <span id="phone-title">My Ticket</span>
+            </div>
+
+            <!-- Smartphone Screen Body -->
+            <div
+              style="flex: 1; position: relative; overflow: hidden; background: #f8fafc; display: flex; flex-direction: column;">
+
+              <!-- Slide 0: Find & Buy Screen / My Ticket -->
+              <div class="fp-slide" id="att-slide-0"
+                style="display: flex; flex-direction: column; height: 100%; padding: 12px; gap: 8px; overflow-y: auto; font-size: 12px;">
+                <!-- Sub-state 0A: Booking Screen -->
+                <div id="sim-booking-state" style="display: flex; flex-direction: column; height: 100%; gap: 8px;">
+                  <div style="text-align: center; margin-bottom: 2px;">
+                    <p
+                      style="font-size: 9px; color: var(--attendee-accent); font-weight: 700; margin: 0; text-transform: uppercase;">
+                      Buying tickets for</p>
+                    <h4 style="font-size: 13px; font-weight: 800; color: #213c63; margin: 0;">Dance Fest Spain 2026</h4>
+                  </div>
+                  <div
+                    style="background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 10px; display: flex; flex-direction: column; gap: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                      <span style="font-weight: 800; color: #213c63; font-size: 11px;">Sensuality Pass</span>
+                      <span style="font-weight: 800; color: #f58220; font-size: 11px;">€170.00</span>
+                    </div>
+                    <p style="font-size: 9px; color: #64748b; line-height: 1.2; margin: 0;">Access to all main workshops
+                      and social parties.</p>
+                    <div
+                      style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px; border-top: 1px solid #f1f5f9; padding-top: 6px;">
+                      <span style="font-size: 9px; color: #64748b;">Quantity</span>
+                      <div style="display: flex; align-items: center; gap: 6px;">
+                        <button
+                          style="width: 18px; height: 18px; border-radius: 50%; background: #e2e8f0; border: none; font-size: 10px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center;">-</button>
+                        <span style="font-weight: 700; font-size: 11px;">1</span>
+                        <button
+                          style="width: 18px; height: 18px; border-radius: 50%; background: #e2e8f0; border: none; font-size: 10px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center;">+</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    style="background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 8px; font-size: 10px; display: flex; justify-content: space-between; align-items: center; color: #213c63; font-weight: 700; cursor: pointer;">
+                    <span>Discount Code</span>
+                    <span style="font-size: 8px; color: #94a3b8;">▼</span>
+                  </div>
+                  <div
+                    style="margin-top: auto; border-top: 1px solid #cbd5e1; padding-top: 8px; display: flex; flex-direction: column; gap: 6px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                      <span style="color: #64748b; font-size: 10px;">Total Price</span>
+                      <strong style="font-size: 13px; color: #213c63;">€170.00</strong>
+                    </div>
+                    <button id="sim-buy-btn" onclick="simBuyTicket()"
+                      style="background: var(--attendee-accent); color: white; border: none; padding: 10px; border-radius: 8px; font-weight: 800; font-size: 11px; cursor: pointer; text-align: center; box-shadow: 0 4px 10px rgba(245,130,32,0.2);">
+                      Proceed to Checkout
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Sub-state 0B: Purchase Details (purchaseDetails.html) -->
+                <div id="sim-details-state" style="display: none; flex-direction: column; gap: 8px; height: 100%;">
+                  <div style="border-bottom: 1px solid #e2e8f0; padding-bottom: 6px;">
+                    <h4 style="font-size: 13px; font-weight: 800; color: #213c63; margin: 0;">Purchase Details</h4>
+                    <p style="font-size: 9px; color: #64748b; margin: 0;">Order #1A2B3C4D &bull; Confirmed</p>
+                  </div>
+                  <button onclick="toggleSimTicketModal(true)"
+                    style="width: 100%; background: var(--attendee-accent); color: white; border: none; padding: 8px; border-radius: 8px; font-weight: 800; font-size: 11px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 2px 5px rgba(245,130,32,0.15);">
+                    🎫 View Ticket
+                  </button>
+                  <!-- Event Card -->
+                  <div
+                    style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.02); display: flex; flex-direction: column;">
+                    <img src="images/eventPoster.png" style="width: 100%; height: 75px; object-fit: cover;">
+                    <div style="padding: 8px;">
+                      <h5 style="font-weight: 800; color: #213c63; font-size: 11px; margin: 0;">Dance Fest Spain 2026
+                      </h5>
+                      <p style="font-size: 9px; color: #64748b; margin: 2px 0 0 0;">Nov 1-2, 2025 &bull; Madrid, Spain
+                      </p>
+                    </div>
+                  </div>
+                  <!-- Organizer Card -->
+                  <div
+                    style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 8px; display: flex; align-items: center; gap: 8px;">
+                    <img src="images/organizerAvatar.png"
+                      style="width: 28px; height: 28px; border-radius: 50%; object-fit: cover;">
+                    <div>
+                      <span style="font-size: 8px; color: #94a3b8; display: block;">Organized by</span>
+                      <span style="font-weight: 700; color: #213c63; font-size: 10px;">LMP Events</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Sub-state 0C: Ticket QR Modal (ticketPurchase View Ticket modal) -->
+                <div id="sim-ticket-modal"
+                  style="display: none; position: absolute; inset: 0; background: rgba(15,23,42,0.85); z-index: 100; padding: 12px; flex-direction: column; justify-content: center; align-items: center;">
+                  <div
+                    style="background: white; width: 100%; border-radius: 16px; padding: 12px; position: relative; max-height: 100%; overflow-y: auto; display: flex; flex-direction: column; gap: 6px;">
+                    <button onclick="toggleSimTicketModal(false)"
+                      style="position: absolute; top: 8px; right: 12px; background: none; border: none; font-size: 20px; color: #94a3b8; cursor: pointer; line-height: 1;">&times;</button>
+                    <h4 style="font-size: 12px; font-weight: 800; color: #213c63; margin-top: 4px; text-align: center;">
+                      Dance Fest Spain 2026</h4>
+                    <div style="height: 1px; border-top: 1px dashed #e2e8f0; margin: 4px 0;"></div>
+                    <div style="display: flex; justify-content: center; margin: 4px 0;">
+                      <img src="images/qrCode.png" style="width: 90px; height: 90px;">
+                    </div>
+                    <p style="font-size: 8px; text-align: center; color: #64748b; margin: 0;">Scan at event entrance</p>
+                    <p
+                      style="font-size: 10px; font-family: monospace; text-align: center; font-weight: 700; letter-spacing: 0.1em; margin: 0; color: #1e293b;">
+                      6824 7659 3469</p>
+                    <div
+                      style="font-size: 9px; color: #4b5563; border-top: 1px solid #f1f5f9; padding-top: 6px; display: flex; flex-direction: column; gap: 2px;">
+                      <p style="margin:0;"><strong>Attendee:</strong> Sofia Martínez</p>
+                      <p style="margin:0;"><strong>Ticket:</strong> Sensuality Pass</p>
+                    </div>
+                    <!-- Apple & Google Wallet Buttons -->
+                    <div style="display: flex; flex-direction: column; gap: 4px; margin-top: 4px;">
+                      <div
+                        style="background: black; border-radius: 6px; padding: 4px; display: flex; align-items: center; justify-content: center; gap: 6px; color: white; font-size: 9px; font-weight: 700; cursor: pointer;">
+                        <span style="font-size: 12px;"></span> Add to Apple Wallet
+                      </div>
+                      <div
+                        style="background: black; border-radius: 6px; padding: 4px; display: flex; align-items: center; justify-content: center; gap: 6px; color: white; font-size: 9px; font-weight: 700; cursor: pointer;">
+                        <span style="color: #4285F4; font-size: 12px;">💳</span> Add to Google Wallet
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 1: Companion (Timeline & Announcements) -->
+              <div class="fp-slide fp-slide-hidden" id="att-slide-1"
+                style="display: flex; flex-direction: column; height: 100%; padding: 12px; gap: 8px; overflow-y: auto; font-size: 12px;">
+                <!-- Story bubbles -->
+                <div
+                  style="display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; border-bottom: 1px solid #e2e8f0; flex-shrink: 0;"
+                  class="no-scrollbar">
+                  <div
+                    style="display: flex; flex-direction: column; align-items: center; gap: 2px; flex-shrink: 0; cursor: pointer;">
+                    <div
+                      style="width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--attendee-accent); background: #213c63; display: flex; align-items: center; justify-content: center; color: white; font-size: 8px; font-weight: 800;">
+                      ALL</div>
+                    <span
+                      style="font-size: 7px; color: #213c63; font-weight: 800; text-transform: uppercase;">All</span>
+                  </div>
+                  <div
+                    style="display: flex; flex-direction: column; align-items: center; gap: 2px; flex-shrink: 0; cursor: pointer;">
+                    <img src="images/eventPoster.png"
+                      style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover; border: 1px solid #cbd5e1;">
+                    <span style="font-size: 7px; color: #64748b;">PROGRAM</span>
+                  </div>
+                  <div
+                    style="display: flex; flex-direction: column; align-items: center; gap: 2px; flex-shrink: 0; cursor: pointer;">
+                    <div
+                      style="width: 32px; height: 32px; border-radius: 50%; background: #e2e8f0; color: #213c63; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 800;">
+                      J&J</div>
+                    <span style="font-size: 7px; color: #64748b;">J&J</span>
+                  </div>
+                  <div
+                    style="display: flex; flex-direction: column; align-items: center; gap: 2px; flex-shrink: 0; cursor: pointer;">
+                    <div
+                      style="width: 32px; height: 32px; border-radius: 50%; background: #e2e8f0; color: #213c63; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 800;">
+                      SAFE</div>
+                    <span style="font-size: 7px; color: #64748b;">SAFETY</span>
+                  </div>
+                </div>
+
+                <!-- Timeline/Latest Updates list -->
+                <h5 style="font-weight: 800; color: #213c63; font-size: 11px; margin: 2px 0 0 0;">Latest Updates</h5>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                  <!-- Live Program Update -->
+                  <div
+                    style="background: white; border: 1px solid #e2e8f0; border-left: 3px solid #f58220; border-radius: 8px; padding: 8px; display: flex; flex-direction: column; gap: 3px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
+                    <div style="display: flex; gap: 4px;">
+                      <span
+                        style="background: rgba(33,60,99,0.1); color: #213c63; font-size: 7px; font-weight: 800; padding: 1px 4px; border-radius: 4px; text-transform: uppercase;">Program</span>
+                      <span
+                        style="background: rgba(33,60,99,0.1); color: #213c63; font-size: 7px; font-weight: 800; padding: 1px 4px; border-radius: 4px; text-transform: uppercase;">Workshops</span>
+                    </div>
+                    <h4 style="font-size: 10px; font-weight: 800; color: #213c63; margin: 0;">Next year, something big
+                      is coming...</h4>
+                    <span style="font-size: 7px; color: #94a3b8;">Posted on: Aug 26, 2025</span>
+                    <img src="images/eventUpdate.png"
+                      style="width: 100%; height: 65px; object-fit: cover; border-radius: 6px; margin: 2px 0;">
+                    <p style="font-size: 9px; color: #4b5563; line-height: 1.2; margin: 0;">European Qualifiers across
+                      the top 20 competitions. The Madrid Qualifier Cup is coming...</p>
+                  </div>
+
+                  <!-- Schedule Update -->
+                  <div
+                    style="background: white; border: 1px solid #e2e8f0; border-left: 3px solid #f58220; border-radius: 8px; padding: 8px; display: flex; flex-direction: column; gap: 3px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
+                    <span
+                      style="background: rgba(33,60,99,0.1); color: #213c63; font-size: 7px; font-weight: 800; padding: 1px 4px; border-radius: 4px; text-transform: uppercase; width: fit-content;">Workshops</span>
+                    <h4 style="font-size: 10px; font-weight: 800; color: #213c63; margin: 0;">Schedule Update: New
+                      Workshop!</h4>
+                    <span style="font-size: 7px; color: #94a3b8;">Posted on: Oct 15, 2025</span>
+                    <p style="font-size: 9px; color: #4b5563; line-height: 1.2; margin: 0;">We've added a Bachata
+                      Sensual workshop with Judith Cordero on Sunday at 11:00 AM.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 2: See who is going (eventDetail.html People Tab) -->
+              <div class="fp-slide fp-slide-hidden" id="att-slide-2"
+                style="display: flex; flex-direction: column; height: 100%; padding: 12px; gap: 8px; overflow-y: auto; font-size: 12px;">
+                <!-- Are you going toggles -->
+                <div>
+                  <p
+                    style="font-size: 8px; font-weight: 800; color: #94a3b8; text-transform: uppercase; margin: 0 0 4px 0;">
+                    Are you going?</p>
+                  <div style="display: flex; gap: 6px;">
+                    <button
+                      style="flex: 1; border: 1px solid #213c63; background: #213c63; color: white; font-size: 10px; font-weight: 700; padding: 5px 8px; border-radius: 20px; display: flex; align-items: center; justify-content: center; gap: 4px; cursor: pointer;">
+                      <span style="font-size: 8px;">✓</span> Going
+                    </button>
+                    <button
+                      style="flex: 1; border: 1px solid #e2e8f0; background: white; color: #4b5563; font-size: 10px; font-weight: 700; padding: 5px 8px; border-radius: 20px; cursor: pointer;">Curious</button>
+                  </div>
+                </div>
+
+                <!-- Social Proof Summary Box -->
+                <div
+                  style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 8px; display: flex; align-items: center; gap: 6px; margin: 2px 0;">
+                  <div style="display: flex; -space-x-1.5 overflow: hidden;">
+                    <img src="https://i.pravatar.cc/30?img=1"
+                      style="width: 16px; height: 16px; border-radius: 50%; border: 1px solid white;">
+                    <img src="https://i.pravatar.cc/30?img=2"
+                      style="width: 16px; height: 16px; border-radius: 50%; border: 1px solid white;">
+                    <img src="https://i.pravatar.cc/30?img=3"
+                      style="width: 16px; height: 16px; border-radius: 50%; border: 1px solid white;">
+                  </div>
+                  <span style="font-size: 9px; color: #4b5563;"><strong style="color: #213c63;">14</strong> going &bull;
+                    <strong style="color: #4b5563;">22</strong> curious</span>
+                </div>
+
+                <!-- Filter tabs -->
+                <div
+                  style="display: flex; gap: 4px; background: #f1f5f9; padding: 2px; border-radius: 6px; width: fit-content;">
+                  <button
+                    style="background: white; color: #213c63; font-size: 8px; font-weight: 800; border: none; padding: 3px 8px; border-radius: 4px; cursor: pointer; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">Going</button>
+                  <button
+                    style="background: transparent; color: #64748b; font-size: 8px; font-weight: 800; border: none; padding: 3px 8px; border-radius: 4px; cursor: pointer;">Curious</button>
+                </div>
+
+                <!-- Attendees list -->
+                <div style="display: flex; flex-direction: column; gap: 4px;">
+                  <div
+                    style="background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 6px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 2px rgba(0,0,0,0.02);">
+                    <div style="display: flex; align-items: center; gap: 6px;">
+                      <img src="https://i.pravatar.cc/40?img=10"
+                        style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover;">
+                      <div style="display: flex; flex-direction: column; text-align: left;">
+                        <span style="font-size: 9px; font-weight: 800; color: #213c63; line-height: 1.1;">Sofia
+                          Martínez</span>
+                        <span style="font-size: 7px; color: #94a3b8;">Madrid, Spain</span>
+                      </div>
+                    </div>
+                    <span
+                      style="font-size: 7px; color: #213c63; background: rgba(33,60,99,0.1); font-weight: 800; padding: 1px 6px; border-radius: 10px;">Connected</span>
+                  </div>
+                  <div
+                    style="background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 6px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 2px rgba(0,0,0,0.02);">
+                    <div style="display: flex; align-items: center; gap: 6px;">
+                      <img src="https://i.pravatar.cc/40?img=11"
+                        style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover;">
+                      <div style="display: flex; flex-direction: column; text-align: left;">
+                        <span style="font-size: 9px; font-weight: 800; color: #213c63; line-height: 1.1;">Alex
+                          Duarte</span>
+                        <span style="font-size: 7px; color: #94a3b8;">Barcelona, Spain</span>
+                      </div>
+                    </div>
+                    <span
+                      style="font-size: 7px; color: #213c63; background: rgba(33,60,99,0.1); font-weight: 800; padding: 1px 6px; border-radius: 10px;">Connected</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 3: Relive the whole event (mediaTab.html & openGalleryOverlay()) -->
+              <div class="fp-slide fp-slide-hidden" id="att-slide-3"
+                style="display: flex; flex-direction: column; height: 100%; padding: 12px; gap: 8px; overflow-y: auto; font-size: 12px; position: relative;">
+                <!-- Main media tab view -->
+                <div id="sim-media-card" onclick="toggleSimGallery(true)"
+                  style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 6px; display: flex; flex-direction: column; gap: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); cursor: pointer; height: 100%;">
+                  <span
+                    style="font-size: 8px; font-weight: 800; color: #94a3b8; text-transform: uppercase; display: block; margin-bottom: 2px;">Visual
+                    Creatives</span>
+                  <div style="display: flex; gap: 6px; align-items: center; margin-bottom: 4px;">
+                    <img src="images/creativeIcon.png"
+                      style="width: 24px; height: 24px; border-radius: 50%; object-fit: contain; background: black; padding: 1px;">
+                    <span style="font-size: 10px; font-weight: 800; color: #213c63;">AMedia (Photographer)</span>
+                  </div>
+
+                  <span
+                    style="font-size: 8px; font-weight: 800; color: #94a3b8; text-transform: uppercase; display: block; margin-top: 2px;">Uploaded
+                    Album</span>
+                  <div style="position: relative; border-radius: 8px; overflow: hidden; flex: 1; min-height: 100px;">
+                    <img src="albums/event/gallery2.jpg" style="width: 100%; height: 100%; object-fit: cover;">
+                    <div
+                      style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,17,23,0.7) 30%, transparent); display: flex; align-items: flex-end; padding: 8px;">
+                      <div>
+                        <h4 style="color: white; font-size: 12px; font-weight: 800; margin: 0;">Official Event Gallery
+                        </h4>
+                        <p style="color: rgba(255,255,255,0.8); font-size: 8px; margin: 1px 0 0 0;">Tap to view 142
+                          photos</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Fullscreen masonry style publicGalleryView mockup overlay inside simulator -->
+                <div id="sim-gallery-overlay"
+                  style="display: none; position: absolute; inset: 0; background: #0d1117; z-index: 100; flex-direction: column; padding: 12px; gap: 8px;">
+                  <div
+                    style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1f2937; padding-bottom: 6px; flex-shrink: 0;">
+                    <span
+                      style="color: white; font-weight: 800; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em;">AMedia
+                      Gallery &bull; Madrid</span>
+                    <button onclick="event.stopPropagation(); toggleSimGallery(false)"
+                      style="background: none; border: none; color: #9ca3af; font-size: 18px; cursor: pointer; line-height: 1;">&times;</button>
+                  </div>
+                  <div
+                    style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; overflow-y: auto; flex: 1;"
+                    class="no-scrollbar">
+                    <img src="albums/event/gallery2.jpg"
+                      style="width: 100%; height: 50px; object-fit: cover; border-radius: 4px;">
+                    <img src="images/eventPoster2.png"
+                      style="width: 100%; height: 50px; object-fit: cover; border-radius: 4px;">
+                    <img src="images/eventPoster3.png"
+                      style="width: 100%; height: 50px; object-fit: cover; border-radius: 4px;">
+                    <img src="images/eventPoster4.png"
+                      style="width: 100%; height: 50px; object-fit: cover; border-radius: 4px;">
+                    <img src="images/eventPoster5.png"
+                      style="width: 100%; height: 50px; object-fit: cover; border-radius: 4px;">
+                    <img src="images/eventUpdate.png"
+                      style="width: 100%; height: 50px; object-fit: cover; border-radius: 4px;">
+                    <img src="albums/event/gallery2.jpg"
+                      style="width: 100%; height: 50px; object-fit: cover; border-radius: 4px;">
+                    <img src="images/eventPoster2.png"
+                      style="width: 100%; height: 50px; object-fit: cover; border-radius: 4px;">
+                    <div
+                      style="border-radius: 4px; overflow: hidden; background: rgba(245,130,32,0.15); height: 50px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--attendee-accent); font-weight: 800;">
+                      +134</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Phone Footer Tabs (Switches slides locally too!) -->
+            <div
+              style="height: 54px; background: #fff; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-around; align-items: center; flex-shrink: 0; position: relative; z-index: 5;">
+              <div id="tab-phone-0" class="phone-footer-tab active" onclick="goToAttSlide(0)"
+                style="cursor: pointer; font-size: 18px; padding: 8px; transition: transform 0.2s;">🎟️</div>
+              <div id="tab-phone-1" class="phone-footer-tab" onclick="goToAttSlide(1)"
+                style="cursor: pointer; font-size: 18px; padding: 8px; transition: transform 0.2s;">📅</div>
+              <div id="tab-phone-2" class="phone-footer-tab" onclick="goToAttSlide(2)"
+                style="cursor: pointer; font-size: 18px; padding: 8px; transition: transform 0.2s;">👥</div>
+              <div id="tab-phone-3" class="phone-footer-tab" onclick="goToAttSlide(3)"
+                style="cursor: pointer; font-size: 18px; padding: 8px; transition: transform 0.2s;">📸</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== SECTION: ECOSYSTEM ===================== -->
+  <section id="ecosystem" style="background: var(--dark); position: relative;">
+    <!-- ECOSYSTEM PARTICLES CANVAS -->
+    <canvas id="ecosystem-particles-canvas"
+      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; opacity: 0.6;"></canvas>
+    <div class="ecosystem-inner" style="position: relative; z-index: 2;">
+      <div class="section-label reveal" style="justify-content:center;">Better together</div>
+      <h2 class="eco-headline reveal reveal-delay-1" style="text-align:center;">
+        When everyone's<br>on the same stage,<br><span class="headline-accent">the magic happens.</span>
+      </h2>
+      <p class="eco-sub reveal reveal-delay-2"
+        style="text-align:center;max-width:640px;margin-left:auto;margin-right:auto;">
+        <strong class="brand-highlight">Revelti</strong> is a triangle, not a line. Organizers, creatives, and attendees
+        all share the same platform - connected, in sync, and always in the loop.
+      </p>
+
+      <!-- Triangle: 3 equal cards with icon in the true center -->
+      <div class="eco-tri-wrapper reveal reveal-delay-3">
+
+        <!-- Top row: Organizer + Creative -->
+        <div class="eco-tri-top">
+          <div class="eco-node org">
+            <div class="eco-node-icon">🎪</div>
+            <div class="eco-node-tag org">Organizer</div>
+            <div class="eco-node-title">Runs the show</div>
+            <div class="eco-node-body">Sets up events, sells tickets, broadcasts to the crowd, and manages their media
+              team - all without leaving the platform.</div>
+          </div>
+
+          <!-- Mobile-only Hub between Organizer and Creative -->
+          <div class="mobile-only-hub">
+            <div class="eco-orbit">
+              <div class="eco-orbit-arrow top">→</div>
+              <div class="eco-orbit-arrow bottom">→</div>
+            </div>
+            <div class="eco-hub-badge">
+              <img src="icons/icon-192.png" alt="Revelti Icon" class="eco-hub-icon">
+            </div>
+          </div>
+
+          <div class="eco-node cre">
+            <div class="eco-node-icon">📷</div>
+            <div class="eco-node-tag cre">Creative</div>
+            <div class="eco-node-title">Captures the night</div>
+            <div class="eco-node-body">Stores, edits, and delivers media directly to the event. Their work is seen by
+              every single attendee - automatically.</div>
+          </div>
+        </div>
+
+        <!-- Hub: absolutely centered between top and bottom rows -->
+        <div class="eco-tri-center">
+          <div class="eco-orbit">
+            <div class="eco-orbit-arrow top">→</div>
+            <div class="eco-orbit-arrow bottom">→</div>
+          </div>
+          <div class="eco-hub-badge">
+            <img src="icons/icon-192.png" alt="Revelti Icon" class="eco-hub-icon">
+          </div>
+        </div>
+
+        <!-- Bottom row: Attendee -->
+        <div class="eco-tri-bottom">
+          <div class="eco-node att">
+            <div class="eco-node-icon">🎉</div>
+            <div class="eco-node-tag att">Attendee</div>
+            <div class="eco-node-title">Lives the experience</div>
+            <div class="eco-node-body">Buys their ticket, gets the updates, finds their photos - and relives the night,
+              long after it's over.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SECTION: WAITLIST ===================== -->
+  <section id="waitlist">
+    <div class="waitlist-glow"></div>
+    <div class="waitlist-inner">
+      <div class="waitlist-eyebrow reveal">Limited Early Access</div>
+      <h2 class="waitlist-headline reveal reveal-delay-1">
+        Be the first to<br>experience <span class="headline-accent">Revelti.</span>
+      </h2>
+      <p class="waitlist-sub reveal reveal-delay-2">
+        We're putting the finishing touches on something special. Join the waitlist today and lock in early access perks
+        based on your profile.
+      </p>
+
+      <div class="reveal reveal-delay-3">
+        <!-- Role selector toggle -->
+        <div class="waitlist-role-selector">
+          <button type="button" class="role-btn org active" onclick="setWaitlistRole('organizer')">
+            <span>🎪</span> Organizer
+          </button>
+          <button type="button" class="role-btn cre" onclick="setWaitlistRole('creative')">
+            <span>📷</span> Creative
+          </button>
+          <button type="button" class="role-btn att" onclick="setWaitlistRole('attendee')">
+            <span>🎉</span> Attendee
+          </button>
+        </div>
+
+        <form class="waitlist-form" onsubmit="handleWaitlistSubmit(event)" id="waitlist-form">
+          <input type="hidden" name="role" id="waitlist-role-input" value="organizer">
+          <input type="email" class="waitlist-input" placeholder="your@email.com" required id="waitlist-email"
+            aria-label="Email address">
+          <button type="submit" class="waitlist-btn" id="waitlist-submit-btn">Join the Waitlist</button>
+        </form>
+      </div>
+
+      <div class="waitlist-perks reveal reveal-delay-4">
+        <div class="waitlist-perk"><span class="perk-check">✦</span> Profile-specific beta access</div>
+        <div class="waitlist-perk"><span class="perk-check">✦</span> Early bird perks lock-in</div>
+        <div class="waitlist-perk"><span class="perk-check">✦</span> Founding member label</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <img src="images/reveltiLogo.png" alt="Revelti" style="height:16px;opacity:0.65;"
+        onerror="this.style.display='none'">
+      <span>© 2025 <strong class="brand-highlight">Revelti</strong>. All rights reserved.</span>
+    </div>
+    <div class="footer-note">Mockups shown are illustrative. Final product may vary.</div>
+  </footer>
+
+  <!-- FOMO BAR -->
+  <div class="fomo-bar" id="fomo-bar">
+    <div class="fomo-dot"></div>
+    <span><span class="fomo-count" id="fomo-count">1,284</span> people already on the waitlist</span>
+  </div>
+
+  <!-- SUCCESS MODAL -->
+  <div class="modal-overlay" id="success-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card">
+      <div class="modal-icon">🎉</div>
+      <div class="modal-title" id="modal-title">You're on the list!</div>
+      <div class="modal-body">
+        You just locked in your spot as an <strong id="modal-role-label">Organizer</strong>.<br>
+        <strong class="brand-highlight">Exclusive early-bird perks</strong> are yours - we'll reach out before anyone
+        else when <strong class="brand-highlight">Revelti</strong> launches.<br><br>
+        Tell your people. The night doesn't end here. 🔥
+      </div>
+      <button class="modal-close" onclick="closeModal()">Let's go! 🚀</button>
+    </div>
+  </div>
+
+  <!-- MOBILE FULLSCREEN MODAL FOR MOCKUPS -->
+  <div id="mobile-mockup-modal" class="mobile-mockup-modal" style="display: none;">
+    <button id="close-mobile-modal-btn" onclick="closeMobileMockupModal()"
+      style="position: absolute; top: 24px; right: 24px; background: rgba(255,255,255,0.1); border: none; color: white; width: 44px; height: 44px; border-radius: 50%; font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 100000;">✕</button>
+    <div id="mobile-modal-body"
+      style="width: 100%; flex: 1; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+      <!-- Content gets cloned or moved here -->
+    </div>
+    <div id="mobile-modal-footer-hint"
+      style="color: rgba(255,255,255,0.6); font-size: 11px; margin-top: 15px; text-align: center;">
+      Interact with the screen. Tap ✕ or click outside to return.
+    </div>
+  </div>
+
+  <script>
+    /* ===================== MENU TOGGLE ===================== */
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+
+    function toggleMobileMenu() {
+      menuToggle.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    }
+
+    /* ===================== CURSOR ===================== */
+    const cursor = document.getElementById('cursor');
+    const cursorRing = document.getElementById('cursor-ring');
+    let mouseX = 0, mouseY = 0;
+    let ringX = 0, ringY = 0;
+
+    document.addEventListener('mousemove', e => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursor.style.left = mouseX + 'px';
+      cursor.style.top = mouseY + 'px';
+    });
+
+    function animateCursor() {
+      ringX += (mouseX - ringX) * 0.12;
+      ringY += (mouseY - ringY) * 0.12;
+      cursorRing.style.left = ringX + 'px';
+      cursorRing.style.top = ringY + 'px';
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    document.querySelectorAll('a, button, input, .chapter-dot, .eco-node, .picker-card').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.transform = 'translate(-50%, -50%) scale(2)';
+        cursorRing.style.transform = 'translate(-50%, -50%) scale(1.4)';
+        cursorRing.style.borderColor = 'rgba(245,130,32,0.7)';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+        cursorRing.style.transform = 'translate(-50%, -50%) scale(1)';
+        cursorRing.style.borderColor = 'rgba(245,130,32,0.4)';
+      });
+    });
+
+    /* ===================== PARTICLES CANVAS ===================== */
+    function setupParticlesForCanvas(canvasId) {
+      const canvas = document.getElementById(canvasId);
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let particles = [];
+      let animFrame;
+
+      function resizeCanvas() {
+        canvas.width = canvas.clientWidth || window.innerWidth;
+        canvas.height = canvas.clientHeight || window.innerHeight;
+      }
+
+      class Particle {
+        constructor() { this.reset(); }
+        reset() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.size = Math.random() * 2.5 + 0.5;
+          this.speedX = (Math.random() - 0.5) * 0.4;
+          this.speedY = (Math.random() - 0.5) * 0.4;
+          this.opacity = Math.random() * 0.5 + 0.05;
+          this.color = Math.random() > 0.6
+            ? `rgba(245,130,32,${this.opacity})`
+            : Math.random() > 0.5
+              ? `rgba(33,60,99,${this.opacity * 2})`
+              : `rgba(107,33,168,${this.opacity})`;
+          this.life = 0;
+          this.maxLife = 200 + Math.random() * 200;
+        }
+        update() {
+          this.x += this.speedX;
+          this.y += this.speedY;
+          this.life++;
+          if (this.life > this.maxLife || this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+            this.reset();
+          }
+        }
+        draw() {
+          const fade = Math.sin((this.life / this.maxLife) * Math.PI);
+          ctx.globalAlpha = fade;
+          ctx.fillStyle = this.color;
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      function initParticles() {
+        particles = [];
+        const count = Math.min(80, Math.floor(canvas.width * canvas.height / 14000));
+        for (let i = 0; i < count; i++) particles.push(new Particle());
+      }
+
+      function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => { p.update(); p.draw(); });
+        ctx.globalAlpha = 1;
+        animFrame = requestAnimationFrame(animateParticles);
+      }
+
+      resizeCanvas();
+      initParticles();
+      animateParticles();
+
+      window.addEventListener('resize', () => {
+        resizeCanvas();
+        initParticles();
+      });
+    }
+
+    setupParticlesForCanvas('particles-canvas');
+    setupParticlesForCanvas('ecosystem-particles-canvas');
+
+    /* ===================== GLITCH ANIMATION ===================== */
+    function runGlitch() {
+      const el = document.getElementById('glitch-target');
+      if (!el) return;
+      const originalChars = 'when the music stops.';
+      const glitchChars = '!@#$%^&*ABCDEFGH01234';
+      let iterations = 0;
+      const interval = setInterval(() => {
+        el.textContent = originalChars.split('').map((c, i) => {
+          if (c === ' ') return ' ';
+          if (i < iterations) return originalChars[i];
+          return glitchChars[Math.floor(Math.random() * glitchChars.length)];
+        }).join('');
+        iterations += 1.5;
+        if (iterations >= originalChars.length) {
+          el.textContent = originalChars;
+          clearInterval(interval);
+        }
+      }, 35);
+    }
+
+    setTimeout(runGlitch, 1200);
+    setInterval(runGlitch, 9000);
+
+    /* ===================== FEATURE CAROUSEL — ORGANIZER ===================== */
+    const orgUrls = [
+      'revelti.com / ticketing',
+      'revelti.com / broadcast',
+      'revelti.com / collaborators',
+      'revelti.com / analytics'
+    ];
+    let currentOrgSlide = 0;
+    let orgAutoTimer = null;
+
+    function goToOrgSlide(idx) {
+      const total = 4;
+      currentOrgSlide = ((idx % total) + total) % total;
+      for (let i = 0; i < total; i++) {
+        const s = document.getElementById(`org-slide-${i}`);
+        const f = document.getElementById(`org-feat-${i}`);
+        if (s) s.classList.add('fp-slide-hidden');
+        if (f) f.classList.remove('org-feat-active');
+      }
+      const active = document.getElementById(`org-slide-${currentOrgSlide}`);
+      const activeFeat = document.getElementById(`org-feat-${currentOrgSlide}`);
+      if (active) active.classList.remove('fp-slide-hidden');
+      if (activeFeat) activeFeat.classList.add('org-feat-active');
+      const urlEl = document.getElementById('org-url');
+      if (urlEl) urlEl.textContent = orgUrls[currentOrgSlide];
+      resetOrgAuto();
+    }
+
+    function resetOrgAuto() {
+      if (orgAutoTimer) clearInterval(orgAutoTimer);
+      orgAutoTimer = setInterval(() => {
+        goToOrgSlide((currentOrgSlide + 1) % 4);
+      }, 4500);
+    }
+
+    /* ===================== FEATURE CAROUSEL — CREATIVE ===================== */
+    const crUrls = [
+      'studio.revelti.com / workspace',
+      'studio.revelti.com / delivery',
+      'studio.revelti.com / analytics',
+      'studio.revelti.com / portfolio'
+    ];
+    let currentCrSlide = 0;
+    let crAutoTimer = null;
+
+    function goToCrSlide(idx) {
+      const total = 4;
+      currentCrSlide = ((idx % total) + total) % total;
+      for (let i = 0; i < total; i++) {
+        const s = document.getElementById(`cr-slide-${i}`);
+        const f = document.getElementById(`cr-feat-${i}`);
+        if (s) s.classList.add('fp-slide-hidden');
+        if (f) {
+          f.classList.remove('cr-feat-active');
+          f.style.borderColor = 'rgba(168,85,247,0.05)';
+          const icon = f.querySelector('.fi-icon');
+          if (icon) {
+            icon.style.background = 'rgba(168,85,247,0.05)';
+            icon.style.color = '#94a3b8';
+          }
+        }
+      }
+      const active = document.getElementById(`cr-slide-${currentCrSlide}`);
+      const activeFeat = document.getElementById(`cr-feat-${currentCrSlide}`);
+      if (active) active.classList.remove('fp-slide-hidden');
+      if (activeFeat) {
+        activeFeat.classList.add('cr-feat-active');
+        activeFeat.style.borderColor = 'rgba(168,85,247,0.15)';
+        const icon = activeFeat.querySelector('.fi-icon');
+        if (icon) {
+          icon.style.background = 'rgba(168,85,247,0.15)';
+          icon.style.color = 'var(--creative-accent)';
+        }
+      }
+      const urlEl = document.getElementById('cr-url');
+      if (urlEl) urlEl.textContent = crUrls[currentCrSlide];
+      resetCrAuto();
+    }
+
+    function resetCrAuto() {
+      if (crAutoTimer) clearInterval(crAutoTimer);
+      crAutoTimer = setInterval(() => {
+        goToCrSlide((currentCrSlide + 1) % 4);
+      }, 4500);
+    }
+
+    /* ===================== FEATURE CAROUSEL — ATTENDEE ===================== */
+    const attTitles = [
+      'My Ticket',
+      'Event Companion',
+      'Friends',
+      'Photos Ready!'
+    ];
+    let currentAttSlide = 0;
+    let attAutoTimer = null;
+
+    function goToAttSlide(idx) {
+      const total = 4;
+      currentAttSlide = ((idx % total) + total) % total;
+
+      // Update left checklist step states
+      for (let i = 0; i < total; i++) {
+        const step = document.getElementById(`sim-step-${i}`);
+        const tab = document.getElementById(`tab-phone-${i}`);
+        const slide = document.getElementById(`att-slide-${i}`);
+        if (step) step.classList.toggle('att-feat-active', i === currentAttSlide);
+        if (tab) tab.classList.toggle('active', i === currentAttSlide);
+        if (slide) slide.classList.toggle('fp-slide-hidden', i !== currentAttSlide);
+      }
+
+      const titleEl = document.getElementById('phone-title');
+      if (titleEl) titleEl.textContent = attTitles[currentAttSlide];
+      resetAttAuto();
+    }
+
+    function resetAttAuto() {
+      if (attAutoTimer) clearInterval(attAutoTimer);
+      attAutoTimer = setInterval(() => {
+        goToAttSlide((currentAttSlide + 1) % 4);
+      }, 4500);
+    }
+
+    /* Screen 0 logic: Buy Ticket click */
+    function simBuyTicket() {
+      const btn = document.getElementById('sim-buy-btn');
+      const bookingState = document.getElementById('sim-booking-state');
+      const detailsState = document.getElementById('sim-details-state');
+
+      if (btn.classList.contains('issued')) return;
+
+      btn.textContent = 'Processing checkout...';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        btn.classList.add('issued');
+        bookingState.style.display = 'none';
+        detailsState.style.display = 'flex';
+
+        // Auto open ticket modal to simulate user flow
+        setTimeout(() => {
+          toggleSimTicketModal(true);
+        }, 1000);
+      }, 1200);
+    }
+
+    function toggleSimTicketModal(show) {
+      const modals = document.querySelectorAll('#sim-ticket-modal');
+      modals.forEach(m => m.style.display = show ? 'flex' : 'none');
+    }
+
+    function toggleSimGallery(show) {
+      const galleries = document.querySelectorAll('#sim-gallery-overlay');
+      galleries.forEach(g => g.style.display = show ? 'flex' : 'none');
+    }
+
+    /* ===================== MOBILE MOCKUP MODAL DRIVER ===================== */
+    function openMobileMockupModal(persona, slideIndex) {
+      if (window.innerWidth > 991) return;
+
+      // Stop auto-sliding carousels
+      if (orgAutoTimer) clearInterval(orgAutoTimer);
+      if (crAutoTimer) clearInterval(crAutoTimer);
+      if (attAutoTimer) clearInterval(attAutoTimer);
+
+      const modal = document.getElementById('mobile-mockup-modal');
+      const modalBody = document.getElementById('mobile-modal-body');
+      const footerHint = document.getElementById('mobile-modal-footer-hint');
+      modalBody.innerHTML = '';
+
+      if (persona === 'organizer') {
+        const src = document.getElementById(`org-slide-${slideIndex}`).src;
+        modalBody.innerHTML = `<img src="${src}" style="max-width: 95%; max-height: 95%; width: auto; height: auto; object-fit: contain; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">`;
+        if (footerHint) footerHint.innerText = 'Tap ✕ or click outside to return.';
+      } else if (persona === 'creative') {
+        const src = document.getElementById(`cr-slide-${slideIndex}`).src;
+        modalBody.innerHTML = `<img src="${src}" style="max-width: 95%; max-height: 95%; width: auto; height: auto; object-fit: contain; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">`;
+        if (footerHint) footerHint.innerText = 'Tap ✕ or click outside to return.';
+      } else if (persona === 'attendee') {
+        const phoneMockup = document.querySelector('#attendee-section .pp-mockup > div');
+        if (phoneMockup) {
+          modalBody.appendChild(phoneMockup);
+          phoneMockup.style.display = 'flex';
+          phoneMockup.style.transform = 'scale(0.85)';
+          phoneMockup.style.transformOrigin = 'center';
+        }
+        if (footerHint) footerHint.innerText = 'Interact with the screen. Tap ✕ or click outside to return.';
+      }
+
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    /* ===================== DESKTOP SCREENSHOT LIGHTBOX DRIVER ===================== */
+    function openScreenshotLightbox(persona, slideIndex) {
+      // Stop auto-sliding carousels
+      if (orgAutoTimer) clearInterval(orgAutoTimer);
+      if (crAutoTimer) clearInterval(crAutoTimer);
+      if (attAutoTimer) clearInterval(attAutoTimer);
+
+      const modal = document.getElementById('mobile-mockup-modal');
+      const modalBody = document.getElementById('mobile-modal-body');
+      const footerHint = document.getElementById('mobile-modal-footer-hint');
+      modalBody.innerHTML = '';
+
+      let src = '';
+      if (persona === 'organizer') {
+        src = document.getElementById(`org-slide-${slideIndex}`).src;
+      } else if (persona === 'creative') {
+        src = document.getElementById(`cr-slide-${slideIndex}`).src;
+      }
+
+      if (src) {
+        modalBody.innerHTML = `<img src="${src}" style="max-width: 95%; max-height: 95%; width: auto; height: auto; object-fit: contain; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">`;
+      }
+      if (footerHint) footerHint.innerText = 'Click outside or Tap ✕ to return.';
+
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Backdrop click closes the modal
+    document.getElementById('mobile-mockup-modal').addEventListener('click', function (e) {
+      if (e.target === this || e.target === document.getElementById('mobile-modal-body')) {
+        closeMobileMockupModal();
+      }
+    });
+
+    function closeMobileMockupModal() {
+      const modal = document.getElementById('mobile-mockup-modal');
+      const modalBody = document.getElementById('mobile-modal-body');
+
+      const phoneMockup = modalBody.querySelector('div[style*="width: 300px"]');
+      if (phoneMockup) {
+        const originalContainer = document.querySelector('#attendee-section .pp-mockup');
+        if (originalContainer) {
+          originalContainer.appendChild(phoneMockup);
+          phoneMockup.style.transform = '';
+        }
+      }
+
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+
+      // Resume auto-sliding carousels
+      resetOrgAuto();
+      resetCrAuto();
+      resetAttAuto();
+    }
+
+    // Init carousels on load
+    window.addEventListener('DOMContentLoaded', () => {
+      goToOrgSlide(0);
+      goToCrSlide(0);
+      goToAttSlide(0);
+    });
+    if (document.readyState !== 'loading') {
+      goToOrgSlide(0);
+      goToCrSlide(0);
+      goToAttSlide(0);
+    }
+
+    /* ===================== SCROLL REVEAL ===================== */
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    /* ===================== CHAPTER DOT ACTIVE STATE ===================== */
+    const sections = ['hero', 'chaos', 'organizer-section', 'creative-section', 'attendee-section', 'ecosystem', 'waitlist'];
+    const dots = document.querySelectorAll('.chapter-dot');
+
+    function updateChapterDots() {
+      const scrollY = window.scrollY + window.innerHeight * 0.35;
+      let activeIdx = 0;
+      sections.forEach((id, i) => {
+        const el = document.getElementById(id);
+        if (el && el.offsetTop <= scrollY) activeIdx = i;
+      });
+      dots.forEach((d, i) => {
+        d.classList.toggle('active', i === activeIdx);
+      });
+    }
+
+    window.addEventListener('scroll', updateChapterDots, { passive: true });
+
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function scrollToWaitlist(e, rolePreference) {
+      if (e) e.preventDefault();
+      const waitlistSec = document.getElementById('waitlist');
+      if (waitlistSec) waitlistSec.scrollIntoView({ behavior: 'smooth' });
+      if (rolePreference) {
+        setWaitlistRole(rolePreference);
+      }
+    }
+
+    /* ===================== WAITLIST ROLE SELECTOR ===================== */
+    function setWaitlistRole(role) {
+      const orgBtn = document.querySelector('.role-btn.org');
+      const creBtn = document.querySelector('.role-btn.cre');
+      const attBtn = document.querySelector('.role-btn.att');
+      const roleInput = document.getElementById('waitlist-role-input');
+
+      orgBtn.classList.remove('active');
+      creBtn.classList.remove('active');
+      attBtn.classList.remove('active');
+
+      if (role === 'organizer') {
+        orgBtn.classList.add('active');
+        roleInput.value = 'organizer';
+      } else if (role === 'creative') {
+        creBtn.classList.add('active');
+        roleInput.value = 'creative';
+      } else if (role === 'attendee') {
+        attBtn.classList.add('active');
+        roleInput.value = 'attendee';
+      }
+    }
+
+    /* ===================== FOMO COUNTER ===================== */
+    let baseCount = 1247;
+    const fomoEl = document.getElementById('fomo-count');
+
+    function updateFomo() {
+      baseCount += Math.floor(Math.random() * 3);
+      fomoEl.textContent = baseCount.toLocaleString();
+    }
+
+    setInterval(updateFomo, 4500 + Math.random() * 3000);
+
+    /* ===================== WAITLIST FORM ===================== */
+    function handleWaitlistSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const btn = form.querySelector('button[type="submit"]');
+      const input = form.querySelector('input[type="email"]');
+      const role = document.getElementById('waitlist-role-input').value;
+
+      if (!input || !input.value) return;
+
+      btn.textContent = 'Adding you...';
+      btn.disabled = true;
+      input.disabled = true;
+
+      setTimeout(() => {
+        // Reset form
+        document.getElementById('waitlist-form').reset();
+        btn.disabled = false;
+        btn.textContent = 'Join the Waitlist';
+        input.disabled = false;
+
+        // increment fomo counter
+        baseCount += 1;
+        fomoEl.textContent = baseCount.toLocaleString();
+
+        // update modal text based on selected role
+        const modalRoleLabel = document.getElementById('modal-role-label');
+        if (role === 'organizer') {
+          modalRoleLabel.textContent = 'Organizer';
+        } else if (role === 'creative') {
+          modalRoleLabel.textContent = 'Creative';
+        } else if (role === 'attendee') {
+          modalRoleLabel.textContent = 'Attendee';
+        }
+
+        // show modal
+        document.getElementById('success-modal').classList.add('open');
+      }, 900);
+    }
+
+    function closeModal() {
+      document.getElementById('success-modal').classList.remove('open');
+    }
+
+    document.getElementById('success-modal').addEventListener('click', function (e) {
+      if (e.target === this) closeModal();
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    /* ===================== HIDE FOMO BAR ON WAITLIST ===================== */
+    const waitlistSection = document.getElementById('waitlist');
+    const fomoBar = document.getElementById('fomo-bar');
+    const fomoObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        fomoBar.style.opacity = e.isIntersecting ? '0' : '1';
+        fomoBar.style.pointerEvents = e.isIntersecting ? 'none' : 'all';
+      });
+    }, { threshold: 0.3 });
+    fomoObserver.observe(waitlistSection);
+    fomoBar.style.transition = 'opacity 0.4s ease';
+
+    /* ===================== CHAOS MAGNETIC REPULSION ===================== */
+    const chaosTools = document.querySelectorAll('.chaos-tool');
+    const REPULSION_RADIUS = 130; // px — how close cursor needs to be to trigger
+    const REPULSION_STRENGTH = 55; // px — max push distance
+
+    // Per-card smooth state
+    const cardState = Array.from(chaosTools).map(() => ({ tx: 0, ty: 0, cx: 0, cy: 0 }));
+
+    document.addEventListener('mousemove', e => {
+      chaosTools.forEach((tool, i) => {
+        const rect = tool.getBoundingClientRect();
+        const cardCx = rect.left + rect.width / 2;
+        const cardCy = rect.top + rect.height / 2;
+        const dx = e.clientX - cardCx;
+        const dy = e.clientY - cardCy;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < REPULSION_RADIUS && dist > 0) {
+          // Push away: direction is opposite of cursor→card vector
+          const force = (1 - dist / REPULSION_RADIUS) * REPULSION_STRENGTH;
+          cardState[i].tx = -(dx / dist) * force;
+          cardState[i].ty = -(dy / dist) * force;
+        } else {
+          cardState[i].tx = 0;
+          cardState[i].ty = 0;
+        }
+      });
+    });
+
+    // Smooth interpolation loop — spring toward target
+    const ROT_VAR = i => {
+      const s = chaosTools[i].style;
+      return s.getPropertyValue('--rot') || '0deg';
+    };
+
+    (function repulseLoop() {
+      chaosTools.forEach((tool, i) => {
+        const s = cardState[i];
+        // Lerp current toward target
+        s.cx += (s.tx - s.cx) * 0.12;
+        s.cy += (s.ty - s.cy) * 0.12;
+
+        const rot = getComputedStyle(tool).getPropertyValue('--rot').trim() || '0deg';
+        tool.style.transform = `translate(${s.cx.toFixed(2)}px, ${s.cy.toFixed(2)}px) rotate(${rot})`;
+      });
+      requestAnimationFrame(repulseLoop);
+    })();
+  </script>
+</body>
+
+</html>
