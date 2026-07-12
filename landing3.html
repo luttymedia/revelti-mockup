@@ -3055,68 +3055,68 @@
       </div>
 
       <div class="pp-grid">
-        <!-- Left Column: Highlights list -->
-        <ul class="feature-list" style="grid-column: 1; grid-row: 1; margin-bottom: 0;">
-          <li class="feature-item org-feat org-feat-active" id="org-feat-0"
-            onclick="goToOrgSlide(0); openMobileMockupModal('organizer', 0)">
-            <div class="fi-icon org">🎫</div>
-            <div class="fi-text">
-              <strong>Effortless ticketing &amp; sales</strong>
-              <span>Set up your event, manage ticket tiers, and track sales live. No spreadsheets. It just works.</span>
-            </div>
-          </li>
-          <li class="feature-item org-feat" id="org-feat-1"
-            onclick="goToOrgSlide(1); openMobileMockupModal('organizer', 1)">
-            <div class="fi-icon org">📢</div>
-            <div class="fi-text">
-              <strong>Direct audience connection</strong>
-              <span>Keep your crowd in the loop before, during, and after the event - all from one dashboard.</span>
-            </div>
-          </li>
-          <li class="feature-item org-feat" id="org-feat-2"
-            onclick="goToOrgSlide(2); openMobileMockupModal('organizer', 2)">
-            <div class="fi-icon org">📸</div>
-            <div class="fi-text">
-              <strong>Your media team, synced</strong>
-              <span>Connect directly with your photographers. Their work goes straight into the official event gallery.
-                Done.</span>
-            </div>
-          </li>
-          <li class="feature-item org-feat" id="org-feat-3"
-            onclick="goToOrgSlide(3); openMobileMockupModal('organizer', 3)">
-            <div class="fi-icon org">📈</div>
-            <div class="fi-text">
-              <strong>Know exactly how you did</strong>
-              <span>Beautiful, easy-to-read stats on everything from ticket sales to post-event engagement. Know your
-                numbers.</span>
-            </div>
-          </li>
-        </ul>
-
-        <!-- Right Column: Mockup Window -->
-        <div class="pp-mockup" style="grid-column: 2; grid-row: 1; align-self: center; margin-top: 0;">
-          <div class="mockup-window"
-            style="width: 100%; height: auto; aspect-ratio: 1489/866; position: relative; overflow: hidden; border-radius: 12px; box-shadow: 0 25px 50px -12px rgba(33,60,99,0.15); border: none; background: none;">
-            <img id="org-slide-0" src="images/screenshots/1-orgTicketing.png"
-              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 0 !important; margin: 0 !important; cursor: pointer;"
-              class="fp-slide" onclick="openScreenshotLightbox('organizer', 0)">
-            <img id="org-slide-1" src="images/screenshots/2-orgEmails.png"
-              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 0 !important; margin: 0 !important; cursor: pointer;"
-              class="fp-slide fp-slide-hidden" onclick="openScreenshotLightbox('organizer', 1)">
-            <img id="org-slide-2" src="images/screenshots/3-orgMedia.png"
-              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 0 !important; margin: 0 !important; cursor: pointer;"
-              class="fp-slide fp-slide-hidden" onclick="openScreenshotLightbox('organizer', 2)">
-            <img id="org-slide-3" src="images/screenshots/4-orgReports.png"
-              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 0 !important; margin: 0 !important; cursor: pointer;"
-              class="fp-slide fp-slide-hidden" onclick="openScreenshotLightbox('organizer', 3)">
+        <!-- Left Column: Highlights list + CTA -->
+        <div style="display: flex; flex-direction: column;">
+          <ul class="feature-list" style="margin-bottom: 0;">
+            <li class="feature-item org-feat org-feat-active" id="org-feat-0"
+              onclick="goToOrgSlide(0, true); openMobileMockupModal('organizer', 0)">
+              <div class="fi-icon org">🎫</div>
+              <div class="fi-text">
+                <strong>Effortless ticketing &amp; sales</strong>
+                <span>Set up your event, manage ticket tiers, and track sales live. No spreadsheets. It just works.</span>
+              </div>
+            </li>
+            <li class="feature-item org-feat" id="org-feat-1"
+              onclick="goToOrgSlide(1, true); openMobileMockupModal('organizer', 1)">
+              <div class="fi-icon org">📢</div>
+              <div class="fi-text">
+                <strong>Direct audience connection</strong>
+                <span>Keep your crowd in the loop before, during, and after the event - all from one dashboard.</span>
+              </div>
+            </li>
+            <li class="feature-item org-feat" id="org-feat-2"
+              onclick="goToOrgSlide(2, true); openMobileMockupModal('organizer', 2)">
+              <div class="fi-icon org">📸</div>
+              <div class="fi-text">
+                <strong>Your media team, synced</strong>
+                <span>Connect directly with your photographers. Their work goes straight into the official event gallery.
+                  Done.</span>
+              </div>
+            </li>
+            <li class="feature-item org-feat" id="org-feat-3"
+              onclick="goToOrgSlide(3, true); openMobileMockupModal('organizer', 3)">
+              <div class="fi-icon org">📈</div>
+              <div class="fi-text">
+                <strong>Know exactly how you did</strong>
+                <span>Beautiful, easy-to-read stats on everything from ticket sales to post-event engagement. Know your
+                  numbers.</span>
+              </div>
+            </li>
+          </ul>
+          <div style="margin-top: 24px;">
+            <a href="#waitlist" class="pp-cta org-cta" onclick="scrollToWaitlist(event, 'organizer')">
+              Reserve Organizer Access →
+            </a>
           </div>
         </div>
 
-        <!-- Left Column: CTA button -->
-        <div style="grid-column: 1; grid-row: 2; margin-top: 24px;">
-          <a href="#waitlist" class="pp-cta org-cta" onclick="scrollToWaitlist(event, 'organizer')">
-            Reserve Organizer Access →
-          </a>
+        <!-- Right Column: Mockup Window -->
+        <div class="pp-mockup" style="grid-column: 2; grid-row: 1; align-self: center; display: flex; justify-content: center; margin-top: 0;">
+          <div class="mockup-window"
+            style="width: 100%; max-width: 330px; aspect-ratio: 1536/2752; position: relative; overflow: hidden; border-radius: 12px; box-shadow: 0 25px 50px -12px rgba(33,60,99,0.15); border: none; background: none;">
+            <img id="org-slide-0" src="images/illustrations/1-orgTicketing.png"
+              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 0 !important; margin: 0 !important; cursor: pointer;"
+              class="fp-slide" onclick="openScreenshotLightbox('organizer', 0)">
+            <img id="org-slide-1" src="images/illustrations/2-orgEmails.png"
+              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 0 !important; margin: 0 !important; cursor: pointer;"
+              class="fp-slide fp-slide-hidden" onclick="openScreenshotLightbox('organizer', 1)">
+            <img id="org-slide-2" src="images/illustrations/3-orgMedia.png"
+              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 0 !important; margin: 0 !important; cursor: pointer;"
+              class="fp-slide fp-slide-hidden" onclick="openScreenshotLightbox('organizer', 2)">
+            <img id="org-slide-3" src="images/illustrations/4-orgReports.png"
+              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 0 !important; margin: 0 !important; cursor: pointer;"
+              class="fp-slide fp-slide-hidden" onclick="openScreenshotLightbox('organizer', 3)">
+          </div>
         </div>
       </div>
     </div>
@@ -3138,71 +3138,71 @@
       </div>
 
       <div class="pp-grid">
-        <!-- Left Column: Highlights list -->
-        <ul class="feature-list" style="grid-column: 1; grid-row: 1; margin-bottom: 0;">
-          <li class="feature-item cr-feat cr-feat-active" id="cr-feat-0"
-            onclick="goToCrSlide(0); openMobileMockupModal('creative', 0)" style="cursor: pointer;">
-            <div class="fi-icon creative">💾</div>
-            <div class="fi-text">
-              <strong>Storage meets presentation</strong>
-              <span>Your workspace and your gallery in one place. Upload raw files, export polished albums — all in one
-                platform.</span>
-            </div>
-          </li>
-          <li class="feature-item cr-feat" id="cr-feat-1" onclick="goToCrSlide(1); openMobileMockupModal('creative', 1)"
-            style="cursor: pointer;">
-            <div class="fi-icon creative">🚫</div>
-            <div class="fi-text">
-              <strong>No more transfer links</strong>
-              <span>Deliver media directly to the official event. No expiring links, no lost folders, no messy
-                DMs.</span>
-            </div>
-          </li>
-          <li class="feature-item cr-feat" id="cr-feat-2" onclick="goToCrSlide(2); openMobileMockupModal('creative', 2)"
-            style="cursor: pointer;">
-            <div class="fi-icon creative">👁️</div>
-            <div class="fi-text">
-              <strong>Automatic exposure</strong>
-              <span>Every attendee looking for their photos sees your profile and your art. Thousands of organic
-                eyes.</span>
-            </div>
-          </li>
-          <li class="feature-item cr-feat" id="cr-feat-3" onclick="goToCrSlide(3); openMobileMockupModal('creative', 3)"
-            style="cursor: pointer;">
-            <div class="fi-icon creative">✨</div>
-            <div class="fi-text">
-              <strong>A portfolio that does you justice</strong>
-              <span>A stunning public profile to send to every future client — built automatically from the events you
-                shoot.</span>
-            </div>
-          </li>
-        </ul>
-
-        <!-- Right Column: SLEEK DARK Mockup Window -->
-        <div class="pp-mockup" style="grid-column: 2; grid-row: 1; align-self: center; margin-top: 0;">
-          <div class="mockup-window"
-            style="width: 100%; height: auto; aspect-ratio: 1489/866; position: relative; overflow: hidden; border-radius: 12px; box-shadow: 0 25px 50px -12px rgba(107,33,168,0.25); border: none; background: none;">
-            <img id="cr-slide-0" src="images/screenshots/1-creUpload.png"
-              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 0 !important; margin: 0 !important; cursor: pointer;"
-              class="fp-slide" onclick="openScreenshotLightbox('creative', 0)">
-            <img id="cr-slide-1" src="images/screenshots/2-creEvents.png"
-              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 0 !important; margin: 0 !important; cursor: pointer;"
-              class="fp-slide fp-slide-hidden" onclick="openScreenshotLightbox('creative', 1)">
-            <img id="cr-slide-2" src="images/screenshots/3-creGallery.png"
-              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 0 !important; margin: 0 !important; cursor: pointer;"
-              class="fp-slide fp-slide-hidden" onclick="openScreenshotLightbox('creative', 2)">
-            <img id="cr-slide-3" src="images/screenshots/4-crePage.png"
-              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 0 !important; margin: 0 !important; cursor: pointer;"
-              class="fp-slide fp-slide-hidden" onclick="openScreenshotLightbox('creative', 3)">
+        <!-- Left Column: Highlights list + CTA -->
+        <div style="display: flex; flex-direction: column;">
+          <ul class="feature-list" style="margin-bottom: 0;">
+            <li class="feature-item cr-feat cr-feat-active" id="cr-feat-0"
+              onclick="goToCrSlide(0, true); openMobileMockupModal('creative', 0)" style="cursor: pointer;">
+              <div class="fi-icon creative">💾</div>
+              <div class="fi-text">
+                <strong>Storage meets presentation</strong>
+                <span>Your workspace and your gallery in one place. Upload raw files, export polished albums — all in one
+                  platform.</span>
+              </div>
+            </li>
+            <li class="feature-item cr-feat" id="cr-feat-1" onclick="goToCrSlide(1, true); openMobileMockupModal('creative', 1)"
+              style="cursor: pointer;">
+              <div class="fi-icon creative">🚫</div>
+              <div class="fi-text">
+                <strong>No more transfer links</strong>
+                <span>Deliver media directly to the official event. No expiring links, no lost folders, no messy
+                  DMs.</span>
+              </div>
+            </li>
+            <li class="feature-item cr-feat" id="cr-feat-2" onclick="goToCrSlide(2, true); openMobileMockupModal('creative', 2)"
+              style="cursor: pointer;">
+              <div class="fi-icon creative">👁️</div>
+              <div class="fi-text">
+                <strong>Automatic exposure</strong>
+                <span>Every attendee looking for their photos sees your profile and your art. Thousands of organic
+                  eyes.</span>
+              </div>
+            </li>
+            <li class="feature-item cr-feat" id="cr-feat-3" onclick="goToCrSlide(3, true); openMobileMockupModal('creative', 3)"
+              style="cursor: pointer;">
+              <div class="fi-icon creative">✨</div>
+              <div class="fi-text">
+                <strong>A portfolio that does you justice</strong>
+                <span>A stunning public profile to send to every future client — built automatically from the events you
+                  shoot.</span>
+              </div>
+            </li>
+          </ul>
+          <div style="margin-top: 24px;">
+            <a href="#waitlist" class="pp-cta creative-cta" onclick="scrollToWaitlist(event, 'creative')"
+              style="background:var(--creative-accent);box-shadow:0 8px 30px rgba(107,33,168,0.35); margin-top: 0;">
+              Claim Your Creative Studio →
+            </a>
           </div>
         </div>
 
-        <!-- Left Column: CTA button -->
-        <div style="grid-column: 1; grid-row: 2; margin-top: 24px;">
-          <a href="#waitlist" class="pp-cta creative-cta" onclick="scrollToWaitlist(event, 'creative')"
-            style="background:var(--creative-accent);box-shadow:0 8px 30px rgba(107,33,168,0.35); margin-top: 0;">
-            Claim Your Creative Studio →
-          </a>
+        <!-- Right Column: SLEEK DARK Mockup Window -->
+        <div class="pp-mockup" style="grid-column: 2; grid-row: 1; align-self: center; display: flex; justify-content: center; margin-top: 0;">
+          <div class="mockup-window"
+            style="width: 100%; max-width: 330px; aspect-ratio: 1536/2752; position: relative; overflow: hidden; border-radius: 12px; box-shadow: 0 25px 50px -12px rgba(107,33,168,0.25); border: none; background: none;">
+            <img id="cr-slide-0" src="images/illustrations/1-creUpload.png"
+              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 0 !important; margin: 0 !important; cursor: pointer;"
+              class="fp-slide" onclick="openScreenshotLightbox('creative', 0)">
+            <img id="cr-slide-1" src="images/illustrations/2-creEvents.png"
+              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 0 !important; margin: 0 !important; cursor: pointer;"
+              class="fp-slide fp-slide-hidden" onclick="openScreenshotLightbox('creative', 1)">
+            <img id="cr-slide-2" src="images/illustrations/3-creGallery.png"
+              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 0 !important; margin: 0 !important; cursor: pointer;"
+              class="fp-slide fp-slide-hidden" onclick="openScreenshotLightbox('creative', 2)">
+            <img id="cr-slide-3" src="images/illustrations/4-crePage.png"
+              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 0 !important; margin: 0 !important; cursor: pointer;"
+              class="fp-slide fp-slide-hidden" onclick="openScreenshotLightbox('creative', 3)">
+          </div>
         </div>
       </div>
     </div>
@@ -3228,7 +3228,7 @@
         <div style="display: flex; flex-direction: column;">
           <ul class="feature-list" style="margin-bottom: 0;">
             <li class="feature-item att-feat att-feat-active" id="sim-step-0"
-              onclick="goToAttSlide(0); openMobileMockupModal('attendee', 0)" style="cursor: pointer;">
+              onclick="goToAttSlide(0, true); openMobileMockupModal('attendee', 0)" style="cursor: pointer;">
               <div class="fi-icon att">🎫</div>
               <div class="fi-text">
                 <strong>Find events &amp; buy tickets</strong>
@@ -3236,7 +3236,7 @@
               </div>
             </li>
             <li class="feature-item att-feat" id="sim-step-1"
-              onclick="goToAttSlide(1); openMobileMockupModal('attendee', 1)" style="cursor: pointer;">
+              onclick="goToAttSlide(1, true); openMobileMockupModal('attendee', 1)" style="cursor: pointer;">
               <div class="fi-icon att">📢</div>
               <div class="fi-text">
                 <strong>Your event companion</strong>
@@ -3244,7 +3244,7 @@
               </div>
             </li>
             <li class="feature-item att-feat" id="sim-step-2"
-              onclick="goToAttSlide(2); openMobileMockupModal('attendee', 2)" style="cursor: pointer;">
+              onclick="goToAttSlide(2, true); openMobileMockupModal('attendee', 2)" style="cursor: pointer;">
               <div class="fi-icon att">👥</div>
               <div class="fi-text">
                 <strong>See who is going</strong>
@@ -3253,7 +3253,7 @@
               </div>
             </li>
             <li class="feature-item att-feat" id="sim-step-3"
-              onclick="goToAttSlide(3); openMobileMockupModal('attendee', 3)" style="cursor: pointer;">
+              onclick="goToAttSlide(3, true); openMobileMockupModal('attendee', 3)" style="cursor: pointer;">
               <div class="fi-icon att">📸</div>
               <div class="fi-text">
                 <strong>Relive the whole event</strong>
@@ -3627,13 +3627,13 @@
             <!-- Phone Footer Tabs (Switches slides locally too!) -->
             <div
               style="height: 54px; background: #fff; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-around; align-items: center; flex-shrink: 0; position: relative; z-index: 5;">
-              <div id="tab-phone-0" class="phone-footer-tab active" onclick="goToAttSlide(0)"
+              <div id="tab-phone-0" class="phone-footer-tab active" onclick="goToAttSlide(0, true)"
                 style="cursor: pointer; font-size: 18px; padding: 8px; transition: transform 0.2s;">🎟️</div>
-              <div id="tab-phone-1" class="phone-footer-tab" onclick="goToAttSlide(1)"
+              <div id="tab-phone-1" class="phone-footer-tab" onclick="goToAttSlide(1, true)"
                 style="cursor: pointer; font-size: 18px; padding: 8px; transition: transform 0.2s;">📅</div>
-              <div id="tab-phone-2" class="phone-footer-tab" onclick="goToAttSlide(2)"
+              <div id="tab-phone-2" class="phone-footer-tab" onclick="goToAttSlide(2, true)"
                 style="cursor: pointer; font-size: 18px; padding: 8px; transition: transform 0.2s;">👥</div>
-              <div id="tab-phone-3" class="phone-footer-tab" onclick="goToAttSlide(3)"
+              <div id="tab-phone-3" class="phone-footer-tab" onclick="goToAttSlide(3, true)"
                 style="cursor: pointer; font-size: 18px; padding: 8px; transition: transform 0.2s;">📸</div>
             </div>
           </div>
@@ -3964,7 +3964,7 @@
     let currentOrgSlide = 0;
     let orgAutoTimer = null;
 
-    function goToOrgSlide(idx) {
+    function goToOrgSlide(idx, userInitiated = false) {
       const total = 4;
       currentOrgSlide = ((idx % total) + total) % total;
       for (let i = 0; i < total; i++) {
@@ -3979,7 +3979,12 @@
       if (activeFeat) activeFeat.classList.add('org-feat-active');
       const urlEl = document.getElementById('org-url');
       if (urlEl) urlEl.textContent = orgUrls[currentOrgSlide];
-      resetOrgAuto();
+      if (userInitiated) {
+        if (orgAutoTimer) clearInterval(orgAutoTimer);
+        orgAutoTimer = null;
+      } else {
+        resetOrgAuto();
+      }
     }
 
     function resetOrgAuto() {
@@ -3999,7 +4004,7 @@
     let currentCrSlide = 0;
     let crAutoTimer = null;
 
-    function goToCrSlide(idx) {
+    function goToCrSlide(idx, userInitiated = false) {
       const total = 4;
       currentCrSlide = ((idx % total) + total) % total;
       for (let i = 0; i < total; i++) {
@@ -4030,7 +4035,12 @@
       }
       const urlEl = document.getElementById('cr-url');
       if (urlEl) urlEl.textContent = crUrls[currentCrSlide];
-      resetCrAuto();
+      if (userInitiated) {
+        if (crAutoTimer) clearInterval(crAutoTimer);
+        crAutoTimer = null;
+      } else {
+        resetCrAuto();
+      }
     }
 
     function resetCrAuto() {
@@ -4050,7 +4060,7 @@
     let currentAttSlide = 0;
     let attAutoTimer = null;
 
-    function goToAttSlide(idx) {
+    function goToAttSlide(idx, userInitiated = false) {
       const total = 4;
       currentAttSlide = ((idx % total) + total) % total;
 
@@ -4066,7 +4076,12 @@
 
       const titleEl = document.getElementById('phone-title');
       if (titleEl) titleEl.textContent = attTitles[currentAttSlide];
-      resetAttAuto();
+      if (userInitiated) {
+        if (attAutoTimer) clearInterval(attAutoTimer);
+        attAutoTimer = null;
+      } else {
+        resetAttAuto();
+      }
     }
 
     function resetAttAuto() {
@@ -4123,14 +4138,19 @@
       const footerHint = document.getElementById('mobile-modal-footer-hint');
       modalBody.innerHTML = '';
 
-      if (persona === 'organizer') {
-        const src = document.getElementById(`org-slide-${slideIndex}`).src;
-        modalBody.innerHTML = `<img src="${src}" style="max-width: 95%; max-height: 95%; width: auto; height: auto; object-fit: contain; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">`;
-        if (footerHint) footerHint.innerText = 'Tap ✕ or click outside to return.';
-      } else if (persona === 'creative') {
-        const src = document.getElementById(`cr-slide-${slideIndex}`).src;
-        modalBody.innerHTML = `<img src="${src}" style="max-width: 95%; max-height: 95%; width: auto; height: auto; object-fit: contain; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">`;
-        if (footerHint) footerHint.innerText = 'Tap ✕ or click outside to return.';
+      if (persona === 'organizer' || persona === 'creative') {
+        let prefix = persona === 'organizer' ? 'org' : 'cr';
+        let src = document.getElementById(`${prefix}-slide-${slideIndex}`).src;
+        let title = document.querySelector(`#${prefix}-feat-${slideIndex} strong`).innerText;
+        let nextIdx = (slideIndex + 1) % 4;
+
+        modalBody.innerHTML = `
+          <div style="position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%;">
+            <img src="${src}" onclick="event.stopPropagation(); openMobileMockupModal('${persona}', ${nextIdx})" style="max-width: 95%; max-height: 80vh; width: auto; height: auto; object-fit: contain; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); cursor: pointer;">
+            <div style="color: white; margin-top: 16px; font-weight: 600; text-align: center; font-size: 16px; padding: 0 20px;">${title}</div>
+          </div>
+        `;
+        if (footerHint) footerHint.innerText = 'Tap image for next, or click outside to return.';
       } else if (persona === 'attendee') {
         const phoneMockup = document.querySelector('#attendee-section .pp-mockup > div');
         if (phoneMockup) {
@@ -4158,17 +4178,20 @@
       const footerHint = document.getElementById('mobile-modal-footer-hint');
       modalBody.innerHTML = '';
 
-      let src = '';
-      if (persona === 'organizer') {
-        src = document.getElementById(`org-slide-${slideIndex}`).src;
-      } else if (persona === 'creative') {
-        src = document.getElementById(`cr-slide-${slideIndex}`).src;
-      }
+      if (persona === 'organizer' || persona === 'creative') {
+        let prefix = persona === 'organizer' ? 'org' : 'cr';
+        let src = document.getElementById(`${prefix}-slide-${slideIndex}`).src;
+        let title = document.querySelector(`#${prefix}-feat-${slideIndex} strong`).innerText;
+        let nextIdx = (slideIndex + 1) % 4;
 
-      if (src) {
-        modalBody.innerHTML = `<img src="${src}" style="max-width: 95%; max-height: 95%; width: auto; height: auto; object-fit: contain; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">`;
+        modalBody.innerHTML = `
+          <div style="position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%;">
+            <img src="${src}" onclick="event.stopPropagation(); openScreenshotLightbox('${persona}', ${nextIdx})" style="max-width: 95%; max-height: 85vh; width: auto; height: auto; object-fit: contain; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); cursor: pointer;">
+            <div style="color: white; margin-top: 20px; font-weight: 600; text-align: center; font-size: 18px; padding: 0 20px;">${title}</div>
+          </div>
+        `;
+        if (footerHint) footerHint.innerText = 'Click image for next, or click outside to return.';
       }
-      if (footerHint) footerHint.innerText = 'Click outside or Tap ✕ to return.';
 
       modal.style.display = 'flex';
       document.body.style.overflow = 'hidden';
