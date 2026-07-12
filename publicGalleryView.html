@@ -36,6 +36,40 @@
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
     <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
 
+    <script>
+        if (new URLSearchParams(window.location.search).get('mockup') === '1') {
+            document.addEventListener('DOMContentLoaded', () => {
+                document.body.classList.add('mockup-mode');
+                const style = document.createElement('style');
+                style.textContent = `
+                    .brand-header, 
+                    .event-banner-container, 
+                    .banner-overlay {
+                        display: none !important;
+                    }
+                    body.mockup-mode {
+                        background-color: #0d1117 !important;
+                        padding-top: 0 !important;
+                        padding-bottom: 0 !important;
+                    }
+                `;
+                document.head.appendChild(style);
+            });
+
+            // Block clicks on filters and close button, allow browsing, shuffle, and back to top
+            document.addEventListener('click', (e) => {
+                const allowed = e.target.closest(
+                    '.grid-item, #popup, #btn-back-to-top, #btn-shuffle, [data-open-media-modal], .masonry-image, #popup-close, #btn-prev, #btn-next'
+                );
+                const isBlocked = !allowed || e.target.closest('#filters-wrapper, #close-gallery-overlay');
+                if (isBlocked) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+            }, true);
+        }
+    </script>
+
     <style>
         body {
             background-color: #0d1117;

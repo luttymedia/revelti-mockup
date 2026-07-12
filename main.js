@@ -332,10 +332,52 @@ function initializeFooter() {
 
 // --- NAVBAR & FOOTER INITIALIZATION ---
 document.addEventListener("DOMContentLoaded", function () {
-    // Track auth state via localStorage based on specific pages visited
     const pathname = window.location.pathname;
     const urlParams = new URLSearchParams(window.location.search);
+    const isMockup = urlParams.get('mockup') === '1' || window.self !== window.top;
+    if (isMockup) {
+        document.body.classList.add('mockup-mode');
+        const style = document.createElement('style');
+        style.textContent = `
+            body.mockup-mode .lg\\:col-span-1,
+            body.mockup-mode [class*="col-span-1"] {
+                display: none !important;
+            }
+        `;
+        document.head.appendChild(style);
 
+        // Block clicks based on specific mockup slide rules
+        const blockClicks = (e) => {
+            const pathname = window.location.pathname;
+            const urlParams = new URLSearchParams(window.location.search);
+            const tabParam = urlParams.get('tab');
+
+            let allowed = false;
+
+            if (pathname.endsWith('purchaseDetails.html')) {
+                // Slide 0: purchaseDetails (Only View Ticket and its modal are clickable)
+                allowed = e.target.closest('#see-ticket-btn, #ticket-modal, #close-ticket-modal, #ticket-modal-content');
+            } else if (pathname.endsWith('eventDetail.html')) {
+                if (tabParam === 'announcements') {
+                    // Slide 1: Event Companion (Info tab - only highlight bubbles clickable)
+                    allowed = e.target.closest('#announcements button');
+                } else if (tabParam === 'people') {
+                    // Slide 2: See who's going (People tab - Going/Curious toggle & filters & modals are clickable)
+                    allowed = e.target.closest(
+                        '#status-going-btn, #status-curious-btn, #list-filter-going, #list-filter-curious, #follow-edition-modal, #follow-modal, #close-modal-btn, #close-edition-modal-btn'
+                    );
+                }
+            }
+
+            if (!allowed) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        };
+        document.addEventListener('click', blockClicks, true);
+    }
+
+    // Track auth state via localStorage based on specific pages visited
     if (urlParams.get('logout') === 'true') {
         localStorage.setItem('revelti_logged_in', 'false');
         localStorage.removeItem('revelti_active_role');
@@ -359,18 +401,21 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorage.setItem('revelti_active_role', currentRole);
     }
 
-    const isLoggedIn = localStorage.getItem('revelti_logged_in') === 'true';
+    let isLoggedIn = localStorage.getItem('revelti_logged_in') === 'true';
+    if (isMockup) {
+        isLoggedIn = true;
+    }
 
     // Use publicNavBar ONLY if the user is not logged in.
     const navBarFile = (!isLoggedIn) ? 'publicNavBar.html' : 'navBar.html';
 
     // Load Navbar
     fetch(navBarFile)
-        .then(response => response.text())
-        .then(html => {
-            const placeholder = document.getElementById('navbar-placeholder');
-            if (placeholder) {
-                placeholder.innerHTML = html;
+            .then(response => response.text())
+            .then(html => {
+                const placeholder = document.getElementById('navbar-placeholder');
+                if (placeholder) {
+                    placeholder.innerHTML = html;
 
                 const langEn = document.getElementById('lang-en');
                 const langEs = document.getElementById('lang-es');
@@ -480,7 +525,10 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(error => console.error('Error fetching navbar:', error));
 
     // Load Footer only if logged in and the role is attendee
-    const activeRole = localStorage.getItem('revelti_active_role');
+    let activeRole = localStorage.getItem('revelti_active_role');
+    if (isMockup) {
+        activeRole = 'attendee';
+    }
     if (isLoggedIn && activeRole === 'attendee') {
         fetch('footer.html')
             .then(response => response.text())

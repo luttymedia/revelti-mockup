@@ -1382,14 +1382,25 @@
 
         // Handle Buy Tickets button to pass along promo code
         document.addEventListener('DOMContentLoaded', () => {
-            switchTab('details');
+            const urlParams = new URLSearchParams(window.location.search);
+            const tabParam = urlParams.get('tab');
+            switchTab(tabParam || 'details');
 
             const buyTicketsLink = document.getElementById('buy-tickets-link');
-            const urlParams = new URLSearchParams(window.location.search);
             const promoterCode = urlParams.get('promoter');
 
-            if (promoterCode && promoterCode.toUpperCase() === 'JOHNDOE') {
+            if (buyTicketsLink && promoterCode && promoterCode.toUpperCase() === 'JOHNDOE') {
                 buyTicketsLink.href = 'ticketPurchase.html?promo=LUTTY';
+            }
+
+            const isMockup = urlParams.get('mockup') === '1' || window.self !== window.top;
+            if (isMockup) {
+                const navElement = document.getElementById('tab-navigation');
+                if (navElement) {
+                    setTimeout(() => {
+                        navElement.scrollIntoView({ block: 'start' });
+                    }, 50);
+                }
             }
         });
 
