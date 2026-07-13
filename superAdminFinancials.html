@@ -36,7 +36,7 @@
 
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="style.css">
-    
+
     <style>
         .dataTables_wrapper .dataTables_paginate .paginate_button.current {
             background: #be123c !important;
@@ -44,6 +44,7 @@
             border: 1px solid #be123c !important;
             border-radius: 9999px;
         }
+
         .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
             background: #be123c !important;
             color: white !important;
@@ -67,16 +68,26 @@
                     <header class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between">
                         <div>
                             <h1 class="text-3xl font-extrabold text-slate-900">Platform Financials</h1>
-                            <p class="text-gray-500 mt-1">Stripe integration health, subscription logs, and commission transactions.</p>
+                            <p class="text-gray-500 mt-1">Stripe integration health, subscription logs, and commission
+                                transactions.</p>
                         </div>
                     </header>
 
                     <!-- Tab Navigation -->
                     <div class="bg-white rounded-xl shadow-sm border border-gray-100 mb-6 overflow-hidden">
                         <nav class="flex border-b border-gray-200">
-                            <button onclick="switchTab('overview')" id="tab-overview" class="flex-1 py-3 text-center font-bold text-sm border-b-2 border-rose-700 text-rose-700">Financial Overview</button>
-                            <button onclick="switchTab('payouts')" id="tab-payouts" class="flex-1 py-3 text-center font-semibold text-sm text-gray-500 hover:text-rose-700 transition">Stripe Payout Log (Auto-Approved)</button>
-                            <button onclick="switchTab('ledger')" id="tab-ledger" class="flex-1 py-3 text-center font-semibold text-sm text-gray-500 hover:text-rose-700 transition">Transaction Ledger</button>
+                            <button onclick="switchTab('overview')" id="tab-overview"
+                                data-tooltip="View overall platform financial health, gross sales volume, and subscription metrics."
+                                class="flex-1 py-3 text-center font-bold text-sm border-b-2 border-rose-700 text-rose-700">Financial
+                                Overview</button>
+                            <button onclick="switchTab('payouts')" id="tab-payouts"
+                                data-tooltip="Review and manage Stripe Connect automated transfers and pending payouts to platform users."
+                                class="flex-1 py-3 text-center font-semibold text-sm text-gray-500 hover:text-rose-700 transition">Stripe
+                                Payout Log (Auto-Approved)</button>
+                            <button onclick="switchTab('ledger')" id="tab-ledger"
+                                data-tooltip="Audit the granular ledger of all individual ticket purchases, subscription charges, and commissions."
+                                class="flex-1 py-3 text-center font-semibold text-sm text-gray-500 hover:text-rose-700 transition">Transaction
+                                Ledger</button>
                         </nav>
 
                         <div class="p-6">
@@ -84,27 +95,79 @@
                             <div id="content-overview" class="tab-content">
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                                     <div class="p-5 rounded-lg border border-gray-200 bg-gray-50">
-                                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wide">Gross Ticket Sales Volume</h4>
+                                        <h4
+                                            class="text-xs font-bold text-gray-400 uppercase tracking-wide flex items-center">
+                                            Gross Ticket Sales Volume
+                                            <span
+                                                class="inline-flex items-center justify-center ml-1 text-gray-400 hover:text-slate-600 cursor-help transition-colors"
+                                                data-tooltip="Cumulative ticket sales volume processed through Stripe.">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke="currentColor" class="w-3.5 h-3.5">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                            </span>
+                                        </h4>
                                         <p class="text-2xl font-extrabold text-slate-950 mt-2">€482,900.00</p>
-                                        <p class="text-xs text-gray-500 mt-1">Platform fee: 5% avg</p>
+                                        <p class="text-xs text-gray-500 mt-1">Platform fee: 3% avg</p>
                                     </div>
                                     <div class="p-5 rounded-lg border border-gray-200 bg-gray-50">
-                                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wide">Stripe Net Payouts Disbursed</h4>
+                                        <h4
+                                            class="text-xs font-bold text-gray-400 uppercase tracking-wide flex items-center">
+                                            Stripe Net Payouts Disbursed
+                                            <span
+                                                class="inline-flex items-center justify-center ml-1 text-gray-400 hover:text-slate-600 cursor-help transition-colors"
+                                                data-tooltip="Total funds automatically transferred to organizers and promoters via Stripe Connect.">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke="currentColor" class="w-3.5 h-3.5">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                            </span>
+                                        </h4>
                                         <p class="text-2xl font-extrabold text-emerald-600 mt-2">€458,755.00</p>
-                                        <p class="text-xs text-gray-500 mt-1">Stripe auto-transferred: 95% total volume</p>
+                                        <p class="text-xs text-gray-500 mt-1">Stripe auto-transferred: 97% total volume
+                                        </p>
                                     </div>
                                     <div class="p-5 rounded-lg border border-gray-200 bg-gray-50">
-                                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wide">Revelti Net Share Accumulated</h4>
+                                        <h4
+                                            class="text-xs font-bold text-gray-400 uppercase tracking-wide flex items-center">
+                                            Revelti Net Share Accumulated
+                                            <span
+                                                class="inline-flex items-center justify-center ml-1 text-gray-400 hover:text-slate-600 cursor-help transition-colors"
+                                                data-tooltip="Net platform commission and fees retained in the Revelti operating account.">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke="currentColor" class="w-3.5 h-3.5">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                            </span>
+                                        </h4>
                                         <p class="text-2xl font-extrabold text-rose-700 mt-2">€24,145.00</p>
                                         <p class="text-xs text-gray-500 mt-1">Direct payout commission reserve</p>
                                     </div>
                                 </div>
 
                                 <div class="border border-gray-200 rounded-lg p-5">
-                                    <h3 class="text-lg font-bold text-slate-950 mb-3">Subscription Metrics</h3>
+                                    <h3 class="text-lg font-bold text-slate-950 mb-3 flex items-center">
+                                        Subscription Metrics
+                                        <span
+                                            class="inline-flex items-center justify-center ml-1.5 text-gray-400 hover:text-slate-600 cursor-help transition-colors"
+                                            data-tooltip="Subscription revenue split between Creative Studio Pro and Organizer Business plans.">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke="currentColor" class="w-4 h-4">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                        </span>
+                                    </h3>
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div>
-                                            <p class="text-sm font-semibold text-gray-600 mb-2">Revenue Split By Plan Type</p>
+                                            <p class="text-sm font-semibold text-gray-600 mb-2">Revenue Split By Plan
+                                                Type</p>
                                             <div class="space-y-2.5">
                                                 <div>
                                                     <div class="flex justify-between text-xs font-bold mb-1">
@@ -112,7 +175,8 @@
                                                         <span>€7,830.00 (61%)</span>
                                                     </div>
                                                     <div class="w-full bg-gray-150 rounded-full h-2">
-                                                        <div class="bg-rose-700 h-2 rounded-full" style="width: 61%"></div>
+                                                        <div class="bg-rose-700 h-2 rounded-full" style="width: 61%">
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div>
@@ -121,15 +185,19 @@
                                                         <span>€5,020.00 (39%)</span>
                                                     </div>
                                                     <div class="w-full bg-gray-150 rounded-full h-2">
-                                                        <div class="bg-purple-700 h-2 rounded-full" style="width: 39%"></div>
+                                                        <div class="bg-purple-700 h-2 rounded-full" style="width: 39%">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="flex flex-col justify-center">
-                                            <div class="p-4 bg-rose-50/50 rounded-lg border border-rose-100/50 text-rose-950">
+                                            <div class="p-4 bg-rose-50/50 rounded-lg border border-rose-100/50 text-rose-950 cursor-help"
+                                                data-tooltip="Current operational status and sync health of the Stripe Connect infrastructure.">
                                                 <p class="text-sm font-bold">Stripe Connect Integration Health</p>
-                                                <p class="text-xs text-rose-800 mt-1">Auto-payout schedules are running dynamically. Payout reserves are backed by Stripe Connect balances.</p>
+                                                <p class="text-xs text-rose-800 mt-1">Auto-payout schedules are running
+                                                    dynamically. Payout reserves are backed by Stripe Connect balances.
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -138,8 +206,24 @@
 
                             <!-- Tab Content: Payout Log -->
                             <div id="content-payouts" class="tab-content hidden">
-                                <div class="mb-4 p-3 bg-amber-50 rounded-lg border border-amber-100 flex items-center justify-between text-amber-900 text-xs font-semibold">
-                                    <span>💡 Stripe automatically payouts funds to organizers and promoters. You can enforce a manual hold on any pending status in case of a dispute.</span>
+                                <div
+                                    class="mb-4 p-3 bg-amber-50 rounded-lg border border-amber-100 flex items-center justify-between text-amber-900 text-xs font-semibold">
+                                    <span>💡 Stripe automatically payouts funds to organizers and promoters. You can
+                                        enforce a manual hold on any pending status in case of a dispute.</span>
+                                </div>
+                                <div class="flex items-center mb-4">
+                                    <h3 class="text-base font-bold text-slate-900 flex items-center">
+                                        Stripe Payout Log
+                                        <span
+                                            class="inline-flex items-center justify-center ml-1.5 text-gray-400 hover:text-slate-600 cursor-help transition-colors"
+                                            data-tooltip="Log of all Stripe Connect payouts processed to creators, promoters, and organizers.">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke="currentColor" class="w-3.5 h-3.5">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                        </span>
+                                    </h3>
                                 </div>
                                 <div class="overflow-x-auto">
                                     <table id="payoutsTable" class="w-full text-left text-sm">
@@ -159,42 +243,69 @@
                                             <tr>
                                                 <td class="p-3 font-semibold">PAY-9810</td>
                                                 <td class="p-3">LMP Events</td>
-                                                <td class="p-3"><span class="text-xs px-2 py-0.5 bg-blue-100 text-blue-800 rounded font-semibold">Organizer</span></td>
+                                                <td class="p-3"><span
+                                                        class="text-xs px-2 py-0.5 bg-blue-100 text-blue-800 rounded font-semibold">Organizer</span>
+                                                </td>
                                                 <td class="p-3 font-mono text-xs text-gray-500">tr_1NbK2V2eZvKYlo</td>
                                                 <td class="p-3 font-bold text-slate-900">€3,160.50</td>
                                                 <td class="p-3 text-xs">2026-07-11 14:20</td>
-                                                <td class="p-3"><span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full text-xs font-bold">Paid</span></td>
-                                                <td class="p-3"><button onclick="togglePayoutHold(this, 'PAY-9810')" class="px-3 py-1 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded text-xs transition">Pause Transfer</button></td>
+                                                <td class="p-3"><span
+                                                        class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full text-xs font-bold">Paid</span>
+                                                </td>
+                                                <td class="p-3"><button onclick="togglePayoutHold(this, 'PAY-9810')"
+                                                        data-tooltip="Temporarily halt this Stripe transfer to investigate a dispute or compliance alert."
+                                                        class="px-3 py-1 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded text-xs transition">Pause
+                                                        Transfer</button></td>
                                             </tr>
                                             <tr>
                                                 <td class="p-3 font-semibold">PAY-9809</td>
                                                 <td class="p-3">AMedia</td>
-                                                <td class="p-3"><span class="text-xs px-2 py-0.5 bg-purple-100 text-purple-800 rounded font-semibold">Creative</span></td>
+                                                <td class="p-3"><span
+                                                        class="text-xs px-2 py-0.5 bg-purple-100 text-purple-800 rounded font-semibold">Creative</span>
+                                                </td>
                                                 <td class="p-3 font-mono text-xs text-gray-500">tr_1NbK2V2eZvKYl1</td>
                                                 <td class="p-3 font-bold text-slate-900">€1,240.00</td>
                                                 <td class="p-3 text-xs">2026-07-11 11:05</td>
-                                                <td class="p-3"><span class="px-2 py-0.5 bg-yellow-100 text-yellow-800 rounded-full text-xs font-bold">Processing</span></td>
-                                                <td class="p-3"><button onclick="togglePayoutHold(this, 'PAY-9809')" class="px-3 py-1 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded text-xs transition">Pause Transfer</button></td>
+                                                <td class="p-3"><span
+                                                        class="px-2 py-0.5 bg-yellow-100 text-yellow-800 rounded-full text-xs font-bold">Processing</span>
+                                                </td>
+                                                <td class="p-3"><button onclick="togglePayoutHold(this, 'PAY-9809')"
+                                                        data-tooltip="Temporarily halt this Stripe transfer to investigate a dispute or compliance alert."
+                                                        class="px-3 py-1 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded text-xs transition">Pause
+                                                        Transfer</button></td>
                                             </tr>
                                             <tr>
                                                 <td class="p-3 font-semibold">PAY-9808</td>
                                                 <td class="p-3">John Doe</td>
-                                                <td class="p-3"><span class="text-xs px-2 py-0.5 bg-gray-150 text-gray-800 rounded font-semibold">Promoter</span></td>
+                                                <td class="p-3"><span
+                                                        class="text-xs px-2 py-0.5 bg-gray-150 text-gray-800 rounded font-semibold">Promoter</span>
+                                                </td>
                                                 <td class="p-3 font-mono text-xs text-gray-500">tr_1NbK2V2eZvKYl2</td>
                                                 <td class="p-3 font-bold text-slate-900">€240.50</td>
                                                 <td class="p-3 text-xs">2026-07-10 18:30</td>
-                                                <td class="p-3"><span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full text-xs font-bold">Paid</span></td>
-                                                <td class="p-3"><button onclick="togglePayoutHold(this, 'PAY-9808')" class="px-3 py-1 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded text-xs transition">Pause Transfer</button></td>
+                                                <td class="p-3"><span
+                                                        class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full text-xs font-bold">Paid</span>
+                                                </td>
+                                                <td class="p-3"><button onclick="togglePayoutHold(this, 'PAY-9808')"
+                                                        data-tooltip="Temporarily halt this Stripe transfer to investigate a dispute or compliance alert."
+                                                        class="px-3 py-1 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded text-xs transition">Pause
+                                                        Transfer</button></td>
                                             </tr>
                                             <tr>
                                                 <td class="p-3 font-semibold">PAY-9807</td>
                                                 <td class="p-3">Dance Fest Spain</td>
-                                                <td class="p-3"><span class="text-xs px-2 py-0.5 bg-blue-100 text-blue-800 rounded font-semibold">Organizer</span></td>
+                                                <td class="p-3"><span
+                                                        class="text-xs px-2 py-0.5 bg-blue-100 text-blue-800 rounded font-semibold">Organizer</span>
+                                                </td>
                                                 <td class="p-3 font-mono text-xs text-gray-500">tr_1NbK2V2eZvKYl3</td>
                                                 <td class="p-3 font-bold text-slate-900">€14,800.00</td>
                                                 <td class="p-3 text-xs">2026-07-09 09:15</td>
-                                                <td class="p-3"><span class="px-2 py-0.5 bg-rose-100 text-rose-800 rounded-full text-xs font-bold">Failed</span></td>
-                                                <td class="p-3"><button disabled class="px-3 py-1 bg-gray-300 text-gray-500 font-bold rounded text-xs cursor-not-allowed">Stripe Blocked</button></td>
+                                                <td class="p-3"><span
+                                                        class="px-2 py-0.5 bg-rose-100 text-rose-800 rounded-full text-xs font-bold">Failed</span>
+                                                </td>
+                                                <td class="p-3"><button disabled
+                                                        class="px-3 py-1 bg-gray-300 text-gray-500 font-bold rounded text-xs cursor-not-allowed">Stripe
+                                                        Blocked</button></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -203,6 +314,20 @@
 
                             <!-- Tab Content: Ledger -->
                             <div id="content-ledger" class="tab-content hidden">
+                                <div class="flex items-center mb-4">
+                                    <h3 class="text-base font-bold text-slate-900 flex items-center">
+                                        Transaction Ledger
+                                        <span
+                                            class="inline-flex items-center justify-center ml-1.5 text-gray-400 hover:text-slate-600 cursor-help transition-colors"
+                                            data-tooltip="Complete audit trail of all transactions processed by the platform, including commission cuts.">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke="currentColor" class="w-3.5 h-3.5">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                        </span>
+                                    </h3>
+                                </div>
                                 <div class="overflow-x-auto">
                                     <table id="ledgerTable" class="w-full text-left text-sm">
                                         <thead>
@@ -211,7 +336,7 @@
                                                 <th class="p-3 font-bold text-gray-500">Buyer</th>
                                                 <th class="p-3 font-bold text-gray-500">Associated Event</th>
                                                 <th class="p-3 font-bold text-gray-500">Gross Amount</th>
-                                                <th class="p-3 font-bold text-gray-500">Platform Comm (5%)</th>
+                                                <th class="p-3 font-bold text-gray-500">Platform Comm (3%)</th>
                                                 <th class="p-3 font-bold text-gray-500">Promoter Comm</th>
                                                 <th class="p-3 font-bold text-gray-500">Method</th>
                                                 <th class="p-3 font-bold text-gray-500">Date</th>
@@ -300,7 +425,8 @@
                 btn.innerText = "Resume Transfer";
                 btn.classList.remove('bg-amber-500', 'hover:bg-amber-600');
                 btn.classList.add('bg-rose-600', 'hover:bg-rose-700');
-                
+                btn.setAttribute('data-tooltip', 'Clear the hold and resume the Stripe Connect payout transfer to the recipient.');
+
                 // Visual status modification
                 const row = btn.closest('tr');
                 const statusSpan = row.querySelector('td:nth-child(7) span');
@@ -311,6 +437,7 @@
                 btn.innerText = "Pause Transfer";
                 btn.classList.remove('bg-rose-600', 'hover:bg-rose-700');
                 btn.classList.add('bg-amber-500', 'hover:bg-amber-600');
+                btn.setAttribute('data-tooltip', 'Temporarily halt this Stripe transfer to investigate a dispute or compliance alert.');
 
                 const row = btn.closest('tr');
                 const statusSpan = row.querySelector('td:nth-child(7) span');
@@ -320,7 +447,7 @@
             }
         }
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#payoutsTable').DataTable({
                 pageLength: 10,
                 ordering: true,

@@ -72,19 +72,47 @@
                     <!-- Statistics Summary -->
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
                         <div class="p-4 bg-white rounded-xl border border-gray-150 shadow-sm text-center">
-                            <p class="text-xs text-gray-400 font-bold uppercase">Total Users</p>
+                            <p class="text-xs text-gray-400 font-bold uppercase flex items-center justify-center">
+                                Total Users
+                                <span class="inline-flex items-center justify-center ml-1 text-gray-400 hover:text-slate-600 cursor-help transition-colors" data-tooltip="Total count of user accounts registered on the platform.">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-3.5 h-3.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </span>
+                            </p>
                             <p class="text-2xl font-extrabold text-slate-950 mt-1">3,440</p>
                         </div>
                         <div class="p-4 bg-white rounded-xl border border-gray-150 shadow-sm text-center">
-                            <p class="text-xs text-gray-400 font-bold uppercase">Organizers</p>
+                            <p class="text-xs text-gray-400 font-bold uppercase flex items-center justify-center">
+                                Organizers
+                                <span class="inline-flex items-center justify-center ml-1 text-gray-400 hover:text-slate-600 cursor-help transition-colors" data-tooltip="Number of registered event organizers.">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-3.5 h-3.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </span>
+                            </p>
                             <p class="text-2xl font-extrabold text-blue-600 mt-1">120</p>
                         </div>
                         <div class="p-4 bg-white rounded-xl border border-gray-150 shadow-sm text-center">
-                            <p class="text-xs text-gray-400 font-bold uppercase">Creatives</p>
+                            <p class="text-xs text-gray-400 font-bold uppercase flex items-center justify-center">
+                                Creatives
+                                <span class="inline-flex items-center justify-center ml-1 text-gray-400 hover:text-slate-600 cursor-help transition-colors" data-tooltip="Number of registered creatives (photographers, videographers, etc.).">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-3.5 h-3.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </span>
+                            </p>
                             <p class="text-2xl font-extrabold text-purple-600 mt-1">340</p>
                         </div>
                         <div class="p-4 bg-white rounded-xl border border-gray-150 shadow-sm text-center">
-                            <p class="text-xs text-gray-400 font-bold uppercase">Stripe KYC Pending</p>
+                            <p class="text-xs text-gray-400 font-bold uppercase flex items-center justify-center">
+                                Stripe KYC Pending
+                                <span class="inline-flex items-center justify-center ml-1 text-gray-400 hover:text-slate-600 cursor-help transition-colors" data-tooltip="Accounts awaiting Stripe identity verification (Know Your Customer) before payout approval.">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-3.5 h-3.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </span>
+                            </p>
                             <p class="text-2xl font-extrabold text-amber-500 mt-1">8 accounts</p>
                         </div>
                     </div>
@@ -92,10 +120,17 @@
                     <!-- Filter / Table Container -->
                     <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                         <div class="border-b border-gray-200 bg-gray-50/50 px-6 py-3 flex justify-between items-center">
-                            <span class="text-sm font-bold text-slate-900">User Accounts List</span>
+                            <span class="text-sm font-bold text-slate-900 flex items-center">
+                                User Accounts List
+                                <span class="inline-flex items-center justify-center ml-1.5 text-gray-400 hover:text-slate-600 cursor-help transition-colors" data-tooltip="Central registry of all user accounts on the platform, including their role, verification status, and actions.">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </span>
+                            </span>
                             <!-- Quick actions -->
                             <div class="flex space-x-2">
-                                <select id="roleFilter" class="px-3 py-1 border rounded text-xs focus:ring-rose-500">
+                                <select id="roleFilter" data-tooltip="Filter the registry table to display only users with the selected role." class="px-3 py-1 border rounded text-xs focus:ring-rose-500">
                                     <option value="">All Roles</option>
                                     <option value="Organizer">Organizer</option>
                                     <option value="Creative">Creative</option>
@@ -141,8 +176,8 @@
                                             <td class="p-3 font-semibold">€24,800.00</td>
                                             <td class="p-3"><span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-800 rounded-full text-xs font-bold">Active</span></td>
                                             <td class="p-3 space-x-1">
-                                                <button onclick="toggleSuspend(this)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold rounded transition">Suspend</button>
-                                                <button onclick="requestKYC(this)" class="px-2 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-semibold rounded border border-gray-200 transition">Force KYC</button>
+                                                <button onclick="toggleSuspend(this)" data-tooltip="Temporarily suspend this user account, disabling logins and placing their listings offline." class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold rounded transition">Suspend</button>
+                                                <button onclick="requestKYC(this)" data-tooltip="Trigger an email requesting the user to complete Stripe KYC verification immediately." class="px-2 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-semibold rounded border border-gray-200 transition">Force KYC</button>
                                             </td>
                                         </tr>
                                         <!-- User 2 -->
@@ -165,8 +200,8 @@
                                             <td class="p-3 font-semibold">€8,140.00</td>
                                             <td class="p-3"><span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-800 rounded-full text-xs font-bold">Active</span></td>
                                             <td class="p-3 space-x-1">
-                                                <button onclick="toggleSuspend(this)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold rounded transition">Suspend</button>
-                                                <button onclick="requestKYC(this)" class="px-2 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-semibold rounded border border-gray-200 transition">Force KYC</button>
+                                                <button onclick="toggleSuspend(this)" data-tooltip="Temporarily suspend this user account, disabling logins and placing their listings offline." class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold rounded transition">Suspend</button>
+                                                <button onclick="requestKYC(this)" data-tooltip="Trigger an email requesting the user to complete Stripe KYC verification immediately." class="px-2 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-semibold rounded border border-gray-200 transition">Force KYC</button>
                                             </td>
                                         </tr>
                                         <!-- User 3 -->
@@ -189,8 +224,8 @@
                                             <td class="p-3 font-semibold">€1,240.00</td>
                                             <td class="p-3"><span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-800 rounded-full text-xs font-bold">Active</span></td>
                                             <td class="p-3 space-x-1">
-                                                <button onclick="toggleSuspend(this)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold rounded transition">Suspend</button>
-                                                <button onclick="requestKYC(this)" class="px-2 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-semibold rounded border border-gray-200 transition">Force KYC</button>
+                                                <button onclick="toggleSuspend(this)" data-tooltip="Temporarily suspend this user account, disabling logins and placing their listings offline." class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold rounded transition">Suspend</button>
+                                                <button onclick="requestKYC(this)" data-tooltip="Trigger an email requesting the user to complete Stripe KYC verification immediately." class="px-2 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-semibold rounded border border-gray-200 transition">Force KYC</button>
                                             </td>
                                         </tr>
                                         <!-- User 4 -->
@@ -210,7 +245,7 @@
                                             <td class="p-3 font-semibold">—</td>
                                             <td class="p-3"><span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-800 rounded-full text-xs font-bold">Active</span></td>
                                             <td class="p-3 space-x-1">
-                                                <button onclick="toggleSuspend(this)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold rounded transition">Suspend</button>
+                                                <button onclick="toggleSuspend(this)" data-tooltip="Temporarily suspend this user account, disabling logins and placing their listings offline." class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold rounded transition">Suspend</button>
                                                 <button disabled class="px-2 py-1 bg-gray-200 text-gray-400 text-xs font-semibold rounded border border-gray-200 cursor-not-allowed">Force KYC</button>
                                             </td>
                                         </tr>
@@ -234,8 +269,8 @@
                                             <td class="p-3 font-semibold">€0.00</td>
                                             <td class="p-3"><span class="px-2.5 py-0.5 bg-rose-50 text-rose-850 rounded-full text-xs font-bold">Suspended</span></td>
                                             <td class="p-3 space-x-1">
-                                                <button onclick="toggleSuspend(this)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded transition">Reactivate</button>
-                                                <button onclick="requestKYC(this)" class="px-2 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-semibold rounded border border-gray-200 transition">Force KYC</button>
+                                                <button onclick="toggleSuspend(this)" data-tooltip="Reactivate this suspended user account and restore their platform access." class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded transition">Reactivate</button>
+                                                <button onclick="requestKYC(this)" data-tooltip="Trigger an email requesting the user to complete Stripe KYC verification immediately." class="px-2 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-semibold rounded border border-gray-200 transition">Force KYC</button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -279,6 +314,7 @@
                 btn.innerText = "Reactivate";
                 btn.classList.remove('bg-slate-900', 'hover:bg-slate-800');
                 btn.classList.add('bg-emerald-600', 'hover:bg-emerald-700');
+                btn.setAttribute('data-tooltip', 'Reactivate this suspended user account and restore their platform access.');
 
                 statusSpan.innerText = "Suspended";
                 statusSpan.classList.remove('bg-emerald-50', 'text-emerald-800');
@@ -287,6 +323,7 @@
                 btn.innerText = "Suspend";
                 btn.classList.remove('bg-emerald-600', 'hover:bg-emerald-700');
                 btn.classList.add('bg-slate-900', 'hover:bg-slate-800');
+                btn.setAttribute('data-tooltip', 'Temporarily suspend this user account, disabling logins and placing their listings offline.');
 
                 statusSpan.innerText = "Active";
                 statusSpan.classList.remove('bg-rose-50', 'text-rose-850');

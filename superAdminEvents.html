@@ -72,19 +72,47 @@
                     <!-- Statistics Summary -->
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
                         <div class="p-4 bg-white rounded-xl border border-gray-150 shadow-sm text-center">
-                            <p class="text-xs text-gray-400 font-bold uppercase">Total Platform Events</p>
+                            <p class="text-xs text-gray-400 font-bold uppercase flex items-center justify-center">
+                                Total Platform Events
+                                <span class="inline-flex items-center justify-center ml-1 text-gray-400 hover:text-slate-600 cursor-help transition-colors" data-tooltip="Total count of all events created on the platform across all statuses.">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-3.5 h-3.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </span>
+                            </p>
                             <p class="text-2xl font-extrabold text-slate-950 mt-1">428</p>
                         </div>
                         <div class="p-4 bg-white rounded-xl border border-gray-150 shadow-sm text-center">
-                            <p class="text-xs text-gray-400 font-bold uppercase">Live Events</p>
+                            <p class="text-xs text-gray-400 font-bold uppercase flex items-center justify-center">
+                                Live Events
+                                <span class="inline-flex items-center justify-center ml-1 text-gray-400 hover:text-slate-600 cursor-help transition-colors" data-tooltip="Count of events that are currently live and visible to attendees.">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-3.5 h-3.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </span>
+                            </p>
                             <p class="text-2xl font-extrabold text-rose-700 mt-1">148</p>
                         </div>
                         <div class="p-4 bg-white rounded-xl border border-gray-150 shadow-sm text-center">
-                            <p class="text-xs text-gray-400 font-bold uppercase">Tickets Sold (Total)</p>
+                            <p class="text-xs text-gray-400 font-bold uppercase flex items-center justify-center">
+                                Tickets Sold (Total)
+                                <span class="inline-flex items-center justify-center ml-1 text-gray-400 hover:text-slate-600 cursor-help transition-colors" data-tooltip="Cumulative number of tickets sold across all platform events.">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-3.5 h-3.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </span>
+                            </p>
                             <p class="text-2xl font-extrabold text-slate-950 mt-1">24,910</p>
                         </div>
                         <div class="p-4 bg-white rounded-xl border border-gray-150 shadow-sm text-center">
-                            <p class="text-xs text-gray-400 font-bold uppercase">Unpublished/Flagged</p>
+                            <p class="text-xs text-gray-400 font-bold uppercase flex items-center justify-center">
+                                Unpublished/Flagged
+                                <span class="inline-flex items-center justify-center ml-1 text-gray-400 hover:text-slate-600 cursor-help transition-colors" data-tooltip="Number of events that are currently unpublished or flagged for administrative review.">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-3.5 h-3.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </span>
+                            </p>
                             <p class="text-2xl font-extrabold text-amber-500 mt-1">4 events</p>
                         </div>
                     </div>
@@ -92,7 +120,14 @@
                     <!-- Events Table Container -->
                     <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                         <div class="border-b border-gray-200 bg-gray-50/50 px-6 py-3 flex justify-between items-center">
-                            <span class="text-sm font-bold text-slate-900">Platform Events List</span>
+                            <span class="text-sm font-bold text-slate-900 flex items-center">
+                                Platform Events List
+                                <span class="inline-flex items-center justify-center ml-1.5 text-gray-400 hover:text-slate-600 cursor-help transition-colors" data-tooltip="Oversight registry containing details of all platform events, ticket sales progress, and revenue.">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </span>
+                            </span>
                         </div>
 
                         <div class="p-6">
@@ -121,7 +156,7 @@
                                             <td class="p-3 font-semibold">€24,800.00</td>
                                             <td class="p-3 text-xs">2026-08-15</td>
                                             <td class="p-3">
-                                                <button onclick="openUnpublishModal('Dance Fest Spain', this)" class="px-3 py-1 bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold rounded transition">Unpublish</button>
+                                                <button onclick="openUnpublishModal('Dance Fest Spain', this)" data-tooltip="Force-unpublish this event and suspend ticketing due to a policy violation or dispute." class="px-3 py-1 bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold rounded transition">Unpublish</button>
                                             </td>
                                         </tr>
                                         <!-- Event 2 -->
@@ -134,7 +169,7 @@
                                             <td class="p-3 font-semibold">€80,100.00</td>
                                             <td class="p-3 text-xs">2026-07-20</td>
                                             <td class="p-3">
-                                                <button onclick="openUnpublishModal('Ibiza Summer Rave', this)" class="px-3 py-1 bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold rounded transition">Unpublish</button>
+                                                <button onclick="openUnpublishModal('Ibiza Summer Rave', this)" data-tooltip="Force-unpublish this event and suspend ticketing due to a policy violation or dispute." class="px-3 py-1 bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold rounded transition">Unpublish</button>
                                             </td>
                                         </tr>
                                         <!-- Event 3 -->
@@ -160,7 +195,7 @@
                                             <td class="p-3 font-semibold">€0.00</td>
                                             <td class="p-3 text-xs">2026-07-15</td>
                                             <td class="p-3">
-                                                <button onclick="reactivateEvent(this)" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded transition">Reactivate</button>
+                                                <button onclick="reactivateEvent(this)" data-tooltip="Reactivate this suspended event and make it live and visible on the platform again." class="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded transition">Reactivate</button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -241,7 +276,7 @@
                 statusSpan.innerText = "Suspended";
                 statusSpan.className = "px-2.5 py-0.5 bg-rose-100 text-rose-800 rounded-full text-xs font-bold";
 
-                currentTargetBtn.outerHTML = `<button onclick="reactivateEvent(this)" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded transition">Reactivate</button>`;
+                currentTargetBtn.outerHTML = `<button onclick="reactivateEvent(this)" data-tooltip="Reactivate this suspended event and make it live and visible on the platform again." class="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded transition">Reactivate</button>`;
             }
 
             alert(`Event unpublished successfully. Reason: ${reason}. Notes: ${notes}`);
@@ -256,7 +291,7 @@
             statusSpan.className = "px-2.5 py-0.5 bg-emerald-100 text-emerald-800 rounded-full text-xs font-bold";
 
             const eventName = row.querySelector('td:nth-child(1)').innerText;
-            btn.outerHTML = `<button onclick="openUnpublishModal('${eventName}', this)" class="px-3 py-1 bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold rounded transition">Unpublish</button>`;
+            btn.outerHTML = `<button onclick="openUnpublishModal('${eventName}', this)" data-tooltip="Force-unpublish this event and suspend ticketing due to a policy violation or dispute." class="px-3 py-1 bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold rounded transition">Unpublish</button>`;
 
             alert("Event reactivated successfully.");
         }

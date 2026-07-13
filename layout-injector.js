@@ -150,7 +150,74 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
         });
 
+        // Initialize tooltips engine
+        initTooltip();
+
     } catch (e) {
         console.error("Layout Injector Error:", e);
     }
 });
+
+function initTooltip() {
+    let tooltipEl = document.getElementById('revelti-tooltip');
+    if (!tooltipEl) {
+        tooltipEl = document.createElement('div');
+        tooltipEl.id = 'revelti-tooltip';
+        tooltipEl.className = 'fixed hidden z-[9999] px-3 py-2 text-xs font-semibold text-slate-100 bg-slate-950/95 backdrop-blur-sm border border-slate-800 rounded-lg shadow-xl max-w-xs pointer-events-none transition-opacity duration-150 ease-out opacity-0';
+        document.body.appendChild(tooltipEl);
+    }
+
+    let activeTooltipTarget = null;
+    let tooltipTimeout = null;
+
+    document.body.addEventListener('mouseover', (e) => {
+        const target = e.target.closest('[data-tooltip]');
+        if (!target || target === activeTooltipTarget) return;
+
+        activeTooltipTarget = target;
+        clearTimeout(tooltipTimeout);
+
+        tooltipEl.textContent = target.getAttribute('data-tooltip');
+        tooltipEl.classList.remove('hidden');
+        
+        // Calculate position
+        const rect = target.getBoundingClientRect();
+        const tooltipRect = tooltipEl.getBoundingClientRect();
+        
+        let top = rect.top - tooltipRect.height - 8;
+        let left = rect.left + (rect.width - tooltipRect.width) / 2;
+
+        // Boundaries
+        if (left < 8) left = 8;
+        if (left + tooltipRect.width > window.innerWidth - 8) {
+            left = window.innerWidth - tooltipRect.width - 8;
+        }
+        if (top < 8) {
+            top = rect.bottom + 8;
+        }
+
+        tooltipEl.style.top = `${top}px`;
+        tooltipEl.style.left = `${left}px`;
+        
+        // Trigger reflow for transition
+        tooltipEl.offsetHeight;
+        tooltipEl.style.opacity = '1';
+    });
+
+    document.body.addEventListener('mouseout', (e) => {
+        const target = e.target.closest('[data-tooltip]');
+        if (!target || !activeTooltipTarget || target !== activeTooltipTarget) return;
+
+        // Check if we are moving to a child of the active target
+        if (e.relatedTarget && activeTooltipTarget.contains(e.relatedTarget)) return;
+
+        activeTooltipTarget = null;
+        tooltipEl.style.opacity = '0';
+        
+        tooltipTimeout = setTimeout(() => {
+            if (!activeTooltipTarget) {
+                tooltipEl.classList.add('hidden');
+            }
+        }, 150);
+    });
+}

@@ -3138,8 +3138,27 @@
       </div>
 
       <div class="pp-grid">
-        <!-- Left Column: Highlights list + CTA -->
-        <div style="display: flex; flex-direction: column;">
+        <!-- Left Column: SLEEK DARK Mockup Window -->
+        <div class="pp-mockup" style="grid-column: 1; grid-row: 1; align-self: center; display: flex; justify-content: center; margin-top: 0;">
+          <div class="mockup-window"
+            style="width: 100%; max-width: 330px; aspect-ratio: 1536/2752; position: relative; overflow: hidden; border-radius: 12px; box-shadow: 0 25px 50px -12px rgba(107,33,168,0.25); border: none; background: none;">
+            <img id="cr-slide-0" src="images/illustrations/1-creUpload.png"
+              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 0 !important; margin: 0 !important; cursor: pointer;"
+              class="fp-slide" onclick="openScreenshotLightbox('creative', 0)">
+            <img id="cr-slide-1" src="images/illustrations/2-creEvents.png"
+              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 0 !important; margin: 0 !important; cursor: pointer;"
+              class="fp-slide fp-slide-hidden" onclick="openScreenshotLightbox('creative', 1)">
+            <img id="cr-slide-2" src="images/illustrations/3-creGallery.png"
+              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 0 !important; margin: 0 !important; cursor: pointer;"
+              class="fp-slide fp-slide-hidden" onclick="openScreenshotLightbox('creative', 2)">
+            <img id="cr-slide-3" src="images/illustrations/4-crePage.png"
+              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 0 !important; margin: 0 !important; cursor: pointer;"
+              class="fp-slide fp-slide-hidden" onclick="openScreenshotLightbox('creative', 3)">
+          </div>
+        </div>
+
+        <!-- Right Column: Highlights list + CTA -->
+        <div style="grid-column: 2; grid-row: 1; display: flex; flex-direction: column;">
           <ul class="feature-list" style="margin-bottom: 0;">
             <li class="feature-item cr-feat cr-feat-active" id="cr-feat-0"
               onclick="goToCrSlide(0, true); openMobileMockupModal('creative', 0)" style="cursor: pointer;">
@@ -3183,25 +3202,6 @@
               style="background:var(--creative-accent);box-shadow:0 8px 30px rgba(107,33,168,0.35); margin-top: 0;">
               Claim Your Creative Studio →
             </a>
-          </div>
-        </div>
-
-        <!-- Right Column: SLEEK DARK Mockup Window -->
-        <div class="pp-mockup" style="grid-column: 2; grid-row: 1; align-self: center; display: flex; justify-content: center; margin-top: 0;">
-          <div class="mockup-window"
-            style="width: 100%; max-width: 330px; aspect-ratio: 1536/2752; position: relative; overflow: hidden; border-radius: 12px; box-shadow: 0 25px 50px -12px rgba(107,33,168,0.25); border: none; background: none;">
-            <img id="cr-slide-0" src="images/illustrations/1-creUpload.png"
-              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 0 !important; margin: 0 !important; cursor: pointer;"
-              class="fp-slide" onclick="openScreenshotLightbox('creative', 0)">
-            <img id="cr-slide-1" src="images/illustrations/2-creEvents.png"
-              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 0 !important; margin: 0 !important; cursor: pointer;"
-              class="fp-slide fp-slide-hidden" onclick="openScreenshotLightbox('creative', 1)">
-            <img id="cr-slide-2" src="images/illustrations/3-creGallery.png"
-              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 0 !important; margin: 0 !important; cursor: pointer;"
-              class="fp-slide fp-slide-hidden" onclick="openScreenshotLightbox('creative', 2)">
-            <img id="cr-slide-3" src="images/illustrations/4-crePage.png"
-              style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 0 !important; margin: 0 !important; cursor: pointer;"
-              class="fp-slide fp-slide-hidden" onclick="openScreenshotLightbox('creative', 3)">
           </div>
         </div>
       </div>
