@@ -69,6 +69,44 @@
       font-weight: 800;
     }
 
+    /* Skimming highlights */
+    .highlight-main {
+      font-weight: 700;
+      color: #df6906;
+      background: rgba(245, 130, 32, 0.08);
+      padding: 0 4px;
+      border-radius: 4px;
+    }
+    .highlight-org {
+      font-weight: 700;
+      color: #1a2f4e;
+      background: rgba(33, 60, 99, 0.07);
+      padding: 0 4px;
+      border-radius: 4px;
+    }
+    .highlight-cre {
+      font-weight: 700;
+      color: #6b21a8;
+      background: rgba(107, 33, 168, 0.08);
+      padding: 0 4px;
+      border-radius: 4px;
+    }
+    .creative-gallery-section .highlight-cre {
+      color: #e9d5ff;
+      background: rgba(168, 85, 247, 0.2);
+    }
+    #waitlist .highlight-main {
+      color: #1e293b;
+      background: rgba(255, 255, 255, 0.25);
+    }
+    .highlight-att {
+      font-weight: 700;
+      color: #d9630e;
+      background: rgba(245, 130, 32, 0.08);
+      padding: 0 4px;
+      border-radius: 4px;
+    }
+
     /* ===================== CUSTOM CURSOR ===================== */
     #cursor {
       position: fixed;
@@ -2924,7 +2962,7 @@
 
         <p class="hero-sub">
           <strong class="brand-highlight">Revelti</strong> is one ridiculously simple platform where event organizers
-          run the show, creatives get their spotlight, and attendees relive the night forever.
+          <span class="highlight-main">run the show</span>, creatives <span class="highlight-main">get their spotlight</span>, and attendees <span class="highlight-main">relive the night forever</span>.
         </p>
 
         <!-- Choose Your Journey Cards Picker -->
@@ -2937,7 +2975,7 @@
                 <div class="picker-icon">🎪</div>
                 <span class="picker-tag">Organizer</span>
                 <h3 class="picker-card-title">Run the Show</h3>
-                <p class="picker-card-desc">Ticketing, collaborator management, and live post-event galleries in one
+                <p class="picker-card-desc"><span class="highlight-org">Ticketing</span>, <span class="highlight-org">collaborator management</span>, and <span class="highlight-org">live post-event galleries</span> in one
                   beautiful place.</p>
               </div>
               <span class="picker-arrow">Explore Features &rarr;</span>
@@ -2949,8 +2987,8 @@
                 <div class="picker-icon">📷</div>
                 <span class="picker-tag">Creative</span>
                 <h3 class="picker-card-title">Own the Spotlight</h3>
-                <p class="picker-card-desc">No more WeTransfer links. Seamless delivery, automatic portfolio building,
-                  and client bookings.</p>
+                <p class="picker-card-desc">No more WeTransfer links. <span class="highlight-cre">Seamless delivery</span>, <span class="highlight-cre">automatic portfolio building</span>,
+                  and <span class="highlight-cre">client bookings</span>.</p>
               </div>
               <span class="picker-arrow">Explore Features &rarr;</span>
             </div>
@@ -2961,7 +2999,7 @@
                 <div class="picker-icon">🎉</div>
                 <span class="picker-tag">Attendee</span>
                 <h3 class="picker-card-title">Relive the Night</h3>
-                <p class="picker-card-desc">Buy tickets, access event schedules, see who's going, and get direct photo
+                <p class="picker-card-desc"><span class="highlight-att">Buy tickets</span>, access event schedules, <span class="highlight-att">see who's going</span>, and get direct photo
                   updates instantly.</p>
               </div>
               <span class="picker-arrow">Explore Features &rarr;</span>
@@ -2986,22 +3024,22 @@
           Events shouldn't feel<br>like organized chaos.
         </h2>
         <p class="section-body reveal reveal-delay-2">
-          We're juggling too many apps, link sharing services, messaging threads, and expired folder links. It's a
+          We're juggling too many apps, <span class="highlight-main">link sharing services</span>, <span class="highlight-main">messaging threads</span>, and <span class="highlight-main">expired folder links</span>. It's a
           hassle for everyone involved.
         </p>
         <ul class="pain-list">
           <li class="pain-item reveal reveal-delay-3">
             <div class="pain-icon">🎪</div>
-            <div><strong>Organizers:</strong> Juggling separate ticket pages, group messages, and spreadsheets.</div>
+            <div><strong>Organizers:</strong> Juggling separate <span class="highlight-org">ticket pages</span>, <span class="highlight-org">group messages</span>, and <span class="highlight-org">spreadsheets</span>.</div>
           </li>
           <li class="pain-item reveal reveal-delay-4">
             <div class="pain-icon">📷</div>
-            <div><strong>Creatives:</strong> Chasing organizers, paying for expiring folder links, losing exposure.
+            <div><strong>Creatives:</strong> Chasing organizers, paying for <span class="highlight-cre">expiring folder links</span>, <span class="highlight-cre">losing exposure</span>.
             </div>
           </li>
           <li class="pain-item reveal reveal-delay-5">
             <div class="pain-icon">🎉</div>
-            <div><strong>Attendees:</strong> Lost ticket emails, missing event info, and hunting for photos afterwards.
+            <div><strong>Attendees:</strong> <span class="highlight-att">Lost ticket emails</span>, missing event info, and <span class="highlight-att">hunting for photos</span> afterwards.
             </div>
           </li>
         </ul>
@@ -3050,7 +3088,7 @@
             the chaos.</span></h3>
         <p class="pp-body">
           You've got enough on your plate. <strong class="brand-highlight">Revelti</strong> handles the moving parts -
-          tickets, crowd comms, media team, and real-time stats - so you can focus on making the night unforgettable.
+          <span class="highlight-org">tickets</span>, <span class="highlight-org">crowd comms</span>, <span class="highlight-org">media team</span>, and <span class="highlight-org">real-time stats</span> - so you can focus on making the night unforgettable.
         </p>
       </div>
 
@@ -3063,7 +3101,8 @@
               <div class="fi-icon org">🎫</div>
               <div class="fi-text">
                 <strong>Effortless ticketing &amp; sales</strong>
-                <span>Set up your event, manage ticket tiers, and track sales live. No spreadsheets. It just works.</span>
+                <span>Set up your event, <span class="highlight-org">manage ticket tiers</span>, and <span class="highlight-org">track sales live</span>. No spreadsheets. It just
+                  works.</span>
               </div>
             </li>
             <li class="feature-item org-feat" id="org-feat-1"
@@ -3071,7 +3110,7 @@
               <div class="fi-icon org">📢</div>
               <div class="fi-text">
                 <strong>Direct audience connection</strong>
-                <span>Keep your crowd in the loop before, during, and after the event - all from one dashboard.</span>
+                <span>Keep your crowd <span class="highlight-org">in the loop</span> before, during, and after the event - all from <span class="highlight-org">one dashboard</span>.</span>
               </div>
             </li>
             <li class="feature-item org-feat" id="org-feat-2"
@@ -3079,7 +3118,7 @@
               <div class="fi-icon org">📸</div>
               <div class="fi-text">
                 <strong>Your media team, synced</strong>
-                <span>Connect directly with your photographers. Their work goes straight into the official event gallery.
+                <span>Connect directly with your photographers. Their work goes <span class="highlight-org">straight into the official event gallery</span>.
                   Done.</span>
               </div>
             </li>
@@ -3088,7 +3127,7 @@
               <div class="fi-icon org">📈</div>
               <div class="fi-text">
                 <strong>Know exactly how you did</strong>
-                <span>Beautiful, easy-to-read stats on everything from ticket sales to post-event engagement. Know your
+                <span>Beautiful, easy-to-read <span class="highlight-org">stats</span> on everything from ticket sales to <span class="highlight-org">post-event engagement</span>. Know your
                   numbers.</span>
               </div>
             </li>
@@ -3101,7 +3140,8 @@
         </div>
 
         <!-- Right Column: Mockup Window -->
-        <div class="pp-mockup" style="grid-column: 2; grid-row: 1; align-self: center; display: flex; justify-content: center; margin-top: 0;">
+        <div class="pp-mockup"
+          style="grid-column: 2; grid-row: 1; align-self: center; display: flex; justify-content: center; margin-top: 0;">
           <div class="mockup-window"
             style="width: 100%; max-width: 330px; aspect-ratio: 1536/2752; position: relative; overflow: hidden; border-radius: 12px; box-shadow: 0 25px 50px -12px rgba(33,60,99,0.15); border: none; background: none;">
             <img id="org-slide-0" src="images/illustrations/1-orgTicketing.png"
@@ -3131,15 +3171,17 @@
             style="background:linear-gradient(90deg,var(--creative-accent) 0%,#a855f7 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Own
             the event spotlight.</span></h3>
         <p class="pp-body">
-          You're not just taking photos — you're capturing memories. Revelti replaces expired links and messy handoffs
-          with a visual ecosystem that stores your shots, delivers them instantly, and puts your brand in front of every
+          You're not just taking photos — you're capturing memories. <strong class="brand-highlight">Revelti</strong>
+          replaces <span class="highlight-cre">expired links</span> and <span class="highlight-cre">messy handoffs</span>
+          with a visual ecosystem that stores your shots, <span class="highlight-cre">delivers them instantly</span>, and puts <span class="highlight-cre">your brand</span> in front of every
           attendee.
         </p>
       </div>
 
       <div class="pp-grid">
         <!-- Left Column: SLEEK DARK Mockup Window -->
-        <div class="pp-mockup" style="grid-column: 1; grid-row: 1; align-self: center; display: flex; justify-content: center; margin-top: 0;">
+        <div class="pp-mockup"
+          style="grid-column: 1; grid-row: 1; align-self: center; display: flex; justify-content: center; margin-top: 0;">
           <div class="mockup-window"
             style="width: 100%; max-width: 330px; aspect-ratio: 1536/2752; position: relative; overflow: hidden; border-radius: 12px; box-shadow: 0 25px 50px -12px rgba(107,33,168,0.25); border: none; background: none;">
             <img id="cr-slide-0" src="images/illustrations/1-creUpload.png"
@@ -3165,34 +3207,35 @@
               <div class="fi-icon creative">💾</div>
               <div class="fi-text">
                 <strong>Storage meets presentation</strong>
-                <span>Your workspace and your gallery in one place. Upload raw files, export polished albums — all in one
+                <span>Your workspace and your gallery in one place. <span class="highlight-cre">Upload raw files</span>, <span class="highlight-cre">export polished albums</span> — all in
+                  one
                   platform.</span>
               </div>
             </li>
-            <li class="feature-item cr-feat" id="cr-feat-1" onclick="goToCrSlide(1, true); openMobileMockupModal('creative', 1)"
-              style="cursor: pointer;">
+            <li class="feature-item cr-feat" id="cr-feat-1"
+              onclick="goToCrSlide(1, true); openMobileMockupModal('creative', 1)" style="cursor: pointer;">
               <div class="fi-icon creative">🚫</div>
               <div class="fi-text">
                 <strong>No more transfer links</strong>
-                <span>Deliver media directly to the official event. No expiring links, no lost folders, no messy
+                <span>Deliver media directly to the official event. <span class="highlight-cre">No expiring links</span>, <span class="highlight-cre">no lost folders</span>, no messy
                   DMs.</span>
               </div>
             </li>
-            <li class="feature-item cr-feat" id="cr-feat-2" onclick="goToCrSlide(2, true); openMobileMockupModal('creative', 2)"
-              style="cursor: pointer;">
+            <li class="feature-item cr-feat" id="cr-feat-2"
+              onclick="goToCrSlide(2, true); openMobileMockupModal('creative', 2)" style="cursor: pointer;">
               <div class="fi-icon creative">👁️</div>
               <div class="fi-text">
                 <strong>Automatic exposure</strong>
-                <span>Every attendee looking for their photos sees your profile and your art. Thousands of organic
+                <span>Every attendee looking for their photos sees <span class="highlight-cre">your profile</span> and <span class="highlight-cre">your art</span>. Thousands of organic
                   eyes.</span>
               </div>
             </li>
-            <li class="feature-item cr-feat" id="cr-feat-3" onclick="goToCrSlide(3, true); openMobileMockupModal('creative', 3)"
-              style="cursor: pointer;">
+            <li class="feature-item cr-feat" id="cr-feat-3"
+              onclick="goToCrSlide(3, true); openMobileMockupModal('creative', 3)" style="cursor: pointer;">
               <div class="fi-icon creative">✨</div>
               <div class="fi-text">
                 <strong>A portfolio that does you justice</strong>
-                <span>A stunning public profile to send to every future client — built automatically from the events you
+                <span>A stunning <span class="highlight-cre">public profile</span> to send to every future client — <span class="highlight-cre">built automatically</span> from the events you
                   shoot.</span>
               </div>
             </li>
@@ -3213,13 +3256,13 @@
     <div class="perspective-inner">
       <div style="text-align:center; max-width:700px; margin:0 auto 48px;">
         <div class="section-label" style="color:var(--attendee-accent); justify-content:center;">For Attendees</div>
-        <h3 class="pp-headline">Your entire event,<br><span
-            style="background:linear-gradient(90deg,var(--attendee-accent) 0%,#ff9f50 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">in
-            the palm of your hand.</span></h3>
+        <h3 class="pp-headline">Buy tickets, get updates, and find your photos. <span
+            style="background:linear-gradient(90deg,var(--attendee-accent) 0%,#ff9f50 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">All
+            in one app.</span></h3>
         <p class="pp-body">
-          Carry the event in your pocket. From buying tickets to staying in sync with friends and accessing the live
-          media gallery afterward, <strong class="brand-highlight">Revelti</strong> keeps you connected. Tap the steps
-          below to run the live phone simulation!
+          Stop hunting through your email for <span class="highlight-att">lost tickets</span> or searching social media for <span class="highlight-att">event photos</span>. <strong
+            class="brand-highlight">Revelti</strong> lets you
+          securely buy your ticket and <span class="highlight-att">handles everything else automatically</span>.
         </p>
       </div>
 
@@ -3231,33 +3274,36 @@
               onclick="goToAttSlide(0, true); openMobileMockupModal('attendee', 0)" style="cursor: pointer;">
               <div class="fi-icon att">🎫</div>
               <div class="fi-text">
-                <strong>Find events &amp; buy tickets</strong>
-                <span>Browse events, buy secure tickets, and get your digital QR code ready for check-in.</span>
+                <strong>Buy your ticket and check in</strong>
+                <span>Find your favorite dance events, <span class="highlight-att">purchase tickets securely</span>, and instantly get your <span class="highlight-att">entry QR code</span>
+                  inside the app. No lost confirmation emails.</span>
               </div>
             </li>
             <li class="feature-item att-feat" id="sim-step-1"
               onclick="goToAttSlide(1, true); openMobileMockupModal('attendee', 1)" style="cursor: pointer;">
               <div class="fi-icon att">📢</div>
               <div class="fi-text">
-                <strong>Your event companion</strong>
-                <span>Get real-time updates from organizers. Schedule changes, maps, and important updates.</span>
+                <strong>See the event schedule</strong>
+                <span>Access up-to-date <span class="highlight-att">timetables</span>, FAQ, and <span class="highlight-att">live announcements</span> from the organizers so you never miss a
+                  workshop or a party.</span>
               </div>
             </li>
             <li class="feature-item att-feat" id="sim-step-2"
               onclick="goToAttSlide(2, true); openMobileMockupModal('attendee', 2)" style="cursor: pointer;">
               <div class="fi-icon att">👥</div>
               <div class="fi-text">
-                <strong>See who is going</strong>
-                <span>See which of your friends are attending upcoming events. Never miss a chance to dance
-                  together.</span>
+                <strong>Meet your friends</strong>
+                <span>Connect with your <span class="highlight-att">dance community</span> and see exactly <span class="highlight-att">who else is going</span> before you even buy your
+                  pass.</span>
               </div>
             </li>
             <li class="feature-item att-feat" id="sim-step-3"
               onclick="goToAttSlide(3, true); openMobileMockupModal('attendee', 3)" style="cursor: pointer;">
               <div class="fi-icon att">📸</div>
               <div class="fi-text">
-                <strong>Relive the whole event</strong>
-                <span>Get notified the instant photographers publish. Find, download, and share your favorites.</span>
+                <strong>Get your photos &amp; videos fast</strong>
+                <span>No more hunting down expired links and social media. The moment the party gallery is uploaded,
+                  they go <span class="highlight-att">straight to your app profile</span>.</span>
               </div>
             </li>
           </ul>
@@ -3269,7 +3315,8 @@
           </div>
         </div>
         <!-- Right: Interactive Mobile App Mockup -->
-        <div class="pp-mockup" style="align-self: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <div class="pp-mockup"
+          style="align-self: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
           <div
             style="width: 300px; height: 600px; background: #fff; border-radius: 40px; box-shadow: 0 25px 50px -12px rgba(245, 130, 32, 0.25), 0 0 0 10px #1e293b, 0 0 0 12px rgba(255,255,255,0.2); position: relative; overflow: hidden; display: flex; flex-direction: column; text-align: left; font-family: 'Nunito', sans-serif;">
 
@@ -3280,30 +3327,35 @@
               <!-- Slide 0: Ticket details (purchaseDetails.html) -->
               <div class="fp-slide" id="att-slide-0"
                 style="padding: 0 !important; position: absolute; inset: 0; overflow: hidden;">
-                <iframe src="purchaseDetails.html?mockup=1" style="position: absolute; top: 0; left: 0; width: 125%; height: 125%; transform: scale(0.8); transform-origin: top left; border: none; background: #fff;"></iframe>
+                <iframe src="purchaseDetails.html?mockup=1"
+                  style="position: absolute; top: 0; left: 0; width: 125%; height: 125%; transform: scale(0.8); transform-origin: top left; border: none; background: #fff;"></iframe>
               </div>
 
               <!-- Slide 1: Companion (eventDetail.html?tab=announcements) -->
               <div class="fp-slide fp-slide-hidden" id="att-slide-1"
                 style="padding: 0 !important; position: absolute; inset: 0; overflow: hidden;">
-                <iframe src="eventDetail.html?tab=announcements&mockup=1" style="position: absolute; top: 0; left: 0; width: 125%; height: 125%; transform: scale(0.8); transform-origin: top left; border: none; background: #fff;"></iframe>
+                <iframe src="eventDetail.html?tab=announcements&mockup=1"
+                  style="position: absolute; top: 0; left: 0; width: 125%; height: 125%; transform: scale(0.8); transform-origin: top left; border: none; background: #fff;"></iframe>
               </div>
 
               <!-- Slide 2: See who is going (eventDetail.html?tab=people) -->
               <div class="fp-slide fp-slide-hidden" id="att-slide-2"
                 style="padding: 0 !important; position: absolute; inset: 0; overflow: hidden;">
-                <iframe src="eventDetail.html?tab=people&mockup=1" style="position: absolute; top: 0; left: 0; width: 125%; height: 125%; transform: scale(0.8); transform-origin: top left; border: none; background: #fff;"></iframe>
+                <iframe src="eventDetail.html?tab=people&mockup=1"
+                  style="position: absolute; top: 0; left: 0; width: 125%; height: 125%; transform: scale(0.8); transform-origin: top left; border: none; background: #fff;"></iframe>
               </div>
 
               <!-- Slide 3: Relive the whole event (publicGalleryView.html) -->
               <div class="fp-slide fp-slide-hidden" id="att-slide-3"
                 style="padding: 0 !important; position: absolute; inset: 0; overflow: hidden;">
-                <iframe src="publicGalleryView.html?mockup=1" style="position: absolute; top: 0; left: 0; width: 125%; height: 125%; transform: scale(0.8); transform-origin: top left; border: none; background: #0d1117;"></iframe>
+                <iframe src="publicGalleryView.html?mockup=1"
+                  style="position: absolute; top: 0; left: 0; width: 125%; height: 125%; transform: scale(0.8); transform-origin: top left; border: none; background: #0d1117;"></iframe>
               </div>
 
             </div>
           </div>
-          <div style="margin-top: 16px; font-size: 13px; color: #a1a1aa; font-weight: 600; text-align: center; user-select: none;">
+          <div
+            style="margin-top: 16px; font-size: 13px; color: #a1a1aa; font-weight: 600; text-align: center; user-select: none;">
             👆 Interact with the mockup
           </div>
         </div>
@@ -3325,7 +3377,7 @@
       <p class="eco-sub reveal reveal-delay-2"
         style="text-align:center;max-width:640px;margin-left:auto;margin-right:auto;">
         <strong class="brand-highlight">Revelti</strong> is a triangle, not a line. Organizers, creatives, and attendees
-        all share the same platform - connected, in sync, and always in the loop.
+        all share the <span class="highlight-main">same platform</span> - <span class="highlight-main">connected</span>, <span class="highlight-main">in sync</span>, and always <span class="highlight-main">in the loop</span>.
       </p>
 
       <!-- Triangle: 3 equal cards with icon in the true center -->
@@ -3337,8 +3389,7 @@
             <div class="eco-node-icon">🎪</div>
             <div class="eco-node-tag org">Organizer</div>
             <div class="eco-node-title">Runs the show</div>
-            <div class="eco-node-body">Sets up events, sells tickets, broadcasts to the crowd, and manages their media
-              team - all without leaving the platform.</div>
+            <div class="eco-node-body">Sets up events, <span class="highlight-org">sells tickets</span>, broadcasts to the crowd, and <span class="highlight-org">manages their media team</span> - all without leaving the platform.</div>
           </div>
 
           <!-- Mobile-only Hub between Organizer and Creative -->
@@ -3356,8 +3407,7 @@
             <div class="eco-node-icon">📷</div>
             <div class="eco-node-tag cre">Creative</div>
             <div class="eco-node-title">Captures the night</div>
-            <div class="eco-node-body">Stores, edits, and delivers media directly to the event. Their work is seen by
-              every single attendee - automatically.</div>
+            <div class="eco-node-body"><span class="highlight-cre">Stores, edits, and delivers media</span> directly to the event. Their work is seen by every single attendee - <span class="highlight-cre">automatically</span>.</div>
           </div>
         </div>
 
@@ -3378,8 +3428,7 @@
             <div class="eco-node-icon">🎉</div>
             <div class="eco-node-tag att">Attendee</div>
             <div class="eco-node-title">Lives the experience</div>
-            <div class="eco-node-body">Buys their ticket, gets the updates, finds their photos - and relives the night,
-              long after it's over.</div>
+            <div class="eco-node-body"><span class="highlight-att">Buys their ticket</span>, gets the updates, <span class="highlight-att">finds their photos</span> - and relives the night, long after it's over.</div>
           </div>
         </div>
 
@@ -3396,8 +3445,7 @@
         Be the first to<br>experience <span class="headline-accent">Revelti.</span>
       </h2>
       <p class="waitlist-sub reveal reveal-delay-2">
-        We're putting the finishing touches on something special. Join the waitlist today and lock in early access perks
-        based on your profile.
+        We're putting the finishing touches on something special. <span class="highlight-main">Join the waitlist today</span> and lock in <span class="highlight-main">early access perks</span> based on your profile.
       </p>
 
       <div class="reveal reveal-delay-3">
@@ -3873,7 +3921,7 @@
         document.body.style.top = '';
         document.body.style.width = '';
         document.body.removeAttribute('data-scroll-y');
-        
+
         // Temporarily disable smooth scroll animation for an instant jump
         const html = document.documentElement;
         const originalScroll = html.style.scrollBehavior;
