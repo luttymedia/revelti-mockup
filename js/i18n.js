@@ -35,16 +35,16 @@
           },
           "hero": {
             "badge": "Coming Soon - Join the Waitlist",
-            "headline_line1": "The event doesn't end",
-            "headline_line2": "when the music stops.",
+            "headline_line1": "The event <br class=\"hero-br-mobile\">doesn't end",
+            "headline_line2": "when the <br class=\"hero-br-mobile\">music stops.",
             "sub": "<strong class=\"brand-highlight\">Revelti</strong> is one ridiculously simple platform where event organizers <span class=\"highlight-main\">run the show</span>, creatives <span class=\"highlight-main\">get their spotlight</span>, and attendees <span class=\"highlight-main\">relive the night forever</span>.",
-            "picker_title": "Choose your perspective",
+            "picker_title": "Choose your role",
             "org_tag": "Organizer",
             "org_card_title": "Run the Show",
-            "org_card_desc": "<span class=\"highlight-org\">Ticketing</span>, <span class=\"highlight-org\">collaborator management</span>, and <span class=\"highlight-org\">live post-event galleries</span> in one beautiful place.",
+            "org_card_desc": "<span class=\"highlight-org\">Ticketing</span>, <span class=\"highlight-org\">audience email</span>, <span class=\"highlight-org\">collaborator management</span>, <span class=\"highlight-org\">stats</span> and <span class=\"highlight-org\">event galleries</span> in one beautiful place.",
             "cre_tag": "Creative",
             "cre_card_title": "Own the Spotlight",
-            "cre_card_desc": "No more WeTransfer links. <span class=\"highlight-cre\">Seamless delivery</span>, <span class=\"highlight-cre\">automatic portfolio building</span>, and <span class=\"highlight-cre\">client bookings</span>.",
+            "cre_card_desc": "No more WeTransfer links. <span class=\"highlight-cre\">Cloud storage</span>, <span class=\"highlight-cre\">seamless delivery</span> and <span class=\"highlight-cre\">automatic portfolio building</span> with <span class=\"highlight-cre\">customized galleries</span>.",
             "att_tag": "Attendee",
             "att_card_title": "Relive the Night",
             "att_card_desc": "<span class=\"highlight-att\">Buy tickets</span>, access event schedules, <span class=\"highlight-att\">see who's going</span>, and get direct photo updates instantly.",
@@ -85,7 +85,7 @@
             "headline": "Overhaul your workspace.<br><span style=\"background:linear-gradient(90deg,var(--creative-accent) 0%,#a855f7 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;\">Own the event spotlight.</span>",
             "body": "You're not just taking photos — you're capturing memories. <strong class=\"brand-highlight\">Revelti</strong> replaces <span class=\"highlight-cre\">expired links</span> and <span class=\"highlight-cre\">messy handoffs</span> with a visual ecosystem that stores your shots, <span class=\"highlight-cre\">delivers them instantly</span>, and puts <span class=\"highlight-cre\">your brand</span> in front of every attendee.",
             "feat1_title": "Storage meets presentation",
-            "feat1_desc": "Your workspace and your gallery in one place. <span class=\"highlight-cre\">Upload raw files</span>, <span class=\"highlight-cre\">export polished albums</span> — all in one platform.",
+            "feat1_desc": "Your workspace and your gallery in one place. <span class=\"highlight-cre\">Upload your media files</span>, <span class=\"highlight-cre\">export polished albums</span> — all in one platform.",
             "feat2_title": "No more transfer links",
             "feat2_desc": "Deliver media directly to the official event. <span class=\"highlight-cre\">No expiring links</span>, <span class=\"highlight-cre\">no lost folders</span>, no messy DMs.",
             "feat3_title": "Automatic exposure",
@@ -118,19 +118,22 @@
             "headline": "When everyone's<br>on the same stage,<br><span class=\"headline-accent\">the magic happens.</span>",
             "body": "<strong class=\"brand-highlight\">Revelti</strong> is a triangle, not a line. Organizers, creatives, and attendees all share the <span class=\"highlight-main\">same platform</span> - <span class=\"highlight-main\">connected</span>, <span class=\"highlight-main\">in sync</span>, and always <span class=\"highlight-main\">in the loop</span>.",
             "org_tag": "Organizer",
-            "org_title": "Runs the show",
+            "org_title": "Organizer",
             "org_body": "Sets up events, <span class=\"highlight-org\">sells tickets</span>, broadcasts to the crowd, and <span class=\"highlight-org\">manages their media team</span> - all without leaving the platform.",
             "cre_tag": "Creative",
-            "cre_title": "Captures the night",
-            "cre_body": "<span class=\"highlight-cre\">Stores, edits, and delivers media</span> directly to the event. Their work is seen by every single attendee - <span class=\"highlight-cre\">automatically</span>.",
+            "cre_title": "Creative",
+            "cre_body": "<span class=\"highlight-cre\">Stores and delivers media</span> directly to the event. Their work is seen by every single attendee - <span class=\"highlight-cre\">automatically</span>.",
             "att_tag": "Attendee",
-            "att_title": "Lives the experience",
-            "att_body": "<span class=\"highlight-att\">Buys their ticket</span>, gets the updates, <span class=\"highlight-att\">finds their photos</span> - and relives the night, long after it's over."
+            "att_title": "Attendee",
+            "att_body": "<span class=\"highlight-att\">Buys their ticket</span>, gets the updates, <span class=\"highlight-att\">finds their photos</span> - and relives the night, long after it's over.",
+            "link_cta": "Explore perspective"
           },
           "waitlist": {
             "eyebrow": "Limited Early Access",
             "headline": "Be the first to<br>experience <span class=\"headline-accent\">Revelti.</span>",
             "sub": "We're putting the finishing touches on something special. <span class=\"highlight-main\">Join the waitlist today</span> and lock in <span class=\"highlight-main\">early access perks</span> based on your profile.",
+            "instruction": "Select your profile to continue:",
+            "role_required_error": "⚠️ Please select a profile before joining.",
             "role_org": "Organizer",
             "role_cre": "Creative",
             "role_att": "Attendee",
@@ -163,9 +166,9 @@
         },
         es: {
           "meta": {
-            "title": "Revelti - El evento no termina cuando la música se apaga.",
+            "title": "Revelti - El evento no termina cuando la música se para.",
             "description": "Revelti es la plataforma todo en uno para organizadores de eventos, creativos y asistentes. Deja de hacer malabares con herramientas. Únete a la lista de espera y sé el primero en vivirlo.",
-            "og_title": "Revelti - El evento no termina cuando la música se apaga.",
+            "og_title": "Revelti - El evento no termina cuando la música se para.",
             "og_description": "Una plataforma. Organizadores. Creativos. Asistentes. Recuerdos para siempre. Únete a la lista de espera."
           },
           "nav": {
@@ -187,16 +190,16 @@
           },
           "hero": {
             "badge": "Próximamente - Únete a la lista de espera",
-            "headline_line1": "El evento no termina",
-            "headline_line2": "cuando la música se apaga.",
+            "headline_line1": "El evento <br class=\"hero-br-mobile\">no termina",
+            "headline_line2": "cuando la música <br class=\"hero-br-mobile\">se para.",
             "sub": "<strong class=\"brand-highlight\">Revelti</strong> es una plataforma increíblemente sencilla donde los organizadores <span class=\"highlight-main\">dirigen el espectáculo</span>, los creativos <span class=\"highlight-main\">brillan con luz propia</span> y los asistentes <span class=\"highlight-main\">reviven la noche para siempre</span>.",
-            "picker_title": "Elige tu perspectiva",
+            "picker_title": "Elige tu rol",
             "org_tag": "Organizador",
             "org_card_title": "Dirige el Espectáculo",
-            "org_card_desc": "<span class=\"highlight-org\">Venta de entradas</span>, <span class=\"highlight-org\">gestión de colaboradores</span> y <span class=\"highlight-org\">galerías post-evento en directo</span> en un solo lugar.",
+            "org_card_desc": "<span class=\"highlight-org\">Venta de entradas</span>, <span class=\"highlight-org\">email a la audiencia</span>, <span class=\"highlight-org\">gestión de colaboradores</span>, <span class=\"highlight-org\">estadísticas</span> y <span class=\"highlight-org\">galerías de eventos</span> en un solo lugar.",
             "cre_tag": "Creativo",
             "cre_card_title": "Sé el Protagonista",
-            "cre_card_desc": "Sin más enlaces de WeTransfer. <span class=\"highlight-cre\">Entrega fluida</span>, <span class=\"highlight-cre\">creación automática de portafolios</span> y <span class=\"highlight-cre\">reservas de clientes</span>.",
+            "cre_card_desc": "Sin más enlaces de WeTransfer. <span class=\"highlight-cre\">Almacenamiento en la nube</span>, <span class=\"highlight-cre\">entrega fluida</span> y <span class=\"highlight-cre\">creación automática de portafolios</span> con <span class=\"highlight-cre\">galerías personalizadas</span>.",
             "att_tag": "Asistente",
             "att_card_title": "Revive la Noche",
             "att_card_desc": "<span class=\"highlight-att\">Compra entradas</span>, accede a horarios de eventos, <span class=\"highlight-att\">mira quién va</span> y recibe fotos al instante.",
@@ -237,7 +240,7 @@
             "headline": "Renueva tu espacio de trabajo.<br><span style=\"background:linear-gradient(90deg,var(--creative-accent) 0%,#a855f7 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;\">Sé el centro de atención.</span>",
             "body": "No solo haces fotos: estás capturando recuerdos. <strong class=\"brand-highlight\">Revelti</strong> reemplaza los <span class=\"highlight-cre\">enlaces caducados</span> y las <span class=\"highlight-cre\">entregas caóticas</span> con un ecosistema visual que almacena tus tomas, <span class=\"highlight-cre\">las entrega al instante</span> y destaca <span class=\"highlight-cre\">tu marca</span> ante cada asistente.",
             "feat1_title": "Almacenamiento y presentación en uno",
-            "feat1_desc": "Tu espacio de trabajo y tu galería juntos. <span class=\"highlight-cre\">Sube archivos RAW</span>, <span class=\"highlight-cre\">exporta álbumes pulidos</span> — todo en una sola plataforma.",
+            "feat1_desc": "Tu espacio de trabajo y tu galería juntos. <span class=\"highlight-cre\">Sube tus archivos multimedia</span>, <span class=\"highlight-cre\">exporta álbumes pulidos</span> — todo en una sola plataforma.",
             "feat2_title": "Sin más enlaces de descarga",
             "feat2_desc": "Entrega fotos y vídeos directamente al evento oficial. <span class=\"highlight-cre\">Sin enlaces que caducan</span>, <span class=\"highlight-cre\">sin carpetas perdidas</span> ni mensajes privados.",
             "feat3_title": "Visibilidad automática",
@@ -270,19 +273,22 @@
             "headline": "Cuando todos están<br>en el mismo escenario,<br><span class=\"headline-accent\">ocurre la magia.</span>",
             "body": "<strong class=\"brand-highlight\">Revelti</strong> es un triángulo, no una línea. Organizadores, creativos y asistentes comparten la <span class=\"highlight-main\">misma plataforma</span>: <span class=\"highlight-main\">conectados</span>, <span class=\"highlight-main\">sincronizados</span> y siempre <span class=\"highlight-main\">informados</span>.",
             "org_tag": "Organizador",
-            "org_title": "Dirige el espectáculo",
+            "org_title": "Organizador",
             "org_body": "Crea eventos, <span class=\"highlight-org\">vende entradas</span>, emite avisos al público y <span class=\"highlight-org\">gestiona al equipo de medios</span> sin salir de la plataforma.",
             "cre_tag": "Creativo",
-            "cre_title": "Captura la noche",
-            "cre_body": "<span class=\"highlight-cre\">Almacena, edita y entrega contenidos</span> directamente al evento. Su trabajo llega a cada asistente — <span class=\"highlight-cre\">automáticamente</span>.",
+            "cre_title": "Creativo",
+            "cre_body": "<span class=\"highlight-cre\">Almacena y entrega contenidos</span> directamente al evento. Su trabajo llega a cada asistente — <span class=\"highlight-cre\">automáticamente</span>.",
             "att_tag": "Asistente",
-            "att_title": "Vive la experiencia",
-            "att_body": "<span class=\"highlight-att\">Compra su entrada</span>, recibe avisos, <span class=\"highlight-att\">encuentra sus fotos</span> y revive la noche mucho después de que termine."
+            "att_title": "Asistente",
+            "att_body": "<span class=\"highlight-att\">Compra su entrada</span>, recibe avisos, <span class=\"highlight-att\">encuentra sus fotos</span> y revive la noche mucho después de que termine.",
+            "link_cta": "Explorar perspectiva"
           },
           "waitlist": {
             "eyebrow": "Acceso Anticipado Limitado",
             "headline": "Sé el primero en<br>experimentar <span class=\"headline-accent\">Revelti.</span>",
             "sub": "Estamos dando los últimos retoques a algo muy especial. <span class=\"highlight-main\">Únete a la lista hoy</span> y asegura <span class=\"highlight-main\">ventajas de acceso exclusivo</span> según tu perfil.",
+            "instruction": "Selecciona tu perfil para continuar:",
+            "role_required_error": "⚠️ Por favor, selecciona un perfil antes de unirte.",
             "role_org": "Organizador",
             "role_cre": "Creativo",
             "role_att": "Asistente",
@@ -363,7 +369,7 @@
     t(key, params = {}) {
       const keys = key.split('.');
       let dict = this.translations[this.currentLang] || this.translations[DEFAULT_LANG] || {};
-      
+
       let val = dict;
       for (const k of keys) {
         if (val && typeof val === 'object' && k in val) {
