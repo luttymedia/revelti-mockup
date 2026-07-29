@@ -1,0 +1,152 @@
+{
+  "meta": {
+    "title": "Revelti - El evento no termina cuando la música se apaga.",
+    "description": "Revelti es la plataforma todo en uno para organizadores de eventos, creativos y asistentes. Deja de hacer malabares con herramientas. Únete a la lista de espera y sé el primero en vivirlo.",
+    "og_title": "Revelti - El evento no termina cuando la música se apaga.",
+    "og_description": "Una plataforma. Organizadores. Creativos. Asistentes. Recuerdos para siempre. Únete a la lista de espera."
+  },
+  "nav": {
+    "organizer": "Organizador",
+    "creative": "Creativo",
+    "attendee": "Asistente",
+    "join_waitlist": "Unirse a la lista",
+    "toggle_menu_aria": "Alternar menú móvil"
+  },
+  "chapter": {
+    "page_sections_aria": "Secciones de la página",
+    "start": "Inicio",
+    "problem": "El Problema",
+    "organizer": "Organizador",
+    "creative": "Creativo",
+    "attendee": "Asistente",
+    "together": "Juntos",
+    "join": "Unirse"
+  },
+  "hero": {
+    "badge": "Próximamente - Únete a la lista de espera",
+    "headline_line1": "El evento no termina",
+    "headline_line2": "cuando la música se apaga.",
+    "sub": "<strong class=\"brand-highlight\">Revelti</strong> es una plataforma increíblemente sencilla donde los organizadores <span class=\"highlight-main\">dirigen el espectáculo</span>, los creativos <span class=\"highlight-main\">brillan con luz propia</span> y los asistentes <span class=\"highlight-main\">reviven la noche para siempre</span>.",
+    "picker_title": "Elige tu perspectiva",
+    "org_tag": "Organizador",
+    "org_card_title": "Dirige el Espectáculo",
+    "org_card_desc": "<span class=\"highlight-org\">Venta de entradas</span>, <span class=\"highlight-org\">gestión de colaboradores</span> y <span class=\"highlight-org\">galerías post-evento en directo</span> en un solo lugar.",
+    "cre_tag": "Creativo",
+    "cre_card_title": "Sé el Protagonista",
+    "cre_card_desc": "Sin más enlaces de WeTransfer. <span class=\"highlight-cre\">Entrega fluida</span>, <span class=\"highlight-cre\">creación automática de portafolios</span> y <span class=\"highlight-cre\">reservas de clientes</span>.",
+    "att_tag": "Asistente",
+    "att_card_title": "Revive la Noche",
+    "att_card_desc": "<span class=\"highlight-att\">Compra entradas</span>, accede a horarios de eventos, <span class=\"highlight-att\">mira quién va</span> y recibe fotos al instante.",
+    "explore_cta": "Explorar Funciones &rarr;",
+    "scroll_hint": "Desplazar"
+  },
+  "problem": {
+    "label": "La forma antigua",
+    "headline": "Los eventos no deberían sentirse<br>como un caos organizado.",
+    "body": "Hacemos demasiado malabarismo entre apps, <span class=\"highlight-main\">servidores de enlaces</span>, <span class=\"highlight-main\">hilos de mensajes</span> y <span class=\"highlight-main\">enlaces caducados</span>. Es una molestia para todos.",
+    "pain_org": "<strong>Organizadores:</strong> Gestionando páginas de <span class=\"highlight-org\">entradas</span>, <span class=\"highlight-org\">grupos de chat</span> y <span class=\"highlight-org\">hojas de cálculo</span> por separado.",
+    "pain_cre": "<strong>Creativos:</strong> Persiguiendo organizadores, pagando por <span class=\"highlight-cre\">enlaces que caducan</span>, <span class=\"highlight-cre\">perdiendo visibilidad</span>.",
+    "pain_att": "<strong>Asistentes:</strong> <span class=\"highlight-att\">Correos de entradas perdidos</span>, información que falta y <span class=\"highlight-att\">buscando fotos</span> días después.",
+    "tool_1": "📁 Enlace WeTransfer caducado",
+    "tool_2": "💬 Spam en grupo de WhatsApp (1.247)",
+    "tool_3": "🎟️ ¿Dónde está el correo de mi entrada?",
+    "tool_4": "💸 Búsqueda de justificantes bancarios",
+    "tool_5": "📧 Boletines de correo independientes",
+    "tool_6": "📂 Carpeta de Google Drive perdida",
+    "tool_7": "📊 Lista en Excel v12.xlsx"
+  },
+  "organizer": {
+    "label": "Para Organizadores",
+    "headline": "Tu evento,<br><span style=\"background:linear-gradient(90deg,var(--organizer-accent) 0%,#7cb4ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;\">sin el caos.</span>",
+    "body": "Ya tienes bastante trabajo. <strong class=\"brand-highlight\">Revelti</strong> se encarga de lo complejo: <span class=\"highlight-org\">entradas</span>, <span class=\"highlight-org\">comunicación</span>, <span class=\"highlight-org\">equipo de medios</span> y <span class=\"highlight-org\">estadísticas en tiempo real</span>, para que te concentres en hacer la noche inolvidable.",
+    "feat1_title": "Venta de entradas sin esfuerzo",
+    "feat1_desc": "Crea tu evento, <span class=\"highlight-org\">gestiona tipos de entradas</span> y <span class=\"highlight-org\">sigue las ventas en directo</span>. Sin hojas de cálculo. Simplemente funciona.",
+    "feat2_title": "Conexión directa con la audiencia",
+    "feat2_desc": "Mantén a tu público <span class=\"highlight-org\">al día</span> antes, durante y después del evento, todo desde <span class=\"highlight-org\">un único panel</span>.",
+    "feat3_title": "Tu equipo visual, sincronizado",
+    "feat3_desc": "Conecta directamente con tus fotógrafos. Su trabajo va <span class=\"highlight-org\">directo a la galería oficial del evento</span>. Listo.",
+    "feat4_title": "Conoce exactamente tus resultados",
+    "feat4_desc": "<span class=\"highlight-org\">Estadísticas</span> claras y elegantes sobre todo, desde la venta de entradas hasta la <span class=\"highlight-org\">interacción posterior</span>.",
+    "cta": "Reservar Acceso para Organizadores →"
+  },
+  "creative": {
+    "label": "Para Creativos",
+    "headline": "Renueva tu espacio de trabajo.<br><span style=\"background:linear-gradient(90deg,var(--creative-accent) 0%,#a855f7 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;\">Sé el centro de atención.</span>",
+    "body": "No solo haces fotos: estás capturando recuerdos. <strong class=\"brand-highlight\">Revelti</strong> reemplaza los <span class=\"highlight-cre\">enlaces caducados</span> y las <span class=\"highlight-cre\">entregas caóticas</span> con un ecosistema visual que almacena tus tomas, <span class=\"highlight-cre\">las entrega al instante</span> y destaca <span class=\"highlight-cre\">tu marca</span> ante cada asistente.",
+    "feat1_title": "Almacenamiento y presentación en uno",
+    "feat1_desc": "Tu espacio de trabajo y tu galería juntos. <span class=\"highlight-cre\">Sube archivos RAW</span>, <span class=\"highlight-cre\">exporta álbumes pulidos</span> — todo en una sola plataforma.",
+    "feat2_title": "Sin más enlaces de descarga",
+    "feat2_desc": "Entrega fotos y vídeos directamente al evento oficial. <span class=\"highlight-cre\">Sin enlaces que caducan</span>, <span class=\"highlight-cre\">sin carpetas perdidas</span> ni mensajes privados.",
+    "feat3_title": "Visibilidad automática",
+    "feat3_desc": "Cada asistente que busca sus fotos ve <span class=\"highlight-cre\">tu perfil</span> y <span class=\"highlight-cre\">tu arte</span>. Miles de miradas orgánicas.",
+    "feat4_title": "Un portafolio a tu altura",
+    "feat4_desc": "Un <span class=\"highlight-cre\">perfil público</span> impresionante para mostrar a tus futuros clientes — <span class=\"highlight-cre\">creado automáticamente</span> con cada evento que cubres.",
+    "cta": "Reclamar Tu Estudio Creativo →"
+  },
+  "attendee": {
+    "label": "Para Asistentes",
+    "headline": "Compra entradas, recibe novedades y encuentra tus fotos. <span style=\"background:linear-gradient(90deg,var(--attendee-accent) 0%,#ff9f50 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;\">Todo en una app.</span>",
+    "body": "Deja de buscar en tu correo <span class=\"highlight-att\">entradas perdidas</span> o de rastrear redes sociales por <span class=\"highlight-att\">fotos del evento</span>. <strong class=\"brand-highlight\">Revelti</strong> te permite comprar tu entrada de forma segura y <span class=\"highlight-att\">gestiona todo lo demás automáticamente</span>.",
+    "feat1_title": "Compra tu entrada e ingresa",
+    "feat1_desc": "Encuentra tus eventos favoritos, <span class=\"highlight-att\">compra entradas con seguridad</span> y obtén tu <span class=\"highlight-att\">código QR de acceso</span> en la app.",
+    "feat2_title": "Mira la programación del evento",
+    "feat2_desc": "Accede a <span class=\"highlight-att\">horarios</span> actualizados, preguntas frecuentes y <span class=\"highlight-att\">anuncios en directo</span> para no perderte nada.",
+    "feat3_title": "Encuéntrate con tus amigos",
+    "feat3_desc": "Conéctate con tu <span class=\"highlight-att\">comunidad de baile</span> y mira exactamente <span class=\"highlight-att\">quién más asistirá</span> antes de comprar el pase.",
+    "feat4_title": "Fotos y vídeos al instante",
+    "feat4_desc": "Sin buscar en enlaces caducados. En cuanto se sube la galería, las fotos llegan <span class=\"highlight-att\">directamente a tu perfil en la app</span>.",
+    "cta": "Unirse a la Lista de Asistentes →",
+    "interact_hint": "👆 Interactúa con la maqueta",
+    "att_title_0": "Mi Entrada",
+    "att_title_1": "Guía del Evento",
+    "att_title_2": "Amigos",
+    "att_title_3": "¡Fotos Listas!"
+  },
+  "ecosystem": {
+    "label": "Mejor juntos",
+    "headline": "Cuando todos están<br>en el mismo escenario,<br><span class=\"headline-accent\">ocurre la magia.</span>",
+    "body": "<strong class=\"brand-highlight\">Revelti</strong> es un triángulo, no una línea. Organizadores, creativos y asistentes comparten la <span class=\"highlight-main\">misma plataforma</span>: <span class=\"highlight-main\">conectados</span>, <span class=\"highlight-main\">sincronizados</span> y siempre <span class=\"highlight-main\">informados</span>.",
+    "org_tag": "Organizador",
+    "org_title": "Dirige el espectáculo",
+    "org_body": "Crea eventos, <span class=\"highlight-org\">vende entradas</span>, emite avisos al público y <span class=\"highlight-org\">gestiona al equipo de medios</span> sin salir de la plataforma.",
+    "cre_tag": "Creativo",
+    "cre_title": "Captura la noche",
+    "cre_body": "<span class=\"highlight-cre\">Almacena, edita y entrega contenidos</span> directamente al evento. Su trabajo llega a cada asistente — <span class=\"highlight-cre\">automáticamente</span>.",
+    "att_tag": "Asistente",
+    "att_title": "Vive la experiencia",
+    "att_body": "<span class=\"highlight-att\">Compra su entrada</span>, recibe avisos, <span class=\"highlight-att\">encuentra sus fotos</span> y revive la noche mucho después de que termine."
+  },
+  "waitlist": {
+    "eyebrow": "Acceso Anticipado Limitado",
+    "headline": "Sé el primero en<br>experimentar <span class=\"headline-accent\">Revelti.</span>",
+    "sub": "Estamos dando los últimos retoques a algo muy especial. <span class=\"highlight-main\">Únete a la lista hoy</span> y asegura <span class=\"highlight-main\">ventajas de acceso exclusivo</span> según tu perfil.",
+    "role_org": "Organizador",
+    "role_cre": "Creativo",
+    "role_att": "Asistente",
+    "email_placeholder": "tu@email.com",
+    "email_aria": "Dirección de correo electrónico",
+    "submit_btn": "Unirse a la Lista",
+    "submit_btn_loading": "Añadiéndote...",
+    "perk1": "<span class=\"perk-check\">✦</span> Acceso beta según tu perfil",
+    "perk2": "<span class=\"perk-check\">✦</span> Beneficios exclusivos asegurados",
+    "perk3": "<span class=\"perk-check\">✦</span> Insignia de miembro fundador"
+  },
+  "fomo": {
+    "text": "personas ya están en la lista de espera"
+  },
+  "footer": {
+    "rights": "© 2025 <strong class=\"brand-highlight\">Revelti</strong>. Todos los derechos reservados.",
+    "disclaimer": "Las maquetas mostradas son ilustrativas. El producto final puede variar."
+  },
+  "modal": {
+    "success_title": "¡Estás en la lista!",
+    "success_body": "Has asegurado tu lugar como <strong id=\"modal-role-label\">{role}</strong>.<br><strong class=\"brand-highlight\">Beneficios exclusivos de acceso anticipado</strong> guardados — te contactaremos antes que a nadie cuando se lance <strong class=\"brand-highlight\">Revelti</strong>.<br><br>Cuéntaselo a los tuyos. La noche no termina aquí. 🔥",
+    "success_close": "¡Vamos! 🚀",
+    "role_organizer": "Organizador",
+    "role_creative": "Creativo",
+    "role_attendee": "Asistente",
+    "mobile_hint_next": "Toca la imagen para ver la siguiente o haz clic fuera para salir.",
+    "mobile_hint_interact": "Interactúa con la pantalla. Toca ✕ o haz clic fuera para salir.",
+    "desktop_hint": "Haz clic en la imagen para ver la siguiente o haz clic fuera para salir."
+  }
+}

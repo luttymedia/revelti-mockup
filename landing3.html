@@ -4,12 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Revelti - The event doesn't end when the music stops.</title>
-  <meta name="description"
+  <title data-i18n-meta="meta.title">Revelti - The event doesn't end when the music stops.</title>
+  <meta name="description" data-i18n-meta="meta.description"
     content="Revelti is the all-in-one platform for event organizers, creatives, and attendees. Stop juggling tools. Join the waitlist and be the first to experience it.">
-  <meta property="og:title" content="Revelti - The event doesn't end when the music stops.">
-  <meta property="og:description"
+  <meta property="og:title" data-i18n-meta="meta.og_title" content="Revelti - The event doesn't end when the music stops.">
+  <meta property="og:description" data-i18n-meta="meta.og_description"
     content="One platform. Organizers. Creatives. Attendees. Memories that live forever. Join the waitlist.">
+  <script src="js/i18n.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -231,6 +232,46 @@
       opacity: 0.9;
       transform: translateY(-2px);
       box-shadow: 0 4px 10px rgba(33, 60, 99, 0.15);
+    }
+
+    .top-bar-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    /* Language Switcher */
+    .lang-switcher {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      background: var(--surface2);
+      padding: 3px;
+      border-radius: 999px;
+      border: 1px solid var(--border-color-strong);
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: none;
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--muted);
+      padding: 4px 10px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .lang-btn.active {
+      background: var(--organizer-accent);
+      color: #ffffff;
+      box-shadow: 0 1px 3px rgba(33, 60, 99, 0.15);
+    }
+
+    .lang-btn:hover:not(.active) {
+      color: var(--text);
     }
 
     /* Mobile Hamburger Menu */
@@ -2906,41 +2947,49 @@
           onerror="this.onerror=null;this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<span style=\'font-family:Nunito,sans-serif;font-size:18px;font-weight:800;color:#213c63;letter-spacing:-0.03em;\'>revelti</span>')">
       </a>
 
-      <nav class="nav-links">
-        <a href="#organizer-section" class="nav-link">Organizer</a>
-        <a href="#creative-section" class="nav-link">Creative</a>
-        <a href="#attendee-section" class="nav-link">Attendee</a>
-        <a href="#waitlist" class="nav-pill" onclick="scrollToWaitlist(event)">Join Waitlist</a>
-      </nav>
+      <div class="top-bar-right">
+        <nav class="nav-links">
+          <a href="#organizer-section" class="nav-link" data-i18n="nav.organizer">Organizer</a>
+          <a href="#creative-section" class="nav-link" data-i18n="nav.creative">Creative</a>
+          <a href="#attendee-section" class="nav-link" data-i18n="nav.attendee">Attendee</a>
+          <a href="#waitlist" class="nav-pill" onclick="scrollToWaitlist(event)" data-i18n="nav.join_waitlist">Join Waitlist</a>
+        </nav>
 
-      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle mobile menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+        <!-- Language Switcher (Always visible in top bar) -->
+        <div class="lang-switcher">
+          <button type="button" class="lang-btn active" data-lang="en" onclick="i18n.setLanguage('en')">EN</button>
+          <button type="button" class="lang-btn" data-lang="es" onclick="i18n.setLanguage('es')">ES</button>
+        </div>
+
+        <button class="menu-toggle" id="menu-toggle" aria-label="Toggle mobile menu" data-i18n-aria-label="nav.toggle_menu_aria">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </div>
   </header>
 
   <!-- MOBILE MENU DRAWER -->
   <div class="mobile-menu" id="mobile-menu">
-    <a href="#organizer-section" class="nav-link" onclick="toggleMobileMenu()">Organizer</a>
-    <a href="#creative-section" class="nav-link" onclick="toggleMobileMenu()">Creative</a>
-    <a href="#attendee-section" class="nav-link" onclick="toggleMobileMenu()">Attendee</a>
-    <a href="#waitlist" class="nav-pill" onclick="scrollToWaitlist(event); toggleMobileMenu();">Join Waitlist</a>
+    <a href="#organizer-section" class="nav-link" onclick="toggleMobileMenu()" data-i18n="nav.organizer">Organizer</a>
+    <a href="#creative-section" class="nav-link" onclick="toggleMobileMenu()" data-i18n="nav.creative">Creative</a>
+    <a href="#attendee-section" class="nav-link" onclick="toggleMobileMenu()" data-i18n="nav.attendee">Attendee</a>
+    <a href="#waitlist" class="nav-pill" onclick="scrollToWaitlist(event); toggleMobileMenu();" data-i18n="nav.join_waitlist">Join Waitlist</a>
   </div>
 
   <!-- CHAPTER NAV DOTS -->
-  <nav class="chapter-nav" aria-label="Page sections">
-    <div class="chapter-dot active" data-section="hero" onclick="scrollToSection('hero')" title="Start"></div>
-    <div class="chapter-dot" data-section="chaos" onclick="scrollToSection('chaos')" title="The Problem"></div>
+  <nav class="chapter-nav" aria-label="Page sections" data-i18n-aria-label="chapter.page_sections_aria">
+    <div class="chapter-dot active" data-section="hero" onclick="scrollToSection('hero')" title="Start" data-i18n-title="chapter.start"></div>
+    <div class="chapter-dot" data-section="chaos" onclick="scrollToSection('chaos')" title="The Problem" data-i18n-title="chapter.problem"></div>
     <div class="chapter-dot" data-section="organizer-section" onclick="scrollToSection('organizer-section')"
-      title="Organizer"></div>
+      title="Organizer" data-i18n-title="chapter.organizer"></div>
     <div class="chapter-dot" data-section="creative-section" onclick="scrollToSection('creative-section')"
-      title="Creative"></div>
+      title="Creative" data-i18n-title="chapter.creative"></div>
     <div class="chapter-dot" data-section="attendee-section" onclick="scrollToSection('attendee-section')"
-      title="Attendee"></div>
-    <div class="chapter-dot" data-section="ecosystem" onclick="scrollToSection('ecosystem')" title="Together"></div>
-    <div class="chapter-dot" data-section="waitlist" onclick="scrollToSection('waitlist')" title="Join"></div>
+      title="Attendee" data-i18n-title="chapter.attendee"></div>
+    <div class="chapter-dot" data-section="ecosystem" onclick="scrollToSection('ecosystem')" title="Together" data-i18n-title="chapter.together"></div>
+    <div class="chapter-dot" data-section="waitlist" onclick="scrollToSection('waitlist')" title="Join" data-i18n-title="chapter.join"></div>
   </nav>
 
   <!-- ===================== HERO ===================== -->
@@ -2951,58 +3000,58 @@
       <div style="text-align:center;">
         <div class="hero-label">
           <span class="pulse-dot"></span>
-          Coming Soon - Join the Waitlist
+          <span data-i18n="hero.badge">Coming Soon - Join the Waitlist</span>
         </div>
 
         <h1 class="hero-headline">
-          <span class="headline-line">The event doesn't end</span>
-          <span class="headline-line"><span class="glitch-word headline-accent" id="glitch-target">when the music
+          <span class="headline-line" data-i18n="hero.headline_line1">The event doesn't end</span>
+          <span class="headline-line"><span class="glitch-word headline-accent" id="glitch-target" data-i18n="hero.headline_line2">when the music
               stops.</span></span>
         </h1>
 
-        <p class="hero-sub">
+        <p class="hero-sub" data-i18n-html="hero.sub">
           <strong class="brand-highlight">Revelti</strong> is one ridiculously simple platform where event organizers
           <span class="highlight-main">run the show</span>, creatives <span class="highlight-main">get their spotlight</span>, and attendees <span class="highlight-main">relive the night forever</span>.
         </p>
 
         <!-- Choose Your Journey Cards Picker -->
         <div class="hero-picker-wrapper">
-          <h2 class="picker-title">Choose your perspective</h2>
+          <h2 class="picker-title" data-i18n="hero.picker_title">Choose your perspective</h2>
           <div class="picker-grid">
             <!-- Card 1: Organizer -->
             <div class="picker-card org-card" onclick="scrollToSection('organizer-section')">
               <div>
                 <div class="picker-icon">🎪</div>
-                <span class="picker-tag">Organizer</span>
-                <h3 class="picker-card-title">Run the Show</h3>
-                <p class="picker-card-desc"><span class="highlight-org">Ticketing</span>, <span class="highlight-org">collaborator management</span>, and <span class="highlight-org">live post-event galleries</span> in one
+                <span class="picker-tag" data-i18n="hero.org_tag">Organizer</span>
+                <h3 class="picker-card-title" data-i18n="hero.org_card_title">Run the Show</h3>
+                <p class="picker-card-desc" data-i18n-html="hero.org_card_desc"><span class="highlight-org">Ticketing</span>, <span class="highlight-org">collaborator management</span>, and <span class="highlight-org">live post-event galleries</span> in one
                   beautiful place.</p>
               </div>
-              <span class="picker-arrow">Explore Features &rarr;</span>
+              <span class="picker-arrow" data-i18n-html="hero.explore_cta">Explore Features &rarr;</span>
             </div>
 
             <!-- Card 2: Creative -->
             <div class="picker-card cre-card" onclick="scrollToSection('creative-section')">
               <div>
                 <div class="picker-icon">📷</div>
-                <span class="picker-tag">Creative</span>
-                <h3 class="picker-card-title">Own the Spotlight</h3>
-                <p class="picker-card-desc">No more WeTransfer links. <span class="highlight-cre">Seamless delivery</span>, <span class="highlight-cre">automatic portfolio building</span>,
+                <span class="picker-tag" data-i18n="hero.cre_tag">Creative</span>
+                <h3 class="picker-card-title" data-i18n="hero.cre_card_title">Own the Spotlight</h3>
+                <p class="picker-card-desc" data-i18n-html="hero.cre_card_desc">No more WeTransfer links. <span class="highlight-cre">Seamless delivery</span>, <span class="highlight-cre">automatic portfolio building</span>,
                   and <span class="highlight-cre">client bookings</span>.</p>
               </div>
-              <span class="picker-arrow">Explore Features &rarr;</span>
+              <span class="picker-arrow" data-i18n-html="hero.explore_cta">Explore Features &rarr;</span>
             </div>
 
             <!-- Card 3: Attendee -->
             <div class="picker-card att-card" onclick="scrollToSection('attendee-section')">
               <div>
                 <div class="picker-icon">🎉</div>
-                <span class="picker-tag">Attendee</span>
-                <h3 class="picker-card-title">Relive the Night</h3>
-                <p class="picker-card-desc"><span class="highlight-att">Buy tickets</span>, access event schedules, <span class="highlight-att">see who's going</span>, and get direct photo
+                <span class="picker-tag" data-i18n="hero.att_tag">Attendee</span>
+                <h3 class="picker-card-title" data-i18n="hero.att_card_title">Relive the Night</h3>
+                <p class="picker-card-desc" data-i18n-html="hero.att_card_desc"><span class="highlight-att">Buy tickets</span>, access event schedules, <span class="highlight-att">see who's going</span>, and get direct photo
                   updates instantly.</p>
               </div>
-              <span class="picker-arrow">Explore Features &rarr;</span>
+              <span class="picker-arrow" data-i18n-html="hero.explore_cta">Explore Features &rarr;</span>
             </div>
           </div>
         </div>
@@ -3011,7 +3060,7 @@
 
     <div class="scroll-hint">
       <div class="scroll-hint-line"></div>
-      <span>Scroll</span>
+      <span data-i18n="hero.scroll_hint">Scroll</span>
     </div>
   </section>
 
@@ -3019,58 +3068,58 @@
   <section id="chaos">
     <div class="chaos-inner">
       <div>
-        <div class="section-label reveal">The old way</div>
-        <h2 class="section-headline reveal reveal-delay-1">
+        <div class="section-label reveal" data-i18n="problem.label">The old way</div>
+        <h2 class="section-headline reveal reveal-delay-1" data-i18n-html="problem.headline">
           Events shouldn't feel<br>like organized chaos.
         </h2>
-        <p class="section-body reveal reveal-delay-2">
+        <p class="section-body reveal reveal-delay-2" data-i18n-html="problem.body">
           We're juggling too many apps, <span class="highlight-main">link sharing services</span>, <span class="highlight-main">messaging threads</span>, and <span class="highlight-main">expired folder links</span>. It's a
           hassle for everyone involved.
         </p>
         <ul class="pain-list">
           <li class="pain-item reveal reveal-delay-3">
             <div class="pain-icon">🎪</div>
-            <div><strong>Organizers:</strong> Juggling separate <span class="highlight-org">ticket pages</span>, <span class="highlight-org">group messages</span>, and <span class="highlight-org">spreadsheets</span>.</div>
+            <div data-i18n-html="problem.pain_org"><strong>Organizers:</strong> Juggling separate <span class="highlight-org">ticket pages</span>, <span class="highlight-org">group messages</span>, and <span class="highlight-org">spreadsheets</span>.</div>
           </li>
           <li class="pain-item reveal reveal-delay-4">
             <div class="pain-icon">📷</div>
-            <div><strong>Creatives:</strong> Chasing organizers, paying for <span class="highlight-cre">expiring folder links</span>, <span class="highlight-cre">losing exposure</span>.
+            <div data-i18n-html="problem.pain_cre"><strong>Creatives:</strong> Chasing organizers, paying for <span class="highlight-cre">expiring folder links</span>, <span class="highlight-cre">losing exposure</span>.
             </div>
           </li>
           <li class="pain-item reveal reveal-delay-5">
             <div class="pain-icon">🎉</div>
-            <div><strong>Attendees:</strong> <span class="highlight-att">Lost ticket emails</span>, missing event info, and <span class="highlight-att">hunting for photos</span> afterwards.
+            <div data-i18n-html="problem.pain_att"><strong>Attendees:</strong> <span class="highlight-att">Lost ticket emails</span>, missing event info, and <span class="highlight-att">hunting for photos</span> afterwards.
             </div>
           </li>
         </ul>
       </div>
       <div class="chaos-visual reveal reveal-delay-2">
         <div class="chaos-stack" id="chaos-stack">
-          <div class="chaos-tool" style="top:10px;left:0;--rot:-5deg;--dx:8px;--dy:-6px;animation-duration:7s;">
+          <div class="chaos-tool" style="top:10px;left:0;--rot:-5deg;--dx:8px;--dy:-6px;animation-duration:7s;" data-i18n="problem.tool_1">
             📁 Expired WeTransfer Link
           </div>
           <div class="chaos-tool"
-            style="top:60px;left:80px;--rot:4deg;--dx:-10px;--dy:8px;animation-duration:9s;animation-delay:1s;">
+            style="top:60px;left:80px;--rot:4deg;--dx:-10px;--dy:8px;animation-duration:9s;animation-delay:1s;" data-i18n="problem.tool_2">
             💬 WhatsApp group spam (1,247)
           </div>
           <div class="chaos-tool"
-            style="top:120px;left:20px;--rot:-2deg;--dx:5px;--dy:12px;animation-duration:8s;animation-delay:0.5s;">
+            style="top:120px;left:20px;--rot:-2deg;--dx:5px;--dy:12px;animation-duration:8s;animation-delay:0.5s;" data-i18n="problem.tool_3">
             🎟️ Where is my ticket email?
           </div>
           <div class="chaos-tool"
-            style="top:175px;left:100px;--rot:6deg;--dx:-8px;--dy:-10px;animation-duration:10s;animation-delay:2s;">
+            style="top:175px;left:100px;--rot:6deg;--dx:-8px;--dy:-10px;animation-duration:10s;animation-delay:2s;" data-i18n="problem.tool_4">
             💸 Bank transfer refs search
           </div>
           <div class="chaos-tool"
-            style="top:220px;left:10px;--rot:-3deg;--dx:12px;--dy:4px;animation-duration:7.5s;animation-delay:1.5s;">
+            style="top:220px;left:10px;--rot:-3deg;--dx:12px;--dy:4px;animation-duration:7.5s;animation-delay:1.5s;" data-i18n="problem.tool_5">
             📧 Separate email newsletters
           </div>
           <div class="chaos-tool"
-            style="top:0px;left:180px;--rot:3deg;--dx:-6px;--dy:8px;animation-duration:11s;animation-delay:3s;">
+            style="top:0px;left:180px;--rot:3deg;--dx:-6px;--dy:8px;animation-duration:11s;animation-delay:3s;" data-i18n="problem.tool_6">
             📂 Lost Google Drive Folder
           </div>
           <div class="chaos-tool"
-            style="top:150px;left:195px;--rot:-4deg;--dx:4px;--dy:-9px;animation-duration:8.5s;animation-delay:0.8s;">
+            style="top:150px;left:195px;--rot:-4deg;--dx:4px;--dy:-9px;animation-duration:8.5s;animation-delay:0.8s;" data-i18n="problem.tool_7">
             📊 Excel checklist v12.xlsx
           </div>
         </div>
@@ -3082,11 +3131,11 @@
   <section id="organizer-section" class="perspective-section">
     <div class="perspective-inner">
       <div style="text-align:center; max-width:700px; margin:0 auto 48px;">
-        <div class="section-label" style="color:var(--organizer-accent); justify-content:center;">For Organizers</div>
-        <h3 class="pp-headline">Your event,<br><span
+        <div class="section-label" style="color:var(--organizer-accent); justify-content:center;" data-i18n="organizer.label">For Organizers</div>
+        <h3 class="pp-headline" data-i18n-html="organizer.headline">Your event,<br><span
             style="background:linear-gradient(90deg,var(--organizer-accent) 0%,#7cb4ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">without
             the chaos.</span></h3>
-        <p class="pp-body">
+        <p class="pp-body" data-i18n-html="organizer.body">
           You've got enough on your plate. <strong class="brand-highlight">Revelti</strong> handles the moving parts -
           <span class="highlight-org">tickets</span>, <span class="highlight-org">crowd comms</span>, <span class="highlight-org">media team</span>, and <span class="highlight-org">real-time stats</span> - so you can focus on making the night unforgettable.
         </p>
@@ -3100,8 +3149,8 @@
               onclick="goToOrgSlide(0, true); openMobileMockupModal('organizer', 0)">
               <div class="fi-icon org">🎫</div>
               <div class="fi-text">
-                <strong>Effortless ticketing &amp; sales</strong>
-                <span>Set up your event, <span class="highlight-org">manage ticket tiers</span>, and <span class="highlight-org">track sales live</span>. No spreadsheets. It just
+                <strong data-i18n="organizer.feat1_title">Effortless ticketing &amp; sales</strong>
+                <span data-i18n-html="organizer.feat1_desc">Set up your event, <span class="highlight-org">manage ticket tiers</span>, and <span class="highlight-org">track sales live</span>. No spreadsheets. It just
                   works.</span>
               </div>
             </li>
@@ -3109,16 +3158,16 @@
               onclick="goToOrgSlide(1, true); openMobileMockupModal('organizer', 1)">
               <div class="fi-icon org">📢</div>
               <div class="fi-text">
-                <strong>Direct audience connection</strong>
-                <span>Keep your crowd <span class="highlight-org">in the loop</span> before, during, and after the event - all from <span class="highlight-org">one dashboard</span>.</span>
+                <strong data-i18n="organizer.feat2_title">Direct audience connection</strong>
+                <span data-i18n-html="organizer.feat2_desc">Keep your crowd <span class="highlight-org">in the loop</span> before, during, and after the event - all from <span class="highlight-org">one dashboard</span>.</span>
               </div>
             </li>
             <li class="feature-item org-feat" id="org-feat-2"
               onclick="goToOrgSlide(2, true); openMobileMockupModal('organizer', 2)">
               <div class="fi-icon org">📸</div>
               <div class="fi-text">
-                <strong>Your media team, synced</strong>
-                <span>Connect directly with your photographers. Their work goes <span class="highlight-org">straight into the official event gallery</span>.
+                <strong data-i18n="organizer.feat3_title">Your media team, synced</strong>
+                <span data-i18n-html="organizer.feat3_desc">Connect directly with your photographers. Their work goes <span class="highlight-org">straight into the official event gallery</span>.
                   Done.</span>
               </div>
             </li>
@@ -3126,14 +3175,14 @@
               onclick="goToOrgSlide(3, true); openMobileMockupModal('organizer', 3)">
               <div class="fi-icon org">📈</div>
               <div class="fi-text">
-                <strong>Know exactly how you did</strong>
-                <span>Beautiful, easy-to-read <span class="highlight-org">stats</span> on everything from ticket sales to <span class="highlight-org">post-event engagement</span>. Know your
+                <strong data-i18n="organizer.feat4_title">Know exactly how you did</strong>
+                <span data-i18n-html="organizer.feat4_desc">Beautiful, easy-to-read <span class="highlight-org">stats</span> on everything from ticket sales to <span class="highlight-org">post-event engagement</span>. Know your
                   numbers.</span>
               </div>
             </li>
           </ul>
           <div style="margin-top: 24px;">
-            <a href="#waitlist" class="pp-cta org-cta" onclick="scrollToWaitlist(event, 'organizer')">
+            <a href="#waitlist" class="pp-cta org-cta" onclick="scrollToWaitlist(event, 'organizer')" data-i18n="organizer.cta">
               Reserve Organizer Access →
             </a>
           </div>
@@ -3166,11 +3215,11 @@
   <section id="creative-section" class="creative-gallery-section">
     <div class="perspective-inner">
       <div style="text-align:center; max-width:700px; margin:0 auto 48px;">
-        <div class="section-label" style="color:var(--creative-accent); justify-content:center;">For Creatives</div>
-        <h3 class="pp-headline">Overhaul your workspace.<br><span
+        <div class="section-label" style="color:var(--creative-accent); justify-content:center;" data-i18n="creative.label">For Creatives</div>
+        <h3 class="pp-headline" data-i18n-html="creative.headline">Overhaul your workspace.<br><span
             style="background:linear-gradient(90deg,var(--creative-accent) 0%,#a855f7 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Own
             the event spotlight.</span></h3>
-        <p class="pp-body">
+        <p class="pp-body" data-i18n-html="creative.body">
           You're not just taking photos — you're capturing memories. <strong class="brand-highlight">Revelti</strong>
           replaces <span class="highlight-cre">expired links</span> and <span class="highlight-cre">messy handoffs</span>
           with a visual ecosystem that stores your shots, <span class="highlight-cre">delivers them instantly</span>, and puts <span class="highlight-cre">your brand</span> in front of every
@@ -3206,8 +3255,8 @@
               onclick="goToCrSlide(0, true); openMobileMockupModal('creative', 0)" style="cursor: pointer;">
               <div class="fi-icon creative">💾</div>
               <div class="fi-text">
-                <strong>Storage meets presentation</strong>
-                <span>Your workspace and your gallery in one place. <span class="highlight-cre">Upload raw files</span>, <span class="highlight-cre">export polished albums</span> — all in
+                <strong data-i18n="creative.feat1_title">Storage meets presentation</strong>
+                <span data-i18n-html="creative.feat1_desc">Your workspace and your gallery in one place. <span class="highlight-cre">Upload raw files</span>, <span class="highlight-cre">export polished albums</span> — all in
                   one
                   platform.</span>
               </div>
@@ -3216,8 +3265,8 @@
               onclick="goToCrSlide(1, true); openMobileMockupModal('creative', 1)" style="cursor: pointer;">
               <div class="fi-icon creative">🚫</div>
               <div class="fi-text">
-                <strong>No more transfer links</strong>
-                <span>Deliver media directly to the official event. <span class="highlight-cre">No expiring links</span>, <span class="highlight-cre">no lost folders</span>, no messy
+                <strong data-i18n="creative.feat2_title">No more transfer links</strong>
+                <span data-i18n-html="creative.feat2_desc">Deliver media directly to the official event. <span class="highlight-cre">No expiring links</span>, <span class="highlight-cre">no lost folders</span>, no messy
                   DMs.</span>
               </div>
             </li>
@@ -3225,8 +3274,8 @@
               onclick="goToCrSlide(2, true); openMobileMockupModal('creative', 2)" style="cursor: pointer;">
               <div class="fi-icon creative">👁️</div>
               <div class="fi-text">
-                <strong>Automatic exposure</strong>
-                <span>Every attendee looking for their photos sees <span class="highlight-cre">your profile</span> and <span class="highlight-cre">your art</span>. Thousands of organic
+                <strong data-i18n="creative.feat3_title">Automatic exposure</strong>
+                <span data-i18n-html="creative.feat3_desc">Every attendee looking for their photos sees <span class="highlight-cre">your profile</span> and <span class="highlight-cre">your art</span>. Thousands of organic
                   eyes.</span>
               </div>
             </li>
@@ -3234,15 +3283,15 @@
               onclick="goToCrSlide(3, true); openMobileMockupModal('creative', 3)" style="cursor: pointer;">
               <div class="fi-icon creative">✨</div>
               <div class="fi-text">
-                <strong>A portfolio that does you justice</strong>
-                <span>A stunning <span class="highlight-cre">public profile</span> to send to every future client — <span class="highlight-cre">built automatically</span> from the events you
+                <strong data-i18n="creative.feat4_title">A portfolio that does you justice</strong>
+                <span data-i18n-html="creative.feat4_desc">A stunning <span class="highlight-cre">public profile</span> to send to every future client — <span class="highlight-cre">built automatically</span> from the events you
                   shoot.</span>
               </div>
             </li>
           </ul>
           <div style="margin-top: 24px;">
             <a href="#waitlist" class="pp-cta creative-cta" onclick="scrollToWaitlist(event, 'creative')"
-              style="background:var(--creative-accent);box-shadow:0 8px 30px rgba(107,33,168,0.35); margin-top: 0;">
+              style="background:var(--creative-accent);box-shadow:0 8px 30px rgba(107,33,168,0.35); margin-top: 0;" data-i18n="creative.cta">
               Claim Your Creative Studio →
             </a>
           </div>
@@ -3255,11 +3304,11 @@
   <section id="attendee-section" class="perspective-section">
     <div class="perspective-inner">
       <div style="text-align:center; max-width:700px; margin:0 auto 48px;">
-        <div class="section-label" style="color:var(--attendee-accent); justify-content:center;">For Attendees</div>
-        <h3 class="pp-headline">Buy tickets, get updates, and find your photos. <span
+        <div class="section-label" style="color:var(--attendee-accent); justify-content:center;" data-i18n="attendee.label">For Attendees</div>
+        <h3 class="pp-headline" data-i18n-html="attendee.headline">Buy tickets, get updates, and find your photos. <span
             style="background:linear-gradient(90deg,var(--attendee-accent) 0%,#ff9f50 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">All
             in one app.</span></h3>
-        <p class="pp-body">
+        <p class="pp-body" data-i18n-html="attendee.body">
           Stop hunting through your email for <span class="highlight-att">lost tickets</span> or searching social media for <span class="highlight-att">event photos</span>. <strong
             class="brand-highlight">Revelti</strong> lets you
           securely buy your ticket and <span class="highlight-att">handles everything else automatically</span>.
@@ -3274,8 +3323,8 @@
               onclick="goToAttSlide(0, true); openMobileMockupModal('attendee', 0)" style="cursor: pointer;">
               <div class="fi-icon att">🎫</div>
               <div class="fi-text">
-                <strong>Buy your ticket and check in</strong>
-                <span>Find your favorite dance events, <span class="highlight-att">purchase tickets securely</span>, and instantly get your <span class="highlight-att">entry QR code</span>
+                <strong data-i18n="attendee.feat1_title">Buy your ticket and check in</strong>
+                <span data-i18n-html="attendee.feat1_desc">Find your favorite dance events, <span class="highlight-att">purchase tickets securely</span>, and instantly get your <span class="highlight-att">entry QR code</span>
                   inside the app. No lost confirmation emails.</span>
               </div>
             </li>
@@ -3283,8 +3332,8 @@
               onclick="goToAttSlide(1, true); openMobileMockupModal('attendee', 1)" style="cursor: pointer;">
               <div class="fi-icon att">📢</div>
               <div class="fi-text">
-                <strong>See the event schedule</strong>
-                <span>Access up-to-date <span class="highlight-att">timetables</span>, FAQ, and <span class="highlight-att">live announcements</span> from the organizers so you never miss a
+                <strong data-i18n="attendee.feat2_title">See the event schedule</strong>
+                <span data-i18n-html="attendee.feat2_desc">Access up-to-date <span class="highlight-att">timetables</span>, FAQ, and <span class="highlight-att">live announcements</span> from the organizers so you never miss a
                   workshop or a party.</span>
               </div>
             </li>
@@ -3292,8 +3341,8 @@
               onclick="goToAttSlide(2, true); openMobileMockupModal('attendee', 2)" style="cursor: pointer;">
               <div class="fi-icon att">👥</div>
               <div class="fi-text">
-                <strong>Meet your friends</strong>
-                <span>Connect with your <span class="highlight-att">dance community</span> and see exactly <span class="highlight-att">who else is going</span> before you even buy your
+                <strong data-i18n="attendee.feat3_title">Meet your friends</strong>
+                <span data-i18n-html="attendee.feat3_desc">Connect with your <span class="highlight-att">dance community</span> and see exactly <span class="highlight-att">who else is going</span> before you even buy your
                   pass.</span>
               </div>
             </li>
@@ -3301,15 +3350,15 @@
               onclick="goToAttSlide(3, true); openMobileMockupModal('attendee', 3)" style="cursor: pointer;">
               <div class="fi-icon att">📸</div>
               <div class="fi-text">
-                <strong>Get your photos &amp; videos fast</strong>
-                <span>No more hunting down expired links and social media. The moment the party gallery is uploaded,
+                <strong data-i18n="attendee.feat4_title">Get your photos &amp; videos fast</strong>
+                <span data-i18n-html="attendee.feat4_desc">No more hunting down expired links and social media. The moment the party gallery is uploaded,
                   they go <span class="highlight-att">straight to your app profile</span>.</span>
               </div>
             </li>
           </ul>
           <div style="margin-top: 24px;">
             <a href="#waitlist" class="pp-cta att-cta" onclick="scrollToWaitlist(event, 'attendee')"
-              style="background:var(--attendee-accent); box-shadow:0 8px 30px rgba(245,130,32,0.35);">
+              style="background:var(--attendee-accent); box-shadow:0 8px 30px rgba(245,130,32,0.35);" data-i18n="attendee.cta">
               Join the Attendee Waitlist →
             </a>
           </div>
@@ -3355,7 +3404,7 @@
             </div>
           </div>
           <div
-            style="margin-top: 16px; font-size: 13px; color: #a1a1aa; font-weight: 600; text-align: center; user-select: none;">
+            style="margin-top: 16px; font-size: 13px; color: #a1a1aa; font-weight: 600; text-align: center; user-select: none;" data-i18n="attendee.interact_hint">
             👆 Interact with the mockup
           </div>
         </div>
@@ -3370,12 +3419,12 @@
     <canvas id="ecosystem-particles-canvas"
       style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; opacity: 0.6;"></canvas>
     <div class="ecosystem-inner" style="position: relative; z-index: 2;">
-      <div class="section-label reveal" style="justify-content:center;">Better together</div>
-      <h2 class="eco-headline reveal reveal-delay-1" style="text-align:center;">
+      <div class="section-label reveal" style="justify-content:center;" data-i18n="ecosystem.label">Better together</div>
+      <h2 class="eco-headline reveal reveal-delay-1" style="text-align:center;" data-i18n-html="ecosystem.headline">
         When everyone's<br>on the same stage,<br><span class="headline-accent">the magic happens.</span>
       </h2>
       <p class="eco-sub reveal reveal-delay-2"
-        style="text-align:center;max-width:640px;margin-left:auto;margin-right:auto;">
+        style="text-align:center;max-width:640px;margin-left:auto;margin-right:auto;" data-i18n-html="ecosystem.body">
         <strong class="brand-highlight">Revelti</strong> is a triangle, not a line. Organizers, creatives, and attendees
         all share the <span class="highlight-main">same platform</span> - <span class="highlight-main">connected</span>, <span class="highlight-main">in sync</span>, and always <span class="highlight-main">in the loop</span>.
       </p>
@@ -3387,9 +3436,9 @@
         <div class="eco-tri-top">
           <div class="eco-node org">
             <div class="eco-node-icon">🎪</div>
-            <div class="eco-node-tag org">Organizer</div>
-            <div class="eco-node-title">Runs the show</div>
-            <div class="eco-node-body">Sets up events, <span class="highlight-org">sells tickets</span>, broadcasts to the crowd, and <span class="highlight-org">manages their media team</span> - all without leaving the platform.</div>
+            <div class="eco-node-tag org" data-i18n="ecosystem.org_tag">Organizer</div>
+            <div class="eco-node-title" data-i18n="ecosystem.org_title">Runs the show</div>
+            <div class="eco-node-body" data-i18n-html="ecosystem.org_body">Sets up events, <span class="highlight-org">sells tickets</span>, broadcasts to the crowd, and <span class="highlight-org">manages their media team</span> - all without leaving the platform.</div>
           </div>
 
           <!-- Mobile-only Hub between Organizer and Creative -->
@@ -3405,9 +3454,9 @@
 
           <div class="eco-node cre">
             <div class="eco-node-icon">📷</div>
-            <div class="eco-node-tag cre">Creative</div>
-            <div class="eco-node-title">Captures the night</div>
-            <div class="eco-node-body"><span class="highlight-cre">Stores, edits, and delivers media</span> directly to the event. Their work is seen by every single attendee - <span class="highlight-cre">automatically</span>.</div>
+            <div class="eco-node-tag cre" data-i18n="ecosystem.cre_tag">Creative</div>
+            <div class="eco-node-title" data-i18n="ecosystem.cre_title">Captures the night</div>
+            <div class="eco-node-body" data-i18n-html="ecosystem.cre_body"><span class="highlight-cre">Stores, edits, and delivers media</span> directly to the event. Their work is seen by every single attendee - <span class="highlight-cre">automatically</span>.</div>
           </div>
         </div>
 
@@ -3426,9 +3475,9 @@
         <div class="eco-tri-bottom">
           <div class="eco-node att">
             <div class="eco-node-icon">🎉</div>
-            <div class="eco-node-tag att">Attendee</div>
-            <div class="eco-node-title">Lives the experience</div>
-            <div class="eco-node-body"><span class="highlight-att">Buys their ticket</span>, gets the updates, <span class="highlight-att">finds their photos</span> - and relives the night, long after it's over.</div>
+            <div class="eco-node-tag att" data-i18n="ecosystem.att_tag">Attendee</div>
+            <div class="eco-node-title" data-i18n="ecosystem.att_title">Lives the experience</div>
+            <div class="eco-node-body" data-i18n-html="ecosystem.att_body"><span class="highlight-att">Buys their ticket</span>, gets the updates, <span class="highlight-att">finds their photos</span> - and relives the night, long after it's over.</div>
           </div>
         </div>
 
@@ -3440,11 +3489,11 @@
   <section id="waitlist">
     <div class="waitlist-glow"></div>
     <div class="waitlist-inner">
-      <div class="waitlist-eyebrow reveal">Limited Early Access</div>
-      <h2 class="waitlist-headline reveal reveal-delay-1">
+      <div class="waitlist-eyebrow reveal" data-i18n="waitlist.eyebrow">Limited Early Access</div>
+      <h2 class="waitlist-headline reveal reveal-delay-1" data-i18n-html="waitlist.headline">
         Be the first to<br>experience <span class="headline-accent">Revelti.</span>
       </h2>
-      <p class="waitlist-sub reveal reveal-delay-2">
+      <p class="waitlist-sub reveal reveal-delay-2" data-i18n-html="waitlist.sub">
         We're putting the finishing touches on something special. <span class="highlight-main">Join the waitlist today</span> and lock in <span class="highlight-main">early access perks</span> based on your profile.
       </p>
 
@@ -3452,28 +3501,28 @@
         <!-- Role selector toggle -->
         <div class="waitlist-role-selector">
           <button type="button" class="role-btn org active" onclick="setWaitlistRole('organizer')">
-            <span>🎪</span> Organizer
+            <span>🎪</span> <span data-i18n="waitlist.role_org">Organizer</span>
           </button>
           <button type="button" class="role-btn cre" onclick="setWaitlistRole('creative')">
-            <span>📷</span> Creative
+            <span>📷</span> <span data-i18n="waitlist.role_cre">Creative</span>
           </button>
           <button type="button" class="role-btn att" onclick="setWaitlistRole('attendee')">
-            <span>🎉</span> Attendee
+            <span>🎉</span> <span data-i18n="waitlist.role_att">Attendee</span>
           </button>
         </div>
 
         <form class="waitlist-form" onsubmit="handleWaitlistSubmit(event)" id="waitlist-form">
           <input type="hidden" name="role" id="waitlist-role-input" value="organizer">
-          <input type="email" class="waitlist-input" placeholder="your@email.com" required id="waitlist-email"
-            aria-label="Email address">
-          <button type="submit" class="waitlist-btn" id="waitlist-submit-btn">Join the Waitlist</button>
+          <input type="email" class="waitlist-input" placeholder="your@email.com" data-i18n-placeholder="waitlist.email_placeholder" required id="waitlist-email"
+            aria-label="Email address" data-i18n-aria-label="waitlist.email_aria">
+          <button type="submit" class="waitlist-btn" id="waitlist-submit-btn" data-i18n="waitlist.submit_btn">Join the Waitlist</button>
         </form>
       </div>
 
       <div class="waitlist-perks reveal reveal-delay-4">
-        <div class="waitlist-perk"><span class="perk-check">✦</span> Profile-specific beta access</div>
-        <div class="waitlist-perk"><span class="perk-check">✦</span> Early bird perks lock-in</div>
-        <div class="waitlist-perk"><span class="perk-check">✦</span> Founding member label</div>
+        <div class="waitlist-perk" data-i18n-html="waitlist.perk1"><span class="perk-check">✦</span> Profile-specific beta access</div>
+        <div class="waitlist-perk" data-i18n-html="waitlist.perk2"><span class="perk-check">✦</span> Early bird perks lock-in</div>
+        <div class="waitlist-perk" data-i18n-html="waitlist.perk3"><span class="perk-check">✦</span> Founding member label</div>
       </div>
     </div>
   </section>
@@ -3483,29 +3532,29 @@
     <div style="display:flex;align-items:center;gap:10px;">
       <img src="images/reveltiLogo.png" alt="Revelti" style="height:16px;opacity:0.65;"
         onerror="this.style.display='none'">
-      <span>© 2025 <strong class="brand-highlight">Revelti</strong>. All rights reserved.</span>
+      <span data-i18n-html="footer.rights">© 2025 <strong class="brand-highlight">Revelti</strong>. All rights reserved.</span>
     </div>
-    <div class="footer-note">Mockups shown are illustrative. Final product may vary.</div>
+    <div class="footer-note" data-i18n="footer.disclaimer">Mockups shown are illustrative. Final product may vary.</div>
   </footer>
 
   <!-- FOMO BAR -->
   <div class="fomo-bar" id="fomo-bar">
     <div class="fomo-dot"></div>
-    <span><span class="fomo-count" id="fomo-count">1,284</span> people already on the waitlist</span>
+    <span><span class="fomo-count" id="fomo-count">1,284</span> <span data-i18n="fomo.text">people already on the waitlist</span></span>
   </div>
 
   <!-- SUCCESS MODAL -->
   <div class="modal-overlay" id="success-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="modal-card">
       <div class="modal-icon">🎉</div>
-      <div class="modal-title" id="modal-title">You're on the list!</div>
+      <div class="modal-title" id="modal-title" data-i18n="modal.success_title">You're on the list!</div>
       <div class="modal-body">
         You just locked in your spot as an <strong id="modal-role-label">Organizer</strong>.<br>
         <strong class="brand-highlight">Exclusive early-bird perks</strong> are yours - we'll reach out before anyone
         else when <strong class="brand-highlight">Revelti</strong> launches.<br><br>
         Tell your people. The night doesn't end here. 🔥
       </div>
-      <button class="modal-close" onclick="closeModal()">Let's go! 🚀</button>
+      <button class="modal-close" onclick="closeModal()" data-i18n="modal.success_close">Let's go! 🚀</button>
     </div>
   </div>
 
@@ -3651,7 +3700,7 @@
     function runGlitch() {
       const el = document.getElementById('glitch-target');
       if (!el) return;
-      const originalChars = 'when the music stops.';
+      const originalChars = window.i18n ? i18n.t('hero.headline_line2') : (el.textContent || 'when the music stops.');
       const glitchChars = '!@#$%^&*ABCDEFGH01234';
       let iterations = 0;
       const interval = setInterval(() => {
@@ -3792,7 +3841,9 @@
       }
 
       const titleEl = document.getElementById('phone-title');
-      if (titleEl) titleEl.textContent = attTitles[currentAttSlide];
+      if (titleEl) {
+        titleEl.textContent = window.i18n ? i18n.t(`attendee.att_title_${currentAttSlide}`) : attTitles[currentAttSlide];
+      }
       if (userInitiated) {
         if (attAutoTimer) clearInterval(attAutoTimer);
         attAutoTimer = null;
@@ -3835,7 +3886,7 @@
             <div style="color: white; margin-top: 16px; font-weight: 600; text-align: center; font-size: 16px; padding: 0 20px;">${title}</div>
           </div>
         `;
-        if (footerHint) footerHint.innerText = 'Tap image for next, or click outside to return.';
+        if (footerHint) footerHint.innerText = i18n.t('modal.mobile_hint_next');
       } else if (persona === 'attendee') {
         const phoneMockup = document.querySelector('#attendee-section .pp-mockup > div');
         if (phoneMockup) {
@@ -3844,7 +3895,7 @@
           phoneMockup.style.transform = 'scale(0.85)';
           phoneMockup.style.transformOrigin = 'center';
         }
-        if (footerHint) footerHint.innerText = 'Interact with the screen. Tap ✕ or click outside to return.';
+        if (footerHint) footerHint.innerText = i18n.t('modal.mobile_hint_interact');
       }
 
       if (!document.body.hasAttribute('data-scroll-y')) {
@@ -3881,7 +3932,7 @@
             <div style="color: white; margin-top: 20px; font-weight: 600; text-align: center; font-size: 18px; padding: 0 20px;">${title}</div>
           </div>
         `;
-        if (footerHint) footerHint.innerText = 'Click image for next, or click outside to return.';
+        if (footerHint) footerHint.innerText = i18n.t('modal.desktop_hint');
       }
 
       if (!document.body.hasAttribute('data-scroll-y')) {
@@ -3936,13 +3987,15 @@
       resetAttAuto();
     }
 
-    // Init carousels on load
+    // Init carousels and i18n on load
     window.addEventListener('DOMContentLoaded', () => {
+      if (window.i18n) i18n.init();
       goToOrgSlide(0);
       goToCrSlide(0);
       goToAttSlide(0);
     });
     if (document.readyState !== 'loading') {
+      if (window.i18n) i18n.init();
       goToOrgSlide(0);
       goToCrSlide(0);
       goToAttSlide(0);
@@ -4035,7 +4088,7 @@
 
       if (!input || !input.value) return;
 
-      btn.textContent = 'Adding you...';
+      btn.textContent = i18n.t('waitlist.submit_btn_loading');
       btn.disabled = true;
       input.disabled = true;
 
@@ -4043,7 +4096,7 @@
         // Reset form
         document.getElementById('waitlist-form').reset();
         btn.disabled = false;
-        btn.textContent = 'Join the Waitlist';
+        btn.textContent = i18n.t('waitlist.submit_btn');
         input.disabled = false;
 
         // increment fomo counter
@@ -4053,11 +4106,11 @@
         // update modal text based on selected role
         const modalRoleLabel = document.getElementById('modal-role-label');
         if (role === 'organizer') {
-          modalRoleLabel.textContent = 'Organizer';
+          modalRoleLabel.textContent = i18n.t('modal.role_organizer');
         } else if (role === 'creative') {
-          modalRoleLabel.textContent = 'Creative';
+          modalRoleLabel.textContent = i18n.t('modal.role_creative');
         } else if (role === 'attendee') {
-          modalRoleLabel.textContent = 'Attendee';
+          modalRoleLabel.textContent = i18n.t('modal.role_attendee');
         }
 
         // show modal
