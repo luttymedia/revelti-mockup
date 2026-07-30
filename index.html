@@ -3528,6 +3528,7 @@
           <input type="hidden" name="ROLE" id="waitlist-role-input" value="">
           <input type="hidden" name="email_address_check" value="">
           <input type="hidden" name="locale" id="waitlist-locale-input" value="en">
+          <input type="hidden" name="LANGUAGE" id="waitlist-lang-attr-input" value="en">
           
           <!-- Honeypot field (hidden from real visitors, targets spam bots) -->
           <div style="position: absolute; left: -9999px; top: -9999px;" aria-hidden="true">
@@ -4181,6 +4182,7 @@
       const input = form.querySelector('input[type="email"]');
       const roleInput = document.getElementById('waitlist-role-input');
       const localeInput = document.getElementById('waitlist-locale-input');
+      const langInput = document.getElementById('waitlist-lang-attr-input');
       const role = roleInput ? roleInput.value : '';
       const roleSelector = document.getElementById('waitlist-role-selector');
       const roleError = document.getElementById('waitlist-role-error');
@@ -4199,9 +4201,9 @@
 
       if (!input || !input.value) return;
 
-      if (localeInput) {
-        localeInput.value = (window.i18n && window.i18n.currentLang) || 'en';
-      }
+      const currentLang = (window.i18n && window.i18n.currentLang) || 'en';
+      if (localeInput) localeInput.value = currentLang;
+      if (langInput) langInput.value = currentLang;
 
       // Track waitlist submission event in PostHog
       if (window.ReveltiAnalytics && typeof window.ReveltiAnalytics.trackWaitlistSubmission === 'function') {
