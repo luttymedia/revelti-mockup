@@ -13,6 +13,7 @@
   <meta property="og:description" data-i18n-meta="meta.og_description"
     content="One platform. Organizers. Creatives. Attendees. Memories that live forever. Join the waitlist.">
   <script src="js/i18n.js"></script>
+  <script src="js/analytics.js"></script>
   <link rel="stylesheet" href="fonts.css">
 
   <style>
@@ -4074,6 +4075,9 @@
       if (e) e.preventDefault();
       const waitlistSec = document.getElementById('waitlist');
       if (waitlistSec) waitlistSec.scrollIntoView({ behavior: 'smooth' });
+      if (window.ReveltiAnalytics && typeof window.ReveltiAnalytics.trackCtaClick === 'function') {
+        window.ReveltiAnalytics.trackCtaClick('join_waitlist', rolePreference || null, 'landing_page');
+      }
       if (rolePreference) {
         setWaitlistRole(rolePreference);
       }
@@ -4105,6 +4109,10 @@
         if (roleInput) roleInput.value = 'attendee';
       } else {
         if (roleInput) roleInput.value = '';
+      }
+
+      if (role && window.ReveltiAnalytics && typeof window.ReveltiAnalytics.trackRoleSelection === 'function') {
+        window.ReveltiAnalytics.trackRoleSelection(role);
       }
     }
 
@@ -4165,6 +4173,12 @@
 
       if (localeInput) {
         localeInput.value = (window.i18n && window.i18n.currentLang) || 'en';
+      }
+
+      // Track waitlist submission event in PostHog
+      if (window.ReveltiAnalytics && typeof window.ReveltiAnalytics.trackWaitlistSubmission === 'function') {
+        const locale = (window.i18n && window.i18n.currentLang) || 'en';
+        window.ReveltiAnalytics.trackWaitlistSubmission(role, locale);
       }
 
       btn.textContent = i18n.t('waitlist.submit_btn_loading');

@@ -427,6 +427,9 @@
       this.updateDOM();
       this.updateSwitcherUI();
       this.listeners.forEach(cb => cb(lang));
+      if (window.ReveltiAnalytics && typeof window.ReveltiAnalytics.trackLanguageChange === 'function') {
+        window.ReveltiAnalytics.trackLanguageChange(lang);
+      }
     }
 
     onLanguageChange(callback) {
