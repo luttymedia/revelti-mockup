@@ -139,7 +139,21 @@
   },
   "footer": {
     "rights": "© 2025 <strong class=\"brand-highlight\">Revelti</strong>. Todos los derechos reservados.",
-    "disclaimer": "Las maquetas mostradas son ilustrativas. El producto final puede variar."
+    "disclaimer": "Las maquetas mostradas son ilustrativas. El producto final puede variar.",
+    "terms": "Términos y Condiciones",
+    "privacy": "Política de Privacidad"
+  },
+  "terms": {
+    "title": "Términos y Condiciones - Revelti",
+    "heading": "Términos y Condiciones",
+    "placeholder": "El contenido de Términos y Condiciones se añadirá próximamente. ¡Permaneced atentos!",
+    "back_home": "← Volver al Inicio"
+  },
+  "privacy": {
+    "title": "Política de Privacidad - Revelti",
+    "heading": "Política de Privacidad",
+    "placeholder": "El contenido de la Política de Privacidad se añadirá próximamente. ¡Permaneced atentos!",
+    "back_home": "← Volver al Inicio"
   },
   "modal": {
     "success_title": "¡Estás en la lista!",

@@ -150,7 +150,21 @@
           },
           "footer": {
             "rights": "© 2025 <strong class=\"brand-highlight\">Revelti</strong>. All rights reserved.",
-            "disclaimer": "Mockups shown are illustrative. Final product may vary."
+            "disclaimer": "Mockups shown are illustrative. Final product may vary.",
+            "terms": "Terms & Conditions",
+            "privacy": "Privacy Policy"
+          },
+          "terms": {
+            "title": "Terms & Conditions - Revelti",
+            "heading": "Terms & Conditions",
+            "placeholder": "The Terms & Conditions content will be added soon. Stay tuned!",
+            "back_home": "← Back to Home"
+          },
+          "privacy": {
+            "title": "Privacy Policy - Revelti",
+            "heading": "Privacy Policy",
+            "placeholder": "The Privacy Policy content will be added soon. Stay tuned!",
+            "back_home": "← Back to Home"
           },
           "modal": {
             "success_title": "You're on the list!",
@@ -305,7 +319,21 @@
           },
           "footer": {
             "rights": "© 2025 <strong class=\"brand-highlight\">Revelti</strong>. Todos los derechos reservados.",
-            "disclaimer": "Las maquetas mostradas son ilustrativas. El producto final puede variar."
+            "disclaimer": "Las maquetas mostradas son ilustrativas. El producto final puede variar.",
+            "terms": "Términos y Condiciones",
+            "privacy": "Política de Privacidad"
+          },
+          "terms": {
+            "title": "Términos y Condiciones - Revelti",
+            "heading": "Términos y Condiciones",
+            "placeholder": "El contenido de Términos y Condiciones se añadirá próximamente. ¡Permaneced atentos!",
+            "back_home": "← Volver al Inicio"
+          },
+          "privacy": {
+            "title": "Política de Privacidad - Revelti",
+            "heading": "Política de Privacidad",
+            "placeholder": "El contenido de la Política de Privacidad se añadirá próximamente. ¡Permaneced atentos!",
+            "back_home": "← Volver al Inicio"
           },
           "modal": {
             "success_title": "¡Estás en la lista!",
@@ -463,6 +491,16 @@
           }
         }
       });
+
+      // Update legal links href dynamically based on active language
+      const termsLink = document.querySelector('a[href^="terms"]');
+      if (termsLink) {
+        termsLink.setAttribute('href', this.currentLang === 'es' ? 'terms-es.html' : 'terms.html');
+      }
+      const privacyLink = document.querySelector('a[href^="privacy"]');
+      if (privacyLink) {
+        privacyLink.setAttribute('href', this.currentLang === 'es' ? 'privacy-es.html' : 'privacy.html');
+      }
     }
 
     updateSwitcherUI() {

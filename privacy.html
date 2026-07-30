@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="icons/favicon-192.png">
+  <link rel="apple-touch-icon" href="icons/favicon-192.png">
+  <title>Privacy Policy - Revelti</title>
+  <meta name="description" content="Privacy Policy for Revelti website and waitlist.">
+  <link rel="stylesheet" href="fonts.css">
+
+  <style>
+    :root {
+      --blue: #213c63;
+      --orange: #f58220;
+      --purple: #6b21a8;
+      --dark: #f8fafc;
+      --surface: #ffffff;
+      --surface2: #f1f5f9;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border-color: rgba(33, 60, 99, 0.08);
+      --border-color-strong: rgba(33, 60, 99, 0.15);
+      --shadow-premium: 0 10px 30px rgba(33, 60, 99, 0.04), 0 1px 3px rgba(33, 60, 99, 0.02);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--dark);
+      color: var(--text);
+      line-height: 1.65;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Bar */
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      height: 56px;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .top-bar-inner {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-img {
+      height: 22px;
+      object-fit: contain;
+    }
+
+    .top-bar-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .back-link {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--blue);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--orange);
+    }
+
+    .lang-switcher {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      background: var(--surface2);
+      padding: 3px;
+      border-radius: 999px;
+      border: 1px solid var(--border-color-strong);
+    }
+
+    .lang-btn {
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--muted);
+      padding: 4px 10px;
+      border-radius: 999px;
+      transition: all 0.2s ease;
+    }
+
+    .lang-btn.active {
+      background: var(--blue);
+      color: #ffffff;
+      box-shadow: 0 1px 3px rgba(33, 60, 99, 0.15);
+    }
+
+    .lang-btn:hover:not(.active) {
+      color: var(--text);
+    }
+
+    /* Content Area */
+    main {
+      flex: 1;
+      max-width: 900px;
+      width: 100%;
+      margin: 96px auto 48px;
+      padding: 0 24px;
+    }
+
+    .legal-card {
+      background: var(--surface);
+      border: 1px solid var(--border-color-strong);
+      border-radius: 16px;
+      padding: 40px 36px;
+      box-shadow: var(--shadow-premium);
+    }
+
+    .legal-header {
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 24px;
+      margin-bottom: 32px;
+    }
+
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--blue);
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .last-updated {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .legal-section {
+      margin-bottom: 32px;
+    }
+
+    .legal-section:last-child {
+      margin-bottom: 0;
+    }
+
+    h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    p {
+      font-size: 15px;
+      color: #334155;
+      margin-bottom: 12px;
+    }
+
+    ul {
+      margin-bottom: 16px;
+      padding-left: 24px;
+    }
+
+    li {
+      font-size: 15px;
+      color: #334155;
+      margin-bottom: 8px;
+    }
+
+    strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    a {
+      color: var(--orange);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .info-box {
+      background: var(--surface2);
+      border-left: 4px solid var(--orange);
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 16px 0;
+    }
+
+    code {
+      background: rgba(33, 60, 99, 0.06);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 13px;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border-color);
+      padding: 24px;
+      margin-top: auto;
+    }
+
+    .footer-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .footer-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 700;
+      transition: color 0.2s;
+    }
+
+    .footer-link:hover {
+      color: var(--orange);
+    }
+
+    @media (max-width: 640px) {
+      .legal-card {
+        padding: 24px 20px;
+      }
+
+      h1 {
+        font-size: 26px;
+      }
+
+      h2 {
+        font-size: 17px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <a href="index.html">
+        <img src="images/reveltiLogo.png" alt="Revelti" class="logo-img" onerror="this.style.display='none'">
+      </a>
+      <div class="top-bar-right">
+        <div class="lang-switcher">
+          <a href="privacy.html" class="lang-btn active">EN</a>
+          <a href="privacy-es.html" class="lang-btn">ES</a>
+        </div>
+        <a href="index.html" class="back-link">&larr; Back to Revelti</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Legal Content -->
+  <main>
+    <article class="legal-card">
+      <header class="legal-header">
+        <h1>Privacy Policy</h1>
+        <div class="last-updated">Last Updated: July 30, 2026</div>
+      </header>
+
+      <section class="legal-section">
+        <h2>1. Personal Data Collected and Purpose of Processing</h2>
+        <p>We collect and process the following data for specific purposes:</p>
+        <ul>
+          <li>
+            <strong>Explicit Data:</strong> Email address and your selected user role (Organizer, Creative, or
+            Attendee).
+            <br><em>Purpose:</em> To send you recurring marketing newsletters, waitlist updates, and notifications
+            regarding the launch of the Revelti application.
+            <br><em>Legal Basis:</em> Your explicit consent (Article 6(1)(a) GDPR) provided when submitting the form.
+          </li>
+          <li>
+            <strong>Technical &amp; Server Data:</strong> IP addresses, User-Agent strings (browser/OS), and access
+            timestamps.
+            <br><em>Purpose:</em> Security, web server infrastructure monitoring, and protection against Distributed
+            Denial of Service (DDoS) attacks.
+            <br><em>Legal Basis:</em> Legitimate interest (Article 6(1)(f) GDPR) to maintain the security and integrity
+            of the website.
+          </li>
+          <li>
+            <strong>Analytics Data:</strong> Pageviews, referral sources, clicks, and role selections.
+            <br><em>Purpose:</em> To understand user interactions and improve the website.
+            <br><em>Legal Basis:</em> Legitimate interest (Article 6(1)(f) GDPR) in understanding the performance of our
+            website.
+          </li>
+        </ul>
+      </section>
+
+      <section class="legal-section">
+        <h2>2. Third-Party Services and Data Processors</h2>
+        <p>We share your data with the following third-party service providers, acting as Data Processors:</p>
+        <ul>
+          <li><strong>Brevo:</strong> Used for managing the mailing list and sending newsletters. Data is stored within
+            the European Union (France, Germany, Belgium).</li>
+          <li><strong>PostHog:</strong> Used for website analytics in cookie-less mode. Data is stored on servers
+            located in Frankfurt, Germany.</li>
+          <li><strong>Render:</strong> Used for website hosting and global Content Delivery Network (CDN) distribution.
+          </li>
+        </ul>
+      </section>
+
+      <section class="legal-section">
+        <h2>3. International Data Transfers</h2>
+        <p>Because Render operates a global CDN infrastructure, your technical data (IP addresses and access logs) may
+          be routed or processed on servers outside the European Economic Area (EEA). These transfers are protected by
+          Standard Contractual Clauses (SCCs) or other lawful mechanisms defined by the provider to comply with GDPR
+          requirements.</p>
+      </section>
+
+      <section class="legal-section">
+        <h2>4. Cookies and Local Storage</h2>
+        <p>This website does not use cookies. We use <code>localStorage</code> strictly to save your functional UI
+          language preference (<code>revelti_lang</code>). Because this does not track individual identities across the
+          web and is strictly necessary for the user interface preference, a cookie consent banner is not required.
+          Analytics are conducted via PostHog in a cookie-less configuration.</p>
+      </section>
+
+      <section class="legal-section">
+        <h2>5. Data Retention</h2>
+        <p>Your email address and selected role will be retained until you withdraw your consent (unsubscribe) or until
+          the marketing purpose ceases to exist. Technical and analytics logs are retained only as long as necessary for
+          security and performance purposes.</p>
+      </section>
+
+      <section class="legal-section">
+        <h2>6. Your Rights</h2>
+        <p>Under the GDPR, you have the right to:</p>
+        <ul>
+          <li>Access your personal data.</li>
+          <li>Request the rectification of inaccurate data.</li>
+          <li>Request the deletion (erasure) of your data.</li>
+          <li>Withdraw your consent at any time (e.g., by clicking the "unsubscribe" link in our emails).</li>
+          <li>Object to or restrict the processing of your data.</li>
+          <li>Request data portability.</li>
+        </ul>
+        <p>To exercise any of these rights, contact <a href="mailto:info@revelti.com">info@revelti.com</a>. If you
+          believe your data protection rights have been violated, you have the right to file a complaint with the
+          Spanish Data Protection Agency (AEPD).</p>
+      </section>
+
+      <section class="legal-section">
+        <h2>7. Data Controller &amp; Contact Information</h2>
+        <p>The entity responsible for the processing of your personal data (Data Controller) in accordance with the
+          General Data Protection Regulation (GDPR) and the Spanish LOPDGDD is:</p>
+        <div class="info-box">
+          <ul>
+            <li><strong>Name:</strong> LUCIANO MOREIRA ALVES DA SILVA</li>
+            <li><strong>Address:</strong> CALLE MOSSEN JAUME SOLE Nº 00007 PISO 01 PUERTA 000, 08940 CORNELLA DE
+              LLOBREGAT, BARCELONA, SPAIN</li>
+            <li><strong>Contact Email:</strong> <a href="mailto:info@revelti.com">info@revelti.com</a></li>
+          </ul>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div>© 2026 <strong>Revelti</strong>. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="terms.html" class="footer-link">Terms &amp; Conditions</a>
+        <span>•</span>
+        <a href="privacy.html" class="footer-link">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

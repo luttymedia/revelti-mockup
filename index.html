@@ -2684,12 +2684,35 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
       max-width: 1100px;
       margin: 0 auto;
       font-size: 12px;
       color: var(--muted);
       position: relative;
       z-index: 1;
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .footer-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 700;
+      transition: color 0.2s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--orange);
+    }
+
+    .footer-separator {
+      opacity: 0.35;
     }
 
     .footer-note {
@@ -3484,6 +3507,12 @@
 
         <form class="waitlist-form" onsubmit="handleWaitlistSubmit(event)" id="waitlist-form">
           <input type="hidden" name="role" id="waitlist-role-input" value="">
+          
+          <!-- Honeypot field (hidden from real visitors, targets spam bots) -->
+          <div style="position: absolute; left: -9999px; top: -9999px;" aria-hidden="true">
+            <input type="text" name="b_hp_website" id="waitlist-hp-website" tabindex="-1" autocomplete="off">
+          </div>
+
           <input type="email" class="waitlist-input" placeholder="your@email.com" data-i18n-placeholder="waitlist.email_placeholder" required id="waitlist-email"
             aria-label="Email address" data-i18n-aria-label="waitlist.email_aria">
           <button type="submit" class="waitlist-btn" id="waitlist-submit-btn" data-i18n="waitlist.submit_btn">Join the Waitlist</button>
@@ -3504,6 +3533,11 @@
       <img src="images/reveltiLogo.png" alt="Revelti" style="height:16px;opacity:0.65;"
         onerror="this.style.display='none'">
       <span data-i18n-html="footer.rights">© 2025 <strong class="brand-highlight">Revelti</strong>. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+      <a href="terms.html" class="footer-link" data-i18n="footer.terms">Terms &amp; Conditions</a>
+      <span class="footer-separator">•</span>
+      <a href="privacy.html" class="footer-link" data-i18n="footer.privacy">Privacy Policy</a>
     </div>
     <div class="footer-note" data-i18n="footer.disclaimer">Mockups shown are illustrative. Final product may vary.</div>
   </footer>
@@ -4085,6 +4119,24 @@
     /* ===================== WAITLIST FORM ===================== */
     function handleWaitlistSubmit(e) {
       e.preventDefault();
+
+      // Honeypot check: If filled, silently abort (it's a bot)
+      const hpInput = document.getElementById('waitlist-hp-website');
+      if (hpInput && hpInput.value.trim() !== '') {
+        console.warn('Spam bot detected via honeypot field. Submission blocked.');
+        // Show success modal to trick the bot into thinking submission succeeded
+        document.getElementById('success-modal').classList.add('open');
+        return;
+      }
+
+      // Rate limiting: Prevent multi-click spam within 30 seconds
+      const lastSubmit = localStorage.getItem('revelti_last_submit');
+      const now = Date.now();
+      if (lastSubmit && (now - parseInt(lastSubmit, 10)) < 30000) {
+        alert('You already submitted recently. Please wait a moment.');
+        return;
+      }
+
       const form = e.target;
       const btn = form.querySelector('button[type="submit"]');
       const input = form.querySelector('input[type="email"]');
@@ -4110,6 +4162,9 @@
       btn.textContent = i18n.t('waitlist.submit_btn_loading');
       btn.disabled = true;
       input.disabled = true;
+
+      // Store submission timestamp for rate-limiting
+      localStorage.setItem('revelti_last_submit', Date.now().toString());
 
       setTimeout(() => {
         // Reset form

@@ -139,7 +139,21 @@
   },
   "footer": {
     "rights": "© 2025 <strong class=\"brand-highlight\">Revelti</strong>. All rights reserved.",
-    "disclaimer": "Mockups shown are illustrative. Final product may vary."
+    "disclaimer": "Mockups shown are illustrative. Final product may vary.",
+    "terms": "Terms & Conditions",
+    "privacy": "Privacy Policy"
+  },
+  "terms": {
+    "title": "Terms & Conditions - Revelti",
+    "heading": "Terms & Conditions",
+    "placeholder": "The Terms & Conditions content will be added soon. Stay tuned!",
+    "back_home": "← Back to Home"
+  },
+  "privacy": {
+    "title": "Privacy Policy - Revelti",
+    "heading": "Privacy Policy",
+    "placeholder": "The Privacy Policy content will be added soon. Stay tuned!",
+    "back_home": "← Back to Home"
   },
   "modal": {
     "success_title": "You're on the list!",
