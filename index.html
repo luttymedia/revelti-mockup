@@ -2698,7 +2698,9 @@
     .footer-links {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 14px;
+      flex-wrap: wrap;
     }
 
     .footer-link {
@@ -2710,6 +2712,22 @@
 
     .footer-link:hover {
       color: var(--orange);
+    }
+
+    .footer-social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-social-link svg {
+      transition: transform 0.2s ease, stroke 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .footer-social-link:hover svg {
+      stroke: var(--orange);
+      transform: translateY(-1px);
     }
 
     .footer-separator {
@@ -3539,6 +3557,16 @@
       <span data-i18n-html="footer.rights">© 2025 <strong class="brand-highlight">Revelti</strong>. All rights reserved.</span>
     </div>
     <div class="footer-links">
+      <a href="https://instagram.com/reveltiofficial" target="_blank" rel="noopener noreferrer" class="footer-link footer-social-link" aria-label="Instagram">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        <span>@reveltiofficial</span>
+      </a>
+      <span class="footer-separator">•</span>
+      <a href="mailto:info@revelti.com" class="footer-link footer-social-link" aria-label="Email">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        <span>info@revelti.com</span>
+      </a>
+      <span class="footer-separator">•</span>
       <a href="terms.html" class="footer-link" data-i18n="footer.terms">Terms &amp; Conditions</a>
       <span class="footer-separator">•</span>
       <a href="privacy.html" class="footer-link" data-i18n="footer.privacy">Privacy Policy</a>
