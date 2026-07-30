@@ -13,12 +13,10 @@
     if (window.posthog && POSTHOG_KEY) {
         window.posthog.init(POSTHOG_KEY, {
             api_host: POSTHOG_HOST,
-            defaults: {
-                persistence: 'localStorage', // Privacy & cookie-less compatible
-            },
+            persistence: 'localStorage',
             autocapture: true,
             capture_pageview: true,
-            respect_dnt: true
+            respect_dnt: false
         });
     }
 
