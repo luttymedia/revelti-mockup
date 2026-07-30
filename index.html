@@ -4098,6 +4098,14 @@
     function scrollToSection(id) {
       const el = document.getElementById(id);
       if (el) el.scrollIntoView({ behavior: 'smooth' });
+
+      // Track profile navigation clicks (navbar, hamburger menu, hero cards)
+      if (['organizer-section', 'creative-section', 'attendee-section'].includes(id)) {
+        const role = id.replace('-section', '');
+        if (window.ReveltiAnalytics && typeof window.ReveltiAnalytics.trackCtaClick === 'function') {
+          window.ReveltiAnalytics.trackCtaClick('profile_navigated', role, 'navigation');
+        }
+      }
     }
 
     function scrollToWaitlist(e, rolePreference) {
