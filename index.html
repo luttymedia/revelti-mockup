@@ -4217,22 +4217,11 @@
       // Store submission timestamp for rate-limiting
       localStorage.setItem('revelti_last_submit', Date.now().toString());
 
-      // Send to Brevo via hidden target iframe and fetch
+      // Send to Brevo via hidden target iframe (single submission)
       try {
         HTMLFormElement.prototype.submit.call(form);
       } catch (err) {
-        console.warn('Direct form submission fallback:', err);
-      }
-
-      try {
-        const formData = new FormData(form);
-        fetch(form.action, {
-          method: 'POST',
-          body: formData,
-          mode: 'no-cors'
-        }).catch(err => console.warn('Brevo fetch notice:', err));
-      } catch (e) {
-        // ignore fetch fallback errors
+        console.warn('Form submission error:', err);
       }
 
       setTimeout(() => {
