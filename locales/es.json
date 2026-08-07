@@ -23,10 +23,11 @@
     "join": "Unirse"
   },
   "hero": {
-    "badge": "Próximamente - Únete ahora",
+    "badge": "Próximamente",
     "headline_line1": "El evento <br class=\"hero-br-mobile\">no termina",
     "headline_line2": "cuando la música <br class=\"hero-br-mobile\">se para.",
     "sub": "<strong class=\"brand-highlight\">Revelti</strong> es una plataforma sencilla donde los organizadores <span class=\"highlight-main\">dirigen el espectáculo</span>, los creativos <span class=\"highlight-main\">brillan con luz propia</span> y los asistentes <span class=\"highlight-main\">reviven la noche para siempre</span>.",
+    "primary_cta": "Únete a la lista",
     "picker_title": "Elige tu rol",
     "org_tag": "Organizador",
     "org_card_title": "Dirige el Espectáculo",

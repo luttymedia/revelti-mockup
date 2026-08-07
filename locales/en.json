@@ -23,10 +23,11 @@
     "join": "Join"
   },
   "hero": {
-    "badge": "Coming Soon - Join the Waitlist",
+    "badge": "Coming Soon",
     "headline_line1": "The event <br class=\"hero-br-mobile\">doesn't end",
     "headline_line2": "when the <br class=\"hero-br-mobile\">music stops.",
     "sub": "<strong class=\"brand-highlight\">Revelti</strong> is one ridiculously simple platform where event organizers <span class=\"highlight-main\">run the show</span>, creatives <span class=\"highlight-main\">get their spotlight</span>, and attendees <span class=\"highlight-main\">relive the night forever</span>.",
+    "primary_cta": "Join the Waitlist",
     "picker_title": "Choose your role",
     "org_tag": "Organizer",
     "org_card_title": "Run the Show",
