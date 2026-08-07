@@ -95,15 +95,43 @@
       color: #e9d5ff;
       background: rgba(168, 85, 247, 0.2);
     }
-    #waitlist .highlight-main {
-      color: #1e293b;
-      background: rgba(255, 255, 255, 0.25);
-    }
     .highlight-att {
       font-weight: 700;
       color: #d9630e;
       background: rgba(245, 130, 32, 0.08);
       padding: 0 4px;
+      border-radius: 4px;
+    }
+
+    /* Hero & Waitlist Scoped Highlights (for dark collage backgrounds) */
+    #hero .highlight-main {
+      color: #ffffff;
+      background: rgba(245, 130, 32, 0.28);
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+    #hero .highlight-org {
+      color: #ffffff;
+      background: rgba(74, 127, 212, 0.35);
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+    #hero .highlight-cre {
+      color: #ffffff;
+      background: rgba(168, 85, 247, 0.35);
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+    #hero .highlight-att {
+      color: #ffffff;
+      background: rgba(245, 130, 32, 0.35);
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+    #waitlist .highlight-main {
+      color: #ffffff !important;
+      background: rgba(255, 255, 255, 0.22) !important;
+      padding: 1px 6px;
       border-radius: 4px;
     }
 
@@ -150,8 +178,8 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 1;
-      opacity: 0.6;
+      z-index: 2;
+      opacity: 0.75;
     }
 
     /* ===================== GLOBAL NAV ===================== */
@@ -390,7 +418,164 @@
       padding: 60px 24px 16px;
       position: relative;
       overflow: hidden;
-      background: var(--dark);
+      background: #080404;
+    }
+
+    /* ===================== SHARED PHOTO COLLAGE BACKGROUND ===================== */
+    /*
+      Used in both #hero and #waitlist.
+      6 columns on desktop, 3 on mobile.
+      grid-template-rows: repeat(130, 1vh) — explicit row tracks
+      so every browser sizes them correctly.
+      inset: -8% bleeds the grid past all edges so rotated images
+      never expose the section background colour.
+    */
+    .section-collage {
+      position: absolute;
+      inset: -8%;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: repeat(130, 1vh);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .section-collage-cell {
+      position: relative;
+      overflow: visible;
+    }
+
+    .section-collage-cell img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform-origin: center center;
+      display: block;
+    }
+
+    /* ── Desktop: 6 columns × 2 images each ── */
+    /* Col 1 — portrait + portrait */
+    .section-collage-cell:nth-child(1)  { grid-column: 1; grid-row:   1 / span 62; }
+    .section-collage-cell:nth-child(7)  { grid-column: 1; grid-row:  63 / span 55; }
+    /* Col 2 — landscape + crowd */
+    .section-collage-cell:nth-child(2)  { grid-column: 2; grid-row:   1 / span 35; }
+    .section-collage-cell:nth-child(8)  { grid-column: 2; grid-row:  36 / span 80; }
+    /* Col 3 — portrait + portrait */
+    .section-collage-cell:nth-child(3)  { grid-column: 3; grid-row:   1 / span 60; }
+    .section-collage-cell:nth-child(9)  { grid-column: 3; grid-row:  61 / span 58; }
+    /* Col 4 — landscape + portrait */
+    .section-collage-cell:nth-child(4)  { grid-column: 4; grid-row:   1 / span 55; }
+    .section-collage-cell:nth-child(10) { grid-column: 4; grid-row:  56 / span 62; }
+    /* Col 5 — portrait + portrait */
+    .section-collage-cell:nth-child(5)  { grid-column: 5; grid-row:   1 / span 65; }
+    .section-collage-cell:nth-child(11) { grid-column: 5; grid-row:  66 / span 52; }
+    /* Col 6 — landscape + landscape */
+    .section-collage-cell:nth-child(6)  { grid-column: 6; grid-row:   1 / span 38; }
+    .section-collage-cell:nth-child(12) { grid-column: 6; grid-row:  39 / span 78; }
+
+    /* ── Unique rotation + scale per cell (cells 1..24) ── */
+    .section-collage-cell:nth-child(1)  img { transform: rotate( -9deg) scale(1.28); }
+    .section-collage-cell:nth-child(2)  img { transform: rotate( 13deg) scale(1.18); }
+    .section-collage-cell:nth-child(3)  img { transform: rotate(-15deg) scale(1.32); }
+    .section-collage-cell:nth-child(4)  img { transform: rotate(  7deg) scale(1.20); }
+    .section-collage-cell:nth-child(5)  img { transform: rotate( 11deg) scale(1.24); }
+    .section-collage-cell:nth-child(6)  img { transform: rotate( -5deg) scale(1.30); }
+    .section-collage-cell:nth-child(7)  img { transform: rotate(  4deg) scale(1.22); }
+    .section-collage-cell:nth-child(8)  img { transform: rotate(-13deg) scale(1.16); }
+    .section-collage-cell:nth-child(9)  img { transform: rotate( 16deg) scale(1.28); }
+    .section-collage-cell:nth-child(10) img { transform: rotate( -8deg) scale(1.22); }
+    .section-collage-cell:nth-child(11) img { transform: rotate( 12deg) scale(1.18); }
+    .section-collage-cell:nth-child(12) img { transform: rotate(-10deg) scale(1.26); }
+    .section-collage-cell:nth-child(13) img { transform: rotate( -8deg) scale(1.26); }
+    .section-collage-cell:nth-child(14) img { transform: rotate( 14deg) scale(1.18); }
+    .section-collage-cell:nth-child(15) img { transform: rotate(-12deg) scale(1.30); }
+    .section-collage-cell:nth-child(16) img { transform: rotate(  9deg) scale(1.22); }
+    .section-collage-cell:nth-child(17) img { transform: rotate(-15deg) scale(1.28); }
+    .section-collage-cell:nth-child(18) img { transform: rotate(  6deg) scale(1.20); }
+    .section-collage-cell:nth-child(19) img { transform: rotate( 11deg) scale(1.24); }
+    .section-collage-cell:nth-child(20) img { transform: rotate( -7deg) scale(1.32); }
+    .section-collage-cell:nth-child(21) img { transform: rotate(-13deg) scale(1.18); }
+    .section-collage-cell:nth-child(22) img { transform: rotate( 15deg) scale(1.26); }
+    .section-collage-cell:nth-child(23) img { transform: rotate( -9deg) scale(1.20); }
+    .section-collage-cell:nth-child(24) img { transform: rotate( 10deg) scale(1.28); }
+
+    /* Hide extra mobile cells on desktop screen sizes */
+    @media (min-width: 769px) {
+      .section-collage-cell:nth-child(n+13) {
+        display: none !important;
+      }
+    }
+
+    /* ── Collage overlay — shared base ── */
+    .section-collage-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Hero overlay: dark vignette, lighter centre for text legibility */
+    #hero .section-collage-overlay {
+      background:
+        radial-gradient(
+          ellipse 75% 65% at 50% 48%,
+          rgba(8, 4, 4, 0.52) 0%,
+          rgba(8, 4, 4, 0.82) 100%
+        );
+    }
+
+    /* Waitlist overlay: dark + warm orange tint — preserves brand feel
+       while still showing the event photos underneath */
+    #waitlist .section-collage-overlay {
+      background:
+        radial-gradient(
+          ellipse 75% 65% at 50% 48%,
+          rgba(30, 12, 2, 0.60) 0%,
+          rgba(20, 8, 0, 0.85) 100%
+        ),
+        linear-gradient(135deg, rgba(245, 130, 32, 0.30) 0%, rgba(180, 80, 10, 0.35) 100%);
+    }
+
+    /* ── Mobile: 3 columns × 8 images (covers tall vertical content) ── */
+    @media (max-width: 768px) {
+      .section-collage {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(260, 1vh);
+      }
+      .section-collage-cell:nth-child(n+13) {
+        display: block !important;
+      }
+      /* Col 1: 1, 4, 7, 10, 13, 16, 19, 22 */
+      .section-collage-cell:nth-child(1)  { grid-column: 1; grid-row:   1 / span 34; }
+      .section-collage-cell:nth-child(4)  { grid-column: 1; grid-row:  35 / span 28; }
+      .section-collage-cell:nth-child(7)  { grid-column: 1; grid-row:  63 / span 32; }
+      .section-collage-cell:nth-child(10) { grid-column: 1; grid-row:  95 / span 34; }
+      .section-collage-cell:nth-child(13) { grid-column: 1; grid-row: 129 / span 30; }
+      .section-collage-cell:nth-child(16) { grid-column: 1; grid-row: 159 / span 34; }
+      .section-collage-cell:nth-child(19) { grid-column: 1; grid-row: 193 / span 32; }
+      .section-collage-cell:nth-child(22) { grid-column: 1; grid-row: 225 / span 36; }
+
+      /* Col 2: 2, 5, 8, 11, 14, 17, 20, 23 */
+      .section-collage-cell:nth-child(2)  { grid-column: 2; grid-row:   1 / span 28; }
+      .section-collage-cell:nth-child(5)  { grid-column: 2; grid-row:  29 / span 36; }
+      .section-collage-cell:nth-child(8)  { grid-column: 2; grid-row:  65 / span 28; }
+      .section-collage-cell:nth-child(11) { grid-column: 2; grid-row:  93 / span 34; }
+      .section-collage-cell:nth-child(14) { grid-column: 2; grid-row: 127 / span 32; }
+      .section-collage-cell:nth-child(17) { grid-column: 2; grid-row: 159 / span 30; }
+      .section-collage-cell:nth-child(20) { grid-column: 2; grid-row: 189 / span 36; }
+      .section-collage-cell:nth-child(23) { grid-column: 2; grid-row: 225 / span 35; }
+
+      /* Col 3: 3, 6, 9, 12, 15, 18, 21, 24 */
+      .section-collage-cell:nth-child(3)  { grid-column: 3; grid-row:   1 / span 32; }
+      .section-collage-cell:nth-child(6)  { grid-column: 3; grid-row:  33 / span 30; }
+      .section-collage-cell:nth-child(9)  { grid-column: 3; grid-row:  63 / span 34; }
+      .section-collage-cell:nth-child(12) { grid-column: 3; grid-row:  97 / span 30; }
+      .section-collage-cell:nth-child(15) { grid-column: 3; grid-row: 127 / span 34; }
+      .section-collage-cell:nth-child(18) { grid-column: 3; grid-row: 161 / span 30; }
+      .section-collage-cell:nth-child(21) { grid-column: 3; grid-row: 191 / span 34; }
+      .section-collage-cell:nth-child(24) { grid-column: 3; grid-row: 225 / span 35; }
     }
 
     .hero-container {
@@ -398,7 +583,7 @@
       max-width: 1100px;
       margin: 0 auto;
       position: relative;
-      z-index: 2;
+      z-index: 3;
       padding-top: 20px;
     }
 
@@ -448,10 +633,12 @@
       max-width: 950px;
       margin: 0 auto 24px;
       animation: fadeUp 0.9s 0.1s ease both;
+      color: #ffffff;
     }
 
     .headline-line {
       display: block;
+      color: #ffffff;
     }
 
     .hero-br-mobile {
@@ -519,7 +706,7 @@
 
     .hero-sub {
       font-size: clamp(15px, 2vw, 18px);
-      color: var(--muted);
+      color: rgba(255, 255, 255, 0.88);
       max-width: 580px;
       margin: 0 auto 36px;
       line-height: 1.65;
@@ -537,7 +724,7 @@
       font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      color: var(--muted);
+      color: rgba(255, 255, 255, 0.9);
       margin-bottom: 24px;
       font-weight: 800;
     }
@@ -551,15 +738,17 @@
     }
 
     .picker-card {
-      background: var(--surface);
-      border: 1px solid var(--border-color);
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.22);
       border-radius: 18px;
       padding: 24px 20px;
       text-align: left;
       cursor: pointer;
       position: relative;
       transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-      box-shadow: var(--shadow-premium);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -567,19 +756,24 @@
 
     .picker-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(33, 60, 99, 0.06);
+      background: rgba(255, 255, 255, 0.22);
+      border-color: rgba(255, 255, 255, 0.45);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     }
 
     .picker-card.org-card:hover {
-      border-color: rgba(33, 60, 99, 0.4);
+      border-color: rgba(74, 127, 212, 0.6);
+      box-shadow: 0 20px 40px rgba(74, 127, 212, 0.25);
     }
 
     .picker-card.cre-card:hover {
-      border-color: rgba(107, 33, 168, 0.4);
+      border-color: rgba(168, 85, 247, 0.6);
+      box-shadow: 0 20px 40px rgba(168, 85, 247, 0.25);
     }
 
     .picker-card.att-card:hover {
-      border-color: rgba(245, 130, 32, 0.4);
+      border-color: rgba(245, 130, 32, 0.6);
+      box-shadow: 0 20px 40px rgba(245, 130, 32, 0.25);
     }
 
     .picker-icon {
@@ -597,33 +791,37 @@
       border-radius: 999px;
       margin-bottom: 10px;
       width: fit-content;
+      border: 1px solid transparent;
     }
 
     .picker-card.org-card .picker-tag {
-      background: rgba(33, 60, 99, 0.08);
-      color: #213c63;
+      background: rgba(74, 127, 212, 0.3);
+      color: #ffffff;
+      border-color: rgba(74, 127, 212, 0.5);
     }
 
     .picker-card.cre-card .picker-tag {
-      background: rgba(107, 33, 168, 0.08);
-      color: var(--creative-accent);
+      background: rgba(168, 85, 247, 0.3);
+      color: #ffffff;
+      border-color: rgba(168, 85, 247, 0.5);
     }
 
     .picker-card.att-card .picker-tag {
-      background: rgba(245, 130, 32, 0.08);
-      color: var(--attendee-accent);
+      background: rgba(245, 130, 32, 0.3);
+      color: #ffffff;
+      border-color: rgba(245, 130, 32, 0.5);
     }
 
     .picker-card-title {
       font-size: 15px;
       font-weight: 800;
-      color: var(--text);
+      color: #ffffff;
       margin-bottom: 6px;
     }
 
     .picker-card-desc {
       font-size: 12px;
-      color: var(--muted);
+      color: rgba(255, 255, 255, 0.88);
       line-height: 1.6;
       margin-bottom: 16px;
     }
@@ -638,15 +836,15 @@
     }
 
     .picker-card.org-card .picker-arrow {
-      color: var(--organizer-accent);
+      color: #93c5fd;
     }
 
     .picker-card.cre-card .picker-arrow {
-      color: var(--creative-accent);
+      color: #e9d5ff;
     }
 
     .picker-card.att-card .picker-arrow {
-      color: var(--attendee-accent);
+      color: #ffedd5;
     }
 
     .picker-card:hover .picker-arrow {
@@ -663,11 +861,12 @@
       flex-direction: column;
       align-items: center;
       gap: 8px;
-      color: var(--muted);
+      color: rgba(255,255,255,0.55);
       font-size: 11px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       animation: fadeUpScroll 1s 1s ease both;
+      z-index: 3;
     }
 
     @keyframes fadeUpScroll {
@@ -2274,7 +2473,7 @@
     /* ===================== SECTION: WAITLIST (FINAL CTA) ===================== */
     #waitlist {
       padding: 60px 24px;
-      background: linear-gradient(135deg, #f58220 0%, #e06d10 100%);
+      background: #120800;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -2292,10 +2491,11 @@
     }
 
     #waitlist .headline-accent {
-      background: none !important;
-      -webkit-text-fill-color: #0f172a !important;
-      color: #0f172a !important;
-      background-clip: initial !important;
+      background: linear-gradient(90deg, #f58220 0%, #ffc285 100%) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+      background-clip: text !important;
+      color: #f58220 !important;
     }
 
     #waitlist .waitlist-sub {
@@ -2358,7 +2558,7 @@
 
     .waitlist-inner {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       max-width: 640px;
       margin: 0 auto;
     }
@@ -3058,6 +3258,35 @@
 
   <!-- ===================== HERO ===================== -->
   <section id="hero">
+    <!-- Photo collage background -->
+    <div class="section-collage" aria-hidden="true">
+      <div class="section-collage-cell"><img src="albums/event/gallery1.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery2.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery3.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery4.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery5.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery6.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery7.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery8.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery9.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery10.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery11.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery12.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery13.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery1.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery2.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery3.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery4.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery5.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery6.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery7.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery8.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery9.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery10.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery11.jpg" alt=""></div>
+    </div>
+    <!-- Dark overlay -->
+    <div class="section-collage-overlay" aria-hidden="true"></div>
     <!-- PARTICLE CANVAS -->
     <canvas id="particles-canvas"></canvas>
     <div class="hero-container">
@@ -3113,16 +3342,10 @@
                 <p class="picker-card-desc" data-i18n-html="hero.att_card_desc"><span class="highlight-att">Buy tickets</span>, access event schedules, <span class="highlight-att">see who's going</span>, and get direct photo
                   updates instantly.</p>
               </div>
-              <span class="picker-arrow" data-i18n-html="hero.explore_cta">Explore Features &rarr;</span>
             </div>
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="scroll-hint">
-      <div class="scroll-hint-line"></div>
-      <span data-i18n="hero.scroll_hint">Scroll</span>
     </div>
   </section>
 
@@ -3495,6 +3718,23 @@
 
   <!-- ===================== SECTION: WAITLIST ===================== -->
   <section id="waitlist">
+    <!-- Photo collage background -->
+    <div class="section-collage" aria-hidden="true">
+      <div class="section-collage-cell"><img src="albums/event/gallery9.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery6.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery1.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery8.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery5.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery2.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery10.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery4.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery7.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery3.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery11.jpg" alt=""></div>
+      <div class="section-collage-cell"><img src="albums/event/gallery12.jpg" alt=""></div>
+    </div>
+    <!-- Warm dark overlay with orange tint -->
+    <div class="section-collage-overlay" aria-hidden="true"></div>
     <div class="waitlist-glow"></div>
     <div class="waitlist-inner">
       <div class="waitlist-eyebrow reveal" data-i18n="waitlist.eyebrow">Limited Early Access</div>
@@ -3679,15 +3919,15 @@
         reset() {
           this.x = Math.random() * canvas.width;
           this.y = Math.random() * canvas.height;
-          this.size = Math.random() * 2.5 + 0.5;
+          this.size = Math.random() * 2.5 + 0.8;
           this.speedX = (Math.random() - 0.5) * 0.4;
           this.speedY = (Math.random() - 0.5) * 0.4;
-          this.opacity = Math.random() * 0.5 + 0.05;
-          this.color = Math.random() > 0.6
+          this.opacity = Math.random() * 0.45 + 0.15;
+          this.color = Math.random() > 0.5
             ? `rgba(245,130,32,${this.opacity})`
             : Math.random() > 0.5
-              ? `rgba(33,60,99,${this.opacity * 2})`
-              : `rgba(107,33,168,${this.opacity})`;
+              ? `rgba(255,255,255,${this.opacity * 0.8})`
+              : `rgba(168,85,247,${this.opacity})`;
           this.life = 0;
           this.maxLife = 200 + Math.random() * 200;
         }
