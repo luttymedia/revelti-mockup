@@ -165,9 +165,16 @@
 <body class="antialiased text-gray-800 bg-white">
     <div id="navbar-placeholder"></div>
 
-    <div class="relative hidden lg:block max-w-2xl md:max-w-full lg:max-w-full mx-auto overflow-hidden">
-        <img src="images/banner1200x400.png" alt="Revelti Banner: Find your dance. Find your people."
-            class="w-full h-auto object-cover">
+    <div class="relative hidden lg:block max-w-2xl md:max-w-full lg:max-w-full mx-auto overflow-hidden" style="line-height:0;">
+        <img src="images/banner1200x400.png" alt="Revelti Banner background" class="w-full h-auto object-cover">
+        <!-- Right-half overlay: logo + taglines -->
+        <div style="position:absolute;top:0;bottom:0;left:53%;right:0;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:5% 4% 6%;box-sizing:border-box;">
+            <img src="images/reveltiLogoTag.png" alt="Revelti – Connect. Move. Together." style="width:59%;transform:translateY(5%);">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:0;transform:translateY(10%);">
+                <p style="margin:0;color:#fff;font-family:'Nunito',sans-serif;font-size:3.12vw;font-weight:800;text-align:center;line-height:1.2;text-shadow:0 1px 6px rgba(0,0,0,0.55);letter-spacing:-0.01em;">The event doesn&rsquo;t end<br>when the music stops.</p>
+                <p style="margin:0.8vw 0 0;color:#fff;font-family:'Nunito',sans-serif;font-size:1.89vw;font-weight:400;text-align:center;line-height:1.35;text-shadow:0 1px 4px rgba(0,0,0,0.5);">Find your dance. Find your people.</p>
+            </div>
+        </div>
     </div>
 
     <div class="max-w-2xl md:max-w-full lg:max-w-full mx-auto bg-white overflow-hidden">
