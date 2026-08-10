@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Collage Only — Revelti</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #080404;
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+
+    /* ── SHARED PHOTO COLLAGE BACKGROUND ───────────────────── */
+    .section-collage {
+      position: absolute;
+      inset: -8%;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: repeat(130, 1vh);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .section-collage-cell {
+      position: relative;
+      overflow: visible;
+    }
+
+    .section-collage-cell img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform-origin: center center;
+      display: block;
+    }
+
+    /* ── Desktop: 6 columns × 2 images each ── */
+    /* Col 1 */
+    .section-collage-cell:nth-child(1)  { grid-column: 1; grid-row:   1 / span 62; }
+    .section-collage-cell:nth-child(7)  { grid-column: 1; grid-row:  63 / span 55; }
+    /* Col 2 */
+    .section-collage-cell:nth-child(2)  { grid-column: 2; grid-row:   1 / span 35; }
+    .section-collage-cell:nth-child(8)  { grid-column: 2; grid-row:  36 / span 80; }
+    /* Col 3 */
+    .section-collage-cell:nth-child(3)  { grid-column: 3; grid-row:   1 / span 60; }
+    .section-collage-cell:nth-child(9)  { grid-column: 3; grid-row:  61 / span 58; }
+    /* Col 4 */
+    .section-collage-cell:nth-child(4)  { grid-column: 4; grid-row:   1 / span 55; }
+    .section-collage-cell:nth-child(10) { grid-column: 4; grid-row:  56 / span 62; }
+    /* Col 5 */
+    .section-collage-cell:nth-child(5)  { grid-column: 5; grid-row:   1 / span 65; }
+    .section-collage-cell:nth-child(11) { grid-column: 5; grid-row:  66 / span 52; }
+    /* Col 6 */
+    .section-collage-cell:nth-child(6)  { grid-column: 6; grid-row:   1 / span 38; }
+    .section-collage-cell:nth-child(12) { grid-column: 6; grid-row:  39 / span 78; }
+
+    /* ── Unique rotation + scale per cell (cells 1..24) ── */
+    .section-collage-cell:nth-child(1)  img { transform: rotate( -9deg) scale(1.28); }
+    .section-collage-cell:nth-child(2)  img { transform: rotate( 13deg) scale(1.18); }
+    .section-collage-cell:nth-child(3)  img { transform: rotate(-15deg) scale(1.32); }
+    .section-collage-cell:nth-child(4)  img { transform: rotate(  7deg) scale(1.20); }
+    .section-collage-cell:nth-child(5)  img { transform: rotate( 11deg) scale(1.24); }
+    .section-collage-cell:nth-child(6)  img { transform: rotate( -5deg) scale(1.30); }
+    .section-collage-cell:nth-child(7)  img { transform: rotate(  4deg) scale(1.22); }
+    .section-collage-cell:nth-child(8)  img { transform: rotate(-13deg) scale(1.16); }
+    .section-collage-cell:nth-child(9)  img { transform: rotate( 16deg) scale(1.28); }
+    .section-collage-cell:nth-child(10) img { transform: rotate( -8deg) scale(1.22); }
+    .section-collage-cell:nth-child(11) img { transform: rotate( 12deg) scale(1.18); }
+    .section-collage-cell:nth-child(12) img { transform: rotate(-10deg) scale(1.26); }
+    .section-collage-cell:nth-child(13) img { transform: rotate( -8deg) scale(1.26); }
+    .section-collage-cell:nth-child(14) img { transform: rotate( 14deg) scale(1.18); }
+    .section-collage-cell:nth-child(15) img { transform: rotate(-12deg) scale(1.30); }
+    .section-collage-cell:nth-child(16) img { transform: rotate(  9deg) scale(1.22); }
+    .section-collage-cell:nth-child(17) img { transform: rotate(-15deg) scale(1.28); }
+    .section-collage-cell:nth-child(18) img { transform: rotate(  6deg) scale(1.20); }
+    .section-collage-cell:nth-child(19) img { transform: rotate( 11deg) scale(1.24); }
+    .section-collage-cell:nth-child(20) img { transform: rotate( -7deg) scale(1.32); }
+    .section-collage-cell:nth-child(21) img { transform: rotate(-13deg) scale(1.18); }
+    .section-collage-cell:nth-child(22) img { transform: rotate( 15deg) scale(1.26); }
+    .section-collage-cell:nth-child(23) img { transform: rotate( -9deg) scale(1.20); }
+    .section-collage-cell:nth-child(24) img { transform: rotate( 10deg) scale(1.28); }
+
+    /* Hide extra mobile cells on desktop screen sizes */
+    @media (min-width: 769px) {
+      .section-collage-cell:nth-child(n+13) {
+        display: none !important;
+      }
+    }
+
+    /* ── Mobile: 3 columns × 8 images ── */
+    @media (max-width: 768px) {
+      .section-collage {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(260, 1vh);
+      }
+      .section-collage-cell:nth-child(n+13) {
+        display: block !important;
+      }
+      /* Col 1: 1, 4, 7, 10, 13, 16, 19, 22 */
+      .section-collage-cell:nth-child(1)  { grid-column: 1; grid-row:   1 / span 34; }
+      .section-collage-cell:nth-child(4)  { grid-column: 1; grid-row:  35 / span 28; }
+      .section-collage-cell:nth-child(7)  { grid-column: 1; grid-row:  63 / span 32; }
+      .section-collage-cell:nth-child(10) { grid-column: 1; grid-row:  95 / span 34; }
+      .section-collage-cell:nth-child(13) { grid-column: 1; grid-row: 129 / span 30; }
+      .section-collage-cell:nth-child(16) { grid-column: 1; grid-row: 159 / span 34; }
+      .section-collage-cell:nth-child(19) { grid-column: 1; grid-row: 193 / span 32; }
+      .section-collage-cell:nth-child(22) { grid-column: 1; grid-row: 225 / span 36; }
+
+      /* Col 2: 2, 5, 8, 11, 14, 17, 20, 23 */
+      .section-collage-cell:nth-child(2)  { grid-column: 2; grid-row:   1 / span 28; }
+      .section-collage-cell:nth-child(5)  { grid-column: 2; grid-row:  29 / span 36; }
+      .section-collage-cell:nth-child(8)  { grid-column: 2; grid-row:  65 / span 28; }
+      .section-collage-cell:nth-child(11) { grid-column: 2; grid-row:  93 / span 34; }
+      .section-collage-cell:nth-child(14) { grid-column: 2; grid-row: 127 / span 32; }
+      .section-collage-cell:nth-child(17) { grid-column: 2; grid-row: 159 / span 30; }
+      .section-collage-cell:nth-child(20) { grid-column: 2; grid-row: 189 / span 36; }
+      .section-collage-cell:nth-child(23) { grid-column: 2; grid-row: 225 / span 35; }
+
+      /* Col 3: 3, 6, 9, 12, 15, 18, 21, 24 */
+      .section-collage-cell:nth-child(3)  { grid-column: 3; grid-row:   1 / span 32; }
+      .section-collage-cell:nth-child(6)  { grid-column: 3; grid-row:  33 / span 30; }
+      .section-collage-cell:nth-child(9)  { grid-column: 3; grid-row:  63 / span 34; }
+      .section-collage-cell:nth-child(12) { grid-column: 3; grid-row:  97 / span 30; }
+      .section-collage-cell:nth-child(15) { grid-column: 3; grid-row: 127 / span 34; }
+      .section-collage-cell:nth-child(18) { grid-column: 3; grid-row: 161 / span 30; }
+      .section-collage-cell:nth-child(21) { grid-column: 3; grid-row: 191 / span 34; }
+      .section-collage-cell:nth-child(24) { grid-column: 3; grid-row: 225 / span 35; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Pure photo collage background -->
+  <div class="section-collage" aria-hidden="true">
+    <div class="section-collage-cell"><img src="albums/event/gallery5.jpg" alt=""></div>
+    <div class="section-collage-cell"><img src="albums/event/gallery11.jpg" alt=""></div>
+    <div class="section-collage-cell"><img src="albums/event/gallery3.jpg" alt=""></div>
+    <div class="section-collage-cell"><img src="albums/event/gallery9.jpg" alt=""></div>
+    <div class="section-collage-cell"><img src="albums/event/gallery1.jpg" alt=""></div>
+    <div class="section-collage-cell"><img src="albums/event/gallery7.jpg" alt=""></div>
+    <div class="section-collage-cell"><img src="albums/event/gallery10.jpg" alt=""></div>
+    <div class="section-collage-cell"><img src="albums/event/gallery4.jpg" alt=""></div>
+    <div class="section-collage-cell"><img src="albums/event/gallery12.jpg" alt=""></div>
+    <div class="section-collage-cell"><img src="albums/event/gallery2.jpg" alt=""></div>
+    <div class="section-collage-cell"><img src="albums/event/gallery8.jpg" alt=""></div>
+    <div class="section-collage-cell"><img src="albums/event/gallery5.jpg" alt=""></div>
+    <div class="section-collage-cell"><img src="albums/event/gallery9.jpg" alt=""></div>
+    <div class="section-collage-cell"><img src="albums/event/gallery1.jpg" alt=""></div>
+    <div class="section-collage-cell"><img src="albums/event/gallery7.jpg" alt=""></div>
+    <div class="section-collage-cell"><img src="albums/event/gallery11.jpg" alt=""></div>
+    <div class="section-collage-cell"><img src="albums/event/gallery3.jpg" alt=""></div>
+    <div class="section-collage-cell"><img src="albums/event/gallery10.jpg" alt=""></div>
+    <div class="section-collage-cell"><img src="albums/event/gallery4.jpg" alt=""></div>
+    <div class="section-collage-cell"><img src="albums/event/gallery12.jpg" alt=""></div>
+    <div class="section-collage-cell"><img src="albums/event/gallery2.jpg" alt=""></div>
+    <div class="section-collage-cell"><img src="albums/event/gallery8.jpg" alt=""></div>
+    <div class="section-collage-cell"><img src="albums/event/gallery5.jpg" alt=""></div>
+    <div class="section-collage-cell"><img src="albums/event/gallery1.jpg" alt=""></div>
+  </div>
+
+</body>
+</html>
