@@ -53,10 +53,13 @@
                 <header class="relative">
                     <!-- Header Banner -->
                     <div class="bg-black">
-                        <!-- Corrected direct image link -->
-                        <img src="images/creativeBanner1920x600.png" alt="Creator banner for AMedia"
-                            class="w-full h-48 object-cover"
-                            onerror="this.onerror=null;this.src='https://placehold.co/800x300/213c63/f58220?text=AMedia';">
+                        <!-- Responsive Header Banner -->
+                        <picture>
+                            <source media="(min-width: 640px)" srcset="images/creativeBanner1920x600.jpg">
+                            <img src="images/creativeBanner600x188.jpg" alt="Creator banner for AMedia"
+                                class="w-full h-48 object-cover"
+                                onerror="this.onerror=null;this.src='https://placehold.co/800x300/213c63/f58220?text=AMedia';">
+                        </picture>
                     </div>
 
                     <div class="p-6 bg-white">
@@ -437,7 +440,7 @@
                                         <div
                                             class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 shadow-sm">
                                             <div class="relative">
-                                                <img src="images/eventPoster.png" alt="Event Poster"
+                                                <img src="images/eventPoster.jpg" alt="Event Poster"
                                                     class="w-full h-40 lg:h-48 object-cover"
                                                     onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Event';">
                                                 <!-- Series Tag -->
