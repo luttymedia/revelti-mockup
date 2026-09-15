@@ -133,7 +133,13 @@
     "submit_btn_loading": "Añadiéndote...",
     "perk1": "<span class=\"perk-check\">✦</span> Acceso beta según tu perfil",
     "perk2": "<span class=\"perk-check\">✦</span> Beneficios exclusivos asegurados",
-    "perk3": "<span class=\"perk-check\">✦</span> Insignia de miembro fundador"
+    "perk3": "<span class=\"perk-check\">✦</span> Insignia de miembro fundador",
+    "terms_prefix": "Acepto el",
+    "terms_link": "tratamiento de mis datos.",
+    "terms_required_error": "⚠️ Por favor, acepta el tratamiento de tus datos para continuar.",
+    "terms_modal_title": "Cláusula Informativa Básica Formulario de Lista de Espera de Revelti",
+    "terms_modal_body": "<p><strong>RESPONSABLE TRATAMIENTO:</strong> LUCIANO MOREIRA ALVES DA SILVA</p><p style=\"margin-top: 10px;\"><strong>FINALIDAD:</strong> Unirse a la lista para acceder de forma anticipada a la plataforma Revelti.</p><p style=\"margin-top: 10px;\"><strong>LEGITIMACIÓN:</strong> Consentimiento del interesado.</p><p style=\"margin-top: 10px;\"><strong>DERECHOS:</strong> Acceso, rectificación, supresión, oposición, limitación, portabilidad, revocación del consentimiento al correo <a href=\"mailto:info@revelti.com\" class=\"terms-modal-link\">info@revelti.com</a> o mediante el procedimiento establecido en nuestra política de privacidad de la web. Si considera que el tratamiento de sus datos no se ajusta a la normativa, puede acudir a la Autoridad de Control (<a href=\"http://www.aepd.es/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"terms-modal-link\">http://www.aepd.es/</a>).</p><p style=\"margin-top: 10px;\"><strong>INFORMACIÓN ADICIONAL:</strong> Más información en nuestra <a href=\"privacy.html\" class=\"terms-modal-link\">política de privacidad</a>.</p>",
+    "terms_modal_close": "Entendido"
   },
   "fomo": {
     "text": "personas ya están en la lista de espera"

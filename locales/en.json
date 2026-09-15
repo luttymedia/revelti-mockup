@@ -133,7 +133,13 @@
     "submit_btn_loading": "Adding you...",
     "perk1": "<span class=\"perk-check\">✦</span> Profile-specific beta access",
     "perk2": "<span class=\"perk-check\">✦</span> Early bird perks lock-in",
-    "perk3": "<span class=\"perk-check\">✦</span> Founding member label"
+    "perk3": "<span class=\"perk-check\">✦</span> Founding member label",
+    "terms_prefix": "I accept the",
+    "terms_link": "processing of my data.",
+    "terms_required_error": "⚠️ Please accept the processing of your data to continue.",
+    "terms_modal_title": "Basic Information Clause - Revelti Waitlist Form",
+    "terms_modal_body": "<p><strong>DATA CONTROLLER:</strong> LUCIANO MOREIRA ALVES DA SILVA</p><p style=\"margin-top: 10px;\"><strong>PURPOSE:</strong> Joining the waitlist to obtain early access to the Revelti platform.</p><p style=\"margin-top: 10px;\"><strong>LEGAL BASIS:</strong> Consent of the data subject.</p><p style=\"margin-top: 10px;\"><strong>RIGHTS:</strong> Access, rectification, erasure, objection, restriction, portability, and revocation of consent by emailing <a href=\"mailto:info@revelti.com\" class=\"terms-modal-link\">info@revelti.com</a> or through the procedure set out in our website's privacy policy. If you believe that the processing of your data does not comply with regulations, you may contact the Supervisory Authority (<a href=\"http://www.aepd.es/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"terms-modal-link\">http://www.aepd.es/</a>).</p><p style=\"margin-top: 10px;\"><strong>ADDITIONAL INFORMATION:</strong> More information in our <a href=\"privacy.html\" class=\"terms-modal-link\">privacy policy</a>.</p>",
+    "terms_modal_close": "Got it"
   },
   "fomo": {
     "text": "people already on the waitlist"

@@ -2699,15 +2699,18 @@
       font-weight: 700;
       text-align: center;
       margin-bottom: 16px;
-      background: #0f172a;
-      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(220, 38, 38, 0.28);
+      border: 1px solid rgba(248, 113, 113, 0.5);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       border-radius: 12px;
       padding: 10px 16px;
       max-width: 480px;
       margin-left: auto;
       margin-right: auto;
       box-sizing: border-box;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25), 0 0 16px rgba(220, 38, 38, 0.2);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
     }
 
     @keyframes shake {
@@ -2764,7 +2767,7 @@
       border-radius: 18px;
       padding: 6px;
       max-width: 480px;
-      margin: 0 auto 20px;
+      margin: 0 auto 16px;
       transition: border-color 0.3s, box-shadow 0.3s;
       overflow: hidden;
       box-shadow: var(--shadow-premium);
@@ -2810,6 +2813,115 @@
     .waitlist-btn:hover {
       background: #ff9030;
       box-shadow: 0 8px 30px rgba(245, 130, 32, 0.4);
+    }
+
+    .waitlist-terms-wrapper {
+      max-width: 480px;
+      margin: 0 auto 16px;
+      text-align: center;
+      transition: all 0.25s ease;
+    }
+
+    .waitlist-terms-label {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.88);
+      cursor: pointer;
+      user-select: none;
+      line-height: 1.4;
+      padding: 4px 10px;
+      border-radius: 8px;
+      transition: background 0.2s ease, outline 0.2s ease;
+    }
+
+    .waitlist-terms-label:hover {
+      color: #ffffff;
+    }
+
+    .waitlist-terms-checkbox {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 17px;
+      height: 17px;
+      border: 1.5px solid rgba(255, 255, 255, 0.5);
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.12);
+      cursor: pointer;
+      display: inline-grid;
+      place-content: center;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+      margin: 0;
+      vertical-align: middle;
+      position: relative;
+    }
+
+    .waitlist-terms-checkbox:hover {
+      border-color: #ffffff;
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .waitlist-terms-checkbox:checked {
+      background: var(--orange);
+      border-color: var(--orange);
+    }
+
+    .waitlist-terms-checkbox:checked::after {
+      content: "";
+      width: 5px;
+      height: 9px;
+      border: solid #ffffff;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      margin-bottom: 2px;
+    }
+
+    .waitlist-terms-checkbox:focus-visible {
+      outline: 2px solid var(--orange);
+      outline-offset: 2px;
+    }
+
+    .waitlist-terms-link {
+      color: #ffffff;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    .waitlist-terms-link:hover {
+      color: var(--orange);
+    }
+
+    .waitlist-terms-wrapper.error .waitlist-terms-label {
+      animation: shake 0.4s ease-in-out;
+      outline: 1.5px solid #ffffff;
+      outline-offset: 2px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .waitlist-terms-error {
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+      margin-top: 10px;
+      background: rgba(220, 38, 38, 0.28);
+      border: 1px solid rgba(248, 113, 113, 0.5);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 12px;
+      padding: 10px 16px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      box-sizing: border-box;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25), 0 0 16px rgba(220, 38, 38, 0.2);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+      animation: shake 0.4s ease-in-out;
     }
 
     .waitlist-perks {
@@ -2889,6 +3001,7 @@
     }
 
     .modal-card {
+      position: relative;
       background: var(--surface);
       border: 1px solid var(--border-color);
       border-radius: 24px;
@@ -2903,6 +3016,70 @@
 
     .modal-overlay.open .modal-card {
       transform: translateY(0);
+    }
+
+    .modal-dismiss-x {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      background: transparent;
+      border: none;
+      font-size: 18px;
+      color: var(--muted);
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .modal-dismiss-x:hover {
+      background: rgba(0, 0, 0, 0.06);
+      color: var(--text);
+    }
+
+    .terms-modal-card {
+      max-width: 520px;
+    }
+
+    .terms-modal-title {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      line-height: 1.4;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .terms-modal-body {
+      text-align: left;
+      line-height: 1.6;
+      font-size: 13px;
+      max-height: 60vh;
+      overflow-y: auto;
+      padding-right: 6px;
+    }
+
+    .terms-modal-body strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .terms-modal-link {
+      color: var(--orange);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      font-weight: 600;
+      word-break: break-word;
+      transition: color 0.2s ease;
+    }
+
+    .terms-modal-link:hover {
+      color: #ff9030;
     }
 
     .modal-icon {
@@ -3166,6 +3343,10 @@
 
       .waitlist-btn {
         border-radius: 10px;
+      }
+
+      .waitlist-terms-wrapper {
+        padding: 0 8px;
       }
 
       .chaos-tool {
@@ -3866,6 +4047,18 @@
           <button type="submit" class="waitlist-btn" id="waitlist-submit-btn" data-i18n="waitlist.submit_btn">Join the Waitlist</button>
         </form>
         <iframe name="brevo-target-iframe" id="brevo-target-iframe" style="display:none;" aria-hidden="true"></iframe>
+
+        <!-- Terms checkbox -->
+        <div class="waitlist-terms-wrapper" id="waitlist-terms-wrapper">
+          <label class="waitlist-terms-label" for="waitlist-terms-checkbox">
+            <input type="checkbox" id="waitlist-terms-checkbox" class="waitlist-terms-checkbox">
+            <span class="waitlist-terms-text">
+              <span data-i18n="waitlist.terms_prefix">I accept the</span>
+              <a href="#" class="waitlist-terms-link" id="waitlist-terms-link" onclick="openTermsModal(event)" data-i18n="waitlist.terms_link">processing of my data.</a>
+            </span>
+          </label>
+          <div class="waitlist-terms-error" id="waitlist-terms-error" style="display: none;" data-i18n="waitlist.terms_required_error">⚠️ Please accept the processing of your data to continue.</div>
+        </div>
       </div>
 
       <div class="waitlist-perks reveal reveal-delay-4">
@@ -3919,6 +4112,23 @@
         Tell your people. The night doesn't end here. 🔥
       </div>
       <button class="modal-close" onclick="closeModal()" data-i18n="modal.success_close">Let's go! 🚀</button>
+    </div>
+  </div>
+
+  <!-- TERMS & CONDITIONS MODAL -->
+  <div class="modal-overlay" id="terms-modal" role="dialog" aria-modal="true" aria-labelledby="terms-modal-title">
+    <div class="modal-card terms-modal-card">
+      <button type="button" class="modal-dismiss-x" onclick="closeTermsModal()" aria-label="Close modal">✕</button>
+      <div class="modal-icon">📋</div>
+      <div class="modal-title terms-modal-title" id="terms-modal-title" data-i18n="waitlist.terms_modal_title">Basic Information Clause - Revelti Waitlist Form</div>
+      <div class="modal-body terms-modal-body" id="terms-modal-body" data-i18n-html="waitlist.terms_modal_body">
+        <p><strong>DATA CONTROLLER:</strong> LUCIANO MOREIRA ALVES DA SILVA</p>
+        <p style="margin-top: 10px;"><strong>PURPOSE:</strong> Joining the waitlist to obtain early access to the Revelti platform.</p>
+        <p style="margin-top: 10px;"><strong>LEGAL BASIS:</strong> Consent of the data subject.</p>
+        <p style="margin-top: 10px;"><strong>RIGHTS:</strong> Access, rectification, erasure, objection, restriction, portability, and revocation of consent by emailing <a href="mailto:info@revelti.com" class="terms-modal-link">info@revelti.com</a> or through the procedure set out in our website's privacy policy. If you believe that the processing of your data does not comply with regulations, you may contact the Supervisory Authority (<a href="http://www.aepd.es/" target="_blank" rel="noopener noreferrer" class="terms-modal-link">http://www.aepd.es/</a>).</p>
+        <p style="margin-top: 10px;"><strong>ADDITIONAL INFORMATION:</strong> More information in our <a href="privacy.html" class="terms-modal-link">privacy policy</a>.</p>
+      </div>
+      <button type="button" class="modal-close" onclick="closeTermsModal()" data-i18n="waitlist.terms_modal_close">Got it</button>
     </div>
   </div>
 
@@ -4524,6 +4734,11 @@
       const role = roleInput ? roleInput.value : '';
       const roleSelector = document.getElementById('waitlist-role-selector');
       const roleError = document.getElementById('waitlist-role-error');
+      const termsCheckbox = document.getElementById('waitlist-terms-checkbox');
+      const termsError = document.getElementById('waitlist-terms-error');
+      const termsWrapper = document.getElementById('waitlist-terms-wrapper');
+
+      let hasError = false;
 
       if (!role) {
         if (roleSelector) {
@@ -4534,8 +4749,22 @@
         if (roleError) {
           roleError.style.display = 'block';
         }
-        return;
+        hasError = true;
       }
+
+      if (!termsCheckbox || !termsCheckbox.checked) {
+        if (termsWrapper) {
+          termsWrapper.classList.remove('error');
+          void termsWrapper.offsetWidth; // trigger reflow
+          termsWrapper.classList.add('error');
+        }
+        if (termsError) {
+          termsError.style.display = 'block';
+        }
+        hasError = true;
+      }
+
+      if (hasError) return;
 
       if (!input || !input.value) return;
 
@@ -4565,6 +4794,9 @@
       setTimeout(() => {
         // Reset form
         document.getElementById('waitlist-form').reset();
+        if (termsCheckbox) termsCheckbox.checked = false;
+        if (termsError) termsError.style.display = 'none';
+        if (termsWrapper) termsWrapper.classList.remove('error');
         setWaitlistRole('');
         btn.disabled = false;
         btn.textContent = i18n.t('waitlist.submit_btn');
@@ -4625,8 +4857,45 @@
       if (e.target === this) closeModal();
     });
 
+    /* ===================== TERMS MODAL ===================== */
+    function openTermsModal(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      const modal = document.getElementById('terms-modal');
+      if (modal) modal.classList.add('open');
+    }
+
+    function closeTermsModal() {
+      const modal = document.getElementById('terms-modal');
+      if (modal) modal.classList.remove('open');
+    }
+
+    const termsModalEl = document.getElementById('terms-modal');
+    if (termsModalEl) {
+      termsModalEl.addEventListener('click', function (e) {
+        if (e.target === this) closeTermsModal();
+      });
+    }
+
+    const termsCheckboxEl = document.getElementById('waitlist-terms-checkbox');
+    if (termsCheckboxEl) {
+      termsCheckboxEl.addEventListener('change', function () {
+        if (this.checked) {
+          const termsError = document.getElementById('waitlist-terms-error');
+          const termsWrapper = document.getElementById('waitlist-terms-wrapper');
+          if (termsError) termsError.style.display = 'none';
+          if (termsWrapper) termsWrapper.classList.remove('error');
+        }
+      });
+    }
+
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeModal();
+      if (e.key === 'Escape') {
+        closeModal();
+        closeTermsModal();
+      }
     });
 
     /* ===================== HIDE FOMO BAR ON WAITLIST ===================== */
