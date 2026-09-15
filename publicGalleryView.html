@@ -62,7 +62,7 @@
             // Block clicks on filters and close button, allow browsing, shuffle, and back to top
             document.addEventListener('click', (e) => {
                 const allowed = e.target.closest(
-                    '.grid-item, #popup, #btn-back-to-top, #btn-shuffle, [data-open-media-modal], .masonry-image, #popup-close, #btn-prev, #btn-next'
+                    '.grid-item, #popup, #modal-flag, #btn-flag-photo, #btn-back-to-top, #btn-shuffle, [data-open-media-modal], .masonry-image, #popup-close, #btn-prev, #btn-next'
                 );
                 const isBlocked = !allowed || e.target.closest('#filters-wrapper, #close-gallery-overlay');
                 if (isBlocked) {
@@ -669,6 +669,106 @@
             z-index: 10011;
         }
 
+        #btn-flag-photo:hover {
+            color: #f87171;
+            transform: scale(1.1);
+        }
+
+        /* --- Flag / Report Modal --- */
+        #modal-flag {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 10050;
+            background: rgba(3, 7, 18, 0.88);
+            backdrop-filter: blur(10px);
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .flag-card {
+            background: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 24px;
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.85);
+            animation: flagModalScaleIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes flagModalScaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .flag-option-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            background: rgba(17, 24, 39, 0.7);
+            border: 1px solid #1f2937;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .flag-option-card:hover {
+            background: rgba(31, 41, 55, 0.7);
+            border-color: #374151;
+        }
+
+        .flag-option-card.selected,
+        .flag-option-card:has(input:checked) {
+            border-color: #f58220;
+            background: rgba(245, 130, 32, 0.08);
+        }
+
+        .flag-option-card input[type="radio"] {
+            margin-top: 2px;
+            cursor: pointer;
+            accent-color: #f58220;
+        }
+
+        /* Floating Toast */
+        #flag-toast {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: #1f2937;
+            border: 1px solid #374151;
+            color: #f3f4f6;
+            padding: 10px 18px;
+            border-radius: 9999px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            z-index: 10060;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        #flag-toast.show {
+            display: flex;
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
         #popup-content-wrapper {
             display: flex;
             justify-content: center;
@@ -925,6 +1025,187 @@
         </div>
     </div>
 
+    <!-- Flag / Report Modal -->
+    <div id="modal-flag" onclick="handleFlagBackdropClick(event)">
+        <div class="flag-card" onclick="event.stopPropagation()">
+            <!-- Form View -->
+            <div id="flag-form-view">
+                <!-- Header -->
+                <div class="flex items-start justify-between pb-3 border-b border-gray-800">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-red-500/10 border border-red-500/25 flex items-center justify-center text-red-400 shrink-0">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
+                                <line x1="4" y1="22" x2="4" y2="15"></line>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-bold text-white leading-tight">Report or Request Removal</h3>
+                            <p class="text-xs text-gray-400 mt-0.5">Let us know about an issue with this media</p>
+                        </div>
+                    </div>
+                    <button class="text-gray-400 hover:text-white p-1 rounded-lg transition-colors" onclick="closeFlagModal()" aria-label="Close modal">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Media Preview Card -->
+                <div class="mt-4 p-2.5 rounded-xl bg-gray-900/90 border border-gray-800 flex items-center gap-3.5">
+                    <img id="flag-media-thumb" src="" alt="Thumbnail" class="w-12 h-12 rounded-lg object-cover border border-gray-700 bg-gray-950 shrink-0">
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-black text-revelti-orange uppercase tracking-wider" id="flag-media-id">Photo #1</span>
+                            <span class="text-xs text-gray-600">•</span>
+                            <span class="text-xs text-gray-300 font-semibold truncate" id="flag-media-creator">AMedia</span>
+                        </div>
+                        <p class="text-[11px] text-gray-400 truncate mt-0.5">Dance Fest Spain 2026 • Public Gallery</p>
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <form id="flag-report-form" onsubmit="handleFlagSubmit(event)" class="mt-4 space-y-4">
+                    <!-- Reasons -->
+                    <div>
+                        <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
+                            Reason for request <span class="text-red-400">*</span>
+                        </label>
+                        <div class="space-y-2" id="flag-reasons-group">
+                            <label class="flag-option-card selected">
+                                <input type="radio" name="flag_reason" value="removal" checked onchange="handleFlagReasonChange(this)">
+                                <div class="text-xs">
+                                    <span class="font-bold text-gray-200 block">I am in this photo & request removal</span>
+                                    <span class="text-[11px] text-gray-400">You appear in this image and would like it taken down from the public gallery</span>
+                                </div>
+                            </label>
+
+                            <label class="flag-option-card">
+                                <input type="radio" name="flag_reason" value="inappropriate" onchange="handleFlagReasonChange(this)">
+                                <div class="text-xs">
+                                    <span class="font-bold text-gray-200 block">Inappropriate or offensive content</span>
+                                    <span class="text-[11px] text-gray-400">Contains nudity, explicit gestures, violence, or violates community guidelines</span>
+                                </div>
+                            </label>
+
+                            <label class="flag-option-card">
+                                <input type="radio" name="flag_reason" value="privacy" onchange="handleFlagReasonChange(this)">
+                                <div class="text-xs">
+                                    <span class="font-bold text-gray-200 block">Privacy or safety concern</span>
+                                    <span class="text-[11px] text-gray-400">Shows sensitive personal details, minors without consent, or harassment</span>
+                                </div>
+                            </label>
+
+                            <label class="flag-option-card">
+                                <input type="radio" name="flag_reason" value="copyright" onchange="handleFlagReasonChange(this)">
+                                <div class="text-xs">
+                                    <span class="font-bold text-gray-200 block">Copyright or intellectual property issue</span>
+                                    <span class="text-[11px] text-gray-400">You hold the copyright to this material and did not grant permission</span>
+                                </div>
+                            </label>
+
+                            <label class="flag-option-card">
+                                <input type="radio" name="flag_reason" value="other" onchange="handleFlagReasonChange(this)">
+                                <div class="text-xs">
+                                    <span class="font-bold text-gray-200 block">Other reason / request</span>
+                                    <span class="text-[11px] text-gray-400">Photo quality issue, duplicate, tag correction, or custom inquiry</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Details Open Text Field -->
+                    <div>
+                        <div class="flex justify-between items-center mb-1.5">
+                            <label for="flag-details" class="text-xs font-bold text-gray-300 uppercase tracking-wider">
+                                Request Details / Comments
+                            </label>
+                            <span class="text-[11px] text-gray-500" id="flag-details-hint">Helpful for identification</span>
+                        </div>
+                        <textarea id="flag-details" rows="3"
+                            class="w-full bg-gray-950/80 border border-gray-800 rounded-xl p-3 text-xs text-gray-200 placeholder-gray-500 focus:outline-none focus:border-revelti-orange transition-colors resize-none leading-relaxed"
+                            placeholder="Help us identify you (e.g. wearing blue shirt on the left, near the stage)..."></textarea>
+                    </div>
+
+                    <!-- Contact Email -->
+                    <div>
+                        <label for="flag-email" class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1.5">
+                            Your Email Address <span class="text-red-400">*</span>
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-500">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                            </div>
+                            <input type="email" id="flag-email" required
+                                class="w-full bg-gray-950/80 border border-gray-800 rounded-xl pl-10 pr-3.5 py-2.5 text-xs text-gray-200 placeholder-gray-500 focus:outline-none focus:border-revelti-orange transition-colors"
+                                placeholder="name@example.com">
+                        </div>
+                        <p class="text-[11px] text-gray-500 mt-1.5 flex items-center gap-1.5">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-400 shrink-0">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="16" x2="12" y2="12"></line>
+                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                            </svg>
+                            We'll email you a confirmation and follow-up once reviewed.
+                        </p>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="pt-3 flex items-center justify-end gap-3 border-t border-gray-800">
+                        <button type="button" onclick="closeFlagModal()" class="px-4 py-2 rounded-xl border border-gray-700 text-xs font-bold text-gray-300 hover:bg-gray-800 hover:text-white transition-all">
+                            Cancel
+                        </button>
+                        <button type="submit" id="flag-submit-btn" class="flex items-center justify-center gap-2 bg-revelti-orange hover:bg-orange-600 px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider text-white transition-all shadow-md active:scale-95 min-w-[135px]">
+                            <span>Submit Request</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Success Confirmation View -->
+            <div id="flag-success-view" class="hidden text-center py-5 px-2">
+                <div class="w-14 h-14 mx-auto rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-4">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-black text-white mb-1.5 tracking-tight">Request Received</h3>
+                <p class="text-xs text-gray-300 max-w-sm mx-auto leading-relaxed mb-5">
+                    Thank you for notifying us. Your request regarding <span id="flag-success-media-id" class="font-bold text-revelti-orange">Photo #1</span> has been logged and our moderation team will review it promptly.
+                </p>
+
+                <div class="bg-gray-950/70 border border-gray-800 rounded-xl p-3.5 max-w-sm mx-auto mb-6 text-left flex items-start gap-3">
+                    <div class="mt-0.5 text-revelti-orange">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </div>
+                    <div class="min-w-0">
+                        <div class="text-[11px] text-gray-400 uppercase font-bold tracking-wider">Updates will be sent to:</div>
+                        <div class="text-xs font-semibold text-white truncate mt-0.5" id="flag-success-email">user@example.com</div>
+                    </div>
+                </div>
+
+                <button type="button" onclick="closeFlagModal()" class="w-full sm:w-auto bg-gray-800 hover:bg-gray-700 text-white text-xs font-bold uppercase tracking-wider px-8 py-2.5 rounded-xl border border-gray-700 transition-colors">
+                    Done
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Toast Notification -->
+    <div id="flag-toast">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+        <span id="flag-toast-text">Request submitted successfully</span>
+    </div>
+
     <!-- Lightbox Modal -->
     <div id="popup" onclick="closeLightboxOnClick(event)">
         <div class="popup-header">
@@ -958,6 +1239,13 @@
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                         <polyline points="7 10 12 15 17 10"></polyline>
                         <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                </button>
+                <button class="action-btn" id="btn-flag-photo" title="Report or Request Removal" aria-label="Report or Request Removal" onclick="openFlagModal(event)">
+                    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
+                        <line x1="4" y1="22" x2="4" y2="15"></line>
                     </svg>
                 </button>
                 <button class="action-btn close" id="popup-close" onclick="closeLightbox(event)">&times;</button>
@@ -1131,13 +1419,15 @@
 
         let lastNavTime = 0;
         function navigateLightbox(direction) {
+            const flagModal = document.getElementById('modal-flag');
+            if (flagModal && flagModal.style.display === 'flex') return;
             const now = Date.now();
             if (now - lastNavTime < 400) return;
             lastNavTime = now;
             currentIndex = (currentIndex + direction + currentVisibleItems.length) % currentVisibleItems.length;
             updateLightbox(direction);
         }
-        function closeLightbox(e) { if (e) e.stopPropagation(); popup.style.display = 'none'; document.body.style.overflow = 'auto'; }
+        function closeLightbox(e) { if (e) e.stopPropagation(); closeFlagModal(); popup.style.display = 'none'; document.body.style.overflow = 'auto'; }
         function closeLightboxOnClick(e) {
             const wrapper = document.getElementById('popup-content-wrapper');
             if (e.target === popup || e.target === wrapper) {
@@ -1216,6 +1506,172 @@
         });
 
         updateShuffleButton();
+
+        // --- Flag / Report Modal Logic ---
+        function openFlagModal(e) {
+            if (e) e.stopPropagation();
+            const item = currentVisibleItems[currentIndex];
+            if (!item) return;
+
+            // Reset modal views
+            const formView = document.getElementById('flag-form-view');
+            const successView = document.getElementById('flag-success-view');
+            if (formView) formView.classList.remove('hidden');
+            if (successView) successView.classList.add('hidden');
+
+            const form = document.getElementById('flag-report-form');
+            if (form) form.reset();
+
+            // Set active radio styling and default placeholder
+            document.querySelectorAll('#flag-reasons-group .flag-option-card').forEach((card, i) => {
+                card.classList.toggle('selected', i === 0);
+            });
+            updateFlagPlaceholder('removal');
+
+            // Populate media info
+            const isVideo = item.type === 'videos';
+            const mediaLabel = (isVideo ? 'Video' : 'Photo') + ' #' + (item.id + 1);
+            document.getElementById('flag-media-id').textContent = mediaLabel;
+            
+            const meta = creatorMetadata[item.creator];
+            document.getElementById('flag-media-creator').textContent = meta ? meta.name : item.creator;
+
+            const activeImg = document.getElementById('popup-img');
+            const thumbImg = document.getElementById('flag-media-thumb');
+            const triggerImg = document.querySelector(`.grid-item[data-id="${item.id}"] img`);
+            thumbImg.src = (activeImg && activeImg.src) ? activeImg.src : (triggerImg ? triggerImg.src : item.src);
+            thumbImg.onerror = () => { thumbImg.src = item.fallback; };
+
+            // Reset submit button
+            const submitBtn = document.getElementById('flag-submit-btn');
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<span>Submit Request</span>';
+
+            // Show modal
+            const modal = document.getElementById('modal-flag');
+            modal.style.display = 'flex';
+        }
+
+        function closeFlagModal() {
+            const modal = document.getElementById('modal-flag');
+            if (modal) modal.style.display = 'none';
+        }
+
+        function handleFlagBackdropClick(e) {
+            if (e.target.id === 'modal-flag') {
+                closeFlagModal();
+            }
+        }
+
+        function handleFlagReasonChange(radio) {
+            document.querySelectorAll('#flag-reasons-group .flag-option-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            if (radio.checked) {
+                radio.closest('.flag-option-card').classList.add('selected');
+            }
+            updateFlagPlaceholder(radio.value);
+        }
+
+        function updateFlagPlaceholder(reason) {
+            const textarea = document.getElementById('flag-details');
+            const hint = document.getElementById('flag-details-hint');
+            if (!textarea) return;
+
+            if (reason === 'removal') {
+                textarea.placeholder = 'Help us identify you (e.g. wearing blue shirt on the left, near the stage)...';
+                if (hint) hint.textContent = 'Helpful for identification';
+            } else if (reason === 'inappropriate') {
+                textarea.placeholder = 'Please tell us what part of this content is inappropriate or violates guidelines...';
+                if (hint) hint.textContent = 'Please describe the violation';
+            } else if (reason === 'privacy') {
+                textarea.placeholder = 'Please explain the privacy or safety concern...';
+                if (hint) hint.textContent = 'Confidential details';
+            } else if (reason === 'copyright') {
+                textarea.placeholder = 'Please provide details on your ownership or copyright registration...';
+                if (hint) hint.textContent = 'Proof of ownership';
+            } else {
+                textarea.placeholder = 'Please share any additional details or request specifics...';
+                if (hint) hint.textContent = 'Optional details';
+            }
+        }
+
+        function handleFlagSubmit(e) {
+            e.preventDefault();
+            const item = currentVisibleItems[currentIndex];
+            const emailInput = document.getElementById('flag-email');
+            const submitBtn = document.getElementById('flag-submit-btn');
+
+            if (!emailInput.checkValidity()) {
+                emailInput.reportValidity();
+                return;
+            }
+
+            // Simulate server submission
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `
+                <svg class="animate-spin -ml-1 mr-1.5 h-3.5 w-3.5 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                </svg>
+                <span>Submitting...</span>
+            `;
+
+            setTimeout(() => {
+                const isVideo = item && item.type === 'videos';
+                const mediaLabel = item ? ((isVideo ? 'Video' : 'Photo') + ' #' + (item.id + 1)) : 'Photo';
+                
+                document.getElementById('flag-success-media-id').textContent = mediaLabel;
+                document.getElementById('flag-success-email').textContent = emailInput.value;
+
+                document.getElementById('flag-form-view').classList.add('hidden');
+                document.getElementById('flag-success-view').classList.remove('hidden');
+
+                showFlagToast('Request submitted for ' + mediaLabel);
+            }, 750);
+        }
+
+        let toastTimeout;
+        function showFlagToast(msg) {
+            const toast = document.getElementById('flag-toast');
+            const text = document.getElementById('flag-toast-text');
+            if (!toast) return;
+            text.textContent = msg;
+            toast.classList.add('show');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+
+        // Global keydown handler for Lightbox & Flag modal
+        document.addEventListener('keydown', (e) => {
+            const modal = document.getElementById('modal-flag');
+            const isFlagOpen = modal && modal.style.display === 'flex';
+
+            if (e.key === 'Escape') {
+                if (isFlagOpen) {
+                    closeFlagModal();
+                    e.stopPropagation();
+                    return;
+                }
+                if (popup && popup.style.display === 'flex') {
+                    closeLightbox(e);
+                    e.stopPropagation();
+                    return;
+                }
+            }
+
+            if (isFlagOpen) return; // Don't navigate with arrows when typing in modal
+
+            if (popup && popup.style.display === 'flex') {
+                if (e.key === 'ArrowLeft') {
+                    navigateLightbox(-1);
+                } else if (e.key === 'ArrowRight') {
+                    navigateLightbox(1);
+                }
+            }
+        });
     </script>
     <!-- Overlay Close Button (Only visible when in iframe) -->
     <button id="close-gallery-overlay"
