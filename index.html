@@ -2987,12 +2987,16 @@
       z-index: 200;
       background: rgba(248, 250, 252, 0.85);
       backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 16px;
+      box-sizing: border-box;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.35s;
+      overscroll-behavior: contain;
     }
 
     .modal-overlay.open {
@@ -3020,8 +3024,8 @@
 
     .modal-dismiss-x {
       position: absolute;
-      top: 18px;
-      right: 18px;
+      top: 16px;
+      right: 16px;
       background: transparent;
       border: none;
       font-size: 18px;
@@ -3034,6 +3038,7 @@
       align-items: center;
       justify-content: center;
       transition: background 0.2s, color 0.2s;
+      z-index: 2;
     }
 
     .modal-dismiss-x:hover {
@@ -3042,25 +3047,47 @@
     }
 
     .terms-modal-card {
-      max-width: 520px;
+      max-width: 500px;
+      width: 100%;
+      max-height: calc(100dvh - 32px);
+      max-height: calc(100vh - 32px);
+      display: flex;
+      flex-direction: column;
+      padding: 28px 24px 20px;
+      border-radius: 20px;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    .terms-modal-card .modal-icon {
+      width: 48px;
+      height: 48px;
+      font-size: 22px;
+      margin: 0 auto 12px;
+      border-radius: 16px;
+      flex-shrink: 0;
     }
 
     .terms-modal-title {
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 800;
       letter-spacing: 0.02em;
-      line-height: 1.4;
-      margin-bottom: 16px;
+      line-height: 1.35;
+      margin-bottom: 12px;
       text-transform: uppercase;
       color: var(--text);
+      flex-shrink: 0;
     }
 
     .terms-modal-body {
-      text-align: left;
-      line-height: 1.6;
-      font-size: 13px;
-      max-height: 60vh;
+      flex: 1 1 auto;
+      min-height: 0;
       overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      text-align: left;
+      line-height: 1.55;
+      font-size: 12.5px;
+      margin-bottom: 14px;
       padding-right: 6px;
     }
 
@@ -3080,6 +3107,12 @@
 
     .terms-modal-link:hover {
       color: #ff9030;
+    }
+
+    .terms-modal-card .modal-close {
+      flex-shrink: 0;
+      padding: 10px 28px;
+      align-self: center;
     }
 
     .modal-icon {
@@ -3357,6 +3390,32 @@
       .waitlist-role-selector {
         flex-direction: column;
         gap: 8px;
+      }
+
+      .terms-modal-card {
+        padding: 20px 16px 16px;
+        max-height: calc(100dvh - 24px);
+        max-height: calc(100vh - 24px);
+        border-radius: 16px;
+      }
+
+      .terms-modal-card .modal-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+        margin: 0 auto 8px;
+        border-radius: 12px;
+      }
+
+      .terms-modal-title {
+        font-size: 12.5px;
+        margin-bottom: 10px;
+      }
+
+      .terms-modal-body {
+        font-size: 11.5px;
+        line-height: 1.5;
+        margin-bottom: 12px;
       }
     }
 
@@ -4461,6 +4520,42 @@
     }
 
 
+    /* ===================== SCROLL LOCK HELPERS ===================== */
+    let activeModalScrollLocks = 0;
+
+    function lockBodyScroll() {
+      activeModalScrollLocks++;
+      if (activeModalScrollLocks === 1) {
+        const scrollY = window.scrollY;
+        document.body.setAttribute('data-scroll-y', scrollY);
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${scrollY}px`;
+        document.body.style.width = '100%';
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function unlockBodyScroll() {
+      if (activeModalScrollLocks > 0) {
+        activeModalScrollLocks--;
+      }
+      if (activeModalScrollLocks === 0 && document.body.hasAttribute('data-scroll-y')) {
+        const scrollY = parseInt(document.body.getAttribute('data-scroll-y') || '0', 10);
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+        document.body.removeAttribute('data-scroll-y');
+
+        // Temporarily disable smooth scroll animation for an instant jump
+        const html = document.documentElement;
+        const originalScroll = html.style.scrollBehavior;
+        html.style.scrollBehavior = 'auto';
+        window.scrollTo(0, scrollY);
+        html.style.scrollBehavior = originalScroll;
+      }
+    }
+
     /* ===================== MOBILE MOCKUP MODAL DRIVER ===================== */
     function openMobileMockupModal(persona, slideIndex) {
       if (window.innerWidth > 991) return;
@@ -4499,13 +4594,7 @@
         if (footerHint) footerHint.innerText = i18n.t('modal.mobile_hint_interact');
       }
 
-      if (!document.body.hasAttribute('data-scroll-y')) {
-        const scrollY = window.scrollY;
-        document.body.setAttribute('data-scroll-y', scrollY);
-        document.body.style.position = 'fixed';
-        document.body.style.top = `-${scrollY}px`;
-        document.body.style.width = '100%';
-      }
+      lockBodyScroll();
       modal.style.display = 'flex';
     }
 
@@ -4536,13 +4625,7 @@
         if (footerHint) footerHint.innerText = i18n.t('modal.desktop_hint');
       }
 
-      if (!document.body.hasAttribute('data-scroll-y')) {
-        const scrollY = window.scrollY;
-        document.body.setAttribute('data-scroll-y', scrollY);
-        document.body.style.position = 'fixed';
-        document.body.style.top = `-${scrollY}px`;
-        document.body.style.width = '100%';
-      }
+      lockBodyScroll();
       modal.style.display = 'flex';
     }
 
@@ -4567,20 +4650,7 @@
       }
 
       modal.style.display = 'none';
-      if (document.body.hasAttribute('data-scroll-y')) {
-        const scrollY = parseInt(document.body.getAttribute('data-scroll-y') || '0');
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.width = '';
-        document.body.removeAttribute('data-scroll-y');
-
-        // Temporarily disable smooth scroll animation for an instant jump
-        const html = document.documentElement;
-        const originalScroll = html.style.scrollBehavior;
-        html.style.scrollBehavior = 'auto';
-        window.scrollTo(0, scrollY);
-        html.style.scrollBehavior = originalScroll;
-      }
+      unlockBodyScroll();
 
       // Resume auto-sliding carousels
       resetOrgAuto();
@@ -4810,6 +4880,7 @@
         renderModalBody(role);
 
         // show modal
+        lockBodyScroll();
         document.getElementById('success-modal').classList.add('open');
       }, 800);
     }
@@ -4850,7 +4921,11 @@
     }
 
     function closeModal() {
-      document.getElementById('success-modal').classList.remove('open');
+      const modal = document.getElementById('success-modal');
+      if (modal && modal.classList.contains('open')) {
+        modal.classList.remove('open');
+        unlockBodyScroll();
+      }
     }
 
     document.getElementById('success-modal').addEventListener('click', function (e) {
@@ -4864,12 +4939,18 @@
         e.stopPropagation();
       }
       const modal = document.getElementById('terms-modal');
-      if (modal) modal.classList.add('open');
+      if (modal && !modal.classList.contains('open')) {
+        lockBodyScroll();
+        modal.classList.add('open');
+      }
     }
 
     function closeTermsModal() {
       const modal = document.getElementById('terms-modal');
-      if (modal) modal.classList.remove('open');
+      if (modal && modal.classList.contains('open')) {
+        modal.classList.remove('open');
+        unlockBodyScroll();
+      }
     }
 
     const termsModalEl = document.getElementById('terms-modal');
@@ -4895,6 +4976,9 @@
       if (e.key === 'Escape') {
         closeModal();
         closeTermsModal();
+        if (typeof closeMobileMockupModal === 'function') {
+          closeMobileMockupModal();
+        }
       }
     });
 
