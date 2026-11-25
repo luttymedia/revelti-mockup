@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="{{lang}}">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="/icons/favicon-192.png">
+  <link rel="apple-touch-icon" href="/icons/favicon-192.png">
+  <title>{{pageTitle}}</title>
+  <meta name="description" content="{{metaDescription}}">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="{{canonicalUrl}}">
+  {{hreflangLinks}}
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Revelti">
+  <meta property="og:locale" content="{{ogLocale}}">
+  {{ogAlternateLocale}}
+  <meta property="og:title" content="{{ogTitle}}">
+  <meta property="og:description" content="{{metaDescription}}">
+  <meta property="og:url" content="{{canonicalUrl}}">
+  <meta property="og:image" content="{{ogImage}}">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ogTitle}}">
+  <meta name="twitter:description" content="{{metaDescription}}">
+  <meta name="twitter:image" content="{{ogImage}}">
+
+  {{jsonLd}}
+  <script src="/js/analytics.js"></script>
+  <link rel="stylesheet" href="/fonts.css">
+  <link rel="stylesheet" href="/css/blog.css">
+</head>
+
+<body>
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <a href="/" class="logo-link" aria-label="Revelti Home">
+        <img src="/images/reveltiLogo.png" alt="Revelti" class="logo-img">
+      </a>
+
+      <div class="top-bar-right">
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="/#organizer-section" class="nav-link">{{ui.navOrganizer}}</a>
+          <a href="/#creative-section" class="nav-link">{{ui.navCreative}}</a>
+          <a href="/#attendee-section" class="nav-link">{{ui.navAttendee}}</a>
+          <a href="{{blogIndexPath}}" class="nav-link active" aria-current="page">{{ui.navBlog}}</a>
+          <a href="/#waitlist" class="nav-pill">{{ui.navJoinWaitlist}}</a>
+        </nav>
+
+        <div class="lang-switcher" aria-label="Language switcher">
+          <a href="{{enSwitchUrl}}" class="lang-btn {{enActiveClass}}" data-lang="en">EN</a>
+          <a href="{{esSwitchUrl}}" class="lang-btn {{esActiveClass}}" data-lang="es">ES</a>
+        </div>
+
+        <button class="menu-toggle" id="menu-toggle" aria-label="{{ui.toggleMenuAria}}" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/#organizer-section" class="nav-link">{{ui.navOrganizer}}</a>
+    <a href="/#creative-section" class="nav-link">{{ui.navCreative}}</a>
+    <a href="/#attendee-section" class="nav-link">{{ui.navAttendee}}</a>
+    <a href="{{blogIndexPath}}" class="nav-link active">{{ui.navBlog}}</a>
+    <a href="/#waitlist" class="nav-pill">{{ui.navJoinWaitlist}}</a>
+  </div>
+
+  <main class="blog-main">
+    <section class="blog-hero">
+      <div class="blog-kicker">{{ui.blogKicker}}</div>
+      <h1>{{ui.blogHeading}}</h1>
+      <p>{{ui.blogSubtitle}}</p>
+    </section>
+
+    <section class="blog-controls" aria-label="{{ui.filterSectionAria}}">
+      <div class="controls-row">
+        <div class="search-field">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input
+            type="search"
+            id="blog-search-input"
+            class="search-input"
+            placeholder="{{ui.searchPlaceholder}}"
+            aria-label="{{ui.searchAria}}"
+            autocomplete="off"
+          >
+          <button type="button" id="search-clear-btn" class="search-clear-btn" aria-label="{{ui.clearSearchAria}}">✕</button>
+        </div>
+
+        <select id="category-select" class="filter-select" aria-label="{{ui.filterByCategoryAria}}">
+          <option value="all">{{ui.allCategoriesOption}}</option>
+          {{categoryOptions}}
+        </select>
+
+        <select id="tag-select" class="filter-select" aria-label="{{ui.filterByTagAria}}">
+          <option value="all">{{ui.allTagsOption}}</option>
+          {{tagOptions}}
+        </select>
+
+        <select id="sort-select" class="filter-select" aria-label="{{ui.sortByAria}}">
+          <option value="newest">{{ui.sortNewest}}</option>
+          <option value="oldest">{{ui.sortOldest}}</option>
+          <option value="title">{{ui.sortTitle}}</option>
+        </select>
+      </div>
+
+      <div class="controls-status">
+        <span class="results-count" id="results-count" data-singular="{{ui.resultSingular}}" data-plural="{{ui.resultPlural}}">{{initialResultsText}}</span>
+        <div class="active-filters-list" id="active-filters-list" data-clear-all="{{ui.clearAllFilters}}"></div>
+      </div>
+    </section>
+
+    <section class="posts-grid" id="posts-grid" aria-label="{{ui.articlesListAria}}">
+      {{postCards}}
+    </section>
+
+    <div class="empty-state" id="empty-state">
+      <p>{{ui.emptyFilterState}}</p>
+    </div>
+
+    <section class="waitlist-cta-card">
+      <h2>{{ui.ctaHeading}}</h2>
+      <p>{{ui.ctaBody}}</p>
+      <a href="/#waitlist" class="waitlist-cta-btn">{{ui.ctaButton}}</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-brand">
+      <img src="/images/reveltiLogo.png" alt="Revelti" class="footer-logo">
+      <span>{{ui.footerRights}}</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://instagram.com/reveltiofficial" target="_blank" rel="noopener noreferrer" class="footer-link footer-social-link" aria-label="Instagram">
+        <span>@reveltiofficial</span>
+      </a>
+      <span class="footer-separator">•</span>
+      <a href="mailto:info@revelti.com" class="footer-link footer-social-link" aria-label="Email">
+        <span>info@revelti.com</span>
+      </a>
+      <span class="footer-separator">•</span>
+      <a href="{{blogIndexPath}}" class="footer-link">{{ui.navBlog}}</a>
+      <span class="footer-separator">•</span>
+      <a href="{{termsPath}}" class="footer-link">{{ui.footerTerms}}</a>
+      <span class="footer-separator">•</span>
+      <a href="{{privacyPath}}" class="footer-link">{{ui.footerPrivacy}}</a>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const menuToggle = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+          const isOpen = menuToggle.classList.toggle('open');
+          mobileMenu.classList.toggle('open', isOpen);
+          menuToggle.setAttribute('aria-expanded', String(isOpen));
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            menuToggle.classList.remove('open');
+            mobileMenu.classList.remove('open');
+            menuToggle.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+
+      document.querySelectorAll('.lang-btn[data-lang]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          try {
+            localStorage.setItem('revelti_lang', btn.getAttribute('data-lang'));
+          } catch (_) {}
+        });
+      });
+
+      const grid = document.getElementById('posts-grid');
+      const cards = Array.from(document.querySelectorAll('.post-card'));
+      const searchInput = document.getElementById('blog-search-input');
+      const searchClearBtn = document.getElementById('search-clear-btn');
+      const categorySelect = document.getElementById('category-select');
+      const tagSelect = document.getElementById('tag-select');
+      const sortSelect = document.getElementById('sort-select');
+      const resultsCountEl = document.getElementById('results-count');
+      const activeFiltersEl = document.getElementById('active-filters-list');
+      const emptyState = document.getElementById('empty-state');
+
+      function normalizeText(str) {
+        return String(str || '')
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .toLowerCase()
+          .trim();
+      }
+
+      function syncUrlParams() {
+        const url = new URL(window.location.href);
+        const q = searchInput ? searchInput.value.trim() : '';
+        const cat = categorySelect ? categorySelect.value : 'all';
+        const tag = tagSelect ? tagSelect.value : 'all';
+        const sort = sortSelect ? sortSelect.value : 'newest';
+
+        if (q) url.searchParams.set('q', q); else url.searchParams.delete('q');
+        if (cat && cat !== 'all') url.searchParams.set('category', cat); else url.searchParams.delete('category');
+        if (tag && tag !== 'all') url.searchParams.set('tag', tag); else url.searchParams.delete('tag');
+        if (sort && sort !== 'newest') url.searchParams.set('sort', sort); else url.searchParams.delete('sort');
+
+        window.history.replaceState({}, '', url.pathname + (url.search || ''));
+      }
+
+      function renderActiveChips() {
+        if (!activeFiltersEl) return;
+        activeFiltersEl.innerHTML = '';
+
+        const chips = [];
+        const rawQuery = searchInput ? searchInput.value.trim() : '';
+        if (rawQuery) {
+          chips.push({
+            label: `"${rawQuery}"`,
+            onClear: () => { searchInput.value = ''; applyFilters(); }
+          });
+        }
+        if (categorySelect && categorySelect.value !== 'all') {
+          const selectedOpt = categorySelect.options[categorySelect.selectedIndex];
+          chips.push({
+            label: selectedOpt ? selectedOpt.getAttribute('data-label') || selectedOpt.textContent : categorySelect.value,
+            onClear: () => { categorySelect.value = 'all'; applyFilters(); }
+          });
+        }
+        if (tagSelect && tagSelect.value !== 'all') {
+          const selectedOpt = tagSelect.options[tagSelect.selectedIndex];
+          chips.push({
+            label: selectedOpt ? selectedOpt.getAttribute('data-label') || selectedOpt.textContent : '#' + tagSelect.value,
+            onClear: () => { tagSelect.value = 'all'; applyFilters(); }
+          });
+        }
+
+        chips.forEach(item => {
+          const chip = document.createElement('span');
+          chip.className = 'active-filter-chip';
+          chip.textContent = item.label;
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.textContent = '✕';
+          btn.setAttribute('aria-label', 'Remove ' + item.label);
+          btn.addEventListener('click', item.onClear);
+          chip.appendChild(btn);
+          activeFiltersEl.appendChild(chip);
+        });
+
+        if (chips.length > 0) {
+          const clearAll = document.createElement('button');
+          clearAll.type = 'button';
+          clearAll.className = 'clear-filter-btn';
+          clearAll.textContent = activeFiltersEl.getAttribute('data-clear-all') || 'Clear all';
+          clearAll.addEventListener('click', () => {
+            if (searchInput) searchInput.value = '';
+            if (categorySelect) categorySelect.value = 'all';
+            if (tagSelect) tagSelect.value = 'all';
+            if (sortSelect) sortSelect.value = 'newest';
+            applyFilters();
+          });
+          activeFiltersEl.appendChild(clearAll);
+        }
+      }
+
+      function applyFilters(skipUrlSync = false) {
+        const rawQuery = searchInput ? searchInput.value : '';
+        const normalizedQuery = normalizeText(rawQuery);
+        const queryTokens = normalizedQuery ? normalizedQuery.split(/\s+/).filter(Boolean) : [];
+        const activeCategory = categorySelect ? categorySelect.value : 'all';
+        const activeTag = tagSelect ? tagSelect.value : 'all';
+        const sortBy = sortSelect ? sortSelect.value : 'newest';
+
+        if (searchClearBtn) {
+          searchClearBtn.classList.toggle('visible', rawQuery.trim().length > 0);
+        }
+
+        const sortedCards = [...cards].sort((a, b) => {
+          if (sortBy === 'oldest') {
+            return (a.getAttribute('data-date') || '').localeCompare(b.getAttribute('data-date') || '');
+          }
+          if (sortBy === 'title') {
+            return (a.getAttribute('data-title') || '').localeCompare(b.getAttribute('data-title') || '');
+          }
+          return (b.getAttribute('data-date') || '').localeCompare(a.getAttribute('data-date') || '');
+        });
+
+        let visibleCount = 0;
+        sortedCards.forEach(card => {
+          const cats = (card.getAttribute('data-categories') || '').split('|').filter(Boolean);
+          const tags = (card.getAttribute('data-tags') || '').split('|').filter(Boolean);
+          const searchable = card.getAttribute('data-search') || '';
+
+          const matchesCat = activeCategory === 'all' || cats.includes(activeCategory);
+          const matchesTag = activeTag === 'all' || tags.includes(activeTag);
+          const matchesQuery = queryTokens.every(token => {
+            if (token.startsWith('#') && token.length > 1) {
+              const tagQuery = token.slice(1);
+              return tags.some(t => t.includes(tagQuery)) || searchable.includes(tagQuery);
+            }
+            return searchable.includes(token);
+          });
+
+          const visible = matchesCat && matchesTag && matchesQuery;
+          card.classList.toggle('hidden', !visible);
+          if (visible) visibleCount += 1;
+          if (grid) grid.appendChild(card);
+        });
+
+        if (emptyState) {
+          emptyState.classList.toggle('visible', visibleCount === 0);
+        }
+
+        if (resultsCountEl) {
+          const singular = resultsCountEl.getAttribute('data-singular') || '{count} article';
+          const plural = resultsCountEl.getAttribute('data-plural') || '{count} articles';
+          resultsCountEl.textContent = (visibleCount === 1 ? singular : plural).replace('{count}', String(visibleCount));
+        }
+
+        renderActiveChips();
+        if (!skipUrlSync) syncUrlParams();
+      }
+
+      if (searchInput) {
+        searchInput.addEventListener('input', () => applyFilters());
+      }
+      if (searchClearBtn) {
+        searchClearBtn.addEventListener('click', () => {
+          if (searchInput) {
+            searchInput.value = '';
+            searchInput.focus();
+          }
+          applyFilters();
+        });
+      }
+      if (categorySelect) categorySelect.addEventListener('change', () => applyFilters());
+      if (tagSelect) tagSelect.addEventListener('change', () => applyFilters());
+      if (sortSelect) sortSelect.addEventListener('change', () => applyFilters());
+
+      const params = new URLSearchParams(window.location.search);
+      const initialQ = (params.get('q') || '').trim();
+      const initialCat = (params.get('category') || '').trim().toLowerCase();
+      const initialTag = (params.get('tag') || '').trim().toLowerCase();
+      const initialSort = (params.get('sort') || '').trim().toLowerCase();
+
+      if (initialQ && searchInput) searchInput.value = initialQ;
+      if (initialCat && categorySelect && Array.from(categorySelect.options).some(o => o.value === initialCat)) {
+        categorySelect.value = initialCat;
+      }
+      if (initialTag && tagSelect && Array.from(tagSelect.options).some(o => o.value === initialTag)) {
+        tagSelect.value = initialTag;
+      }
+      if (initialSort && sortSelect && Array.from(sortSelect.options).some(o => o.value === initialSort)) {
+        sortSelect.value = initialSort;
+      }
+      applyFilters(true);
+    })();
+  </script>
+</body>
+
+</html>

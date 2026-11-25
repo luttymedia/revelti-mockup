@@ -2,15 +2,40 @@ services:
   - type: web
     name: revelti-mockup
     runtime: static
+    buildCommand: npm ci && npm run build:blog
     staticPublishPath: .
     headers:
-      # HTML pages - revalidate so updates deploy immediately to clients
+      # HTML pages & clean blog URLs - revalidate so updates deploy immediately to clients
       - path: /*.html
         name: Cache-Control
         value: public, max-age=0, must-revalidate
       - path: /
         name: Cache-Control
         value: public, max-age=0, must-revalidate
+      - path: /blog
+        name: Cache-Control
+        value: public, max-age=0, must-revalidate
+      - path: /blog/*
+        name: Cache-Control
+        value: public, max-age=0, must-revalidate
+      - path: /blog/**/*
+        name: Cache-Control
+        value: public, max-age=0, must-revalidate
+      - path: /es/blog
+        name: Cache-Control
+        value: public, max-age=0, must-revalidate
+      - path: /es/blog/*
+        name: Cache-Control
+        value: public, max-age=0, must-revalidate
+      - path: /es/blog/**/*
+        name: Cache-Control
+        value: public, max-age=0, must-revalidate
+      - path: /sitemap.xml
+        name: Cache-Control
+        value: public, max-age=0, must-revalidate
+      - path: /robots.txt
+        name: Cache-Control
+        value: public, max-age=3600
 
       # Long-term immutable caching for static media (images, fonts, icons, albums)
       # Render CDN automatically invalidates edge cache on every successful deployment
@@ -32,6 +57,9 @@ services:
 
       # CSS & JS assets - short TTL with stale-while-revalidate (unhashed asset files)
       - path: /*.css
+        name: Cache-Control
+        value: public, max-age=86400, stale-while-revalidate=604800
+      - path: /css/*
         name: Cache-Control
         value: public, max-age=86400, stale-while-revalidate=604800
       - path: /*.js

@@ -39,11 +39,11 @@
     async loadLanguage(lang) {
       if (this.translations[lang]) return;
       try {
-        const response = await fetch(`locales/${lang}.json`);
-        if (!response.ok) throw new Error(`Failed to load locales/${lang}.json (Status: ${response.status})`);
+        const response = await fetch(`/locales/${lang}.json`);
+        if (!response.ok) throw new Error(`Failed to load /locales/${lang}.json (Status: ${response.status})`);
         this.translations[lang] = await response.json();
       } catch (err) {
-        console.error(`[i18n] Error loading locales/${lang}.json:`, err);
+        console.error(`[i18n] Error loading /locales/${lang}.json:`, err);
       }
     }
 
@@ -151,15 +151,19 @@
         }
       });
 
-      // Update legal links href dynamically based on active language
-      const termsLink = document.querySelector('a[href^="terms"]');
-      if (termsLink) {
-        termsLink.setAttribute('href', this.currentLang === 'es' ? 'terms-es.html' : 'terms.html');
-      }
-      const privacyLink = document.querySelector('a[href^="privacy"]');
-      if (privacyLink) {
-        privacyLink.setAttribute('href', this.currentLang === 'es' ? 'privacy-es.html' : 'privacy.html');
-      }
+      // Update legal & blog links href dynamically based on active language
+      const termsLinks = document.querySelectorAll('a[href^="terms"], a[href^="/terms"]');
+      termsLinks.forEach(link => {
+        link.setAttribute('href', this.currentLang === 'es' ? '/terms-es.html' : '/terms.html');
+      });
+      const privacyLinks = document.querySelectorAll('a[href^="privacy"], a[href^="/privacy"]');
+      privacyLinks.forEach(link => {
+        link.setAttribute('href', this.currentLang === 'es' ? '/privacy-es.html' : '/privacy.html');
+      });
+      const blogLinks = document.querySelectorAll('a[data-blog-link]');
+      blogLinks.forEach(link => {
+        link.setAttribute('href', this.currentLang === 'es' ? '/es/blog/' : '/blog/');
+      });
     }
 
     updateSwitcherUI() {

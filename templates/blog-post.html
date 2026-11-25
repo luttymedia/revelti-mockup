@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="{{lang}}">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="/icons/favicon-192.png">
+  <link rel="apple-touch-icon" href="/icons/favicon-192.png">
+  <title>{{pageTitle}}</title>
+  <meta name="description" content="{{metaDescription}}">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="{{canonicalUrl}}">
+  {{hreflangLinks}}
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Revelti">
+  <meta property="og:locale" content="{{ogLocale}}">
+  {{ogAlternateLocale}}
+  <meta property="og:title" content="{{ogTitle}}">
+  <meta property="og:description" content="{{metaDescription}}">
+  <meta property="og:url" content="{{canonicalUrl}}">
+  <meta property="og:image" content="{{ogImage}}">
+  <meta property="article:published_time" content="{{pubDateIso}}">
+  {{modifiedMetaTag}}
+  {{articleSectionMeta}}
+  {{articleTagMetas}}
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ogTitle}}">
+  <meta name="twitter:description" content="{{metaDescription}}">
+  <meta name="twitter:image" content="{{ogImage}}">
+
+  {{jsonLd}}
+  <script src="/js/analytics.js"></script>
+  <link rel="stylesheet" href="/fonts.css">
+  <link rel="stylesheet" href="/css/blog.css">
+</head>
+
+<body>
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <a href="/" class="logo-link" aria-label="Revelti Home">
+        <img src="/images/reveltiLogo.png" alt="Revelti" class="logo-img">
+      </a>
+
+      <div class="top-bar-right">
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="/#organizer-section" class="nav-link">{{ui.navOrganizer}}</a>
+          <a href="/#creative-section" class="nav-link">{{ui.navCreative}}</a>
+          <a href="/#attendee-section" class="nav-link">{{ui.navAttendee}}</a>
+          <a href="{{blogIndexPath}}" class="nav-link active">{{ui.navBlog}}</a>
+          <a href="/#waitlist" class="nav-pill">{{ui.navJoinWaitlist}}</a>
+        </nav>
+
+        <div class="lang-switcher" aria-label="Language switcher">
+          <a href="{{enSwitchUrl}}" class="lang-btn {{enActiveClass}}" data-lang="en">EN</a>
+          <a href="{{esSwitchUrl}}" class="lang-btn {{esActiveClass}}" data-lang="es">ES</a>
+        </div>
+
+        <button class="menu-toggle" id="menu-toggle" aria-label="{{ui.toggleMenuAria}}" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/#organizer-section" class="nav-link">{{ui.navOrganizer}}</a>
+    <a href="/#creative-section" class="nav-link">{{ui.navCreative}}</a>
+    <a href="/#attendee-section" class="nav-link">{{ui.navAttendee}}</a>
+    <a href="{{blogIndexPath}}" class="nav-link active">{{ui.navBlog}}</a>
+    <a href="/#waitlist" class="nav-pill">{{ui.navJoinWaitlist}}</a>
+  </div>
+
+  <main class="blog-main blog-main--post">
+    <div class="article-back-row">
+      <a href="{{blogIndexPath}}" class="back-link">← {{ui.backToBlog}}</a>
+    </div>
+
+    <article class="article-shell">
+      <header class="article-header">
+        <div class="post-categories">
+          {{categoryBadges}}
+        </div>
+        <h1 class="article-title">{{title}}</h1>
+        <p class="article-description">{{description}}</p>
+        <div class="article-meta">
+          <span>{{ui.publishedLabel}} <time datetime="{{pubDateIso}}">{{pubDateFormatted}}</time></span>
+          {{updatedDateHtml}}
+          <span class="article-meta-dot">•</span>
+          <span>{{readingTimeText}}</span>
+        </div>
+      </header>
+
+      {{featuredImageHtml}}
+
+      <div class="prose">
+        {{contentHtml}}
+      </div>
+
+      <div class="article-footer-meta">
+        <div class="tag-list">
+          {{tagChips}}
+        </div>
+
+        <div class="share-bar">
+          <span class="share-label">{{ui.shareLabel}}</span>
+          <a href="{{shareXUrl}}" target="_blank" rel="noopener noreferrer" class="share-icon-btn" aria-label="X" title="X">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="{{shareLinkedInUrl}}" target="_blank" rel="noopener noreferrer" class="share-icon-btn" aria-label="LinkedIn" title="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37z"/></svg>
+          </a>
+          <a href="{{shareWhatsAppUrl}}" target="_blank" rel="noopener noreferrer" class="share-icon-btn" aria-label="WhatsApp" title="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/direct/inbox/" target="_blank" rel="noopener noreferrer" class="share-icon-btn" id="share-instagram-btn" data-ig-copied-label="{{ui.instagramCopiedLabel}}" aria-label="Instagram DM" title="Instagram DM">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="{{shareEmailUrl}}" class="share-icon-btn" aria-label="Email" title="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </a>
+          <button type="button" class="share-icon-btn" id="copy-link-btn" data-copied-label="{{ui.copiedLabel}}" aria-label="{{ui.copyLinkLabel}}" title="{{ui.copyLinkLabel}}">
+            <svg class="icon-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none;"><polyline points="20 6 9 17 4 12"/></svg>
+          </button>
+          <span class="share-feedback" id="share-feedback" aria-live="polite"></span>
+        </div>
+      </div>
+    </article>
+
+    {{relatedPostsSection}}
+
+    <section class="waitlist-cta-card">
+      <h2>{{ui.ctaHeading}}</h2>
+      <p>{{ui.ctaBody}}</p>
+      <a href="/#waitlist" class="waitlist-cta-btn">{{ui.ctaButton}}</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-brand">
+      <img src="/images/reveltiLogo.png" alt="Revelti" class="footer-logo">
+      <span>{{ui.footerRights}}</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://instagram.com/reveltiofficial" target="_blank" rel="noopener noreferrer" class="footer-link footer-social-link" aria-label="Instagram">
+        <span>@reveltiofficial</span>
+      </a>
+      <span class="footer-separator">•</span>
+      <a href="mailto:info@revelti.com" class="footer-link footer-social-link" aria-label="Email">
+        <span>info@revelti.com</span>
+      </a>
+      <span class="footer-separator">•</span>
+      <a href="{{blogIndexPath}}" class="footer-link">{{ui.navBlog}}</a>
+      <span class="footer-separator">•</span>
+      <a href="{{termsPath}}" class="footer-link">{{ui.footerTerms}}</a>
+      <span class="footer-separator">•</span>
+      <a href="{{privacyPath}}" class="footer-link">{{ui.footerPrivacy}}</a>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const menuToggle = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+          const isOpen = menuToggle.classList.toggle('open');
+          mobileMenu.classList.toggle('open', isOpen);
+          menuToggle.setAttribute('aria-expanded', String(isOpen));
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            menuToggle.classList.remove('open');
+            mobileMenu.classList.remove('open');
+            menuToggle.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+
+      document.querySelectorAll('.lang-btn[data-lang]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          try {
+            localStorage.setItem('revelti_lang', btn.getAttribute('data-lang'));
+          } catch (_) {}
+        });
+      });
+
+      const copyBtn = document.getElementById('copy-link-btn');
+      const igBtn = document.getElementById('share-instagram-btn');
+      const feedbackEl = document.getElementById('share-feedback');
+      let feedbackTimer = null;
+
+      function showShareFeedback(message) {
+        if (!feedbackEl) return;
+        feedbackEl.textContent = message;
+        if (feedbackTimer) clearTimeout(feedbackTimer);
+        feedbackTimer = setTimeout(() => {
+          feedbackEl.textContent = '';
+        }, 2500);
+      }
+
+      if (copyBtn) {
+        const copiedLabel = copyBtn.getAttribute('data-copied-label') || 'Copied!';
+        const linkIcon = copyBtn.querySelector('.icon-link');
+        const checkIcon = copyBtn.querySelector('.icon-check');
+        copyBtn.addEventListener('click', async () => {
+          try {
+            await navigator.clipboard.writeText(window.location.href);
+            copyBtn.classList.add('copied');
+            if (linkIcon) linkIcon.style.display = 'none';
+            if (checkIcon) checkIcon.style.display = 'block';
+            showShareFeedback(copiedLabel);
+            setTimeout(() => {
+              copyBtn.classList.remove('copied');
+              if (linkIcon) linkIcon.style.display = 'block';
+              if (checkIcon) checkIcon.style.display = 'none';
+            }, 2000);
+          } catch (_) {}
+        });
+      }
+
+      if (igBtn) {
+        const igCopiedLabel = igBtn.getAttribute('data-ig-copied-label') || 'Link copied for Instagram DM!';
+        igBtn.addEventListener('click', () => {
+          try {
+            navigator.clipboard.writeText(window.location.href);
+            showShareFeedback(igCopiedLabel);
+          } catch (_) {}
+        });
+      }
+    })();
+  </script>
+</body>
+
+</html>

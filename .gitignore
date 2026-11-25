@@ -4,3 +4,14 @@ push_output.txt
 .DS_Store
 Thumbs.db
 organizerFlow.txt
+
+# Generated static blog output (rebuilt automatically by Render & npm run build:blog)
+/blog/
+/es/
+/sitemap.xml
+
+# Internal technical reference (not for public deployment)
+/REVELTI_BLOG_TECHNICAL_REFERENCE.md
+
+# Internal editorial pipeline record (not for public deployment)
+/REVELTI_EDITORIAL_PIPELINE.md
