@@ -5,7 +5,7 @@ pubDate: "2026-11-25"
 updatedDate: "2026-11-25"
 slug: "social-dance-event-formats-explained"
 categories: ["Dance Events", "Guides"]
-tags: ["event-formats", "dance-congress", "dance-festival", "tango-marathon", "encuentro", "lindy-exchange", "west-coast-swing", "organisers"]
+tags: ["event-formats", "dance-congress", "dance-festival", "tango-marathon", "encuentro", "lindy-exchange", "west-coast-swing", "organizers"]
 featuredImage: "/images/blog/social-dance-event-formats-latin-social-floor.jpg"
 featuredImageAlt: "A packed dance floor of couples social dancing under blue and pink stage lights at a Latin dance party"
 draft: false
@@ -15,8 +15,8 @@ A salsa "congress" and a salsa "festival" are usually the same thing. A tango "m
 
 This guide explains the multi-day formats you are most likely to meet in European social dance, from salsa, bachata, kizomba and zouk to tango, Lindy Hop and West Coast Swing. Two things to keep in mind:
 
-* **Terminology is not standardised.** Even specialist directories disagree on details. We point out where they do.
-* **Many events combine formats.** A congress can include a competition and an all-night social, and a tango marathon can offer optional classes. The programme tells you more than the label.
+* **Terminology is not standardized.** Even specialist directories disagree on details. We point out where they do.
+* **Many events combine formats.** A congress can include a competition and an all-night social, and a tango marathon can offer optional classes. The program tells you more than the label.
 
 *Events named here are neutral examples based on their public pages as of 25 November 2026. They are not recommendations, and Revelti has no relationship with them.*
 
@@ -51,22 +51,22 @@ This guide explains the multi-day formats you are most likely to meet in Europea
 1. **Are there classes?** If so, how many hours, and are they the main daytime activity?
 2. **Is there a stage?** Shows and competitions shape the timetable and the atmosphere.
 3. **How do you get in?** Buying a pass is not the same as applying and waiting to be accepted.
-4. **Does the organiser balance leaders and followers?** Look for role-specific tickets, partner registration or a waiting list for one role.
+4. **Does the organizer balance leaders and followers?** Look for role-specific tickets, partner registration or a waiting list for one role.
 5. **How many hours are set aside for social dancing?** A weekend built around 30 hours of workshops feels very different from one built around 30 hours of dancing.
 
 ## Congress and festival (salsa, bachata, kizomba, zouk)
 
 In the Latin and Afro-Latin scenes, a **congress** is a multi-day event that combines workshops, shows and social dancing, sometimes with competitions. Wikipedia describes a salsa congress as "a multi-day dance festival featuring workshops" and gives "Salsa Festival" and "Salsa Summit" as other names for it. Salsa Vida's glossary says "salsa congress" has "gradually become less popular in favor of 'salsa festival'".
 
-**So is a congress different from a festival?** In practice, no. Organisers use both words for the same format, sometimes on the same page: the Copenhagen Bachata Congress listing on go&dance is tagged "Weekend Festival".
+**So is a congress different from a festival?** In practice, no. Organizers use both words for the same format, sometimes on the same page: the Copenhagen Bachata Congress listing on go&dance is tagged "Weekend Festival".
 
-Wikipedia and Salsa Vida both say the first salsa congress took place in Puerto Rico in 1997, organised by Eli Irizarry, and Wikipedia records a "World Salsa Congress" in Valencia in October 1999. We found no independent primary source for these dates, so treat them as the commonly cited history.
+Wikipedia and Salsa Vida both say the first salsa congress took place in Puerto Rico in 1997, organized by Eli Irizarry, and Wikipedia records a "World Salsa Congress" in Valencia in October 1999. We found no independent primary source for these dates, so treat them as the commonly cited history.
 
 A typical day runs from workshops to evening shows to parties late into the night. Three examples from 2026:
 
-* **Copenhagen Bachata Congress** (Denmark, October) listed "30+ hours of workshops", "3 amazing parties", styling bootcamps and a social dance competition open only to Full Pass holders. One ticket was an "Early Bird Full Pass - Leader", one way organisers manage role balance.
+* **Copenhagen Bachata Congress** (Denmark, October) listed "30+ hours of workshops", "3 amazing parties", styling bootcamps and a social dance competition open only to Full Pass holders. One ticket was an "Early Bird Full Pass - Leader", one way organizers manage role balance.
 * **Bachatasia World Congress** (Bormujos, Seville, March) promised "workshops, shows and unforgettable parties", with a bachata and salsa ballroom plus a separate kizomba room.
-* **Neverending Kizomba Festival** (Platja d'Aro, Girona, November) combined "24+ hours of workshops" and contests with what the organiser calls "80+ hours non-stop" of dancing. Its name says Barcelona, but the venue is on the Costa Brava, a good reason to check the address as well as the title.
+* **Neverending Kizomba Festival** (Platja d'Aro, Girona, November) combined "24+ hours of workshops" and contests with what the organizer calls "80+ hours non-stop" of dancing. Its name says Barcelona, but the venue is on the Costa Brava, a good reason to check the address as well as the title.
 
 If you mainly want to social dance at an event like this, look for a party-only pass.
 
@@ -80,31 +80,31 @@ The marathon is most clearly defined in **tango**. The Tango Marathon Directory 
 
 The idea exists in salsa too. The **Prague Salsa Marathon** is listed on Salsa Vida as focusing "on extended social dancing rather than classes, workshops, or shows", with registration "balanced between leaders and followers".
 
-The label also drifts. The **Istanbul Dance Marathon SBK** (2024 edition) advertised six workshop rooms and more than 100 hours of classes, a congress programme under a marathon name. The **Barcelona Tango Marathon** (April 2026) asked dancers to register with a partner "to help us keep the balance on the dance floor", as marathons traditionally do, but also offered optional paid workshops.
+The label also drifts. The **Istanbul Dance Marathon SBK** (2024 edition) advertised six workshop rooms and more than 100 hours of classes, a congress program under a marathon name. The **Barcelona Tango Marathon** (April 2026) asked dancers to register with a partner "to help us keep the balance on the dance floor", as marathons traditionally do, but also offered optional paid workshops.
 
 **Where sources disagree.** TMD treats curated registration as part of the definition. Tango Portal says marathons "generally" have open registration and defines them as events running "for 12 hours or more". TangoFestivals.net says they have "few or no workshops" and last 2 to 4 days. We give more weight to TMD because it publishes its data and covers the most events, but always read the registration page.
 
 ## Encuentro milonguero
 
-An **encuentro** is organised much like a tango marathon: closed, pre-registered and role-balanced. TMD calls encuentros "basically 'Marathons' in most ways". What differs is the culture on the floor, summed up by TMD as a "milonguero ethos; strict cabeceo, often smaller".
+An **encuentro** is organized much like a tango marathon: closed, pre-registered and role-balanced. TMD calls encuentros "basically 'Marathons' in most ways". What differs is the culture on the floor, summed up by TMD as a "milonguero ethos; strict cabeceo, often smaller".
 
-In 2014, Melina Sedó, whose writing on encuentros TMD quotes, published a checklist for recognising one. Dancers "invite each other by mirada & cabeceo", a look and a nod across the room. They "dance together one tanda only, then clear the dance floor during the cortina", the short musical break between sets. Organisers "admit an equal number of followers & leaders", and some encuentros seat men and women separately.
+In 2014, Melina Sedó, whose writing on encuentros TMD quotes, published a checklist for recognizing one. Dancers "invite each other by mirada & cabeceo", a look and a nod across the room. They "dance together one tanda only, then clear the dance floor during the cortina", the short musical break between sets. Organizers "admit an equal number of followers & leaders", and some encuentros seat men and women separately.
 
-**Abrazame! Encuentro Milonguero Barcelona** (December 2025) was listed as emphasising "close embrace, mirada & cabeceo, and gender balance", with "33 hours of dancing across 6 main milongas".
+**Abrazame! Encuentro Milonguero Barcelona** (December 2025) was listed as emphasizing "close embrace, mirada & cabeceo, and gender balance", with "33 hours of dancing across 6 main milongas".
 
 **Where sources disagree.** TangoFestivals.net puts typical encuentros at "40 to 80 dancers", yet the Tango Rustico Encuentro in Znojmo, Czech Republic, expected about 130 in April 2026. "Often smaller than a marathon" is the safest description.
 
-Encuentros suit experienced tango dancers who are at ease with the codes. If cabeceo is still new to you, a festival or your local milonga is a gentler place to practise.
+Encuentros suit experienced tango dancers who are at ease with the codes. If cabeceo is still new to you, a festival or your local milonga is a gentler place to practice.
 
 ## Tango festival, festivalito and milonga weekend
 
-A **tango festival** is the open, programme-heavy format: TMD lists "Shows, workshops with maestros, formal milongas, live music", with registration that is "Usually open". Its data shows how distinct the formats are: of 271 festivals it categorised, 210 listed lessons, compared with 70 of 789 marathons. A **festivalito** is a smaller festival with fewer maestros. A **milonga weekend** strings several milongas together with no registration, so "there is no planned gender balance".
+A **tango festival** is the open, program-heavy format: TMD lists "Shows, workshops with maestros, formal milongas, live music", with registration that is "Usually open". Its data shows how distinct the formats are: of 271 festivals it categorized, 210 listed lessons, compared with 70 of 789 marathons. A **festivalito** is a smaller festival with fewer maestros. A **milonga weekend** strings several milongas together with no registration, so "there is no planned gender balance".
 
 ## Lindy exchange
 
 In swing dancing, an **exchange** is a social weekend hosted by a local scene. A 2011 post on the ATOMIC Ballroom blog explains that exchanges "began as a way for communities to open and share their local swing dancing culture". Guests "are invited to stay in the homes of local dancers", and "many do not offer the variety workshops or lessons typically found at swing camps". DanceUS.org describes exchanges as "dancer-led gatherings, typically hosted rather than run as commercial festivals".
 
-Dances often move between venues across the city. The **Edinburgh Lindy Exchange** (September 2026) was listed with a programme spanning "venues across the city, with live bands, DJs and social dancing". The **Madrid Swing Exchange** (May 2026) was described as "a social dance and live music exchange, with tasters and shows, without a level-based course programme". Short tasters like Madrid's are a common middle ground between no classes and a full programme.
+Dances often move between venues across the city. The **Edinburgh Lindy Exchange** (September 2026) was listed with a program spanning "venues across the city, with live bands, DJs and social dancing". The **Madrid Swing Exchange** (May 2026) was described as "a social dance and live music exchange, with tasters and shows, without a level-based course programme". Short tasters like Madrid's are a common middle ground between no classes and a full program.
 
 ## Swing festivals and camps
 
@@ -132,14 +132,14 @@ Most of these formats grow out of the evening social. Salsa Vida's Spanish gloss
 
 Hybrids are common too: "marathon and festival" combinations, congresses with 24-hour socials, swing festivals that are close to exchanges. Treat the name as a hint, not a contract, and go back to the five questions.
 
-## If you organise events
+## If you organize events
 
-The label you choose sets expectations before anyone reads your programme:
+The label you choose sets expectations before anyone reads your program:
 
 * **Tango:** "marathon" and "encuentro" imply curated registration and role balance. If yours is open to all, say so clearly.
-* **Swing:** "exchange" implies a social, community-hosted weekend. With a full class programme, "festival" is the less surprising word.
+* **Swing:** "exchange" implies a social, community-hosted weekend. With a full class program, "festival" is the less surprising word.
 * **West Coast Swing:** presenting an event as a points event implies the WSDC Registry rules above.
-* **Salsa, bachata, kizomba and zouk:** "congress" and "festival" are interchangeable, so your programme is what sets you apart.
+* **Salsa, bachata, kizomba and zouk:** "congress" and "festival" are interchangeable, so your program is what sets you apart.
 
 The events in this guide show several ways to make the rules clear. Copenhagen sold role-specific tickets. Barcelona's tango marathon asked for partner registration, warned that solo followers might be waitlisted, and offered a "Double Role" option for people who both lead and follow. Prague's salsa marathon stated its balance outright. Whatever you choose, say what each pass includes and give the venue address, not just the city.
 
@@ -152,22 +152,22 @@ The format decides what there is to capture and when:
 * **Exchanges** move between venues across a city, often with live bands, so the logistics resemble a small city festival.
 * **Camps** such as Herräng run for weeks rather than days.
 
-None of our sources describes photography practice at these events. Our recommendation: read each event's own media or photography policy before you shoot, and ask the organiser whether there is an official media team.
+None of our sources describes photography practice at these events. Our recommendation: read each event's own media or photography policy before you shoot, and ask the organizer whether there is an official media team.
 
 ## Before you book
 
 * Read the timetable, not just the title. Count the hours of classes and of social dancing.
 * Check how registration works: open sale, partner registration, application or invitation.
-* Look for role-specific tickets or waiting lists. They show that the organiser manages balance.
+* Look for role-specific tickets or waiting lists. They show that the organizer manages balance.
 * Check what each pass covers. Party, day and full passes can differ a lot.
 * Check the venue address. Event names don't always match the city.
 * For an encuentro, make sure you are comfortable with cabeceo. For a WCS convention, check which Jack and Jill divisions you can enter.
 
-*Last reviewed: 25 November 2026. Dates, venues and ticket names change between editions. Always check the organiser's current page.*
+*Last reviewed: 25 November 2026. Dates, venues and ticket names change between editions. Always check the organizer's current page.*
 
 ## Sources
 
-Event details (dates, venues, programmes, ticket names) come from each event's public page or listing, as read on 25 November 2026.
+Event details (dates, venues, programs, ticket names) come from each event's public page or listing, as read on 25 November 2026.
 
 **Tango**
 

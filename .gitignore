@@ -15,3 +15,6 @@ organizerFlow.txt
 
 # Internal editorial pipeline record (not for public deployment)
 /REVELTI_EDITORIAL_PIPELINE.md
+
+# Local copies of editorial reference documents (not for public deployment)
+/editorial-reference/

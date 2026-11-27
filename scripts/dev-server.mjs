@@ -59,22 +59,25 @@ function scheduleRebuild(reason) {
 }
 
 function startWatchers() {
-  const watchTargets = [
-    path.join(ROOT_DIR, 'content', 'blog'),
-    path.join(ROOT_DIR, 'templates'),
-    path.join(ROOT_DIR, 'css', 'blog.css'),
-    path.join(ROOT_DIR, 'scripts', 'build-blog.mjs')
+  const watchSpecs = [
+    { dir: path.join(ROOT_DIR, 'content', 'blog'), recursive: true },
+    { dir: path.join(ROOT_DIR, 'templates'), recursive: true },
+    { dir: path.join(ROOT_DIR, 'css'), recursive: false, filter: name => !name || name === 'blog.css' },
+    { dir: path.join(ROOT_DIR, 'scripts'), recursive: false, filter: name => !name || name === 'build-blog.mjs' }
   ];
 
-  for (const target of watchTargets) {
+  for (const spec of watchSpecs) {
     try {
-      const stat = fsSync.statSync(target);
-      fsSync.watch(target, { recursive: stat.isDirectory() }, (eventType, filename) => {
-        const label = filename ? `${path.basename(target)}/${filename}` : path.basename(target);
+      const watcher = fsSync.watch(spec.dir, { recursive: spec.recursive }, (eventType, filename) => {
+        if (spec.filter && !spec.filter(filename)) return;
+        const label = filename ? `${path.basename(spec.dir)}/${filename}` : path.basename(spec.dir);
         scheduleRebuild(`${eventType}: ${label}`);
       });
+      watcher.on('error', err => {
+        console.warn(`[dev-server] Watcher warning (${path.basename(spec.dir)}): ${err.message}`);
+      });
     } catch (err) {
-      console.warn(`[dev-server] Could not watch ${target}: ${err.message}`);
+      console.warn(`[dev-server] Could not watch ${spec.dir}: ${err.message}`);
     }
   }
 }
